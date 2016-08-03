@@ -739,7 +739,7 @@
 
 			var req = {
 				method : 'post',
-				url : api_base_url + 'tables/medicion/',
+				url : api_base_url + 'tables/medicion/',	//definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
 					'X-ZUMO-AUTH': '',
@@ -754,18 +754,101 @@
 			}
 
 			$http(req).success(function(response){
-
+				console.log(response);	
 			});
-		},
+		},  //END REGISTER ACTIVITY
 
-		update_perfil: function(){
 
-		},
 
-		get_diet: function(diet_id, client, coach){
+		update_perfil: function(sexo,peso,pesoDeseado,personalidad,objetivo,ejercicio,edad,fechaNaciemiento,codigoPostal,comentarios,nombre,restricciones,estatura){
+			var req = {
+				method : 'post',
+				url : api_base_url + 'tables/medicion/',	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': '',
+					'Content-Type': 'application/json'
+				},
+				data : {
+					'sexo' : sexo,
+					'peso' : peso,
+					'pesoDeseado' : pesoDeseado,
+					'personalidad' : personalidad,
+					'objetivo' : objetivo,
+					'ejercicio' : ejercicio,
+					'edad' : edad,
+					'fechaNacimiento' : fechaNaciemiento,
+					'cp' : codigoPostal,
+					'comentarios' : comentarios,
+					'nombre' : nombre,
+					'restricciones' : restricciones,
+					'estatura' : estatura
+				}
+			}
+
+			$http(req).success(function(response){
+				console.log(response);	
+			});
+
+		},//END UPDATE PERFIL
+
+
+		feed_user_defaults: function(firstName,lastName,email,customerId,password,token,userId,chatId,chatPassword,coachId,coachQuickblox,dietId,user,exerciseValue,picture)
+		{
+			var req = {
+				method : 'post',
+				url : api_base_url + 'tables/medicion/',	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': '',
+					'Content-Type': 'application/json'
+				},
+				data : {
+					'firstName' : firstName,
+					'lastName' : lastName,
+					'email' : email,
+					'customerId' : customerId,
+					'password' : password,
+					'token' : token,
+					'userId' : userId,
+					'chatId' : chatId,
+					'chatPassword' : chatPassword,
+					'coachQuickblox' : coachQuickblox,
+					'dietId' : dietId,
+					'user' : user,
+					'exerciseValue' : exerciseValue,
+					'picture' : picture
+				}
+			}
+
+			$http(req).success(function(response){
+				console.log(response);	
+			});
+		}, //END feed_user_defailt
+
+		update_platillo: function(plato, fecha, comida, platillo){
+			var req = {
+				method: 'post',
+				url: api_base_url + 'tables/consumo/',	//definitr tabla
+				headers:{
+					'X-ZUMO-APPLICATION': '',
+					'X-ZUMO-AUTH': '',
+					'Content-Type': 'application/json'
+				},
+				data: {
+					'plato': dishID,
+					'fecha': fecha,
+					'comida': comida,
+					'platillo': platillo
+				}
+			}
+		}
+
+		get_diet: function(diet_id, client, coach)
+		{
 			var req = {
 				method : 'get',
-				url : api_base_url + 'tables/medicion/',
+				url : api_base_url + 'tables/medicion/',  //definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': '',
 					'X-ZUMO-AUTH': '',
@@ -782,7 +865,7 @@
 			$http(req).success(function(response){
 
 			});
-		}
+		}//END GET DIET
 	};
 
 /*      _                                       _                        _       
