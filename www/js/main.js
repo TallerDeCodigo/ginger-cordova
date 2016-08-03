@@ -727,6 +727,61 @@
 				alert(message);
 			}
 			return;
+		},
+
+		/** INIT GINGER SERVICES REQUEST **/
+
+		/* ---- TRACKING ACTIVITY USERS ---- */
+
+		/* @param type: [ 'peso', 'animo', 'brazo', 'pierna', 'cintura', 'cadera', 'pecho', 'agua', 'ejercicio', 'recorrido', 'caminar', 'correr', 'pesas', 'cross' ],  //0..9 */
+
+		register_activity: function(type, magnitude, client_id, coach_id){
+
+			var req = {
+				method : 'post',
+				url : api_base_url + 'tables/medicion/',
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': '',
+					'Content-Type': 'application/json'
+				},
+				data : {
+					'tipo' : type,
+					'magnitud' : magnitude,
+					'cliente' : client_id,
+					'coach' : coach_id
+				}
+			}
+
+			$http(req).success(function(response){
+
+			});
+		},
+
+		update_perfil: function(){
+
+		},
+
+		get_diet: function(diet_id, client, coach){
+			var req = {
+				method : 'get',
+				url : api_base_url + 'tables/medicion/',
+				headers: {
+					'X-ZUMO-APPLICATION': '',
+					'X-ZUMO-AUTH': '',
+					'Content-Type': 'application/json'
+				},
+				data : {
+					'tipo' : type,
+					'magnitud' : magnitude,
+					'cliente' : client_id,
+					'coach' : coach_id
+				}
+			}
+
+			$http(req).success(function(response){
+
+			});
 		}
 	};
 
