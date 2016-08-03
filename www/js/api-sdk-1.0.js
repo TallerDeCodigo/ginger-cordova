@@ -44,7 +44,7 @@ function requestHandlerAPI(){
 		 * @return status Bool true is successfully logged in; false if an error ocurred
 		 */
 		this.loginNative =  function(data_login){
-								
+
 								var data_object = {
 													user_email : data_login.email, 
 													user_password: data_login.password, 
