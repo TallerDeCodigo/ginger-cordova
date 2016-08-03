@@ -824,7 +824,7 @@
 			$http(req).success(function(response){
 				console.log(response);	
 			});
-		}, //END feed_user_defailt
+		}, //END feed_user_default
 
 		update_platillo: function(plato, fecha, comida, platillo){
 			var req = {
@@ -842,9 +842,14 @@
 					'platillo': platillo
 				}
 			}
-		}
 
-		get_diet: function(diet_id, client, coach)
+			$http(req).success(function(response){
+				console.log(response);	
+			});
+		},
+		
+
+		get_diet: function(dietId, client, coachId)
 		{
 			var req = {
 				method : 'get',
@@ -855,15 +860,19 @@
 					'Content-Type': 'application/json'
 				},
 				data : {
-					'tipo' : type,
-					'magnitud' : magnitude,
-					'cliente' : client_id,
-					'coach' : coach_id
+					'dietId' : dietId,
+					'createdAt' : createdAt,
+					'name' : name,
+					'coachId' : coachId,
+					'structure': structure,
+					'comments': comments,
+					'dishes': dishes,
+					'duration': duration
 				}
 			}
 
 			$http(req).success(function(response){
-
+				console.log(response);
 			});
 		}//END GET DIET
 	};
