@@ -847,7 +847,7 @@
 				console.log(response);	
 			});
 		},
-		
+
 
 		get_diet: function(dietId, client, coachId)
 		{
