@@ -1,0 +1,19 @@
+<div id="content" class="settings">
+	{{> history_header_nouser}}
+	<section>
+		<form id="create_account_form">
+			<table><tr><td><i class="material-icons account_circle"></i> Personal Info</td></tr></table>
+			{{!-- <br><img id="img-id" class="trigger_getphoto" src="images/photo.png" /><br> --}}
+			<input type="hidden" value="" name="image_profile" id="image_profile">
+			<input type="text" name="user_name" type="text" placeholder="Name" value=""><br>
+			<input type="text" name="user_last_name" type="text" placeholder="Lastname" value=""><br>
+			<input type="text" name="user_email" type="text" placeholder="E-mail" value=""><br>
+			<input type="password" name="user_pwd" type="text" placeholder="Password" value=""><br>
+			<input type="password" name="user_rpt_pwd" type="text" placeholder="Confirm password" value=""><br>
+			<input type="text" name="user_bio" type="text" placeholder="Bio (Tell us about you)" value=""><br>
+			
+			<br><input type="submit" class="submit" value="Start!" >
+		</form>
+	</section>
+</div>
+{{> dom_assets}}

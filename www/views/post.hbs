@@ -1,0 +1,27 @@
+<div id="content" class="post">
+
+	{{> history_header}}
+	<section>
+		<img src="{{data.thumb_url}}"/>
+	</section>
+
+	<section class="post_head">
+		<h1>{{data.post_title}}</h1>
+		<p class="side_profile date">{{data.post_date}}</p>
+		{{#if data.thumb_url}}
+			<img src="{{data.post_editor.profile_pic}}" class="profile_pic round"><p class="side_profile">{{data.post_editor.name}}</p>
+		{{else}}
+			<p><i class="material-icons" >account_circle</i> {{data.post_editor.name}}</p>
+		{{/if}}
+	</section>
+	<section>
+		<p>{{{data.post_content}}}</p>
+	</section>
+	
+</div>
+{{> footer}}
+{{#if logged_user}}
+	{{> sidemenu_logged me}}
+{{else}}
+	{{> sidemenu}}
+{{/if}}

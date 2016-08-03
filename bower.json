@@ -1,0 +1,21 @@
+{
+  "name": "dedalo",
+  "homepage": "http://3dedalo.org",
+  "authors": [
+    "John Falcon <john@tallerdecodigo.com>"
+  ],
+  "description": "3Dedalo 3D printing services",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "handlebars": "^4.0.5"
+  }
+}

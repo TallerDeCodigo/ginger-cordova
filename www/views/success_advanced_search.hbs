@@ -1,0 +1,34 @@
+{{> header}}
+<div id="content" class="search">
+
+	<div id="no-cat" class="pages advanced">
+
+		<section class="no_results">
+			<p class="keyword">We've successfully posted your request!</p>
+			<p class="message">You will get notifications about the status of your request.</p>
+		</section>
+		{{# if offered.count}}
+			<section class="offered">
+				<p>We found these for you:</p>
+				{{# each offered.pool}}
+					<a href="detail.html?id={{ID}}" class="small link">
+						<img src="{{thumb_url}}">
+						<div>
+							{{#if designer_brand.profile_pic}}
+								<img src="{{designer_brand.profile_pic}}" alt="{{designer_brand.name}}" class="round profile_pic">
+							{{else}}
+								<i class="material-icons account_circle invert"></i>
+							{{/if}}
+							<h1>{{name}}</h1>
+							<span>{{designer_brand.name}}</span>
+						</div>
+					</a>
+				{{/ each}}
+			</section>
+		{{/ if }}
+	</div>	
+    
+</div>
+{{> footer}}
+{{> dom_assets}}
+{{> sidemenu}}

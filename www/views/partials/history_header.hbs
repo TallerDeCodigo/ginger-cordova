@@ -1,0 +1,15 @@
+<header class="daheader">
+	<a id="backBtn" >
+		<i id="back" class="material-icons arrow_back"></i>
+	</a>
+	<p>{{header_title}}</p>
+	{{#if logged_user}}
+		{{#if me.profile_pic}}
+			<img id="account1" src="{{me.profile_pic}}" class="profile_pic round">
+		{{else}}
+			<i id="account1" class="material-icons account_circle"></i>
+		{{/if}}
+	{{else}}
+		<i id="account1" class="material-icons account_circle"></i>
+	{{/if}}
+</header>

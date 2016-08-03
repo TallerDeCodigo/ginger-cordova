@@ -1,0 +1,124 @@
+<div id="content" class="settings">
+	{{> history_header_nouser}}
+	<section>
+		<form id="settings_form" class="settings_form">
+			<table><tr><td><i class="material-icons account_circle small"></i> Personal Info</td></tr></table>
+
+			{{#if me.profile_pic}}
+				<img id="settings_image" src="{{me.profile_pic}}" class="profile_pic round change_pic">
+			{{else}}
+				<br><img id="img-id" src="images/photo.png" /><br>
+			{{/if}}
+			<input type="text" name="user_first_name" placeholder="Name" value="{{data.first_name}}"><br>
+			<input type="text" name="user_last_name" placeholder="Lastname" value="{{data.last_name}}"><br>
+			<input type="text" name="user_email" placeholder="E-mail" value="{{data.email}}"><br>
+			<input type="text" name="user_bio" placeholder="Bio (Tell us about you)" value="{{data.bio}}"><br>
+			<section class="options">
+				<div class="roundedTwo inline_check">
+					<input type="checkbox" name="become_printer" id="become_printer" value="true" {{#if data.is_printer}}checked{{/if}}>
+					<label for="become_printer"></label>
+				</div>
+				<label class="inline_check">Become a printer</label>
+				<section class="form_part dbl_indent {{#unless data.is_printer}}hidden{{/unless}}" >
+					<p class="lil_comment">Hardware specs</p>
+					<select name="printer_brand" class="good_ol_select fifty" id="printer_brand">
+						<option value="">Brand</option>
+						{{#each printer_brands}}
+							<option value="{{@index}}" data-eq="{{../data.cat_printer_brand}}" {{#if_eq @index ../data.cat_printer_brand }}selected{{/if_eq}}>{{.}}</option>
+						{{/each}}
+					</select>
+					<select name="printer_model" class="good_ol_select fifty" id="printer_model">
+						<option value="">Model</option>
+						{{#each data.models_already}}
+							<option value="{{@index}}" data-eq="{{../data.cat_printer_model}}" {{#if_eq @index ../data.cat_printer_model }}selected{{/if_eq}}>{{.}}</option>
+						{{/each}}
+					</select>
+					<a class="buttonlike printer {{#if data.location_set}}on{{/if}}" id="locate_new_printer">
+						<i class="material-icons {{#if data.location_set}}edit_location{{else}}add_location{{/if}}"></i>
+						{{#if data.location_set}}Edit printer location{{else}}Add printer location{{/if}}
+					</a>
+					<small>Current location will be used.</small>
+				</section>
+				<br>
+			</section>
+			<br><input type="submit" class="submit" value="Save" >
+		</form>
+
+			<!-- <section class="options">
+				<div class="roundedTwo inline_check">
+					<input type="checkbox" name="become_scanner" id="become_scanner" value="true" {{#if data.is_scanner}}checked{{/if}}>
+					<label for="become_scanner"></label>
+				</div>
+				<label class="inline_check">Become a scanner</label>
+				<section class="form_part dbl_indent {{#unless data.is_scanner}}hidden{{/unless}}">
+					{{!-- <p class="lil_comment">Scanner specs</p>
+					<input type="text" name="scanner_brand" id="scanner_brand" placeholder="Brand" value="">
+					<input type="text" name="scanner_model" id="scanner_model" placeholder="Model" value="">
+					<input type="text" name="scanner_resolution" id="scanner_resolution" placeholder="Resolution" value=""> --}}
+				</section>
+				<br>
+			</section> -->
+			<form id="save_password" class="save_password">
+				<br><p>Change your password</p>
+				<input type="password" name="user_pwd" placeholder="New password" value=""><br>
+				<input type="password" name="user_rpt_pwd" placeholder="Confirm new password" value="">
+				<br><input type="submit" class="submit" value="Change" >
+			</form>
+			
+			<!-- <table>
+				<tr>
+					<td><i class="material-icons">local_shipping</i> Shipping</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="shipp"><i class="material-icons">adjust</i> Home</td>
+					<td><i class="material-icons">mode_edit</i></td>
+					<td><i class="material-icons">delete</i></td>
+				</tr>
+				<tr>
+					<td class="shipp"><i class="material-icons">panorama_fish_eye</i> Work</td>
+					<td><i class="material-icons">mode_edit</i></td>
+					<td><i class="material-icons">delete</i></td>
+				</tr>
+				<tr>
+					<td><a href="address.html"><i class="material-icons">control_point</i> Add Address</a></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td><i class="material-icons">credit_card</i> Payment</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="paym"><i class="material-icons">adjust</i> Visa 1234</td>
+					<td><i class="material-icons">mode_edit</i></td>
+					<td><i class="material-icons">delete</i></td>
+				</tr>
+				<tr>
+					<td class="paym"><i class="material-icons">panorama_fish_eye</i> Mastercard 3456</td>
+					<td><i class="material-icons">mode_edit</i></td>
+					<td><i class="material-icons">delete</i></td>
+				</tr>
+				<tr>
+					<td class="paym"><i class="material-icons">panorama_fish_eye</i> Amex 6789</td>
+					<td><i class="material-icons">mode_edit</i></td>
+					<td><i class="material-icons">delete</i></td>
+				</tr>
+				<tr>
+					<td class="paym"><i class="material-icons">panorama_fish_eye</i> Paypal</td>
+					<td><i class="material-icons">mode_edit</i></td>
+					<td><i class="material-icons">delete</i></td>
+				</tr>
+				<tr>
+					<td><a href="card.html"><i class="material-icons">control_point</i> Add Card</a></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table> -->
+	</section>
+</div>
+{{> dom_assets}}

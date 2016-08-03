@@ -1,0 +1,19 @@
+<div class="subheader">
+	<div id="swipper">
+		<div>
+			{{#each categories.pool}}<a class="cats" data-id="{{ID}}">{{{name}}}</a>{{/each}}
+		</div>
+	</div>
+	{{#each categories.pool}}
+		<div id="subcats{{ID}}" data-catid="{{ID}}" style="display:none" class="submenus">
+			<div class="swipper1">
+			<div>
+				{{#each children.pool}}
+					<a id="sca{{ID}}" class="sucats" data-id="{{ID}}">{{{name}}}</a>
+				{{/each }}
+			</div>
+		</div><i class="return" class="material-icons arrow_back"></i></div>
+	{{/each}}
+</div>
+
+

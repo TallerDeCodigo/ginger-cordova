@@ -1,0 +1,49 @@
+<div id="content" class="search">
+	{{> search_header}}
+
+	<div id="no-cat" class="pages search_results">
+    	{{#if data.count}}
+			<section>
+	    		{{#each data.pool}}
+					<a href="{{#if productos}}detail{{else}}post{{/if}}.html?id={{ID}}" class="small link">
+						<img src="{{thumb_url}}">
+						<div>
+						{{#if productos}}
+							{{#if designer_brand.profile_pic}}
+								<img src="{{designer_brand.profile_pic}}" alt="{{designer_brand.name}}" class="round profile_pic">
+							{{else}}
+								<i class="material-icons account_circle invert"></i>
+							{{/if}}
+						{{/if}}
+							<h1>{{name}}</h1>
+							<span>{{designer_brand.name}}</span>
+						</div>
+					</a>
+				{{/each}}
+	    	</section>
+    	{{else}}
+			<section class="no_results">
+				<p class="keyword">{{search_term}}</p>
+    			<p class="message">We didn't find any results matching your query. <br><br>Please provide further details and Dedalo's community will try to help you.</p>
+    			
+				<form action="" id="further_search" class="further_form">
+					<textarea name="message" id="message" placeholder="Comma separated keywords e.g. keychain, darth vader, plastic"></textarea>
+					<div class="img_place"></div>
+					<a id="send_form" class="submit_adv_search"><i class="material-icons send blue"></i>Send</a>
+					<a id="add_photo_appear" class="add_photo"><i class="material-icons photo_camera medium"></i>Add photo</a>
+				</form>
+
+				<section class="upload_options close_on_touch hidden">
+					<div class="wrapper to_bottom dont_close">
+						<a id="get_pic_gallery" class="dont_close"><i class="material-icons upload dark"></i>Upload Photo</a>
+						<a id="get_pic_camera" class="dont_close"><i class="material-icons photo_camera dark"></i>Use camera</a>
+					</div>
+				</section>
+			</section>
+    	{{/if}}
+	</div>
+    
+</div>
+{{> footer}}
+{{> dom_assets}}
+{{> sidemenu}}

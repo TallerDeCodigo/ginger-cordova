@@ -1,0 +1,25 @@
+
+<div id="info-maker" style="display:none">
+	<div>
+	<a href="maker.html?id={{profile.ID}}">
+		{{#if profile.profile_pic}}
+			<img src="{{profile.profile_pic}}" class="profile_pic round small" >
+		{{else}}
+			<i class="material-icons account_circle"></i>
+		{{/if}}
+		{{profile.first_name}} {{profile.last_name}}
+	</a>
+	</div>
+	<div>
+		<i class="material-icons star mini on"></i>
+		<i class="material-icons star mini on"></i>
+		<i class="material-icons star mini"></i>
+		<br>{{distance}} km.
+	</div>
+	<div class="clearfix"></div>
+	<section class="select_printer">
+		<a href="select_printer.html?ref_id={{ref_id}}&printer_id={{profile.ID}}">
+			Select as printer
+		</a>
+	</section>
+</div>

@@ -1,0 +1,15 @@
+<div id="content" class="detail">
+	
+	{{> history_header}}
+	<section class="success_message user_connected">
+		<p><bold>Thanks for choosing 3Dedalo!</bold>We've sent the model files to the printer, check your <a href="notifications.html">notifications</a> to find out the status of your piece.</p>
+		<img src="images/schedule.svg" class="big-ass">
+	</section>
+</div>
+{{> footer}}
+{{> dom_assets}}
+{{#if logged_user}}
+	{{> sidemenu_logged me}}
+{{else}}
+	{{> sidemenu}}
+{{/if}}

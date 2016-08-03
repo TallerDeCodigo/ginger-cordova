@@ -1,0 +1,26 @@
+<div class="wrapper" style="display:none;">
+	<div id="user">
+		<div class="login">
+			<div>
+				{{#if profile_pic}}
+					<img src="{{profile_pic}}" alt="{{display_name}}" class="round profile_pic">
+				{{else}}
+					<i id="account" class="material-icons">account_circle</i>
+				{{/if}}
+				<p>{{display_name}}</p>
+				<div class="clearfix"></div>
+			</div>
+			<a href="settings.html">Account</a>
+			<a href="dashboard.html">Dashboard</a>
+			{{!-- <a href="#">Products</a>
+			<a href="#">Sales</a> --}}
+			{{!-- <a href="#">Following</a> --}}
+			<a id="logout" >Log out</a>
+		</div>
+		<div class="footer">
+		<p><a onclick="window.open('http://3dedalo.org/about/', '_blank', 'location=yes');" ><span>About</span> <img width="134" height="32" src="images/logo.svg" /></a></p>
+		<p><a onclick="window.open('http://3dedalo.org/terms-and-conditions/', '_blank', 'location=yes');" >Terms and conditions<a/> | <a onclick="window.open('http://3dedalo.org/privacy-policies/', '_blank', 'location=yes');" >Privacy policies</a></p>
+		</div>
+	</div>
+	<div class="separate"></div>
+</div>
