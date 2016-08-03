@@ -727,6 +727,25 @@
 				alert(message);
 			}
 			return;
+		},
+
+		/** INIT GINGER SERVICES REQUEST **/
+
+		/* ----  ---- */
+
+
+
+		register_activity: function(type, magnitude, client, coach){
+
+
+		},
+
+		update_perfil: function(){
+
+		},
+
+		get_diet: function(diet_id, client, coach){
+
 		}
 	};
 

@@ -22,7 +22,7 @@ function requestHandlerAPI(){
 	var context = this;
 	window.sdk_app_context = null;
 	/* Production API URL */
-	window.api_base_url = "http://dedalo.devtdc.online/rest/v1/";
+	window.api_base_url = "https://gingerservice.azure-mobile.net/";
 	/* Development local API URL */
 	// window.api_base_url = "http://dedalo.dev/rest/v1/";
 	// window.api_base_url = "http://localhost/~manuelon/dedalo/rest/v1/";
