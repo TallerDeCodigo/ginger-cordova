@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.dedalodomus.app" version="1.2.10.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>3Dedalo</name>
+<widget id="org.ginger.app" version="2.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Ginger</name>
     <description>
-        3Dedalo i...
+        Nutrición en la palma de tu mano.
     </description>
     <author email="john@tallerdecodigo.com" href="http://tallerdecodigo.com">
         John Falcon for TDC
@@ -11,7 +11,7 @@
     <plugin name="cordova-plugin-whitelist" spec="1" />
 
     <feature name="App">
-        <param name="android-package" value="org.dedalodomus.app" />
+        <param name="android-package" value="org.ginger.app" />
     </feature>
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
