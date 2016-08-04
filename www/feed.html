@@ -5,17 +5,371 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src *">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-		<title>DEDALO</title>
-		<link rel="stylesheet" type="text/css" href="css/style.min.css">
+		<title>GINGER</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 
 	<body class="iOS">
 		<section class="main" id="mainFeed">
 			<!-- Template will be inserted here -->
+
+<!--
+		MANUEL
+					-->
+				<div id="container">
+					<div class="fondo">
+						<img  src="images/bkg1.png">
+					</div>
+					<header class="htrans">
+						<div class="toolbar">
+							<a class="back" style="display:none"><img src="images/back.svg"></a>
+						</div>
+					</header>
+					<div class="paginador-wrapper">
+				    	<div class="paginador">
+					    	<div class="aboutyou pagina">
+					    		<h2>Cuéntanos sobre ti</h2>
+					    		<nav class="selector">
+					    			<a class="genre-bt active" href="#">Soy un(a)</a>
+					    			<a class="age-bt" href="#">Que tiene</a>
+					    			<a class="zip-bt" href="#">Código<br>Postal</a>
+					    		</nav>
+					    		<div class="page-holder">
+					    			<div class="page genre sector-1">
+					    				<img id="hombre" src="images/hombreh.svg">
+					    				<img id="mujer" src="images/mujer.svg">
+					    			</div>
+					    			<div class="page age sector-1" style="display:none">
+					    				<img class="img-derecha" src="images/bebe.png">
+					    				<div class="drag-parent">
+					    					<div class="slider-bar"></div>
+					    					<div id="age-filler" class="slider-filler"></div>
+					    					<div id="age" class="slider-point">
+					    						<div class="position"><span id="age-dato">0</span><br>años</div>
+					    					</div>
+					    				</div>
+					    				<img class="img-izquierda" src="images/adulto.png">
+					    			</div>
+					    			<div class="page zip sector-1" style="display:none">
+					    				<div class="box-input-1">
+					    					<input type="text" name="zipcode" maxlength="5">
+					    				</div>
+					    			</div>
+					    		</div>
+					    		<nav class="selector">
+					    			<a class="mido-bt active" href="#">Mido</a>
+					    			<a class="peso-bt" href="#">Peso</a>
+					    			<a class="ideal-bt" href="#">Mi peso<br>ideal es</a>
+					    		</nav>
+					    		<div class="page-holder">
+					    			<div class="page mido sector-2">
+					    				<div class="arrows-vertical">
+					    					<img id="estatura-up" src="images/leftarrow.png">
+					    					<img id="estatura-dw" src="images/rightarrow.png">
+					    				</div>
+					    				<img class="type-def" src="images/hombreh.svg">
+					    				<div class="box-input-2">
+					    					<input type="text" name="estatura" value="1.50" maxlength="4">
+					    					<span>m</span>
+					    				</div>
+					    			</div>
+					    			<div class="page peso sector-2" style="display:none">
+					    				<div class="arrows-vertical">
+					    					<img id="peso-up" src="images/leftarrow.png">
+					    					<img id="peso-dw" src="images/rightarrow.png">
+					    				</div>
+					    				<img class="type-def" src="images/hombreh.svg">
+					    				<div class="box-input-2">
+					    					<input type="text" name="estatura" value="50.0" maxlength="4">
+					    					<span>kg</span>
+					    				</div>
+					    			</div>
+					    			<div class="page ideal sector-2" style="display:none">
+					    				<div class="arrows-vertical">
+					    					<img id="ideal-up" src="images/leftarrow.png">
+					    					<img id="ideal-dw" src="images/rightarrow.png">
+					    				</div>
+					    				<img class="type-def" src="images/hombreh.svg">
+					    				<div class="box-input-2">
+					    					<input type="text" name="estatura" value="50.0" maxlength="4">
+					    					<span>kg</span>
+					    				</div>
+					    			</div>
+					    		</div>
+					    		<img id="finish1" class="enter" src="images/enter.svg">
+					    	</div>
+					    	<div class="objetive pagina" style="display:none">
+					    		<h2>¿Cuál es tu objetivo?</h2>
+					    		<div class="sld-wrapper">
+					    			<div class="mover planes">
+					    				<div class="plan pl-option active">
+					    					<img src="images/plan/detox2.png">
+					    					<span>Perder<br>peso</span>
+					    				</div>
+					    				<div class="plan pl-option">
+					    					<img src="images/plan/detox.png">
+					    					<span>Detox</span>
+					    				</div>
+					    				<div class="plan pl-option">
+					    					<img src="images/plan/detox.png">
+					    					<span>Rendimiento físico</span>
+					    				</div>
+					    				<div class="plan pl-option">
+					    					<img src="images/plan/detox.png">
+					    					<span>Sentirse mejor</span>
+					    				</div>
+					    			</div>
+					    		</div>
+					    		<h2>¿Qué tipo de coach necesitas?</h2>
+					    		<div class="sld-wrapper">
+					    			<div class="mover planes">
+					    				<div class="plan co-option active">
+					    					<img src="images/plan/detox2.png">
+					    					<span>Estricto</span><br>
+					    					<img class="question" src="images/question.svg">
+					    				</div>
+					    				<div class="plan co-option">
+					    					<img src="images/plan/detox.png">
+					    					<span>Analítico</span><br>
+					    					<img class="question" src="images/question.svg">
+					    				</div>
+					    				<div class="plan co-option">
+					    					<img src="images/plan/detox.png">
+					    					<span>Médico</span><br>
+					    					<img class="question" src="images/question.svg">
+					    				</div>
+					    				<div class="plan co-option">
+					    					<img src="images/plan/detox.png">
+					    					<span>Innovador</span><br>
+					    					<img class="question" src="images/question.svg">
+					    				</div>
+					    			</div>
+					    		</div>
+					    		<img id="finish2" class="enter" src="images/enter.svg">
+					    	</div>
+					    	<div class="pagina exercise" style="display:none">
+					    		<h2>¿Con qué frecuencia<br>haces ejercicio?</h2>
+					    		<div class="page-holder">
+					    			<div class="page">
+					    				<img class="img-derecha" src="images/norun.svg">
+					    				<div class="drag-parent">
+					    					<div class="slider-bar"></div>
+					    					<div id="ejercicio-filler" class="slider-filler"></div>
+					    					<div id="ejercicio" class="slider-point">
+					    						<div class="position"><span id="ejercicio-dato">0-3</span><br>días</div>
+					    					</div>
+					    				</div>
+					    				<img class="img-izquierda" src="images/run.svg">
+					    			</div>
+					    		</div>
+				    			<p>Días por semana</p>
+					    		<img id="finish3" class="enter" src="images/enter.svg">
+					    	</div>
+					    	<div class="restric pagina" style="display:none">
+					    		<h2>¿Tienes alguna<br>restricción alimenticia?</h2>
+					    		<span class="little-comment">Puedes seleccionar más de una opción</span>
+					    		<div class="sld-wrapper">
+					    			<div class="mover planes">
+					    				<div class="plan re-option">
+					    					<img src="images/plan/detox.png">
+					    					<span>Perder<br>peso</span>
+					    				</div>
+					    				<div class="plan re-option">
+					    					<img src="images/plan/detox.png">
+					    					<span>Detox</span>
+					    				</div>
+					    				<div class="plan re-option">
+					    					<img src="images/plan/detox.png">
+					    					<span>Rendimiento físico</span>
+					    				</div>
+					    				<div class="plan re-option">
+					    					<img src="images/plan/detox.png">
+					    					<span>Sentirse mejor</span>
+					    				</div>
+					    			</div>
+					    		</div>
+					    		<h2>¿Tienes algo más que contarnos?</h2>
+					    		<span class="little-comment">Medicamentos, enfermedades, condiciones, alergias o cualquier otra cosa que nos quieras contar</span>
+			    				<div class="siono yes">Sí</div>
+			    				<div class="siono not active">No</div>
+					    		<span class="the-comment" style="display:none">Sufro de hipertensión y odio comer lentejas porque me provocan malestar estomacal, también soy intolerante a los hongos</span>
+					    		<img id="finish4" class="saltar" src="images/saltar.svg">
+					    	</div>
+					    	<div class="pcoach1 pagina" style="display:none">
+					    		<h2>Selecciona tu coach</h2>
+					    		<div class="wrap-cslide">
+					    			<div class="cslider">
+					    				<div class="slide-coach">
+					    					<div class="coach img-frame">
+					    						<img src="images/noimg.svg">
+					    						<img src="images/info.svg">
+					    					</div>
+					    					<h5 class="name">María Medina</h5>
+					    					<div class="rate-stars">
+					    						<img src="images/starh.svg">
+					    						<img src="images/starh.svg">
+					    						<img src="images/starh.svg">
+					    						<img src="images/star.svg">
+					    						<img src="images/star.svg">
+					    					</div>
+					    					<p class="short-descrip">Tener una dieta blanceada es algo bueno para tu vida una dieta blanceada es algo bueno para tu vida una dieta blanceada es algo bueno para tu vida</p>
+					    				</div>
+					    				<div class="slide-coach">
+					    					<div class="coach img-frame">
+					    						<img src="images/muestra.png">
+					    						<img src="images/info.svg">
+					    					</div>
+					    					<h5 class="name">María Medina</h5>
+					    					<div class="rate-stars">
+					    						<img src="images/starh.svg">
+					    						<img src="images/starh.svg">
+					    						<img src="images/starh.svg">
+					    						<img src="images/star.svg">
+					    						<img src="images/star.svg">
+					    					</div>
+					    					<p class="short-descrip">Tener una dieta blanceada es algo bueno para tu vida una dieta blanceada es algo bueno para tu vida una dieta blanceada es algo bueno para tu vida</p>
+					    				</div>
+					    				<div class="slide-coach">
+					    					<div class="coach img-frame">
+					    						<img src="images/noimg.svg">
+					    						<img src="images/info.svg">
+					    					</div>
+					    					<h5 class="name">María Medina</h5>
+					    					<div class="rate-stars">
+					    						<img src="images/starh.svg">
+					    						<img src="images/starh.svg">
+					    						<img src="images/starh.svg">
+					    						<img src="images/star.svg">
+					    						<img src="images/star.svg">
+					    					</div>
+					    					<p class="short-descrip">Tener una dieta blanceada es algo bueno para tu vida una dieta blanceada es algo bueno para tu vida una dieta blanceada es algo bueno para tu vida</p>
+					    				</div>
+					    				<div class="slide-coach">
+					    					<div class="coach img-frame">
+					    						<img src="images/noimg.svg">
+					    						<img src="images/info.svg">
+					    					</div>
+					    					<h5 class="name">María Medina</h5>
+					    					<div class="rate-stars">
+					    						<img src="images/starh.svg">
+					    						<img src="images/starh.svg">
+					    						<img src="images/starh.svg">
+					    						<img src="images/star.svg">
+					    						<img src="images/star.svg">
+					    					</div>
+					    					<p class="short-descrip">Tener una dieta blanceada es algo bueno para tu vida una dieta blanceada es algo bueno para tu vida una dieta blanceada es algo bueno para tu vida</p>
+					    				</div>
+					    				<div class="slide-coach">
+					    					<div class="coach img-frame">
+					    						<img src="images/noimg.svg">
+					    						<img src="images/info.svg">
+					    					</div>
+					    					<h5 class="name">María Medina</h5>
+					    					<div class="rate-stars">
+					    						<img src="images/starh.svg">
+					    						<img src="images/starh.svg">
+					    						<img src="images/starh.svg">
+					    						<img src="images/star.svg">
+					    						<img src="images/star.svg">
+					    					</div>
+					    					<p class="short-descrip">Tener una dieta blanceada es algo bueno para tu vida una dieta blanceada es algo bueno para tu vida una dieta blanceada es algo bueno para tu vida</p>
+					    				</div>
+					    			</div>
+					    		</div>
+					    	</div>
+					    	<div class="bio pagina" style="display:none">
+					    		<h2>Biografía</h2>
+					    		<div class="bio img-frame">
+					    			<img src="images/muestra.png">
+					    		</div>
+					    		<h5 class="name">María Medina</h5>
+					    		<div class="rate-stars">
+					    			<img src="images/starh.svg">
+					    			<img src="images/starh.svg">
+					    			<img src="images/starh.svg">
+					    			<img src="images/star.svg">
+					    			<img src="images/star.svg">
+					    			<div class="bt-review">VER RESEÑAS</div>
+					    			<div class="no-review">2 valoraciones</div>
+					    		</div>
+					    		<p><b>"Tener una dieta blanceada es bueno para tu salud"</b></p>
+					    		<p>Estudios Superiores: Licenciatura en Nutrición. Generación 2005-2009, Escuela de Nutrición, Universidad Vasco de Quiroga. Fecha de titulación 29 de abril de 2010.</p>
+					    		<p>Prácticas profesionales: Hospital Vasco de Quiroga del Instituto de Seguridad y Servicios Sociales.</p>
+					    		<img id="finish5" class="enter" src="images/elegir.svg">
+					    	</div>
+					    	<div class="discount pagina" style="display:none">
+					    		<p class="semana">Prueba una semana gratis. Después sólo<br>paga $350.00 al mes y puedes cancelar<br>en cualquier momento*</p>
+					    		<p class="satis corg">¡SATISFACCIÓN 100% GARANTIZADA<br>O TE DEVOLVEMOS TU DINERO!</p>
+					    		<div class="btn-iniciar borg">Iniciar prueba GRATIS</div>
+					    		<h4>Elegir forma de pago</h4>
+					    		<div class="btn-pago">TARJETA</div>
+					    		<p class="letritas">* Aplican términos y condiciones,<br>abierto únicamente a nuevos usuarios</p>
+					    	</div>
+					    	<div class="conekta pagina" style="display:none">
+					    		<h2>Información de pago</h2>
+					    		<form>
+					    			<div class="form-label">
+					    				<input type="text" name="nombre">
+						    			<label for="nombre">Nombre (como aparece en tu tarjeta)</label>
+					    			</div>
+					    			<div class="form-label">
+					    				<input type="text" name="card" maxlength="16">
+						    			<label for="card">Número de tarjeta</label>
+					    			</div>
+					    			<div class="form-label-2">
+					    				<input type="text" name="mes" maxlength="2">
+						    			<label for="mes">MM</label>
+						    			<span>/</span>
+						    			<input type="text" name="year" maxlength="2">
+						    			<label for="year">YY</label>
+					    			</div>
+					    			<div class="form-label-2 segur">
+					    				<input type="text" name="cvc" maxlength="3">
+						    			<label for="cvc">CVC</label>
+					    			</div>
+					    			<div class="form-label">
+					    				<input type="text" name="mail">
+						    			<label for="mail">Correo electrónico</label>
+					    			</div>
+					    			<div class="form-label-2">
+					    				<input type="text" name="cupon">
+						    			<label for="cupon">Cupón</label>
+					    			</div>
+					    			<div class="form-label-2">
+					    				<div class="bt-review">VALIDAR CUPÓN</div>
+					    			</div>
+					    			<div class="form-label">
+					    			<input type="checkbox" name="terms">
+					    			<span>Acepto <a href="#">Términos y Condiciones</a></span>
+					    			</div>
+					    		</form>
+					    		<img class="enter" src="images/aceptar.svg">
+					    	</div>
+				    	</div>
+				    </div>
+				    <div class="bolitas">
+				    	<div class="bola bpur active"></div>
+				    	<div class="bola bgre"></div>
+				    	<div class="bola bred"></div>
+				    	<div class="bola borg"></div>
+				    	<div class="bola byel"></div>
+				    	<div class="bola bgry always">
+				    		<div class="circle-frame">
+				    			<img src="images/muestra.png">
+				    		</div>
+				    	</div>
+				    </div>
+				</div>
+
+				<!--
+						END MANUEL
+									-->
+
 		</section>
 	</body>
 	<!-- Load Scripts -->
     <script src="js/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="js/jquery-touch.min.js"></script>
 	<script src="js/plugins.js"></script>
 	<script src="js/api-sdk-1.0.min.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
@@ -35,6 +389,7 @@
 		app.showLoader();
 	</script>
 
+	<script type='text/javascript' src='js/plugins_m.js'></script>
 	<script type="text/javascript" src="js/functions.min.js"></script>
 	<script type="text/javascript" src="js/fullPage.js"></script>
 </html>	

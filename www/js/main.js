@@ -831,7 +831,7 @@
 				method: 'post',
 				url: api_base_url + 'tables/consumo/',	//definitr tabla
 				headers:{
-					'X-ZUMO-APPLICATION': '',
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
 					'X-ZUMO-AUTH': '',
 					'Content-Type': 'application/json'
 				},
@@ -855,7 +855,7 @@
 				method : 'get',
 				url : api_base_url + 'tables/medicion/',  //definitr tabla
 				headers: {
-					'X-ZUMO-APPLICATION': '',
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
 					'X-ZUMO-AUTH': '',
 					'Content-Type': 'application/json'
 				},
