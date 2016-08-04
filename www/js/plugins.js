@@ -12,3 +12,361 @@
   and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
 */
 (function(a){a.fn.serializeJSON=function(k){var g,e,j,h,i,c,d,b;d=a.serializeJSON;b=d.optsWithDefaults(k);d.validateOptions(b);e=this.serializeArray();d.readCheckboxUncheckedValues(e,this,b);g={};a.each(e,function(l,f){j=d.splitInputNameIntoKeysArray(f.name);h=j.pop();if(h!=="skip"){i=d.parseValue(f.value,h,b);if(b.parseWithFunction&&h==="_"){i=b.parseWithFunction(i,f.name)}d.deepSet(g,j,i,b)}});return g};a.serializeJSON={defaultOptions:{parseNumbers:false,parseBooleans:false,parseNulls:false,parseAll:false,parseWithFunction:null,checkboxUncheckedValue:undefined,useIntKeysAsArrayIndex:false},optsWithDefaults:function(c){var d,b;if(c==null){c={}}d=a.serializeJSON;b=d.optWithDefaults("parseAll",c);return{parseNumbers:b||d.optWithDefaults("parseNumbers",c),parseBooleans:b||d.optWithDefaults("parseBooleans",c),parseNulls:b||d.optWithDefaults("parseNulls",c),parseWithFunction:d.optWithDefaults("parseWithFunction",c),checkboxUncheckedValue:d.optWithDefaults("checkboxUncheckedValue",c),useIntKeysAsArrayIndex:d.optWithDefaults("useIntKeysAsArrayIndex",c)}},optWithDefaults:function(c,b){return(b[c]!==false)&&(b[c]!=="")&&(b[c]||a.serializeJSON.defaultOptions[c])},validateOptions:function(d){var b,c;c=["parseNumbers","parseBooleans","parseNulls","parseAll","parseWithFunction","checkboxUncheckedValue","useIntKeysAsArrayIndex"];for(b in d){if(c.indexOf(b)===-1){throw new Error("serializeJSON ERROR: invalid option '"+b+"'. Please use one of "+c.join(","))}}},parseValue:function(g,b,c){var e,d;d=a.serializeJSON;if(b=="string"){return g}if(b=="number"||(c.parseNumbers&&d.isNumeric(g))){return Number(g)}if(b=="boolean"||(c.parseBooleans&&(g==="true"||g==="false"))){return(["false","null","undefined","","0"].indexOf(g)===-1)}if(b=="null"||(c.parseNulls&&g=="null")){return["false","null","undefined","","0"].indexOf(g)!==-1?null:g}if(b=="array"||b=="object"){return JSON.parse(g)}if(b=="auto"){return d.parseValue(g,null,{parseNumbers:true,parseBooleans:true,parseNulls:true})}return g},isObject:function(b){return b===Object(b)},isUndefined:function(b){return b===void 0},isValidArrayIndex:function(b){return/^[0-9]+$/.test(String(b))},isNumeric:function(b){return b-parseFloat(b)>=0},splitInputNameIntoKeysArray:function(c){var e,b,d,h,g;g=a.serializeJSON;h=g.extractTypeFromInputName(c),b=h[0],d=h[1];e=b.split("[");e=a.map(e,function(f){return f.replace(/]/g,"")});if(e[0]===""){e.shift()}e.push(d);return e},extractTypeFromInputName:function(c){var b,d;d=a.serializeJSON;if(b=c.match(/(.*):([^:]+)$/)){var e=["string","number","boolean","null","array","object","skip","auto"];if(e.indexOf(b[2])!==-1){return[b[1],b[2]]}else{throw new Error("serializeJSON ERROR: Invalid type "+b[2]+" found in input name '"+c+"', please use one of "+e.join(", "))}}else{return[c,"_"]}},deepSet:function(c,l,j,b){var k,h,g,i,d,e;if(b==null){b={}}e=a.serializeJSON;if(e.isUndefined(c)){throw new Error("ArgumentError: param 'o' expected to be an object or array, found undefined")}if(!l||l.length===0){throw new Error("ArgumentError: param 'keys' expected to be an array with least one element")}k=l[0];if(l.length===1){if(k===""){c.push(j)}else{c[k]=j}}else{h=l[1];if(k===""){i=c.length-1;d=c[i];if(e.isObject(d)&&(e.isUndefined(d[h])||l.length>2)){k=i}else{k=i+1}}if(e.isUndefined(c[k])){if(h===""){c[k]=[]}else{if(b.useIntKeysAsArrayIndex&&e.isValidArrayIndex(h)){c[k]=[]}else{c[k]={}}}}g=l.slice(1);e.deepSet(c[k],g,j,b)}},readCheckboxUncheckedValues:function(e,d,i){var b,h,g,c,j;if(i==null){i={}}j=a.serializeJSON;b="input[type=checkbox][name]:not(:checked)";h=d.find(b).add(d.filter(b));h.each(function(f,k){g=a(k);c=g.attr("data-unchecked-value");if(c){e.push({name:k.name,value:c})}else{if(!j.isUndefined(i.checkboxUncheckedValue)){e.push({name:k.name,value:i.checkboxUncheckedValue})}}})}}}(window.jQuery||window.Zepto||window.$));
+
+
+// AVOID CONSOLE ERRORS IN BROWSERS THAT LACK A CONSOLE //////////////////////////////
+
+
+/*MANUEL*/
+(function(){
+
+	var method;
+	var noop    = function () {};
+	var methods = [
+		'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+		'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+		'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+		'timeStamp', 'trace', 'warn'
+	];
+	var length  = methods.length;
+	var console = (window.console = window.console || {});
+
+	while ( length-- ) {
+		method = methods[length];
+
+		// Only stub undefined methods.
+		if (!console[method]) {
+			console[method] = noop;
+		}
+	}
+
+})();
+
+// PLACE ANY JQUERY/HELPER PLUGINS IN HERE ///////////////////////////////////////////
+
+window.Swipe = function(element, options) {
+
+  // return immediately if element doesn't exist
+  if (!element) return null;
+
+  var _this = this;
+
+  // retreive options
+  this.options = options || {};
+  this.index = this.options.startSlide || 0;
+  this.speed = this.options.speed || 400;
+  this.callback = this.options.callback || function() {};
+  this.delay = this.options.auto || 0;
+
+  // reference dom elements
+  this.container = element;
+  this.element = this.container.children[0]; // the slide pane
+
+  // static css
+  this.container.style.overflow = 'hidden';
+  this.element.style.listStyle = 'none';
+  this.element.style.margin = 0;
+
+  // trigger slider initialization
+  this.setup();
+
+  // begin auto slideshow
+  this.begin();
+
+  // add event listeners
+  if (this.element.addEventListener) {
+    this.element.addEventListener('touchstart', this, false);
+    this.element.addEventListener('touchmove', this, false);
+    this.element.addEventListener('touchend', this, false);
+    this.element.addEventListener('touchcancel', this, false);
+    this.element.addEventListener('webkitTransitionEnd', this, false);
+    this.element.addEventListener('msTransitionEnd', this, false);
+    this.element.addEventListener('oTransitionEnd', this, false);
+    this.element.addEventListener('transitionend', this, false);
+    window.addEventListener('resize', this, false);
+  }
+
+};
+
+Swipe.prototype = {
+
+  setup: function() {
+
+    // get and measure amt of slides
+    this.slides = this.element.children;
+    this.length = this.slides.length;
+
+    // return immediately if their are less than two slides
+    if (this.length < 2) return null;
+
+    // determine width of each slide
+    this.width = Math.ceil(("getBoundingClientRect" in this.container) ? this.container.getBoundingClientRect().width : this.container.offsetWidth);
+
+    // return immediately if measurement fails
+    if (!this.width) return null;
+
+    // hide slider element but keep positioning during setup
+    this.container.style.visibility = 'hidden';
+
+    // dynamic css
+    this.element.style.width = Math.ceil(this.slides.length * this.width) + 'px';
+    var index = this.slides.length;
+    while (index--) {
+      var el = this.slides[index];
+      el.style.width = this.width + 'px';
+      el.style.display = 'table-cell';
+      el.style.verticalAlign = 'top';
+    }
+
+    // set start position and force translate to remove initial flickering
+    this.slide(this.index, 0); 
+
+    // show slider element
+    this.container.style.visibility = 'visible';
+
+  },
+
+  slide: function(index, duration) {
+
+    var style = this.element.style;
+
+    // fallback to default speed
+    if (duration == undefined) {
+        duration = this.speed;
+    }
+
+    // set duration speed (0 represents 1-to-1 scrolling)
+    style.webkitTransitionDuration = style.MozTransitionDuration = style.msTransitionDuration = style.OTransitionDuration = style.transitionDuration = duration + 'ms';
+
+    // translate to given index position
+    style.MozTransform = style.webkitTransform = 'translate3d(' + -(index * this.width) + 'px,0,0)';
+    style.msTransform = style.OTransform = 'translateX(' + -(index * this.width) + 'px)';
+
+    // set new index to allow for expression arguments
+    this.index = index;
+
+    //   if(this.container.id == "scroller") {
+    //     var actualin = "#first" + index;
+    //     $(".points .marca").removeClass( "activada" );
+    //     $(actualin).addClass( "activada" );
+    //   } else if (this.container.id == "scroller1") {
+    //     var actualin1 = "#secon" + index;
+    //     $(".points1 .marca").removeClass( "activada" );
+    //     $(actualin1).addClass( "activada" );
+    //   } else {
+    //     var actualin2 = "#third" + index;
+    //     $(".points2 .marca").removeClass( "activada" );
+    //     $(actualin2).addClass( "activada" );
+    //   }
+
+    // toggleVideo();
+
+  },
+
+  getPos: function() {
+    
+    // return current index position
+    return this.index;
+
+  },
+
+  uno: function(delay) {
+
+    // cancel next scheduled automatic transition, if any
+    this.delay = delay || 0;
+    clearTimeout(this.interval);
+    
+    if (this.index) this.slide(0, this.speed);
+
+  },
+  
+  dos: function(delay) {
+
+    // cancel next scheduled automatic transition, if any
+    this.delay = delay || 0;
+    clearTimeout(this.interval);
+
+    if (this.index != 1) this.slide(1, this.speed);
+  
+  },
+  
+  tres: function(delay) {
+
+    // cancel next scheduled automatic transition, if any
+    this.delay = delay || 0;
+    clearTimeout(this.interval);
+
+    if (this.index != 2) this.slide(2, this.speed);
+
+  },
+
+  cuatro: function(delay) {
+
+    // cancel next scheduled automatic transition, if any
+    this.delay = delay || 0;
+    clearTimeout(this.interval);
+
+    if (this.index != 3) this.slide(3, this.speed);
+
+  },
+  
+  prev: function(delay) {
+
+    // cancel next scheduled automatic transition, if any
+    this.delay = delay || 0;
+    clearTimeout(this.interval);
+    
+    if (this.index != 0) this.slide(this.index-1, this.speed);
+    else this.slide(this.length-1, this.speed);
+
+  },
+
+  next: function(delay) {
+
+    // cancel next scheduled automatic transition, if any
+    this.delay = delay || 0;
+    clearTimeout(this.interval);
+
+    if (this.index < this.length - 1) this.slide(this.index+1, this.speed); // if not last slide
+    else this.slide(0, this.speed);
+
+  },
+
+  begin: function() {
+
+    var _this = this;
+
+    this.interval = (this.delay)
+      ? setTimeout(function() { 
+        _this.next(_this.delay);
+      }, this.delay)
+      : 0;
+  
+  },
+  
+  stop: function() {
+    this.delay = 0;
+    clearTimeout(this.interval);
+  },
+  
+  resume: function() {
+    this.delay = this.options.auto || 0;
+    this.begin();
+  },
+
+  handleEvent: function(e) {
+    switch (e.type) {
+      case 'touchstart': this.onTouchStart(e); break;
+      case 'touchmove': this.onTouchMove(e); break;
+      case 'touchcancel' :
+      case 'touchend': this.onTouchEnd(e); break;
+      case 'webkitTransitionEnd':
+      case 'msTransitionEnd':
+      case 'oTransitionEnd':
+      case 'transitionend': this.transitionEnd(e); break;
+      case 'resize': this.setup(); break;
+    }
+  },
+
+  transitionEnd: function(e) {
+    
+    if (this.delay) this.begin();
+
+    this.callback(e, this.index, this.slides[this.index]);
+
+  },
+
+  onTouchStart: function(e) {
+    
+    this.start = {
+
+      // get touch coordinates for delta calculations in onTouchMove
+      pageX: e.touches[0].pageX,
+      pageY: e.touches[0].pageY,
+
+      // set initial timestamp of touch sequence
+      time: Number( new Date() )
+
+    };
+
+    // used for testing first onTouchMove event
+    this.isScrolling = undefined;
+    
+    // reset deltaX
+    this.deltaX = 0;
+
+    // set transition time to 0 for 1-to-1 touch movement
+    this.element.style.MozTransitionDuration = this.element.style.webkitTransitionDuration = 0;
+    
+    e.stopPropagation();
+  },
+
+  onTouchMove: function(e) {
+
+    // ensure swiping with one touch and not pinching
+    if(e.touches.length > 1 || e.scale && e.scale !== 1) return;
+
+    this.deltaX = e.touches[0].pageX - this.start.pageX;
+
+    // determine if scrolling test has run - one time test
+    if ( typeof this.isScrolling == 'undefined') {
+      this.isScrolling = !!( this.isScrolling || Math.abs(this.deltaX) < Math.abs(e.touches[0].pageY - this.start.pageY) );
+    }
+
+    // if user is not trying to scroll vertically
+    if (!this.isScrolling) {
+
+      // prevent native scrolling 
+      e.preventDefault();
+
+      // cancel slideshow
+      clearTimeout(this.interval);
+
+      // increase resistance if first or last slide
+      this.deltaX = 
+        this.deltaX / 
+          ( (!this.index && this.deltaX > 0               // if first slide and sliding left
+            || this.index == this.length - 1              // or if last slide and sliding right
+            && this.deltaX < 0                            // and if sliding at all
+          ) ?                      
+          ( Math.abs(this.deltaX) / this.width + 1 )      // determine resistance level
+          : 1 );                                          // no resistance if false
+      
+      // translate immediately 1-to-1
+      this.element.style.MozTransform = this.element.style.webkitTransform = 'translate3d(' + (this.deltaX - this.index * this.width) + 'px,0,0)';
+      
+      e.stopPropagation();
+    }
+
+  },
+
+  onTouchEnd: function(e) {
+
+    // determine if slide attempt triggers next/prev slide
+    var isValidSlide = 
+          Number(new Date()) - this.start.time < 250      // if slide duration is less than 250ms
+          && Math.abs(this.deltaX) > 20                   // and if slide amt is greater than 20px
+          || Math.abs(this.deltaX) > this.width/2,        // or if slide amt is greater than half the width
+
+    // determine if slide attempt is past start and end
+        isPastBounds = 
+          !this.index && this.deltaX > 0                          // if first slide and slide amt is greater than 0
+          || this.index == this.length - 1 && this.deltaX < 0;    // or if last slide and slide amt is less than 0
+
+    // if not scrolling vertically
+    if (!this.isScrolling) {
+
+      // call slide function with slide end value based on isValidSlide and isPastBounds tests
+      this.slide( this.index + ( isValidSlide && !isPastBounds ? (this.deltaX < 0 ? 1 : -1) : 0 ), this.speed );
+
+    }
+    
+    e.stopPropagation();
+  }
+
+};
+
+// new Swipe(document.getElementById('scroller'));
+// var slider1 = new Swipe(document.getElementById('scroller'));
+
+/*END MANUEL*/

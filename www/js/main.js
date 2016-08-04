@@ -194,7 +194,7 @@
 				for (var key in obj) 
 					if (hasOwnProperty.call(obj, key)) return false;
 				return true;
-		},
+		},								/*SE PUEDE BORRAR A PARTIR DE ESTE PUNTO*/
 		render_feed : function(offset, filter){
 			app.showLoader();
 			$.getJSON(api_base_url+'feed/'+offset+'/'+filter , function(response){
