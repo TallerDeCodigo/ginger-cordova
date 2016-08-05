@@ -5,10 +5,10 @@ $( function() {
 	var minval_age = 15; 
 	var maxval_age = 90;
 	var rango_age = maxval_age-minval_age; 
-	var gridag = ((document.documentElement.clientWidth*0.7)-30)/rango_age;
+	var gridag = ($('.drag-parent').width()-30)/rango_age;
     $('#age').draggable({ containment:"parent",axis:"x",grid:[gridag,gridag],drag:function(){
-    	var percent = (document.documentElement.clientWidth*0.7)-30;
-    	var donde = Math.round((($('#age').position().left)*rango_age)/percent);
+    	var percent = $('.drag-parent').width()-30;
+    	var donde = Math.round(((($('#age').position().left)*rango_age)/percent)+minval_age);
     	$("#age-filler").css("width",$('#age').position().left+29);
     	$('#age-dato').html(donde);
       }
@@ -17,10 +17,10 @@ $( function() {
   	var minval_eje = 0; 
 	var maxval_eje = 7;
 	var rango_eje = maxval_eje-minval_eje;
-  	var gridej = ((document.documentElement.clientWidth*0.7)-30)/rango_eje;
+  	var gridej = ($('.drag-parent').width()-30)/rango_eje;
     $('#ejercicio').draggable({ containment:"parent",axis:"x",grid:[gridej,gridej],drag:function(){
-    	var percent = (document.documentElement.clientWidth*0.7)-30;
-    	var donde = Math.round((($('#ejercicio').position().left)*rango_eje)/percent);
+    	var percent = $('.drag-parent').width()-30;
+    	var donde = Math.round(((($('#ejercicio').position().left)*rango_eje)/percent)+minval_eje);
     	$("#ejercicio-filler").css("width",$('#ejercicio').position().left+29);
     	$('#ejercicio-dato').html(donde);
       }
@@ -164,14 +164,22 @@ $(window).load(function(){
 		});
 
 		$("#hombre").click(function(){
+			if ($(this).hasClass('edition')) {
+				$('#mujer').attr("src","images/mujere.svg");
+			} else {
+				$('#mujer').attr("src","images/mujer.svg");
+			}
 			$(this).attr("src","images/hombreh.svg");
-			$('#mujer').attr("src","images/mujer.svg");
 			$('.type-def').attr("src","images/hombreh.svg");
 		});
 
 		$("#mujer").click(function(){
+			if ($(this).hasClass('edition')) {
+				$('#hombre').attr("src","images/hombree.svg");
+			} else {
+				$('#hombre').attr("src","images/hombre.svg");
+			}
 			$(this).attr("src","images/mujerh.svg");
-			$('#hombre').attr("src","images/hombre.svg");
 			$('.type-def').attr("src","images/mujerh.svg");
 		});
 
@@ -511,8 +519,22 @@ $(window).load(function(){
 			} else {
 				$(this).html('Mostrar Completados');
 				$('.platillo.consumido').hide();
-			}
-			
+			}	
+		});
+
+		$('.di-options a').click(function() {
+			$('.overscreen2').removeClass('active');
+			setTimeout(function() {$('.overscreen2').hide();}, 500);
+		});
+
+		$('.ov-filler2').click(function() {
+			$('.overscreen2').removeClass('active');
+			setTimeout(function() {$('.overscreen2').hide();}, 500);
+		});
+
+		$('a.logout').click(function() {
+			$('.overscreen2').show();
+			setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
 		});
 
 	});
