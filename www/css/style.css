@@ -315,8 +315,8 @@ nav.botones {float:right;margin:2px 0px 5px 15px;}
 .cena svg {fill:#ffd156;}
 
 .platillo p.receta, .platillo p.comentario {padding:0px 5px 0px 50px;font-size:95%;position:relative;min-height:28px;margin-top:4px;}
-.platillo p.receta {background:url('images/cook.svg') no-repeat;background-position:7px center;}
-.platillo p.comentario {background:url('images/comment.svg') no-repeat;background-position:7px center;}
+.platillo p.receta {background:url('../images/cook.svg') no-repeat;background-position:7px center;}
+.platillo p.comentario {background:url('../images/comment.svg') no-repeat;background-position:7px center;}
 
 .platillo a.more {display:inline-block;width:100%;height:28px;text-align:right;padding-right:2px;border-bottom:1px solid #cfcfcf;}
 div.acc-content .platillo:last-of-type a.more {border:none;}
@@ -353,14 +353,21 @@ div.acc-content .platillo:last-of-type a.more {border:none;}
 .active .rueda-4 {bottom:50px;left:69%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
 .active .rueda-5 {bottom:10px;left:86%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
 
+/* INICIO */
 
+.inicio {background:#f4f1f0 url('../images/fondo.png');background-size:100% auto;}
+.ini-options {width:100%;height:90px;position:absolute;top:50%;margin-top:-30px;}
+.ini-options a {width:90px;height:90px;background:blue;display:inline-block;vertical-align:top;border-radius:50%;color:#FFF;font-weight:700;}
 
+a.morado {margin-right:15%;line-height:88px;background:rgba(128,65,183,0.55);}
+a.verde {padding-top:28px;background:rgba(0,183,166,0.55);}
 
+/* SEGUNDO */
 
+.segundo {background:#f4f1f0 url('../images/fondo_login.png');background-size:100% auto;}
+.seg-options {position:absolute;width:100%;height:120px;top:72.5%;}
+.seg-options a {width:80%;height:36px;line-height:36px;color:#FFF;font-weight:700;display:inline-block;text-align:left;padding-left:48px;font-size:105%;margin:12px 0px;}
 
-
-
-
-
-
+a.face {background:#4b66a1 url('../images/fb_btn.png') no-repeat;background-size:auto 100%;}
+a.mail {background:#2eab7e url('../images/mail_btn.png') no-repeat;background-size:auto 100%;}
 
