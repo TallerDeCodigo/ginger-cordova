@@ -981,7 +981,9 @@
 			},
 			submitHandler:function(){
 				var data_login	= app.getFormData("#login_form");
+
 				console.log(data_login);
+				
 				data_login.pass = $('#pass').val();
 				var responsedata = apiRH.loginNative(data_login);
 

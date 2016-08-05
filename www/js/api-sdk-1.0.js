@@ -49,7 +49,10 @@ function requestHandlerAPI(){
 		 */
 		this.loginNative =  function(data_login){
 		
-		console.log('entro a login native');
+		console.log(data_login);
+
+
+
 		var req = {
 				method : 'post',
 				url : api_base_url + 'api/login',	//definitr tabla
@@ -59,19 +62,11 @@ function requestHandlerAPI(){
 					'Content-Type': 'application/json'
 				},
 				data : {
-					'mail' : email,
-					'password' : password,
+					'mail' : data_login.email,
+					'password' : data_login.pass,
 					'tipo' : 'cliente'
 				}
 			}
-
-			$http(req).success(function(response){
-				console.log(response);	
-			});
-
-
-			console.log(req.mail);
-
 			var response = this.makeRequest('api/login', req);  //metodo makeRequest
 			return (response.success) ? response.data : false;
 		};
