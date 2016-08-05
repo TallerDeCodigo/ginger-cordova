@@ -766,8 +766,6 @@
 			});
 		},  //END REGISTER ACTIVITY
 
-
-
 		update_perfil: function(sexo,peso,pesoDeseado,personalidad,objetivo,ejercicio,edad,fechaNaciemiento,codigoPostal,comentarios,nombre,restricciones,estatura){
 			var req = {
 				method : 'post',
