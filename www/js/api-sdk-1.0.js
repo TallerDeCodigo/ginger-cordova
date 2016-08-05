@@ -21,8 +21,12 @@ function requestHandlerAPI(){
 						};
 	var context = this;
 	window.sdk_app_context = null;
-	/* Production API URL */
-	window.api_base_url = "http://dedalo.devtdc.online/rest/v1/";
+
+	/* 
+		Production API URL 
+							*/
+
+	window.api_base_url = "http://localhost/gingerservice/service";  //servicios ginger
 	/* Development local API URL */
 	// window.api_base_url = "http://dedalo.dev/rest/v1/";
 	// window.api_base_url = "http://localhost/~manuelon/dedalo/rest/v1/";
@@ -44,43 +48,55 @@ function requestHandlerAPI(){
 		 * @return status Bool true is successfully logged in; false if an error ocurred
 		 */
 		this.loginNative =  function(data_login){
-
 								var data_object = {
-													user_email : data_login.email, 
-													user_password: data_login.password, 
-													request_token: apiRH.get_request_token(),
-													parts:  {
-																model: context.device_model, 
-																platform: context.device_platform, 
-																version: context.device_platform_version 
-															}
+													mail 		: data_login.email, 
+													pass	: data_login.password
 												  };
-								var response = this.makeRequest('auth/login/', data_object);
-								console.log(response);
+								console.log(data_login.email);
+
+								var response = this.makeRequest('service/api/', data_object);  //metodo makeRequest
 								return (response.success) ? response.data : false;
 							};
+
+		// this.loginNative2 =  function(data_login){
+		// 						var data_object = {
+		// 											mail 		: data_login.email, 
+		// 											pass	: data_login.password, 
+		// 											request_token 	: apiRH.get_request_token(),
+		// 											parts:  {
+		// 														model 	: context.device_model, 
+		// 														platform: context.device_platform, 
+		// 														version : context.device_platform_version 
+		// 													}
+		// 										  };
+		// 						console.log(data_login.email);
+
+		// 						var response = this.makeRequest('auth/login/', data_object);  //metodo makeRequest
+		// 						return (response.success) ? response.data : false;
+		// 					};
 
 		/* 
 		 * Register a new user account the old fashioned way
 		 * @param data_login JSON {user_login, user_password}
 		 * @return status Bool true is successfully logged in; false if an error ocurred (User already exists)
 		 */
-		this.registerNative =  function(data_login){
-								var userfinal = data_login.user_email;
+		this.registerNative =   function(data_login){
+								var userfinal = data_login.mail;
+								console.log(userfinal);
 								userfinal = userfinal.replace("@", "").replace(/\./g, "").replace(/\-/g, "").replace(/\_/g, "");
 								var data = {
-												username 	: userfinal, 
-												email 		: data_login.user_email,
+												user 	: userfinal, 
+												email 		: data_login.mail,
 												attrs 		: {
 																password 	: data_login.user_pwd,
 																bio 		: data_login.user_bio,
-																name 		: data_login.user_name, 
-																last_name 	: data_login.user_last_name, 
+																name 		: data_login.user_name,
+																last_name 	: data_login.user_last_name,
 																request_token: apiRH.get_request_token()
 															  }
 											};
 								console.log(data);
-								var response = this.makeRequest('auth/user/', data);
+								var response = this.makeRequest('service/api', data);  //es el endpoint correcto?
 								console.log(response);
 								// if(response.success)
 									// apiRH.initializeProfileFileTransfer();
@@ -146,6 +162,7 @@ function requestHandlerAPI(){
 											var_return = (response.success) ? true : false;
 											return var_return;
 									};
+
 		/* 
 		 * Save user data client side to execute auth requests to the API
 		 * @return null
@@ -166,6 +183,7 @@ function requestHandlerAPI(){
 											 .done(function(response){
 											 	apiRH.ls.setItem('me', JSON.stringify(response));
 											 	apiRH.ls.setItem('me.logged', true);
+											 	console.log(response);
 											})
 											 .fail(function(err){
 												console.log(err);
@@ -185,6 +203,7 @@ function requestHandlerAPI(){
 								}
 								return this;
 							};
+
 		/* 
 		 * Set token user
 		 * @return the token
@@ -278,16 +297,16 @@ function requestHandlerAPI(){
 		 * @see API documentation about jsonp encoding
 		 */
 		this.getRequest = function(endpoint, data){
-							
 							sdk_app_context.showLoader();
 							var result = {};
-							endpoint = (data === null) ? endpoint : endpoint+data; 
+							endpoint = (data === null) ? endpoint : endpoint+data; //ternario
 							$.getJSON( window.api_base_url+endpoint, function( response ){
 								result = response;
 								sdk_app_context.hideLoader();
 							});
 							return result;
 						};
+
 		/* 
 		 * Executes a PUT call
 		 * @param endpoint API endpoint to make the call to

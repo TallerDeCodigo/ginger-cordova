@@ -10,18 +10,20 @@
 	    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 	    <script src="js/jquery-touch.min.js"></script>
 	    <script type="text/javascript" src="js/functions.js"></script>
+		<script type='text/javascript' src='js/plugins.js'></script>
+		<script type="text/javascript" src="js/oauth.js"></script>
+		<script src="js/main.js"></script>
 	</head>
 	<body>
 	<div id="container" class="login">
 		<img class="logo" src="images/logo.svg">
 		<h4>INICIAR SESIÓN</h4>
-		<form>
-			<input type="text" name="mail" placeholder="Correo electrónico">
-			<input type="text" name="pass" placeholder="Contraseña">
-			<img src="images/enter.svg">
+		<form id="login_form" name="login_form" method="post">
+			<input id="mail" 		 type="email" 	 name="mail" placeholder="Correo electrónico">
+			<input id="pass" 		 type="password" name="pass" placeholder="Contraseña">
+			<input id="enviar_login" type="submit" 	 name="enviar_login" value="">
 		</form>
 	</div>
-	<script type='text/javascript' src='js/plugins_m.js'></script>
 	</body>
 </html>
 

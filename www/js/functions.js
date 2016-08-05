@@ -479,6 +479,7 @@ $(window).load(function(){
 
 });
 
+
 (function($){
 
 	"use strict";

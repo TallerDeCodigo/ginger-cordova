@@ -123,14 +123,22 @@
 		// deviceready Event Handler
 		onDeviceReady: function() {
 			app.receivedEvent('deviceready');
+
+
+
+
 			/*   ___    _         _   _     
 			*  / _ \  / \  _   _| |_| |__  
 			* | | | |/ _ \| | | | __| '_ \ 
 			* | |_| / ___ \ |_| | |_| | | |
 			*  \___/_/   \_\__,_|\__|_| |_|
 			*/                              
+
+
+
+
 			try{
-				OAuth.initialize('VWadBFs2rbk8esrvqSEFCyHGKnc');
+				OAuth.initialize('F_A1PBTm8Vv9WtuftE8CuTqNV7g');
 				console.log("Initialized Oauth");
 			}
 			catch(err){
@@ -886,42 +894,47 @@
  */
 	jQuery(document).ready(function($) {
 
+		 console.log("hello from mainJs");
 		// $('#search_by_photo').click(function(){
 		// 	app.get_file_from_device('search', 'camera');
 		// });
 
 		/* Create a new account the old fashioned way */
-		if($('#register_form').length)
-			$('#register_form').validate({
+		
+		if($('#create_account').length)
+			$('#create_account').validate({
 				rules: {
-					user_login_reg: "required",
-					user_email_reg: {
+					user: "required",
+					mail: {
 							required: true,
 							email: true
 						},
-					user_country: "required",
-					i_accept_terms : "required"
+					pass: "required",
+					cpass : "required"
 				},
 				messages: {
-					user_login_reg: "Debes proporcionar un username",
-					user_email_reg: {
-							required: "Debes proporcionar un email",
-							email: "Por favor proporciona un email válido"
+					user: "Debes proporcionar un nombre de usuario",
+					mail: {
+							required: "Debes proporcionar un correo",
+							email: "Por favor proporciona un correo válido"
 						},
-					user_country: "Por favor selecciona tu país",
-					i_accept_terms: "Debes aceptar los términos y condiciones para continuar"
+					pass: "Este campo es requerido para acceder a tu cuenta",
+					cpass: "Las contraseñas que proporcionaste no coinciden"
 				},
 				submitHandler: function(e){
-					var data_login  	= app.getFormData('#register_form');
-					data_login.user_password_reg = $('#user_password_reg').val();
+					var data_login  	= app.getFormData('#create_account');
+					data_login.pass 	= $('#pass').val();
 					var responsedata 	= apiRH.registerNative(data_login);
-					if(responsedata) {
-						apiRH.save_user_data_clientside(responsedata);
-						window.location.assign('feed.html?filter_feed=all');
-						return;
-					}
-					app.toast('Lo sentimos, el nombre de usuario ya existe.');
-					e.preventDefault();
+
+					console.log(responsedata);
+
+					// if(responsedata) {
+					// 	apiRH.save_user_data_clientside(responsedata);
+					// 	window.location.assign('feed.html?filter_feed=all');
+					// 	return;
+					// }
+					// app.toast('Lo sentimos, el nombre de usuario ya existe.');
+					// e.preventDefault();
 				}
 			});
 
@@ -930,7 +943,7 @@
 			/* Requesting logout from server */
 			var response = apiRH.logOut({user_login : user, request_token : apiRH.get_request_token() });
 			if(response.success){
-				app.toast('Session ended, see you soon!');
+				app.toast('Has cerrado la sesión, hasta pronto');
 					app.ls.removeItem('dedalo_log_info');
 					app.ls.removeItem('request_token');
 					app.ls.removeItem('me.logged');
@@ -938,12 +951,46 @@
 				window.location.assign('feed.html');
 				return;
 			}
-			app.toast('Ocurrió un problema al intentar cerrar tu sesión');
+			app.toast('No ha sido posible crear tu cuenta, inténtalo de nuevo por favor.');
 			return;
 		});
 
 
 // ----------------------------------------------------------------------
+
+
+/*
+	LOGIN WITHOUT FACEBOOK
+							*/
+
+	if($('#login_form').length)
+		$('#login_form').validate({
+			rules:{
+				mail:{
+					required:true,
+					email:true
+				},
+				pass:"required"
+			},
+			messages:{
+				mail:{
+					required:"Debes proporcionar un correo",
+					email:"Proporciona un correo válido"
+				},
+				pass:"Este campo es requerido para acceder a tu cuenta"
+			},
+			submitHandler:function(){
+				var data_login	= app.getFormData("#login_form");
+				console.log(data_login);
+
+				// data_login.pass = $('#pass').val();
+				// var responsedata = apiRH.loginNative(data_login);
+
+				// if(responsedata){
+				// 	console.log(responsedata);
+				// }
+			}
+	}); //END VALIDATE
 
 
 
@@ -984,3 +1031,4 @@
 
 
 	});
+
