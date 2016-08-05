@@ -2,7 +2,7 @@
 
 $( function() {
 
-	var minval_age = 0; 
+	var minval_age = 15; 
 	var maxval_age = 90;
 	var rango_age = maxval_age-minval_age; 
 	var gridag = ((document.documentElement.clientWidth*0.7)-30)/rango_age;
@@ -22,13 +22,11 @@ $( function() {
     	var percent = (document.documentElement.clientWidth*0.7)-30;
     	var donde = Math.round((($('#ejercicio').position().left)*rango_eje)/percent);
     	$("#ejercicio-filler").css("width",$('#ejercicio').position().left+29);
-    	if (donde>3) {
-    		$('#ejercicio-dato').html("4-7");
-    	} else {
-    		$('#ejercicio-dato').html("0-3");
-    	}
+    	$('#ejercicio-dato').html(donde);
       }
   	});
+
+  	$( ".accordion" ).accordion({ collapsible:true,active:false,animate:300,heightStyle:"content" });
 
 } );
 
@@ -475,10 +473,51 @@ $(window).load(function(){
 			}
 		});
 
+		$('.centro').click(function() {
+			if(!$('.overscreen').is(':visible')){
+				$('.overscreen').show();
+				setTimeout(function() {$('.overscreen').addClass('active');}, 200);
+			} else {
+				$('.overscreen').removeClass('active');
+				setTimeout(function() {$('.overscreen').hide();}, 800);
+			}
+			$('#container').toggleClass('blurred');
+			$('a.centro img').toggleClass('onn');
+		});
+
+		$('.ov-filler').click(function() {
+			$('.overscreen').removeClass('active');
+			setTimeout(function() {$('.overscreen').hide();}, 800);
+			$('#container').removeClass('blurred');
+			$('a.centro img').removeClass('onn');
+		});
+
+		$('svg.consume').click(function() {
+			$(this).parent().parent().addClass('consumido');
+			$(this).html('<use xlink:href="#consume2"></use>');
+		});
+
+		$('svg.noconsu').click(function() {
+			$(this).parent().parent().addClass('cancelado');
+			$(this).html('<use xlink:href="#noconsu2"></use>');
+		});
+
+		var texto = 'Mostrar Completados';
+
+		$('.toggle-complete').click(function() {
+			if ($(this).html()=='Mostrar Completados') {
+				$(this).html('Ocultar Completados');
+				$('.platillo.consumido').show();
+			} else {
+				$(this).html('Mostrar Completados');
+				$('.platillo.consumido').hide();
+			}
+			
+		});
+
 	});
 
 });
-
 
 (function($){
 

@@ -156,7 +156,7 @@ nav.selector {margin:5% 0px 7%;}
 .drag-parent {width:70%;position:relative;height:22px;top:60px;display:inline-block;}
 .slider-bar {width:100%;height:6px;background:#FFF;border-radius:3px;position:absolute;top:50%;margin-top:-3px;left:0px;}
 .slider-filler {width:0%;height:6px;background:#ff9f64;border-bottom-left-radius:5px;border-top-left-radius:3px;position:absolute;top:50%;margin-top:-3px;left:0px;}
-.slider-point {position:absolute;left:0%;box-shadow:0px 0px 1px #bf602b;width:30px;height:30px;top:50%;margin-top:-15px;background:url('images/slider.svg');background-size:100% auto;border-radius:50%;}
+.slider-point {position:absolute;left:0%;box-shadow:0px 0px 1px #bf602b;width:30px;height:30px;top:50%;margin-top:-15px;background:url('../images/slider.svg');background-size:100% auto;border-radius:50%;}
 .slider-point .position {position:absolute;width:40px;height:30px;line-height:100%;top:-50px;left:50%;margin-left:-20px;color:#767676;}
 .slider-point .position span {font-size:135%;font-weight:100;}
 .slider-point .position:after {content:"";width:1px;height:12px;background:#838383;position:absolute;left:50%;margin-left:-1px;bottom:-14px;}
@@ -245,7 +245,7 @@ label[for="year"] {left:58%;}
 .segur label {left:20%;}
 
 input[type=checkbox]:not(old) {width:30px;height:30px;margin:0;padding:0;opacity:0;position:relative;top:10px;margin-top:-15px;}
-input[type=checkbox]:not(old) + span {font-weight:100;display:inline-block;margin-left:-34px;padding-left:38px;background:url('images/radio.png') no-repeat 0 0;background-size:30px auto; line-height:29px;}
+input[type=checkbox]:not(old) + span {font-weight:100;display:inline-block;margin-left:-34px;padding-left:38px;background:url('../images/radio.png') no-repeat 0 0;background-size:30px auto; line-height:29px;}
 input[type=checkbox]:not(old):checked + span {background-position: 0 -29px;}
 .form-label span a {font-weight:700;display:inline-block;text-decoration:underline;}
 
