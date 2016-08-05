@@ -67,7 +67,9 @@ function requestHandlerAPI(){
 					'tipo' : 'cliente'
 				}
 			}
+
 			var response = this.makeRequest('api/login', req);  //metodo makeRequest
+			console.log(response);
 			return (response.success) ? response.data : false;
 		};
 
