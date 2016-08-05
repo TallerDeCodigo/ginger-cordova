@@ -17,7 +17,8 @@
 // AVOID CONSOLE ERRORS IN BROWSERS THAT LACK A CONSOLE //////////////////////////////
 
 
-/*MANUEL*/
+// AVOID CONSOLE ERRORS IN BROWSERS THAT LACK A CONSOLE //////////////////////////////
+
 (function(){
 
 	var method;
@@ -145,21 +146,9 @@ Swipe.prototype = {
     // set new index to allow for expression arguments
     this.index = index;
 
-    //   if(this.container.id == "scroller") {
-    //     var actualin = "#first" + index;
-    //     $(".points .marca").removeClass( "activada" );
-    //     $(actualin).addClass( "activada" );
-    //   } else if (this.container.id == "scroller1") {
-    //     var actualin1 = "#secon" + index;
-    //     $(".points1 .marca").removeClass( "activada" );
-    //     $(actualin1).addClass( "activada" );
-    //   } else {
-    //     var actualin2 = "#third" + index;
-    //     $(".points2 .marca").removeClass( "activada" );
-    //     $(actualin2).addClass( "activada" );
-    //   }
-
-    // toggleVideo();
+    $(".weekdays span").removeClass("active");
+    var actual = index+1;
+    $(".weekdays td:nth-of-type("+actual+") span").addClass("active");
 
   },
 
@@ -207,6 +196,36 @@ Swipe.prototype = {
     clearTimeout(this.interval);
 
     if (this.index != 3) this.slide(3, this.speed);
+
+  },
+
+  cinco: function(delay) {
+
+    // cancel next scheduled automatic transition, if any
+    this.delay = delay || 0;
+    clearTimeout(this.interval);
+
+    if (this.index != 4) this.slide(4, this.speed);
+
+  },
+
+  seis: function(delay) {
+
+    // cancel next scheduled automatic transition, if any
+    this.delay = delay || 0;
+    clearTimeout(this.interval);
+
+    if (this.index != 5) this.slide(5, this.speed);
+
+  },
+
+  siete: function(delay) {
+
+    // cancel next scheduled automatic transition, if any
+    this.delay = delay || 0;
+    clearTimeout(this.interval);
+
+    if (this.index != 6) this.slide(6, this.speed);
 
   },
   
@@ -366,7 +385,7 @@ Swipe.prototype = {
 
 };
 
-// new Swipe(document.getElementById('scroller'));
-// var slider1 = new Swipe(document.getElementById('scroller'));
+new Swipe(document.getElementById('scroller'));
+var slider = new Swipe(document.getElementById('scroller'));
 
-/*END MANUEL*/
+
