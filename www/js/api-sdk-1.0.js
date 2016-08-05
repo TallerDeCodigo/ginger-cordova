@@ -1,3 +1,17 @@
+/*
+ *
+ *
+ *	Search for localStorage support
+ *
+ *
+ */
+
+if (localStorage) {
+	console.log("Supported");
+} else {
+  console.log("Non supported");
+}
+
 /* 
  * Prototype: requestHandlerAPI 
  * @params token (optional if not executing auth requests) Locally saved user token
@@ -48,30 +62,35 @@ function requestHandlerAPI(){
 		 * @return status Bool true is successfully logged in; false if an error ocurred
 		 */
 		this.loginNative =  function(data_login){
-		
-		console.log(data_login);
 
-
-
+		var email = data_login.mail;
+		var pass = data_login.pass;
 		var req = {
 				method : 'post',
-				url : api_base_url + 'api/login',	//definitr tabla
+				url : api_base_url + 'api/login',
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
 					'X-ZUMO-AUTH': '',
 					'Content-Type': 'application/json'
 				},
 				data : {
-					'mail' : data_login.email,
-					'password' : data_login.pass,
-					'tipo' : 'cliente'
+					"tipo" : "cliente",
+					"mail" : email,
+					"password" : pass
 				}
 			}
+			var response = this.makeRequest('api/login', req);
 
-			var response = this.makeRequest('api/login', req);  //metodo makeRequest
 			console.log(response);
+
+			localStorage.setItem('respuesta', response);
+
 			return (response.success) ? response.data : false;
 		};
+
+
+
+
 
 		// this.loginNative2 =  function(data_login){
 		// 						var data_object = {
@@ -220,7 +239,7 @@ function requestHandlerAPI(){
 		 * @return new generated token
 		 */
 		this.request_token = function(){
-								var response_data = this.getRequest('auth/getToken/', null);
+								var response_data = this.getRequest('api/', null);
 								/* Verify we got a nice token */
 								if( response_data.success !== false){
 									this.token = response_data.data.request_token;
@@ -294,7 +313,9 @@ function requestHandlerAPI(){
 		 * @return JSON encoded response
 		 */
 		this.makeRequest = function(endpoint, data){
-								
+			
+			console.log(data.data);
+
 			sdk_app_context.showLoader();
 			var result = {};
 			$.ajax({
