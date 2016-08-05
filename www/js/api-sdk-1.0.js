@@ -83,31 +83,25 @@ function requestHandlerAPI(){
 
 			console.log(response);
 
-			localStorage.setItem('respuesta', response);
+/*
+	GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
+*/
+			localStorage.setItem('token', response.token);
+			localStorage.setItem('mail', response.mail);
+			localStorage.setItem('userId', response.userId);
 
+			var userId = localStorage.getItem('userId');
+			var mail = localStorage.getItem('mail');
+			var token = localStorage.getItem('token');
+			console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
+
+
+/*
+	REGRESA LA RESPUESTA DEL SERVIDOR CON EL USER ID, MAIL Y TOKEN
+*/
 			return (response.success) ? response.data : false;
 		};
 
-
-
-
-
-		// this.loginNative2 =  function(data_login){
-		// 						var data_object = {
-		// 											mail 		: data_login.email, 
-		// 											pass	: data_login.password, 
-		// 											request_token 	: apiRH.get_request_token(),
-		// 											parts:  {
-		// 														model 	: context.device_model, 
-		// 														platform: context.device_platform, 
-		// 														version : context.device_platform_version 
-		// 													}
-		// 										  };
-		// 						console.log(data_login.email);
-
-		// 						var response = this.makeRequest('auth/login/', data_object);  //metodo makeRequest
-		// 						return (response.success) ? response.data : false;
-		// 					};
 
 		/* 
 		 * Register a new user account the old fashioned way
