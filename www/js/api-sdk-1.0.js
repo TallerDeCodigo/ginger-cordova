@@ -26,7 +26,7 @@ function requestHandlerAPI(){
 		Production API URL 
 							*/
 
-	window.api_base_url = "http://localhost/gingerservice/service";  //servicios ginger
+	window.api_base_url = "https://gingerservice.azure-mobile.net/";  //servicios ginger
 	/* Development local API URL */
 	// window.api_base_url = "http://dedalo.dev/rest/v1/";
 	// window.api_base_url = "http://localhost/~manuelon/dedalo/rest/v1/";
@@ -48,15 +48,33 @@ function requestHandlerAPI(){
 		 * @return status Bool true is successfully logged in; false if an error ocurred
 		 */
 		this.loginNative =  function(data_login){
-								var data_object = {
-													mail 		: data_login.email, 
-													pass	: data_login.password
-												  };
-								console.log(data_login.email);
+		
+		console.log('entro a login native');
+		var req = {
+				method : 'post',
+				url : api_base_url + 'api/login',	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': '',
+					'Content-Type': 'application/json'
+				},
+				data : {
+					'mail' : email,
+					'password' : password,
+					'tipo' : 'cliente'
+				}
+			}
 
-								var response = this.makeRequest('service/api/', data_object);  //metodo makeRequest
-								return (response.success) ? response.data : false;
-							};
+			$http(req).success(function(response){
+				console.log(response);	
+			});
+
+
+			console.log(req.mail);
+
+			var response = this.makeRequest('api/login', req);  //metodo makeRequest
+			return (response.success) ? response.data : false;
+		};
 
 		// this.loginNative2 =  function(data_login){
 		// 						var data_object = {
@@ -96,7 +114,7 @@ function requestHandlerAPI(){
 															  }
 											};
 								console.log(data);
-								var response = this.makeRequest('service/api', data);  //es el endpoint correcto?
+								var response = this.makeRequest('api/login', data);  //es el endpoint correcto?
 								console.log(response);
 								// if(response.success)
 									// apiRH.initializeProfileFileTransfer();
@@ -170,6 +188,16 @@ function requestHandlerAPI(){
 		 */
 		this.save_user_data_clientside = function(data){
 											var user_role = data.role;
+											if(user_role == 'cliente') user_role = 'maker';
+											this.ls.setItem('', 	JSON.stringify({
+																					user_login: 	data.user_login,
+																					username: 		data.user_login,
+																					user_id: 		data.user_id,
+																					user_role: 		data.role,
+																					user_profile: 	data.profile_url,
+																				}));
+											
+											/*
 											if(user_role == 'administrator') user_role = 'maker';
 											this.ls.setItem('dedalo_log_info', 	JSON.stringify({
 																					user_login: 	data.user_login,
@@ -178,6 +206,7 @@ function requestHandlerAPI(){
 																					user_role: 		data.role,
 																					user_profile: 	data.profile_url,
 																				}));
+											*/									
 											/* Also save user ME info */
 											$.getJSON(api_base_url+data.user_login+'/me/')
 											 .done(function(response){
@@ -269,25 +298,25 @@ function requestHandlerAPI(){
 		 */
 		this.makeRequest = function(endpoint, data){
 								
-								sdk_app_context.showLoader();
-								var result = {};
-								$.ajax({
-								  type: 'POST',
-								  url: window.api_base_url+endpoint,
-								  data: data,
-								  dataType: 'json',
-								  async: false
-								})
-								 .done(function(response){
-									result = response;
-									sdk_app_context.hideLoader();
-								})
-								 .fail(function(e){
-									result = false;
-									console.log(JSON.stringify(e));
-								});
-								return result;
-							};
+			sdk_app_context.showLoader();
+			var result = {};
+			$.ajax({
+			  type: 'POST',
+			  url: window.api_base_url+endpoint,
+			  data: data,
+			  dataType: 'json',
+			  async: false
+			})
+			 .done(function(response){
+				result = response;
+				sdk_app_context.hideLoader(response);
+			})
+			 .fail(function(e){
+				result = false;
+				console.log(JSON.stringify(response));
+			});
+			return result;
+		};
 		/* 
 		 * Executes a GET call
 		 * @param endpoint API endpoint to make the call to

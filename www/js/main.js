@@ -924,17 +924,18 @@
 				submitHandler: function(e){
 					var data_login  	= app.getFormData('#create_account');
 					data_login.pass 	= $('#pass').val();
+					
 					var responsedata 	= apiRH.registerNative(data_login);
 
 					console.log(responsedata);
 
-					// if(responsedata) {
-					// 	apiRH.save_user_data_clientside(responsedata);
-					// 	window.location.assign('feed.html?filter_feed=all');
-					// 	return;
-					// }
-					// app.toast('Lo sentimos, el nombre de usuario ya existe.');
-					// e.preventDefault();
+					if(responsedata) {
+						apiRH.save_user_data_clientside(responsedata);
+						window.location.assign('feed.html?filter_feed=all');
+						return;
+					}
+					app.toast('Lo sentimos, el nombre de usuario ya existe.');
+					e.preventDefault();
 				}
 			});
 
@@ -982,15 +983,19 @@
 			submitHandler:function(){
 				var data_login	= app.getFormData("#login_form");
 				console.log(data_login);
+				data_login.pass = $('#pass').val();
+				var responsedata = apiRH.loginNative(data_login);
 
-				// data_login.pass = $('#pass').val();
-				// var responsedata = apiRH.loginNative(data_login);
-
-				// if(responsedata){
-				// 	console.log(responsedata);
-				// }
+				if(responsedata){
+				 	console.log(responsedata);
+				 	apiRH.save_user_data_clientside(responsedata);
+				 	window.location.assign('feed.html?filter_feed=all');
+				 	return;
+				}
 			}
 	}); //END VALIDATE
+
+
 
 
 
