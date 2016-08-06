@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Ginger Cliente</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1, height=device-height">
+		<meta http-equiv="cleartype" content="on">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		
+	    <script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.runtime.min.js"></script>
+	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+	    <script src="js/jquery-touch.min.js"></script>
+	    <script type="text/javascript" src="js/functions.js"></script>
+	    <script type="text/javascript" src="js/api-sdk-1.0.js"></script>
+		<script type='text/javascript' src='js/plugins.js'></script>
+		<script type="text/javascript" src="js/oauth.js"></script>
+		<script src="js/main.js"></script>
+	</head>
+	<body class="perfil2">
+
+	<div id="container">
+		<header class="hwhite2">
+			<div class="toolbar">
+				<a class="back" href="userdata.html"><img src="images/back.svg"></a>
+			</div>
+		</header>
+		<div class="profile circle-frame edition">
+			<img src="images/muestra.png">
+		</div>
+		<h2 class="cpur">Abby Shabot</h2>
+		<div class="profile-data edition">
+			<a class="edit-profile"><img src="images/profile/pencil.svg">Datos de Abby Shabot</a>
+			<ul>
+				<li><span>Sexo:</span></li>
+			</ul>
+			<div class="page genre">
+				<img class="edition" id="hombre" src="images/hombreh.svg">
+				<img class="edition" id="mujer" src="images/mujere.svg">
+			</div>
+			<ul>
+				<li><span>Edad:</span></li>
+			</ul>
+			<div class="page age">
+				<img class="img-derecha" src="images/bebe.png">
+				<div class="drag-parent">
+					<div class="slider-bar"></div>
+					<div id="age-filler" class="slider-filler"></div>
+					<div id="age" class="slider-point">
+						<div class="position"><span id="age-dato">15</span><br>años</div>
+					</div>
+				</div>
+				<img class="img-izquierda" src="images/adulto.png">
+			</div>
+			<ul>
+				<li><span>Código Postal:</span></li>
+			</ul>
+			<div class="page zip">
+				<div class="box-input-1">
+					<input type="text" name="zipcode" maxlength="5" value="03820">
+				</div>
+			</div>
+			<ul>
+				<li><span>Estatura:</span></li>
+			</ul>
+			<div class="page mido">
+				<div class="arrows-vertical">
+					<img id="estatura-up" src="images/leftarrow.png">
+					<img id="estatura-dw" src="images/rightarrow.png">
+				</div>
+				<img class="type-def" src="images/hombreh.svg">
+				<div class="box-input-2">
+					<input type="text" name="estatura" value="1.50" maxlength="4">
+					<span>m</span>
+				</div>
+			</div>
+			<ul>
+				<li><span>Peso:</span></li>
+			</ul>
+			<div class="page peso">
+				<div class="arrows-vertical">
+					<img id="peso-up" src="images/leftarrow.png">
+					<img id="peso-dw" src="images/rightarrow.png">
+				</div>
+				<div class="box-input-2">
+					<input type="text" name="estatura" value="50.0" maxlength="4">
+					<span>kg</span>
+				</div>
+			</div>
+			<ul>
+				<li><span>Peso Ideal:</span></li>
+			</ul>
+			<div class="page ideal">
+				<div class="arrows-vertical">
+					<img id="ideal-up" src="images/leftarrow.png">
+					<img id="ideal-dw" src="images/rightarrow.png">
+				</div>
+				<div class="box-input-2">
+					<input type="text" name="estatura" value="50.0" maxlength="4">
+					<span>kg</span>
+				</div>
+			</div>
+			<ul>
+				<li><span>Tipo de Coach:</span></li>
+			</ul>
+			<div class="sld-wrapper">
+				<div class="mover planes">
+					<div class="plan co-option active">
+						<img src="images/plan/detox2.png">
+						<span>Estricto</span><br>
+						<img class="question" src="images/question.svg">
+					</div>
+					<div class="plan co-option">
+						<img src="images/plan/detox.png">
+						<span>Analítico</span><br>
+						<img class="question" src="images/question.svg">
+					</div>
+					<div class="plan co-option">
+						<img src="images/plan/detox.png">
+						<span>Médico</span><br>
+						<img class="question" src="images/question.svg">
+					</div>
+					<div class="plan co-option">
+						<img src="images/plan/detox.png">
+						<span>Innovador</span><br>
+						<img class="question" src="images/question.svg">
+					</div>
+				</div>
+			</div>
+			<ul>
+				<li><span>Frecuencia de Ejercicio:</span></li>
+			</ul>
+			<div class="page">
+				<img class="img-derecha" src="images/norun.svg">
+				<div class="drag-parent">
+					<div class="slider-bar"></div>
+					<div id="ejercicio-filler" class="slider-filler"></div>
+					<div id="ejercicio" class="slider-point">
+						<div class="position"><span id="ejercicio-dato">0</span><br>días</div>
+					</div>
+				</div>
+				<img class="img-izquierda" src="images/run.svg">
+			</div>
+			<ul>
+				<li><span>Restricciones Alimenticias:</span></li>
+			</ul>
+			<div class="sld-wrapper">
+				<div class="mover planes">
+					<div class="plan re-option">
+						<img src="images/plan/detox.png">
+						<span>Perder<br>peso</span>
+					</div>
+					<div class="plan re-option">
+						<img src="images/plan/detox.png">
+						<span>Detox</span>
+					</div>
+					<div class="plan re-option">
+						<img src="images/plan/detox.png">
+						<span>Rendimiento físico</span>
+					</div>
+					<div class="plan re-option">
+						<img src="images/plan/detox.png">
+						<span>Sentirse mejor</span>
+					</div>
+				</div>
+			</div>
+			<ul>
+				<li>
+					<span>¿Tienes algo más que contarnos?</span>
+				</li>
+				<li class="comentario" style="display:none"><span><i>Sufro de hipertensión y odio comer lentejas porque me provocan malestar estomacal, también soy intolerante a los hongos</i></span></li>
+			</ul>
+			<div class="alt-page">
+				<div class="siono yes">Sí</div>
+					<div class="siono not active">No</div>
+			</div>
+			<ul>
+				<li><span>Objetivo:</span></li>
+			</ul>
+			<div class="sld-wrapper">
+				<div class="mover planes">
+					<div class="plan pl-option active">
+						<img src="images/plan/detox2.png">
+						<span>Perder<br>peso</span>
+					</div>
+					<div class="plan pl-option">
+						<img src="images/plan/detox.png">
+						<span>Detox</span>
+					</div>
+					<div class="plan pl-option">
+						<img src="images/plan/detox.png">
+						<span>Rendimiento físico</span>
+					</div>
+					<div class="plan pl-option">
+						<img src="images/plan/detox.png">
+						<span>Sentirse mejor</span>
+					</div>
+				</div>
+			</div>
+			<ul>
+				<li class="savech">
+					<a class="btn-org" href="#">Guardar</a>	
+				</li>
+			</ul>
+			<div class="profile-bottom">
+				<ul>
+					<li>
+						<span>Coach: <strong>María Medina</strong></span>
+						<div class="rate-stars">
+							<img src="images/starh.svg">
+							<img src="images/starh.svg">
+							<img src="images/starh.svg">
+							<img src="images/star.svg">
+							<img src="images/star.svg">
+						</div>
+					</li>
+					<li>
+						<a class="btn-org" href="#">Cambiar Coach</a>	
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		/* Initialize app object and perform initial login check */
+		window.is_feed = true;
+		app.initialize();
+		//app.render_feed(0, 'all');
+		//app.showLoader();
+	</script>
+	</body>
+</html>
+
