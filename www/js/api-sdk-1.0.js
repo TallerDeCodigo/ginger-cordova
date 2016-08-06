@@ -1,8 +1,5 @@
 /*
- *
- *
  *	Search for localStorage support
- *
  *
  */
 
@@ -48,7 +45,7 @@ function requestHandlerAPI(){
 	this.ls = window.localStorage;
 	/* Constructor */
 	this.construct = function(app_context){
-					console.log('Initialized rest API Dedalo sdk v1.2');
+					console.log('Initialized ginger api-sdk1.0');
 					if(this.ls.getItem('request_token')) this.token = this.ls.getItem('request_token');
 					sdk_app_context = app_context;
 					/* For chaining purposes ::) */
@@ -108,35 +105,62 @@ function requestHandlerAPI(){
 		 * @param data_login JSON {user_login, user_password}
 		 * @return status Bool true is successfully logged in; false if an error ocurred (User already exists)
 		 */
-		this.registerNative =   function(data_login){
-								var userfinal = data_login.mail;
-								console.log(userfinal);
-								userfinal = userfinal.replace("@", "").replace(/\./g, "").replace(/\-/g, "").replace(/\_/g, "");
-								var data = {
-												user 	: userfinal, 
-												email 		: data_login.mail,
-												attrs 		: {
-																password 	: data_login.user_pwd,
-																bio 		: data_login.user_bio,
-																name 		: data_login.user_name,
-																last_name 	: data_login.user_last_name,
-																request_token: apiRH.get_request_token()
-															  }
-											};
-								console.log(data);
-								var response = this.makeRequest('api/login', data);  //es el endpoint correcto?
-								console.log(response);
-								// if(response.success)
-									// apiRH.initializeProfileFileTransfer();
-								return (response.success) ? response.data : false;
-							};
+		this.registerNative = function(data_login){
+
+			var name = data_login.user;
+			var email = data_login.mail;
+			var pass = data_login.pass;
+			var cPass = data_login.cpass;
+
+			// console.log(data_login.user);
+			// console.log(data_login.mail);
+			// console.log(data_login.pass);
+			// console.log(data_login.cpass);
+
+			var req = {
+					method : 'post',
+					url : api_base_url + 'api/signup',
+					headers: {
+						'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+						'X-ZUMO-AUTH': '',
+						'Content-Type': 'application/json'
+					},
+					data : {
+						"nombre" : name,
+						"apellido" : "apellido",
+						"mail" : email,
+						"password" : pass
+					}
+				}
+
+				var response = this.makeRequest('api/signup', req);
+
+				console.log(response);  //llega aqui con la respuesta del servidor
+
+			/*
+				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
+			*/
+						// localStorage.setItem('token', response.token);
+						// localStorage.setItem('mail', response.mail);
+						// localStorage.setItem('userId', response.userId);
+
+						// var userId = localStorage.getItem('userId');
+						// var mail = localStorage.getItem('mail');
+						// var token = localStorage.getItem('token');
+						// console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
+
+			/*
+				REGRESA LA RESPUESTA DEL SERVIDOR CON EL USER ID, MAIL Y TOKEN
+			*/
+						return (response.success) ? response.data : false;
+		};
 		/* 
 		 * Log Out from the API and disable token server side
 		 * @param user_data JSON {user_login : 'username', request_token : 'XY0XXX0Y0XYYYXXX'}
 		 * @return status Bool true is successfully logged in; false if an error ocurred
 		 */
 		this.logOut =  function(user_data){
-								return this.makeRequest('auth/'+user_data.user_login+'/logout/', { request_token: user_data.request_token });
+								return this.makeRequest('api/'+user_data.user_login+'/logout/', { request_token: user_data.request_token });
 							};
 		/* 
 		 * Creates an internal user to make calls to the API
@@ -308,7 +332,7 @@ function requestHandlerAPI(){
 		 */
 		this.makeRequest = function(endpoint, data){
 			
-			console.log(data.data);
+			console.log(data.data); //llega a makerequest
 
 			sdk_app_context.showLoader();
 			var result = {};

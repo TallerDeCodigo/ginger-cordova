@@ -731,7 +731,7 @@
 				}
 			}
 			catch(err){
-				console.log('Toasting error: ' + JSON.stringify(err));
+				console.log('Toasting error: ' + JSON.stringify(err)); // imprime esto con un JSON vacio
 				alert(message);
 			}
 			return;
@@ -891,14 +891,11 @@
  *                                                                         |___/ 
  */
 	jQuery(document).ready(function($) {
+		/* 
 
-		 console.log("hello from mainJs");
-		// $('#search_by_photo').click(function(){
-		// 	app.get_file_from_device('search', 'camera');
-		// });
+			Create a new account the old fashioned way 
 
-		/* Create a new account the old fashioned way */
-		
+														*/
 		if($('#create_account').length)
 			$('#create_account').validate({
 				rules: {
@@ -919,21 +916,27 @@
 					pass: "Este campo es requerido para acceder a tu cuenta",
 					cpass: "Las contraseñas que proporcionaste no coinciden"
 				},
-				submitHandler: function(e){
+				submitHandler: function(){
+
 					var data_login  	= app.getFormData('#create_account');
+
+					console.log(data_login);
+					
 					data_login.pass 	= $('#pass').val();
 					
-					var responsedata 	= apiRH.registerNative(data_login);
-
-					console.log(responsedata);
+					var responsedata 	= apiRH.registerNative(data_login);  
+					console.log(responsedata);						//llega hasta aqui con un valor FALSE
 
 					if(responsedata) {
+						console.log("en resopnse data" + responsedata);
+
 						apiRH.save_user_data_clientside(responsedata);
 						window.location.assign('feed.html?filter_feed=all');
 						return;
+					}else{
+						app.toast('Lo sentimos, el nombre de usuario ya existe.'); //dispara el toast con el mensaje.
+						//e.preventDefault();
 					}
-					app.toast('Lo sentimos, el nombre de usuario ya existe.');
-					e.preventDefault();
 				}
 			});
 
@@ -986,7 +989,6 @@
 				var responsedata = apiRH.loginNative(data_login);
 
 				if(responsedata){
-				 	console.log(responsedata);
 				 	apiRH.save_user_data_clientside(responsedata);
 				 	window.location.assign('feed.html?filter_feed=all');
 				 	return;
