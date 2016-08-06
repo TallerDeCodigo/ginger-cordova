@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 	<head>
 		<meta charset="utf-8">
 		<title>Ginger Cliente</title>
@@ -6,8 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1, height=device-height">
 		<meta http-equiv="cleartype" content="on">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-
-	    
+		
 	    <script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.runtime.min.js"></script>
 	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -18,41 +18,28 @@
 		<script type='text/javascript' src='js/plugins.js'></script>
 		<script type="text/javascript" src="js/oauth.js"></script>
 		<script src="js/main.js"></script>
-		
 	</head>
 	<body>
-	<div id="container" class="chat">
+
+	<div id="container" class="profile-data finanzas">
 		<header class="hwhite2">
 			<div class="toolbar">
-				<a class="back"><img src="images/back.svg"></a>
-				<h2 class="titulo">María Medina</h2>
+				<a class="back" href="menu.html"><img src="images/back.svg"></a>
+				<h2 class="titulo">Transacciones</h2>
 			</div>
 		</header>
-		<section>
-			<div class="incoming">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt purus non nulla euismod lobortis.</p>
-			</div>
-			<div class="outgoing">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt purus non nulla euismod lobortis. Pellentesque fermentum tortor vitae mauris rhoncus viverra. Proin egestas diam quis ex tincidunt suscipit.</p>
-			</div>
-			<div class="incoming withimg">
-				<img src="images/muestra.png">
-			</div>
-			<div class="outgoing">
-				<p>Lorem ipsum dolor sit amet</p>
-			</div>
-			<div class="incoming">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt purus non nulla euismod lobortis.</p>
-			</div>
-		</section>
-		<footer class="foot-chat">
-			<a href="#" class="attach"><img src="images/attach.svg"></a>
-			<textarea id="mensaje-chat" rows="1" onfocus="if(this.innerHTML=='Mensaje') {this.innerHTML='';}">Mensaje</textarea>
-			<a class="send cpur" href="#">Enviar</a>
-		</footer>
+		<ul>
+			<li><span>Método de pago actual: <strong>Tarjeta</strong></span></li>
+			<li><span>Tarjeta: <strong>VISA **** **** **** 1234</strong></span></li>
+			<li class="sinpoint">
+				<a class="btn-org" href="#">Cambiar método de pago</a>	
+			</li>
+			<li class="sinpoint">
+				<a class="btn-org" href="#">Realizar pago</a>	
+			</li>
+			<li><span><strong>Historial de pagos</strong></span></li>
+		</ul>
 	</div>
-	<script type='text/javascript' src='js/plugins_m.js'></script>
-	</body>
 	<script type="text/javascript">
 		/* Initialize app object and perform initial login check */
 		window.is_feed = true;
@@ -60,5 +47,6 @@
 		//app.render_feed(0, 'all');
 		//app.showLoader();
 	</script>
+	</body>
 </html>
 

@@ -9,7 +9,7 @@ $( function() {
     $('#age').draggable({ containment:"parent",axis:"x",grid:[gridag,gridag],drag:function(){
     	var percent = $('.drag-parent').width()-30;
     	var donde = Math.round(((($('#age').position().left)*rango_age)/percent)+minval_age);
-    	$("#age-filler").css("width",$('#age').position().left+29);
+    	$("#age-filler").css("width",$('#age').position().left+20);
     	$('#age-dato').html(donde);
       }
   	});
@@ -21,7 +21,7 @@ $( function() {
     $('#ejercicio').draggable({ containment:"parent",axis:"x",grid:[gridej,gridej],drag:function(){
     	var percent = $('.drag-parent').width()-30;
     	var donde = Math.round(((($('#ejercicio').position().left)*rango_eje)/percent)+minval_eje);
-    	$("#ejercicio-filler").css("width",$('#ejercicio').position().left+29);
+    	$("#ejercicio-filler").css("width",$('#ejercicio').position().left+20);
     	$('#ejercicio-dato').html(donde);
       }
   	});
@@ -498,6 +498,11 @@ $(window).load(function(){
 			setTimeout(function() {$('.overscreen').hide();}, 800);
 			$('#container').removeClass('blurred');
 			$('a.centro img').removeClass('onn');
+		});
+
+		$('a.more').click(function() {
+			$(this).parent().find('.extra-info').toggle();
+			$(this).toggleClass('presionado');
 		});
 
 		$('svg.consume').click(function() {

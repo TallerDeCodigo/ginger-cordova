@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Ginger Cliente</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1, height=device-height">
+		<meta http-equiv="cleartype" content="on">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+			<!-- Load Scripts -->
+
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.runtime.min.js"></script>
+	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+	    <script src="js/jquery-touch.min.js"></script>
+	    <script type="text/javascript" src="js/functions.js"></script>
+	    <script type="text/javascript" src="js/api-sdk-1.0.js"></script>
+		<script type='text/javascript' src='js/plugins.js'></script>
+		<script type="text/javascript" src="js/oauth.js"></script>
+		<script src="js/main.js"></script>
+</head>
+
+	<body>
+		<div id="container" class="money">
+			<header class="hwhite2">
+				<div class="toolbar">
+					<a class="back" href="menu.html"><img src="images/back.svg"></a>
+					<h2 class="titulo">Información de Pago</h2>
+				</div>
+			</header>
+	    	<div class="conekta pagina">
+	    		<h4>Elegir forma de pago</h4>
+	    		<div class="btn-pago1">TARJETA</div>
+	    		<form>
+	    			<div class="form-label">
+	    				<input type="text" name="nombre">
+		    			<label for="nombre">Nombre (como aparece en tu tarjeta)</label>
+	    			</div>
+	    			<div class="form-label">
+	    				<input type="text" name="card" maxlength="16">
+		    			<label for="card">Número de tarjeta</label>
+	    			</div>
+	    			<div class="form-label-2">
+	    				<input type="text" name="mes" maxlength="2">
+		    			<label for="mes">MM</label>
+		    			<span>/</span>
+		    			<input type="text" name="year" maxlength="2">
+		    			<label for="year">YY</label>
+	    			</div>
+	    			<div class="form-label-2 segur">
+	    				<input type="text" name="cvc" maxlength="3">
+		    			<label for="cvc">CVC</label>
+	    			</div>
+	    			<div class="form-label">
+	    				<input type="text" name="mail">
+		    			<label for="mail">Correo electrónico</label>
+	    			</div>
+	    			<div class="form-label-2">
+	    				<input type="text" name="cupon">
+		    			<label for="cupon">Cupón</label>
+	    			</div>
+	    			<div class="form-label-2">
+	    				<div class="bt-review">VALIDAR CUPÓN</div>
+	    			</div>
+	    			<div class="form-label">
+	    			<input type="checkbox" name="terms">
+	    			<span>Acepto <a href="http://www.gingerapp.mx/terminosycondiciones/">Términos y Condiciones</a></span>
+	    			</div>
+	    		</form>
+	    		<img class="enter" src="images/aceptar.svg">
+	    	</div>
+		</div>
+	</body>
+
+	<!-- ******* CONEKTA ******** 
+
+   <script type="text/javascript" src="https://conektaapi.s3.amazonaws.com/v0.5.0/js/conekta.js"></script>
+   <script type="text/javascript">
+    //Conekta.setPublishableKey('key_KJysdbf6PotS2ut2'); //v3.2
+    Conekta.setPublicKey('key_C3MaVjaR7emXdiyRGTcbjFQ'); //v5+
+   </script>-->
+	<script type="text/javascript">
+		/* Initialize app object and perform initial login check */
+		window.is_feed = true;
+		app.initialize();
+		//app.render_feed(0, 'all');
+		//app.showLoader();
+	</script>
+</html>	

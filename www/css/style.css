@@ -225,7 +225,7 @@ img.saltar {position:absolute;bottom:2.5%;left:50%;margin-left:-65px;display:blo
 .semana {color:#555;}
 .satis {font-weight:900;font-size:110%;text-shadow:0px 0px 2px #EEE;}
 .btn-iniciar {color:#FFF;font-weight:800;font-size:110%;display:inline-block;padding:5px 15px;}
-.btn-pago {color:#FFF;font-weight:800;font-size:120%;display:inline-block;padding:5px 15px;background:#43c2a7;border-radius:3px;}
+.btn-pago, .btn-pago1 {color:#FFF;font-weight:800;font-size:120%;display:inline-block;padding:5px 15px;background:#43c2a7;border-radius:3px;}
 .letritas {font-size:75%;margin:4%;}
 
 .form-label {position:relative;display:inline-block;width:88%;height:37px;margin-top:6%;color:#414141;text-align:left;}
@@ -274,8 +274,8 @@ input[type=checkbox]:not(old):checked + span {background-position: 0 -29px;}
 
 .incoming {float:left;background:#42c2a7;width:75%;color:#FFF;text-align:left;border-radius:10px;margin:12px 0px 0px 13px;position:relative;}
 .outgoing {float:right;background:#7f4ab8;width:75%;color:#FFF;text-align:left;border-radius:10px;margin:12px 13px 0px 0px;position:relative;}
-.incoming:after {content:"";position:absolute;left:-11px;bottom:0px;width:11px;height:14px;background:url('images/incom.svg');}
-.outgoing:after {content:"";position:absolute;right:-11px;bottom:0px;width:11px;height:14px;background:url('images/outgo.svg');}
+.incoming:after {content:"";position:absolute;left:-11px;bottom:0px;width:11px;height:14px;background:url('../images/incom.svg');}
+.outgoing:after {content:"";position:absolute;right:-11px;bottom:0px;width:11px;height:14px;background:url('../images/outgo.svg');}
 .incoming:not(.withimg) {border-bottom-left-radius:0px;}
 .outgoing:not(.withimg) {border-bottom-right-radius:0px;}
 .withimg {overflow:hidden;}
@@ -315,12 +315,27 @@ nav.botones {float:right;margin:2px 0px 5px 15px;}
 .snack2 svg {fill:#ff9933;}
 .cena svg {fill:#ffd156;}
 
+.desayuno .plat-comentario {background:#8041b7;}
+.snack1 .plat-comentario {background:#33cc99;}
+.comida .plat-comentario {background:#e2376c;}
+.snack2 .plat-comentario {background:#ff9933;}
+.cena .plat-comentario {background:#ffd156;}
+
+
 .platillo p.receta, .platillo p.comentario {padding:0px 5px 0px 50px;font-size:95%;position:relative;min-height:28px;margin-top:4px;}
 .platillo p.receta {background:url('../images/cook.svg') no-repeat;background-position:7px center;}
 .platillo p.comentario {background:url('../images/comment.svg') no-repeat;background-position:7px center;}
 
 .platillo a.more {display:inline-block;width:100%;height:28px;text-align:right;padding-right:2px;border-bottom:1px solid #cfcfcf;}
 div.acc-content .platillo:last-of-type a.more {border:none;}
+a.more.presionado {border-bottom:1px solid #cfcfcf!important;}
+
+div.extra-info {border-bottom:1px solid #cfcfcf;padding:1px 5px 7px 5px;}
+.plat-comentario {color:#FFF;text-align:left;border-radius:10px;border-bottom-left-radius:0px;margin:2px 0px 0px 13px;position:relative;padding:3px 3px 3px 8px;}
+div.acc-content .platillo:last-of-type div.extra-info {border:none;}
+.plat-comentario svg {position:absolute;width:11px;height:14px;left:-21px;bottom:0px;}
+.plat-comentario span:before {content:'“';}
+.plat-comentario span:after {content:'”';}
 
 .menu-bar {position:fixed;background:#fff;width:100%;height:44px;bottom:0px;left:0px;}
 .menu-bar a {position:relative;display:inline-block;width:12.5%;height:44px;vertical-align:top;margin:0px 2.6%;line-height:12px;color:#8f8f8f;}
@@ -331,7 +346,6 @@ div.acc-content .platillo:last-of-type a.more {border:none;}
 .menu-bar a span {font-size:40%;display:block;}
 
 .toggle-complete {position:fixed;width:100%;height:40px;left:0px;bottom:44px;font-size:120%;background:#f5f1f0;border-top:1px solid #cfcfcf;line-height:40px;color:#6633cc;font-weight:100;}
-
 
 /* RUEDITAS */
 
@@ -348,11 +362,11 @@ div.acc-content .platillo:last-of-type a.more {border:none;}
 .overscreen .rueda-4 {bottom:-47px;left:50%;-webkit-transform:scale(0.5) rotate(150deg);opacity:0;-webkit-transition:.35s ease-in-out;transition:.35s ease-in-out;}
 .overscreen .rueda-5 {bottom:-47px;left:50%;-webkit-transform:scale(0.5) rotate(150deg);opacity:0;-webkit-transition:.4s ease-in-out;transition:.4s ease-in-out;}
 
-.active .rueda-1 {bottom:10px;left:14%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
+.active .rueda-1 {bottom:10px;left:17%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
 .active .rueda-2 {bottom:50px;left:31%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
 .active .rueda-3 {bottom:68px;left:50%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
 .active .rueda-4 {bottom:50px;left:69%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
-.active .rueda-5 {bottom:10px;left:86%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
+.active .rueda-5 {bottom:10px;left:83%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
 
 /* INICIO */
 
@@ -404,7 +418,7 @@ a.mail {background:#2eab7e url('../images/mail_btn.png') no-repeat;background-si
 .profile-bottom .rate-stars img {margin:0px -1px;}
 
 .btn-org {position:relative;display:inline-block;border-radius:2px;text-align:center;color:#FFF;font-weight:800;background:#ff873e;letter-spacing:0.035em;width:150px;}
-.profile-bottom .btn-org, .savech a {font-size:75%;padding:6px 13px;margin:5px 0px 0px;}
+.profile-data .btn-org, .savech a {font-size:75%;padding:6px 13px;margin:5px 0px 0px;}
 
 /* EDIT PROFILE */
 
@@ -442,14 +456,16 @@ a.mail {background:#2eab7e url('../images/mail_btn.png') no-repeat;background-si
 .di-options a:first-of-type {font-weight:700;width:49.8%;}
 .di-options a:last-of-type {margin-left:-4px;width:49.8%;border-left:1px solid #afafaf;}
 
+/* MONEY */
 
+.money .pagina {width:100%;opacity:1;padding-top:7px;}
+.money .pagina form {padding-top:10px;}
 
+.profile-data.finanzas {width:100%;background:#FFF;padding:0px;margin-top:0;border:none;text-align:center;}
+.profile-data.finanzas ul li {text-align:left;margin-bottom:22px;}
 
-
-
-
-
-
+.finanzas .btn-org {width:240px;}
+.sinpoint {list-style:none;}
 
 
 
