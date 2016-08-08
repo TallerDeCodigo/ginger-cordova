@@ -24,6 +24,7 @@ $( function() {
     	var donde = Math.round(((($('#ejercicio').position().left)*rango_eje)/percent)+minval_eje);
     	$("#ejercicio-filler").css("width",$('#ejercicio').position().left+20);
     	$('#ejercicio-dato').html(donde);
+    	$('#ejercicio-dato').attr("value", donde);
       }
   	});
 
@@ -463,26 +464,33 @@ $(window).load(function(){
 		});
 
 		$('.pl-option').click(function() {
+			var valor = $(this).find('.type').attr('value');
+			console.log(valor);
 			$('.pl-option').each(function() {
 			    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
 			      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
 			      $(this).removeClass('active');
+			      $(this).attr("value", "");
 			    }
 			});
 			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 			$(this).addClass('active');
+			$(this).attr("value", valor);
 
 		});
 
 		$('.co-option').click(function() {
+			var valor = $(this).find('.type').attr('value');
 			$('.co-option').each(function() {
 			    if ($(this).find('img:not(.question)').attr('src').substr(-5, 1)=="2") {
 			      $(this).find('img:not(.question)').attr("src",$(this).find('img:not(.question)').attr('src').slice(0, -5)+".png");
 			      $(this).removeClass('active');
+			      $(this).attr("value", "");
 			    }
 			}); 
 			$(this).find('img:not(.question)').attr("src",$(this).find('img:not(.question)').attr('src').slice(0, -4)+"2.png");
 			$(this).addClass('active');
+			$(this).attr("value", valor);
 		});
 
 		$('.re-option').click(function() {
