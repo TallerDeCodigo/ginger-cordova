@@ -70,7 +70,7 @@
 			var filenames = ['header', 'history_header', 'history_header_nouser', 'search_header', 'feed_chunk', 'sidemenu', 'sidemenu_logged', 'footer', 'subheader', 'dom_assets'];
 			
 			filenames.forEach(function (filename) {
-					Handlebars.registerPartial(filename, Handlebars.templates[filename]);
+					//Handlebars.registerPartial(filename, Handlebars.templates[filename]);
 			});
 		},
 		registerTemplate : function(name) {
@@ -931,7 +931,7 @@
 						console.log("en resopnse data" + responsedata);
 
 						apiRH.save_user_data_clientside(responsedata);
-						window.location.assign('crear.html');
+						window.location.assign('feed.html');
 						return;
 					}else{
 						app.toast('Lo sentimos, el nombre de usuario ya existe.'); //dispara el toast con el mensaje.

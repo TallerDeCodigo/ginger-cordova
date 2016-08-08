@@ -109,6 +109,7 @@ function requestHandlerAPI(){
 		this.registerNative = function(data_login){
 
 			var name = data_login.user;
+			var last_name = data_login.last_name;
 			var email = data_login.mail;
 			var pass = data_login.pass;
 			var cPass = data_login.cpass;
@@ -128,7 +129,7 @@ function requestHandlerAPI(){
 					},
 					data : {
 						"nombre" : name,
-						"apellido" : "apellido",
+						"apellido" :last_name,
 						"mail" : email,
 						"password" : pass
 					}
