@@ -11,6 +11,7 @@ $( function() {
     	var donde = Math.round(((($('#age').position().left)*rango_age)/percent)+minval_age);
     	$("#age-filler").css("width",$('#age').position().left+20);
     	$('#age-dato').html(donde);
+    	$('#age-dato').attr("value", donde);
       }
   	});
 
@@ -166,20 +167,26 @@ $(window).load(function(){
 		$("#hombre").click(function(){
 			if ($(this).hasClass('edition')) {
 				$('#mujer').attr("src","images/mujere.svg");
+				$('#mujer').attr("value","mujer");
 			} else {
 				$('#mujer').attr("src","images/mujer.svg");
+				$('#mujer').attr("value","");
 			}
-			$(this).attr("src","images/hombreh.svg");
+			$(this).attr({src: "images/hombreh.svg", value: "hombre"});
 			$('.type-def').attr("src","images/hombreh.svg");
+
+			localStorage(setItem())
 		});
 
 		$("#mujer").click(function(){
 			if ($(this).hasClass('edition')) {
 				$('#hombre').attr("src","images/hombree.svg");
+				$('#hombre').attr("value","hombre");
 			} else {
 				$('#hombre').attr("src","images/hombre.svg");
+				$('#hombre').attr("value","");
 			}
-			$(this).attr("src","images/mujerh.svg");
+			$(this).attr({src: "images/hombreh.svg", value: "mujer"});
 			$('.type-def').attr("src","images/mujerh.svg");
 		});
 
@@ -190,7 +197,8 @@ $(window).load(function(){
 			timeout = setInterval(function(){
 				estatura = Number($("#estatura-up").parent().parent().find('input').val());
 		        estatura=estatura+0.01;
-		        $("#estatura-up").parent().parent().find('input').val(estatura.toFixed(2)); 
+		        $("#estatura-up").parent().parent().find('input').val(estatura.toFixed(2));
+		        $('input[name="estatura"]').attr("value", estatura);
 		    }, 100);
 		    return false;
 		});
@@ -204,7 +212,8 @@ $(window).load(function(){
 			timeout = setInterval(function(){
 				estatura = Number($("#estatura-dw").parent().parent().find('input').val());
 		        estatura=estatura-0.01;
-		        $("#estatura-dw").parent().parent().find('input').val(estatura.toFixed(2)); 
+		        $("#estatura-dw").parent().parent().find('input').val(estatura.toFixed(2));
+		        $('input[name="estatura"]').attr("value", estatura);
 		    }, 100);
 		    return false;
 		});
@@ -221,7 +230,8 @@ $(window).load(function(){
 				peso = Number($("#peso-up").parent().parent().find('input').val());
 				if (peso<99) {
 					peso=peso+0.5;
-		        	$("#peso-up").parent().parent().find('input').val(peso.toFixed(1)); 
+		        	$("#peso-up").parent().parent().find('input').val(peso.toFixed(1));
+		        	$('input[name="peso"]').attr("value", peso);
 				} else {
 					peso=peso+1;
 		        	$("#peso-up").parent().parent().find('input').val(peso.toFixed(0));
@@ -241,6 +251,7 @@ $(window).load(function(){
 				if (peso<100.1) {
 					peso=peso-0.5;
 					$("#peso-dw").parent().parent().find('input').val(peso.toFixed(1));
+					$('input[name="peso"]').attr("value", peso);
 				} else {
 					peso=peso-1;
 					$("#peso-dw").parent().parent().find('input').val(peso.toFixed(0));
@@ -261,7 +272,8 @@ $(window).load(function(){
 				ideal = Number($("#ideal-up").parent().parent().find('input').val());
 		        if (ideal<99) {
 					ideal=ideal+0.5;
-		        	$("#ideal-up").parent().parent().find('input').val(ideal.toFixed(1)); 
+		        	$("#ideal-up").parent().parent().find('input').val(ideal.toFixed(1));
+		        	$('input[name="ideal"]').attr("value", ideal);
 				} else {
 					ideal=ideal+1;
 		        	$("#ideal-up").parent().parent().find('input').val(ideal.toFixed(0));
@@ -281,6 +293,7 @@ $(window).load(function(){
 		        if (ideal<100.1) {
 					ideal=ideal-0.5;
 					$("#ideal-dw").parent().parent().find('input').val(ideal.toFixed(1));
+					$('input[name="ideal"]').attr("value", ideal);
 				} else {
 					ideal=ideal-1;
 					$("#ideal-dw").parent().parent().find('input').val(ideal.toFixed(0));
@@ -455,9 +468,10 @@ $(window).load(function(){
 			      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
 			      $(this).removeClass('active');
 			    }
-			}); 
+			});
 			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 			$(this).addClass('active');
+
 		});
 
 		$('.co-option').click(function() {
