@@ -926,10 +926,10 @@
 					
 					var responsedata 	= apiRH.registerNative(data_login);  
 					
-					console.log(responsedata);						//llega hasta aqui con un valor FALSE
+					//console.log(responsedata);						//llega hasta aqui con un valor FALSE
 
 					if(responsedata) {
-						console.log("en resopnse data" + responsedata);
+						//console.log(responsedata);
 						
 						apiRH.save_user_data_clientside(responsedata);
 						
@@ -1001,6 +1001,36 @@
 			}
 	}); //END VALIDATE
 
+
+
+
+/*TARJETA DE CREDITO*/
+
+	if($('#forma_pago').length)
+		$('#forma_pago').validate({
+			rules:{
+				nombre:"required",
+				card:"required",
+				mes:"required",
+				year:"required",
+				cvc:"required",
+				mail:"required",
+				terms:"required"
+			},
+			messages:{
+				nombre:"mensaje",
+				card:"mensaje",
+				mes:"mensaje",
+				year:"mensaje",
+				cvc:"mensaje",
+				mail:"mensaje",
+				terms:"mensaje"
+			},
+			submitHandler:function(){
+				var data_login = app.getFormData("#forma_pago");
+				console.log("enviar forma de pago");
+			}
+		});
 
 
 

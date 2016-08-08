@@ -136,6 +136,19 @@ function requestHandlerAPI(){
 
 			this.token = response.token;
 
+			/*
+				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
+			*/
+			localStorage.setItem('token', response.token);
+			localStorage.setItem('mail', response.mail);
+			localStorage.setItem('chatId', response.jid);
+
+			var userId = localStorage.getItem('chatId');
+			var mail = localStorage.getItem('mail');
+			var token = localStorage.getItem('token');
+
+			console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
+
 			return (response.nuevo) ? response : false;
 		};
 		/* 

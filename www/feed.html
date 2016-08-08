@@ -10,7 +10,7 @@
 
 			<!-- Load Scripts -->
 
-		<script type="text/javascript" src="cordova.js"></script>
+		<!--<script type="text/javascript" src="cordova.js"></script>-->
 		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.runtime.min.js"></script>
 	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
@@ -49,8 +49,8 @@
 					    		</nav>
 					    		<div class="page-holder">
 					    			<div class="page genre sector-1">
-					    				<img id="hombre" src="images/hombreh.svg">
-					    				<img id="mujer" src="images/mujer.svg">
+					    				<img id="hombre" src="images/hombreh.svg" value="hombre">
+					    				<img id="mujer" src="images/mujer.svg" value="mujer">
 					    			</div>
 					    			<div class="page age sector-1" style="display:none">
 					    				<img class="img-derecha" src="images/bebe.png">
@@ -58,7 +58,11 @@
 					    					<div class="slider-bar"></div>
 					    					<div id="age-filler" class="slider-filler"></div>
 					    					<div id="age" class="slider-point">
-					    						<div class="position"><span id="age-dato">15</span><br>años</div>
+					    						<div class="position">
+					    							<span id="age-dato">
+					    								15<br>años
+					    							</span>
+					    						</div>
 					    					</div>
 					    				</div>
 					    				<img class="img-izquierda" src="images/adulto.png">
@@ -320,7 +324,7 @@
 					    	</div>
 					    	<div class="conekta pagina" style="display:none">
 					    		<h2>Información de pago</h2>
-					    		<form>
+					    		<form id="forma_pago" name="forma_pago" method="post">
 					    			<div class="form-label">
 					    				<input type="text" name="nombre">
 						    			<label for="nombre">Nombre (como aparece en tu tarjeta)</label>
@@ -356,7 +360,8 @@
 					    			<span>Acepto <a href="http://www.gingerapp.mx/terminosycondiciones/">Términos y Condiciones</a></span>
 					    			</div>
 					    		</form>
-					    		<img class="enter" src="images/aceptar.svg">
+					    		<input id="send_fPago" name="send_fPago" type="submit" value="">
+					    		<!-- <img class="enter" src="images/aceptar.svg"> -->
 					    	</div>
 				    	</div>
 				    </div>
