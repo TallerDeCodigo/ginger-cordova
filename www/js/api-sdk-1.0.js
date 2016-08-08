@@ -114,11 +114,6 @@ function requestHandlerAPI(){
 			var pass = data_login.pass;
 			var cPass = data_login.cpass;
 
-			// console.log(data_login.user);
-			// console.log(data_login.mail);
-			// console.log(data_login.pass);
-			// console.log(data_login.cpass);
-
 			var req = {
 					method : 'post',
 					url : api_base_url + 'api/signup',
@@ -135,28 +130,13 @@ function requestHandlerAPI(){
 					}
 				}
 
-				var response = this.makeRequest('api/signup', req);
+			var response = this.makeRequest('api/signup', req);
 
-				console.log(response);  //llega aqui con la respuesta del servidor
+			console.log(response);  //llega aqui con la respuesta del servidor
 
-			/*
-				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
-			*/
-						// localStorage.setItem('token', response.token);
-						// localStorage.setItem('mail', response.mail);
-						// localStorage.setItem('userId', response.userId);
+			this.token = response.token;
 
-						// var userId = localStorage.getItem('userId');
-						// var mail = localStorage.getItem('mail');
-						// var token = localStorage.getItem('token');
-						// console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
-
-			/*
-				REGRESA LA RESPUESTA DEL SERVIDOR CON EL USER ID, MAIL Y TOKEN
-			*/
-
-				console.log(response);
-						return (response) ? response : false;
+			return (response.nuevo) ? response : false;
 		};
 		/* 
 		 * Log Out from the API and disable token server side
@@ -225,37 +205,41 @@ function requestHandlerAPI(){
 		 * @see this.create_internal_user
 		 */
 		this.save_user_data_clientside = function(data){
-											var user_role = data.role;
-											if(user_role == 'cliente') user_role = 'maker';
-											this.ls.setItem('', 	JSON.stringify({
-																					user_login: 	data.user_login,
-																					username: 		data.user_login,
-																					user_id: 		data.user_id,
-																					user_role: 		data.role,
-																					user_profile: 	data.profile_url,
-																				}));
-											
-											/*
-											if(user_role == 'administrator') user_role = 'maker';
-											this.ls.setItem('dedalo_log_info', 	JSON.stringify({
-																					user_login: 	data.user_login,
-																					username: 		data.user_login,
-																					user_id: 		data.user_id,
-																					user_role: 		data.role,
-																					user_profile: 	data.profile_url,
-																				}));
-											*/									
-											/* Also save user ME info */
-											$.getJSON(api_base_url+data.user_login+'/me/')
-											 .done(function(response){
-											 	apiRH.ls.setItem('me', JSON.stringify(response));
-											 	apiRH.ls.setItem('me.logged', true);
-											 	console.log(response);
-											})
-											 .fail(function(err){
-												console.log(err);
-											});
-									};
+				var user_role = data.role;
+				
+				if(user_role == 'cliente') user_role = 'maker';
+				this.ls.setItem('', 	JSON.stringify({
+														user_login: 	data.user_login,
+														username: 		data.user_login,
+														user_id: 		data.user_id,
+														user_role: 		data.role,
+														user_profile: 	data.profile_url,
+													}));
+				
+				/*
+				if(user_role == 'administrator') user_role = 'maker';
+				this.ls.setItem('dedalo_log_info', 	JSON.stringify({
+														user_login: 	data.user_login,
+														username: 		data.user_login,
+														user_id: 		data.user_id,
+														user_role: 		data.role,
+														user_profile: 	data.profile_url,
+													}));
+				*/									
+				/* Also save user ME info */
+
+				/*
+				$.getJSON(api_base_url+data.user_login+'/me/')
+				 .done(function(response){
+				 	apiRH.ls.setItem('me', JSON.stringify(response));
+				 	apiRH.ls.setItem('me.logged', true);
+				 	console.log(response);
+				})
+				 .fail(function(err){
+					console.log(err);
+				});
+				*/
+		};
 		/* 
 		 * Request new passive token from the API 
 		 * @return new generated token
