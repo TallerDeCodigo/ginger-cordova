@@ -2,10 +2,16 @@
 
 $( function() {
 
+	var anchot = document.documentElement.clientWidth;
+
 	var minval_age = 15; 
 	var maxval_age = 90;
-	var rango_age = maxval_age-minval_age; 
-	var gridag = ($('.age .drag-parent').width()-30)/rango_age;
+	var rango_age = maxval_age-minval_age;
+	if ($('.pagina').hasClass('aboutyou')) {
+		var gridag = ((anchot*0.7)-30)/rango_age;
+	} else {
+		var gridag = ($('.age .drag-parent').width()-30)/rango_age;
+	}
     $('#age').draggable({ containment:"parent",axis:"x",grid:[gridag,gridag],drag:function(){
     	var percent = $('.age .drag-parent').width()-30;
     	var donde = Math.round(((($('#age').position().left)*rango_age)/percent)+minval_age);
@@ -18,7 +24,11 @@ $( function() {
   	var minval_eje = 0; 
 	var maxval_eje = 7;
 	var rango_eje = maxval_eje-minval_eje;
-  	var gridej = ($('.exercise .drag-parent').width()-30)/rango_eje;
+	if ($('.pagina').hasClass('aboutyou')) {
+		var gridej = ((anchot*0.7)-30)/rango_eje;
+	} else {
+		var gridej = ($('.exercise .drag-parent').width()-30)/rango_eje;
+	}
     $('#ejercicio').draggable({ containment:"parent",axis:"x",grid:[gridej,gridej],drag:function(){
     	var percent = $('.exercise .drag-parent').width()-30;
     	var donde = Math.round(((($('#ejercicio').position().left)*rango_eje)/percent)+minval_eje);
@@ -97,6 +107,18 @@ $( function() {
 } );
 
 $(window).on("load resize",function(){
+
+	var cuantos = $('.co-option').length;
+	cuantos = cuantos*105;
+	$(".tipo_coach").css("width",cuantos);
+
+	var cuantos1 = $('.pl-option').length;
+	cuantos1 = cuantos1*105;
+	$(".tipo_plan").css("width",cuantos1);
+
+	var cuantos2 = $('.re-option').length;
+	cuantos2 = cuantos2*105;
+	$(".tipo_restric").css("width",cuantos2);
 
 	var ancho = document.documentElement.clientWidth;
 	var tamano = $('.slide-coach').length;
@@ -251,7 +273,7 @@ $(window).load(function(){
 				$('#hombre').attr("src","images/hombre.svg");
 				$('#hombre').attr("value","");
 			}
-			$(this).attr({src: "images/hombreh.svg", value: "mujer"});
+			$(this).attr({src: "images/mujerh.svg", value: "mujer"});
 			$('.type-def').attr("src","images/mujerh.svg");
 		});
 
@@ -368,6 +390,119 @@ $(window).load(function(){
 		});
 
 		$("#ideal-dw").bind('touchend', function(){
+		    clearInterval(timeout);
+		    return false;
+		});
+
+		var agua;
+
+		$("#agua-up").bind('touchstart', function(){
+			timeout = setInterval(function(){
+				agua = Number($('.vaso p span').html());
+				agua=agua+0.5;
+	        	$('.vaso p span').html(agua.toFixed(1));
+		    }, 100);
+		    return false;
+		});
+
+		$("#agua-up").bind('touchend', function(){
+		    clearInterval(timeout);
+		    return false;
+		});
+
+		$("#agua-dw").bind('touchstart', function(){
+			timeout = setInterval(function(){
+				agua = Number($('.vaso p span').html());
+				if (agua>0.4) {
+					agua=agua-0.5;
+		        	$('.vaso p span').html(agua.toFixed(1));
+				}
+		    }, 100);
+		    return false;
+		});
+
+		$("#agua-dw").bind('touchend', function(){
+		    clearInterval(timeout);
+		    return false;
+		});
+
+		var r_peso;
+
+		$("#r_peso-up").bind('touchstart', function(){
+			timeout = setInterval(function(){
+				r_peso = Number($('.r_peso p').html());
+		        if (r_peso<99) {
+					r_peso=r_peso+0.5;
+		        	$('.r_peso p').html(r_peso.toFixed(1));
+				} else {
+					r_peso=r_peso+1;
+		        	$('.r_peso p').html(r_peso.toFixed(0));
+				}
+		    }, 100);
+		    return false;
+		});
+
+		$("#r_peso-up").bind('touchend', function(){
+		    clearInterval(timeout);
+		    return false;
+		});
+
+		$("#r_peso-dw").bind('touchstart', function(){
+			timeout = setInterval(function(){
+				r_peso = Number($('.r_peso p').html());
+				if (r_peso>0.4) {
+					if (r_peso<100.1) {
+						r_peso=r_peso-0.5;
+						$('.r_peso p').html(r_peso.toFixed(1));
+					} else {
+						r_peso=r_peso-1;
+						$('.r_peso p').html(r_peso.toFixed(0));
+					}
+				}
+		    }, 100);
+		    return false;
+		});
+
+		$("#r_peso-dw").bind('touchend', function(){
+		    clearInterval(timeout);
+		    return false;
+		});
+
+		var valor = 0;
+		var animo = [ 'increible', 'feliz', 'bien', 'regular', 'triste', 'cansado', 'hambriento', 'frustrado', 'motivado' ];
+
+		$("#animo-up").bind('touchstart', function(){
+			timeout = setInterval(function(){
+				if (valor < 8) {
+					valor++;
+				} else {
+					valor = 0;
+				}
+		        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
+		        $('.carita h4').html(animo[valor]);
+		    }, 150);
+		    return false;
+		});
+
+		$("#animo-up").bind('touchend', function(){
+		    clearInterval(timeout);
+		    return false;
+		});
+
+		$("#animo-dw").bind('touchstart', function(){
+			timeout = setInterval(function(){
+				if (valor > 0) {
+					valor--;
+				} else {
+					valor = 8;
+				}
+		        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
+		        $('.carita h4').html(animo[valor]);
+		    }, 150);
+		    return false;
+		});
+
+		$("#animo-dw").bind('touchend', function(){
 		    clearInterval(timeout);
 		    return false;
 		});
@@ -543,8 +678,8 @@ $(window).load(function(){
 
 		});
 
-		$('.co-option').click(function() {
-			var valor = $(this).find('.type').attr('value');
+		$('.co-option img:not(.question)').click(function() {
+			var valor = $(this).parent().find('.type').attr('value');
 			$('.co-option').each(function() {
 			    if ($(this).find('img:not(.question)').attr('src').substr(-5, 1)=="2") {
 			      $(this).find('img:not(.question)').attr("src",$(this).find('img:not(.question)').attr('src').slice(0, -5)+".png");
@@ -552,9 +687,9 @@ $(window).load(function(){
 			      $(this).attr("value", "");
 			    }
 			}); 
-			$(this).find('img:not(.question)').attr("src",$(this).find('img:not(.question)').attr('src').slice(0, -4)+"2.png");
-			$(this).addClass('active');
-			$(this).attr("value", valor);
+			$(this).attr("src",$(this).attr('src').slice(0, -4)+"2.png");
+			$(this).parent().addClass('active');
+			$(this).parent().attr("value", valor);
 		});
 
 		$('.re-option').click(function() {
@@ -649,6 +784,37 @@ $(window).load(function(){
 			$('.overscreen2').show();
 			setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
 		});
+
+		$('img.question').click(function() {
+			$('.overscreen2').show();
+			$('.overscreen2 h5').html($(this).attr("title"));
+			setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
+		});
+
+		$('.siono').click(function() {
+			$('.siono').removeClass('active');
+			$(this).addClass('active');
+			if ($(this).hasClass('yes')) {
+				$('.overscreen3').show();
+				setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
+				$('#comentar').focus();
+			} else {
+				$('.the-comment').html("");
+				$('.the-comment').hide();
+				$('.little-comment').show();
+			}
+
+		});
+
+		$('.send_cmt').click(function() {
+			$('.overscreen3').removeClass('active');
+			setTimeout(function() {$('.overscreen3').hide();}, 500);
+			$('.the-comment').html($('#comentar').val());
+			$('.the-comment').show();
+			$('.little-comment').hide();
+		});
+
+
 
 	});
 

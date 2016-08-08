@@ -115,7 +115,7 @@ header.hwhite2 {background:#f5f1f0;}
 header.htrans {background:none;}
 header a {position:absolute;}
 header a.back {left:9px;height:32px;width:32px;top:9px;}
-header a.add {right:9px;height:22px;line-height:21px;top:14px;color:#79c1a7;}
+a.add {right:9px;height:22px;line-height:21px;top:14px;color:#79c1a7;}
 header a.menu {right:12px;height:32px;width:32px;top:9px;}
 .toolbar {width:100%;height:50px;position:absolute;top:0px;left:0px;}
 .titulo {width:100%;height:49px;line-height:49px;margin:0;font-weight:300;font-size:130%;}
@@ -183,7 +183,7 @@ img.enter {position:absolute;bottom:2.5%;left:50%;margin-left:-25px;display:bloc
 img.saltar {position:absolute;bottom:2.5%;left:50%;margin-left:-65px;display:block;height:50px;}
 
 .sld-wrapper {position:relative;text-align:left;overflow-y:hidden;overflow-x:scroll;width:100%;margin:3.5% 0px 7%;}
-.mover {position:relative;width:200%;max-width:418px;}
+.mover {position:relative;}
 
 .plan {width:85px;text-align:center;font-size:95%;font-weight:700;color:#888;margin:8px;position:relative;display:inline-block;vertical-align:top;}
 .plan.active {color:#8041b7;}
@@ -222,6 +222,7 @@ img.saltar {position:absolute;bottom:2.5%;left:50%;margin-left:-65px;display:blo
 .bt-review:before {content:"";position:absolute;left:-3px;top:4px;z-index:-1;content:"";background:#8041b7;width:10px;height:10px;transform:rotate(45deg);-webkit-transform:rotate(45deg);border-radius:15%;}
 .no-review {position:relative;display:inline-block;font-size:80%;line-height:18px;top:-3px;margin-left:3px;}
 
+.la_img {width:94%;height:auto;}
 .semana {color:#555;}
 .satis {font-weight:900;font-size:110%;text-shadow:0px 0px 2px #EEE;}
 .btn-iniciar {color:#FFF;font-weight:800;font-size:110%;display:inline-block;padding:5px 15px;}
@@ -264,7 +265,7 @@ input[type=checkbox]:not(old):checked + span {background-position: 0 -29px;}
 #enviar{background: url(../images/enter.svg);background-position: center;background-repeat: no-repeat;}
 
 /*FORMA DE PAGO*/
-#send_fPago{background: url(../images/aceptar.svg);background-position: center;background-repeat: no-repeat;width:50px;height:50px;border-style: none;/*outline: none*/}
+#send_fPago{background: url(../images/aceptar.svg);background-position: center;background-repeat: no-repeat;width:50px;height:50px;border-style: none;margin-top:15px;outline: none}
 
 /* CHAT */
 
@@ -455,9 +456,9 @@ a.mail {background:#2eab7e url('../images/mail_btn.png') no-repeat;background-si
 .di-options {width:100%;border-top:1px solid #afafaf;}
 
 .di-options a {display:inline-block;height:32px;line-height:32px;color:#43c2a7;font-size:110%;}
-.di-options a:only-of-type {}
 .di-options a:first-of-type {font-weight:700;width:49.8%;}
 .di-options a:last-of-type {margin-left:-4px;width:49.8%;border-left:1px solid #afafaf;}
+.di-options a:only-of-type {width:100%;border:none;margin-left:0px;}
 
 /* MONEY */
 
@@ -477,6 +478,7 @@ a.mail {background:#2eab7e url('../images/mail_btn.png') no-repeat;background-si
 .carita {width:70%;margin-left:5%;display:inline-block;position:relative;}
 .carita img {width:100%;}
 .animo {margin-top:14%;margin-bottom:7.5%;}
+.animo h4 {margin-top:20px;text-transform:uppercase;}
 .animo .arrows-vertical {height:100%;position:relative;margin:0px 6%;top:-108px;}
 
 .btn-gre {position:relative;display:inline-block;border-radius:2px;text-align:center;color:#FFF;font-weight:800;background:#43c2a7;font-size:125%;letter-spacing:0.035em;padding:6px 13px;margin:0px 0px 0px;}
@@ -507,9 +509,14 @@ a.mail {background:#2eab7e url('../images/mail_btn.png') no-repeat;background-si
 .r_ejercicio .page.inteje {top:-4px;height:95px;margin-bottom:2.5%;}
 .r_ejercicio .page.inteje .position {width:90px;margin-left:-45px;}
 
+/* THE COMMENT */
 
-
-
+.overscreen3 {position:fixed;width:100%;height:100%;top:0px;left:0px;z-index:999999999999;overflow:hidden;padding-top:200px;opacity:0;-webkit-transition:.35s ease-in-out;transition:.35s ease-in-out;}
+.overscreen3.active {opacity:1;padding-top:0px;}
+.boxx-top {height:50px;position:relative;background:#f5f1f0;}
+.boxx-top a {position:absolute;font-weight:800;}
+.boxx-top a.izquii {left:9px;height:22px;line-height:21px;top:14px;color:#767676;}
+.overscreen3 textarea {resize:none;background:#FFF;outline:none;width:100%;height:calc(100% - 50px);padding:6px 8px;font-size:115%;}
 
 
 
