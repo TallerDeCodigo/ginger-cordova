@@ -37,6 +37,7 @@ $( function() {
     	var donde = Math.round(((($('#medida').position().left)*rango_med)/percent)+minval_med);
     	$("#medida-filler").css("width",$('#medida').position().left+20);
     	$('#medida-dato').html(donde);
+    	$('#medida-dato').attr('value',donde);
       }
   	});
 
@@ -62,6 +63,7 @@ $( function() {
     		minutos="00";
     	}
     	$('#horaeje-dato').html(hora+":"+minutos);
+    	$('#horaeje-dato').attr("value", hora+":"+minutos);
       }
   	});
 
@@ -89,6 +91,7 @@ $( function() {
     	        break;
     	}
     	$('#inteje-dato').html(text_int);
+    	$('#inteje-dato').attr('value',text_int);
       }
   	});
 
@@ -239,8 +242,6 @@ $(window).load(function(){
 			}
 			$(this).attr({src: "images/hombreh.svg", value: "hombre"});
 			$('.type-def').attr("src","images/hombreh.svg");
-
-			localStorage(setItem())
 		});
 
 		$("#mujer").click(function(){
@@ -558,35 +559,44 @@ $(window).load(function(){
 		});
 
 		$('.re-option').click(function() {
+			var valor = $(this).find('.type').attr('value');
 			if (!$(this).hasClass('active')) {
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 				$(this).addClass('active');
+				$(this).attr('value', valor);
 			} else {
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
 				$(this).removeClass('active');
+				$(this).attr('value',"");
 			}
 		});
 
 		$('.me-option').click(function() {
+			var valor = $(this).find('.type').attr('value');
 			$('.me-option').each(function() {
 			    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
 			      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
 			      $(this).removeClass('active');
+			      $(this).attr('value', "");
 			    }
 			}); 
 			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 			$(this).addClass('active');
+			$(this).attr('value', valor);
 		});
 
 		$('.ej-option').click(function() {
+			var valor = $(this).find('.type').attr('value');
 			$('.ej-option').each(function() {
 			    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
 			      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
 			      $(this).removeClass('active');
+			      $(this).attr('value', "");
 			    }
 			}); 
 			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 			$(this).addClass('active');
+			$(this).attr('value', valor);
 		});
 
 		$('.centro').click(function() {

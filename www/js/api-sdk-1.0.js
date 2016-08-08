@@ -4,9 +4,9 @@
  */
 
 if (localStorage) {
-	console.log("Supported");
+	console.log("Local storage supported");
 } else {
-  console.log("Non supported");
+  console.log("Local storage not supported");
 }
 
 /* 
