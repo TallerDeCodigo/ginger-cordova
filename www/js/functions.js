@@ -5,9 +5,9 @@ $( function() {
 	var minval_age = 15; 
 	var maxval_age = 90;
 	var rango_age = maxval_age-minval_age; 
-	var gridag = ($('.drag-parent').width()-30)/rango_age;
+	var gridag = ($('.age .drag-parent').width()-30)/rango_age;
     $('#age').draggable({ containment:"parent",axis:"x",grid:[gridag,gridag],drag:function(){
-    	var percent = $('.drag-parent').width()-30;
+    	var percent = $('.age .drag-parent').width()-30;
     	var donde = Math.round(((($('#age').position().left)*rango_age)/percent)+minval_age);
     	$("#age-filler").css("width",$('#age').position().left+20);
     	$('#age-dato').html(donde);
@@ -17,12 +17,76 @@ $( function() {
   	var minval_eje = 0; 
 	var maxval_eje = 7;
 	var rango_eje = maxval_eje-minval_eje;
-  	var gridej = ($('.drag-parent').width()-30)/rango_eje;
+  	var gridej = ($('.exercise .drag-parent').width()-30)/rango_eje;
     $('#ejercicio').draggable({ containment:"parent",axis:"x",grid:[gridej,gridej],drag:function(){
-    	var percent = $('.drag-parent').width()-30;
+    	var percent = $('.exercise .drag-parent').width()-30;
     	var donde = Math.round(((($('#ejercicio').position().left)*rango_eje)/percent)+minval_eje);
     	$("#ejercicio-filler").css("width",$('#ejercicio').position().left+20);
     	$('#ejercicio-dato').html(donde);
+      }
+  	});
+
+  	var minval_med = 0; 
+	var maxval_med = 70;
+	var rango_med = maxval_med-minval_med;
+  	var gridme = ($('.medida .drag-parent').width()-30)/rango_med;
+    $('#medida').draggable({ containment:"parent",axis:"x",grid:[gridme,gridme],drag:function(){
+    	var percent = $('.medida .drag-parent').width()-30;
+    	var donde = Math.round(((($('#medida').position().left)*rango_med)/percent)+minval_med);
+    	$("#medida-filler").css("width",$('#medida').position().left+20);
+    	$('#medida-dato').html(donde);
+      }
+  	});
+
+  	var minval_hora = 0; 
+	var maxval_hora = 16;
+	var rango_hora = maxval_hora-minval_hora;
+  	var gridhr = ($('.horaeje .drag-parent').width()-30)/rango_hora;
+    $('#horaeje').draggable({ containment:"parent",axis:"x",grid:[gridhr,gridhr],drag:function(){
+    	var percent = $('.horaeje .drag-parent').width()-30;
+    	var donde = Math.round(((($('#horaeje').position().left)*rango_hora)/percent)+minval_hora);
+    	$("#horaeje-filler").css("width",$('#horaeje').position().left+20);
+    	var hora = (donde/4);
+    	hora = hora.toString().substr(0,1);
+    	var minutos = (donde/4)*60;
+    	if (minutos>179) {
+    		minutos = minutos-180;
+    	} else if (minutos>119) {
+    		minutos = minutos-120;
+    	} else if (minutos>59) {
+    		minutos = minutos-60;
+    	}
+    	if (minutos==0 || minutos==60) {
+    		minutos="00";
+    	}
+    	$('#horaeje-dato').html(hora+":"+minutos);
+      }
+  	});
+
+  	var minval_int = 0; 
+	var maxval_int = 3;
+	var rango_int = maxval_int-minval_int;
+  	var gridin = ($('.inteje .drag-parent').width()-30)/rango_int;
+    $('#inteje').draggable({ containment:"parent",axis:"x",grid:[gridin,gridin],drag:function(){
+    	var percent = $('.inteje .drag-parent').width()-30;
+    	var donde = Math.round(((($('#inteje').position().left)*rango_int)/percent)+minval_int);
+    	$("#inteje-filler").css("width",$('#inteje').position().left+20);
+    	var text_int;
+    	switch (donde) {
+    	    case 0:
+    	        text_int = "baja";
+    	        break;
+    	    case 1:
+    	        text_int = "moderada";
+    	        break;
+    	    case 2:
+    	        text_int = "alta";
+    	        break;
+    	    case 3:
+    	        text_int = "extrema";
+    	        break;
+    	}
+    	$('#inteje-dato').html(text_int);
       }
   	});
 
@@ -479,6 +543,28 @@ $(window).load(function(){
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
 				$(this).removeClass('active');
 			}
+		});
+
+		$('.me-option').click(function() {
+			$('.me-option').each(function() {
+			    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
+			      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
+			      $(this).removeClass('active');
+			    }
+			}); 
+			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
+			$(this).addClass('active');
+		});
+
+		$('.ej-option').click(function() {
+			$('.ej-option').each(function() {
+			    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
+			      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
+			      $(this).removeClass('active');
+			    }
+			}); 
+			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
+			$(this).addClass('active');
 		});
 
 		$('.centro').click(function() {
