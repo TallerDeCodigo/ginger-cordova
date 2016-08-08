@@ -925,13 +925,16 @@
 					data_login.pass 	= $('#pass').val();
 					
 					var responsedata 	= apiRH.registerNative(data_login);  
+					
 					console.log(responsedata);						//llega hasta aqui con un valor FALSE
 
 					if(responsedata) {
 						console.log("en resopnse data" + responsedata);
-
+						
 						apiRH.save_user_data_clientside(responsedata);
-						window.location.assign('crear.html');
+						
+						window.location.assign('feed.html');
+
 						return;
 					}else{
 						app.toast('Lo sentimos, el nombre de usuario ya existe.'); //dispara el toast con el mensaje.
