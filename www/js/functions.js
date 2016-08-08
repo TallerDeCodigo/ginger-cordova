@@ -10,8 +10,8 @@ $( function() {
     	var percent = $('.age .drag-parent').width()-30;
     	var donde = Math.round(((($('#age').position().left)*rango_age)/percent)+minval_age);
     	$("#age-filler").css("width",$('#age').position().left+20);
-    	$('#age-dato').html(donde);
-    	$('#age-dato').attr("value", donde);
+    	$('#age-dato').html(donde+"<br>"+"años");
+    	$('#edad_value').attr("value", donde);
       }
   	});
 
@@ -24,7 +24,7 @@ $( function() {
     	var donde = Math.round(((($('#ejercicio').position().left)*rango_eje)/percent)+minval_eje);
     	$("#ejercicio-filler").css("width",$('#ejercicio').position().left+20);
     	$('#ejercicio-dato').html(donde);
-    	$('#ejercicio-dato').attr("value", donde);
+    	$('#days_per_week').attr("value", donde);
       }
   	});
 
@@ -232,22 +232,24 @@ $(window).load(function(){
             }, 210);
 		});
 
+
+
 		$("#hombre").click(function(){
 			if ($(this).hasClass('edition')) {
 				$('#mujer').attr("src","images/mujere.svg");
-				$('#mujer').attr("value","mujer");
 			} else {
 				$('#mujer').attr("src","images/mujer.svg");
 				$('#mujer').attr("value","");
 			}
 			$(this).attr({src: "images/hombreh.svg", value: "hombre"});
 			$('.type-def').attr("src","images/hombreh.svg");
+			
 		});
 
+ 
 		$("#mujer").click(function(){
 			if ($(this).hasClass('edition')) {
 				$('#hombre').attr("src","images/hombree.svg");
-				$('#hombre').attr("value","hombre");
 			} else {
 				$('#hombre').attr("src","images/hombre.svg");
 				$('#hombre').attr("value","");
@@ -255,11 +257,6 @@ $(window).load(function(){
 			$(this).attr({src: "images/mujerh.svg", value: "mujer"});
 			$('.type-def').attr("src","images/mujerh.svg");
 		});
-
-
-		/*
-			LOCALSTORAGE GENERO
-		*/
 
 
 
@@ -272,7 +269,7 @@ $(window).load(function(){
 				estatura = Number($("#estatura-up").parent().parent().find('input').val());
 		        estatura=estatura+0.01;
 		        $("#estatura-up").parent().parent().find('input').val(estatura.toFixed(2));
-		        $('input[name="estatura"]').attr("value", estatura); 
+		        $('input[name="estatura"]').attr("value", estatura);
 
 
 		    }, 100);
@@ -388,7 +385,27 @@ $(window).load(function(){
 			$('.bpur').removeClass('active');
 			$('.bgre').addClass('active');
 
-			localStorage('', );
+/*
+
+	localstorage
+
+*/
+
+			//genero
+			localStorage.setItem('genero', $('#mujer').attr("value","mujer").val() );//hacerlo una condicional
+
+			//estatura
+			localStorage.setItem('estatura', $('input[name="estatura"]').val() );
+			
+			//peso
+			localStorage.setItem('peso', $('input[name="peso"]').val() );
+			
+			//edad
+			localStorage.setItem('edad', $('#edad_value').val() );
+			
+			//peso ideal
+			localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
+
 
 			setTimeout(function() {
         		$(".pagina").hide();
@@ -400,9 +417,17 @@ $(window).load(function(){
 		});
 
 		$('#finish2').click(function(){
+
 			$('.objetive').animate({opacity:"0",left:"-40px"}, 200);
 			$('.bgre').removeClass('active');
 			$('.bred').addClass('active');
+
+			//plan
+			localStorage.setItem('plan', $('#plan').val() );
+			
+			//coach_type
+			localStorage.setItem('coach_type', $('#coach_type').val() );
+
 			setTimeout(function() {
         		$(".pagina").hide();
         		$(".exercise").show();
@@ -415,6 +440,15 @@ $(window).load(function(){
 			$('.exercise').animate({opacity:"0",left:"-40px"}, 200);
 			$('.bred').removeClass('active');
 			$('.borg').addClass('active');
+
+
+			//frecuencia de ejercicio
+			localStorage.setItem('dpw', $('#days_per_week').val() );
+
+			var dpw = localStorage.getItem('dpw');
+
+			//console.log(" estatura> "+estatura + " peso> " + peso +" edad> "+ edad+" ideal> "+peso_ideal+" plan> "+ plan+" coachType> "+ coachType+ " dias por semana> > > "+dpw)
+
 			setTimeout(function() {
         		$(".pagina").hide();
         		$(".restric").show();
@@ -427,6 +461,13 @@ $(window).load(function(){
 			$('.restric').animate({opacity:"0",left:"-40px"}, 200);
 			$('.borg').removeClass('active');
 			$('.byel').addClass('active');
+
+
+
+			//restriccion alimenticia
+			localStorage.setItem('restricciones', $('#').val() );
+
+
 			setTimeout(function() {
         		$(".pagina").hide();
         		$(".pcoach1").show();
@@ -542,8 +583,10 @@ $(window).load(function(){
 		});
 
 		$('.pl-option').click(function() {
+
 			var valor = $(this).find('.type').attr('value');
-			console.log(valor);
+			$('#plan').attr('value', valor);
+
 			$('.pl-option').each(function() {
 			    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
 			      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
@@ -559,6 +602,9 @@ $(window).load(function(){
 
 		$('.co-option').click(function() {
 			var valor = $(this).find('.type').attr('value');
+			$('#coach_type').attr('value', valor);
+
+
 			$('.co-option').each(function() {
 			    if ($(this).find('img:not(.question)').attr('src').substr(-5, 1)=="2") {
 			      $(this).find('img:not(.question)').attr("src",$(this).find('img:not(.question)').attr('src').slice(0, -5)+".png");
@@ -573,6 +619,12 @@ $(window).load(function(){
 
 		$('.re-option').click(function() {
 			var valor = $(this).find('.type').attr('value');
+			$('#restricciones1').attr('value', valor);
+
+			var restricciones = {}
+
+			console.log(restricciones = restricciones{$('#restricciones1').val() } )
+
 			if (!$(this).hasClass('active')) {
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 				$(this).addClass('active');
