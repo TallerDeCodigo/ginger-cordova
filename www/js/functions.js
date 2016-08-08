@@ -252,19 +252,29 @@ $(window).load(function(){
 				$('#hombre').attr("src","images/hombre.svg");
 				$('#hombre').attr("value","");
 			}
-			$(this).attr({src: "images/hombreh.svg", value: "mujer"});
+			$(this).attr({src: "images/mujerh.svg", value: "mujer"});
 			$('.type-def').attr("src","images/mujerh.svg");
 		});
 
+
+		/*
+			LOCALSTORAGE GENERO
+		*/
+
+
+
 		var timeout;
 		var estatura;
+
 
 		$("#estatura-up").bind('touchstart', function(){
 			timeout = setInterval(function(){
 				estatura = Number($("#estatura-up").parent().parent().find('input').val());
 		        estatura=estatura+0.01;
 		        $("#estatura-up").parent().parent().find('input').val(estatura.toFixed(2));
-		        $('input[name="estatura"]').attr("value", estatura);
+		        $('input[name="estatura"]').attr("value", estatura); 
+
+
 		    }, 100);
 		    return false;
 		});
@@ -377,6 +387,9 @@ $(window).load(function(){
 			$('.aboutyou').animate({opacity:"0",left:"-40px"}, 200);
 			$('.bpur').removeClass('active');
 			$('.bgre').addClass('active');
+
+			localStorage('', );
+
 			setTimeout(function() {
         		$(".pagina").hide();
         		$(".objetive").show();
