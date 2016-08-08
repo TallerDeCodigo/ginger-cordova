@@ -988,9 +988,11 @@
 				data_login.pass = $('#pass').val();
 				var responsedata = apiRH.loginNative(data_login);
 
+			  	console.log("RESPUESTA: " + responsedata);
+
 				if(responsedata){
-				 	apiRH.save_user_data_clientside(responsedata);
-				 	window.location.assign('feed.html?filter_feed=all');
+				 	//apiRH.save_user_data_clientside(responsedata);
+				 	window.location.assign('dieta.html');
 				 	return;
 				}
 			}

@@ -80,9 +80,9 @@ function requestHandlerAPI(){
 
 			console.log(response);
 
-/*
-	GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
-*/
+			/*
+				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
+			*/
 			localStorage.setItem('token', response.token);
 			localStorage.setItem('mail', response.mail);
 			localStorage.setItem('userId', response.userId);
@@ -93,10 +93,11 @@ function requestHandlerAPI(){
 			console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
 
 
-/*
-	REGRESA LA RESPUESTA DEL SERVIDOR CON EL USER ID, MAIL Y TOKEN
-*/
-			return (response.success) ? response.data : false;
+			/*
+				REGRESA LA RESPUESTA DEL SERVIDOR CON EL USER ID, MAIL Y TOKEN
+			*/
+						
+			return (userId) ? true : false;
 		};
 
 
