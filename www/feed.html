@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-	<head>
+<head>
 		<meta charset="utf-8">
 		<title>Ginger Cliente</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,7 +10,7 @@
 
 			<!-- Load Scripts -->
 
-		<script type="text/javascript" src="cordova.js"></script>
+		<!--<script type="text/javascript" src="cordova.js"></script>-->
 		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.runtime.min.js"></script>
 	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
@@ -38,6 +38,7 @@
 							<a class="back" style="display:none"><img src="images/back.svg"></a>
 						</div>
 					</header>
+
 					<div class="paginador-wrapper">
 				    	<div class="paginador">
 					    	<div class="aboutyou pagina">
@@ -58,14 +59,18 @@
 					    					<div class="slider-bar"></div>
 					    					<div id="age-filler" class="slider-filler"></div>
 					    					<div id="age" class="slider-point">
-					    						<div class="position"><span id="age-dato">15</span><br>años</div>
+					    						<div class="position">
+					    							<span id="age-dato" value="">
+					    								15<br>años
+					    							</span>
+					    						</div>
 					    					</div>
 					    				</div>
 					    				<img class="img-izquierda" src="images/adulto.png">
 					    			</div>
 					    			<div class="page zip sector-1" style="display:none">
 					    				<div class="box-input-1">
-					    					<input type="text" name="zipcode" maxlength="5">
+					    					<input type="text" name="zipcode" maxlength="5" value="">
 					    				</div>
 					    			</div>
 					    		</div>
@@ -76,15 +81,19 @@
 					    		</nav>
 					    		<div class="page-holder">
 					    			<div class="page mido sector-2">
+
 					    				<div class="arrows-vertical">
 					    					<img id="estatura-up" src="images/leftarrow.png">
 					    					<img id="estatura-dw" src="images/rightarrow.png">
 					    				</div>
+					    				
 					    				<img class="type-def" src="images/hombreh.svg">
+					    				
 					    				<div class="box-input-2">
 					    					<input type="text" name="estatura" value="1.50" maxlength="4">
 					    					<span>m</span>
 					    				</div>
+
 					    			</div>
 					    			<div class="page peso sector-2" style="display:none">
 					    				<div class="arrows-vertical">
@@ -93,7 +102,7 @@
 					    				</div>
 					    				<img class="type-def" src="images/hombreh.svg">
 					    				<div class="box-input-2">
-					    					<input type="text" name="estatura" value="50.0" maxlength="4">
+					    					<input type="text" name="peso" value="50.0" maxlength="4">
 					    					<span>kg</span>
 					    				</div>
 					    			</div>
@@ -104,7 +113,7 @@
 					    				</div>
 					    				<img class="type-def" src="images/hombreh.svg">
 					    				<div class="box-input-2">
-					    					<input type="text" name="estatura" value="50.0" maxlength="4">
+					    					<input type="text" name="ideal" value="50.0" maxlength="4">
 					    					<span>kg</span>
 					    				</div>
 					    			</div>
@@ -117,19 +126,19 @@
 					    			<div class="mover planes">
 					    				<div class="plan pl-option active">
 					    					<img src="images/plan/detox2.png">
-					    					<span>Perder<br>peso</span>
+					    					<span value="perder_peso" class="type">Perder<br>peso</span>
 					    				</div>
 					    				<div class="plan pl-option">
-					    					<img src="images/plan/detox.png">
-					    					<span>Detox</span>
+					    					<img src="images/plan/detox.png" value="">
+					    					<span value="detox" class="type">Detox</span>
 					    				</div>
 					    				<div class="plan pl-option">
-					    					<img src="images/plan/detox.png">
-					    					<span>Rendimiento físico</span>
+					    					<img src="images/plan/detox.png" value="">
+					    					<span value="rendimiento_fisico" class="type">Rendimiento físico</span>
 					    				</div>
 					    				<div class="plan pl-option">
-					    					<img src="images/plan/detox.png">
-					    					<span>Sentirse mejor</span>
+					    					<img src="images/plan/detox.png" value="">
+					    					<span value="sentirse_mejor" class="type">Sentirse mejor</span>
 					    				</div>
 					    			</div>
 					    		</div>
@@ -138,22 +147,22 @@
 					    			<div class="mover planes">
 					    				<div class="plan co-option active">
 					    					<img src="images/plan/detox2.png">
-					    					<span>Estricto</span><br>
+					    					<span class="type" value="estricto">Estricto</span><br>
 					    					<img class="question" src="images/question.svg">
 					    				</div>
 					    				<div class="plan co-option">
 					    					<img src="images/plan/detox.png">
-					    					<span>Analítico</span><br>
+					    					<span class="type" value="analitico">Analítico</span><br>
 					    					<img class="question" src="images/question.svg">
 					    				</div>
 					    				<div class="plan co-option">
 					    					<img src="images/plan/detox.png">
-					    					<span>Médico</span><br>
+					    					<span class="type" value="medico">Médico</span><br>
 					    					<img class="question" src="images/question.svg">
 					    				</div>
 					    				<div class="plan co-option">
 					    					<img src="images/plan/detox.png">
-					    					<span>Innovador</span><br>
+					    					<span class="type" value="innovador">Innovador</span><br>
 					    					<img class="question" src="images/question.svg">
 					    				</div>
 					    			</div>
@@ -320,7 +329,7 @@
 					    	</div>
 					    	<div class="conekta pagina" style="display:none">
 					    		<h2>Información de pago</h2>
-					    		<form>
+					    		<form id="forma_pago" name="forma_pago" method="post">
 					    			<div class="form-label">
 					    				<input type="text" name="nombre">
 						    			<label for="nombre">Nombre (como aparece en tu tarjeta)</label>
@@ -356,7 +365,8 @@
 					    			<span>Acepto <a href="http://www.gingerapp.mx/terminosycondiciones/">Términos y Condiciones</a></span>
 					    			</div>
 					    		</form>
-					    		<img class="enter" src="images/aceptar.svg">
+					    		<input id="send_fPago" name="send_fPago" type="submit" value="">
+					    		<!-- <img class="enter" src="images/aceptar.svg"> -->
 					    	</div>
 				    	</div>
 				    </div>

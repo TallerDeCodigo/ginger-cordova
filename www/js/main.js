@@ -70,7 +70,7 @@
 			var filenames = ['header', 'history_header', 'history_header_nouser', 'search_header', 'feed_chunk', 'sidemenu', 'sidemenu_logged', 'footer', 'subheader', 'dom_assets'];
 			
 			filenames.forEach(function (filename) {
-					Handlebars.registerPartial(filename, Handlebars.templates[filename]);
+					//Handlebars.registerPartial(filename, Handlebars.templates[filename]);
 			});
 		},
 		registerTemplate : function(name) {
@@ -925,13 +925,16 @@
 					data_login.pass 	= $('#pass').val();
 					
 					var responsedata 	= apiRH.registerNative(data_login);  
-					console.log(responsedata);						//llega hasta aqui con un valor FALSE
+					
+					//console.log(responsedata);						//llega hasta aqui con un valor FALSE
 
 					if(responsedata) {
-						console.log("en resopnse data" + responsedata);
-
+						//console.log(responsedata);
+						
 						apiRH.save_user_data_clientside(responsedata);
-						window.location.assign('feed.html?filter_feed=all');
+						
+						window.location.assign('feed.html');
+
 						return;
 					}else{
 						app.toast('Lo sentimos, el nombre de usuario ya existe.'); //dispara el toast con el mensaje.
@@ -988,14 +991,46 @@
 				data_login.pass = $('#pass').val();
 				var responsedata = apiRH.loginNative(data_login);
 
+			  	console.log("RESPUESTA: " + responsedata);
+
 				if(responsedata){
-				 	apiRH.save_user_data_clientside(responsedata);
-				 	window.location.assign('feed.html?filter_feed=all');
+				 	//apiRH.save_user_data_clientside(responsedata);
+				 	window.location.assign('dieta.html');
 				 	return;
 				}
 			}
 	}); //END VALIDATE
 
+
+
+
+/*TARJETA DE CREDITO*/
+
+	if($('#forma_pago').length)
+		$('#forma_pago').validate({
+			rules:{
+				nombre:"required",
+				card:"required",
+				mes:"required",
+				year:"required",
+				cvc:"required",
+				mail:"required",
+				terms:"required"
+			},
+			messages:{
+				nombre:"mensaje",
+				card:"mensaje",
+				mes:"mensaje",
+				year:"mensaje",
+				cvc:"mensaje",
+				mail:"mensaje",
+				terms:"mensaje"
+			},
+			submitHandler:function(){
+				var data_login = app.getFormData("#forma_pago");
+				console.log("enviar forma de pago");
+			}
+		});
 
 
 
