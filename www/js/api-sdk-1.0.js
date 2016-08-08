@@ -153,7 +153,9 @@ function requestHandlerAPI(){
 			/*
 				REGRESA LA RESPUESTA DEL SERVIDOR CON EL USER ID, MAIL Y TOKEN
 			*/
-						return (response.success) ? response.data : false;
+
+				console.log(response);
+						return (response) ? response : false;
 		};
 		/* 
 		 * Log Out from the API and disable token server side

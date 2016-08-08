@@ -931,7 +931,7 @@
 						console.log("en resopnse data" + responsedata);
 
 						apiRH.save_user_data_clientside(responsedata);
-						window.location.assign('feed.html?filter_feed=all');
+						window.location.assign('crear.html');
 						return;
 					}else{
 						app.toast('Lo sentimos, el nombre de usuario ya existe.'); //dispara el toast con el mensaje.
