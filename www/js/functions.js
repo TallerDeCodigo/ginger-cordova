@@ -674,7 +674,7 @@ $(window).load(function(){
 			$('.bpur').removeClass('active');
 			$('.bgre').addClass('active');
 
-			console.log($('#hombre').attr('alt') );
+			//console.log($('#hombre').attr('alt') );
 
 			if($('#hombre').attr('alt') == '1' ){
 				$('#genre_value').attr('value', 1);

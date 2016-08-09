@@ -1006,31 +1006,17 @@
 
 /*TARJETA DE CREDITO*/
 
-	if($('#forma_pago').length)
-		$('#forma_pago').validate({
-			rules:{
-				nombre:"required",
-				card:"required",
-				mes:"required",
-				year:"required",
-				cvc:"required",
-				mail:"required",
-				terms:"required"
-			},
-			messages:{
-				nombre:"mensaje",
-				card:"mensaje",
-				mes:"mensaje",
-				year:"mensaje",
-				cvc:"mensaje",
-				mail:"mensaje",
-				terms:"mensaje"
-			},
-			submitHandler:function(){
-				var data_login = app.getFormData("#forma_pago");
-				console.log("enviar forma de pago");
-			}
-		});
+	$('#send_fPago').on('click', function(){
+
+		console.log($('input[name="nombre"]').val() );
+		console.log($('input[name="card"]').val() );
+		console.log($('input[name="mes"]').val() );
+		console.log($('input[name="year"]').val() );
+		console.log($('input[name="cvc"]').val() );
+		console.log($('input[name="mail"]').val() );
+		console.log($('input[name="cupon"]').val() );
+		console.log($('input[name="terms"]').val() );
+	});
 
 
 
