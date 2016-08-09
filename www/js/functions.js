@@ -756,7 +756,7 @@ $(window).load(function(){
 
 			var restricciones = {}
 
-			console.log(restricciones = restricciones{$('#restricciones1').val() } )
+			//console.log(restricciones = restricciones{$('#restricciones1').val() } )
 
 			if (!$(this).hasClass('active')) {
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
@@ -887,7 +887,12 @@ $(window).load(function(){
 			$('.little-comment').hide();
 		});
 
-
+		$('.izquii').click(function() {
+			$('.overscreen3').removeClass('active');
+			setTimeout(function() {$('.overscreen3').hide();}, 500);
+			$('.siono').removeClass('active');
+			$('.siono.not').addClass('active');
+		});
 
 	});
 
