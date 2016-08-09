@@ -46,9 +46,27 @@ $( function() {
     	var percent = $('.medida .drag-parent').width()-30;
     	var donde = Math.round(((($('#medida').position().left)*rango_med)/percent)+minval_med);
     	$("#medida-filler").css("width",$('#medida').position().left+20);
-    	$('#medida-dato').html(donde);
+    	$('#medida-dato-span').html(donde);
     	$('#medida-dato').attr('value',donde);
       }
+  	});
+
+
+/*
+	localStorage MEDIDAS / MEASURED AREA
+*/
+
+
+
+  	$('#add_medidas').on('click', function(){
+  		
+  		localStorage.setItem( 'medidas', $('#medida-dato').val() );
+  		localStorage.setItem('measured_area', $('#measured_area').val() )
+
+  		var medidas = localStorage.getItem('medidas');
+  		var area = localStorage.getItem('measured_area');
+  		console.log(medidas+" "+ area);
+
   	});
 
   	var minval_hora = 0; 
@@ -73,7 +91,7 @@ $( function() {
     		minutos="00";
     	}
     	$('#horaeje-dato').html(hora+":"+minutos);
-    	$('#horaeje-dato').attr("value", hora+":"+minutos);
+    	$('#duracion').attr("value", hora+":"+minutos);
       }
   	});
 
@@ -100,8 +118,23 @@ $( function() {
     	        text_int = "extrema";
     	        break;
     	}
+    	$('#intensidad').attr('value',text_int);
+
+    	switch ($('#intensidad').val() ) {
+    	    case 'baja':
+    	        $('#intensidad').attr('value','0');
+    	        break;
+    	    case 'moderada':
+    	        $('#intensidad').attr('value','1');;
+    	        break;
+    	    case 'alta' :
+    	        $('#intensidad').attr('value','2');
+    	        break;
+    	    case 'extrema' :
+    	        $('#intensidad').attr('value','3');
+    	        break;
+    	}
     	$('#inteje-dato').html(text_int);
-    	$('#inteje-dato').attr('value',text_int);
       }
   	});
 
@@ -447,11 +480,15 @@ $(window).load(function(){
 		    return false;
 		});
 
+
+/*
+	localStorage AGUA
+*/
 		$('#add_agua').on('click', function(){
 			localStorage.setItem('agua', $('input[name="litros"]').val() );
 
-			// var agua = localStorage.getItem('agua');
-			// console.log(agua);
+			var agua = localStorage.getItem('agua');
+			console.log(agua);
 
 		});
 
@@ -503,7 +540,7 @@ $(window).load(function(){
 
 
 /*
-	localStorage track peso 	*
+	localStorage PESO 	*
 */
 		$('#add_peso').on('click', function(){
 			localStorage.setItem('track_peso', $('input[name="track_peso"]').val() );
@@ -620,11 +657,15 @@ $(window).load(function(){
 		    return false;
 		});
 
+
+/*
+	localStorage ANIMO
+*/
 		$('#add_animo').on('click', function(){
 			localStorage.setItem('track_animo', $('#track_animo').val() );
 
-			// var track_animo = localStorage.getItem('track_animo');
-			// console.log(track_animo);
+			var track_animo = localStorage.getItem('track_animo');
+			console.log(track_animo);
 		});
 
 
@@ -644,7 +685,7 @@ $(window).load(function(){
 
 /*
 
-	localstorage
+	localstorage PERFIL
 
 */
 	
@@ -692,13 +733,17 @@ $(window).load(function(){
 			$('.bgre').removeClass('active');
 			$('.bred').addClass('active');
 
+
+/*
+	localStorage PLAN / COACH_TYPE
+*/
 			//plan
 			localStorage.setItem('plan', $('#plan').val() );
 			
 			//coach_type
 			localStorage.setItem('coach_type', $('#coach_type').val() );
 
-			 var plan = localStorage.getItem('plan', $('#plan').val() );
+			 var plan 		= localStorage.getItem('plan', $('#plan').val() );
 			 var coach_type = localStorage.getItem('coach_type', $('#coach_type').val() );
 
 			console.log(" plan> "+ plan+" coachType> "+ coach_type);
@@ -716,7 +761,9 @@ $(window).load(function(){
 			$('.bred').removeClass('active');
 			$('.borg').addClass('active');
 
-
+/*
+	localStorage FRECUENCIA DE EJERCICIO
+*/
 			//frecuencia de ejercicio
 			localStorage.setItem('dpw', $('#days_per_week').val() );
 
@@ -736,21 +783,25 @@ $(window).load(function(){
 			$('.borg').removeClass('active');
 			$('.byel').addClass('active');
 
+/*
+	localStorage RESTRICCIONES
+*/
+
 			//restriccion alimenticia
 			localStorage.setItem('restricciones', $('.re-option').val() );
 
 
-			var genero = localStorage.getItem('genero');
-			var peso = localStorage.getItem('peso');
-			var estatura = localStorage.getItem('estatura');
-			var edad = localStorage.getItem('edad');
-			var peso_ideal = localStorage.getItem('peso_ideal');
-			var zipcode = localStorage.getItem('zipcode');
-			var plan = localStorage.getItem('plan', $('#plan').val() );
-			var coach_type = localStorage.getItem('coach_type', $('#coach_type').val() );
+			var genero 		  = localStorage.getItem('genero');
+			var peso 		  = localStorage.getItem('peso');
+			var estatura 	  = localStorage.getItem('estatura');
+			var edad 		  = localStorage.getItem('edad');
+			var peso_ideal 	  = localStorage.getItem('peso_ideal');
+			var zipcode 	  = localStorage.getItem('zipcode');
+			var plan 		  = localStorage.getItem('plan', $('#plan').val() );
+			var coach_type 	  = localStorage.getItem('coach_type', $('#coach_type').val() );
 			var restricciones = localStorage.getItem('restricciones');
-			var dpw = localStorage.getItem('dpw');
-			var comentario = localStorage.getItem('comentario');
+			var dpw 		  = localStorage.getItem('dpw');
+			var comentario 	  = localStorage.getItem('comentario');
 
 
 
@@ -975,12 +1026,28 @@ $(window).load(function(){
 			    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
 			      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
 			      $(this).removeClass('active');
-			      $(this).attr('value', "");
+			      $('#measured_area').attr('value', "");
 			    }
 			}); 
 			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 			$(this).addClass('active');
-			$(this).attr('value', valor);
+			$('#measured_area').attr('value', valor);
+
+			switch($('#measured_area').val() ){
+				case 'brazo' :
+					$('#measured_area').attr("value", '2');
+					break;
+				case 'pierna' :
+					$('#measured_area').attr("value", '3');
+					break;
+				case 'cintura' :
+					$('#measured_area').attr("value", '4');
+					break;
+				case 'cadera' :
+					$('#measured_area').attr("value", '5');
+					break;
+			}
+
 		});
 
 		$('.ej-option').click(function() {
@@ -994,7 +1061,69 @@ $(window).load(function(){
 			}); 
 			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 			$(this).addClass('active');
-			$(this).attr('value', valor);
+			$("#ejercicio_type").attr('value', valor);
+
+//'caminar', 'correr', 'pesas', 'cross', 'bici', 'estacionaria', 'eliptica', 'cardio', 'yoga', 'pilates', 'tenis', 'otro'
+
+			switch($("#ejercicio_type").val() ){
+				case 'caminar' :
+				$('#ejercicio_type').attr('value','10');
+    	        break;
+    	        case 'correr' :
+				$('#ejercicio_type').attr('value','11');
+    	        break;
+    	        case 'pesas' :
+				$('#ejercicio_type').attr('value','12');
+    	        break;
+    	        case 'cross' :
+				$('#ejercicio_type').attr('value','13');
+    	        break;
+    	        case 'bici' :
+				$('#ejercicio_type').attr('value','14');
+    	        break;
+    	        case 'estacionaria' :
+				$('#ejercicio_type').attr('value','15');
+    	        break;
+    	        case 'eliptica' :
+				$('#ejercicio_type').attr('value','16');
+    	        break;
+    	        case 'cardio' :
+				$('#ejercicio_type').attr('value','17');
+    	        break;
+    	        case 'yoga' :
+				$('#ejercicio_type').attr('value','18');
+    	        break;
+    	        case 'pilates' :
+				$('#ejercicio_type').attr('value','19');
+    	        break;
+    	        case 'tenis' :
+				$('#ejercicio_type').attr('value','20');
+    	        break;
+    	        case 'otro	' :
+				$('#ejercicio_type').attr('value','21');
+    	        break;
+			}
+
+		});
+
+/*
+	localStorage EJERCICIO / DURACION / INTENSIDAD
+ */
+		$('#add_ejercicio').on('click', function(){
+
+			localStorage.setItem('track_ejercicio_type', 		$('#ejercicio_type').val() );
+			localStorage.setItem('track_ejercicio_duration',	$('#duracion').val() );
+			localStorage.setItem('track_ejercicio_intensidad', 	$('#intensidad').val() );
+
+			var intensidad  = localStorage.getItem('track_ejercicio_intensidad');
+			var type 		= localStorage.getItem('track_ejercicio_type');
+			var duracion	= localStorage.getItem('track_ejercicio_duration');
+
+			console.log(intensidad+" "+type+" "+duracion)
+			//SEND JSON EJERCICIO
+			//var json_ejercicio {}
+
+
 		});
 
 		$('.centro').click(function() {
@@ -1086,8 +1215,9 @@ $(window).load(function(){
 			$('.the-comment').show();
 			$('li.comentario').show();
 			$('.little-comment').hide();
-
-			//localStorage comentario
+/*
+	localStorage COMENTARIO
+*/
 			localStorage.setItem('comentario', $('#comentar').val())
 		});
 
