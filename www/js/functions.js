@@ -16,7 +16,7 @@ $( function() {
     	var percent = $('.age .drag-parent').width()-30;
     	var donde = Math.round(((($('#age').position().left)*rango_age)/percent)+minval_age);
     	$("#age-filler").css("width",$('#age').position().left+20);
-    	$('#age-dato').html(donde+"<br>"+"años");
+    	$('#age-dato').html(donde);
     	$('#edad_value').attr("value", donde);
       }
   	});
@@ -542,6 +542,15 @@ $(window).load(function(){
 			localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
 
 
+			var genero = localStorage.getItem('genero');
+			var estatura = localStorage.getItem('estatura');
+			var peso = localStorage.getItem('peso');
+			var edad = localStorage.getItem('edad');
+			var peso_ideal = localStorage.getItem('peso_ideal');
+
+
+			console.log(genero + " " + estatura + " " + peso + " " + edad + " " + peso_ideal);
+
 			setTimeout(function() {
         		$(".pagina").hide();
         		$(".objetive").show();
@@ -563,6 +572,11 @@ $(window).load(function(){
 			//coach_type
 			localStorage.setItem('coach_type', $('#coach_type').val() );
 
+			var plan = localStorage.getItem('plan', $('#plan').val() );
+			var coach_type = localStorage.getItem('coach_type', $('#coach_type').val() );
+
+			console.log(" plan> "+ plan+" coachType> "+ coach_type);
+
 			setTimeout(function() {
         		$(".pagina").hide();
         		$(".exercise").show();
@@ -582,7 +596,7 @@ $(window).load(function(){
 
 			var dpw = localStorage.getItem('dpw');
 
-			//console.log(" estatura> "+estatura + " peso> " + peso +" edad> "+ edad+" ideal> "+peso_ideal+" plan> "+ plan+" coachType> "+ coachType+ " dias por semana> > > "+dpw)
+			console.log(" dias por semana> > > "+dpw);
 
 			setTimeout(function() {
         		$(".pagina").hide();
@@ -597,11 +611,9 @@ $(window).load(function(){
 			$('.borg').removeClass('active');
 			$('.byel').addClass('active');
 
-
-
 			//restriccion alimenticia
-			localStorage.setItem('restricciones', $('#').val() );
-
+			localStorage.setItem('restricciones', $('.re-option').val() );
+			var restricciones = localStorage.getItem('restricciones');
 
 			setTimeout(function() {
         		$(".pagina").hide();
@@ -752,11 +764,6 @@ $(window).load(function(){
 
 		$('.re-option').click(function() {
 			var valor = $(this).find('.type').attr('value');
-			$('#restricciones1').attr('value', valor);
-
-			var restricciones = {}
-
-			console.log(restricciones = restricciones{$('#restricciones1').val() } )
 
 			if (!$(this).hasClass('active')) {
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
