@@ -7,8 +7,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1, height=device-height">
 		<meta http-equiv="cleartype" content="on">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="../plugins/cordova-plugin-inappbrowser/www/inappbrowser.css">
 		
 	    <script type="text/javascript" src="cordova.js"></script>
+	    <script type="text/javascript" src="../plugins/cordova-plugin-inappbrowser/www/inappbrowser.js"></script>
+	    <script type="text/javascript" src="https://conektaapi.s3.amazonaws.com/v0.3.2/js/conekta.js"></script>
 		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.runtime.min.js"></script>
 	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
@@ -32,11 +35,26 @@
 		</div>
 		<h2 class="cpur">Abby Shabot</h2>
 		<div class="profile-menu">
-			<a href="userdata.html"><img src="images/profile/profile.svg">Perfil</a>
-			<a href="money.html"><img src="images/profile/finances.svg">Transacciones</a>
-			<a href="http://www.gingerapp.mx/blogposts"><img src="images/profile/blog.svg">Blog</a>
-			<a href="#"><img src="images/profile/settings.svg">Acerca de</a>
-			<a class="logout" href="#"><img src="images/profile/logout.svg">Cerrar Sesión</a>
+			<a href="userdata.html">
+				<img src="images/profile/profile.svg">
+				Perfil
+			</a>
+			<a href="money.html">
+				<img src="images/profile/finances.svg">
+				Transacciones
+			</a>
+			<a id="blog" href="#">
+				<img src="images/profile/blog.svg">
+				Blog
+			</a>
+			<a href="#">
+				<img src="images/profile/settings.svg">
+				Acerca de
+			</a>
+			<a class="logout" href="#">
+				<img src="images/profile/logout.svg">
+				Cerrar Sesión
+			</a>
 		</div>
 	</div>
 	<div class="overscreen2" style="display:none">

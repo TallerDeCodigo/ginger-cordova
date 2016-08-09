@@ -53,7 +53,7 @@
             "type": "registry",
             "id": "cordova-plugin-inappbrowser"
         },
-        "is_top_level": false,
+        "is_top_level": true,
         "variables": {}
     },
     "nl.x-services.plugins.toast": {

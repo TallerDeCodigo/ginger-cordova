@@ -1305,7 +1305,17 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 
 	});
 
+/*
+
+	WEB VIEW BLOG
+	
+*/
+	$('#blog').on('click',function(){
+		console.log("click");
+		cordova.InAppBrowser.open('http://www.gingerapp.mx/blogposts/', '_blank', 'location=yes');
+	})
 });
+
 
 /*
 	CONEKTA

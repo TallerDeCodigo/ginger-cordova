@@ -8,42 +8,42 @@
     },
     "installed_plugins": {
         "com.oauthio.plugins.oauthio": {
-            "PACKAGE_NAME": "org.dedalodomus.app"
+            "PACKAGE_NAME": "org.ginger.app"
         },
         "cordova-plugin-camera": {
-            "PACKAGE_NAME": "org.dedalodomus.app"
+            "PACKAGE_NAME": "org.ginger.app"
         },
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "org.dedalodomus.app"
+            "PACKAGE_NAME": "org.ginger.app"
         },
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "org.dedalodomus.app"
+            "PACKAGE_NAME": "org.ginger.app"
         },
         "cordova-plugin-file": {
-            "PACKAGE_NAME": "org.dedalodomus.app"
+            "PACKAGE_NAME": "org.ginger.app"
         },
         "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "org.dedalodomus.app"
+            "PACKAGE_NAME": "org.ginger.app"
         },
         "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "org.dedalodomus.app"
+            "PACKAGE_NAME": "org.ginger.app"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "org.ginger.app"
         },
         "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "org.dedalodomus.app"
+            "PACKAGE_NAME": "org.ginger.app"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "org.dedalodomus.app"
+            "PACKAGE_NAME": "org.ginger.app"
         },
         "nl.x-services.plugins.toast": {
-            "PACKAGE_NAME": "org.dedalodomus.app"
+            "PACKAGE_NAME": "org.ginger.app"
         }
     },
     "dependent_plugins": {
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "org.dedalodomus.app"
-        },
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "org.dedalodomus.app"
+            "PACKAGE_NAME": "org.ginger.app"
         }
     }
 }
