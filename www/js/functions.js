@@ -412,6 +412,7 @@ $(window).load(function(){
 				agua = Number($('.vaso p span').html());
 				agua=agua+0.5;
 	        	$('.vaso p span').html(agua.toFixed(1));
+	        	$('input[name="litros"]').attr("value", agua);
 		    }, 100);
 		    return false;
 		});
@@ -427,6 +428,7 @@ $(window).load(function(){
 				if (agua>0.4) {
 					agua=agua-0.5;
 		        	$('.vaso p span').html(agua.toFixed(1));
+		        	$('input[name="litros"]').attr("value", agua);
 				}
 		    }, 100);
 		    return false;
@@ -437,6 +439,14 @@ $(window).load(function(){
 		    return false;
 		});
 
+		$('#add_agua').on('click', function(){
+			localStorage.setItem('agua', $('input[name="litros"]').val() );
+
+			// var agua = localStorage.getItem('agua');
+			// console.log(agua);
+
+		});
+
 		var r_peso;
 
 		$("#r_peso-up").bind('touchstart', function(){
@@ -445,9 +455,11 @@ $(window).load(function(){
 		        if (r_peso<99) {
 					r_peso=r_peso+0.5;
 		        	$('.r_peso p').html(r_peso.toFixed(1));
+		        	$('input[name="track_peso"]').attr('value', r_peso);
 				} else {
 					r_peso=r_peso+1;
 		        	$('.r_peso p').html(r_peso.toFixed(0));
+		        	$('input[name="track_peso"]').attr('value', r_peso);
 				}
 		    }, 100);
 		    return false;
@@ -465,9 +477,11 @@ $(window).load(function(){
 					if (r_peso<100.1) {
 						r_peso=r_peso-0.5;
 						$('.r_peso p').html(r_peso.toFixed(1));
+						$('input[name="track_peso"]').attr('value', r_peso);
 					} else {
 						r_peso=r_peso-1;
 						$('.r_peso p').html(r_peso.toFixed(0));
+						$('input[name="track_peso"]').attr('value', r_peso);
 					}
 				}
 		    }, 100);
@@ -478,6 +492,19 @@ $(window).load(function(){
 		    clearInterval(timeout);
 		    return false;
 		});
+
+
+/*
+	localStorage track peso 	*
+*/
+		$('#add_peso').on('click', function(){
+			localStorage.setItem('track_peso', $('input[name="track_peso"]').val() );
+
+			var track_peso = localStorage.getItem('track_peso');
+			console.log(track_peso);
+		});
+
+
 
 		var valor = 0;
 		var animo = [ 'increible', 'feliz', 'bien', 'regular', 'triste', 'cansado', 'hambriento', 'frustrado', 'motivado' ];
@@ -491,6 +518,41 @@ $(window).load(function(){
 				}
 		        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
 		        $('.carita h4').html(animo[valor]);
+
+				$('#track_animo').attr("value", animo[valor]);
+
+		        switch ($('#track_animo').val() ) {
+		    	    case 'increible' :
+		    	        $('#track_animo').attr("value", "0");
+		    	        break;
+		    	    case 'feliz' :
+		    	        $('#track_animo').attr("value", "1");
+		    	        break;
+		    	    case 'bien' :
+		    	        $('#track_animo').attr("value", "2");
+		    	        break;
+		    	    case 'regular' :
+		    	        $('#track_animo').attr("value", "3");
+		    	        break;
+		    	    case 'triste' :
+		    	        $('#track_animo').attr("value", "4");
+		    	        break;    
+		    	    case 'cansado' :
+		    	        $('#track_animo').attr("value", "5");
+		    	        break;   
+		    	    case 'hambriento' :
+		    	        $('#track_animo').attr("value", "6");
+		    	        break;     
+		    	    case 'frustrado' :
+		    	        $('#track_animo').attr("value", "7");
+		    	        break; 
+		    	    case 'motivado' :
+		    	        $('#track_animo').attr("value", "8");
+		    	        break;
+    	     	}
+
+		        // 0 - 8 estados de animo
+
 		    }, 150);
 		    return false;
 		});
@@ -509,6 +571,39 @@ $(window).load(function(){
 				}
 		        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
 		        $('.carita h4').html(animo[valor]);
+
+		        $('#track_animo').attr("value", animo[valor]);
+
+		        switch ($('#track_animo').val() ) {
+		    	    case 'increible' :
+		    	        $('#track_animo').attr("value", "0");
+		    	        break;
+		    	    case 'feliz' :
+		    	        $('#track_animo').attr("value", "1");
+		    	        break;
+		    	    case 'bien' :
+		    	        $('#track_animo').attr("value", "2");
+		    	        break;
+		    	    case 'regular' :
+		    	        $('#track_animo').attr("value", "3");
+		    	        break;
+		    	    case 'triste' :
+		    	        $('#track_animo').attr("value", "4");
+		    	        break;    
+		    	    case 'cansado' :
+		    	        $('#track_animo').attr("value", "5");
+		    	        break;   
+		    	    case 'hambriento' :
+		    	        $('#track_animo').attr("value", "6");
+		    	        break;     
+		    	    case 'frustrado' :
+		    	        $('#track_animo').attr("value", "7");
+		    	        break; 
+		    	    case 'motivado' :
+		    	        $('#track_animo').attr("value", "8");
+		    	        break;
+    	     	}
+
 		    }, 150);
 		    return false;
 		});
@@ -517,6 +612,14 @@ $(window).load(function(){
 		    clearInterval(timeout);
 		    return false;
 		});
+
+		$('#add_animo').on('click', function(){
+			localStorage.setItem('track_animo', $('#track_animo').val() );
+
+			// var track_animo = localStorage.getItem('track_animo');
+			// console.log(track_animo);
+		});
+
 
 		$('#finish1').click(function(){
 			$('.aboutyou').animate({opacity:"0",left:"-40px"}, 200);
