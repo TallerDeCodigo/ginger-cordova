@@ -346,11 +346,14 @@ $(window).load(function(){
 			localStorage.setItem('update_epeso', $('input[name="peso"]').val() );
 			localStorage.setItem('update_peso_ideal', $('input[name="ideal"]').val() );
 			localStorage.setItem('update_coach_type', $('#coach_type').val() );
-
-			//falta array restricciones
 			localStorage.setItem('update_dpw', $('#days_per_week').val() );
 			localStorage.setItem('update_comentario', $('#comentar').val() );
 			localStorage.setItem('update_plan', $('#plan').val() );
+
+
+			// var restricciones = localStorage.getItem('restricciones');
+			// console.log(restricciones);
+
 
 /*
 	hacer REQUEST AQUI POR FAVOR
@@ -819,14 +822,14 @@ $(window).load(function(){
 /*
 	REQUEST AQUI POR FAVOR
 */
-			var json = 
+
 
 /*
 	localStorage RESTRICCIONES
 */
 
 			//restriccion alimenticia
-			localStorage.setItem('restricciones', $('.re-option').val() );
+			//localStorage.setItem('restricciones', restricciones );
 
 
 			var genero 		  = localStorage.getItem('genero');
@@ -1044,18 +1047,52 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 
 		});
 
+		var restricciones = [];
+
 		$('.re-option').click(function() {
 			var valor = $(this).find('.type').attr('value');
 
 			if (!$(this).hasClass('active')) {
+
+				console.log('Aqui');
+
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 				$(this).addClass('active');
-				$(this).attr('value', valor);
+				$(this).attr("value", valor);
+				
+				$('.restricciones').attr('value', valor);
+
+				restricciones.push(valor);
+				localStorage.setItem('restricciones', restricciones);
+
 			} else {
+
+				console.log('Aca');
+
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
 				$(this).removeClass('active');
-				$(this).attr('value',"");
-			}
+				$(this).attr("value", "");
+				$('.restricciones').attr('value',"");
+				
+				for(var i=0; i<restricciones.length; i++){
+
+					
+					if( restricciones[i] == valor ){
+
+						var index = restricciones.indexOf(valor);
+
+						restricciones.splice(i, 1);
+
+					}//end IF
+
+				}//end FOR				
+				
+			}// end ELSE
+
+			
+
+			console.log(restricciones);
+
 		});
 
 		$('.me-option').click(function() {
