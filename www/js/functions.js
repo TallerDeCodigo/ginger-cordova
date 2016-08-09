@@ -603,7 +603,6 @@ $(window).load(function(){
 		    	        $('#track_animo').attr("value", "8");
 		    	        break;
     	     	}
-
 		    }, 150);
 		    return false;
 		});
