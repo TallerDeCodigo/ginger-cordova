@@ -890,6 +890,7 @@ $(window).load(function(){
 			setTimeout(function() {$('.overscreen3').hide();}, 500);
 			$('.the-comment').html($('#comentar').val());
 			$('.the-comment').show();
+			$('li.comentario').show();
 			$('.little-comment').hide();
 		});
 
