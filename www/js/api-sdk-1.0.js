@@ -151,6 +151,86 @@ function requestHandlerAPI(){
 
 			return (response.nuevo) ? response : false;
 		};
+
+		this.tracking = function(data){
+			var req = {
+				method : 'post',
+				url : api_base_url + 'tables/medicion/',	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': this.token,
+					'Content-Type': 'application/json'
+				},
+				data : {
+					'tipo' : data.type,
+					'magnitud' : data.magnitude,
+					'cliente' : data.client_id,
+					'coach' : data.coach_id
+				}
+			}
+
+			var response = this.makeRequest('tables/medicion', req);
+
+			console.log(response);  //llega aqui con la respuesta del servidor
+
+			return (response) ? response : false;
+
+		};
+
+		/*
+		 * registerUpTake Registrer event from diet of user
+		 * @param data {}
+		 * @return response
+		 */	
+		this.registerUpTake = function(data){
+			var req = {
+				method : 'post',
+				url : api_base_url + 'tables/medicion/',	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': this.token,
+					'Content-Type': 'application/json'
+				},
+				data : {
+					
+				}
+			}
+
+			var response = this.makeRequest('tables/consumos', req);
+
+			console.log(response);  //llega aqui con la respuesta del servidor
+
+			return (response) ? response : false;
+		};
+
+		this.updateUserSetting = function(data){
+			var req = {
+				method : 'patch',
+				url : api_base_url + 'tables/cliente/' + data._id,	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': this.token,
+					'Content-Type': 'application/json'
+				},
+				data : {
+					
+				}
+			}
+
+			var response = this.makeRequest('tables/cliente/' + data._id, req);
+
+			console.log(response);  //llega aqui con la respuesta del servidor
+
+			return (response) ? response : false;
+		};
+
+
+		// GET PAYMENTS FOR USER
+		
+		this.getPaymentAccount = function(data){
+
+		};
+
 		/* 
 		 * Log Out from the API and disable token server side
 		 * @param user_data JSON {user_login : 'username', request_token : 'XY0XXX0Y0XYYYXXX'}
@@ -218,17 +298,15 @@ function requestHandlerAPI(){
 		 * @see this.create_internal_user
 		 */
 		this.save_user_data_clientside = function(data){
-				var user_role = data.role;
-				
-				if(user_role == 'cliente') user_role = 'maker';
-				this.ls.setItem('', 	JSON.stringify({
-														user_login: 	data.user_login,
-														username: 		data.user_login,
-														user_id: 		data.user_id,
-														user_role: 		data.role,
-														user_profile: 	data.profile_url,
-													}));
-				
+
+			this.ls.setItem('', JSON.stringify({
+								user_login: 	data.user_login,
+								username: 		data.user_login,
+								user_id: 		data.user_id,
+								user_role: 		data.role,
+								user_profile: 	data.profile_url,
+							}));
+
 				/*
 				if(user_role == 'administrator') user_role = 'maker';
 				this.ls.setItem('dedalo_log_info', 	JSON.stringify({
