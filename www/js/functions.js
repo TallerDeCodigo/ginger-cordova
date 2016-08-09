@@ -784,6 +784,11 @@ $(window).load(function(){
 			$('.byel').addClass('active');
 
 /*
+	REQUEST AQUI POR FAVOR
+*/
+			var json = 
+
+/*
 	localStorage RESTRICCIONES
 */
 
@@ -803,7 +808,7 @@ $(window).load(function(){
 			var dpw 		  = localStorage.getItem('dpw');
 			var comentario 	  = localStorage.getItem('comentario');
 
-
+console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+peso_ideal+" > "+zipcode+" > "+plan+" > "+coach_type+" > "+restricciones+" > "+dpw+" > "+comentario );
 
 /*
 	JSON STRUCTURE 	*
