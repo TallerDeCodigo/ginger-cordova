@@ -261,11 +261,12 @@ $(window).load(function(){
 				$('#mujer').attr("src","images/mujere.svg");
 			} else {
 				$('#mujer').attr("src","images/mujer.svg");
-				$('#mujer').attr("value","");
+				$('#mujer').attr("alt","");
 			}
-			$(this).attr({src: "images/hombreh.svg", value: "hombre"});
+			$(this).attr({src: "images/hombreh.svg", alt: "1"});
 			$('.type-def').attr("src","images/hombreh.svg");
 			
+
 		});
 
  
@@ -274,12 +275,14 @@ $(window).load(function(){
 				$('#hombre').attr("src","images/hombree.svg");
 			} else {
 				$('#hombre').attr("src","images/hombre.svg");
-				$('#hombre').attr("value","");
+				$('#hombre').attr("alt","");
 			}
-			$(this).attr({src: "images/mujerh.svg", value: "mujer"});
-			$('.type-def').attr("src","images/mujerh.svg");
-		});
 
+			$(this).attr({src: "images/mujerh.svg", alt: "1"});
+			$('.type-def').attr("src","images/mujerh.svg");
+
+			
+		});
 
 
 		var timeout;
@@ -520,14 +523,26 @@ $(window).load(function(){
 			$('.bpur').removeClass('active');
 			$('.bgre').addClass('active');
 
+			console.log($('#hombre').attr('alt') );
+
+			if($('#hombre').attr('alt') == '1' ){
+				$('#genre_value').attr('value', 1);
+			}else{
+				$('#genre_value').attr('value', 0);
+			}
+
+
 /*
 
 	localstorage
 
 */
+	
+			//Zipocode
+			localStorage.setItem('zipcode', $('input[name="zipcode"]').val() );
 
 			//genero
-			localStorage.setItem('genero', $('#mujer').attr("value","mujer").val() );//hacerlo una condicional
+			localStorage.setItem('genero', $('#genre_value').val() );//hacerlo una condicional
 
 			//estatura
 			localStorage.setItem('estatura', $('input[name="estatura"]').val() );
@@ -542,14 +557,15 @@ $(window).load(function(){
 			localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
 
 
-			var genero = localStorage.getItem('genero');
-			var estatura = localStorage.getItem('estatura');
-			var peso = localStorage.getItem('peso');
-			var edad = localStorage.getItem('edad');
-			var peso_ideal = localStorage.getItem('peso_ideal');
+			 //var genero = localStorage.getItem('genero');
+			// var estatura = localStorage.getItem('estatura');
+			// var peso = localStorage.getItem('peso');
+			// var edad = localStorage.getItem('edad');
+			// var peso_ideal = localStorage.getItem('peso_ideal');
+			// var zipcode = localStorage.getItem('zipcode');
 
 
-			console.log(genero + " " + estatura + " " + peso + " " + edad + " " + peso_ideal);
+			//console.log(genero + " " + estatura + " " + peso + " " + edad + " " + peso_ideal+" "+zipcode);
 
 			setTimeout(function() {
         		$(".pagina").hide();
@@ -572,8 +588,8 @@ $(window).load(function(){
 			//coach_type
 			localStorage.setItem('coach_type', $('#coach_type').val() );
 
-			var plan = localStorage.getItem('plan', $('#plan').val() );
-			var coach_type = localStorage.getItem('coach_type', $('#coach_type').val() );
+			 var plan = localStorage.getItem('plan', $('#plan').val() );
+			 var coach_type = localStorage.getItem('coach_type', $('#coach_type').val() );
 
 			console.log(" plan> "+ plan+" coachType> "+ coach_type);
 
@@ -594,9 +610,8 @@ $(window).load(function(){
 			//frecuencia de ejercicio
 			localStorage.setItem('dpw', $('#days_per_week').val() );
 
-			var dpw = localStorage.getItem('dpw');
-
-			console.log(" dias por semana> > > "+dpw);
+			// var dpw = localStorage.getItem('dpw');
+			// console.log(" dias por semana> > > "+dpw);
 
 			setTimeout(function() {
         		$(".pagina").hide();
@@ -613,7 +628,37 @@ $(window).load(function(){
 
 			//restriccion alimenticia
 			localStorage.setItem('restricciones', $('.re-option').val() );
+
+
+			var genero = localStorage.getItem('genero');
+			var peso = localStorage.getItem('peso');
+			var estatura = localStorage.getItem('estatura');
+			var edad = localStorage.getItem('edad');
+			var peso_ideal = localStorage.getItem('peso_ideal');
+			var zipcode = localStorage.getItem('zipcode');
+			var plan = localStorage.getItem('plan', $('#plan').val() );
+			var coach_type = localStorage.getItem('coach_type', $('#coach_type').val() );
 			var restricciones = localStorage.getItem('restricciones');
+			var dpw = localStorage.getItem('dpw');
+			var comentario = localStorage.getItem('comentario');
+
+
+
+/*
+	JSON STRUCTURE 	*
+*/
+			var json = {
+				"sexo" : genero,
+				"fechaNacimiento" : {
+					"date" : ""
+				},
+				"peso" : peso,
+				"estatura" : estatura,
+				"ejercicio" : dpw,
+				"objetivo" : plan,
+				"restricciones" : [restricciones],
+				"personalidad" : coach_type
+			}
 
 			setTimeout(function() {
         		$(".pagina").hide();
@@ -741,15 +786,30 @@ $(window).load(function(){
 			      $(this).attr("value", "");
 			    }
 			});
+
 			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 			$(this).addClass('active');
 			$(this).attr("value", valor);
 
-		});
-
+			switch ( $('#plan').val() ) {
+				case 'adelgazar' : 
+					$('#plan').attr("value", "0");
+					break;
+				case 'detox':
+					$('#plan').attr("value", "1");
+					break;
+				case 'rendimiento' :
+					$('#plan').attr("value", "2");
+					break;
+				case 'bienestar' :
+					$('#plan').attr("value", "3");
+					break;
+			}
+ 		});
 		$('.co-option img:not(.question)').click(function() {
 			var valor = $(this).parent().find('.type').attr('value');
 			$('#coach_type').attr('value', valor);
+
 			$('.co-option').each(function() {
 			    if ($(this).find('img:not(.question)').attr('src').substr(-5, 1)=="2") {
 			      $(this).find('img:not(.question)').attr("src",$(this).find('img:not(.question)').attr('src').slice(0, -5)+".png");
@@ -760,10 +820,34 @@ $(window).load(function(){
 			$(this).attr("src",$(this).attr('src').slice(0, -4)+"2.png");
 			$(this).parent().addClass('active');
 			$(this).parent().attr("value", valor);
+
+
+			switch ( $('#coach_type').val() ) {
+				case 'estricto' : 
+					$('#coach_type').attr("value", "0");
+					break;
+				case 'analitico':
+					$('#coach_type').attr("value", "1");
+					break;
+				case 'medico' :
+					$('#coach_type').attr("value", "2");
+					break;
+				case 'innovador' :
+					$('#coach_type').attr("value", "3");
+					break;
+				case 'animador' :
+					$('#coach_type').attr("value", "4");
+					break;
+				case 'tradicional' :
+					$('#coach_type').attr("value", "5");
+					break;	
+			}
+
 		});
 
 		$('.re-option').click(function() {
 			var valor = $(this).find('.type').attr('value');
+
 			if (!$(this).hasClass('active')) {
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 				$(this).addClass('active');
@@ -892,6 +976,9 @@ $(window).load(function(){
 			$('.the-comment').show();
 			$('li.comentario').show();
 			$('.little-comment').hide();
+
+			//localStorage comentario
+			localStorage.setItem('comentario', $('#comentar').val())
 		});
 
 		$('.izquii').click(function() {
