@@ -123,6 +123,14 @@ $(window).on("load resize",function(){
 	cuantos2 = cuantos2*105;
 	$(".tipo_restric").css("width",cuantos2);
 
+	var cuantos3 = $('.ej-option').length;
+	cuantos3 = cuantos3*105;
+	$(".tipo_ejer").css("width",cuantos3);
+
+	var cuantos4 = $('.me-option').length;
+	cuantos4 = cuantos4*105;
+	$(".tipo_med").css("width",cuantos4);
+
 	var ancho = document.documentElement.clientWidth;
 	var tamano = $('.slide-coach').length;
 	var csld = (tamano*ancho*0.8125)+(ancho*0.09375);
