@@ -1008,15 +1008,51 @@
 
 	$('#send_fPago').on('click', function(){
 
-		console.log($('input[name="nombre"]').val() );
-		console.log($('input[name="card"]').val() );
-		console.log($('input[name="mes"]').val() );
-		console.log($('input[name="year"]').val() );
-		console.log($('input[name="cvc"]').val() );
-		console.log($('input[name="mail"]').val() );
-		console.log($('input[name="cupon"]').val() );
-		console.log($('input[name="terms"]').val() );
-	});
+		var  t_nombre   = $('input[name="nombre"]').val(); 
+		var  t_card 	= $('input[name="card"]').val(); 
+		var  t_mes  	= $('input[name="mes"]').val(); 
+		var  t_ano 		= $('input[name="year"]').val(); 
+		var  t_cvc 		= $('input[name="cvc"]').val(); 
+		var  t_mail 	= $('input[name="mail"]').val(); 
+		var  t_cupon 	= $('input[name="cupon"]').val(); 
+		var  t_terms 	= $('input[name="terms"]').val(); 
+
+		
+		function conekta(){	
+			var errorResponseHandler, successResponseHandler, tokenParams;
+			tokenParams = {
+			  "card": {
+			    "number": t_card,
+			    "name": t_nombre,
+			    "exp_year": t_ano,
+			    "exp_month": t_mes,
+			    "cvc": t_cvc
+			  }
+			};
+			successResponseHandler = function(token) {
+			  return $.post('/process_payment?token_id=' + token.id, function() {
+			    return document.location = 'payment_succeeded';
+			  });
+			};
+
+			/* Después de recibir un error */
+
+			errorResponseHandler = function(error) {
+			  return console.log(error.message);  //error de conectividad
+			};
+
+			/* Tokenizar una tarjeta en Conekta */
+
+			Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
+
+		}
+
+		conekta();
+
+		window.location.assign('dieta.html');
+
+		console.log();
+	});//endCLICK
 
 
 
@@ -1033,7 +1069,7 @@
 			if(response){
 				$context.addClass('read');
 			}
-			window.location.assign(redirect);
+			//window.location.assign(redirect);
 			
 		});
 

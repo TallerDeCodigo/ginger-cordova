@@ -295,17 +295,23 @@ $(window).load(function(){
             }, 210);
 		});
 
-
+/*
+	GENERO 	*
+*/
 
 		$("#hombre").click(function(){
 			if ($(this).hasClass('edition')) {
 				$('#mujer').attr("src","images/mujere.svg");
+				$('#update_sexo').attr("value", '0');
+
 			} else {
 				$('#mujer').attr("src","images/mujer.svg");
 				$('#mujer').attr("alt","");
 			}
 			$(this).attr({src: "images/hombreh.svg", alt: "1"});
 			$('.type-def').attr("src","images/hombreh.svg");
+
+			$('#update_sexo').attr("value", '1');
 			
 
 		});
@@ -314,6 +320,7 @@ $(window).load(function(){
 		$("#mujer").click(function(){
 			if ($(this).hasClass('edition')) {
 				$('#hombre').attr("src","images/hombree.svg");
+				$('#update_sexo').attr("value", '1');
 			} else {
 				$('#hombre').attr("src","images/hombre.svg");
 				$('#hombre').attr("alt","");
@@ -322,9 +329,35 @@ $(window).load(function(){
 			$(this).attr({src: "images/mujerh.svg", alt: "1"});
 			$('.type-def').attr("src","images/mujerh.svg");
 
+			$('#update_sexo').attr("value", '0');
+
 			
 		});
 
+/*
+	add_localStorage UPDATED PROFILE
+*/
+
+		$('#add_updated_profile').on('click', function(){
+			localStorage.setItem('update_sexo', $('#update_sexo').val() );
+			localStorage.setItem('update_edad', $('#edad_value').val() );
+			localStorage.setItem('update_zip', $('input[name="zipocode"]').val() );
+			localStorage.setItem('update_estatura', $('input[name="estatura"]').val() );
+			localStorage.setItem('update_epeso', $('input[name="peso"]').val() );
+			localStorage.setItem('update_peso_ideal', $('input[name="ideal"]').val() );
+			localStorage.setItem('update_coach_type', $('#coach_type').val() );
+
+			//falta array restricciones
+			localStorage.setItem('update_dpw', $('#days_per_week').val() );
+			localStorage.setItem('update_comentario', $('#comentar').val() );
+			localStorage.setItem('update_plan', $('#plan').val() );
+
+/*
+	hacer REQUEST AQUI POR FAVOR
+*/
+
+		});
+	
 
 		var timeout;
 		var estatura;
@@ -1236,6 +1269,14 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 	});
 
 });
+
+/*
+	CONEKTA
+*/
+
+	Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
+
+
 
 (function($){
 
