@@ -921,7 +921,13 @@
 					var data_login  	= app.getFormData('#create_account');
 
 					console.log(data_login);
-					
+
+/*
+	stores user name
+*/
+					localStorage.setItem('user_name', data_login.user);
+					localStorage.setItem('user_last_name', data_login.last_name);
+
 					data_login.pass 	= $('#pass').val();
 					
 					var responsedata 	= apiRH.registerNative(data_login);  

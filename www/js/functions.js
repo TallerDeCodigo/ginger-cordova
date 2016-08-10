@@ -183,14 +183,20 @@ $(window).on("load resize",function(){
 	$(".cslider").css("width",csld);
 
 
+
+
+
 /*
 	ADD UPDATED PROFILE DATA
 */
-//$('#btn_perfil').on('click', function(){
+
+
+
 
 if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 
-
+	var nombre = localStorage.getItem('user_name');
+	var apellido = localStorage.getItem('user_last_name');
 	var sexo = localStorage.getItem('genero');
 	var edad = localStorage.getItem('edad');
 	var cp 	 = localStorage.getItem('zipcode');
@@ -203,7 +209,7 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 	var plan = localStorage.getItem('plan');
 	var comentario = localStorage.getItem('comentario');
 
-
+	console.log("nombre > "+ nombre);
 	console.log("sexo > "+ sexo);
 	console.log("edad > "+edad);
 	console.log("cp > "+cp);
@@ -215,6 +221,8 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 	console.log("restricciones > "+restricciones);
 	console.log("plan > "+plan);
 	console.log("comentario > "+ comentario);
+
+	$('.cpur').html(nombre +" "+ apellido);
 
 	if(sexo == 0){
 		$('#sexo_perfil').html('Mujer');
@@ -309,16 +317,7 @@ $('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 			//console.log('rendimiento');
 			break;
 		}
-	//});	//END CLICK BTN_PERFIL
-
-}//end if
-	
-
-/*
-	IN APP BROWSER
-*/
-
-
+}//end if has class
 
 
 	/* SWIPE COACH */	
