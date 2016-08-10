@@ -216,8 +216,6 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 	console.log("plan > "+plan);
 	console.log("comentario > "+ comentario);
 
-
-	console.log(sexo);
 	if(sexo == 0){
 		$('#sexo_perfil').html('Mujer');
 	}else{
@@ -242,52 +240,73 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 	$('#ideal_perfil').html(ideal + " kg.");
 	$('input[name="ideal"]').attr("value", ideal);
 
+	var suma = parseInt(coach_type)+1;
+	console.log('suma '+suma);
+
+	$('.tipo_coach .co-option:nth-of-type('+suma+')').addClass('active');
+
 	switch(coach_type){
 			case '0': 
 				$('#coach_type_perfil').html("Estricto");
-				//$('img:not(.question)').attr('src', 'images/estricto2.png');
+				$('.co-option.active img:not(.question)').attr("src",'images/coach/estricto2.png');
 				break;
 			case '1':
 				$('#coach_type_perfil').html("Analítico");
-				//$('img:not(.question)').attr('src', 'images/analitico2.png');
+				$('.co-option.active img:not(.question)').attr("src",'images/coach/analitico2.png');
 				break;
 			case '2':
 				$('#coach_type_perfil').html("Médico");
-				//$('img:not(.question)').attr('src', 'images/medico2.png');
+				$('.co-option.active img:not(.question)').attr("src",'images/coach/medico2.png');
 				break;
 			case '3':
 				$('#coach_type_perfil').html("Innovador");
-				//$('img:not(.question)').attr('src', 'images/innovador2.png');
+				$('.co-option.active img:not(.question)').attr("src",'images/coach/innovador2.png');
 				break;
 			case '4':
 				$('#coach_type_perfil').html("Animador");
-				//$('img:not(.question)').attr('src', 'images/animador2.png');
+				$('.co-option.active img:not(.question)').attr("src",'images/coach/animador2.png');
 				break;
 			case '5':
 				$('#coach_type_perfil').html("Tradicional");
-				//$('img:not(.question)').attr('src', 'images/tradicional2.png');
+				$('.co-option.active img:not(.question)').attr("src",'images/coach/tradicional2.png');
 				break;
 		}
 	$('#frecuencia_perfil').html(frecuencia+" días por semana");
+	$('#ejercicio-dato').html(frecuencia);
+
+
 	$('#restricciones_perfil').html(restricciones);
+
+
 	$('#comentario_perfil').html(comentario);
+	$('.the-comment').html(comentario);
+
+
+$('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
+	var suma = parseInt(plan)+1;
+	console.log('suma '+suma);
+
 
 		switch(plan){
 			case "0":
 			$('#plan_perfil').html("Adelgazar");
-			console.log('adelgazar');
+			$('.pl-option.active img:not(.question)').attr("src",'images/plan/perderpeso2.png');
+			//console.log('adelgazar');
 			break;
 			case "1":
 			$('#plan_perfil').html("Detox");
-			console.log('detox');
+			$('.pl-option.active img:not(.question)').attr("src",'images/plan/detox2.png');
+			//console.log('detox');
 			break;
 			case "2":
 			$('#plan_perfil').html("Bienestar");
-			console.log('bienestar');
+			$('.pl-option.active img:not(.question)').attr("src",'images/plan/sentirsemejor2.png');
+			//console.log('bienestar');
 			break;
 			case "3":
 			$('#plan_perfil').html("Rendimiento físico");
-			console.log('rendimiento');
+			$('.pl-option.active img:not(.question)').attr("src",'images/plan/rendimientofisico2.png');
+			//console.log('rendimiento');
 			break;
 		}
 	//});	//END CLICK BTN_PERFIL
@@ -356,6 +375,8 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 
 $(window).load(function(){
 	$(function() {
+
+var restricciones = [];
 
 		$(".acc-selector").click(function(){
 			if ($(this).hasClass('ui-state-active')) {
@@ -480,20 +501,39 @@ $(window).load(function(){
 */
 
 		$('#add_updated_profile').on('click', function(){
-			localStorage.setItem('update_sexo', $('#update_sexo').val() );
-			localStorage.setItem('update_edad', $('#edad_value').val() );
-			localStorage.setItem('update_zip', $('input[name="zipocode"]').val() );
-			localStorage.setItem('update_estatura', $('input[name="estatura"]').val() );
-			localStorage.setItem('update_epeso', $('input[name="peso"]').val() );
-			localStorage.setItem('update_peso_ideal', $('input[name="ideal"]').val() );
-			localStorage.setItem('update_coach_type', $('#coach_type').val() );
-			localStorage.setItem('update_dpw', $('#days_per_week').val() );
-			localStorage.setItem('update_comentario', $('#comentar').val() );
-			localStorage.setItem('update_plan', $('#plan').val() );
+			localStorage.setItem('genero', $('#update_sexo').val() );
+			localStorage.setItem('edad', $('#edad_value').val() );
+			localStorage.setItem('zipcode', $('input[name="zipocode"]').val() );
+			localStorage.setItem('estatura', $('input[name="estatura"]').val() );
+			localStorage.setItem('peso', $('input[name="peso"]').val() );
+			localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
+			localStorage.setItem('coach_type', $('#coach_type').val() );
+			localStorage.setItem('dpw', $('#days_per_week').val() );
+			localStorage.setItem('comentario', $('#comentar').val() );
+			localStorage.setItem('plan', $('#plan').val() );
 
-
-			// var restricciones = localStorage.getItem('restricciones');
-			// console.log(restricciones);
+			// //genero
+			// localStorage.setItem('genero', $('#genre_value').val() );//hacerlo una condicional
+			// //edad
+			// localStorage.setItem('edad', $('#edad_value').val() );
+			// //Zipocode
+			// localStorage.setItem('zipcode', $('input[name="zipcode"]').val() );
+			// //estatura
+			// localStorage.setItem('estatura', $('input[name="estatura"]').val() );
+			// //peso
+			// localStorage.setItem('peso', $('input[name="peso"]').val() );
+			// //peso ideal
+			// localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
+			// //coach_type
+			// localStorage.setItem('coach_type', $('#coach_type').val() );
+			// //frecuencia de ejercicio
+			// localStorage.setItem('dpw', $('#days_per_week').val() );
+			// //plan
+			// localStorage.setItem('plan', $('#plan').val() );
+			// //restricciones
+			// localStorage.setItem('restricciones', restricciones);
+			// //comentario
+			// localStorage.setItem('comentario', $('#comentar').val())
 
 
 /*
@@ -1193,7 +1233,7 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 
 		});
 
-		var restricciones = [];
+		
 
 		$('.re-option').click(function() {
 			var valor = $(this).find('.type').attr('value');
