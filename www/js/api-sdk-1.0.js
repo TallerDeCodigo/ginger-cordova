@@ -134,7 +134,7 @@ function requestHandlerAPI(){
 
 			console.log(response);  //llega aqui con la respuesta del servidor
 
-			this.token = response.token;
+			this.token = localStorage.getItem('token');
 
 			console.log('TOKEN: ' + this.token );
 
