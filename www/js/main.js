@@ -1002,8 +1002,6 @@
 	}); //END VALIDATE
 
 
-
-
 /*TARJETA DE CREDITO*/
 
 	$('#send_fPago').on('click', function(){
@@ -1054,9 +1052,6 @@
 		console.log();
 	});//endCLICK
 
-
-
-
 		//MARK NOTIFICATION AS READ
 		$('.main').on('tap', '.each_notification a', function(e){
 			e.preventDefault();
@@ -1072,7 +1067,6 @@
 			//window.location.assign(redirect);
 			
 		});
-
 
 		/* Pagination Load more posts */
 		$(document).on('tap', '#load_more_posts', function(e){

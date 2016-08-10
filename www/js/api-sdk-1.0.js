@@ -143,11 +143,18 @@ function requestHandlerAPI(){
 			localStorage.setItem('mail', response.mail);
 			localStorage.setItem('chatId', response.jid);
 
-			var userId = localStorage.getItem('chatId');
-			var mail = localStorage.getItem('mail');
-			var token = localStorage.getItem('token');
+			var userId 	= localStorage.getItem('chatId');
+			var mail 	= localStorage.getItem('mail');
+			var token 	= localStorage.getItem('token');
 
 			console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
+
+
+			// Function 
+
+			//var user = this.getRequest('api/cliente', req);
+
+			//console.log(JSON.stringify(user));
 
 			return (response.nuevo) ? response : false;
 		};
