@@ -134,7 +134,9 @@ function requestHandlerAPI(){
 
 			console.log(response);  //llega aqui con la respuesta del servidor
 
-			this.token = response.token;
+			this.token = localStorage.getItem('token');
+
+			console.log('TOKEN: ' + this.token );
 
 			/*
 				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
@@ -159,7 +161,7 @@ function requestHandlerAPI(){
 			return (response.nuevo) ? response : false;
 		};
 
-		this.tracking = function(data){
+		this.tracking = function(tipo, magnitud){
 			var req = {
 				method : 'post',
 				url : api_base_url + 'tables/medicion/',	//definitr tabla
@@ -169,8 +171,8 @@ function requestHandlerAPI(){
 					'Content-Type': 'application/json'
 				},
 				data : {
-					'tipo' : data.type,
-					'magnitud' : data.magnitude,
+					'tipo' : tipo,
+					'magnitud' : magnitud,
 					'cliente' : data.client_id,
 					'coach' : data.coach_id
 				}
@@ -179,6 +181,8 @@ function requestHandlerAPI(){
 			console.log(req);
 
 			var response = this.makeRequest('tables/medicion', req);
+
+			console.log("Request Data Cliente");
 
 			console.log(response);  //llega aqui con la respuesta del servidor
 
