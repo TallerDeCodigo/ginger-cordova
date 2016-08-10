@@ -176,6 +176,8 @@ function requestHandlerAPI(){
 				}
 			}
 
+			console.log(req);
+
 			var response = this.makeRequest('tables/medicion', req);
 
 			console.log(response);  //llega aqui con la respuesta del servidor
