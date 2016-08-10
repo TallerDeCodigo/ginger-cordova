@@ -529,6 +529,15 @@ body.iosm .month {top:70px;}
 body.iosm .week {top:107px;}
 
 
+/*
+	ABOUT
+*/
+#logo{background:url(../images/logo.svg);background-repeat:no-repeat;background-position: center;height:100px;}
+.small{font-size: 1.5rem}
+.bg_blur{background: url(../images/fondo.png);background-repeat: no-repeat;-webkit-filter: blur(5px); background-position:center; padding:20px 0px 10px 0px;position:absolute;top:48%;z-index:-99;height:195px;}
+.bg_content{background-color:rgba(255,255,255,0.5);padding:50px 0px 55px 0px;color:#666;}
+p.small{margin-bottom:0;}
+.bg_content div{margin-top:30px;}
 
 
 
