@@ -1516,8 +1516,12 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 			cordova.InAppBrowser.open('http://www.gingerapp.mx/avisodeprivacidad/', '_blank', 'location=yes');
 		})
 
+	$('#add_picture_profile').on('click', function(){
+		console.log("camara");
+	});
 
-});//
+
+});// end winow onload
 
 
 
