@@ -87,6 +87,9 @@ function requestHandlerAPI(){
 			localStorage.setItem('mail', response.mail);
 			localStorage.setItem('userId', response.userId);
 
+
+			this.token = response.token;
+
 			var userId = localStorage.getItem('userId');
 			var mail = localStorage.getItem('mail');
 			var token = localStorage.getItem('token');
