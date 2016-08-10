@@ -19,7 +19,8 @@
 		<script type="text/javascript" src="js/oauth.js"></script>
 		<script src="js/main.js"></script>
 	</head>
-	<body class="perfil2">
+
+	<body class="perfil2 load_data update_data">
 
 	<div id="container">
 		<header class="hwhite2">
@@ -34,17 +35,17 @@
 		<div class="profile-data">
 		<a class="edit-profile" href="edituser.html"><img src="images/profile/pencil.svg">Datos de Abby Shabot</a>
 			<ul>
-				<li><span>Sexo: <strong>Mujer</strong></span></li>
-				<li><span>Edad: <strong>27 años</strong></span></li>
-				<li><span>Código Postal: <strong>03180</strong></span></li>
-				<li><span>Altura: <strong>1.70 m</strong></span></li>
-				<li><span>Peso: <strong>60 kg</strong></span></li>
-				<li><span>Peso Ideal: <strong>60 kg</strong></span></li>
-				<li><span>Tipo de Coach: <strong>Analítico</strong></span></li>
-				<li><span>Frecuencia de Ejercicio: <strong>1-3 días por semana</strong></span></li>
-				<li><span>Restricciones Alimenticias: <strong>Pescado, Carne</strong></span></li>
-				<li class="comentario"><span><i>Sufro de hipertensión y odio comer lentejas porque me provocan malestar estomacal, también soy intolerante a los hongos</i></span></li>
-				<li><span>Objetivo: <strong>Rendimiento Físico</strong></span></li>
+				<li><span>Sexo: <strong id="sexo_perfil">Mujer</strong></span></li>
+				<li><span>Edad: <strong id="anos_perfil">27 años</strong></span></li>
+				<li><span>Código Postal: <strong id="cp_perfil">03180</strong></span></li>
+				<li><span>Altura: <strong id="estatura_perfil">1.70 m</strong></span></li>
+				<li><span>Peso: <strong id="peso_perfil">60 kg</strong></span></li>
+				<li><span>Peso Ideal: <strong id="ideal_perfil">60 kg</strong></span></li>
+				<li><span>Tipo de Coach: <strong id="coach_type_perfil">Analítico</strong></span></li>
+				<li><span>Frecuencia de Ejercicio: <strong id="frecuencia_perfil">1-3 días por semana</strong></span></li>
+				<li><span>Restricciones Alimenticias: <strong id="restricciones_perfil">Pescado, Carne</strong></span></li>
+				<li class="comentario"><span id="comentario_perfil"><i>Sufro de hipertensión y odio comer lentejas porque me provocan malestar estomacal, también soy intolerante a los hongos</i></span></li>
+				<li><span>Objetivo: <strong id="plan_perfil">Rendimiento Físico</strong></span></li>
 			</ul>
 			<div class="profile-bottom">
 				<ul>
@@ -72,6 +73,7 @@
 		//app.render_feed(0, 'all');
 		//app.showLoader();
 	</script>
+
 	</body>
 </html>
 

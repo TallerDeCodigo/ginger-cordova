@@ -4,6 +4,8 @@ $( function() {
 
 	var anchot = document.documentElement.clientWidth;
 
+
+/*EDAD*/
 	var minval_age = 15; 
 	var maxval_age = 90;
 	var rango_age = maxval_age-minval_age;
@@ -21,6 +23,8 @@ $( function() {
       }
   	});
 
+
+/*DPW*/
   	var minval_eje = 0; 
 	var maxval_eje = 7;
 	var rango_eje = maxval_eje-minval_eje;
@@ -38,6 +42,8 @@ $( function() {
       }
   	});
 
+
+/*MEDIDAS*/
   	var minval_med = 0; 
 	var maxval_med = 70;
 	var rango_med = maxval_med-minval_med;
@@ -55,9 +61,6 @@ $( function() {
 /*
 	localStorage MEDIDAS / MEASURED AREA
 */
-
-
-
   	$('#add_medidas').on('click', function(){
   		
   		localStorage.setItem( 'medidas', $('#medida-dato').val() );
@@ -69,6 +72,9 @@ $( function() {
 
   	});
 
+
+
+/*HORAS MINUTOS*/
   	var minval_hora = 0; 
 	var maxval_hora = 16;
 	var rango_hora = maxval_hora-minval_hora;
@@ -118,6 +124,7 @@ $( function() {
     	        text_int = "extrema";
     	        break;
     	}
+
     	$('#intensidad').attr('value',text_int);
 
     	switch ($('#intensidad').val() ) {
@@ -174,6 +181,124 @@ $(window).on("load resize",function(){
 	$(".slide-coach").css("width",ancho*0.8125);
 	$(".slide-coach:first-of-type").css("margin-left",ancho*0.09375);
 	$(".cslider").css("width",csld);
+
+
+/*
+	ADD UPDATED PROFILE DATA
+*/
+//$('#btn_perfil').on('click', function(){
+
+if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
+
+
+	var sexo = localStorage.getItem('genero');
+	var edad = localStorage.getItem('edad');
+	var cp 	 = localStorage.getItem('zipcode');
+	var estatura = localStorage.getItem('estatura');
+	var peso = localStorage.getItem('peso');
+	var ideal = localStorage.getItem('peso_ideal');
+	var coach_type = localStorage.getItem('coach_type');
+	var frecuencia = localStorage.getItem('dpw');
+	var restricciones = localStorage.getItem('restricciones');
+	var plan = localStorage.getItem('plan');
+	var comentario = localStorage.getItem('comentario');
+
+
+	console.log("sexo > "+ sexo);
+	console.log("edad > "+edad);
+	console.log("cp > "+cp);
+	console.log("estatura > "+estatura);
+	console.log("peso > "+peso);
+	console.log("ideal > "+ideal);
+	console.log("coach_type > "+coach_type);
+	console.log("frecuencia > "+frecuencia);
+	console.log("restricciones > "+restricciones);
+	console.log("plan > "+plan);
+	console.log("comentario > "+ comentario);
+
+
+	console.log(sexo);
+	if(sexo == 0){
+		$('#sexo_perfil').html('Mujer');
+	}else{
+		$('#sexo_perfil').html('Hombre');
+	}
+
+	$('#anos_perfil').html(edad + " años");
+	$('#age-dato').html(edad);
+
+	$('#cp_perfil').html(cp);
+	$('input[name="zipcode"]').attr("value",cp);
+
+
+	$('#estatura_perfil').html(estatura + " m.");
+
+	$('input[name="estatura"]').attr("value", estatura);
+
+
+	$('#peso_perfil').html(peso + " kg.");
+	$('input[name="peso"]').attr("value", peso);
+
+	$('#ideal_perfil').html(ideal + " kg.");
+	$('input[name="ideal"]').attr("value", ideal);
+
+	switch(coach_type){
+			case '0': 
+				$('#coach_type_perfil').html("Estricto");
+				//$('img:not(.question)').attr('src', 'images/estricto2.png');
+				break;
+			case '1':
+				$('#coach_type_perfil').html("Analítico");
+				//$('img:not(.question)').attr('src', 'images/analitico2.png');
+				break;
+			case '2':
+				$('#coach_type_perfil').html("Médico");
+				//$('img:not(.question)').attr('src', 'images/medico2.png');
+				break;
+			case '3':
+				$('#coach_type_perfil').html("Innovador");
+				//$('img:not(.question)').attr('src', 'images/innovador2.png');
+				break;
+			case '4':
+				$('#coach_type_perfil').html("Animador");
+				//$('img:not(.question)').attr('src', 'images/animador2.png');
+				break;
+			case '5':
+				$('#coach_type_perfil').html("Tradicional");
+				//$('img:not(.question)').attr('src', 'images/tradicional2.png');
+				break;
+		}
+	$('#frecuencia_perfil').html(frecuencia+" días por semana");
+	$('#restricciones_perfil').html(restricciones);
+	$('#comentario_perfil').html(comentario);
+
+		switch(plan){
+			case "0":
+			$('#plan_perfil').html("Adelgazar");
+			console.log('adelgazar');
+			break;
+			case "1":
+			$('#plan_perfil').html("Detox");
+			console.log('detox');
+			break;
+			case "2":
+			$('#plan_perfil').html("Bienestar");
+			console.log('bienestar');
+			break;
+			case "3":
+			$('#plan_perfil').html("Rendimiento físico");
+			console.log('rendimiento');
+			break;
+		}
+	//});	//END CLICK BTN_PERFIL
+
+}//end if
+	
+
+
+
+
+	/* SWIPE COACH */	
 
     var IMG_WIDTH = ancho*0.8125;
 	var currentImg = 0;
@@ -346,7 +471,9 @@ $(window).load(function(){
 			$('#update_sexo').attr("value", '0');
 
 			
-		});
+		}); //end click mujer
+
+
 
 /*
 	add_localStorage UPDATED PROFILE
@@ -373,8 +500,10 @@ $(window).load(function(){
 	hacer REQUEST AQUI POR FAVOR
 */
 
-		});
-	
+		});	// end add uodated profile
+
+
+
 
 		var timeout;
 		var estatura;
