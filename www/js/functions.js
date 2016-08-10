@@ -138,11 +138,15 @@ $( function() {
       }
   	});
 
-  	$( ".accordion" ).accordion({ collapsible:true,active:false,animate:300,heightStyle:"content" });
+  	$( ".accordion" ).accordion({collapsible:true,active:false,animate:300,heightStyle:"content"});
 
 } );
 
 $(window).on("load resize",function(){
+
+	if ($('body').hasClass('dieta')) {
+		$('html').css("background","#f5f1f0");
+	}
 
 	var cuantos = $('.co-option').length;
 	cuantos = cuantos*105;
@@ -227,6 +231,16 @@ $(window).on("load resize",function(){
 
 $(window).load(function(){
 	$(function() {
+
+		$(".acc-selector").click(function(){
+			if ($(this).hasClass('ui-state-active')) {
+				if ($(this).hasClass('desayuno')) {$('body').animate({scrollTop:0}, 300);}
+				if ($(this).hasClass('snack1')) {$('body').animate({scrollTop:65}, 300);}
+				if ($(this).hasClass('comida')) {$('body').animate({scrollTop:128}, 300);}
+				if ($(this).hasClass('snack2')) {$('body').animate({scrollTop:190}, 300);}
+				if ($(this).hasClass('cena')) {$('body').animate({scrollTop:255}, 300);}
+			}
+		});
 
 		$(".genre-bt").click(function(){
 			$(this).parent().find("a").removeClass('active');

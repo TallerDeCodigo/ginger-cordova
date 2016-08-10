@@ -144,6 +144,11 @@ Swipe.prototype = {
     style.msTransform = style.OTransform = 'translateX(' + -(index * this.width) + 'px)';
 
     // set new index to allow for expression arguments
+    if (this.index != index) {
+    	$('.ui-state-active').trigger('click');
+    	console.log('cambio');
+    }
+
     this.index = index;
 
     $(".weekdays span").removeClass("active");
@@ -266,6 +271,7 @@ Swipe.prototype = {
   stop: function() {
     this.delay = 0;
     clearTimeout(this.interval);
+
   },
   
   resume: function() {
