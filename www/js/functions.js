@@ -314,6 +314,10 @@ $('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 }//end if
 	
 
+/*
+	IN APP BROWSER
+*/
+
 
 
 
@@ -1500,7 +1504,21 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 		console.log("click");
 		cordova.InAppBrowser.open('http://www.gingerapp.mx/blogposts/', '_blank', 'location=yes');
 	})
-});
+
+	$('#terms_cond').on('click',function(){
+			console.log("click");
+			cordova.InAppBrowser.open('http://www.gingerapp.mx/terminosycondiciones/', '_blank', 'location=yes');
+		})
+
+
+	$('#pol_priv').on('click',function(){
+			console.log("click");
+			cordova.InAppBrowser.open('http://www.gingerapp.mx/avisodeprivacidad/', '_blank', 'location=yes');
+		})
+
+
+});//
+
 
 
 /*
