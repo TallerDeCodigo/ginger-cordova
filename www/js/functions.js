@@ -538,7 +538,10 @@ $(window).load(function(){
 			localStorage.setItem('agua', $('input[name="litros"]').val() );
 
 			var agua = localStorage.getItem('agua');
-			console.log(agua);
+
+			var responsedata = apiRH.tracking(agua);
+
+			console.log(responsedata);
 
 		});
 
