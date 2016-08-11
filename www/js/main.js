@@ -871,31 +871,37 @@
 		},
 
 
-		get_diet: function(dietId, client, coachId)
+		get_diet: function(dietId)
 		{
 			var req = {
-				method : 'get',
-				url : api_base_url + 'tables/medicion/',  //definitr tabla
+				method : 'GET',
+				url : api_base_url + 'tables/dieta/' + dietId,  //definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': '',
+					'X-ZUMO-AUTH': localStorage.getItem('token'),
 					'Content-Type': 'application/json'
-				},
-				data : {
-					'dietId' : dietId,
-					'createdAt' : createdAt,
-					'name' : name,
-					'coachId' : coachId,
-					'structure': structure,
-					'comments': comments,
-					'dishes': dishes,
-					'duration': duration
 				}
 			}
 
-			$http(req).success(function(response){
-				console.log(response);
+			$.ajax({
+			  type: 'GET',
+			  headers: req.headers,
+			  url:  req.url,
+			  dataType: 'json',
+			  async: false
+			})
+			 .done(function(response){
+				result = response;
+				localStorage.setItem('dieta', response);
+				sdk_app_context.hideLoader(response);
+			})
+			 .fail(function(e){
+				result = false;
+				console.log(JSON.stringify(e));
 			});
+
+			//console.log(result);
+			return result;
 		}//END GET DIET
 	};
 
