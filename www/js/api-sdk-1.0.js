@@ -171,17 +171,16 @@ function requestHandlerAPI(){
 				url : api_base_url + 'tables/medicion/',	//definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': this.token,
+					'X-ZUMO-AUTH': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjAifQ.eyJleHAiOjE0NzM1Mjc3MTYzMzIsImlzcyI6InVybjptaWNyb3NvZnQ6d2luZG93cy1henVyZTp6dW1vIiwidmVyIjoyLCJhdWQiOiJDdXN0b20iLCJ1aWQiOiJDdXN0b206NTc4NGY4YjVmMDVmNTgzMDEyNjAxOTRmIn0.WD7aIDdg9392BtwEKXKuIAL8gSYkzxwRh-nBBKRKlps",
 					'Content-Type': 'application/json'
 				},
 				data : {
 					'tipo' : tipo,
 					'magnitud' : magnitud,
-					'cliente' : data.client_id,
-					'coach' : data.coach_id
+					'cliente' : "5784f8b5f05f58301260194f",
+					'coach' : ""
 				}
 			}
-
 			console.log(req);
 
 			var response = this.makeRequest('tables/medicion', req);
@@ -432,10 +431,14 @@ function requestHandlerAPI(){
 
 			sdk_app_context.showLoader();
 			var result = {};
+
+			console.log('datos' + data.data);
+
 			$.ajax({
 			  type: 'POST',
+			  headers: data.headers,
 			  url: window.api_base_url+endpoint,
-			  data: data,
+			  data: JSON.stringify(data.data),
 			  dataType: 'json',
 			  async: false
 			})
@@ -445,7 +448,7 @@ function requestHandlerAPI(){
 			})
 			 .fail(function(e){
 				result = false;
-				console.log(JSON.stringify(response));
+				console.log(JSON.stringify(e));
 			});
 			return result;
 		};

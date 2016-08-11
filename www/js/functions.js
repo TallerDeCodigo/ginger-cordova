@@ -766,9 +766,14 @@ var restricciones = [];
 
 			var agua = localStorage.getItem('agua');
 
-			var responsedata = apiRH.tracking(agua);
+			console.log(0 + ' -+- ' + agua);
+
+			var responsedata = apiRH.tracking(0, 1);
 
 			console.log(responsedata);
+
+			if(responsedata)
+				window.location.assign('dieta.html');
 
 		});
 
