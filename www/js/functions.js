@@ -151,9 +151,10 @@ $( function() {
 
 $(window).on("load resize",function(){
 
-	if ($('body').hasClass('dieta')) {
-		$('html').css("background","#f5f1f0");
-	}
+	var alto = document.documentElement.clientHeight;
+
+	$('#scroller > ul > li').css("height",alto-245);
+	$('.iosm #scroller > ul > li').css("height",alto-265);
 
 	var cuantos = $('.co-option').length;
 	cuantos = cuantos*105;
@@ -181,10 +182,6 @@ $(window).on("load resize",function(){
 	$(".slide-coach").css("width",ancho*0.8125);
 	$(".slide-coach:first-of-type").css("margin-left",ancho*0.09375);
 	$(".cslider").css("width",csld);
-
-
-
-
 
 /*
 	ADD PROFILE DATA TO PROFILE VIEWS
@@ -249,6 +246,7 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 
 	var suma = parseInt(coach_type)+1;
 	console.log('suma '+suma);
+	console.log('coach> '+ coach_type);
 
 	$('.tipo_coach .co-option:nth-of-type('+suma+')').addClass('active');
 
@@ -295,22 +293,22 @@ $('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 
 
 		switch(plan){
-			case "0":
+			case "1":
 			$('#plan_perfil').html("Adelgazar");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/perderpeso2.png');
 			//console.log('adelgazar');
 			break;
-			case "1":
+			case "2":
 			$('#plan_perfil').html("Detox");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/detox2.png');
 			//console.log('detox');
 			break;
-			case "2":
+			case "3":
 			$('#plan_perfil').html("Bienestar");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/sentirsemejor2.png');
 			//console.log('bienestar');
 			break;
-			case "3":
+			case "4":
 			$('#plan_perfil').html("Rendimiento físico");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/rendimientofisico2.png');
 			//console.log('rendimiento');
@@ -378,14 +376,19 @@ $('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 $(window).load(function(){
 	$(function() {
 
+if($('body').hasClass('dieta') ){
 
-		/** DIETA - CALENDAR **/
+		/** 
+
+			DIETA - CALENDAR 
+
+		**/
 			
 
 			Date.prototype.getWeek = function() {
 		        
 		        var eneroUno = new Date(this.getFullYear(), 0, 1);
-		        console.log(eneroUno);
+		       // console.log(eneroUno);
 
 		        return Math.ceil((((this - eneroUno) / 86400000) + eneroUno.getDay() + 1) / 7);
 		    }
@@ -402,7 +405,7 @@ $(window).load(function(){
 		    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 			var dias = ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
-			console.log(weekNumber);
+			//console.log(weekNumber);
 		  	var ano = fecha.getFullYear();
 		  	var mes = meses[fecha.getMonth()];
 
@@ -419,25 +422,32 @@ $(window).load(function(){
 		    }
 		    // usage
 		    var week = getWeekDays( new Date( "'" + fecha.hoy() + "'" ) );
-		    
+		    var days = $('.day_of_week');
+		    var dow; 
 		    for(var i=0; i<dias.length; i++){
-		    	console.log(week[i]);
+		    	//console.log(week[i].toString().slice(8, 11) );
+		    	dow = week[i].toString().slice(8, 11);
+		    	console.log(dow);
 		    }
+		    	for( j=0; j < $('.day_of_week').length; j++ ){
+		    		
+		    		console.log("days> > " +days[0] );
 
-		    
+		    	}
+		    		console.log( $('.day_of_week') );
 
-		    //console.log('da de hoy> '+ date.yyyymmdd() );
-
+//end date
+}
 
 var restricciones = [];
 
 		$(".acc-selector").click(function(){
 			if ($(this).hasClass('ui-state-active')) {
-				if ($(this).hasClass('desayuno')) {$('body').animate({scrollTop:0}, 300);}
-				if ($(this).hasClass('snack1')) {$('body').animate({scrollTop:65}, 300);}
-				if ($(this).hasClass('comida')) {$('body').animate({scrollTop:128}, 300);}
-				if ($(this).hasClass('snack2')) {$('body').animate({scrollTop:190}, 300);}
-				if ($(this).hasClass('cena')) {$('body').animate({scrollTop:255}, 300);}
+				if ($(this).hasClass('desayuno')) {$(this).parent().parent().animate({scrollTop:0}, 300);}
+				if ($(this).hasClass('snack1')) {$(this).parent().parent().animate({scrollTop:54}, 300);}
+				if ($(this).hasClass('comida')) {$(this).parent().parent().animate({scrollTop:120}, 300);}
+				if ($(this).hasClass('snack2')) {$(this).parent().parent().animate({scrollTop:184}, 300);}
+				if ($(this).hasClass('cena')) {$(this).parent().parent().animate({scrollTop:248}, 300);}
 			}
 		});
 
@@ -555,7 +565,6 @@ var restricciones = [];
 
 		$('#add_updated_profile').on('click', function(){
 
-			//if(){			
 				localStorage.setItem('genero', $('#update_sexo').val() );
 				localStorage.setItem('edad', $('#edad_value').val() );
 				localStorage.setItem('zipcode', $('input[name="zipocode"]').val() );
@@ -566,30 +575,6 @@ var restricciones = [];
 				localStorage.setItem('dpw', $('#days_per_week').val() );
 				localStorage.setItem('comentario', $('#comentar').val() );
 				localStorage.setItem('plan', $('#plan').val() );
-			//}
-
-			// //genero
-			// localStorage.setItem('genero', $('#genre_value').val() );//hacerlo una condicional
-			// //edad
-			// localStorage.setItem('edad', $('#edad_value').val() );
-			// //Zipocode
-			// localStorage.setItem('zipcode', $('input[name="zipcode"]').val() );
-			// //estatura
-			// localStorage.setItem('estatura', $('input[name="estatura"]').val() );
-			// //peso
-			// localStorage.setItem('peso', $('input[name="peso"]').val() );
-			// //peso ideal
-			// localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
-			// //coach_type
-			// localStorage.setItem('coach_type', $('#coach_type').val() );
-			// //frecuencia de ejercicio
-			// localStorage.setItem('dpw', $('#days_per_week').val() );
-			// //plan
-			// localStorage.setItem('plan', $('#plan').val() );
-			// //restricciones
-			// localStorage.setItem('restricciones', restricciones);
-			// //comentario
-			// localStorage.setItem('comentario', $('#comentar').val())
 
 
 /*
@@ -840,7 +825,12 @@ var restricciones = [];
 					valor = 0;
 				}
 		        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
-		        $('.carita h4').html(animo[valor]);
+		        if (animo[valor]=="increible") {
+		        	$('.carita h4').html("increíble");
+		        } else {
+		        	$('.carita h4').html(animo[valor]);
+		        }
+		        
 
 				$('#track_animo').attr("value", animo[valor]);
 
@@ -893,7 +883,11 @@ var restricciones = [];
 					valor = 8;
 				}
 		        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
-		        $('.carita h4').html(animo[valor]);
+		        if (animo[valor]=="increible") {
+		        	$('.carita h4').html("increíble");
+		        } else {
+		        	$('.carita h4').html(animo[valor]);
+		        }
 
 		        $('#track_animo').attr("value", animo[valor]);
 
@@ -984,17 +978,6 @@ var restricciones = [];
 			
 			//peso ideal
 			localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
-
-
-			 //var genero = localStorage.getItem('genero');
-			// var estatura = localStorage.getItem('estatura');
-			// var peso = localStorage.getItem('peso');
-			// var edad = localStorage.getItem('edad');
-			// var peso_ideal = localStorage.getItem('peso_ideal');
-			// var zipcode = localStorage.getItem('zipcode');
-
-
-			//console.log(genero + " " + estatura + " " + peso + " " + edad + " " + peso_ideal+" "+zipcode);
 
 			setTimeout(function() {
         		$(".pagina").hide();
@@ -1477,6 +1460,12 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 			$(this).html('<use xlink:href="#noconsu2"></use>');
 		});
 
+		$('svg.commenn').click(function() {
+			$('.overscreen3').show();
+			setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
+			$('.overscreen3 textarea').focus();
+		});
+
 		var texto = 'Mostrar Completados';
 
 		$('.toggle-complete').click(function() {
@@ -1614,8 +1603,8 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 	$('#add_picture_profile').on('click', function(){
 		console.log("camara");
 
-		setOptions();
-		openCamera();
+		// setOptions();
+		// openCamera();
 
 	});
 
@@ -1629,44 +1618,6 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 */
 
 	Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
-
-
-
-
-
-
-
-// /** DIETA - CALENDAR **/
-	
-
-// 	Date.prototype.getWeek = function() {
-        
-//         var oneJan = new Date(this.getFullYear(), 0, 1);
-//         //console.log(oneJan);
-
-//         return Math.ceil((((this - oneJan) / 86400000) + oneJan.getDay() + 1) / 7);
-//     }
-
-//     var fecha = new Date();
-//     var now = new Date();
-//  	var primer = new Date(fecha.getFullYear(), 0, (weekNumber) * 7 -5);
-//   	var ultimo = new Date(fecha.getFullYear(), 0, (weekNumber) * 7 -11);
-//     var weekNumber = (new Date()).getWeek();
-//     var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-// 	var dias = ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-
-//   	// console.log('Primer dia ' + primer);
-//   	// console.log('ultimo dia ' +  ultimo);
-
-//   	var ano = fecha.getFullYear();
-//   	var mes = meses[fecha.getMonth()];
-
-//   	console.log("ano> "+fecha.getFullYear());
-//     //console.log('día ' + dias[now.getDay()] );
-//     console.log("mes> " + meses[fecha.getMonth()] );
-
-//     $('#month').html(mes);
-//     $('#year').html(ano);
       
 
 (function($){

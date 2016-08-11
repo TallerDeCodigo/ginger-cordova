@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title>Ginger Cliente</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1, height=device-height">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
 		<meta http-equiv="cleartype" content="on">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		
@@ -20,7 +20,7 @@
 		<script type="text/javascript" src="js/oauth.js"></script>
 		<script src="js/main.js"></script>
 	</head>
-	<body class="dieta">
+	<body class="dieta iosm">
 
 	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none">
 	<defs>
@@ -60,7 +60,7 @@
 		</header>
 		<div class="month">
 			<img src="images/left.svg">
-			<h4 id="month">SEPT <h4 id="year">2016</h4></h4>
+			<h4 id="month"><h4 id="year"></h4></h4>
 			<img src="images/right.svg">
 		</div>
 		<div class="week">
@@ -75,1429 +75,1443 @@
 					<td>s</td>
 				</tr>
 				<tr class="weekdays">
-					<td id="lunes" onclick="slider.uno();return false;"><span class="active">18</span></td>
-					<td id="martes" onclick="slider.dos();return false;"><span>19</span></td>
-					<td id="miercoles" onclick="slider.tres();return false;"><span>20</span></td>
-					<td id="jueves" onclick="slider.cuatro();return false;"><span>21</span></td>
-					<td id="viernes" onclick="slider.cinco();return false;"><span>22</span></td>
-					<td id="sabado" onclick="slider.seis();return false;"><span>23</span></td>
-					<td id="domingo" onclick="slider.siete();return false;"><span>24</span></td>
+					<td class="day_of_week" onclick="slider.uno();return false;"><span class="active">18</span></td>
+					<td class="day_of_week" onclick="slider.dos();return false;"><span>19</span></td>
+					<td class="day_of_week" onclick="slider.tres();return false;"><span>20</span></td>
+					<td class="day_of_week" onclick="slider.cuatro();return false;"><span>21</span></td>
+					<td class="day_of_week" onclick="slider.cinco();return false;"><span>22</span></td>
+					<td class="day_of_week" onclick="slider.seis();return false;"><span>23</span></td>
+					<td class="day_of_week" onclick="slider.siete();return false;"><span>24</span></td>
 				</tr>
 			</table>
 		</div>
 		<div id="scroller" class="swipe">
 			<ul>
 				<li style="display:block">
-					<div class="accordion">
-						<div class="acc-selector desayuno">DESAYUNO</div>
-						<div class="acc-content desayuno">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+					<div class="dieta-wrapper">
+						<div class="accordion">
+							<div class="acc-selector desayuno">DESAYUNO</div>
+							<div class="acc-content desayuno">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector snack1">SNACK</div>
+							<div class="acc-content snack1">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-						</div>
-						<div class="acc-selector snack1">SNACK</div>
-						<div class="acc-content snack1">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector comida">COMIDA</div>
+							<div class="acc-content comida">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-						</div>
-						<div class="acc-selector comida">COMIDA</div>
-						<div class="acc-content comida">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector snack2">SNACK</div>
+							<div class="acc-content snack2">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector snack2">SNACK</div>
-						<div class="acc-content snack2">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector cena">CENA</div>
-						<div class="acc-content cena">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li style="display:none">
-					<div class="accordion">
-						<div class="acc-selector desayuno">DESAYUNO</div>
-						<div class="acc-content desayuno">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector snack1">SNACK</div>
-						<div class="acc-content snack1">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector comida">COMIDA</div>
-						<div class="acc-content comida">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector snack2">SNACK</div>
-						<div class="acc-content snack2">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector cena">CENA</div>
-						<div class="acc-content cena">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector cena">CENA</div>
+							<div class="acc-content cena">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</li>
 				<li style="display:none">
-					<div class="accordion">
-						<div class="acc-selector desayuno">DESAYUNO</div>
-						<div class="acc-content desayuno">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+					<div class="dieta-wrapper">
+						<div class="accordion">
+							<div class="acc-selector desayuno">DESAYUNO</div>
+							<div class="acc-content desayuno">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector snack1">SNACK</div>
+							<div class="acc-content snack1">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-						</div>
-						<div class="acc-selector snack1">SNACK</div>
-						<div class="acc-content snack1">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector comida">COMIDA</div>
+							<div class="acc-content comida">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-						</div>
-						<div class="acc-selector comida">COMIDA</div>
-						<div class="acc-content comida">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector snack2">SNACK</div>
+							<div class="acc-content snack2">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector cena">CENA</div>
+							<div class="acc-content cena">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+						</div>				
+					</div>
+				</li>
+				<li style="display:none">
+					<div class="dieta-wrapper">
+						<div class="accordion">
+							<div class="acc-selector desayuno">DESAYUNO</div>
+							<div class="acc-content desayuno">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-						</div>
-						<div class="acc-selector snack2">SNACK</div>
-						<div class="acc-content snack2">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector snack1">SNACK</div>
+							<div class="acc-content snack1">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector comida">COMIDA</div>
+							<div class="acc-content comida">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-						</div>
-						<div class="acc-selector cena">CENA</div>
-						<div class="acc-content cena">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector snack2">SNACK</div>
+							<div class="acc-content snack2">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+							</div>
+							<div class="acc-selector cena">CENA</div>
+							<div class="acc-content cena">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</li>
 				<li style="display:none">
-					<div class="accordion">
-						<div class="acc-selector desayuno">DESAYUNO</div>
-						<div class="acc-content desayuno">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+					<div class="dieta-wrapper">
+						<div class="accordion">
+							<div class="acc-selector desayuno">DESAYUNO</div>
+							<div class="acc-content desayuno">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector snack1">SNACK</div>
+							<div class="acc-content snack1">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-						</div>
-						<div class="acc-selector snack1">SNACK</div>
-						<div class="acc-content snack1">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector comida">COMIDA</div>
+							<div class="acc-content comida">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-						</div>
-						<div class="acc-selector comida">COMIDA</div>
-						<div class="acc-content comida">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector snack2">SNACK</div>
+							<div class="acc-content snack2">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector snack2">SNACK</div>
-						<div class="acc-content snack2">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector cena">CENA</div>
-						<div class="acc-content cena">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li style="display:none">
-					<div class="accordion">
-						<div class="acc-selector desayuno">DESAYUNO</div>
-						<div class="acc-content desayuno">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector snack1">SNACK</div>
-						<div class="acc-content snack1">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector comida">COMIDA</div>
-						<div class="acc-content comida">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector snack2">SNACK</div>
-						<div class="acc-content snack2">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector cena">CENA</div>
-						<div class="acc-content cena">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector cena">CENA</div>
+							<div class="acc-content cena">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</li>
 				<li style="display:none">
-					<div class="accordion">
-						<div class="acc-selector desayuno">DESAYUNO</div>
-						<div class="acc-content desayuno">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+					<div class="dieta-wrapper">
+						<div class="accordion">
+							<div class="acc-selector desayuno">DESAYUNO</div>
+							<div class="acc-content desayuno">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector snack1">SNACK</div>
+							<div class="acc-content snack1">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-						</div>
-						<div class="acc-selector snack1">SNACK</div>
-						<div class="acc-content snack1">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector comida">COMIDA</div>
+							<div class="acc-content comida">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-						</div>
-						<div class="acc-selector comida">COMIDA</div>
-						<div class="acc-content comida">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector snack2">SNACK</div>
+							<div class="acc-content snack2">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector snack2">SNACK</div>
-						<div class="acc-content snack2">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector cena">CENA</div>
-						<div class="acc-content cena">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector cena">CENA</div>
+							<div class="acc-content cena">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</li>
 				<li style="display:none">
-					<div class="accordion">
-						<div class="acc-selector desayuno">DESAYUNO</div>
-						<div class="acc-content desayuno">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+					<div class="dieta-wrapper">
+						<div class="accordion">
+							<div class="acc-selector desayuno">DESAYUNO</div>
+							<div class="acc-content desayuno">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector snack1">SNACK</div>
+							<div class="acc-content snack1">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+							</div>
+							<div class="acc-selector comida">COMIDA</div>
+							<div class="acc-content comida">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+							</div>
+							<div class="acc-selector snack2">SNACK</div>
+							<div class="acc-content snack2">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+							</div>
+							<div class="acc-selector cena">CENA</div>
+							<div class="acc-content cena">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
 						</div>
-						<div class="acc-selector snack1">SNACK</div>
-						<div class="acc-content snack1">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+					</div>
+				</li>
+				<li style="display:none">
+					<div class="dieta-wrapper">
+						<div class="accordion">
+							<div class="acc-selector desayuno">DESAYUNO</div>
+							<div class="acc-content desayuno">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-						</div>
-						<div class="acc-selector comida">COMIDA</div>
-						<div class="acc-content comida">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector snack1">SNACK</div>
+							<div class="acc-content snack1">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector comida">COMIDA</div>
+							<div class="acc-content comida">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector snack2">SNACK</div>
+							<div class="acc-content snack2">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-						</div>
-						<div class="acc-selector snack2">SNACK</div>
-						<div class="acc-content snack2">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
+							<div class="acc-selector cena">CENA</div>
+							<div class="acc-content cena">
+								<div class="platillo">
+									 <nav class="botones">
+									 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
+									 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
+									 </nav>
+									 <h5>Vaso grande de agua caliente con limón</h5>
+									 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
+									 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
+									 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
+									 <div class="extra-info" style="display:none">
+									 	<h6>Ingedientes</h6>
+									 	<p>Ázucar,leche, pan</p>
+									 	<h6>Comentario</h6>
+									 	<p class="plat-comentario">
+									 		<span>No me gusta para nada este platillo</span>
+									 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
+									 	</p>
+									 </div>
+								</div>
 							</div>
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
-						<div class="acc-selector cena">CENA</div>
-						<div class="acc-content cena">
-							<div class="platillo">
-								 <nav class="botones">
-								 	<svg viewBox="0 0 30 30" class="noconsu"><use xlink:href="#noconsu"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="consume"><use xlink:href="#consume"></use></svg>
-								 	<svg viewBox="0 0 30 30" class="commenn"><use xlink:href="#comment"></use></svg>
-								 </nav>
-								 <h5>Vaso grande de agua caliente con limón</h5>
-								 <p class="receta">Preparalo con agua de manantial y calientalo en una olla no en el microondas</p>
-								 <p class="comentario">Procura tomarlo en ayunas al menos 20 minutos antes de otros alimentos</p>
-								 <a class="more"><svg viewBox="0 0 30 30"><use xlink:href="#more"></use></svg></a>
-								 <div class="extra-info" style="display:none">
-								 	<h6>Ingedientes</h6>
-								 	<p>Ázucar,leche, pan</p>
-								 	<h6>Comentario</h6>
-								 	<p class="plat-comentario">
-								 		<span>No me gusta para nada este platillo</span>
-								 		<svg viewBox="0 0 11 14"><use xlink:href="#colita"></use></svg>
-								 	</p>
-								 </div>
-							</div>
-						</div>
+						</div>	
 					</div>
 				</li>
 			</ul>
@@ -1547,6 +1561,13 @@
 			<img src="images/menu/animo.svg">
 			<span>ÁNIMO</span>
 		</a>
+	</div>
+	<div class="overscreen3" style="display:none">
+		<div class="boxx-top">
+			<a class="izquii">Cancelar</a>
+			<a class="add send_cmt">Enviar</a>
+		</div>
+		<textarea id="comentar" placeholder="Escribe tu comentario aquí..."></textarea>
 	</div>
 	<script type='text/javascript' src='js/plugins.js'></script>
 	<script type="text/javascript">
