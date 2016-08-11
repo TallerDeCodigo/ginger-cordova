@@ -383,11 +383,9 @@ $(window).load(function(){
 
 if($('body').hasClass('dieta') ){
 
-/** 
 
-	DIETA - CALENDAR 
+	//REQUEST DIETA
 
-**/
 	var dieta = app.get_diet(localStorage.getItem('dieta'));
 	console.log('DIETA');
 	console.log(JSON.stringify(dieta));
@@ -396,6 +394,12 @@ if($('body').hasClass('dieta') ){
 
 	console.log(dieta.estructura);
 	console.log(dieta.estructura.domingo);
+	console.log(dieta.estructura.domingo.cena);
+	console.log(dieta.estructura.domingo.comida);
+	console.log(dieta.estructura.domingo.desayuno);
+	console.log(dieta.estructura.domingo.snack1);
+	console.log(dieta.estructura.domingo.snack2);
+
 	console.log(dieta.estructura.lunes);
 	console.log(dieta.estructura.martes);
 	console.log(dieta.estructura.miercoles);
@@ -403,6 +407,21 @@ if($('body').hasClass('dieta') ){
 	console.log(dieta.estructura.viernes);
 	console.log(dieta.estructura.sabado);
 
+	console.log('------------------------');
+
+	
+	var arr = Object.keys(dieta.estructura.domingo.cena).map(function(k) { return dieta.estructura.domingo.cena[k] });	
+	
+	console.log(arr);
+
+
+
+	/** 	
+
+		DIETA - CALENDAR 
+
+	**/
+	
 
 
 
