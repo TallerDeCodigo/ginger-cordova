@@ -968,16 +968,13 @@
 		/* Log Out from the API */
 		$('#logout').on('click', function(e){
 			/* Requesting logout from server */
-			var response = apiRH.logOut({user_login : user, request_token : apiRH.get_request_token() });
-			if(response.success){
+			//var response = apiRH.logOut({user_login : user, request_token : apiRH.get_request_token() });
+			//if(response.success){
 				app.toast('Has cerrado la sesión, hasta pronto');
-					app.ls.removeItem('dedalo_log_info');
-					app.ls.removeItem('request_token');
-					app.ls.removeItem('me.logged');
-					app.ls.removeItem('me');
-				window.location.assign('feed.html');
+					localStorage.clear();
+				window.location.assign('index.html');
 				return;
-			}
+			//}
 			app.toast('No ha sido posible crear tu cuenta, inténtalo de nuevo por favor.');
 			return;
 		});
