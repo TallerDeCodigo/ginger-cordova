@@ -100,10 +100,38 @@ function requestHandlerAPI(){
 				REGRESA LA RESPUESTA DEL SERVIDOR CON EL USER ID, MAIL Y TOKEN
 			*/
 
-			if(userId)
-				var user = this.getRequest('api/cliente/' + userId, req);
+			if(userId){
+				var req = {
+					method : 'post',
+					url : api_base_url + 'api/login',
+					headers: {
+						'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+						'X-ZUMO-AUTH': token,
+						'Content-Type': 'application/json'
+					},
+					data : {
+						"tipo" : "cliente",
+						"mail" : email,
+						"password" : pass
+					}
+				}
+				var user = this.getRequest('tables/cliente/' + userId, req);
 
-			console.log(user);
+				localStorage.setItem('user_name', user.nombre);
+				localStorage.setItem('user_last_name', user.apellido);
+				localStorage.setItem('genero', user.perfil.sexo);
+				localStorage.setItem('edad', user.edad);
+				localStorage.setItem('zipcode', user.cp);
+				localStorage.setItem('estatura', user.perfil.estatura);
+				localStorage.setItem('peso', user.perfil.peso);
+				localStorage.setItem('peso_ideal', user.pesoDeseado);
+				localStorage.setItem('dpw', user.perfil.ejercicio);
+				localStorage.setItem('restricciones', user.restricciones);
+				localStorage.setItem('comentario', user.comentarios);
+
+			}
+
+			
 
 			
 			return (userId) ? response : false;
@@ -467,15 +495,28 @@ function requestHandlerAPI(){
 		 * @see API documentation about jsonp encoding
 		 */
 		this.getRequest = function(endpoint, data){
-							sdk_app_context.showLoader();
-							var result = {};
-							endpoint = (data === null) ? endpoint : endpoint+data; //ternario
-							$.getJSON( window.api_base_url+endpoint, function( response ){
-								result = response;
-								sdk_app_context.hideLoader();
-							});
-							return result;
-						};
+			sdk_app_context.showLoader();
+			var result = {};
+		
+			$.ajax({
+			  type: 'GET',
+			  headers: data.headers,
+			  url: window.api_base_url+endpoint,
+			  data: JSON.stringify(data.data),
+			  dataType: 'json',
+			  async: false
+			})
+			 .done(function(response){
+				result = response;
+				sdk_app_context.hideLoader(response);
+			})
+			 .fail(function(e){
+				result = false;
+				console.log(JSON.stringify(e));
+			});
+
+			return result;
+		};
 
 		/* 
 		 * Executes a PUT call
