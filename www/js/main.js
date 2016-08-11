@@ -14,6 +14,12 @@
 			/* Initialize API request handler */
 			window.apiRH = new requestHandlerAPI().construct(app);
 
+			console.log('token');
+			
+			var is_login = apiRH.has_token();
+
+			console.log(is_login);
+
 			/* IMPORTANT to set requests to be syncronous */
 			/* TODO test all requests without the following code 'cause of deprecation */
 			$.ajaxSetup({
@@ -31,18 +37,16 @@
 							window.user_first 	= (me_info)  ? me_info.first_name 	: window.user;
 							window.user_id 		= (log_info) ? log_info.user_id 	: ' ';
 							window.user_role 	= (log_info) ? log_info.user_role 	: ' ';
-			if(log_info)
+			if(is_login)
 				loggedIn = true;
-			/*** Initialize maps tools ***/
-			this.marker1 = [];
-			this.marker2 = [];
-			this.marker3 = [];
+			
 			/* Check if has any token */
-			if(apiRH.has_token()){
+			if(is_login){
 				/* Check if has a valid token */
-				var response = apiRH.has_valid_token();
-				if(response){
-					var data_id = $(this).data('id');
+				//var response = apiRH.has_valid_token();
+
+				if(is_login){
+					//var data_id = $(this).data('id');
 					console.log('You okay, now you can start making calls');
 					/* Take the user to it's timeline */
 					var is_home = window.is_home;
@@ -62,7 +66,7 @@
 			// 	backButtonElement.addEventListener("click", app.onBackButton, false);
 			
 			/* Requesting passive token if no token is previously stored */
-			console.log("Token::: "+apiRH.request_token().get_request_token());
+			//console.log("Token::: "+apiRH.request_token().get_request_token());
 		},
 		registerCompiledPartials: function() {
 			console.log("Register pre compiled partials");

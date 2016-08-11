@@ -90,17 +90,18 @@ function requestHandlerAPI(){
 
 			this.token = response.token;
 
+
 			var userId = localStorage.getItem('userId');
 			var mail = localStorage.getItem('mail');
-			var token = localStorage.getItem('token');
-			console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
+			//var token = localStorage.getItem('token');
+			console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + this.token);
 
 
 			/*
 				REGRESA LA RESPUESTA DEL SERVIDOR CON EL USER ID, MAIL Y TOKEN
 			*/
 						
-			return (userId) ? true : false;
+			return (userId) ? response : false;
 		};
 
 
@@ -388,7 +389,7 @@ function requestHandlerAPI(){
 		 * @see localStorage
 		 */
 		this.has_token = function(){
-							return (typeof this.token != 'undefined' || this.token !== '') ? this.token : false;
+							return (typeof this.token != 'undefined' || this.token !== '') ? localStorage.getItem('token') : false;
 						};
 		/* 
 		 * Check if the Request object has a valid token
