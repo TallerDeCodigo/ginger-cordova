@@ -1533,6 +1533,12 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 			setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
 		});
 
+		$('.com2send').click(function() {
+			$('.overscreen3').show();
+			setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
+			$('.overscreen3 textarea').focus();
+		});
+
 		$('.siono').click(function() {
 			$('.siono').removeClass('active');
 			$(this).addClass('active');
