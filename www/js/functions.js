@@ -388,6 +388,24 @@ if($('body').hasClass('dieta') ){
 	DIETA - CALENDAR 
 
 **/
+	var dieta = app.get_diet(localStorage.getItem('dieta'));
+	console.log('DIETA');
+	console.log(JSON.stringify(dieta));
+
+	//Estructura de la dieta
+
+	console.log(dieta.estructura);
+	console.log(dieta.estructura.domingo);
+	console.log(dieta.estructura.lunes);
+	console.log(dieta.estructura.martes);
+	console.log(dieta.estructura.miercoles);
+	console.log(dieta.estructura.jueves);
+	console.log(dieta.estructura.viernes);
+	console.log(dieta.estructura.sabado);
+
+
+
+
 	// OBTIENE EL NUMERO DE LA SEMANA EN LA QUE NOS ENCONTRAMOS 
 	Date.prototype.getWeek = function() {
         var eneroUno = new Date(this.getFullYear(), 0, 1);
