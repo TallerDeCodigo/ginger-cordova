@@ -93,15 +93,55 @@ function requestHandlerAPI(){
 
 			var userId = localStorage.getItem('userId');
 			var mail = localStorage.getItem('mail');
-			//var token = localStorage.getItem('token');
+			var token = localStorage.getItem('token');
 			console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + this.token);
-
 
 			/*
 				REGRESA LA RESPUESTA DEL SERVIDOR CON EL USER ID, MAIL Y TOKEN
 			*/
-						
+
+			console.log(token);
+
+			if(userId){
+				var req = {
+					method : 'post',
+					url : api_base_url + 'api/login',
+					headers: {
+						'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+						'X-ZUMO-AUTH': token,
+						'Content-Type': 'application/json'
+					},
+					data : {
+						"tipo" : "cliente",
+						"mail" : email,
+						"password" : pass
+					}
+				}
+				var user = this.getRequest('tables/cliente/' + userId, req);
+
+				localStorage.setItem('user_name', user.nombre);
+				localStorage.setItem('user_last_name', user.apellido);
+				localStorage.setItem('genero', user.perfil.sexo);
+				localStorage.setItem('edad', user.edad.real);
+				localStorage.setItem('zipcode', user.cp);
+				localStorage.setItem('estatura', user.perfil.estatura);
+				localStorage.setItem('peso', user.perfil.peso);
+				localStorage.setItem('peso_ideal', user.pesoDeseado);
+				localStorage.setItem('dpw', user.perfil.ejercicio);
+				localStorage.setItem('restricciones', user.restricciones);
+				localStorage.setItem('comentario', user.comentarios);
+				localStorage.setItem('customerId', user.customerId);
+				localStorage.setItem('chatId', user.chatId);
+				localStorage.setItem('chatId', user.chatId);
+				localStorage.setItem('dietaId', user.dieta.id);
+				localStorage.setItem('dietaName', user.dieta.nombre);
+			}
+
+			
+
+			
 			return (userId) ? response : false;
+
 		};
 
 
@@ -171,7 +211,7 @@ function requestHandlerAPI(){
 				url : api_base_url + 'tables/medicion/',	//definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjAifQ.eyJleHAiOjE0NzM1Mjc3MTYzMzIsImlzcyI6InVybjptaWNyb3NvZnQ6d2luZG93cy1henVyZTp6dW1vIiwidmVyIjoyLCJhdWQiOiJDdXN0b20iLCJ1aWQiOiJDdXN0b206NTc4NGY4YjVmMDVmNTgzMDEyNjAxOTRmIn0.WD7aIDdg9392BtwEKXKuIAL8gSYkzxwRh-nBBKRKlps",
+					'X-ZUMO-AUTH': localStorage.getItem('token'),
 					'Content-Type': 'application/json'
 				},
 				data : {
@@ -461,15 +501,28 @@ function requestHandlerAPI(){
 		 * @see API documentation about jsonp encoding
 		 */
 		this.getRequest = function(endpoint, data){
-							sdk_app_context.showLoader();
-							var result = {};
-							endpoint = (data === null) ? endpoint : endpoint+data; //ternario
-							$.getJSON( window.api_base_url+endpoint, function( response ){
-								result = response;
-								sdk_app_context.hideLoader();
-							});
-							return result;
-						};
+			sdk_app_context.showLoader();
+			var result = {};
+		
+			$.ajax({
+			  type: 'GET',
+			  headers: data.headers,
+			  url: window.api_base_url+endpoint,
+			  data: JSON.stringify(data.data),
+			  dataType: 'json',
+			  async: false
+			})
+			 .done(function(response){
+				result = response;
+				sdk_app_context.hideLoader(response);
+			})
+			 .fail(function(e){
+				result = false;
+				console.log(JSON.stringify(e));
+			});
+
+			return result;
+		};
 
 		/* 
 		 * Executes a PUT call

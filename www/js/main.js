@@ -44,10 +44,9 @@
 				loggedIn = true;
 		
 			
-
+			
 			/* Check if has a valid token */
 			//var response = apiRH.has_valid_token();
-
 
 			if(is_login){
 				
@@ -871,31 +870,37 @@
 		},
 
 
-		get_diet: function(dietId, client, coachId)
+		get_diet: function(dietId)
 		{
 			var req = {
-				method : 'get',
-				url : api_base_url + 'tables/medicion/',  //definitr tabla
+				method : 'GET',
+				url : api_base_url + 'tables/dieta/' + dietId,  //definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': '',
+					'X-ZUMO-AUTH': localStorage.getItem('token'),
 					'Content-Type': 'application/json'
-				},
-				data : {
-					'dietId' : dietId,
-					'createdAt' : createdAt,
-					'name' : name,
-					'coachId' : coachId,
-					'structure': structure,
-					'comments': comments,
-					'dishes': dishes,
-					'duration': duration
 				}
 			}
 
-			$http(req).success(function(response){
-				console.log(response);
+			$.ajax({
+			  type: 'GET',
+			  headers: req.headers,
+			  url:  req.url,
+			  dataType: 'json',
+			  async: false
+			})
+			 .done(function(response){
+				result = response;
+				localStorage.setItem('dieta', response);
+				sdk_app_context.hideLoader(response);
+			})
+			 .fail(function(e){
+				result = false;
+				console.log(JSON.stringify(e));
 			});
+
+			//console.log(result);
+			return result;
 		}//END GET DIET
 	};
 
@@ -968,16 +973,13 @@
 		/* Log Out from the API */
 		$('#logout').on('click', function(e){
 			/* Requesting logout from server */
-			var response = apiRH.logOut({user_login : user, request_token : apiRH.get_request_token() });
-			if(response.success){
+			//var response = apiRH.logOut({user_login : user, request_token : apiRH.get_request_token() });
+			//if(response.success){
 				app.toast('Has cerrado la sesión, hasta pronto');
-					app.ls.removeItem('dedalo_log_info');
-					app.ls.removeItem('request_token');
-					app.ls.removeItem('me.logged');
-					app.ls.removeItem('me');
-				window.location.assign('feed.html');
+					localStorage.clear();
+				window.location.assign('index.html');
 				return;
-			}
+			//}
 			app.toast('No ha sido posible crear tu cuenta, inténtalo de nuevo por favor.');
 			return;
 		});
