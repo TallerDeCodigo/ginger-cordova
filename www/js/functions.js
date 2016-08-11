@@ -378,6 +378,49 @@ $('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 $(window).load(function(){
 	$(function() {
 
+
+		/** DIETA - CALENDAR **/
+			
+
+			Date.prototype.getWeek = function() {
+		        
+		        var eneroUno = new Date(this.getFullYear(), 0, 1);
+		        console.log(eneroUno);
+
+		        return Math.ceil((((this - eneroUno) / 86400000) + eneroUno.getDay() + 1) / 7);
+		    }
+
+		    var fecha = new Date();
+		    var now = new Date();
+		    var weekNumber = (new Date()).getWeek();
+		    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+			var dias = ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+
+		  	var ano = fecha.getFullYear();
+		  	var mes = fecha.getMonth()+1;
+		  	var dia = fecha.getDay();
+
+		  	console.log(ano +"/"+ mes +"/"+ dia);
+
+		    $('#month').html(mes);
+		    $('#year').html(ano);
+
+		    function getWeekDays(fromDate){
+		     var sunday = new Date(fromDate.setDate(fromDate.getDate()-fromDate.getDay()))
+		        ,result = [new Date(sunday)];
+		     while (sunday.setDate(sunday.getDate()+1) && sunday.getDay()!==0) {
+		      result.push(new Date(sunday));
+		     }
+		     return result;
+		    }
+		    // usage
+		    var week = getWeekDays(new Date(ano+'/'+mes+'/'+dia));
+		    
+		    for(var i=0; i<dias.length; i++){
+		    	console.log(week[i]);
+		    }
+
+
 var restricciones = [];
 
 		$(".acc-selector").click(function(){
@@ -1580,6 +1623,43 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 	Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
 
 
+
+
+
+
+
+// /** DIETA - CALENDAR **/
+	
+
+// 	Date.prototype.getWeek = function() {
+        
+//         var oneJan = new Date(this.getFullYear(), 0, 1);
+//         //console.log(oneJan);
+
+//         return Math.ceil((((this - oneJan) / 86400000) + oneJan.getDay() + 1) / 7);
+//     }
+
+//     var fecha = new Date();
+//     var now = new Date();
+//  	var primer = new Date(fecha.getFullYear(), 0, (weekNumber) * 7 -5);
+//   	var ultimo = new Date(fecha.getFullYear(), 0, (weekNumber) * 7 -11);
+//     var weekNumber = (new Date()).getWeek();
+//     var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+// 	var dias = ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+
+//   	// console.log('Primer dia ' + primer);
+//   	// console.log('ultimo dia ' +  ultimo);
+
+//   	var ano = fecha.getFullYear();
+//   	var mes = meses[fecha.getMonth()];
+
+//   	console.log("ano> "+fecha.getFullYear());
+//     //console.log('día ' + dias[now.getDay()] );
+//     console.log("mes> " + meses[fecha.getMonth()] );
+
+//     $('#month').html(mes);
+//     $('#year').html(ano);
+      
 
 (function($){
 

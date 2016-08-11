@@ -47,7 +47,7 @@
 					/* Take the user to it's timeline */
 					var is_home = window.is_home;
 					if(is_home)
-						window.location.assign('feed.html?filter_feed=all');
+						window.location.assign('dieta.html?filter_feed=all');
 					return;
 				}else{
 					/* Token is not valid, user needs to authenticate */
