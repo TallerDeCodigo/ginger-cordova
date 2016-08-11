@@ -384,35 +384,35 @@ $(window).load(function(){
 if($('body').hasClass('dieta') ){
 
 
-	//REQUEST DIETA
+	// //REQUEST DIETA
 
-	var dieta = app.get_diet(localStorage.getItem('dieta'));
-	console.log('DIETA');
-	console.log(JSON.stringify(dieta));
+	// var dieta = app.get_diet(localStorage.getItem('dieta'));
+	// console.log('DIETA');
+	// console.log(JSON.stringify(dieta));
 
-	//Estructura de la dieta
+	// //Estructura de la dieta
 
-	console.log(dieta.estructura);
-	console.log(dieta.estructura.domingo);
-	console.log(dieta.estructura.domingo.cena);
-	console.log(dieta.estructura.domingo.comida);
-	console.log(dieta.estructura.domingo.desayuno);
-	console.log(dieta.estructura.domingo.snack1);
-	console.log(dieta.estructura.domingo.snack2);
+	// console.log(dieta.estructura);
+	// console.log(dieta.estructura.domingo);
+	// console.log(dieta.estructura.domingo.cena);
+	// console.log(dieta.estructura.domingo.comida);
+	// console.log(dieta.estructura.domingo.desayuno);
+	// console.log(dieta.estructura.domingo.snack1);
+	// console.log(dieta.estructura.domingo.snack2);
 
-	console.log(dieta.estructura.lunes);
-	console.log(dieta.estructura.martes);
-	console.log(dieta.estructura.miercoles);
-	console.log(dieta.estructura.jueves);
-	console.log(dieta.estructura.viernes);
-	console.log(dieta.estructura.sabado);
+	// console.log(dieta.estructura.lunes);
+	// console.log(dieta.estructura.martes);
+	// console.log(dieta.estructura.miercoles);
+	// console.log(dieta.estructura.jueves);
+	// console.log(dieta.estructura.viernes);
+	// console.log(dieta.estructura.sabado);
 
-	console.log('------------------------');
+	// console.log('------------------------');
 
 	
-	var arr = Object.keys(dieta.estructura.domingo.cena).map(function(k) { return dieta.estructura.domingo.cena[k] });	
+	// var arr = Object.keys(dieta.estructura.domingo.cena).map(function(k) { return dieta.estructura.domingo.cena[k] });	
 	
-	console.log(arr);
+	// console.log(arr);
 
 
 
@@ -477,10 +477,14 @@ if($('body').hasClass('dieta') ){
     }
 
     	var incremento = 168;
+		var current_day;
+    	var full_date;
 
 		$(".nextweek").click(function(){
-	    	var semn = new Date( + new Date().getTime() + incremento * 60 * 60 * 1000);
-	    	var week2 = getWeekDays( new Date( "'" + semn + "'" ) );
+	    	current_day = new Date( + new Date().getTime() + 24 * 60 * 60 * 1000);
+	    	full_date = new Date( + new Date("'" + current_day + "'").getTime() + incremento * 60 * 60 * 1000);
+	    	console.log("Full date > > "+full_date);
+	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
 			incremento = incremento+168;
 			for(var i=0; i<dias.length; i++){
 		    	dow = week2[i].toString().slice(8, 11);
@@ -492,20 +496,20 @@ if($('body').hasClass('dieta') ){
 
 		$(".lastweek").click(function(){
 			//debe tomar el ultmo dia en el que se encuentra para retroceder a partir de ese punto en el tiempo
-
-			var current_day;
-	    	var semn = new Date(new Date( /*current_day*/ ).getTime() - incremento * 60 * 60 * 1000);
-	    	var week2 = getWeekDays( new Date( "'" + semn + "'" ) );
+			current_day = new Date( + new Date().getTime() + 24 * 60 * 60 * 1000);
+	    	full_date = new Date(new Date( "'" + current_day + "'" ).getTime() - incremento * 60 * 60 * 1000);
+	    	console.log("Full date > > "+full_date);
+	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
 			incremento = incremento+168;
 			
-			if(){
+			// if(){
 				for(var i=0; i<dias.length; i++){
 			    	dow = week2[i].toString().slice(8, 11);
 			    	var masuno = i+1;
 			    	console.log(dow);
 			    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
 			    }
-			}
+			// }
 		});
 }//end date
 
