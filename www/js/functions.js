@@ -176,7 +176,7 @@ $(window).on("load resize",function(){
 	$(".tipo_restric").css("width",cuantos2);
 
 	var cuantos3 = $('.ej-option').length;
-	cuantos3 = cuantos3*105;
+	cuantos3 = cuantos3*105.25;
 	$(".tipo_ejer").css("width",cuantos3);
 
 	var cuantos4 = $('.me-option').length;
@@ -263,22 +263,14 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 				$('.co-option.active img:not(.question)').attr("src",'images/coach/estricto2.png');
 				break;
 			case '1':
-				$('#coach_type_perfil').html("Analítico");
-				$('.co-option.active img:not(.question)').attr("src",'images/coach/analitico2.png');
-				break;
-			case '2':
-				$('#coach_type_perfil').html("Médico");
-				$('.co-option.active img:not(.question)').attr("src",'images/coach/medico2.png');
-				break;
-			case '3':
 				$('#coach_type_perfil').html("Innovador");
 				$('.co-option.active img:not(.question)').attr("src",'images/coach/innovador2.png');
 				break;
-			case '4':
+			case '2':
 				$('#coach_type_perfil').html("Animador");
 				$('.co-option.active img:not(.question)').attr("src",'images/coach/animador2.png');
 				break;
-			case '5':
+			case '3':
 				$('#coach_type_perfil').html("Tradicional");
 				$('.co-option.active img:not(.question)').attr("src",'images/coach/tradicional2.png');
 				break;
