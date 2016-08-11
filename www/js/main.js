@@ -58,9 +58,7 @@
 				var is_feed = window.is_feed;
 
 				if(is_home){
-					
 					return;
-
 				}
 				else{
 					if(is_feed)
@@ -68,13 +66,9 @@
 					else	
 						window.location.assign('dieta.html?filter_feed=all');
 				}	
-				
-
 				return;
 			}else{
-
 				//window.location.assign('inicio.html');
-
 				return;
 
 			}
