@@ -26,12 +26,11 @@
 				 async: false
 			});
 
-			console.log('token 3');
+			
 			window.loggedIn = false;
 			//app.registerCompiledPartials();
 			//app.registerHelpers();
 
-			console.log('token 4');
 			/* localStorage init */
 			this.ls 		= window.localStorage;
 			/*var log_info 	= JSON.parse(this.ls.getItem('dedalo_log_info'));
@@ -43,27 +42,42 @@
 							window.user_role 	= (log_info) ? log_info.user_role 	: ' '; */
 			if(is_login)
 				loggedIn = true;
-			console.log('token 2');
-			/* Check if has any token */
+		
+			
+
+			/* Check if has a valid token */
+			//var response = apiRH.has_valid_token();
+
+
 			if(is_login){
-				/* Check if has a valid token */
-				//var response = apiRH.has_valid_token();
+				
+				console.log('You okay, now you can start making calls');
+				/* Take the user to it's timeline */
 
-				if(is_login){
-					//var data_id = $(this).data('id');
-					console.log('You okay, now you can start making calls');
-					/* Take the user to it's timeline */
-					var is_home = window.is_home;
-					if(is_home)
-						window.location.assign('dieta.html?filter_feed=all');
+				var is_home = window.is_home;
+				var is_feed = window.is_feed;
+
+				if(is_home){
+					
 					return;
-				}else{
-					/* Token is not valid, user needs to authenticate */
-					console.log("Your token is not valid anymore (or has not been validated yet)");
-					return;
+
 				}
-			}
+				else{
+					if(is_feed)
+						return;
+					else	
+						window.location.assign('dieta.html?filter_feed=all');
+				}	
+				
 
+				return;
+			}else{
+
+				//window.location.assign('inicio.html');
+
+				return;
+
+			}
 			/* Copiado de ondeviceready ----- QUITAR ----- */
 			// var backButtonElement = document.getElementById("backBtn");
 			// if(backButtonElement)
