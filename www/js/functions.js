@@ -376,85 +376,98 @@ $('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 $(window).load(function(){
 	$(function() {
 
+
+
+
+
+
 if($('body').hasClass('dieta') ){
 
-		/** 
+/** 
 
-			DIETA - CALENDAR 
+	DIETA - CALENDAR 
 
-		**/
-			
+**/
+	
+	Date.prototype.getWeek = function() {
+        
+        var eneroUno = new Date(this.getFullYear(), 0, 1);
+       // console.log(eneroUno);
 
-			Date.prototype.getWeek = function() {
-		        
-		        var eneroUno = new Date(this.getFullYear(), 0, 1);
-		       // console.log(eneroUno);
+        return Math.ceil((((this - eneroUno) / 86400000) + eneroUno.getDay() + 1) / 7);
+    }
 
-		        return Math.ceil((((this - eneroUno) / 86400000) + eneroUno.getDay() + 1) / 7);
-		    }
+    Date.prototype.hoy = function() {
+      var mm = this.getMonth() + 1; // getMonth() is zero-based
+      var dd = this.getDate();
 
-		    Date.prototype.hoy = function() {
-		      var mm = this.getMonth() + 1; // getMonth() is zero-based
-		      var dd = this.getDate();
+      return [this.getFullYear(), !mm[1] && '/' , mm, !dd[1] && '/', dd].join(''); // padding
+    };
 
-		      return [this.getFullYear(), !mm[1] && '/' + '0', mm, !dd[1] && '/', dd].join(''); // padding
-		    };
+    var fecha = new Date();
+    var weekNumber = (new Date()).getWeek();
+    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+	var dias = ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
-		    var fecha = new Date();
-		    var weekNumber = (new Date()).getWeek();
-		    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-			var dias = ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+	//console.log(weekNumber);
+  	var ano = fecha.getFullYear();
+  	var mes = meses[fecha.getMonth()];
 
-			//console.log(weekNumber);
-		  	var ano = fecha.getFullYear();
-		  	var mes = meses[fecha.getMonth()];
+    $('#month').html(mes);
+    $('#year').html(ano);
 
-		    $('#month').html(mes);
-		    $('#year').html(ano);
+    function getWeekDays(fromDate){
+     var sunday = new Date(fromDate.setDate(fromDate.getDate()-fromDate.getDay()))
+        ,result = [new Date(sunday)];
+     while (sunday.setDate(sunday.getDate()+1) && sunday.getDay()!==0) {
+      result.push(new Date(sunday));
+     }
+     return result;
+    }
+    // usage
+    var week = getWeekDays( new Date( "'" + fecha.hoy() + "'" ) );
+    var days = $('.day_of_week');
+    var dow; 
+    for(var i=0; i<dias.length; i++){
+    	//console.log(week[i].toString().slice(8, 11) );
+    	dow = week[i].toString().slice(8, 11);
+    	var masuno = i+1;
+    	console.log(dow);
+    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
+    }
 
-		    function getWeekDays(fromDate){
-		     var sunday = new Date(fromDate.setDate(fromDate.getDate()-fromDate.getDay()))
-		        ,result = [new Date(sunday)];
-		     while (sunday.setDate(sunday.getDate()+1) && sunday.getDay()!==0) {
-		      result.push(new Date(sunday));
-		     }
-		     return result;
-		    }
-		    // usage
-		    var week = getWeekDays( new Date( "'" + fecha.hoy() + "'" ) );
-		    var days = $('.day_of_week');
-		    var dow; 
-		    for(var i=0; i<dias.length; i++){
-		    	//console.log(week[i].toString().slice(8, 11) );
-		    	dow = week[i].toString().slice(8, 11);
+    	for( j=0; j < $('.day_of_week').length; j++ ){
+    		console.log(days[j] );
+    	}
+    		//console.log( $('.day_of_week') );
+
+    	var incremento = 168;
+
+		$(".nextweek").click(function(){
+	    	var semn = new Date(new Date().getTime() + incremento * 60 * 60 * 1000);
+	    	var week2 = getWeekDays( new Date( "'" + semn + "'" ) );
+			incremento = incremento+168;
+			for(var i=0; i<dias.length; i++){
+		    	dow = week2[i].toString().slice(8, 11);
 		    	var masuno = i+1;
 		    	console.log(dow);
 		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
 		    }
-
-		    	for( j=0; j < $('.day_of_week').length; j++ ){
-		    		console.log(days[j] );
-		    	}
-		    		//console.log( $('.day_of_week') );
-
-		    	var incremento = 168;
-
-    			$(".nextweek").click(function(){
-			    	var semn = new Date(new Date().getTime() + incremento * 60 * 60 * 1000);
-			    	var week2 = getWeekDays( new Date( "'" + semn + "'" ) );
-    				incremento = incremento+168;
-    				for(var i=0; i<dias.length; i++){
-				    	dow = week2[i].toString().slice(8, 11);
-				    	var masuno = i+1;
-				    	console.log(dow);
-				    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
-				    }
-    			});
+		});
 
 
-
-//end date
-}
+		$(".lastweek").click(function(){
+	    	var semn = new Date(new Date().getTime() + incremento * -60 * -60 * -1000);
+	    	var week2 = getWeekDays( new Date( "'" + semn + "'" ) );
+			incremento = incremento+168;
+			for(var i=0; i<dias.length; i++){
+		    	dow = week2[i].toString().slice(8, 11);
+		    	var masuno = i+1;
+		    	console.log(dow);
+		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
+		    }
+		});
+}//end date
 
 var restricciones = [];
 
