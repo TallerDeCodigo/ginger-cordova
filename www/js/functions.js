@@ -70,6 +70,13 @@ $( function() {
   		var area = localStorage.getItem('measured_area');
   		console.log(medidas+" "+ area);
 
+  		var responsedata = apiRH.tracking(8, 1);
+
+			console.log(responsedata);
+
+			if(responsedata)
+				window.location.assign('dieta.html');
+
   	});
 
 
@@ -751,7 +758,7 @@ var restricciones = [];
 
 			console.log(0 + ' -+- ' + agua);
 
-			var responsedata = apiRH.tracking(0, 1);
+			var responsedata = apiRH.tracking(7, 1);
 
 			console.log(responsedata);
 
@@ -815,6 +822,16 @@ var restricciones = [];
 
 			var track_peso = localStorage.getItem('track_peso');
 			console.log(track_peso);
+
+			if(track_peso == null)
+				track_peso = 50;
+
+			var responsedata = apiRH.tracking(1, track_peso);
+
+			console.log(responsedata);
+
+			if(responsedata)
+				window.location.assign('dieta.html');
 		});
 
 
@@ -943,6 +960,13 @@ var restricciones = [];
 
 			var track_animo = localStorage.getItem('track_animo');
 			console.log(track_animo);
+
+			var responsedata = apiRH.tracking(1, track_animo);
+
+			console.log(responsedata);
+
+			if(responsedata)
+				window.location.assign('dieta.html');
 		});
 
 
@@ -1426,7 +1450,14 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 
 			console.log(intensidad+" "+type+" "+duracion)
 			//SEND JSON EJERCICIO
-			//var json_ejercicio {}
+			
+			var responsedata = apiRH.tracking(7, 1);
+
+			console.log(responsedata);
+
+			if(responsedata)
+				window.location.assign('dieta.html');
+
 
 
 		});
