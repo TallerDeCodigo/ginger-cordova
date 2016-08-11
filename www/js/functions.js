@@ -442,7 +442,7 @@ if($('body').hasClass('dieta') ){
     	var incremento = 168;
 
 		$(".nextweek").click(function(){
-	    	var semn = new Date(new Date().getTime() + incremento * 60 * 60 * 1000);
+	    	var semn = new Date( + new Date().getTime() + incremento * 60 * 60 * 1000);
 	    	var week2 = getWeekDays( new Date( "'" + semn + "'" ) );
 			incremento = incremento+168;
 			for(var i=0; i<dias.length; i++){
@@ -454,15 +454,21 @@ if($('body').hasClass('dieta') ){
 		});
 
 		$(".lastweek").click(function(){
-	    	var semn = new Date(new Date().getTime() + incremento * 60 * 60 * 1000);
+			//debe tomar el ultmo dia en el que se encuentra para retroceder a partir de ese punto en el tiempo
+
+			var current_day;
+	    	var semn = new Date(new Date( /*current_day*/ ).getTime() - incremento * 60 * 60 * 1000);
 	    	var week2 = getWeekDays( new Date( "'" + semn + "'" ) );
 			incremento = incremento+168;
-			for(var i=0; i<dias.length; i++){
-		    	dow = week2[i].toString().slice(8, 11);
-		    	var masuno = i+1;
-		    	console.log(dow);
-		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
-		    }
+			
+			if(){
+				for(var i=0; i<dias.length; i++){
+			    	dow = week2[i].toString().slice(8, 11);
+			    	var masuno = i+1;
+			    	console.log(dow);
+			    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
+			    }
+			}
 		});
 }//end date
 
