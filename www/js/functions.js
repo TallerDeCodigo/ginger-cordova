@@ -249,6 +249,7 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 
 	var suma = parseInt(coach_type)+1;
 	console.log('suma '+suma);
+	console.log('coach> '+ coach_type);
 
 	$('.tipo_coach .co-option:nth-of-type('+suma+')').addClass('active');
 
@@ -295,22 +296,22 @@ $('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 
 
 		switch(plan){
-			case "0":
+			case "1":
 			$('#plan_perfil').html("Adelgazar");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/perderpeso2.png');
 			//console.log('adelgazar');
 			break;
-			case "1":
+			case "2":
 			$('#plan_perfil').html("Detox");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/detox2.png');
 			//console.log('detox');
 			break;
-			case "2":
+			case "3":
 			$('#plan_perfil').html("Bienestar");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/sentirsemejor2.png');
 			//console.log('bienestar');
 			break;
-			case "3":
+			case "4":
 			$('#plan_perfil').html("Rendimiento físico");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/rendimientofisico2.png');
 			//console.log('rendimiento');
@@ -378,6 +379,7 @@ $('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 $(window).load(function(){
 	$(function() {
 
+if($('body').hasClass('dieta') ){
 
 		/** DIETA - CALENDAR **/
 			
@@ -385,7 +387,7 @@ $(window).load(function(){
 			Date.prototype.getWeek = function() {
 		        
 		        var eneroUno = new Date(this.getFullYear(), 0, 1);
-		        console.log(eneroUno);
+		       // console.log(eneroUno);
 
 		        return Math.ceil((((this - eneroUno) / 86400000) + eneroUno.getDay() + 1) / 7);
 		    }
@@ -402,7 +404,7 @@ $(window).load(function(){
 		    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 			var dias = ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
-			console.log(weekNumber);
+			//console.log(weekNumber);
 		  	var ano = fecha.getFullYear();
 		  	var mes = meses[fecha.getMonth()];
 
@@ -419,15 +421,20 @@ $(window).load(function(){
 		    }
 		    // usage
 		    var week = getWeekDays( new Date( "'" + fecha.hoy() + "'" ) );
-		    
+		    var days = $('.day_of_week');
 		    for(var i=0; i<dias.length; i++){
-		    	console.log(week[i]);
+		    	//console.log(week[i].toString().slice(8, 11) );
+		    	var dow = week[i].toString().slice(8, 11);
+
+		    	for( j=0; j < $('.day_of_week').length; j++ ){
+		    		console.log("days> > " +days[j] );
+
+		    	}
 		    }
+		    		console.log( $('.day_of_week') );
 
-		    
-
-		    //console.log('da de hoy> '+ date.yyyymmdd() );
-
+//end date
+}
 
 var restricciones = [];
 
