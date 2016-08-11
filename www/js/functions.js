@@ -12,18 +12,18 @@ var CREDENTIALS = {
 	authSecret: 'JZfqTspCvELAmnW'
 };
  
-QB.init(CREDENTIALS.appId, CREDENTIALS.authKey, CREDENTIALS.authSecret);
+// //QB.init(CREDENTIALS.appId, CREDENTIALS.authKey, CREDENTIALS.authSecret);
 
-console.log(QB);
+// //console.log(QB);
 
-var sessionToken = '1b785b603a9ae88d9dfbd1fc0cca0335086927f1';
-var appId = 3451;
+// var sessionToken = '1b785b603a9ae88d9dfbd1fc0cca0335086927f1';
+// var appId = 3451;
  
-QB.init(sessionToken, appId);
+// //QB.init(sessionToken, appId);
 
-QB.createSession(function(err, result) {
-  console.log('Aqui');
-});
+// //QB.createSession(function(err, result) {
+//   console.log('Aqui');
+// //});
 
 /*EDAD*/
 	var minval_age = 15; 
@@ -464,9 +464,8 @@ if($('body').hasClass('dieta') ){
 /*
 	IMPRIME EL MES Y EL ANO EN EL HEADER DE LA PANTALLA
 */
-
-    $('#month').html(mes);
-    $('#year').html(ano);
+    	$('#month').html(mes);
+    	$('#year').html(ano);
 
     function getWeekDays(fromDate){
      var sunday = new Date(fromDate.setDate(fromDate.getDate()-fromDate.getDay()))
@@ -491,28 +490,47 @@ if($('body').hasClass('dieta') ){
     	var incremento = 168;
 		var current_day;
     	var full_date;
+	    current_day = new Date( + new Date().getTime());
 
 		$(".nextweek").click(function(){
-	    	current_day = new Date( + new Date().getTime() + 24 * 60 * 60 * 1000);
 	    	full_date = new Date( + new Date("'" + current_day + "'").getTime() + incremento * 60 * 60 * 1000);
+
+	    	if(full_date.getMonth() != current_day.getMonth()){
+	    		$('#month').html(meses[full_date.getMonth()] );
+	    	}
+
+	    	if(full_date.getFullYear() != current_day.getFullYear()){
+	    		$('#year').html(full_date.getFullYear() );
+	    	}
+	    	
+	    	current_day = full_date;
 	    	console.log("Full date > > "+full_date);
 	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
-			incremento = incremento+168;
 			for(var i=0; i<dias.length; i++){
 		    	dow = week2[i].toString().slice(8, 11);
 		    	var masuno = i+1;
 		    	console.log(dow);
 		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
 		    }
+
+
 		});
 
 		$(".lastweek").click(function(){
 			//debe tomar el ultmo dia en el que se encuentra para retroceder a partir de ese punto en el tiempo
-			current_day = new Date( + new Date().getTime() + 24 * 60 * 60 * 1000);
+	    	
 	    	full_date = new Date(new Date( "'" + current_day + "'" ).getTime() - incremento * 60 * 60 * 1000);
+	    	if(full_date.getMonth() != current_day.getMonth()){
+	    		$('#month').html(meses[full_date.getMonth()] );
+	    	}
+
+	    	if(full_date.getFullYear() != current_day.getFullYear()){
+	    		$('#year').html(full_date.getFullYear() );
+	    	}
+
+	    	current_day = full_date;
 	    	console.log("Full date > > "+full_date);
 	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
-			incremento = incremento+168;
 			
 			// if(){
 				for(var i=0; i<dias.length; i++){
