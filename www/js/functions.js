@@ -381,7 +381,11 @@ $(window).load(function(){
 
 if($('body').hasClass('dieta') ){
 
-		/** DIETA - CALENDAR **/
+		/** 
+
+			DIETA - CALENDAR 
+
+		**/
 			
 
 			Date.prototype.getWeek = function() {
@@ -422,15 +426,17 @@ if($('body').hasClass('dieta') ){
 		    // usage
 		    var week = getWeekDays( new Date( "'" + fecha.hoy() + "'" ) );
 		    var days = $('.day_of_week');
+		    var dow; 
 		    for(var i=0; i<dias.length; i++){
 		    	//console.log(week[i].toString().slice(8, 11) );
-		    	var dow = week[i].toString().slice(8, 11);
-
+		    	dow = week[i].toString().slice(8, 11);
+		    	console.log(dow);
+		    }
 		    	for( j=0; j < $('.day_of_week').length; j++ ){
-		    		console.log("days> > " +days[j] );
+		    		
+		    		console.log("days> > " +days[0] );
 
 		    	}
-		    }
 		    		console.log( $('.day_of_week') );
 
 //end date
@@ -562,7 +568,6 @@ var restricciones = [];
 
 		$('#add_updated_profile').on('click', function(){
 
-			//if(){			
 				localStorage.setItem('genero', $('#update_sexo').val() );
 				localStorage.setItem('edad', $('#edad_value').val() );
 				localStorage.setItem('zipcode', $('input[name="zipocode"]').val() );
@@ -573,30 +578,6 @@ var restricciones = [];
 				localStorage.setItem('dpw', $('#days_per_week').val() );
 				localStorage.setItem('comentario', $('#comentar').val() );
 				localStorage.setItem('plan', $('#plan').val() );
-			//}
-
-			// //genero
-			// localStorage.setItem('genero', $('#genre_value').val() );//hacerlo una condicional
-			// //edad
-			// localStorage.setItem('edad', $('#edad_value').val() );
-			// //Zipocode
-			// localStorage.setItem('zipcode', $('input[name="zipcode"]').val() );
-			// //estatura
-			// localStorage.setItem('estatura', $('input[name="estatura"]').val() );
-			// //peso
-			// localStorage.setItem('peso', $('input[name="peso"]').val() );
-			// //peso ideal
-			// localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
-			// //coach_type
-			// localStorage.setItem('coach_type', $('#coach_type').val() );
-			// //frecuencia de ejercicio
-			// localStorage.setItem('dpw', $('#days_per_week').val() );
-			// //plan
-			// localStorage.setItem('plan', $('#plan').val() );
-			// //restricciones
-			// localStorage.setItem('restricciones', restricciones);
-			// //comentario
-			// localStorage.setItem('comentario', $('#comentar').val())
 
 
 /*
@@ -991,17 +972,6 @@ var restricciones = [];
 			
 			//peso ideal
 			localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
-
-
-			 //var genero = localStorage.getItem('genero');
-			// var estatura = localStorage.getItem('estatura');
-			// var peso = localStorage.getItem('peso');
-			// var edad = localStorage.getItem('edad');
-			// var peso_ideal = localStorage.getItem('peso_ideal');
-			// var zipcode = localStorage.getItem('zipcode');
-
-
-			//console.log(genero + " " + estatura + " " + peso + " " + edad + " " + peso_ideal+" "+zipcode);
 
 			setTimeout(function() {
         		$(".pagina").hide();
@@ -1621,8 +1591,8 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 	$('#add_picture_profile').on('click', function(){
 		console.log("camara");
 
-		setOptions();
-		openCamera();
+		// setOptions();
+		// openCamera();
 
 	});
 
@@ -1636,44 +1606,6 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 */
 
 	Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
-
-
-
-
-
-
-
-// /** DIETA - CALENDAR **/
-	
-
-// 	Date.prototype.getWeek = function() {
-        
-//         var oneJan = new Date(this.getFullYear(), 0, 1);
-//         //console.log(oneJan);
-
-//         return Math.ceil((((this - oneJan) / 86400000) + oneJan.getDay() + 1) / 7);
-//     }
-
-//     var fecha = new Date();
-//     var now = new Date();
-//  	var primer = new Date(fecha.getFullYear(), 0, (weekNumber) * 7 -5);
-//   	var ultimo = new Date(fecha.getFullYear(), 0, (weekNumber) * 7 -11);
-//     var weekNumber = (new Date()).getWeek();
-//     var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-// 	var dias = ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-
-//   	// console.log('Primer dia ' + primer);
-//   	// console.log('ultimo dia ' +  ultimo);
-
-//   	var ano = fecha.getFullYear();
-//   	var mes = meses[fecha.getMonth()];
-
-//   	console.log("ano> "+fecha.getFullYear());
-//     //console.log('día ' + dias[now.getDay()] );
-//     console.log("mes> " + meses[fecha.getMonth()] );
-
-//     $('#month').html(mes);
-//     $('#year').html(ano);
       
 
 (function($){
