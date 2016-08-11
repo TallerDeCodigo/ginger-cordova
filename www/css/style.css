@@ -295,7 +295,7 @@ body.dieta #container {position:relative;padding-top:165px;padding-bottom:61px;w
 
 .month {padding:7px 0px 5px;position:fixed;width:100%;z-index:99999999;background:#f5f1f0;top:50px;}
 .month * {position:relative;display:inline-block;}
-.month h4 {top:-4px;letter-spacing:0.25em;margin:0px 13px;}
+.month h4 {top:-4px;letter-spacing:0.25em;margin:0px 13px;text-transform:uppercase;}
 
 .week {position:fixed;width:100%;z-index:99999999;background:#f5f1f0;top:87px;padding:0px 2%;}
 .week table {width:100%;table-layout:fixed;margin:6px 0 2px;}

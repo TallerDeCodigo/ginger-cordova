@@ -390,17 +390,21 @@ $(window).load(function(){
 		        return Math.ceil((((this - eneroUno) / 86400000) + eneroUno.getDay() + 1) / 7);
 		    }
 
+		    Date.prototype.hoy = function() {
+		      var mm = this.getMonth() + 1; // getMonth() is zero-based
+		      var dd = this.getDate();
+
+		      return [this.getFullYear(), !mm[1] && '/' + '0', mm, !dd[1] && '/', dd].join(''); // padding
+		    };
+
 		    var fecha = new Date();
-		    var now = new Date();
 		    var weekNumber = (new Date()).getWeek();
 		    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 			var dias = ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
+			console.log(weekNumber);
 		  	var ano = fecha.getFullYear();
-		  	var mes = fecha.getMonth()+1;
-		  	var dia = fecha.getDay();
-
-		  	console.log(ano +"/"+ mes +"/"+ dia);
+		  	var mes = meses[fecha.getMonth()];
 
 		    $('#month').html(mes);
 		    $('#year').html(ano);
@@ -414,11 +418,15 @@ $(window).load(function(){
 		     return result;
 		    }
 		    // usage
-		    var week = getWeekDays(new Date(ano+'/'+mes+'/'+dia));
+		    var week = getWeekDays( new Date( "'" + fecha.hoy() + "'" ) );
 		    
 		    for(var i=0; i<dias.length; i++){
 		    	console.log(week[i]);
 		    }
+
+		    
+
+		    //console.log('da de hoy> '+ date.yyyymmdd() );
 
 
 var restricciones = [];
