@@ -388,15 +388,13 @@ if($('body').hasClass('dieta') ){
 	DIETA - CALENDAR 
 
 **/
-	
+	// OBTIENE EL NUMERO DE LA SEMANA EN LA QUE NOS ENCONTRAMOS 
 	Date.prototype.getWeek = function() {
-        
         var eneroUno = new Date(this.getFullYear(), 0, 1);
-       // console.log(eneroUno);
-
         return Math.ceil((((this - eneroUno) / 86400000) + eneroUno.getDay() + 1) / 7);
     }
 
+    //OBTIENE LA FECHA DE HOY EN FULL FORMAT
     Date.prototype.hoy = function() {
       var mm = this.getMonth() + 1; // getMonth() is zero-based
       var dd = this.getDate();
@@ -413,6 +411,11 @@ if($('body').hasClass('dieta') ){
   	var ano = fecha.getFullYear();
   	var mes = meses[fecha.getMonth()];
 
+
+/*
+	IMPRIME EL MES Y EL ANO EN EL HEADER DE LA PANTALLA
+*/
+
     $('#month').html(mes);
     $('#year').html(ano);
 
@@ -424,7 +427,7 @@ if($('body').hasClass('dieta') ){
      }
      return result;
     }
-    // usage
+
     var week = getWeekDays( new Date( "'" + fecha.hoy() + "'" ) );
     var days = $('.day_of_week');
     var dow; 
@@ -432,14 +435,9 @@ if($('body').hasClass('dieta') ){
     	//console.log(week[i].toString().slice(8, 11) );
     	dow = week[i].toString().slice(8, 11);
     	var masuno = i+1;
-    	console.log(dow);
+    	//console.log(dow);
     	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
     }
-
-    	for( j=0; j < $('.day_of_week').length; j++ ){
-    		console.log(days[j] );
-    	}
-    		//console.log( $('.day_of_week') );
 
     	var incremento = 168;
 
@@ -456,7 +454,7 @@ if($('body').hasClass('dieta') ){
 		});
 
 		$(".lastweek").click(function(){
-	    	var semn = new Date(new Date().getTime() - incremento / 60 / 60 / 1000);
+	    	var semn = new Date(new Date().getTime() + incremento * 60 * 60 * 1000);
 	    	var week2 = getWeekDays( new Date( "'" + semn + "'" ) );
 			incremento = incremento+168;
 			for(var i=0; i<dias.length; i++){
