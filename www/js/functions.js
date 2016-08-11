@@ -187,10 +187,8 @@ $(window).on("load resize",function(){
 
 
 /*
-	ADD UPDATED PROFILE DATA
+	ADD PROFILE DATA TO PROFILE VIEWS
 */
-
-
 
 
 if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
@@ -223,6 +221,7 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 	console.log("comentario > "+ comentario);
 
 	$('.cpur').html(nombre +" "+ apellido);
+	$('.edit-profile span').html(nombre +" "+ apellido);
 
 	if(sexo == 0){
 		$('#sexo_perfil').html('Mujer');
@@ -504,16 +503,19 @@ var restricciones = [];
 */
 
 		$('#add_updated_profile').on('click', function(){
-			localStorage.setItem('genero', $('#update_sexo').val() );
-			localStorage.setItem('edad', $('#edad_value').val() );
-			localStorage.setItem('zipcode', $('input[name="zipocode"]').val() );
-			localStorage.setItem('estatura', $('input[name="estatura"]').val() );
-			localStorage.setItem('peso', $('input[name="peso"]').val() );
-			localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
-			localStorage.setItem('coach_type', $('#coach_type').val() );
-			localStorage.setItem('dpw', $('#days_per_week').val() );
-			localStorage.setItem('comentario', $('#comentar').val() );
-			localStorage.setItem('plan', $('#plan').val() );
+
+			//if(){			
+				localStorage.setItem('genero', $('#update_sexo').val() );
+				localStorage.setItem('edad', $('#edad_value').val() );
+				localStorage.setItem('zipcode', $('input[name="zipocode"]').val() );
+				localStorage.setItem('estatura', $('input[name="estatura"]').val() );
+				localStorage.setItem('peso', $('input[name="peso"]').val() );
+				localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
+				localStorage.setItem('coach_type', $('#coach_type').val() );
+				localStorage.setItem('dpw', $('#days_per_week').val() );
+				localStorage.setItem('comentario', $('#comentar').val() );
+				localStorage.setItem('plan', $('#plan').val() );
+			//}
 
 			// //genero
 			// localStorage.setItem('genero', $('#genre_value').val() );//hacerlo una condicional
