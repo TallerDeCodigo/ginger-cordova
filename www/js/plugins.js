@@ -145,7 +145,7 @@ Swipe.prototype = {
 
     // set new index to allow for expression arguments
     if (this.index != index) {
-    	$('.ui-state-active').trigger('click');
+    	// $('.ui-state-active').trigger('click');
     	console.log('cambio');
     }
 

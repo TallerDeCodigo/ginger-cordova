@@ -151,9 +151,10 @@ $( function() {
 
 $(window).on("load resize",function(){
 
-	if ($('body').hasClass('dieta')) {
-		$('html').css("background","#f5f1f0");
-	}
+	var alto = document.documentElement.clientHeight;
+
+	$('#scroller > ul > li').css("height",alto-245);
+	$('.iosm #scroller > ul > li').css("height",alto-265);
 
 	var cuantos = $('.co-option').length;
 	cuantos = cuantos*105;
@@ -181,10 +182,6 @@ $(window).on("load resize",function(){
 	$(".slide-coach").css("width",ancho*0.8125);
 	$(".slide-coach:first-of-type").css("margin-left",ancho*0.09375);
 	$(".cslider").css("width",csld);
-
-
-
-
 
 /*
 	ADD PROFILE DATA TO PROFILE VIEWS
@@ -446,11 +443,11 @@ var restricciones = [];
 
 		$(".acc-selector").click(function(){
 			if ($(this).hasClass('ui-state-active')) {
-				if ($(this).hasClass('desayuno')) {$('body').animate({scrollTop:0}, 300);}
-				if ($(this).hasClass('snack1')) {$('body').animate({scrollTop:65}, 300);}
-				if ($(this).hasClass('comida')) {$('body').animate({scrollTop:128}, 300);}
-				if ($(this).hasClass('snack2')) {$('body').animate({scrollTop:190}, 300);}
-				if ($(this).hasClass('cena')) {$('body').animate({scrollTop:255}, 300);}
+				if ($(this).hasClass('desayuno')) {$(this).parent().parent().animate({scrollTop:0}, 300);}
+				if ($(this).hasClass('snack1')) {$(this).parent().parent().animate({scrollTop:54}, 300);}
+				if ($(this).hasClass('comida')) {$(this).parent().parent().animate({scrollTop:120}, 300);}
+				if ($(this).hasClass('snack2')) {$(this).parent().parent().animate({scrollTop:184}, 300);}
+				if ($(this).hasClass('cena')) {$(this).parent().parent().animate({scrollTop:248}, 300);}
 			}
 		});
 
@@ -828,7 +825,12 @@ var restricciones = [];
 					valor = 0;
 				}
 		        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
-		        $('.carita h4').html(animo[valor]);
+		        if (animo[valor]=="increible") {
+		        	$('.carita h4').html("increíble");
+		        } else {
+		        	$('.carita h4').html(animo[valor]);
+		        }
+		        
 
 				$('#track_animo').attr("value", animo[valor]);
 
@@ -881,7 +883,11 @@ var restricciones = [];
 					valor = 8;
 				}
 		        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
-		        $('.carita h4').html(animo[valor]);
+		        if (animo[valor]=="increible") {
+		        	$('.carita h4').html("increíble");
+		        } else {
+		        	$('.carita h4').html(animo[valor]);
+		        }
 
 		        $('#track_animo').attr("value", animo[valor]);
 
@@ -1452,6 +1458,12 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 		$('svg.noconsu').click(function() {
 			$(this).parent().parent().addClass('cancelado');
 			$(this).html('<use xlink:href="#noconsu2"></use>');
+		});
+
+		$('svg.commenn').click(function() {
+			$('.overscreen3').show();
+			setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
+			$('.overscreen3 textarea').focus();
 		});
 
 		var texto = 'Mostrar Completados';
