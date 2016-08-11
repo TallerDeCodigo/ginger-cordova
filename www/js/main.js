@@ -44,10 +44,9 @@
 				loggedIn = true;
 		
 			
-
+			
 			/* Check if has a valid token */
 			//var response = apiRH.has_valid_token();
-
 
 			if(is_login){
 				
