@@ -175,8 +175,8 @@ function requestHandlerAPI(){
 					'Content-Type': 'application/json'
 				},
 				data : {
-					'tipo' : 0,
-					'magnitud' : 1,
+					'tipo' : tipo,
+					'magnitud' : magnitud,
 					'cliente' : "5784f8b5f05f58301260194f",
 					'coach' : ""
 				}
