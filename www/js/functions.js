@@ -427,14 +427,31 @@ if($('body').hasClass('dieta') ){
 		    for(var i=0; i<dias.length; i++){
 		    	//console.log(week[i].toString().slice(8, 11) );
 		    	dow = week[i].toString().slice(8, 11);
+		    	var masuno = i+1;
 		    	console.log(dow);
+		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
 		    }
-		    	for( j=0; j < $('.day_of_week').length; j++ ){
-		    		
-		    		console.log("days> > " +days[0] );
 
+		    	for( j=0; j < $('.day_of_week').length; j++ ){
+		    		console.log(days[j] );
 		    	}
-		    		console.log( $('.day_of_week') );
+		    		//console.log( $('.day_of_week') );
+
+		    	var incremento = 168;
+
+    			$(".nextweek").click(function(){
+			    	var semn = new Date(new Date().getTime() + incremento * 60 * 60 * 1000);
+			    	var week2 = getWeekDays( new Date( "'" + semn + "'" ) );
+    				incremento = incremento+168;
+    				for(var i=0; i<dias.length; i++){
+				    	dow = week2[i].toString().slice(8, 11);
+				    	var masuno = i+1;
+				    	console.log(dow);
+				    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
+				    }
+    			});
+
+
 
 //end date
 }
