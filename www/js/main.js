@@ -25,21 +25,25 @@
 			$.ajaxSetup({
 				 async: false
 			});
+
+			console.log('token 3');
 			window.loggedIn = false;
-			app.registerCompiledPartials();
-			app.registerHelpers();
+			//app.registerCompiledPartials();
+			//app.registerHelpers();
+
+			console.log('token 4');
 			/* localStorage init */
 			this.ls 		= window.localStorage;
-			var log_info 	= JSON.parse(this.ls.getItem('dedalo_log_info'));
+			/*var log_info 	= JSON.parse(this.ls.getItem('dedalo_log_info'));
 			var me_info 	= JSON.parse(this.ls.getItem('me'));
 							window.user 		= (log_info) ? log_info.user_login 	: ' ';
 							window.user_display = (me_info)  ? me_info.first_name+' '+me_info.last_name : window.user;
 							window.user_first 	= (me_info)  ? me_info.first_name 	: window.user;
 							window.user_id 		= (log_info) ? log_info.user_id 	: ' ';
-							window.user_role 	= (log_info) ? log_info.user_role 	: ' ';
+							window.user_role 	= (log_info) ? log_info.user_role 	: ' '; */
 			if(is_login)
 				loggedIn = true;
-			
+			console.log('token 2');
 			/* Check if has any token */
 			if(is_login){
 				/* Check if has a valid token */
