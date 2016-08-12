@@ -394,32 +394,73 @@ if($('body').hasClass('dieta') ){
 	//REQUEST DIETA
 
 	var dieta = app.get_diet(localStorage.getItem('dieta'));
-	console.log('DIETA');
-	console.log(JSON.stringify(dieta));
+	//console.log('DIETA');
+	//console.log(JSON.stringify(dieta));
 
 	//Estructura de la dieta
 
-	console.log(dieta.estructura);
-	console.log(dieta.estructura.domingo);
-	console.log(dieta.estructura.domingo.cena);
-	console.log(dieta.estructura.domingo.comida);
-	console.log(dieta.estructura.domingo.desayuno);
-	console.log(dieta.estructura.domingo.snack1);
-	console.log(dieta.estructura.domingo.snack2);
+	// console.log(dieta.estructura);
+	// console.log(dieta.estructura.domingo);
+	// console.log(dieta.estructura.domingo.cena);
+	// console.log(dieta.estructura.domingo.comida);
+	// console.log(dieta.estructura.domingo.desayuno);
+	// console.log(dieta.estructura.domingo.snack1);
+	// console.log(dieta.estructura.domingo.snack2);
 
-	console.log(dieta.estructura.lunes);
-	console.log(dieta.estructura.martes);
-	console.log(dieta.estructura.miercoles);
-	console.log(dieta.estructura.jueves);
-	console.log(dieta.estructura.viernes);
-	console.log(dieta.estructura.sabado);
+	var martes_desayuno = dieta.estructura.martes.desayuno;
+	var martes_snack1 = dieta.estructura.martes.snack1;
+	var martes_comida = dieta.estructura.martes.comida;
+	var martes_snack2 = dieta.estructura.martes.snack2;
+	var martes_cena = dieta.estructura.martes.cena;
+
+
+	var arr_desayuno 	= Object.keys(martes_desayuno).map(function(k) { return dieta.estructura.martes.desayuno[k] });	
+	var arr_snack1 		= Object.keys(martes_snack1).map(function(k) 	{ return dieta.estructura.martes.snack1[k] });	
+	var arr_comida		= Object.keys(martes_comida).map(function(k) 	{ return dieta.estructura.martes.comida[k] });	
+	var arr_snack2 		= Object.keys(martes_snack2).map(function(k) 	{ return dieta.estructura.martes.snack2[k] });	
+	var arr_cena 		= Object.keys(martes_cena).map(function(k) 	{ return dieta.estructura.martes.cena[k] });	
+	
+
+
+	for(var i=0; i<arr_desayuno.length; i++){
+		console.log(arr_desayuno[i].a );
+	}
+
+	var des_platillo_id = arr_desayuno[0].a;
+	var sn1_platillo_id = arr_snack1[0].a;
+
+	// console.log(des_platillo_id);
+	// console.log(sn1_platillo_id);
+
+
+
+	/*
+		COMENTARIOS
+	*/
+
+	var comentarios = dieta.comentarios;
+	console.log("comentarios> ");
+	for(var i=0; i<comentarios.length; i++)
+	{
+		console.log(comentarios[i].comment);	
+	}
+
+
+	/*
+		PLATILLOS
+	*/
+	var platillos = dieta.platillos;
+	console.log("platillos> ");
+	for(var i=0; i<platillos.length; i++){
+		console.log( platillos[i].descripcion);
+	}
 
 	console.log('------------------------');
 
 	
 	var arr = Object.keys(dieta.estructura.domingo.cena).map(function(k) { return dieta.estructura.domingo.cena[k] });	
 	
-	console.log(arr);
+	// console.log(arr);
 
 
 
@@ -443,7 +484,7 @@ if($('body').hasClass('dieta') ){
       var mm = this.getMonth() + 1; // getMonth() is zero-based
       var dd = this.getDate();
 
-      return [this.getFullYear(), !mm[1] && '/' + '0', mm, !dd[1] && '/', dd].join(''); // padding
+      return [this.getFullYear(), !mm[1] && '/' + '0', mm, !dd[1] && '/', dd].join('');
     };
 
     var fecha = new Date();
