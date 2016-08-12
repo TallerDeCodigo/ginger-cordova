@@ -1527,13 +1527,13 @@ if(day_index == 0){
 
 					});
 
-
 					setTimeout(function() {
 		        		$(".pagina").hide();
 		        		$(".pcoach1").show();
 		        		$(".pcoach1").css("left","40px");
 		        		$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
 		            }, 250);
+		            
 				}
             }else{
             	alert('Error en la actualización de datos');
