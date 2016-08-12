@@ -920,21 +920,39 @@ if(day_index == 0){
 
 		$('#add_updated_profile').on('click', function(){
 
-				localStorage.setItem('genero', $('#update_sexo').val() );
+				var genero 		= localStorage.setItem('genero', $('#update_sexo').val() );
 				localStorage.setItem('edad', $('#edad_value').val() );
-				localStorage.setItem('zipcode', $('input[name="zipocode"]').val() );
-				localStorage.setItem('estatura', $('input[name="estatura"]').val() );
-				localStorage.setItem('peso', $('input[name="peso"]').val() );
-				localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
-				localStorage.setItem('coach_type', $('#coach_type').val() );
-				localStorage.setItem('dpw', $('#days_per_week').val() );
-				localStorage.setItem('comentario', $('#comentar').val() );
-				localStorage.setItem('plan', $('#plan').val() );
+				var zipcode 	=  localStorage.setItem('zipcode', $('input[name="zipocode"]').val() );
+				var estatura 	= localStorage.setItem('estatura', $('input[name="estatura"]').val() );
+				var peso 		= localStorage.setItem('peso', $('input[name="peso"]').val() );
+				var peso_ideal 	= localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
+				var coach_type 	= localStorage.setItem('coach_type', $('#coach_type').val() );
+				var dpw 		= localStorage.setItem('dpw', $('#days_per_week').val() );
+				var comentario 	= localStorage.setItem('comentario', $('#comentar').val() );
+				var plan 		= localStorage.setItem('plan', $('#plan').val() );
+				
+				var json = {
+				"sexo" : genero,
+				"fechaNacimiento" : "1984-04-21",
+				"perfil":{
+					"fechaNacimiento" : "1984-04-21",
+					"sexo" : genero,
+					"peso" : peso,
+					"estatura" : estatura,
+					"ejercicio" : dpw,
+					"objetivo" : plan,
+					"restricciones" : JSON.parse(restricciones),
+					"personalidad" : coach_type
+				},
+				"cp": zipcode,
+				"pesoDeseado": peso_ideal,
+				"comentario": comentario
+			}
 
+			var response = apiRH.updatePerfil(json);
 
-				/*
-					hacer REQUEST AQUI POR FAVOR
-				*/
+			if(response) 
+				window.location.assign('userdata.html');
 
 
 
@@ -1509,13 +1527,13 @@ if(day_index == 0){
 
 					});
 
-
 					setTimeout(function() {
 		        		$(".pagina").hide();
 		        		$(".pcoach1").show();
 		        		$(".pcoach1").css("left","40px");
 		        		$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
 		            }, 250);
+		            
 				}
             }else{
             	alert('Error en la actualización de datos');
