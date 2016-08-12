@@ -1046,7 +1046,7 @@
 		Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
 		
 		var errorResponseHandler, successResponseHandler, tokenParams;
-		
+
 		tokenParams = {
 		  "card": {
 		    "number": t_card,
@@ -1067,7 +1067,8 @@
 				var coachId = localStorage.setItem('coachId');	
 				var dietaId = localStorage.setItem('dietaId');
 				var json = {
-
+					"coach" : coachId,
+					"dieta" : dietaId	
 				};
 				//Actualizamos Coach y Dieta para el Usuario
 				var response = apiRH.updatePerfil(JSON);
