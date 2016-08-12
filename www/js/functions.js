@@ -468,15 +468,15 @@ if($('body').hasClass('dieta') ){
     	$('#year').html(ano);
 
     function getWeekDays(fromDate){
-     var sunday = new Date(fromDate.setDate(fromDate.getDate()-fromDate.getDay()))
-        ,result = [new Date(sunday)];
+     var sunday = new Date(fromDate.setDate(fromDate.getDate()-fromDate.getDay())),result = [new Date(sunday)];
      while (sunday.setDate(sunday.getDate()+1) && sunday.getDay()!==0) {
       result.push(new Date(sunday));
      }
      return result;
     }
 
-    var week = getWeekDays( new Date( "'" + fecha.hoy() + "'" ) );
+    var week = [];
+    week = getWeekDays( new Date( "'" + fecha.hoy() + "'" ) );
     var days = $('.day_of_week');
     var dow; 
     var str
