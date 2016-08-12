@@ -1264,6 +1264,8 @@ var restricciones = [];
 							if(value == 'coach'){	
 								$.each( value, function( key, value ) {
 
+									//$( ".container" ).append( $( "h2" ) );
+
 
 									console.log( key + " : " + value );
 								});
