@@ -83,17 +83,17 @@ function requestHandlerAPI(){
 			/*
 				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
 			*/
+
 			localStorage.setItem('token', response.token);
 			localStorage.setItem('mail', response.mail);
 			localStorage.setItem('userId', response.userId);
 
-
 			this.token = response.token;
 
+			var userId 	= localStorage.getItem('userId');
+			var mail 	= localStorage.getItem('mail');
+			var token 	= localStorage.getItem('token');
 
-			var userId = localStorage.getItem('userId');
-			var mail = localStorage.getItem('mail');
-			var token = localStorage.getItem('token');
 			console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + this.token);
 
 			/*
@@ -130,7 +130,7 @@ function requestHandlerAPI(){
 					localStorage.setItem('peso_ideal', user.pesoDeseado);
 					localStorage.setItem('dpw', user.perfil.ejercicio);
 					localStorage.setItem('restricciones', user.restricciones);
-					localStorage.setItem('comentario', user.comentarios);
+					localStorage.setItem('comentarios', user.comentarios);
 					localStorage.setItem('customerId', user.customerId);
 					localStorage.setItem('chatId', user.chatId);
 					localStorage.setItem('chatId', user.chatId);
@@ -191,8 +191,11 @@ function requestHandlerAPI(){
 			localStorage.setItem('token', response.token);
 			localStorage.setItem('mail', response.mail);
 			localStorage.setItem('chatId', response.jid);
+			localStorage.setItem('userId', response._id);
 
-			var userId 	= localStorage.getItem('chatId');
+			console.log(JSON.stringify(response));
+
+			var userId 	= localStorage.getItem('userId');
 			var mail 	= localStorage.getItem('mail');
 			var token 	= localStorage.getItem('token');
 
@@ -240,7 +243,7 @@ function requestHandlerAPI(){
 		this.updatePerfil = function(data){
 			var req = {
 				method : 'PATCH',
-				url : api_base_url + 'tables/cliente/' + data.id ,	//definitr tabla
+				url : api_base_url + 'tables/cliente/' + localStorage.getItem('userId') ,	//definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
 					'X-ZUMO-AUTH': localStorage.getItem('token'),
@@ -248,11 +251,13 @@ function requestHandlerAPI(){
 				},
 				data : data
 			}
-			console.log(req);
 
-			var response = this.makeRequest('tables/cliente/' + data.id, req);
 
-			console.log("Request Data Cliente");
+			console.log(JSON.stringify(req));
+
+			var response = this.makePatchRequest('tables/cliente/' + localStorage.getItem('userId'), req);
+
+			console.log("Request Path Data Cliente");
 
 			console.log(response);  //llega aqui con la respuesta del servidor
 
@@ -553,6 +558,34 @@ function requestHandlerAPI(){
 
 			$.ajax({
 			  type: 'POST',
+			  headers: data.headers,
+			  url: window.api_base_url+endpoint,
+			  data: JSON.stringify(data.data),
+			  dataType: 'json',
+			  async: false
+			})
+			 .done(function(response){
+				result = response;
+				sdk_app_context.hideLoader(response);
+			})
+			 .fail(function(e){
+				result = false;
+				console.log(JSON.stringify(e));
+			});
+			return result;
+		};
+
+		this.makePatchRequest = function(endpoint, data){
+			
+			console.log(data.data); //llega a makerequest
+
+			sdk_app_context.showLoader();
+			var result = {};
+
+			console.log('datos' + data.data);
+
+			$.ajax({
+			  type: 'PATCH',
 			  headers: data.headers,
 			  url: window.api_base_url+endpoint,
 			  data: JSON.stringify(data.data),

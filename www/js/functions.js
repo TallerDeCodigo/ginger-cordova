@@ -429,9 +429,6 @@ if($('body').hasClass('dieta') ){
 
 	**/
 	
-
-
-
 	// OBTIENE EL NUMERO DE LA SEMANA EN LA QUE NOS ENCONTRAMOS 
 	Date.prototype.getWeek = function() {
         var eneroUno = new Date(this.getFullYear(), 0, 1);
@@ -1178,30 +1175,46 @@ var restricciones = [];
 			var dpw 		  = localStorage.getItem('dpw');
 			var comentario 	  = localStorage.getItem('comentario');
 
-console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+peso_ideal+" > "+zipcode+" > "+plan+" > "+coach_type+" > "+restricciones+" > "+dpw+" > "+comentario );
+			console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+peso_ideal+" > "+zipcode+" > "+plan+" > "+coach_type+" > "+restricciones+" > "+dpw+" > "+comentario );
 
-/*
-	JSON STRUCTURE 	*
-*/
+			/*
+				JSON STRUCTURE 	*
+			*/
 			var json = {
 				"sexo" : genero,
 				"fechaNacimiento" : {
 					"date" : ""
 				},
-				"peso" : peso,
-				"estatura" : estatura,
-				"ejercicio" : dpw,
-				"objetivo" : plan,
-				"restricciones" : [restricciones],
-				"personalidad" : coach_type
+				"perfil":{
+					"peso" : peso,
+					"estatura" : estatura,
+					"ejercicio" : dpw,
+					"objetivo" : plan,
+				//	"restricciones" : [restricciones],
+					"personalidad" : coach_type
+				},
+				"cp": zipcode,
+				"pesoDeseado": peso_ideal,
+				"comentario": comentario
+
 			}
 
-			setTimeout(function() {
-        		$(".pagina").hide();
-        		$(".pcoach1").show();
-        		$(".pcoach1").css("left","40px");
-        		$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
-            }, 250);
+			//Request update data
+
+			var responsedata = apiRH.updatePerfil(json);
+
+			console.log(responsedata);
+
+			if(responsedata){
+				setTimeout(function() {
+	        		$(".pagina").hide();
+	        		$(".pcoach1").show();
+	        		$(".pcoach1").css("left","40px");
+	        		$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
+	            }, 250);
+            }else{
+            	alert('Error en la actualización de datos');
+            }
 		});
 
 		$('.coach.img-frame').click(function(){
