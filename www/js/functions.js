@@ -1256,6 +1256,23 @@ var restricciones = [];
 				console.log(listCoach);
 
 				if(listCoach){
+
+					$.each( listCoach, function( key, value ) {
+  						console.log( key + ": " + value );
+  						$.each( value, function( key, value ) {
+  							console.log( key + " : " + value );
+							if(value == 'coach'){	
+								$.each( value, function( key, value ) {
+
+
+									console.log( key + " : " + value );
+								});
+							}
+  						});
+
+					});
+
+
 					setTimeout(function() {
 		        		$(".pagina").hide();
 		        		$(".pcoach1").show();
