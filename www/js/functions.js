@@ -1257,20 +1257,49 @@ var restricciones = [];
 
 				if(listCoach){
 
+					var i = 1;
+					var Name;
+					var LastN;
+
 					$.each( listCoach, function( key, value ) {
-  						console.log( key + ": " + value );
+						var item = $('.initial').html();
+						// $('.initial').remove();
+						// $(".wrap-cslide").append('<div class="csilder">'+item+'</div>');
+  						// console.log( key + ": " + value );
   						$.each( value, function( key, value ) {
-  							console.log( key + " : " + value );
-							if(value == 'coach'){	
+  							// console.log( key + " :: " + value );
+  							if (key=='id') {
+  								localStorage.setItem("dieta_id",value);
+  							}
+							if(key == 'coach'){	
 								$.each( value, function( key, value ) {
-
-									//$( ".container" ).append( $( "h2" ) );
-
-
-									console.log( key + " : " + value );
+									
+									console.log( key + " ::: " + value );
+									if (key=='id') {
+										$(".wrap-cslide .cslider:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
+										console.log(value);
+									}
+									if (key=='nombre') {
+										Name = value;
+									}
+									if (key=='apellido') {
+										LastN = value;
+									}
+									if (key=='frase') {
+										$(".wrap-cslide .cslider:nth-of-type("+i+") p.short-descrip b").html(value);
+										console.log(value);
+									}
+									if (key=='bio') {
+										$(".wrap-cslide .cslider:nth-of-type("+i+") pre.short-descrip").html(value);
+										console.log(value);
+									}
 								});
+								$(".wrap-cslide .cslider:nth-of-type("+i+") h5.name").html(Name+" "+LastN);
+								console.log(Name+" "+LastN);
 							}
   						});
+
+  						i++;
 
 					});
 
