@@ -566,7 +566,7 @@ if(day_index == 0){
 
 	for(var i=0; i<arr_tiempos.length; i++){
 		var tiempos = arr_tiempos[i];
-		console.log(tiempos[i]);
+		console.log(tiempos);
 	}
 
 /*
@@ -668,7 +668,7 @@ if(day_index == 0){
 	var array = [];
 	array.push(dish);
 
-	console.log(array);
+	console.log("array> "+array);
 
 	console.log('------------------------');
 
