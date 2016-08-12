@@ -102,10 +102,10 @@ function requestHandlerAPI(){
 
 			console.log(token);
 
-			if(userId){
+			if(token){
 				var req = {
 					method : 'post',
-					url : api_base_url + 'api/login',
+					url : api_base_url + 'tables/cliente/',
 					headers: {
 						'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
 						'X-ZUMO-AUTH': token,
@@ -122,7 +122,7 @@ function requestHandlerAPI(){
 				localStorage.setItem('user_name', user.nombre);
 				localStorage.setItem('user_last_name', user.apellido);
 				localStorage.setItem('genero', user.perfil.sexo);
-				localStorage.setItem('edad', user.edad.real);
+				localStorage.setItem('edad', user.edad);
 				localStorage.setItem('zipcode', user.cp);
 				localStorage.setItem('estatura', user.perfil.estatura);
 				localStorage.setItem('peso', user.perfil.peso);
@@ -135,13 +135,8 @@ function requestHandlerAPI(){
 				localStorage.setItem('chatId', user.chatId);
 				localStorage.setItem('dietaId', user.dieta.id);
 				localStorage.setItem('dietaName', user.dieta.nombre);
+				return (userId) ? response : false;
 			}
-
-			
-
-			
-			return (userId) ? response : false;
-
 		};
 
 
