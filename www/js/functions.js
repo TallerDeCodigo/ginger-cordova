@@ -579,7 +579,7 @@ if($('body').hasClass('dieta') ){
 		});
 }//end date
 
-var restricciones = [];
+		var restricciones = new Array();
 
 		$(".acc-selector").click(function(){
 			if ($(this).hasClass('ui-state-active')) {
@@ -1191,15 +1191,6 @@ var restricciones = [];
 			$('.borg').removeClass('active');
 			$('.byel').addClass('active');
 
-/*
-	REQUEST AQUI POR FAVOR
-*/
-
-
-/*
-	localStorage RESTRICCIONES
-*/
-
 			//restriccion alimenticia
 			//localStorage.setItem('restricciones', restricciones );
 
@@ -1231,7 +1222,7 @@ var restricciones = [];
 					"estatura" : estatura,
 					"ejercicio" : dpw,
 					"objetivo" : plan,
-				//	"restricciones" : [restricciones],
+					"restricciones" : JSON.parse(restricciones),
 					"personalidad" : coach_type
 				},
 				"cp": zipcode,
@@ -1465,22 +1456,21 @@ var restricciones = [];
 		});
 
 		
-
+		
 		$('.re-option').click(function() {
 			var valor = $(this).find('.type').attr('value');
 
 			if (!$(this).hasClass('active')) {
-
-				console.log('Aqui');
 
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 				$(this).addClass('active');
 				$(this).attr("value", valor);
 				
 				$('.restricciones').attr('value', valor);
-
+				
 				restricciones.push(valor);
-				localStorage.setItem('restricciones', restricciones);
+				
+				localStorage.setItem('restricciones', JSON.stringify(restricciones));
 
 			} else {
 
@@ -1499,6 +1489,8 @@ var restricciones = [];
 						var index = restricciones.indexOf(valor);
 
 						restricciones.splice(i, 1);
+
+						localStorage.setItem('restricciones', JSON.stringify(restricciones));
 
 					}//end IF
 
