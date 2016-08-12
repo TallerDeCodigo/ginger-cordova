@@ -479,12 +479,15 @@ if($('body').hasClass('dieta') ){
     var week = getWeekDays( new Date( "'" + fecha.hoy() + "'" ) );
     var days = $('.day_of_week');
     var dow; 
+    var str
     for(var i=0; i<dias.length; i++){
     	//console.log(week[i].toString().slice(8, 11) );
-    	dow = week[i].toString().slice(8, 11);
+    	dow = week[i].getDate();
     	var masuno = i+1;
     	//console.log(dow);
     	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
+
+
     }
 
     	var incremento = 168;
