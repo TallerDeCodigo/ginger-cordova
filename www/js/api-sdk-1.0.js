@@ -119,24 +119,31 @@ function requestHandlerAPI(){
 				}
 				var user = this.getRequest('tables/cliente/' + userId, req);
 
-				localStorage.setItem('user_name', user.nombre);
-				localStorage.setItem('user_last_name', user.apellido);
-				localStorage.setItem('genero', user.perfil.sexo);
-				localStorage.setItem('edad', user.edad);
-				localStorage.setItem('zipcode', user.cp);
-				localStorage.setItem('estatura', user.perfil.estatura);
-				localStorage.setItem('peso', user.perfil.peso);
-				localStorage.setItem('peso_ideal', user.pesoDeseado);
-				localStorage.setItem('dpw', user.perfil.ejercicio);
-				localStorage.setItem('restricciones', user.restricciones);
-				localStorage.setItem('comentario', user.comentarios);
-				localStorage.setItem('customerId', user.customerId);
-				localStorage.setItem('chatId', user.chatId);
-				localStorage.setItem('chatId', user.chatId);
-				localStorage.setItem('dietaId', user.dieta.id);
-				localStorage.setItem('dietaName', user.dieta.nombre);
-				return (userId) ? response : false;
+				if(user){
+					localStorage.setItem('user_name', user.nombre);
+					localStorage.setItem('user_last_name', user.apellido);
+					localStorage.setItem('genero', user.perfil.sexo);
+					localStorage.setItem('edad', user.edad);
+					localStorage.setItem('zipcode', user.cp);
+					localStorage.setItem('estatura', user.perfil.estatura);
+					localStorage.setItem('peso', user.perfil.peso);
+					localStorage.setItem('peso_ideal', user.pesoDeseado);
+					localStorage.setItem('dpw', user.perfil.ejercicio);
+					localStorage.setItem('restricciones', user.restricciones);
+					localStorage.setItem('comentario', user.comentarios);
+					localStorage.setItem('customerId', user.customerId);
+					localStorage.setItem('chatId', user.chatId);
+					localStorage.setItem('chatId', user.chatId);
+					localStorage.setItem('dietaId', user.dieta.id);
+					localStorage.setItem('dietaName', user.dieta.nombre);
+
+					return (userId) ? response : false;
+				}
+				return false;
+				
 			}
+
+			return false;
 		};
 
 
@@ -227,6 +234,29 @@ function requestHandlerAPI(){
 			return (response) ? response : false;
 
 		};
+
+
+		this.updatePerfil = function(data){
+			var req = {
+				method : 'PATCH',
+				url : api_base_url + 'tables/cliente/' + data.id ,	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'Content-Type': 'application/json'
+				},
+				data : data
+			}
+			console.log(req);
+
+			var response = this.makeRequest('tables/cliente/' + data.id, req);
+
+			console.log("Request Data Cliente");
+
+			console.log(response);  //llega aqui con la respuesta del servidor
+
+			return (response) ? response : false;
+		}
 
 		/*
 		 * registerUpTake Registrer event from diet of user

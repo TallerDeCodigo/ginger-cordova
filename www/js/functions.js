@@ -684,9 +684,11 @@ var restricciones = [];
 				localStorage.setItem('plan', $('#plan').val() );
 
 
-/*
-	hacer REQUEST AQUI POR FAVOR
-*/
+				/*
+					hacer REQUEST AQUI POR FAVOR
+				*/
+
+				
 
 		});	// end add uodated profile
 
