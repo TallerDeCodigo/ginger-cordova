@@ -264,10 +264,10 @@ function requestHandlerAPI(){
 			return (response) ? response : false;
 		};
 
-		this.getDietByPerfil = function(data){
+		this.getCoachList = function(data){
 			var req = {
 				method : 'GET',
-				url : api_base_url + 'tables/cliente/' + data.id ,	//definitr tabla
+				url : api_base_url + 'tables/dieta?opciones=1',	//definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
 					'X-ZUMO-AUTH': localStorage.getItem('token'),
@@ -277,13 +277,25 @@ function requestHandlerAPI(){
 			}
 			console.log(req);
 
-			var response = this.makeRequest('tables/cliente/' + data.id, req);
+			$.ajax({
+			  type: 'GET',
+			  headers: req.headers,
+			  url:  req.url,
+			  dataType: 'json',
+			  async: false
+			})
+			 .done(function(response){
+				result = response;
+				console.log(response);
+				sdk_app_context.hideLoader(response);
+			})
+			 .fail(function(e){
+				result = false;
+				console.log(JSON.stringify(e));
+			});
 
-			console.log("Request Data Diet");
-
-			console.log(response);  //llega aqui con la respuesta del servidor
-
-			return (response) ? response : false;
+			console.log(result);
+			return result;
 		};
 
 		//Conekta

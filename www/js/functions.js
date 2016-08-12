@@ -1223,10 +1223,10 @@ var restricciones = [];
 			*/
 			var json = {
 				"sexo" : genero,
-				"fechaNacimiento" : {
-					"date" : ""
-				},
+				"fechaNacimiento" : "1984-04-21",
 				"perfil":{
+					"fechaNacimiento" : "1984-04-21",
+					"sexo" : genero,
 					"peso" : peso,
 					"estatura" : estatura,
 					"ejercicio" : dpw,
@@ -1237,7 +1237,6 @@ var restricciones = [];
 				"cp": zipcode,
 				"pesoDeseado": peso_ideal,
 				"comentario": comentario
-
 			}
 
 			//Request update data
@@ -1246,13 +1245,24 @@ var restricciones = [];
 
 			console.log(responsedata);
 
+			var listCoach = {};
+			
 			if(responsedata){
-				setTimeout(function() {
-	        		$(".pagina").hide();
-	        		$(".pcoach1").show();
-	        		$(".pcoach1").css("left","40px");
-	        		$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
-	            }, 250);
+
+				/* REQUEST COACHES */	
+				
+				listCoach = apiRH.getCoachList();
+
+				console.log(listCoach);
+
+				if(listCoach){
+					setTimeout(function() {
+		        		$(".pagina").hide();
+		        		$(".pcoach1").show();
+		        		$(".pcoach1").css("left","40px");
+		        		$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
+		            }, 250);
+				}
             }else{
             	alert('Error en la actualización de datos');
             }
