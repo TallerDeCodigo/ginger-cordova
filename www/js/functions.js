@@ -388,11 +388,6 @@ $('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 $(window).load(function(){
 	$(function() {
 
-
-
-
-
-
 if($('body').hasClass('dieta') ){
 
 
@@ -688,7 +683,7 @@ var restricciones = [];
 					hacer REQUEST AQUI POR FAVOR
 				*/
 
-				
+
 
 		});	// end add uodated profile
 
@@ -1728,6 +1723,9 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 
 	});
 
+	
+	
+	
 
 });// end winow onload
 
@@ -1737,7 +1735,7 @@ console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+pes
 	CONEKTA
 */
 
-	Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
+
       
 
 (function($){

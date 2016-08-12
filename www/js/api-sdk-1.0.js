@@ -187,7 +187,7 @@ function requestHandlerAPI(){
 			/*
 				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
 			*/
-			
+
 			localStorage.setItem('token', response.token);
 			localStorage.setItem('mail', response.mail);
 			localStorage.setItem('chatId', response.jid);
@@ -257,7 +257,74 @@ function requestHandlerAPI(){
 			console.log(response);  //llega aqui con la respuesta del servidor
 
 			return (response) ? response : false;
-		}
+		};
+
+		this.getDietByPerfil = function(data){
+			var req = {
+				method : 'GET',
+				url : api_base_url + 'tables/cliente/' + data.id ,	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'Content-Type': 'application/json'
+				},
+				data : data
+			}
+			console.log(req);
+
+			var response = this.makeRequest('tables/cliente/' + data.id, req);
+
+			console.log("Request Data Diet");
+
+			console.log(response);  //llega aqui con la respuesta del servidor
+
+			return (response) ? response : false;
+		};
+
+		//Conekta
+
+		this.makePayment = function(data)
+		{
+			Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
+
+			var errorResponseHandler, successResponseHandler, tokenParams;
+				tokenParams = {
+				  "card": {
+				    "number": "4242424242424242",
+				    "name": "Javier Pedreiro",
+				    "exp_year": "2019",
+				    "exp_month": "12",
+				    "cvc": "123",
+				    "address": {
+				        "street1": "Calle 123 Int 404",
+				        "street2": "Col. Condesa",
+				        "city": "Ciudad de Mexico",
+				        "state": "Distrito Federal",
+				        "zip": "12345",
+				        "country": "Mexico"
+				    }
+				}
+			};
+
+				/* Después de tener una respuesta exitosa, envía la información al servidor */
+
+				successResponseHandler = function(token) {
+				  return $.post('/process_payment?token_id=' + token.id, function() {
+				    return document.location = 'payment_succeeded';
+				  });
+				};
+
+				/* Después de recibir un error */
+
+				errorResponseHandler = function(error) {
+				  return console.log(error.message);
+				};
+
+				/* Tokenizar una tarjeta en Conekta */
+
+			Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
+
+		};
 
 		/*
 		 * registerUpTake Registrer event from diet of user
@@ -878,6 +945,8 @@ function requestHandlerAPI(){
 						mediaType: navigator.camera.MediaType.ALLMEDIA  });
 			return;
 		};
+
+
 
 		
 	}

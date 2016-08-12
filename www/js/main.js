@@ -916,7 +916,9 @@
 
 			Create a new account the old fashioned way 
 
-														*/
+		*/
+	
+
 		if($('#create_account').length)
 			$('#create_account').validate({
 				rules: {
