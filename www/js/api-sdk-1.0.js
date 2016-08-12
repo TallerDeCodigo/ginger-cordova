@@ -78,7 +78,7 @@ function requestHandlerAPI(){
 			}
 			var response = this.makeRequest('api/login', req);
 
-			console.log(response);
+			//console.log(response);
 
 			/*
 				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
@@ -94,13 +94,13 @@ function requestHandlerAPI(){
 			var mail 	= localStorage.getItem('mail');
 			var token 	= localStorage.getItem('token');
 
-			console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + this.token);
+			//console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + this.token);
 
 			/*
 				REGRESA LA RESPUESTA DEL SERVIDOR CON EL USER ID, MAIL Y TOKEN
 			*/
 
-			console.log(token);
+			//console.log(token);
 
 			if(token){
 				var req = {
@@ -119,23 +119,44 @@ function requestHandlerAPI(){
 				}
 				var user = this.getRequest('tables/cliente/' + userId, req);
 
+				//console.log(JSON.stringify(user));
+				//console.log(user);
+
 				if(user){
+					localStorage.setItem('coach_type', user.perfil.personalidad);
+						console.log("plan> "+user.perfil.personalidad);
 					localStorage.setItem('user_name', user.nombre);
+						console.log("name> "+user.nombre);
 					localStorage.setItem('user_last_name', user.apellido);
+						console.log("apellido> "+user.apellido);
 					localStorage.setItem('genero', user.perfil.sexo);
-					localStorage.setItem('edad', user.edad);
+						console.log("sexo> "+user.perfil.sexo);
+					localStorage.setItem('edad', user.perfil.edad.real);
+						console.log("edad> "+user.perfil.edad.real);
 					localStorage.setItem('zipcode', user.cp);
+						console.log("zipcode> "+user.cp);
 					localStorage.setItem('estatura', user.perfil.estatura);
+						console.log("estatura> "+user.perfil.estatura);
 					localStorage.setItem('peso', user.perfil.peso);
+						console.log("peso> "+user.perfil.peso);
 					localStorage.setItem('peso_ideal', user.pesoDeseado);
+						console.log("peso_ideal> "+user.pesoDeseado);
 					localStorage.setItem('dpw', user.perfil.ejercicio);
+						console.log("dpw> "+user.perfil.ejercicio);
 					localStorage.setItem('restricciones', user.restricciones);
+						console.log("restricciones> "+user.restricciones);
 					localStorage.setItem('comentarios', user.comentarios);
+						console.log("comentarios> "+user.comentarios);
 					localStorage.setItem('customerId', user.customerId);
+						console.log("customerId> "+user.customerId);
 					localStorage.setItem('chatId', user.chatId);
+						console.log("chatId> "+user.chatId);
 					localStorage.setItem('chatId', user.chatId);
-					localStorage.setItem('dietaId', user.dieta.id);
+						console.log("chatId> "+user.chatId);
+					localStorage.setItem('dietaId', user.dieta._id);
+						console.log("dietaId> "+user.dieta._id);
 					localStorage.setItem('dietaName', user.dieta.nombre);
+						console.log("dietaName> "+user.dieta.nombre);
 
 					return (userId) ? response : false;
 				}
@@ -566,7 +587,7 @@ function requestHandlerAPI(){
 			sdk_app_context.showLoader();
 			var result = {};
 
-			console.log('datos' + data.data);
+			console.log(data.data);
 
 			$.ajax({
 			  type: 'POST',

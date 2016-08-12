@@ -169,7 +169,7 @@ var CREDENTIALS = {
 
 } );
 
-$(window).on("load resize",function(){
+$(window).on("load resize",function(){ 
 
 	var alto = document.documentElement.clientHeight;
 
@@ -210,32 +210,33 @@ $(window).on("load resize",function(){
 
 if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 
-	var nombre = localStorage.getItem('user_name');
-	var apellido = localStorage.getItem('user_last_name');
-	var sexo = localStorage.getItem('genero');
-	var edad = localStorage.getItem('edad');
-	var cp 	 = localStorage.getItem('zipcode');
-	var estatura = localStorage.getItem('estatura');
-	var peso = localStorage.getItem('peso');
-	var ideal = localStorage.getItem('peso_ideal');
-	var coach_type = localStorage.getItem('coach_type');
-	var frecuencia = localStorage.getItem('dpw');
-	var restricciones = localStorage.getItem('restricciones');
-	var plan = localStorage.getItem('plan');
-	var comentario = localStorage.getItem('comentario');
+	var nombre 			= localStorage.getItem('user_name');
+	var apellido 		= localStorage.getItem('user_last_name');
+	var sexo 			= localStorage.getItem('genero');
+	var edad 			= localStorage.getItem('edad');
+	var cp 	 			= localStorage.getItem('zipcode');
+	var estatura 		= localStorage.getItem('estatura');
+	var peso 			= localStorage.getItem('peso');
+	var ideal 			= localStorage.getItem('peso_ideal');
+	var coach_type 		= localStorage.getItem('coach_type');
+	var frecuencia 		= localStorage.getItem('dpw');
+	var restricciones 	= localStorage.getItem('restricciones');
+	var plan 			= localStorage.getItem('coach_type');
+	var comentario 		= localStorage.getItem('comentarios');
 
-	console.log("nombre > "+ nombre);
-	console.log("sexo > "+ sexo);
-	console.log("edad > "+edad);
-	console.log("cp > "+cp);
-	console.log("estatura > "+estatura);
-	console.log("peso > "+peso);
-	console.log("ideal > "+ideal);
-	console.log("coach_type > "+coach_type);
-	console.log("frecuencia > "+frecuencia);
-	console.log("restricciones > "+restricciones);
-	console.log("plan > "+plan);
-	console.log("comentario > "+ comentario);
+
+	console.log("nombre > "	 		+nombre);
+	console.log("sexo > "	 		+sexo);
+	console.log("edad > "	 		+edad);
+	console.log("cp > "		 		+cp);
+	console.log("estatura > "		+estatura);
+	console.log("peso > "	 		+peso);
+	console.log("ideal > "	 		+ideal);
+	console.log("coach_type > "		+coach_type);
+	console.log("frecuencia > "		+frecuencia);
+	console.log("restricciones > "	+restricciones);
+	console.log("plan > "			+plan);
+	console.log("comentario > "		+comentario);
 
 	$('.cpur').html(nombre +" "+ apellido);
 	$('.edit-profile span').html(nombre +" "+ apellido);
@@ -268,7 +269,7 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 	console.log('suma '+suma);
 	console.log('coach> '+ coach_type);
 
-	$('.tipo_coach .co-option:nth-of-type('+suma+')').addClass('active');
+	//$('.tipo_coach .co-option:nth-of-type('+suma+')').addClass('active');
 
 	switch(coach_type){
 			case '0': 
@@ -288,7 +289,7 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 				$('.co-option.active img:not(.question)').attr("src",'images/coach/tradicional2.png');
 				break;
 		}
-	$('#frecuencia_perfil').html(frecuencia+" días por semana");
+	$('#frecuencia_perfil').html(frecuencia +" días por semana");
 	$('#ejercicio-dato').html(frecuencia);
 
 
@@ -299,7 +300,7 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 	$('.the-comment').html(comentario);
 
 
-$('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
+//$('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 	var suma = parseInt(plan)+1;
 	console.log('suma '+suma);
 
@@ -343,7 +344,7 @@ $('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 	$(function createSwipe () {
 	    imgs = $(".cslider");
 	    imgs.swipe(swipeOptions);
-	});
+	}); //end createSwipe
 
 	function swipeStatus(event, phase, direction, distance) {
 	    if (phase == "move" && (direction == "left" || direction == "right")) {
@@ -365,25 +366,24 @@ $('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 	            nextImage();
 	        }
 	    }
-	}
+	} //end swipeStatus
 
 	function previousImage() {
 	    currentImg = Math.max(currentImg - 1, 0);
 	    scrollImages(IMG_WIDTH * currentImg, speed);
-	}
+	}//end previousImage
 
 	function nextImage() {
 	    currentImg = Math.min(currentImg + 1, maxImages - 1);
 	    scrollImages(IMG_WIDTH * currentImg, speed);
-	}
+	}//end nextImage
 
 	function scrollImages(distance, duration) {
 	    imgs.css("transition-duration", (duration / 1000).toFixed(1) + "s");
 	    var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
 	    imgs.css("transform", "translate(" + value + "px,0)");
-	}
-	    
-});
+	}//end scrollImages
+});// end Window on Load Resize
 
 $(window).load(function(){
 	$(function() {
@@ -733,7 +733,7 @@ if(day_index == 0){
     	dow = week[i].getDate();
     	var masuno = i+1;
     	//console.log(dow);
-    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
+    	//$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
 
 
     }
@@ -761,7 +761,7 @@ if(day_index == 0){
 		    	dow = week2[i].toString().slice(8, 11);
 		    	var masuno = i+1;
 		    	console.log(dow);
-		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
+		    	//$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
 		    }
 
 
@@ -788,7 +788,7 @@ if(day_index == 0){
 			    	dow = week2[i].toString().slice(8, 11);
 			    	var masuno = i+1;
 			    	console.log(dow);
-			    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
+			    	//$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
 			    }
 			// }
 		});
@@ -920,16 +920,16 @@ if(day_index == 0){
 
 		$('#add_updated_profile').on('click', function(){
 
-				var genero 		= localStorage.setItem('genero', $('#update_sexo').val() );
-				localStorage.setItem('edad', $('#edad_value').val() );
-				var zipcode 	=  localStorage.setItem('zipcode', $('input[name="zipocode"]').val() );
-				var estatura 	= localStorage.setItem('estatura', $('input[name="estatura"]').val() );
-				var peso 		= localStorage.setItem('peso', $('input[name="peso"]').val() );
-				var peso_ideal 	= localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
-				var coach_type 	= localStorage.setItem('coach_type', $('#coach_type').val() );
-				var dpw 		= localStorage.setItem('dpw', $('#days_per_week').val() );
-				var comentario 	= localStorage.setItem('comentario', $('#comentar').val() );
-				var plan 		= localStorage.setItem('plan', $('#plan').val() );
+				var genero 		= localStorage.setItem('genero', 	  $('#update_sexo').val() );
+				var edad 		= localStorage.setItem('edad', 		  $('#edad_value').val() );
+				var zipcode 	= localStorage.setItem('zipcode', 	  $('input[name="zipocode"]').val() );
+				var estatura 	= localStorage.setItem('estatura', 	  $('input[name="estatura"]').val() );
+				var peso 		= localStorage.setItem('peso', 		  $('input[name="peso"]').val() );
+				var peso_ideal 	= localStorage.setItem('peso_ideal',  $('input[name="ideal"]').val() );
+				var coach_type 	= localStorage.setItem('coach_type',  $('#coach_type').val() );
+				var dpw 		= localStorage.setItem('dpw', 		  $('#days_per_week').val() );
+				var comentario 	= localStorage.setItem('comentarios', $('#comentar').val() );
+				var plan 		= localStorage.setItem('coach_type',  $('#plan').val() );
 				
 				var json = {
 				"sexo" : genero,
@@ -1384,7 +1384,7 @@ if(day_index == 0){
 			//coach_type
 			localStorage.setItem('coach_type', $('#coach_type').val() );
 
-			 var plan 		= localStorage.getItem('plan', $('#plan').val() );
+			 var plan 		= localStorage.getItem('coach_type', $('#plan').val() );
 			 var coach_type = localStorage.getItem('coach_type', $('#coach_type').val() );
 
 			console.log(" plan> "+ plan+" coachType> "+ coach_type);
@@ -1500,7 +1500,7 @@ if(day_index == 0){
 									
 									console.log( key + " ::: " + value );
 									if (key=='id') {
-										$(".wrap-cslide .cslider:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
+										//$(".wrap-cslide .cslider:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
 										console.log(value);
 									}
 									if (key=='nombre') {
@@ -1510,15 +1510,15 @@ if(day_index == 0){
 										LastN = value;
 									}
 									if (key=='frase') {
-										$(".wrap-cslide .cslider:nth-of-type("+i+") p.short-descrip b").html(value);
+										//$(".wrap-cslide .cslider:nth-of-type("+i+") p.short-descrip b").html(value);
 										console.log(value);
 									}
 									if (key=='bio') {
-										$(".wrap-cslide .cslider:nth-of-type("+i+") pre.short-descrip").html(value);
+										//$(".wrap-cslide .cslider:nth-of-type("+i+") pre.short-descrip").html(value);
 										console.log(value);
 									}
 								});
-								$(".wrap-cslide .cslider:nth-of-type("+i+") h5.name").html(Name+" "+LastN);
+								//$(".wrap-cslide .cslider:nth-of-type("+i+") h5.name").html(Name+" "+LastN);
 								console.log(Name+" "+LastN);
 							}
   						});
@@ -1753,8 +1753,6 @@ if(day_index == 0){
 				}//end FOR				
 				
 			}// end ELSE
-
-			
 
 			console.log(restricciones);
 
@@ -2008,49 +2006,49 @@ if(day_index == 0){
 /*
 	CAMARA
 */
-// 	function setOptions(srcType) {
-// 	    var options = {
-// 	        // Some common settings are 20, 50, and 100
-// 	        quality: 50,
-// 	        destinationType: Camera.DestinationType.FILE_URI,
-// 	        // In this app, dynamically set the picture source, Camera or photo gallery
-// 	        sourceType: srcType,
-// 	        encodingType: Camera.EncodingType.JPEG,
-// 	        mediaType: Camera.MediaType.PICTURE,
-// 	        allowEdit: true,
-// 	        correctOrientation: true  //Corrects Android orientation quirks
-// 	    }
-// 	    return options;
-// 	}
+	function setOptions(srcType) {
+	    var options = {
+	        // Some common settings are 20, 50, and 100
+	        quality: 50,
+	        destinationType: Camera.DestinationType.FILE_URI,
+	        // In this app, dynamically set the picture source, Camera or photo gallery
+	        sourceType: srcType,
+	        encodingType: Camera.EncodingType.JPEG,
+	        mediaType: Camera.MediaType.PICTURE,
+	        allowEdit: true,
+	        correctOrientation: true  //Corrects Android orientation quirks
+	    }
+	    return options;
+	}
 
-// 	function openCamera(selection) {
+	function openCamera(selection) {
 
-//     var srcType = Camera.PictureSourceType.CAMERA;
-//     var options = setOptions(srcType);
-//     var func = createNewFileEntry;
+    var srcType = Camera.PictureSourceType.CAMERA;
+    var options = setOptions(srcType);
+    var func = createNewFileEntry;
 
-//     navigator.camera.getPicture(function cameraSuccess(imageUri) {
+    navigator.camera.getPicture(function cameraSuccess(imageUri) {
 
-//         displayImage(imageUri);
-//         // You may choose to copy the picture, save it somewhere, or upload.
-//         func(imageUri);
+        //displayImage(imageUri);
+        // You may choose to copy the picture, save it somewhere, or upload.
+        func(imageUri);
 
-//     }, function cameraError(error) {
-//         console.debug("Unable to obtain picture: " + error, "app");
+    }, function cameraError(error) {
+        console.debug("Unable to obtain picture: " + error, "app");
 
-//     }, options);
-// }
-// function displayImage(imgUri) {
+    }, options);
+}
+function displayImage(imgUri) {
 
-//     var elem = document.getElementById('imageFile');
-//     elem.src = imgUri;
-// }
+    var elem = document.getElementById('imageFile');
+    elem.src = imgUri;
+}
 	
 	$('#add_picture_profile').on('click', function(){
 		console.log("camara");
 
-		// setOptions();
-		// openCamera();
+		 setOptions();
+		 openCamera();
 
 	});
 });// end winow onload

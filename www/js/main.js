@@ -1018,7 +1018,7 @@
 				data_login.pass = $('#pass').val();
 				var responsedata = apiRH.loginNative(data_login);
 
-			  	console.log("RESPUESTA: " + responsedata);
+			  	//console.log("RESPUESTA: " + responsedata);
 
 				if(responsedata){
 				 	//apiRH.save_user_data_clientside(responsedata);
