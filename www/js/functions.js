@@ -1465,20 +1465,14 @@ if($('body').hasClass('dieta') ){
 				case 'estricto' : 
 					$('#coach_type').attr("value", "0");
 					break;
-				case 'analitico':
+				case 'innovador' :
 					$('#coach_type').attr("value", "1");
 					break;
-				case 'medico' :
+				case 'animador' :
 					$('#coach_type').attr("value", "2");
 					break;
-				case 'innovador' :
-					$('#coach_type').attr("value", "3");
-					break;
-				case 'animador' :
-					$('#coach_type').attr("value", "4");
-					break;
 				case 'tradicional' :
-					$('#coach_type').attr("value", "5");
+					$('#coach_type').attr("value", "3");
 					break;	
 			}
 
