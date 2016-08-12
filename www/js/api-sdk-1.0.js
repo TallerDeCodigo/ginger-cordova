@@ -283,46 +283,30 @@ function requestHandlerAPI(){
 
 		//Conekta
 
-		this.makePayment = function(data)
+		this.makePayment = function(token)
 		{
-			Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
-
-			var errorResponseHandler, successResponseHandler, tokenParams;
-				tokenParams = {
-				  "card": {
-				    "number": "4242424242424242",
-				    "name": "Javier Pedreiro",
-				    "exp_year": "2019",
-				    "exp_month": "12",
-				    "cvc": "123",
-				    "address": {
-				        "street1": "Calle 123 Int 404",
-				        "street2": "Col. Condesa",
-				        "city": "Ciudad de Mexico",
-				        "state": "Distrito Federal",
-				        "zip": "12345",
-				        "country": "Mexico"
-				    }
+			var req = {
+				method : 'post',
+				url : api_base_url + 'api/history/',	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'Content-Type': 'application/json'
+				},
+				data : {
+					'cliente' : localStorage.getItem('userId'),
+					'card_token' : token
 				}
-			};
+			}
+			console.log(req);
 
-				/* Después de tener una respuesta exitosa, envía la información al servidor */
+			var response = this.makeRequest('api/history', req);
 
-				successResponseHandler = function(token) {
-				  return $.post('/process_payment?token_id=' + token.id, function() {
-				    return document.location = 'payment_succeeded';
-				  });
-				};
+			console.log("Request Data Cliente");
 
-				/* Después de recibir un error */
+			console.log(response);  //llega aqui con la respuesta del servidor
 
-				errorResponseHandler = function(error) {
-				  return console.log(error.message);
-				};
-
-				/* Tokenizar una tarjeta en Conekta */
-
-			Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
+			return (response) ? response : false;
 
 		};
 

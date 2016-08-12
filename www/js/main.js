@@ -1042,7 +1042,11 @@
 		var  t_terms 	= $('input[name="terms"]').val(); 
 
 		
-		function conekta(){	
+		function conekta()
+		{	
+
+			Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
+			
 			var errorResponseHandler, successResponseHandler, tokenParams;
 			tokenParams = {
 			  "card": {
@@ -1053,16 +1057,23 @@
 			    "cvc": t_cvc
 			  }
 			};
-			successResponseHandler = function(token) {
-			  return $.post('/process_payment?token_id=' + token.id, function() {
-			    return document.location = 'payment_succeeded';
-			  });
+
+			successResponseHandler = function(token) 
+			{
+				var response = apiRH.makePayment(token.id);
+
+				if(response)
+					window.location.assign('dieta.html');
+				else
+					alert("Error al procesar tu pago");
+				return;
 			};
 
 			/* Después de recibir un error */
 
 			errorResponseHandler = function(error) {
 			  return console.log(error.message);  //error de conectividad
+			  alert('Error al procesar tu pago');
 			};
 
 			/* Tokenizar una tarjeta en Conekta */
@@ -1073,9 +1084,6 @@
 
 		conekta();
 
-		window.location.assign('dieta.html');
-
-		console.log();
 	});//endCLICK
 
 		//MARK NOTIFICATION AS READ
