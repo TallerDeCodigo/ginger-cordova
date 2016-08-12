@@ -729,7 +729,8 @@
 		    };
 		    navigator.geolocation.getCurrentPosition(onSuccess, onError, {maximumAge: 300000, timeout:10000, enableHighAccuracy : true});
 		},
-		get_file_from_device: function(destination, source){
+		get_file_from_device: function(destination, source)
+		{
 			apiRH.getFileFromDevice(destination, source);		
 		},
 		showLoader: function(){
@@ -1042,48 +1043,57 @@
 		var  t_cupon 	= $('input[name="cupon"]').val(); 
 		var  t_terms 	= $('input[name="terms"]').val(); 
 
+		Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
 		
-		function conekta()
-		{	
+		var errorResponseHandler, successResponseHandler, tokenParams;
 
-			Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
-			
-			var errorResponseHandler, successResponseHandler, tokenParams;
-			tokenParams = {
-			  "card": {
-			    "number": t_card,
-			    "name": t_nombre,
-			    "exp_year": t_ano,
-			    "exp_month": t_mes,
-			    "cvc": t_cvc
-			  }
-			};
+		tokenParams = {
+		  "card": {
+		    "number": t_card,
+		    "name": t_nombre,
+		    "exp_year": t_ano,
+		    "exp_month": t_mes,
+		    "cvc": t_cvc
+		  }
+		};
 
-			successResponseHandler = function(token) 
-			{
-				var response = apiRH.makePayment(token.id);
+		successResponseHandler = function(token) 
+		{
+			var response = apiRH.makePayment(token.id);
+
+			// Funcion de mensaje de bienvenida
+
+			if(response){
+				var coachId = localStorage.setItem('coachId');	
+				var dietaId = localStorage.setItem('dietaId');
+				var json = {
+					"coach" : coachId,
+					"dieta" : dietaId	
+				};
+				//Actualizamos Coach y Dieta para el Usuario
+				var response = apiRH.updatePerfil(JSON);
 
 				if(response)
 					window.location.assign('dieta.html');
 				else
-					alert("Error al procesar tu pago");
-				return;
-			};
+					alert("Error al actualizar datos");
+			}else{
+				alert("Error al procesar tu pago");
+			}
+			return;
+		};
 
-			/* Después de recibir un error */
+		/* Después de recibir un error */
 
-			errorResponseHandler = function(error) {
-			  return console.log(error.message);  //error de conectividad
-			  alert('Error al procesar tu pago');
-			};
+		errorResponseHandler = function(error) {
+		  return console.log(error.message);  //error de conectividad
+		  alert('Error al procesar tu pago');
+		};
 
-			/* Tokenizar una tarjeta en Conekta */
+		/* Tokenizar una tarjeta en Conekta */
 
-			Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
+		Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
 
-		}
-
-		conekta();
 
 	});//endCLICK
 

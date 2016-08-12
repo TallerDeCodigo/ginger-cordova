@@ -324,7 +324,7 @@ function requestHandlerAPI(){
 		this.makePayment = function(token)
 		{
 			var req = {
-				method : 'post',
+				method : 'POST',
 				url : api_base_url + 'api/history/',	//definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
@@ -344,7 +344,7 @@ function requestHandlerAPI(){
 
 			console.log(response);  //llega aqui con la respuesta del servidor
 
-			return (response) ? response : false;
+			return (response.statusText == "OK") ? true : false;
 
 		};
 
@@ -586,8 +586,6 @@ function requestHandlerAPI(){
 
 			sdk_app_context.showLoader();
 			var result = {};
-
-			console.log(data.data);
 
 			$.ajax({
 			  type: 'POST',
