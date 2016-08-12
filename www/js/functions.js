@@ -267,7 +267,7 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 
 	var suma = parseInt(coach_type)+1;
 	console.log('suma '+suma);
-	console.log('coach> '+ coach_type);
+	console.log('coach type> '+ coach_type);
 
 	//$('.tipo_coach .co-option:nth-of-type('+suma+')').addClass('active');
 
@@ -292,9 +292,7 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 	$('#frecuencia_perfil').html(frecuencia +" días por semana");
 	$('#ejercicio-dato').html(frecuencia);
 
-
-	$('#restricciones_perfil').html(restricciones);
-
+	$('#restricciones_perfil').html(document.write(restricciones.join(", ")););
 
 	$('#comentario_perfil').html(comentario);
 	$('.the-comment').html(comentario);

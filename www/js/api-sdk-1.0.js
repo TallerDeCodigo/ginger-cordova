@@ -150,7 +150,7 @@ function requestHandlerAPI(){
 					localStorage.setItem('customerId', user.customerId);
 						console.log("customerId> "+user.customerId);
 					localStorage.setItem('chatId', user.chatId);
-						console.log("chatId> "+user.chatId);
+						console.log("chatId> "+user.jid);
 					localStorage.setItem('chatId', user.chatId);
 						console.log("chatId> "+user.chatId);
 					localStorage.setItem('dietaId', user.dieta._id);
