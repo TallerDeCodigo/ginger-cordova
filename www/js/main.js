@@ -18,6 +18,10 @@
 			
 			var is_login = apiRH.has_token();
 
+			var is_client = localStorage.getItem('customerId');
+
+			var is_current = localStorage.getItem('valido');
+
 			console.log(is_login);
 
 			/* IMPORTANT to set requests to be syncronous */
@@ -42,9 +46,7 @@
 							window.user_role 	= (log_info) ? log_info.user_role 	: ' '; */
 			if(is_login)
 				loggedIn = true;
-		
-			
-			
+	
 			/* Check if has a valid token */
 			//var response = apiRH.has_valid_token();
 
@@ -58,8 +60,7 @@
 
 				if(is_home){
 					return;
-				}
-				else{
+				}else{
 					if(is_feed)
 						return;
 					else	
@@ -67,7 +68,7 @@
 				}	
 				return;
 			}else{
-				//window.location.assign('inicio.html');
+				//window.location.assign('feed.html');
 				return;
 
 			}
