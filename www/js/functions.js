@@ -401,19 +401,6 @@ $(window).load(function(){
 
 if($('body').hasClass('dieta') ){
 
-
-	/*
-
-		REQUEST DIETA
-
-
-	*/
-
-
-/*
-	OBTIENE EL DIA DE HOY
-*/
-
 var today = new Date();
 var hoy = today.getDay();
 var day_index;
@@ -436,242 +423,6 @@ var ingredientes;
 
 //console.log('DIETA');
 //console.log(JSON.stringify(dieta));
-
-// switch(hoy){
-// 	case 0: 
-// 		console.log('domingo');
-// 		day_index = 0;
-// 		var domingo_desayuno = dieta.estructura.domingo.desayuno;
-// 		var domingo_snack1 = dieta.estructura.domingo.snack1;
-// 		var domingo_comida = dieta.estructura.domingo.comida;
-// 		var domingo_snack2 = dieta.estructura.domingo.snack2;
-// 		var domingo_cena = dieta.estructura.domingo.cena;
-// 		break;
-// 	case 1: 
-// 		console.log('lunes');
-// 		day_index = 1;
-// 		var lunes_desayuno = dieta.estructura.lunes.desayuno;
-// 		var lunes_snack1 = dieta.estructura.lunes.snack1;
-// 		var lunes_comida = dieta.estructura.lunes.comida;
-// 		var lunes_snack2 = dieta.estructura.lunes.snack2;
-// 		var lunes_cena = dieta.estructura.lunes.cena;
-// 		break;
-// 	case 2: 
-// 		console.log('martes');
-// 		day_index = 2;
-// 		var martes_desayuno = dieta.estructura.martes.desayuno;
-// 		var martes_snack1 = dieta.estructura.martes.snack1;
-// 		var martes_comida = dieta.estructura.martes.comida;
-// 		var martes_snack2 = dieta.estructura.martes.snack2;
-// 		var martes_cena = dieta.estructura.martes.cena;
-// 		break;
-// 	case 3: 
-// 		console.log('miercoles');
-// 		day_index = 3;
-// 		var miercoles_desayuno = dieta.estructura.miercoles.desayuno;
-// 		var miercoles_snack1 = dieta.estructura.miercoles.snack1;
-// 		var miercoles_comida = dieta.estructura.miercoles.comida;
-// 		var miercoles_snack2 = dieta.estructura.miercoles.snack2;
-// 		var miercoles_cena = dieta.estructura.miercoles.cena;
-// 		break;
-// 	case 4: 
-// 		console.log('jueves');
-// 		day_index = 4;
-// 		var jueves_desayuno = dieta.estructura.jueves.desayuno;
-// 		var jueves_snack1 = dieta.estructura.jueves.snack1;
-// 		var jueves_comida = dieta.estructura.jueves.comida;
-// 		var jueves_snack2 = dieta.estructura.jueves.snack2;
-// 		var jueves_cena = dieta.estructura.jueves.cena;
-// 		break;
-// 	case 5: 
-// 		console.log('viernes');
-// 		day_index = 5;
-// 		var viernes_desayuno = dieta.estructura.viernes.desayuno;
-// 		var viernes_snack1 = dieta.estructura.viernes.snack1;
-// 		var viernes_comida = dieta.estructura.viernes.comida;
-// 		var viernes_snack2 = dieta.estructura.viernes.snack2;
-// 		var viernes_cena = dieta.estructura.viernes.cena;
-// 		break;
-// 	case 6: 
-// 		console.log('sabado');
-// 		day_index = 6;
-// 		var sabado_desayuno = dieta.estructura.sabado.desayuno;
-// 		var sabado_snack1 = dieta.estructura.sabado.snack1;
-// 		var sabado_comida = dieta.estructura.sabado.comida;
-// 		var sabado_snack2 = dieta.estructura.sabado.snack2;
-// 		var sabado_cena = dieta.estructura.sabado.cena;
-// 		break;
-// }
-
-// 	//Estructura de la diet
-// if(day_index == 0){	
-// 	arr_desayuno 	= Object.keys(domingo_desayuno).map(function(k) { return dieta.estructura.domingo.desayuno[k] });	
-// 	arr_snack1 		= Object.keys(domingo_snack1).map(function(k) 	{ return dieta.estructura.domingo.snack1[k] });	
-// 	arr_comida		= Object.keys(domingo_comida).map(function(k) 	{ return dieta.estructura.domingo.comida[k] });	
-// 	arr_snack2 		= Object.keys(domingo_snack2).map(function(k) 	{ return dieta.estructura.domingo.snack2[k] });	
-// 	arr_cena 		= Object.keys(domingo_cena).map(function(k) 	{ return dieta.estructura.domingo.cena[k] });
-// 	var arr_tiempos = [];
-// 	arr_tiempos.push(arr_desayuno, arr_snack1, arr_comida, arr_snack2, arr_cena);
-// }else if(day_index == 1){	
-// 	arr_desayuno 	= Object.keys(lunes_desayuno).map(function(k) 	{ return dieta.estructura.lunes.desayuno[k] });	
-// 	arr_snack1 		= Object.keys(lunes_snack1).map(function(k) 	{ return dieta.estructura.lunes.snack1[k] });	
-// 	arr_comida		= Object.keys(lunes_comida).map(function(k) 	{ return dieta.estructura.lunes.comida[k] });	
-// 	arr_snack2 		= Object.keys(lunes_snack2).map(function(k) 	{ return dieta.estructura.lunes.snack2[k] });	
-// 	arr_cena 		= Object.keys(lunes_cena).map(function(k) 		{ return dieta.estructura.lunes.cena[k] });
-// 	var arr_tiempos = [];
-// 	arr_tiempos.push(arr_desayuno, arr_snack1, arr_comida, arr_snack2, arr_cena);
-// }else if(day_index == 2){	
-// 	arr_desayuno 	= Object.keys(martes_desayuno).map(function(k) 	{ return dieta.estructura.martes.desayuno[k] });	
-// 	arr_snack1 		= Object.keys(martes_snack1).map(function(k) 	{ return dieta.estructura.martes.snack1[k] });	
-// 	arr_comida		= Object.keys(martes_comida).map(function(k) 	{ return dieta.estructura.martes.comida[k] });	
-// 	arr_snack2 		= Object.keys(martes_snack2).map(function(k) 	{ return dieta.estructura.martes.snack2[k] });	
-// 	arr_cena 		= Object.keys(martes_cena).map(function(k) 		{ return dieta.estructura.martes.cena[k] });
-// 	var arr_tiempos = [];
-// 	arr_tiempos.push(arr_desayuno, arr_snack1, arr_comida, arr_snack2, arr_cena);
-// }else if(day_index == 3){	
-// 	arr_desayuno 	= Object.keys(miercoles_desayuno).map(function(k) 	{ return dieta.estructura.miercoles.desayuno[k] });	
-// 	arr_snack1 		= Object.keys(miercoles_snack1).map(function(k) 	{ return dieta.estructura.miercoles.snack1[k] });	
-// 	arr_comida		= Object.keys(miercoles_comida).map(function(k) 	{ return dieta.estructura.miercoles.comida[k] });	
-// 	arr_snack2 		= Object.keys(miercoles_snack2).map(function(k) 	{ return dieta.estructura.miercoles.snack2[k] });	
-// 	arr_cena 		= Object.keys(miercoles_cena).map(function(k) 		{ return dieta.estructura.miercoles.cena[k] });
-// 	var arr_tiempos = [];
-// 	arr_tiempos.push(arr_desayuno, arr_snack1, arr_comida, arr_snack2, arr_cena);
-// }else if(day_index == 4){	
-// 	arr_desayuno 	= Object.keys(jueves_desayuno).map(function(k) 	{ return dieta.estructura.jueves.desayuno[k] });	
-// 	arr_snack1 		= Object.keys(jueves_snack1).map(function(k) 	{ return dieta.estructura.jueves.snack1[k] });	
-// 	arr_comida		= Object.keys(jueves_comida).map(function(k) 	{ return dieta.estructura.jueves.comida[k] });	
-// 	arr_snack2 		= Object.keys(jueves_snack2).map(function(k) 	{ return dieta.estructura.jueves.snack2[k] });	
-// 	arr_cena 		= Object.keys(jueves_cena).map(function(k) 		{ return dieta.estructura.jueves.cena[k] });
-// 	var arr_tiempos = [];
-// 	arr_tiempos.push(arr_desayuno, arr_snack1, arr_comida, arr_snack2, arr_cena);
-// }else if(day_index == 5){
-// 	arr_desayuno 	= Object.keys(viernes_desayuno).map(function(k) { return dieta.estructura.viernes.desayuno[k] });	
-// 	arr_snack1 		= Object.keys(viernes_snack1).map(function(k) 	{ return dieta.estructura.viernes.snack1[k] });	
-// 	arr_comida		= Object.keys(viernes_comida).map(function(k) 	{ return dieta.estructura.viernes.comida[k] });	
-// 	arr_snack2 		= Object.keys(viernes_snack2).map(function(k) 	{ return dieta.estructura.viernes.snack2[k] });	
-// 	arr_cena 		= Object.keys(viernes_cena).map(function(k) 	{ return dieta.estructura.viernes.cena[k] });
-// 	var arr_tiempos = [];
-// 	arr_tiempos.push(arr_desayuno, arr_snack1, arr_comida, arr_snack2, arr_cena);
-// }else if(day_index == 6){	
-// 	arr_desayuno 	= Object.keys(sabado_desayuno).map(function(k) 	{ return dieta.estructura.sabado.desayuno[k] });	
-// 	arr_snack1 		= Object.keys(sabado_snack1).map(function(k) 	{ return dieta.estructura.sabado.snack1[k] });	
-// 	arr_comida		= Object.keys(sabado_comida).map(function(k) 	{ return dieta.estructura.sabado.comida[k] });	
-// 	arr_snack2 		= Object.keys(sabado_snack2).map(function(k) 	{ return dieta.estructura.sabado.snack2[k] });	
-// 	arr_cena 		= Object.keys(sabado_cena).map(function(k) 		{ return dieta.estructura.sabado.cena[k] });
-// 	var arr_tiempos = [];
-// 	arr_tiempos.push(arr_desayuno, arr_snack1, arr_comida, arr_snack2, arr_cena);
-// }else{
-// 	console.log("none");
-// }
-
-// 	for(var i=0; i<arr_desayuno.length; i++){
-// 		comm_id = arr_desayuno[i].a.comentario;
-// 		platillo_id = arr_desayuno[i].a.platillo;
-// 		// console.log(comm_id);
-// 		// console.log(platillo_id + " >");
-// 	}
-
-// /*
-// 	RECORRE EL ARRAY QUE SE GENERA POR DIA TIEMPOS
-// */
-
-// 	for(var i=0; i<arr_tiempos.length; i++){
-// 		var tiempos = arr_tiempos[i];
-// 		console.log(tiempos);
-// 	}
-
-// /*
-// 	OBTIENE EL NOMBRE DE LA RECETA
-// */
-// 	var getNombre_receta = function( id ){
-// 			for(var i=0; i<platillos.length; i++){
-// 				if(id == platillos[i]._id ){
-// 					if(platillos[i].descripcion != null){
-// 						nombre_receta = platillos[i].descripcion;
-// 						//console.log("nombre> "+nombre_receta);
-// 					}else{
-// 						console.log("no tiene nombre de la receta");
-// 					}
-// 				}else{
-// 					//console.log('no tiene id');
-// 				}
-// 			}//endFor
-// 	}//endFunction getNombre_receta
-
-// 	getNombre_receta(platillo_id);
-// 	console.log("nombre> "+nombre_receta);
-// /*
-// 	OBTIENE LA RECETA
-// */
-// 	var getRecetas = function( id ){
-		
-// 			for(var i=0; i<platillos.length; i++){
-// 				if(id == platillos[i]._id){
-// 					if(platillos[i].receta != null){
-// 						receta = platillos[i].receta;
-// 					}else{
-// 						console.log("no tiene platillo");
-// 					}
-// 				}else{
-// 					//console.log('no tiene id');
-// 				}
-// 			}//endFor
-
-// 	}//endFunction getRecetas
-
-// 	getRecetas(platillo_id);
-// 	console.log("receta> "+receta);
-
-
-// /*
-// 	OBTIENE LOS INGREDIENTES DE LA RECETA
-// */
-// 	var getIngredientes = function( id ){
-// 		for(var i=0; i<platillos.length; i++){
-// 			if(id == platillos[i]._id){
-// 				if(platillos[i].ingredientes != null){
-// 						ingredientes = platillos[i].ingredientes;
-// 					}else{
-// 						console.log("no tiene ingredientes");
-// 					}
-// 				}else{
-// 					//console.log('no tiene id');
-// 				}
-// 			//console.log(ingredientes);
-// 			}
-// 		}
-// 	getIngredientes(platillo_id);
-// 	console.log("ingredientes> "+ingredientes);
-
-
-// /*
-// 	OBTIENE LOS COMENTARIOS DE LA RECETA
-// */
-// 	var getComentarios = function( id ){
-// 		for(var i=0; i<comentarios.length; i++){
-// 			if(id == comentarios[i]._id){
-// 				if(comentarios[i].comment != null ){
-// 					comments = comentarios[i].comment;
-// 				}else{
-// 					console.log("no tiene comentario> ");
-// 				}
-// 			}else{
-// 				//console.log("no tiene id");
-// 			}
-// 		}
-// 	}
-// 	getComentarios(comm_id);
-// 	console.log("comentarios> "+comments);
-
-
-// 	var dish = {
-// 				"nombre_receta" : nombre_receta,
-// 				"receta" : receta,
-// 				"comentarios" : comments , 
-// 				"ingredientes" : ingredientes
-// 			}
-
-// //console.log(dish);
 
 var losplatos = [];
 var i=0;
@@ -722,14 +473,10 @@ for (var i=0; i<losplatos.length; i++) {
 	}
 }
 
+// console.log(losplatos);
 
-
-console.log(losplatos);
-
-console.log('DIETA');
-console.log(JSON.stringify(dieta));
-
-
+// console.log('DIETA');
+// console.log(JSON.stringify(dieta));
 
 var dieta_array = [];
 
@@ -760,6 +507,7 @@ $.each( dieta.estructura, function( key, value ) {
 							for (var i = 0; i < losplatos.length; i++) {
 								if (value==losplatos[i][0]) {
 									// console.log(losplatos[i][1]+"<"+losplatos[i][2]+"<"+losplatos[i][4]);
+									$(masadentro).attr("data", losplatos[i][0]);
 									$(masadentro+' h5').html(losplatos[i][1]);
 									if (losplatos[i][2]!="") {
 										$(masadentro+' p.receta').html(losplatos[i][2]);
@@ -784,6 +532,7 @@ $.each( dieta.estructura, function( key, value ) {
 							for (var i = 0; i < losplatos.length; i++) {
 								if (value==losplatos[i][0]) {
 									// console.log(losplatos[i][1]+"<"+losplatos[i][2]+"<"+losplatos[i][4]);
+									$(masadentro).attr("data", losplatos[i][0]);
 									$(masadentro+' h5').html(losplatos[i][1]);
 									if (losplatos[i][2]!="") {
 										$(masadentro+' p.receta').html(losplatos[i][2]);
@@ -805,6 +554,12 @@ $.each( dieta.estructura, function( key, value ) {
 			});
 		});
 	});
+});
+
+$('.platillo').each(function() {
+    if ($(this).attr('data') === undefined) {
+      $(this).remove();
+    }
 });
 
 
@@ -935,7 +690,8 @@ $.each( dieta.estructura, function( key, value ) {
 			    }
 			// }
 		});
-}//end date
+
+}//end date ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		var restricciones = new Array();
 
