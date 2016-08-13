@@ -214,7 +214,6 @@ $(window).on("load resize",function(){
 			console.log(msg_return);
 		}
 	});
-	
 /*
 	ADD PROFILE DATA TO PROFILE VIEWS
 */
@@ -1382,23 +1381,18 @@ if(day_index == 0){
 		});
 
 		$('#finish2').click(function(){
-
 			$('.objetive').animate({opacity:"0",left:"-40px"}, 200);
 			$('.bgre').removeClass('active');
 			$('.bred').addClass('active');
-
-
 /*
 	localStorage PLAN / COACH_TYPE
 */
 			//plan
 			localStorage.setItem('plan', $('#plan').val() );
-			
 			//coach_type
 			localStorage.setItem('coach_type', $('#coach_type').val() );
-
-			 var plan 		= localStorage.getItem('coach_type', $('#plan').val() );
-			 var coach_type = localStorage.getItem('coach_type', $('#coach_type').val() );
+			var plan 		= localStorage.getItem('coach_type', $('#plan').val() );
+			var coach_type = localStorage.getItem('coach_type', $('#coach_type').val() );
 
 			console.log(" plan> "+ plan+" coachType> "+ coach_type);
 
@@ -1585,6 +1579,7 @@ if(day_index == 0){
 		});
 
 		$('.back').click(function(){
+	            window.location.assign('crear.html');
 			if($('.objetive').is(':visible')){
 				$('.objetive').animate({opacity:"0",left:"40px"}, 200);
 				$('.bgre').removeClass('active');
@@ -1594,7 +1589,7 @@ if(day_index == 0){
 	        		$(".aboutyou").show();
 	        		$(".aboutyou").animate({opacity:"1",left:"0px"}, 200);
 	            }, 250);
-	            $(".back").hide();
+	            //$(".back").hide();
 			} else if($('.exercise').is(':visible')){
 				$('.exercise').animate({opacity:"0",left:"40px"}, 200);
 				$('.bred').removeClass('active');
