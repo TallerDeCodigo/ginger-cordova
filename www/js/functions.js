@@ -303,10 +303,6 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 	$('#frecuencia_perfil').html(frecuencia +" días por semana");
 	$('#ejercicio-dato').html(frecuencia);
 
-	var parseado = JSON.parse(restricciones);
-	restricciones = parseado.join(", ");
-	$('#restricciones_perfil').html(restricciones);
-
 	$('#comentario_perfil').html(comentario);
 	$('.the-comment').html(comentario);
 
@@ -314,31 +310,34 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 //$('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 	console.log("plan> "+plan);
 	var suma = parseInt(plan)+1;
-	console.log('suma '+suma);
+	console.log('suma '+plan);
 
 
 		switch(plan){
-			case "0":
+			case "1":
 			$('#plan_perfil').html("Adelgazar");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/perderpeso2.png');
 			//console.log('adelgazar');
 			break;
-			case "1":
+			case "2":
 			$('#plan_perfil').html("Detox");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/detox2.png');
 			//console.log('detox');
 			break;
-			case "2":
+			case "3":
 			$('#plan_perfil').html("Sentirse mejor");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/sentirsemejor2.png');
 			//console.log('bienestar');
 			break;
-			case "3":
+			case "4":
 			$('#plan_perfil').html("Rendimiento físico");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/rendimientofisico2.png');
 			//console.log('rendimiento');
 			break;
 		}
+		var parseado = JSON.parse(restricciones);
+		restricciones = parseado.join(", ");
+		$('#restricciones_perfil').html(restricciones);
 }//end if has class
 
 
