@@ -399,7 +399,24 @@ function requestHandlerAPI(){
 		// GET PAYMENTS FOR USER
 		
 		this.getPaymentAccount = function(data){
+			var req = {
+				method : 'patch',
+				url : api_base_url + 'api/history/' + data._id,	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': this.token,
+					'Content-Type': 'application/json'
+				},
+				data : {
+					
+				}
+			}
 
+			var response = this.makeRequest('api/history/' + data._id, req);
+
+			console.log(response);  //llega aqui con la respuesta del servidor
+
+			return (response) ? response : false;
 		};
 
 		/* 
