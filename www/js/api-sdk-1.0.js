@@ -264,7 +264,7 @@ function requestHandlerAPI(){
 		this.updatePerfil = function(data){
 			var req = {
 				method : 'PATCH',
-				url : api_base_url + 'tables/cliente/' + localStorage.getItem('userId') ,	//definitr tabla
+				url : api_base_url + 'tables/cliente/' + localStorage.getItem('userId') ,
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
 					'X-ZUMO-AUTH': localStorage.getItem('token'),

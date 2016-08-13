@@ -204,6 +204,32 @@ $(window).on("load resize",function(){
 	$(".cslider").css("width",csld);
 
 /*
+	ENVIA MENSAJE AL ADMIN PARA AUTORIZAR CAMBIO DE COACH
+*/
+	var msg;
+	var msg_return
+	$('#write_ch_coach').on('click', function(){
+		localStorage.setItem('msg_ch_coach', msg);
+		msg = $('#msg_ch_coach').val();
+		msg_return = localStorage.getItem('msg_ch_coach');
+		if(msg_return != "undefined" || msg_return != "" || msg_return != null){
+			$('#espacio_comentario').html(msg_return);
+		}else{
+			
+		}
+	});
+
+	$('#send_ch_coach').on('click', function(){
+		
+		if(msg_return != ""){
+			console.log(msg_return);
+		}else{
+			alert("Para poder cambiar de coach, es necesario que agregues tus comentarios");
+		}
+	});
+
+
+/*
 	ADD PROFILE DATA TO PROFILE VIEWS
 */
 
@@ -292,34 +318,37 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 	$('#frecuencia_perfil').html(frecuencia +" días por semana");
 	$('#ejercicio-dato').html(frecuencia);
 
-	$('#restricciones_perfil').html(document.write(restricciones.join(", ")););
+	var parseado = JSON.parse(restricciones);
+	restricciones = parseado.join(", ");
+	$('#restricciones_perfil').html(restricciones);
 
 	$('#comentario_perfil').html(comentario);
 	$('.the-comment').html(comentario);
 
 
 //$('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
+	console.log("plan> "+plan);
 	var suma = parseInt(plan)+1;
 	console.log('suma '+suma);
 
 
 		switch(plan){
-			case "1":
+			case "0":
 			$('#plan_perfil').html("Adelgazar");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/perderpeso2.png');
 			//console.log('adelgazar');
 			break;
-			case "2":
+			case "1":
 			$('#plan_perfil').html("Detox");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/detox2.png');
 			//console.log('detox');
 			break;
-			case "3":
-			$('#plan_perfil').html("Bienestar");
+			case "2":
+			$('#plan_perfil').html("Sentirse mejor");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/sentirsemejor2.png');
 			//console.log('bienestar');
 			break;
-			case "4":
+			case "3":
 			$('#plan_perfil').html("Rendimiento físico");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/rendimientofisico2.png');
 			//console.log('rendimiento');
