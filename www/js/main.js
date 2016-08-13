@@ -30,20 +30,8 @@
 				 async: false
 			});
 
-			
 			window.loggedIn = false;
-			//app.registerCompiledPartials();
-			//app.registerHelpers();
-
-			/* localStorage init */
 			this.ls 		= window.localStorage;
-			/*var log_info 	= JSON.parse(this.ls.getItem('dedalo_log_info'));
-			var me_info 	= JSON.parse(this.ls.getItem('me'));
-							window.user 		= (log_info) ? log_info.user_login 	: ' ';
-							window.user_display = (me_info)  ? me_info.first_name+' '+me_info.last_name : window.user;
-							window.user_first 	= (me_info)  ? me_info.first_name 	: window.user;
-							window.user_id 		= (log_info) ? log_info.user_id 	: ' ';
-							window.user_role 	= (log_info) ? log_info.user_role 	: ' '; */
 			if(is_login)
 				loggedIn = true;
 	
@@ -70,7 +58,6 @@
 			}else{
 				//window.location.assign('feed.html');
 				return;
-
 			}
 			/* Copiado de ondeviceready ----- QUITAR ----- */
 			// var backButtonElement = document.getElementById("backBtn");
@@ -755,9 +742,7 @@
 		},
 
 		/** INIT GINGER SERVICES REQUEST **/
-
 		/* ---- TRACKING ACTIVITY USERS ---- */
-
 		/* @param type: [ 'peso', 'animo', 'brazo', 'pierna', 'cintura', 'cadera', 'pecho', 'agua', 'ejercicio', 'recorrido', 'caminar', 'correr', 'pesas', 'cross' ],  //0..9 */
 
 		register_activity: function(type, magnitude, client_id, coach_id){

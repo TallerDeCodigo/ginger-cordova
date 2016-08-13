@@ -157,6 +157,10 @@ function requestHandlerAPI(){
 						console.log("dietaId> "+user.dieta._id);
 					localStorage.setItem('dietaName', user.dieta.nombre);
 						console.log("dietaName> "+user.dieta.nombre);
+					localStorage.setItem('nombre_coach', user.coach.nombre);
+						console.log("coach_name> " + user.coach.nombre);
+					localStorage.setItem('nombre_coach', user.coach.apellido);
+						console.log("coach_last> " + user.coach.apellido);		
 
 					return (userId) ? response : false;
 				}
