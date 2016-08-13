@@ -11,19 +11,6 @@ var CREDENTIALS = {
 	authKey: 'XydaWcf8OO9xhGT',
 	authSecret: 'JZfqTspCvELAmnW'
 };
- 
-// //QB.init(CREDENTIALS.appId, CREDENTIALS.authKey, CREDENTIALS.authSecret);
-
-// //console.log(QB);
-
-// var sessionToken = '1b785b603a9ae88d9dfbd1fc0cca0335086927f1';
-// var appId = 3451;
- 
-// //QB.init(sessionToken, appId);
-
-// //QB.createSession(function(err, result) {
-//   console.log('Aqui');
-// //});
 
 /*EDAD*/
 	var minval_age = 15; 
@@ -204,31 +191,30 @@ $(window).on("load resize",function(){
 	$(".cslider").css("width",csld);
 
 /*
+
 	ENVIA MENSAJE AL ADMIN PARA AUTORIZAR CAMBIO DE COACH
+
 */
 	var msg;
 	var msg_return
 	$('#write_ch_coach').on('click', function(){
-		localStorage.setItem('msg_ch_coach', msg);
 		msg = $('#msg_ch_coach').val();
+		localStorage.setItem('msg_ch_coach', msg);
 		msg_return = localStorage.getItem('msg_ch_coach');
 		if(msg_return != "undefined" || msg_return != "" || msg_return != null){
 			$('#espacio_comentario').html(msg_return);
-		}else{
-			
 		}
 	});
 
 	$('#send_ch_coach').on('click', function(){
 		
-		if(msg_return != ""){
-			console.log(msg_return);
-		}else{
+		if(msg_return == ""){
 			alert("Para poder cambiar de coach, es necesario que agregues tus comentarios");
+		}else{
+			console.log(msg_return);
 		}
 	});
-
-
+	
 /*
 	ADD PROFILE DATA TO PROFILE VIEWS
 */
