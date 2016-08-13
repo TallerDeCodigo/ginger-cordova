@@ -78,13 +78,16 @@
         <icon src="res/screen/ios/icon-50@2x.png"    width="100"    height="100" />
         <icon src="res/screen/ios/icon-40@2x.png"    width="80"     height="80"  />
         <icon src="res/screen/ios/icon-76.png"       width="76"     height="76"  />
-        <icon src="res/screen/ios/icon-76.png"       width="72"     height="72"  />
-        <icon src="res/screen/ios/icon-76.png"       width="60"     height="60"  />
-        <icon src="res/screen/ios/icon-76.png"       width="58"     height="58"  />
-        <icon src="res/screen/ios/icon-76.png"       width="57"     height="57"  />
-        <icon src="res/screen/ios/icon-76.png"       width="50"     height="50"  />
-        <icon src="res/screen/ios/icon-76.png"       width="40"     height="40"  />
-        <icon src="res/screen/ios/icon-76.png"       width="29"     height="29"  />
+        <icon src="res/screen/ios/icon-48.png"       width="48"     height="48"  />
+        <icon src="res/screen/ios/icon-60.png" width="60" height="60" />
+        <icon src="res/screen/ios/icon-76.png" width="76" height="76" />
+        <icon src="res/screen/ios/icon-40.png" width="40" height="40" />
+        <icon src="res/screen/ios/icon.png" width="57" height="57" />
+        <icon src="res/screen/ios/icon-72.png" width="72" height="72" />
+        <icon src="res/screen/ios/icon-small.png" width="29" height="29" />
+        <icon src="res/screen/ios/icon-small@2x.png" width="58" height="58" />
+        <icon src="res/screen/ios/icon-50.png" width="50" height="50" />
+       
     </platform>
     <preference name="Orientation" value="portrait" />
     <preference name="SplashMaintainAspectRatio" value="true" />

@@ -605,7 +605,7 @@ $('.platillo').each(function() {
 	//console.log(weekNumber);
   	var ano = fecha.getFullYear();
   	var mes = meses[fecha.getMonth()];
-
+  	 console.log(fecha.hoy());
 
 /*
 	IMPRIME EL MES Y EL ANO EN EL HEADER DE LA PANTALLA
@@ -621,29 +621,43 @@ $('.platillo').each(function() {
      return result;
     }
 
-    var week = [];
-    week = getWeekDays( new Date( "'" + fecha.hoy() + "'" ) );
+    var week = new Object();
+    var algo = fecha.hoy().toString();
+    console.log(typeof algo); 
+    week = getWeekDays( new Date(algo) );
+
+    //console.log(week);
     var days = $('.day_of_week');
-    var dow; 
-    var str
+    var dow = [];
+    var str;
+    var d = new Date();
+    var date_string;
     for(var i=0; i<dias.length; i++){
-    	//console.log(week[i].toString().slice(8, 11) );
-    	dow = week[i].getDate();
     	var masuno = i+1;
-    	//console.log(dow);
-    	//$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
-
-
+    	date_string = week[i].toString();
+    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
     }
 
     	var incremento = 168;
 		var current_day;
     	var full_date;
-	    current_day = new Date( + new Date().getTime());
+	    current_day = new Date( + new Date().getTime() );
+	    current_day = fecha.hoy().substring(8);
+	    var left = fecha.hoy().substring(0,8);
+
+	    current_day = parseInt(current_day) +7;
+	    current_day = left + current_day; 
+	    console.log(current_day);
+	    week = getWeekDays( new Date( current_day ) );
+
 
 		$(".nextweek").click(function(){
-	    	full_date = new Date( + new Date("'" + current_day + "'").getTime() + incremento * 60 * 60 * 1000);
-
+	    	full_date = new Date( + new Date( current_day ).getTime() + incremento * 60 * 60 * 1000);
+	    	for(var i=0; i<dias.length; i++){
+	    		var masuno = i+1;
+	    		date_string = week[i].toString();
+	    		$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
+	    	}
 	    	if(full_date.getMonth() != current_day.getMonth()){
 	    		$('#month').html(meses[full_date.getMonth()] );
 	    	}
@@ -656,10 +670,10 @@ $('.platillo').each(function() {
 	    	console.log("Full date > > "+full_date);
 	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
 			for(var i=0; i<dias.length; i++){
-		    	dow = week2[i].toString().slice(8, 11);
+		    	dow[i] = week2[i].toString().slice(8, 11);
 		    	var masuno = i+1;
-		    	console.log(dow);
-		    	//$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
+		    	//console.log(dow[i]);
+		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
 		    }
 
 
@@ -669,6 +683,7 @@ $('.platillo').each(function() {
 			//debe tomar el ultmo dia en el que se encuentra para retroceder a partir de ese punto en el tiempo
 	    	
 	    	full_date = new Date(new Date( "'" + current_day + "'" ).getTime() - incremento * 60 * 60 * 1000);
+
 	    	if(full_date.getMonth() != current_day.getMonth()){
 	    		$('#month').html(meses[full_date.getMonth()] );
 	    	}
@@ -678,15 +693,15 @@ $('.platillo').each(function() {
 	    	}
 
 	    	current_day = full_date;
-	    	console.log("Full date > > "+full_date);
+	    	//console.log("Full date > > "+full_date);
 	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
 			
 			// if(){
 				for(var i=0; i<dias.length; i++){
-			    	dow = week2[i].toString().slice(8, 11);
+			    	dow[i] = week2[i].toString().slice(8, 11);
 			    	var masuno = i+1;
-			    	console.log(dow);
-			    	//$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow);
+			    	//console.log(dow);
+			    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
 			    }
 			// }
 		});
