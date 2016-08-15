@@ -308,36 +308,48 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 
 
 //$('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
-	console.log("plan> "+plan);
 	var suma = parseInt(plan)+1;
-	console.log('suma '+plan);
-
 
 		switch(plan){
-			case "1":
+			case "0":
 			$('#plan_perfil').html("Adelgazar");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/perderpeso2.png');
 			//console.log('adelgazar');
 			break;
-			case "2":
+			case "1":
 			$('#plan_perfil').html("Detox");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/detox2.png');
 			//console.log('detox');
 			break;
+			case "2":
+			$('#plan_perfil').html("Rendimiento físico");
+			$('.pl-option.active img:not(.question)').attr("src",'images/plan/rendimientofisico2.png');
+			//console.log('bienestar');
+			break;
 			case "3":
 			$('#plan_perfil').html("Sentirse mejor");
 			$('.pl-option.active img:not(.question)').attr("src",'images/plan/sentirsemejor2.png');
-			//console.log('bienestar');
-			break;
-			case "4":
-			$('#plan_perfil').html("Rendimiento físico");
-			$('.pl-option.active img:not(.question)').attr("src",'images/plan/rendimientofisico2.png');
 			//console.log('rendimiento');
 			break;
 		}
-		var parseado = JSON.parse(restricciones);
-		restricciones = parseado.join(", ");
-		$('#restricciones_perfil').html(restricciones);
+		
+		//console.log("> restricciones> "+restricciones);
+		if(restricciones == 'undefined'){
+			console.log('no definido ');
+		}else{
+
+			var parseado = JSON.parse(restricciones);
+
+			console.log("parse> "+parseado);
+
+			restricciones = parseado.join(", ");
+			
+			console.log("PARSE_RES> "+ restricciones);
+
+			$('#restricciones_perfil').html(restricciones);
+
+		}
+
 }//end if has class
 
 
@@ -634,7 +646,7 @@ $('.platillo').each(function() {
     
     week = getWeekDays( new Date(today) );
 
-    console.log("str> "+today);
+    //console.log("str> "+today);
     
     for(var i=0; i<dias.length; i++){
     	var masuno = i+1;
@@ -647,17 +659,17 @@ $('.platillo').each(function() {
     	var full_date;
 	    var left = fecha.hoy().substring(0,8);
 
-	    console.log('current_day');
+	    //console.log('current_day');
 
 	    current_day = new Date( + new Date().getTime() );
-	    console.log("obj> "+current_day);
+	    //console.log("obj> "+current_day);
 
 	    current_day = fecha.hoy().substring(8);
-	    console.log("str> "+current_day);
+	    //console.log("str> "+current_day);
 	    
 
 	    current_day = left + current_day;
-	    console.log("str> "+current_day);
+	    //console.log("str> "+current_day);
 
 
 		$(".nextweek").click(function(){
@@ -708,7 +720,6 @@ $('.platillo').each(function() {
 
 }//end date ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		var restricciones = new Array();
 
 		$(".acc-selector").click(function(){
 			if ($(this).hasClass('ui-state-active')) {
@@ -828,49 +839,51 @@ $('.platillo').each(function() {
 
 
 
-/*
-	add_localStorage UPDATED PROFILE
-*/
+// /*
+// 	add_localStorage UPDATED PROFILE
+// */
+// 		var restricciones_arr = new Array();
+// 		$('#add_updated_profile').on('click', function(){
 
-		$('#add_updated_profile').on('click', function(){
+// 				var genero 				= localStorage.setItem('genero', 	  $('#update_sexo').val() );
+// 				var edad 				= localStorage.setItem('edad', 		  $('#edad_value').val() );
+// 				var zipcode 			= localStorage.setItem('zipcode', 	  $('input[name="zipocode"]').val() );
+// 				var estatura 			= localStorage.setItem('estatura', 	  $('input[name="estatura"]').val() );
+// 				var peso 				= localStorage.setItem('peso', 		  $('input[name="peso"]').val() );
+// 				var peso_ideal 			= localStorage.setItem('peso_ideal',  $('input[name="ideal"]').val() );
+// 				var coach_type 			= localStorage.setItem('coach_type',  $('#coach_type').val() );
+// 				var dpw 				= localStorage.setItem('dpw', 		  $('#days_per_week').val() );
+// 				var comentario 			= localStorage.setItem('comentarios', $('#comentar').val() );
+// 				var plan 				= localStorage.setItem('coach_type',  $('#plan').val() );
+// 				var restricciones_arr 	= localStorage.setItem('restricciones', restricciones_arr);
 
-				var genero 		= localStorage.setItem('genero', 	  $('#update_sexo').val() );
-				var edad 		= localStorage.setItem('edad', 		  $('#edad_value').val() );
-				var zipcode 	= localStorage.setItem('zipcode', 	  $('input[name="zipocode"]').val() );
-				var estatura 	= localStorage.setItem('estatura', 	  $('input[name="estatura"]').val() );
-				var peso 		= localStorage.setItem('peso', 		  $('input[name="peso"]').val() );
-				var peso_ideal 	= localStorage.setItem('peso_ideal',  $('input[name="ideal"]').val() );
-				var coach_type 	= localStorage.setItem('coach_type',  $('#coach_type').val() );
-				var dpw 		= localStorage.setItem('dpw', 		  $('#days_per_week').val() );
-				var comentario 	= localStorage.setItem('comentarios', $('#comentar').val() );
-				var plan 		= localStorage.setItem('coach_type',  $('#plan').val() );
-				
-				var json = {
-				"sexo" : genero,
-				"fechaNacimiento" : "1984-04-21",
-				"perfil":{
-					"fechaNacimiento" : "1984-04-21",
-					"sexo" : genero,
-					"peso" : peso,
-					"estatura" : estatura,
-					"ejercicio" : dpw,
-					"objetivo" : plan,
-					"restricciones" : JSON.parse(restricciones),
-					"personalidad" : coach_type
-				},
-				"cp": zipcode,
-				"pesoDeseado": peso_ideal,
-				"comentario": comentario
-			}
+// 				console.log("ESTE> > > "+restricciones_arr);
+// 				var json = {
+// 				"sexo" : genero,
+// 				"fechaNacimiento" : "1984-04-21",
+// 				"perfil":{
+// 					"fechaNacimiento" : "1984-04-21",
+// 					"sexo" : genero,
+// 					"peso" : peso,
+// 					"estatura" : estatura,
+// 					"ejercicio" : dpw,
+// 					"objetivo" : plan,
+// 					"restricciones" : JSON.parse(restricciones_arr),
+// 					"personalidad" : coach_type
+// 				},
+// 				"cp": zipcode,
+// 				"pesoDeseado": peso_ideal,
+// 				"comentario": comentario
+// 			}
 
-			var response = apiRH.updatePerfil(json);
+// 			var response = apiRH.updatePerfil(json);
 
-			if(response) 
-				window.location.assign('userdata.html');
+// 			if(response) 
+// 				window.location.assign('userdata.html');
 
 
 
-		});	// end add uodated profile
+// 		});	// end add uodated profile
 
 
 
@@ -1333,9 +1346,6 @@ $('.platillo').each(function() {
 			$('.borg').removeClass('active');
 			$('.byel').addClass('active');
 
-			//restriccion alimenticia
-			//localStorage.setItem('restricciones', restricciones );
-
 
 			var genero 		  = localStorage.getItem('genero');
 			var peso 		  = localStorage.getItem('peso');
@@ -1345,11 +1355,11 @@ $('.platillo').each(function() {
 			var zipcode 	  = localStorage.getItem('zipcode');
 			var plan 		  = localStorage.getItem('plan', $('#plan').val() );
 			var coach_type 	  = localStorage.getItem('coach_type', $('#coach_type').val() );
-			var restricciones = localStorage.getItem('restricciones');
+			var restricciones_ls2 = localStorage.getItem('restricciones');
 			var dpw 		  = localStorage.getItem('dpw');
 			var comentario 	  = localStorage.getItem('comentario');
 
-			console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+peso_ideal+" > "+zipcode+" > "+plan+" > "+coach_type+" > "+restricciones+" > "+dpw+" > "+comentario );
+			console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+peso_ideal+" > "+zipcode+" > "+plan+" > "+coach_type+" > "+restricciones_ls2+" > "+dpw+" > "+comentario );
 
 			/*
 				JSON STRUCTURE 	*
@@ -1364,7 +1374,7 @@ $('.platillo').each(function() {
 					"estatura" : estatura,
 					"ejercicio" : dpw,
 					"objetivo" : plan,
-					"restricciones" : JSON.parse(restricciones),
+					"restricciones" : JSON.parse(restricciones_ls2),
 					"personalidad" : coach_type
 				},
 				"cp": zipcode,
@@ -1627,6 +1637,8 @@ $('.platillo').each(function() {
 			var valor = $(this).find('.type').attr('value');
 
 			if (!$(this).hasClass('active')) {
+				
+				console.log("ADDED");
 
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 				$(this).addClass('active');
@@ -1634,29 +1646,29 @@ $('.platillo').each(function() {
 				
 				$('.restricciones').attr('value', valor);
 				
-				restricciones.push(valor);
+				restricciones_arr.push(valor);
 				
-				localStorage.setItem('restricciones', JSON.stringify(restricciones));
+				localStorage.setItem('restricciones', JSON.stringify(restricciones_arr));
 
 			} else {
 
-				console.log('Aca');
+				console.log('DELETED');
 
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
 				$(this).removeClass('active');
 				$(this).attr("value", "");
 				$('.restricciones').attr('value',"");
 				
-				for(var i=0; i<restricciones.length; i++){
+				for(var i=0; i<restricciones_arr.length; i++){
 
 					
-					if( restricciones[i] == valor ){
+					if( restricciones_arr[i] == valor ){
 
-						var index = restricciones.indexOf(valor);
+						var index = restricciones_arr.indexOf(valor);
 
-						restricciones.splice(i, 1);
+						restricciones_arr.splice(i, 1);
 
-						localStorage.setItem('restricciones', JSON.stringify(restricciones));
+						localStorage.setItem('restricciones', JSON.stringify(restricciones_arr));
 
 					}//end IF
 
@@ -1664,9 +1676,55 @@ $('.platillo').each(function() {
 				
 			}// end ELSE
 
-			console.log(restricciones);
+			console.log(restricciones_arr);
 
 		});
+
+/*
+	add_localStorage UPDATED PROFILE
+*/
+		var restricciones_arr = new Array();
+		$('#add_updated_profile').on('click', function(){
+
+				var genero 				= localStorage.setItem('genero', 	  $('#update_sexo').val() );
+				var edad 				= localStorage.setItem('edad', 		  $('#edad_value').val() );
+				var zipcode 			= localStorage.setItem('zipcode', 	  $('input[name="zipocode"]').val() );
+				var estatura 			= localStorage.setItem('estatura', 	  $('input[name="estatura"]').val() );
+				var peso 				= localStorage.setItem('peso', 		  $('input[name="peso"]').val() );
+				var peso_ideal 			= localStorage.setItem('peso_ideal',  $('input[name="ideal"]').val() );
+				var coach_type 			= localStorage.setItem('coach_type',  $('#coach_type').val() );
+				var dpw 				= localStorage.setItem('dpw', 		  $('#days_per_week').val() );
+				var comentario 			= localStorage.setItem('comentarios', $('#comentar').val() );
+				var plan 				= localStorage.setItem('coach_type',  $('#plan').val() );
+				var restricciones_arr 	= localStorage.setItem('restricciones', restricciones_arr);
+
+				console.log("ESTE> > > "+restricciones_arr);
+				var json = {
+				"sexo" : genero,
+				"fechaNacimiento" : "1984-04-21",
+				"perfil":{
+					"fechaNacimiento" : "1984-04-21",
+					"sexo" : genero,
+					"peso" : peso,
+					"estatura" : estatura,
+					"ejercicio" : dpw,
+					"objetivo" : plan,
+					"restricciones" : JSON.parse(restricciones_arr),
+					"personalidad" : coach_type
+				},
+				"cp": zipcode,
+				"pesoDeseado": peso_ideal,
+				"comentario": comentario
+			}
+
+			var response = apiRH.updatePerfil(json);
+
+			if(response) 
+				window.location.assign('userdata.html');
+
+
+
+		});	// end add uodated profile
 
 		$('.me-option').click(function() {
 			var valor = $(this).find('.type').attr('value');
