@@ -655,8 +655,6 @@ $('.platillo').each(function() {
 	    current_day = fecha.hoy().substring(8);
 	    console.log("str> "+current_day);
 	    
-	    current_day = parseInt(current_day) +7;
-	    console.log("n> "+current_day);
 
 	    current_day = left + current_day;
 	    console.log("str> "+current_day);
@@ -666,9 +664,10 @@ $('.platillo').each(function() {
 	    	week = getWeekDays( new Date( current_day ) );
 	    	full_date = new Date( + new Date( current_day ).getTime() + incremento * 60 * 60 * 1000);
 	    	var month = full_date.getMonth();
-
-	    	console.log(month);
+	    	
 	    	$('#month').html(meses[month] );
+	    	$('#year').html(full_date.getFullYear());
+
 	    	for(var i=0; i<dias.length; i++){
 	    		var masuno = i+1;
 	    		date_string = week[i].toString();
@@ -695,6 +694,7 @@ $('.platillo').each(function() {
 	    	var month = full_date.getMonth();
 	    	console.log(month);
 	    	$('#month').html(meses[month] );
+	    	$('#year').html(full_date.getFullYear());
 	    	current_day = full_date;
 	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
 			
