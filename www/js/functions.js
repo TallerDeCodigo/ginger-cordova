@@ -221,6 +221,8 @@ $(window).on("load resize",function(){
 
 if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 
+	var nombre_coach	= localStorage.getItem('nombre_coach');
+	var apellido_coach	= localStorage.getItem('apellido_coach');
 	var nombre 			= localStorage.getItem('user_name');
 	var apellido 		= localStorage.getItem('user_last_name');
 	var sexo 			= localStorage.getItem('genero');
@@ -235,6 +237,8 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 	var plan 			= localStorage.getItem('coach_type');
 	var comentario 		= localStorage.getItem('comentarios');
 
+
+	//console.log(JSON.stringify(usuario));
 
 	// console.log("nombre > "	 		+nombre);
 	// console.log("sexo > "	 		+sexo);
@@ -351,8 +355,17 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 			//console.log("PARSE_RES> "+ restricciones);
 
 			$('#restricciones_perfil').html(restricciones);
-
 		}
+
+		/*
+			NOMBRE DEL COACH
+		*/
+
+		$('#coach_name').html(nombre_coach + " " + apellido_coach);
+
+		console.log(nombre_coach);
+		console.log(apellido_coach);
+
 
 }//end if has class
 
@@ -437,8 +450,6 @@ var receta;
 var nombre_receta;
 var ingredientes;
 
-//console.log('DIETA');
-//console.log(JSON.stringify(dieta));
 
 var losplatos = [];
 var i=0;
