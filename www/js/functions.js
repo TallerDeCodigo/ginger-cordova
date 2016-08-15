@@ -341,13 +341,12 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 			console.log('no definido ');
 			$('#restricciones_perfil').html("Sin restricciones");
 		}else{
-			//console.log("rest> "+restricciones);
 
-			var parseado = JSON.parse(restricciones);
+			//var parseado = JSON.stringify(restricciones);
 
 			//console.log("parse> "+parseado);
 
-			restricciones = parseado.join(", ");
+			//restricciones = parseado.join(", ");
 			
 			//console.log("PARSE_RES> "+ restricciones);
 
@@ -835,10 +834,11 @@ $('.platillo').each(function() {
 		var restricciones_arr = new Array();
 		$('#add_updated_profile').on('click', function(){
 
+
 			// console.log("ZIP>"+ $('input[name="zipocode"]').val());
 				var genero 				= localStorage.setItem('genero', 	  $('#update_sexo').val() );
 				var edad 				= localStorage.setItem('edad', 		  $('#edad_value').val() );
-				var zipcode 			= localStorage.setItem('zipcode', 	  $('input[name="zipocode"]').val() );
+				var zipcode 			= localStorage.setItem('zipcode', 	  $('input[name="zipcode"]').val() );
 				var estatura 			= localStorage.setItem('estatura', 	  $('input[name="estatura"]').val() );
 				var peso 				= localStorage.setItem('peso', 		  $('input[name="peso"]').val() );
 				var peso_ideal 			= localStorage.setItem('peso_ideal',  $('input[name="ideal"]').val() );
@@ -847,6 +847,11 @@ $('.platillo').each(function() {
 				var comentario 			= localStorage.setItem('comentarios', $('#comentar').val() );
 				var plan 				= localStorage.setItem('coach_type',  $('#plan').val() );
 				restricciones 			= localStorage.setItem('restricciones', restricciones_arr);
+
+				var postal 				= localStorage.getItem('zipocode');
+
+				console.log("POSTAL > > > > "+postal);
+
 
 				var json = {
 				"sexo" : genero,
@@ -858,7 +863,7 @@ $('.platillo').each(function() {
 					"estatura" : estatura,
 					"ejercicio" : dpw,
 					"objetivo" : plan,
-					"restricciones" : JSON.parse(restricciones_arr),
+					"restricciones" : JSON.stringify(restricciones_arr),
 					"personalidad" : coach_type
 				},
 				"cp": zipcode,
@@ -1237,7 +1242,6 @@ $('.platillo').each(function() {
 			//console.log(track_animo);
 		});
 
-
 		$('#finish1').click(function(){
 			$('.aboutyou').animate({opacity:"0",left:"-40px"}, 200);
 			$('.bpur').removeClass('active');
@@ -1260,6 +1264,7 @@ $('.platillo').each(function() {
 	
 			//Zipocode
 			localStorage.setItem('zipcode', $('input[name="zipcode"]').val() );
+			postal = localStorage.get('zipcode');
 
 			//genero
 			localStorage.setItem('genero', $('#genre_value').val() );//hacerlo una condicional
