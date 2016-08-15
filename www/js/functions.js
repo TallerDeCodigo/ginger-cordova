@@ -236,6 +236,7 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 	var restricciones 	= localStorage.getItem('restricciones');
 	var plan 			= localStorage.getItem('coach_type');
 	var comentario 		= localStorage.getItem('comentarios');
+	var coach_rate		= localStorage.getItem('coach_rate');
 
 
 	//console.log(JSON.stringify(usuario));
@@ -365,6 +366,22 @@ if($('body').hasClass('load_data') || $('body').hasClass('update_data')){
 
 		console.log(nombre_coach);
 		console.log(apellido_coach);
+
+
+/*
+	****	COACH RATE ESTRELLITAS	****
+											*/
+		// console.log(coach_rate);
+
+		// if(coach_rate){
+			// $('').css("background");
+		// }
+
+
+
+
+
+
 
 
 }//end if has class
