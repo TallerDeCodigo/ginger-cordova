@@ -605,7 +605,7 @@ $('.platillo').each(function() {
 	//console.log(weekNumber);
   	var ano = fecha.getFullYear();
   	var mes = meses[fecha.getMonth()];
-  	 console.log(fecha.hoy());
+  	//console.log(fecha.hoy());
 
 /*
 	IMPRIME EL MES Y EL ANO EN EL HEADER DE LA PANTALLA
@@ -622,16 +622,20 @@ $('.platillo').each(function() {
     }
 
     var week = new Object();
-    var algo = fecha.hoy().toString();
-    console.log(typeof algo); 
-    week = getWeekDays( new Date(algo) );
-
+    var today = fecha.hoy().toString();
+    //console.log(typeof today); 
     //console.log(week);
+    
     var days = $('.day_of_week');
     var dow = [];
     var str;
     var d = new Date();
     var date_string;
+    
+    week = getWeekDays( new Date(today) );
+
+    console.log("str> "+today);
+    
     for(var i=0; i<dias.length; i++){
     	var masuno = i+1;
     	date_string = week[i].toString();
@@ -641,33 +645,38 @@ $('.platillo').each(function() {
     	var incremento = 168;
 		var current_day;
     	var full_date;
-	    current_day = new Date( + new Date().getTime() );
-	    current_day = fecha.hoy().substring(8);
 	    var left = fecha.hoy().substring(0,8);
 
+	    console.log('current_day');
+
+	    current_day = new Date( + new Date().getTime() );
+	    console.log("obj> "+current_day);
+
+	    current_day = fecha.hoy().substring(8);
+	    console.log("str> "+current_day);
+	    
 	    current_day = parseInt(current_day) +7;
-	    current_day = left + current_day; 
-	    console.log(current_day);
-	    week = getWeekDays( new Date( current_day ) );
+	    console.log("n> "+current_day);
+
+	    current_day = left + current_day;
+	    console.log("str> "+current_day);
 
 
 		$(".nextweek").click(function(){
+	    	week = getWeekDays( new Date( current_day ) );
 	    	full_date = new Date( + new Date( current_day ).getTime() + incremento * 60 * 60 * 1000);
+	    	var month = full_date.getMonth();
+
+	    	console.log(month);
+	    	$('#month').html(meses[month] );
 	    	for(var i=0; i<dias.length; i++){
 	    		var masuno = i+1;
 	    		date_string = week[i].toString();
 	    		$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
 	    	}
-	    	if(full_date.getMonth() != current_day.getMonth()){
-	    		$('#month').html(meses[full_date.getMonth()] );
-	    	}
-
-	    	if(full_date.getFullYear() != current_day.getFullYear()){
-	    		$('#year').html(full_date.getFullYear() );
-	    	}
 	    	
 	    	current_day = full_date;
-	    	console.log("Full date > > "+full_date);
+	    	//console.log("Full date > > "+full_date);
 	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
 			for(var i=0; i<dias.length; i++){
 		    	dow[i] = week2[i].toString().slice(8, 11);
@@ -682,28 +691,19 @@ $('.platillo').each(function() {
 		$(".lastweek").click(function(){
 			//debe tomar el ultmo dia en el que se encuentra para retroceder a partir de ese punto en el tiempo
 	    	
-	    	full_date = new Date(new Date( "'" + current_day + "'" ).getTime() - incremento * 60 * 60 * 1000);
-
-	    	if(full_date.getMonth() != current_day.getMonth()){
-	    		$('#month').html(meses[full_date.getMonth()] );
-	    	}
-
-	    	if(full_date.getFullYear() != current_day.getFullYear()){
-	    		$('#year').html(full_date.getFullYear() );
-	    	}
-
+	    	full_date = new Date(new Date(  current_day  ).getTime() - incremento * 60 * 60 * 1000);
+	    	var month = full_date.getMonth();
+	    	console.log(month);
+	    	$('#month').html(meses[month] );
 	    	current_day = full_date;
-	    	//console.log("Full date > > "+full_date);
 	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
 			
-			// if(){
 				for(var i=0; i<dias.length; i++){
 			    	dow[i] = week2[i].toString().slice(8, 11);
 			    	var masuno = i+1;
 			    	//console.log(dow);
 			    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
 			    }
-			// }
 		});
 
 }//end date ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
