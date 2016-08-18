@@ -346,9 +346,14 @@ function requestHandlerAPI(){
 
 			console.log("Request Data Cliente");
 
-			console.log(response);  //llega aqui con la respuesta del servidor
+			
 
-			return (response.statusText == "OK") ? true : false;
+			
+
+			console.log(response.responseText);
+			console.log(response.statusText);
+
+			return (response.responseText == "active_subscription") ? true : false;
 
 		};
 
@@ -603,7 +608,7 @@ function requestHandlerAPI(){
 		 */
 		this.makeRequest = function(endpoint, data){
 			
-			console.log(data); //llega a makerequest
+			console.log('DATA SEND: ' + data); //llega a makerequest
 
 			sdk_app_context.showLoader();
 			var result = {};
@@ -618,12 +623,15 @@ function requestHandlerAPI(){
 			})
 			 .done(function(response){
 				result = response;
+				console.log('DONE ' + response);
 				sdk_app_context.hideLoader(response);
 			})
 			 .fail(function(e){
-				result = false;
+				result = e;
 				console.log(JSON.stringify(e));
 			});
+
+			 console.log('resuelt ' + result);
 			return result;
 		};
 

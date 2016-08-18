@@ -1420,6 +1420,7 @@ $(window).load(function(){
 					var LastN;
 					var short_description;
 					var biografia;
+					var rate_stars;
 
 					$.each( listCoach, function( key, value ) {
 						var item = $('.initial').html();
@@ -1453,12 +1454,17 @@ $(window).load(function(){
 										short_description = value;
 
 										//console.log(short_description);
-										$(".wrap-cslide .cslider:nth-of-type("+i+") p.short-descrip b").html(short_description);
+										$(".short-descrip b").html(short_description);
 									}
 									if (key=='bio') {
 										biografia = value;
-										$(".wrap-cslide .cslider:nth-of-type("+i+") pre.short-descrip").html(biografia);
+										$("pre.short-descrip").html(biografia);
 										//console.log(value);
+									}
+									if(key == 'rating'){
+										rate_stars = value;
+										rate_stars = Math.round(rate_stars);
+										console.log(rate_stars);
 									}
 								});
 								//$(".wrap-cslide .cslider:nth-of-type("+i+") h5.name").html(Name+" "+LastN);
@@ -1471,6 +1477,23 @@ $(window).load(function(){
   						i++;
 
 					});
+								
+								var count = 5;
+
+								for (var i = 0; i < rate_stars; i++) {
+									$('.rate-stars').append('<img src="images/starh.svg">');
+									console.log(i);
+								};
+								
+								for (var x = 0; x < count - rate_stars; x++) {
+									console.log('-' + x);
+									$('.rate-stars').append('<img src="images/star.svg">');
+									console.log(i);
+								};
+
+
+
+
 
 					setTimeout(function() {
 		        		$(".pagina").hide();
@@ -1704,6 +1727,14 @@ $(window).load(function(){
 				
 			}// end ELSE
 
+			if(restricciones_arr.length == 0){
+				$('#finish4').attr('src', 'images/saltar.svg');
+				$('#finish4').css('margin-left', '-65px');
+			}else{
+				$('#finish4').attr('src', 'images/enter.svg');
+				$('#finish4').css('margin-left', '-25px');
+
+			}
 			console.log(restricciones_arr);
 
 		});
@@ -1884,6 +1915,7 @@ $(window).load(function(){
 		$('img.question').click(function() {
 			$('.overscreen2').show();
 			$('.overscreen2 h5').html($(this).attr("title"));
+			$('.overscreen2 .dialog p').html($(this).attr("data"));
 			setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
 		});
 

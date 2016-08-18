@@ -231,13 +231,14 @@ img.saltar {position:absolute;bottom:2.5%;left:50%;margin-left:-65px;display:blo
 
 .form-label {position:relative;display:inline-block;width:88%;height:37px;margin-top:6%;color:#414141;text-align:left;}
 .form-label input[type="text"] {position:relative;width:100%;background:none;border:none;outline:none;padding:2px 3px 0px;color:#414141;border-bottom:1px solid #414141;}
-.form-label label {position:absolute;width:100%;left:3px;bottom:16px;font-weight:100;-webkit-transition:.25s ease-in-out;transition:.25s ease-in-out;}
-label.focused {bottom:0px;font-weight:800;font-size:65%;}
+.conekta .form-label label {position:absolute;width:100%;left:3px;bottom:16px;font-weight:100;-webkit-transition:.25s ease-in-out;transition:.25s ease-in-out;}
+.conekta label.focused {bottom:0px;font-weight:800;font-size:65%;}
 
 .form-label-2 {position:relative;display:inline-block;width:43%;height:37px;margin-top:6%;color:#414141;text-align:left;}
 .form-label-2 input[type="text"] {position:relative;background:none;border:none;outline:none;padding:2px 3px 0px;color:#414141;border-bottom:1px solid #414141;}
 .form-label-2 label {position:absolute;left:3px;bottom:16px;font-weight:100;-webkit-transition:.25s ease-in-out;transition:.25s ease-in-out;}
-label.focused {bottom:0px;font-weight:800;font-size:65%;}
+#container:not(.login) label.focused {bottom:0px;font-weight:800;font-size:65%;}
+.login label{display: block;text-align: left;    width: 88%;margin:0 auto;font-size: 90%}
 
 input[name="mes"],input[name="year"],label[for="mes"],label[for="year"] {width:44.5%;}
 input[name="cupon"],input[name="cvc"],label[for="cupon"],label[for="cvc"] {width:100%;}

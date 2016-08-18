@@ -1049,14 +1049,14 @@
 			// Funcion de mensaje de bienvenida
 
 			if(response){
-				var coachId = localStorage.setItem('coachId');	
-				var dietaId = localStorage.setItem('dietaId');
-				var json = {
-					"coach" : coachId,
-					"dieta" : dietaId	
-				};
-				//Actualizamos Coach y Dieta para el Usuario
-				var response = apiRH.updatePerfil(JSON);
+				// var coachId = localStorage.setItem('coachId');	
+				// var dietaId = localStorage.setItem('dietaId');
+				// var json = {
+				// 	"coach" : coachId,
+				// 	"dieta" : dietaId	
+				// };	
+				// //Actualizamos Coach y Dieta para el Usuario
+				// var response = apiRH.updatePerfil(JSON);
 
 				if(response)
 					window.location.assign('dieta.html');
