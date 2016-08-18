@@ -1411,17 +1411,21 @@ $(window).load(function(){
 				
 				listCoach = apiRH.getCoachList();
 
-				console.log(listCoach);
+				console.log(listCoach[0].coach);
 
 				if(listCoach){
 
 					var i = 1;
 					var Name;
 					var LastN;
+					var short_description;
+					var biografia;
 
 					$.each( listCoach, function( key, value ) {
 						var item = $('.initial').html();
-						var short_description;
+
+						console.log(listCoach);
+						
 						// $('.initial').remove();
 						// $(".wrap-cslide").append('<div class="csilder">'+item+'</div>');
   						// console.log( key + ": " + value );
@@ -1433,11 +1437,11 @@ $(window).load(function(){
 							if(key == 'coach'){	
 								$.each( value, function( key, value ) {
 									
-									console.log( key + " ::: " + value );
-									short_description =value;
+									//console.log( key + " ::: " + value );
+									
 									if (key=='id') {
 										//$(".wrap-cslide .cslider:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
-										console.log(value);
+										//console.log(value);
 									}
 									if (key=='nombre') {
 										Name = value;
@@ -1446,19 +1450,21 @@ $(window).load(function(){
 										LastN = value;
 									}
 									if (key=='frase') {
-										//$(".wrap-cslide .cslider:nth-of-type("+i+") p.short-descrip b").html(value);
-										console.log(value);
+										short_description = value;
+
+										//console.log(short_description);
+										$(".wrap-cslide .cslider:nth-of-type("+i+") p.short-descrip b").html(short_description);
 									}
 									if (key=='bio') {
-										//$(".wrap-cslide .cslider:nth-of-type("+i+") pre.short-descrip").html(value);
-										console.log(value);
+										biografia = value;
+										$(".wrap-cslide .cslider:nth-of-type("+i+") pre.short-descrip").html(biografia);
+										//console.log(value);
 									}
 								});
 								//$(".wrap-cslide .cslider:nth-of-type("+i+") h5.name").html(Name+" "+LastN);
 								console.log(Name+" "+LastN);
 								var coach_name = Name +" "+LastN 
 								$('#coach_name').html(coach_name);
-								$('#short-description').html(short_description);
 							}
   						});
 
