@@ -449,8 +449,9 @@ $(window).load(function(){
 
 			var today = new Date();
 			var hoy = today.getDay();
-			var day_index;
-			var dieta = app.get_diet(localStorage.getItem('dieta'));
+			var dieta_id = localStorage.getItem('dieta');
+			var dieta = app.get_diet(dieta_id); //pide el dietId
+
 
 			var arr_desayuno
 			var arr_snack1
@@ -471,6 +472,8 @@ $(window).load(function(){
 			var losplatos = [];
 			var i=0;
 
+			console.log(dieta_id);//regresa el id de la dieta
+			
 			$.each( dieta.platillos, function( key, value ) {
 				losplatos[i]=[];
 				$.each( value, function( key, value ) {
@@ -489,7 +492,7 @@ $(window).load(function(){
 					}
 				});
 				i++;
-			});
+			});//end each
 
 			var loscomentarios = [];
 			var i=0;
@@ -504,7 +507,7 @@ $(window).load(function(){
 					j++;
 				});
 				i++;
-			});
+			});// end each
 
 			// console.log(loscomentarios);
 
@@ -594,15 +597,16 @@ $(window).load(function(){
 					});
 				});
 			});//END DIETA ESTRUCTURA
-		}
+		}//end IF
 	});//END FUNCTION
 
 
-$('.platillo').each(function() {
-    if ($(this).attr('data') === undefined) {
-      $(this).remove();
-    }
-});
+
+	$('.platillo').each(function() {
+	    if ($(this).attr('data') === undefined) {
+	      $(this).remove();
+	    }
+	});
 	
 	/** 	
 
@@ -634,9 +638,9 @@ $('.platillo').each(function() {
   	var mes = meses[fecha.getMonth()];
   	//console.log(fecha.hoy());
 
-/*
-	IMPRIME EL MES Y EL ANO EN EL HEADER DE LA PANTALLA
-*/
+	/*
+		IMPRIME EL MES Y EL ANO EN EL HEADER DE LA PANTALLA
+	*/
     	$('#month').html(mes);
     	$('#year').html(ano);
 
@@ -732,8 +736,7 @@ $('.platillo').each(function() {
 			    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
 			    }
 		});
-
-}//end date ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//end date ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 		$(".acc-selector").click(function(){
@@ -1966,21 +1969,22 @@ $('.platillo').each(function() {
 
 	function openCamera(selection) {
 
-    var srcType = Camera.PictureSourceType.CAMERA;
-    var options = setOptions(srcType);
-    var func = createNewFileEntry;
+    	var srcType = Camera.PictureSourceType.CAMERA;
+    	var options = setOptions(srcType);
+    	var func = createNewFileEntry;
 
-    navigator.camera.getPicture(function cameraSuccess(imageUri) {
+    	navigator.camera.getPicture(function cameraSuccess(imageUri) {
 
-        //displayImage(imageUri);
-        // You may choose to copy the picture, save it somewhere, or upload.
-        func(imageUri);
+        	//displayImage(imageUri);
+        	// You may choose to copy the picture, save it somewhere, or upload.
+        	func(imageUri);
 
-    }, function cameraError(error) {
-        console.debug("Unable to obtain picture: " + error, "app");
+    	}, function cameraError(error) {
+        	console.debug("Unable to obtain picture: " + error, "app");
 
-    }, options);
-}
+    	}, options);
+	}
+
 function displayImage(imgUri) {
 
     var elem = document.getElementById('imageFile');
@@ -1994,7 +1998,7 @@ function displayImage(imgUri) {
 		 openCamera();
 
 	});
-});// end winow onload
+// end winow onload
       
 
 (function($){
