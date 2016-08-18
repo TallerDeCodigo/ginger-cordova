@@ -603,7 +603,7 @@ function requestHandlerAPI(){
 		 */
 		this.makeRequest = function(endpoint, data){
 			
-			console.log(data.data); //llega a makerequest
+			console.log(data); //llega a makerequest
 
 			sdk_app_context.showLoader();
 			var result = {};
