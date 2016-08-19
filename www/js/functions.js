@@ -1924,11 +1924,15 @@ $(window).load(function(){
 		$('svg.consume').click(function() {
 			$(this).parent().parent().addClass('consumido');
 			$(this).html('<use xlink:href="#consume2"></use>');
+
+			apiRH.makeCosume();
+
 		});
 
 		$('svg.noconsu').click(function() {
 			$(this).parent().parent().addClass('cancelado');
 			$(this).html('<use xlink:href="#noconsu2"></use>');
+			apiRH.makeCosume();
 		});
 
 		$('svg.commenn').click(function() {
