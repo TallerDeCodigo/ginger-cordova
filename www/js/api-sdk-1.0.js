@@ -701,6 +701,31 @@ function requestHandlerAPI(){
 							/* ContentType is important to parse the data server side since PUT doesn't handle multipart form data */
 							 return userInfo;
 						};
+
+		this.makeCosume = function(endpoint, data){
+			sdk_app_context.showLoader();
+			var result = {};
+		
+			$.ajax({
+			  type: 'POST',
+			  headers: data.headers,
+			  url: window.api_base_url+endpoint,
+			  data: JSON.stringify(data.data),
+			  dataType: 'json',
+			  async: false
+			})
+			 .done(function(response){
+				result = response;
+				sdk_app_context.hideLoader(response);
+			})
+			 .fail(function(e){
+				result = false;
+				console.log(JSON.stringify(e));
+			});
+
+			return result;
+
+		};				
 		/* 
 		 * Perform OAuth authentication 
 		 * @param provider String Values: 'facebook', 'twitter', 'google_plus'
