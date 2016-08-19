@@ -6,13 +6,7 @@ $( function() {
 
 	var anchot = document.documentElement.clientWidth;
 
-	var CREDENTIALS = {
-		appId: 28287,
-		authKey: 'XydaWcf8OO9xhGT',
-		authSecret: 'JZfqTspCvELAmnW'
-	};
-
-		/*EDAD*/
+	/*EDAD*/
 	var minval_age = 15; 
 	var maxval_age = 90;
 	var rango_age = maxval_age-minval_age;
@@ -23,16 +17,15 @@ $( function() {
 	}
 
     $('#age').draggable(
-    	{ 
-    		containment:"parent",axis:"x",grid:[gridag,gridag],drag:function()
-    		{
-		    	var percent = $('.age .drag-parent').width()-30;
-		    	var donde = Math.round(((($('#age').position().left)*rango_age)/percent)+minval_age);
-		    	$("#age-filler").css("width",$('#age').position().left+20);
-		    	$('#age-dato').html(donde);
-		    	$('#edad_value').attr("value", donde);
-      		}
-  		});
+	{ 
+	containment:"parent",axis:"x",grid:[gridag,gridag],drag:function(){
+		var percent = $('.age .drag-parent').width()-30;
+		var donde = Math.round(((($('#age').position().left)*rango_age)/percent)+minval_age);
+		$("#age-filler").css("width",$('#age').position().left+20);
+		$('#age-dato').html(donde);
+		$('#edad_value').attr("value", donde);
+		}
+	});
 
 
 	/*DPW*/
@@ -381,59 +374,59 @@ $(window).on("load resize",function(){
 		}//end if has class
 
 
-				/* SWIPE COACH */	
+		/* SWIPE COACH */	
 
-			    var IMG_WIDTH = ancho*0.8125;
-				var currentImg = 0;
-				var maxImages = tamano;
-				var speed = 500;
+	    var IMG_WIDTH = ancho*0.8125;
+		var currentImg = 0;
+		var maxImages = tamano;
+		var speed = 500;
 
-				var imgs;
+		var imgs;
 
-				var swipeOptions = { triggerOnTouchEnd: true, swipeStatus: swipeStatus, allowPageScroll: "vertical", threshold: 75 };
+		var swipeOptions = { triggerOnTouchEnd: true, swipeStatus: swipeStatus, allowPageScroll: "vertical", threshold: 75 };
 
-				$(function createSwipe () {
-				    imgs = $(".cslider");
-				    imgs.swipe(swipeOptions);
-				}); //end createSwipe
+		$(function createSwipe () {
+		    imgs = $(".cslider");
+		    imgs.swipe(swipeOptions);
+		}); //end createSwipe
 
-				function swipeStatus(event, phase, direction, distance) {
-				    if (phase == "move" && (direction == "left" || direction == "right")) {
-				        var duration = 0;
+		function swipeStatus(event, phase, direction, distance) {
+		    if (phase == "move" && (direction == "left" || direction == "right")) {
+		        var duration = 0;
 
-				        if (direction == "left") {
-				            scrollImages((IMG_WIDTH * currentImg) + distance, duration);
-				            
-				        } else if (direction == "right") {
-				            scrollImages((IMG_WIDTH * currentImg) - distance, duration);
-				        }
+		        if (direction == "left") {
+		            scrollImages((IMG_WIDTH * currentImg) + distance, duration);
+		            
+		        } else if (direction == "right") {
+		            scrollImages((IMG_WIDTH * currentImg) - distance, duration);
+		        }
 
-				    } else if (phase == "cancel") {
-				        scrollImages(IMG_WIDTH * currentImg, speed);
-				    } else if (phase == "end") {
-				        if (direction == "right") {
-				            previousImage();
-				        } else if (direction == "left") {
-				            nextImage();
-				        }
-				    }
-				} //end swipeStatus
+		    } else if (phase == "cancel") {
+		        scrollImages(IMG_WIDTH * currentImg, speed);
+		    } else if (phase == "end") {
+		        if (direction == "right") {
+		            previousImage();
+		        } else if (direction == "left") {
+		            nextImage();
+		        }
+		    }
+		} //end swipeStatus
 
-				function previousImage() {
-				    currentImg = Math.max(currentImg - 1, 0);
-				    scrollImages(IMG_WIDTH * currentImg, speed);
-				}//end previousImage
+		function previousImage() {
+		    currentImg = Math.max(currentImg - 1, 0);
+		    scrollImages(IMG_WIDTH * currentImg, speed);
+		}//end previousImage
 
-				function nextImage() {
-				    currentImg = Math.min(currentImg + 1, maxImages - 1);
-				    scrollImages(IMG_WIDTH * currentImg, speed);
-				}//end nextImage
+		function nextImage() {
+		    currentImg = Math.min(currentImg + 1, maxImages - 1);
+		    scrollImages(IMG_WIDTH * currentImg, speed);
+		}//end nextImage
 
-				function scrollImages(distance, duration) {
-				    imgs.css("transition-duration", (duration / 1000).toFixed(1) + "s");
-				    var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
-				    imgs.css("transform", "translate(" + value + "px,0)");
-				}//end scrollImages
+		function scrollImages(distance, duration) {
+		    imgs.css("transition-duration", (duration / 1000).toFixed(1) + "s");
+		    var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
+		    imgs.css("transform", "translate(" + value + "px,0)");
+		}//end scrollImages
 });// end Window on Load Resize swipe / dietas 
 
 $(window).load(function(){
@@ -444,7 +437,10 @@ $(window).load(function(){
 			var today = new Date();
 			var hoy = today.getDay();
 			var day_index;
-			var dieta = app.get_diet(localStorage.getItem('dieta'));
+
+			console.log('AQUIIII');
+
+			var dieta = app.get_diet(localStorage.getItem('dietaId'));
 
 			var arr_desayuno
 			var arr_snack1
@@ -1426,15 +1422,20 @@ $(window).load(function(){
 					$.each( listCoach, function( key, value ) {
 						var item = $('.initial').html();
 
-						console.log(listCoach);
+						// console.log(listCoach);
 						
 						// $('.initial').remove();
 						// $(".wrap-cslide").append('<div class="csilder">'+item+'</div>');
   						// console.log( key + ": " + value );
+
+  						console.log('Lista de Coaches ' + listCoach);
+
+
   						$.each( value, function( key, value ) {
   							// console.log( key + " :: " + value );
-  							if (key=='id') {
-  								localStorage.setItem("dieta_id",value);
+  							if (key=='_id') {
+  								console.log('DIETA ID' + value);
+  								$('.slide-coach').attr('dieta', value);
   							}
 							if(key == 'coach'){	
 								$.each( value, function( key, value ) {
@@ -1442,8 +1443,10 @@ $(window).load(function(){
 									//console.log( key + " ::: " + value );
 									
 									if (key=='id') {
-										//$(".wrap-cslide .cslider:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
-										//console.log(value);
+										$(".wrap-cslide .cslider:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
+										console.log('ID DE COACH: ' + value);
+										localStorage.setItem('coach_id', value);
+										$('.slide-coach').attr('coach', localStorage.getItem("coach_id"));
 									}
 									if (key=='nombre') {
 										Name = value;
@@ -1479,21 +1482,18 @@ $(window).load(function(){
 
 					});
 								
-								var count = 5;
+					var count = 5;
 
-								for (var i = 0; i < rate_stars; i++) {
-									$('.rate-stars').append('<img src="images/starh.svg">');
-									console.log(i);
-								};
-								
-								for (var x = 0; x < count - rate_stars; x++) {
-									console.log('-' + x);
-									$('.rate-stars').append('<img src="images/star.svg">');
-									console.log(i);
-								};
-
-
-
+					for (var i = 0; i < rate_stars; i++) {
+						$('.rate-stars').append('<img src="images/starh.svg">');
+						console.log(i);
+					};
+					
+					for (var x = 0; x < count - rate_stars; x++) {
+						console.log('-' + x);
+						$('.rate-stars').append('<img src="images/star.svg">');
+						console.log(i);
+					};
 
 
 					setTimeout(function() {
@@ -1521,6 +1521,22 @@ $(window).load(function(){
 
 		$('#finish5').click(function(){
 			console.log('click');
+			/*
+				JSON COACH SELECTED	*
+			*/
+
+			var coach = $('.slide-coach').attr('coach');
+			var dieta = $('.slide-coach').attr('dieta');
+
+			var json = {
+				"coach" : coach,
+				"dieta" : dieta
+			}
+
+			//Request update data
+
+			var responsedata = apiRH.updatePerfil(json);
+
 			
 			if(!$('.overscreen4').is(':visible')){
 				$('.overscreen4').show();

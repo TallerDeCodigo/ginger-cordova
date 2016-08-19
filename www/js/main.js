@@ -1003,12 +1003,13 @@
 				console.log(data_login.mail);
 
 				data_login.pass = $('#pass').val();
+				console.log('here');
 				var responsedata = apiRH.loginNative(data_login);
-
-			  	//console.log("RESPUESTA: " + responsedata);
+				console.log('come');
+			  	console.log("RESPUESTA: " + responsedata);
 
 				if(responsedata){
-				 	//apiRH.save_user_data_clientside(responsedata);
+				 	apiRH.save_user_data_clientside(responsedata);
 				 	window.location.assign('dieta.html');
 				 	return;
 				}

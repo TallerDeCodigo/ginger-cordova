@@ -67,7 +67,6 @@ function requestHandlerAPI(){
 				url : api_base_url + 'api/login',
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': '',
 					'Content-Type': 'application/json'
 				},
 				data : {
@@ -88,11 +87,14 @@ function requestHandlerAPI(){
 			localStorage.setItem('mail', response.mail);
 			localStorage.setItem('userId', response.userId);
 
-			this.token = response.token;
+
+			//this.token = response.token;
 
 			var userId 	= localStorage.getItem('userId');
 			var mail 	= localStorage.getItem('mail');
 			var token 	= localStorage.getItem('token');
+
+			console.log('TOKEN RESPONSE ' + token);
 
 			//console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + this.token);
 
@@ -311,7 +313,6 @@ function requestHandlerAPI(){
 			})
 			 .done(function(response){
 				result = response;
-				console.log(response);
 				sdk_app_context.hideLoader(response);
 			})
 			 .fail(function(e){
