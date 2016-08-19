@@ -857,6 +857,40 @@
 		},
 
 
+		// get_consumed:function(){
+		// 	var req = {
+		// 		method : 'GET',
+		// 		url : api_base_url + '/tables/consumo?coach='+localStorage.getItem('coach')+'&dieta='+ $localeStorage.getItem('dietaId')+'&inicio=&fin='),  //definitr tabla
+		// 		headers: {
+		// 			'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+		// 			'X-ZUMO-AUTH': localStorage.getItem('token'),
+		// 			'Content-Type': 'application/json'
+		// 		}
+		// 	}
+
+		// 	$.ajax({
+		// 	  type: 'GET',
+		// 	  headers: req.headers,
+		// 	  url:  req.url,
+		// 	  dataType: 'json',
+		// 	  async: false
+		// 	})
+		// 	 .done(function(response){
+		// 	 	console.log(response);
+		// 		result = response;
+		// 		localStorage.setItem('dieta', response);
+		// 		sdk_app_context.hideLoader(response);
+		// 	})
+		// 	 .fail(function(e){
+		// 		result = false;
+		// 		console.log(JSON.stringify(e));
+		// 	});
+
+		// 	//console.log(result);
+		// 	return result;
+		// },
+
+
 		get_diet: function(dietId)
 		{
 			var req = {
