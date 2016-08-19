@@ -58,8 +58,8 @@ $( function() {
 
 
 	/*MEDIDAS*/
-  	var minval_med = 0; 
-	var maxval_med = 70;
+  	var minval_med = 20; 
+	var maxval_med = 250;
 	var rango_med = maxval_med-minval_med;
   	var gridme = ($('.medida .drag-parent').width()-30)/rango_med;
     $('#medida').draggable({ 
@@ -363,15 +363,11 @@ $(window).on("load resize",function(){
 					$('#restricciones_perfil').html("Sin restricciones");
 				}else{
 
-					//var parseado = JSON.stringify(restricciones);
-
-					//console.log("parse> "+parseado);
-
-					//restricciones = parseado.join(", ");
-					
-					//console.log("PARSE_RES> "+ restricciones);
-
-					$('#restricciones_perfil').html(restricciones);
+					var restricc = [ 'huevos', 'pollo', 'pescado', 'mariscos', 'lacteos', 'carne' ];
+					var parseado = JSON.parse(restricciones);
+					parseado = JSON.stringify(parseado);
+					parseado = parseado.slice(2,3);
+					$('#restricciones_perfil').html(restricc[parseado]);
 				}
 
 					/*
@@ -624,14 +620,14 @@ $(window).load(function(){
 
     var fecha = new Date();
     var weekNumber = (new Date()).getWeek();
-    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    var meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sept", "Oct", "Nov", "Dic"];
 	var dias = ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
 	//console.log(weekNumber);
   	var ano = fecha.getFullYear();
   	var mes = meses[fecha.getMonth()];
   	//console.log(fecha.hoy());
-
+  	mes = mes.slice(0,3);
 	/*
 		IMPRIME EL MES Y EL ANO EN EL HEADER DE LA PANTALLA
 	*/
@@ -1086,14 +1082,14 @@ $(window).load(function(){
 
 		$("#r_peso-up").bind('touchstart', function(){
 			timeout = setInterval(function(){
-				r_peso = Number($('.r_peso p').html());
+				r_peso = Number($('.r_peso input[name="peso_metric"]').val() );
 		        if (r_peso<99) {
 					r_peso=r_peso+0.5;
-		        	$('.r_peso p').html(r_peso.toFixed(1));
+		        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(1));
 		        	$('input[name="track_peso"]').attr('value', r_peso);
 				} else {
 					r_peso=r_peso+1;
-		        	$('.r_peso p').html(r_peso.toFixed(0));
+		        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(0));
 		        	$('input[name="track_peso"]').attr('value', r_peso);
 				}
 		    }, 100);
@@ -1107,15 +1103,15 @@ $(window).load(function(){
 
 		$("#r_peso-dw").bind('touchstart', function(){
 			timeout = setInterval(function(){
-				r_peso = Number($('.r_peso p').html());
+				r_peso = Number($('.r_peso input[name="peso_metric"]').val());
 				if (r_peso>0.4) {
 					if (r_peso<100.1) {
 						r_peso=r_peso-0.5;
-						$('.r_peso p').html(r_peso.toFixed(1));
+						$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(1));
 						$('input[name="track_peso"]').attr('value', r_peso);
 					} else {
 						r_peso=r_peso-1;
-						$('.r_peso p').html(r_peso.toFixed(0));
+						$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(0));
 						$('input[name="track_peso"]').attr('value', r_peso);
 					}
 				}

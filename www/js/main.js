@@ -877,6 +877,7 @@
 			  async: false
 			})
 			 .done(function(response){
+			 	console.log(response);
 				result = response;
 				localStorage.setItem('dieta', response);
 				sdk_app_context.hideLoader(response);
