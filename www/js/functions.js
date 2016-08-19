@@ -1418,10 +1418,11 @@ $(window).load(function(){
 					var short_description;
 					var biografia;
 					var rate_stars;
-
+					var item = $('.initial').html();
+					
 					$.each( listCoach, function( key, value ) {
-						var item = $('.initial').html();
-
+						
+						console.log("PASE" );
 						// console.log(listCoach);
 						
 						// $('.initial').remove();
