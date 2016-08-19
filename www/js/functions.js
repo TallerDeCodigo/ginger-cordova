@@ -1418,79 +1418,90 @@ $(window).load(function(){
 
 					$.each( listCoach, function( key, value ) {
 						
-						console.log("PASE" );
+						// console.log("PASE" );
 						// console.log(listCoach);
 						
 						// $('.initial').remove();
 						// $(".wrap-cslide").append('<div class="csilder">'+item+'</div>');
   						// console.log( key + ": " + value );
 
-  						console.log('Lista de Coaches ' + listCoach);
+  						// console.log('Lista de Coaches ' + listCoach);
 
 
   						$.each( value, function( key, value ) {
   							// console.log( key + " :: " + value );
   							if (key=='_id') {
-  								console.log('DIETA ID' + value);
-  								$('.slide-coach').attr('dieta', value);
+  								// console.log('DIETA ID' + value);
+  								// $('.slide-coach').attr('dieta', value);
   							}
 							if(key == 'coach'){	
 								$.each( value, function( key, value ) {
 									
-									//console.log( key + " ::: " + value );
+									// console.log( key + " ::: " + value );
 									
-									if (key=='id') {
-										$(".wrap-cslide .cslider:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
+									if (key=='_id') {
+										$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
 										console.log('ID DE COACH: ' + value);
 										localStorage.setItem('coach_id', value);
-										$('.slide-coach').attr('coach', localStorage.getItem("coach_id"));
+										$('.slide-coach:nth-of-type('+i+')').attr('coach', localStorage.getItem("coach_id"));
 									}
 									if (key=='nombre') {
 										Name = value;
 									}
 									if (key=='apellido') {
 										LastN = value;
+										var coach_name = Name +" "+LastN 
+										$('.slide-coach:nth-of-type('+i+') .name.coach_name').html(coach_name);
 									}
 									if (key=='frase') {
-										short_description = value;
-
-										//console.log(short_description);
-										$(".short-descrip b").html(short_description);
+										$(".slide-coach:nth-of-type("+i+") p.short-descrip b").html(value);
 									}
 									if (key=='bio') {
-										biografia = value;
-										$("textarea.short-descrip").html(biografia);
-										//console.log(value);
+										$(".slide-coach:nth-of-type("+i+") textarea.short-descrip").val(value);
 									}
 									if(key == 'rating'){
 										rate_stars = value;
 										rate_stars = Math.round(rate_stars);
-										console.log(rate_stars);
+										for (var j = 1; j <= rate_stars; j++) {
+											$(".slide-coach:nth-of-type("+i+") .rate-stars img:nth-of-type("+j+")").attr("src","images/starh.svg");
+										}
 									}
-								});
-								//$(".wrap-cslide .cslider:nth-of-type("+i+") h5.name").html(Name+" "+LastN);
-								console.log(Name+" "+LastN);
-								var coach_name = Name +" "+LastN 
-								$('#coach_name').html(coach_name);
+									if (key=='calificaciones') {
+										if (value=="1") {
+											$(".slide-coach:nth-of-type("+i+") div.no-review").html(value+" valoración");
+										} else {
+											$(".slide-coach:nth-of-type("+i+") div.no-review").html(value+" valoraciones");
+										}
+									}
+
+								});																
 							}
   						});
 
   						i++;
 
 					});
+
+					$('.slide-coach').each(function() {
+					    if ($(this).attr('coach') === undefined) {
+					      $(this).remove();
+					    }
+					});
+
+					$(window).resize();
 								
-					var count = 5;
-					$('.rate-stars').html();
-					for (var i = 0; i < rate_stars; i++) {
-						$('.rate-stars').append('<img src="images/starh.svg">');
-						console.log(i);
-					};
+					// var count = 5;
+					// $('.rate-stars').html();
+					// for (var i = 0; i < rate_stars; i++) {
+					// 	$('.rate-stars').append('<img src="images/starh.svg">');
+					// 	console.log(i);
+					// };
 					
-					for (var x = 0; x < count - rate_stars; x++) {
-						console.log('-' + x);
-						$('.rate-stars').append('<img src="images/star.svg">');
-						console.log(i);
-					};
+					// for (var x = 0; x < count - rate_stars; x++) {
+					// 	console.log('-' + x);
+					// 	$('.rate-stars').append('<img src="images/star.svg">');
+					// 	console.log(i);
+					// };
 
 
 					setTimeout(function() {
