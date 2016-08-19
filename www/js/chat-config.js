@@ -1,15 +1,3 @@
-// var responsedata = apiRH.getUsuarios();
-// var user = responsedata;
-// console.log(user);
-// var i = 0;
-// /*LLENA LA LISTA DE USUARIOS DEL CHAT */
-// $.each(user, function( key, value ) {
-
-//   $('.lista_chat').append(" <li class='persona' data='" + JSON.stringify(user[i]) + "'><div class='circle-frame'><img src='images/muestra.png'></div><h5>"+ user[i].nombre + ' ' + user[i].apellido +"</h5><p>Comí de más y ahora tengo dolor en mi hígado.</p><div class='no-leido'>12:06</div></li> ");
-
-//   i++;
-// });
-
 /*
   INICIALIZA QUICKBLOX
 */

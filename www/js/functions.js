@@ -7,15 +7,13 @@ $( function() {
 	var anchot = document.documentElement.clientWidth;
 
 	if($('body').hasClass('has-chat')){
-		console.log(currentUser);
+		
 		var mail = localStorage.getItem('mail');
 		var chatPassword = localStorage.getItem('chatPassword');
+	
+		var user = { login : "michelleronaym@gmail.com", pass : "7eveGyxJBkRMwEe1FSEG"};
 		
-		var user = { login : mail, pass : chatPassword};
-		
-		connectToChat(user);
-
-				
+		connectToChat(user);		
 	}
 
 
@@ -260,21 +258,6 @@ $(window).on("load resize",function(){
 			var comentario 		= localStorage.getItem('comentarios');
 			var coach_rate		= localStorage.getItem('coach_rate');
 
-
-			//console.log(JSON.stringify(usuario));
-
-			// console.log("nombre > "	 		+nombre);
-			// console.log("sexo > "	 		+sexo);
-			// console.log("edad > "	 		+edad);
-			// console.log("cp > "		 		+cp);
-			// console.log("estatura > "		+estatura);
-			// console.log("peso > "	 		+peso);
-			// console.log("ideal > "	 		+ideal);
-			// console.log("coach_type > "		+coach_type);
-			// console.log("frecuencia > "		+frecuencia);
-			// console.log("restricciones > "	+restricciones);
-			// console.log("plan > "			+plan);
-			// console.log("comentario > "		+comentario);
 
 			$('.cpur').html(nombre +" "+ apellido);
 			$('.edit-profile span').html(nombre +" "+ apellido);

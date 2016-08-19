@@ -6,19 +6,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
 		<meta http-equiv="cleartype" content="on">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-
-	    
-	    <script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+	    <script type="text/javascript" src="js/bower_components/handlebars/handlebars.runtime.min.js"></script>
 	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 	    <script src="js/jquery-touch.min.js"></script>
 	    <script type="text/javascript" src="js/functions.js"></script>
-	    <script type="text/javascript" src="js/forms.js"></script>
-	    <script type="text/javascript" src="js/api-sdk-1.0.js"></script>
 		<script type='text/javascript' src='js/plugins.js'></script>
+		<script type='text/javascript' src='js/api-sdk-1.0.js'></script>
 		<script type="text/javascript" src="js/oauth.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.1.4/quickblox.min.js"></script>
 		<script src="js/main.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.1.2/quickblox.min.js"></script>
+		<script type='text/javascript' src='js/plugins.js'></script>
 		
 	</head>
 	<body class="has-chat iosm">
@@ -30,20 +29,10 @@
 			</div>
 		</header>
 		<section>
-			<div class="incoming">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt purus non nulla euismod lobortis.</p>
-			</div>
-			<div class="outgoing">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt purus non nulla euismod lobortis. Pellentesque fermentum tortor vitae mauris rhoncus viverra. Proin egestas diam quis ex tincidunt suscipit.</p>
-			</div>
-			<div class="incoming withimg">
-				<img src="images/muestra.png">
-			</div>
-			<div class="outgoing">
-				<p>Lorem ipsum dolor sit amet</p>
-			</div>
-			<div class="incoming">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt purus non nulla euismod lobortis.</p>
+			<!-- <ul class="lista_chat" id="dialogs-list">
+			</ul> -->	
+			<div class="content list-group pre-scrollable nice-scroll" id="messages-list">
+				<!-- list of chat messages will be here -->
 			</div>
 		</section>
 		<footer class="foot-chat">
@@ -52,7 +41,6 @@
 			<a class="send cpur" href="#">Enviar</a>
 		</footer>
 	</div>
-	<script type='text/javascript' src='js/plugins_m.js'></script>
 	</body>
 	<script src="js/chat-config.js"></script>
 	<script src="js/chat-connection.js"></script>
