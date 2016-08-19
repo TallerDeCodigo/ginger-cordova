@@ -169,6 +169,11 @@ $( function() {
 $(window).on("load resize",function(){ 
 
 	var alto = document.documentElement.clientHeight;
+	var ancho = document.documentElement.clientWidth;
+
+	var mediad = 300+(ancho*0.64);
+
+	$('textarea.short-descrip').css('height',alto-mediad);
 
 	$('#scroller > ul > li').css("height",alto-245);
 	$('.iosm #scroller > ul > li').css("height",alto-265);
@@ -1458,7 +1463,7 @@ $(window).load(function(){
 									}
 									if (key=='bio') {
 										biografia = value;
-										$("pre.short-descrip").html(biografia);
+										$("textarea.short-descrip").html(biografia);
 										//console.log(value);
 									}
 									if(key == 'rating'){
@@ -1508,15 +1513,15 @@ $(window).load(function(){
             }
 		});
 
-		$('.coach.img-frame').click(function(){
-			$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
-			setTimeout(function() {
-        		$(".pagina").hide();
-        		$(".bio").show();
-        		$(".bio").css("left","40px");
-        		$(".bio").animate({opacity:"1",left:"0px"}, 200);
-            }, 250);
-		});
+		// $('.coach.img-frame').click(function(){
+		// 	$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
+		// 	setTimeout(function() {
+  //       		$(".pagina").hide();
+  //       		$(".bio").show();
+  //       		$(".bio").css("left","40px");
+  //       		$(".bio").animate({opacity:"1",left:"0px"}, 200);
+  //           }, 250);
+		// });
 
 		$('#finish5').click(function(){
 			$('.bio').animate({opacity:"0",left:"-40px"}, 200);
@@ -1580,20 +1585,13 @@ $(window).load(function(){
 	        		$(".restric").show();
 	        		$(".restric").animate({opacity:"1",left:"0px"}, 200);
 	            }, 250);
-			} else if($('.bio').is(':visible')){
-				$('.bio').animate({opacity:"0",left:"40px"}, 200);
-				setTimeout(function() {
-	        		$(".pagina").hide();
-	        		$(".pcoach1").show();
-	        		$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
-	            }, 250);
 			} else if($('.discount').is(':visible')){
 				$('.discount').animate({opacity:"0",left:"40px"}, 200);
 				$('.byel').addClass('active');
 				setTimeout(function() {
 	        		$(".pagina").hide();
-	        		$(".bio").show();
-	        		$(".bio").animate({opacity:"1",left:"0px"}, 200);
+	        		$(".pcoach1").show();
+	        		$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
 	            }, 250);
 			} else if($('.conekta').is(':visible')){
 				$('.conekta').animate({opacity:"0",left:"40px"}, 200);
