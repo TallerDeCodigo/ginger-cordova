@@ -1009,8 +1009,11 @@
 			  	console.log("RESPUESTA: " + responsedata);
 
 				if(responsedata){
-				 	apiRH.save_user_data_clientside(responsedata);
+					
+					localStorage.setItem('user', JSON.stringify(responsedata));
+
 				 	window.location.assign('dieta.html');
+				 	
 				 	return;
 				}
 			}

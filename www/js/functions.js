@@ -6,6 +6,19 @@ $( function() {
 
 	var anchot = document.documentElement.clientWidth;
 
+	if($('body').hasClass('has-chat')){
+		console.log(currentUser);
+		var mail = localStorage.getItem('mail');
+		var chatPassword = localStorage.getItem('chatPassword');
+		
+		var user = { login : mail, pass : chatPassword};
+		
+		connectToChat(user);
+
+				
+	}
+
+
 	/*EDAD*/
 	var minval_age = 15; 
 	var maxval_age = 90;
@@ -1419,7 +1432,7 @@ $(window).load(function(){
 					var biografia;
 					var rate_stars;
 					var item = $('.initial').html();
-					
+
 					$.each( listCoach, function( key, value ) {
 						
 						console.log("PASE" );
@@ -2026,7 +2039,9 @@ $(window).load(function(){
 			console.log("click");
 			cordova.InAppBrowser.open('http://www.gingerapp.mx/avisodeprivacidad/', '_blank', 'location=yes');
 		})
-}); //END WINDOW LOAD clicks
+	}); //END WINDOW LOAD clicks
+
+
 
 
 				/*

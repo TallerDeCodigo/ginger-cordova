@@ -9,7 +9,6 @@
 
 	    
 	    <script type="text/javascript" src="cordova.js"></script>
-		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.runtime.min.js"></script>
 	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 	    <script src="js/jquery-touch.min.js"></script>
@@ -22,7 +21,7 @@
 		<script src="js/main.js"></script>
 		
 	</head>
-	<body class="iosm">
+	<body class="has-chat iosm">
 	<div id="container" class="chat">
 		<header class="hwhite2">
 			<div class="toolbar">
@@ -55,9 +54,14 @@
 	</div>
 	<script type='text/javascript' src='js/plugins_m.js'></script>
 	</body>
+	<script src="js/chat-config.js"></script>
+	<script src="js/chat-connection.js"></script>
+	<script src="js/chat-messages.js"></script>
+	<script src="js/chat-ui-helpers.js"></script>
+	<script src="js/chat-dialogs.js"></script>
+	<script src="js/chat-users.js"></script>
 	<script type="text/javascript">
 		/* Initialize app object and perform initial login check */
-
 	
 		window.is_feed = true;
 		app.initialize();

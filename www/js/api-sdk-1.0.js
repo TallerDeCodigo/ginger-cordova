@@ -139,30 +139,14 @@ function requestHandlerAPI(){
 					localStorage.setItem('comentarios', user.comentarios);
 					localStorage.setItem('customerId', user.customerId);
 					localStorage.setItem('chatId', user.chatId);
-					localStorage.setItem('chatId', user.chatId);
 					localStorage.setItem('dietaId', user.dieta._id);
 					localStorage.setItem('dietaName', user.dieta.nombre);
 					localStorage.setItem('nombre_coach', user.coach.nombre);
 					localStorage.setItem('apellido_coach', user.coach.apellido);
 					localStorage.setItem('coach_rate', user.coach.rating);
+					localStorage.setItem('chatPassword', user.coach.chatPassword);
 
-						//console.log("dietaName> "+user.dieta.nombre);
-						//console.log("plan> "+user.perfil.personalidad);
-						//console.log("name> "+user.nombre);
-						//console.log("apellido> "+user.apellido);
-						//console.log("sexo> "+user.perfil.sexo);
-						//console.log("edad> "+user.perfil.edad.real);
-						//console.log("zipcode> "+user.cp);
-						//console.log("estatura> "+user.perfil.estatura);
-						//console.log("peso> "+user.perfil.peso);
-						//console.log("peso_ideal> "+user.pesoDeseado);
-						//console.log("dpw> "+user.perfil.ejercicio);
-						//console.log("restricciones> "+user.restricciones);
-						//console.log("comentarios> "+user.comentarios);
-						//console.log("customerId> "+user.customerId);
-						//console.log("chatId> "+user.jid);
-						//console.log("chatId> "+user.chatId);
-						//console.log("dietaId> "+user.dieta._id);
+						
 
 					return (userId) ? response : false;
 				}
@@ -231,9 +215,11 @@ function requestHandlerAPI(){
 
 			// Function 
 
-			//var user = this.getRequest('api/cliente', req);
+			var user = this.getRequest('api/cliente', req);
 
-			//console.log(JSON.stringify(user));
+			console.log(JSON.stringify(user));
+
+			localStorage.setItem('users', JSON.stringify(user));
 
 			return (response.nuevo) ? response : false;
 		};
@@ -448,47 +434,9 @@ function requestHandlerAPI(){
 		 * @return userdata JSON Contains the user info to be stored client side
 		 * @see save_user_data_clientside()
 		 */
-		this.create_internal_user = function(username, email, attrs, token){
-											var data, response, exists = null, var_return;
-											/* If user exists, it returns the username and id */
-											exists  = this.getRequest('user/exists/', username);
-											console.log(JSON.stringify(exists));
-												/* Exit and get new valid token if user already exists */
-												if(exists.success){
-													console.log('User already exists, saving data');
-													this.save_user_data_clientside(exists.data);
-													/* Validate token */
-													data = {
-																user_id     : 'none',
-																token       : apiRH.get_request_token(),
-																validate_id   : (exists.data.user_id) ? exists.data.user_id : 'none'
-															};
-													response = this.makeRequest('user/validateToken/', data);
-													return;
-												}
-											/* Create new user and validate it's token */
-											console.log('Creating new user');
-											data = {
-														email       : email,
-														username    : username,
-														attrs    	: attrs
-													};
-											console.log(JSON.stringify(data));
-											response = this.makeRequest('auth/user/', data);
-											/* End handshake with server by validating token and getting 'me' data */
-											context.endHandshake(username);
-
-											/* Validate token */
-											data = {
-														user_id     : 'none',
-														token       : apiRH.get_request_token(),
-														validate_id   : (window.localStorage.getItem('user_id')) ? window.localStorage.getItem('user_id') : 'none'
-													};
-											response = this.makeRequest('user/validateToken/', data);
-											app.toast("User registered,\n ¡Welcome!");
-											var_return = (response.success) ? true : false;
-											return var_return;
-									};
+		this.create_internal_user = function(data){
+			localStorage.setItem('user', data);										
+		};
 
 		/* 
 		 * Save user data client side to execute auth requests to the API
