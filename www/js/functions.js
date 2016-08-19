@@ -1384,7 +1384,7 @@ $(window).load(function(){
 					"sexo" : genero,
 					"peso" : peso,
 					"estatura" : estatura,
-					"ejercicio" : dpw,
+					"ejercicio" : (dpw>3)?1:0,
 					"objetivo" : plan,
 					"restricciones" : JSON.parse(restricciones_ls2),
 					"personalidad" : coach_type
@@ -1400,13 +1400,13 @@ $(window).load(function(){
 
 			//console.log(responsedata);
 
-			var listCoach = {};
+			
 			
 			if(responsedata){
 
 				/* REQUEST COACHES */	
 				
-				listCoach = apiRH.getCoachList();
+				var listCoach = apiRH.getCoachList();
 
 				console.log(listCoach[0].coach);
 
@@ -1483,7 +1483,7 @@ $(window).load(function(){
 					});
 								
 					var count = 5;
-
+					$('.rate-stars').html();
 					for (var i = 0; i < rate_stars; i++) {
 						$('.rate-stars').append('<img src="images/starh.svg">');
 						console.log(i);
