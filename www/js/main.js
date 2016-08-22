@@ -117,8 +117,7 @@
 			*  \___/_/   \_\__,_|\__|_| |_|
 			*/                              
 
-
-
+			console.log('OAUTH');
 
 			try{
 				OAuth.initialize('F_A1PBTm8Vv9WtuftE8CuTqNV7g');
@@ -623,6 +622,22 @@
 				}
 			}
 	}); //END VALIDATE
+
+
+	//-----------------------------
+	//
+	// Login Facebook
+	//
+	//-----------------------------
+
+	$('.face').click(function (e) {
+
+		apiRH.loginOauth('facebook');
+		
+		e.preventDefault();
+
+	});
+
 
 
 /*TARJETA DE CREDITO*/
