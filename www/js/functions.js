@@ -3,7 +3,10 @@
 
 
 $( function() {
-
+	/*
+		CLEAR LOCAL STORAGE
+	*/
+	
 	//localStorage.clear();
 
 	var anchot = document.documentElement.clientWidth;
