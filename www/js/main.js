@@ -519,8 +519,14 @@
 							required: true,
 							email: true
 						},
-					pass: "required",
-					cpass : "required"
+					pass: {
+						required:true,
+						minlength:7
+					},
+					cpass: {
+						required:true,
+						equalTo:"#pass"
+					},
 				},
 				messages: {
 					user: "Debes proporcionar un nombre de usuario",
@@ -528,7 +534,7 @@
 							required: "Debes proporcionar un correo",
 							email: "Por favor proporciona un correo válido"
 						},
-					pass: "Este campo es requerido para acceder a tu cuenta",
+					pass: "La contraseña debe ser de por lo menos siete caracteres",
 					cpass: "Las contraseñas que proporcionaste no coinciden"
 				},
 				submitHandler: function(){
