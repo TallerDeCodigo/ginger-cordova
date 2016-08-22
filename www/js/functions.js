@@ -1561,6 +1561,16 @@ $(window).load(function(){
 			$('#container').toggleClass('blurred');
 		});
 
+		$('.bt-review').click(function(){
+			$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
+			setTimeout(function() {
+        		$(".pagina").hide();
+        		$(".resena").show();
+        		$(".resena").css("left","40px");
+        		$(".resena").animate({opacity:"1",left:"0px"}, 200);
+            }, 250);
+		});
+
 		$('#aceptar').click(function(){
 			$('#container').toggleClass('blurred');
 			/*
