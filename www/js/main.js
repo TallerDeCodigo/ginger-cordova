@@ -632,7 +632,7 @@
 
 	$('.face').click(function (e) {
 
-		apiRH.loginOauth('facebook');
+		apiRH.loginOauth('facebook', 'loginCallbackFB');
 		
 		e.preventDefault();
 

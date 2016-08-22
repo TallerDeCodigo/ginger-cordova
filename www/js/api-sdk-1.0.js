@@ -776,14 +776,14 @@ function requestHandlerAPI(){
 		 * @see loginCallbackTW, loginCallbackFB, loginCallbackGP
 		 */
 		this.loginOauth   =  function(provider, callback){
-								sdk_app_context.showLoader();
-								OAuth.popup(provider)
-								 .done(callback)
-								 .fail(function(error){
-									console.log(error);
-								 });
-								return;
-							};
+			sdk_app_context.showLoader();
+			OAuth.popup(provider)
+			.done(callback)
+			.fail(function(error){
+				console.log(error);
+			});
+			return;
+		};
 		/* 
 		 * Log in callback for Twitter provider
 		 * @return Bool TRUE if authentication was successful
