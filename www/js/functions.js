@@ -817,10 +817,7 @@ $(window).load(function(){
 			}
 			$(this).attr({src: "images/hombreh.svg", alt: "1"});
 			$('.type-def').attr("src","images/hombreh.svg");
-
 			$('#update_sexo').attr("value", '1');
-			
-
 		});
 
  
@@ -832,13 +829,9 @@ $(window).load(function(){
 				$('#hombre').attr("src","images/hombre.svg");
 				$('#hombre').attr("alt","");
 			}
-
 			$(this).attr({src: "images/mujerh.svg", alt: "1"});
 			$('.type-def').attr("src","images/mujerh.svg");
-
 			$('#update_sexo').attr("value", '0');
-
-			
 		}); //end click mujer
 
 
@@ -1257,6 +1250,11 @@ $(window).load(function(){
 			//console.log(track_animo);
 		});
 
+
+/*
+	FEED HTML
+*/
+
 		$('#finish1').click(function(){
 			$('.aboutyou').animate({opacity:"0",left:"-40px"}, 200);
 			$('.bpur').removeClass('active');
@@ -1279,22 +1277,34 @@ $(window).load(function(){
 	
 			//Zipocode
 			localStorage.setItem('zipcode', $('input[name="zipcode"]').val() );
-			postal = localStorage.getItem('zipcode');
+			var _zipcode = localStorage.getItem('zipcode');
+			console.log("zip>"+_zipcode);
 
 			//genero
 			localStorage.setItem('genero', $('#genre_value').val() );//hacerlo una condicional
+			var _genero = localStorage.getItem('genero');
+			console.log("genero>"+_genero);
 
 			//estatura
 			localStorage.setItem('estatura', $('input[name="estatura"]').val() );
-			
+			var _estatura = localStorage.getItem('estatura');
+			console.log("height>"+_estatura);
+
 			//peso
 			localStorage.setItem('peso', $('input[name="peso"]').val() );
+			var _peso = localStorage.getItem('peso');
+			console.log("weight>"+_peso);
+
 			
 			//edad
 			localStorage.setItem('edad', $('#edad_value').val() );
+			var _edad = localStorage.getItem('edad');
+			console.log("age>"+_edad);
 			
 			//peso ideal
 			localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
+			var _peso_ideal = localStorage.getItem('peso_ideal');
+			console.log("ideal>"+_peso_ideal);
 
 			setTimeout(function() {
         		$(".pagina").hide();
@@ -1316,10 +1326,12 @@ $(window).load(function(){
 			localStorage.setItem('plan', $('#plan').val() );
 			//coach_type
 			localStorage.setItem('coach_type', $('#coach_type').val() );
-			var plan 		= localStorage.getItem('coach_type', $('#plan').val() );
-			var coach_type = localStorage.getItem('coach_type', $('#coach_type').val() );
 
-			//console.log(" plan> "+ plan+" coachType> "+ coach_type);
+			var plan 		= localStorage.getItem('plan' );
+			var coach_type = localStorage.getItem('coach_type' );
+
+			console.log(" plan> "+ plan);
+			console.log("coachType> "+ coach_type);
 
 			setTimeout(function() {
         		$(".pagina").hide();
@@ -1339,6 +1351,8 @@ $(window).load(function(){
 				*/
 			//frecuencia de ejercicio
 			localStorage.setItem('dpw', $('#days_per_week').val() );
+			var _dpw = localStorage.getItem('dpw');
+			console.log(_dpw);
 
 			// var dpw = localStorage.getItem('dpw');
 			// console.log(" dias por semana> > > "+dpw);
@@ -1369,7 +1383,7 @@ $(window).load(function(){
 			var dpw 		  		= localStorage.getItem('dpw');
 			var comentario 	  		= localStorage.getItem('comentario');
 
-			//console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+peso_ideal+" > "+zipcode+" > "+plan+" > "+coach_type+" > "+restricciones_ls2+" > "+dpw+" > "+comentario );
+			console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+peso_ideal+" > "+zipcode+" > "+plan+" > "+coach_type+" > "+restricciones_ls2+" > "+dpw+" > "+comentario );
 
 			/*
 				JSON STRUCTURE 	*
