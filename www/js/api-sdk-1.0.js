@@ -749,6 +749,24 @@ function requestHandlerAPI(){
 			});
 
 			return result;
+		};
+
+		this.cancelarSuscripcion = function(data){
+			$.ajax({
+					url: '',
+					type: 'post',
+					data: {}
+			})
+			.done(function(response){
+				result = response;
+				sdk_app_context.hideLoader(response);
+			})
+			.fail(function(e){
+				result = false;
+				console.log(JSON.stringify(e));
+			});
+
+			return result;
 		};				
 		/* 
 		 * Perform OAuth authentication 
