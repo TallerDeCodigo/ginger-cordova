@@ -1326,10 +1326,12 @@ $(window).load(function(){
 			localStorage.setItem('plan', $('#plan').val() );
 			//coach_type
 			localStorage.setItem('coach_type', $('#coach_type').val() );
-			var plan 		= localStorage.getItem('coach_type', $('#plan').val() );
-			var coach_type = localStorage.getItem('coach_type', $('#coach_type').val() );
 
-			//console.log(" plan> "+ plan+" coachType> "+ coach_type);
+			var plan 		= localStorage.getItem('plan' );
+			var coach_type = localStorage.getItem('coach_type' );
+
+			console.log(" plan> "+ plan);
+			console.log("coachType> "+ coach_type);
 
 			setTimeout(function() {
         		$(".pagina").hide();
@@ -1349,6 +1351,8 @@ $(window).load(function(){
 				*/
 			//frecuencia de ejercicio
 			localStorage.setItem('dpw', $('#days_per_week').val() );
+			var _dpw = localStorage.getItem('dpw');
+			console.log(_dpw);
 
 			// var dpw = localStorage.getItem('dpw');
 			// console.log(" dias por semana> > > "+dpw);
