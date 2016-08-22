@@ -460,6 +460,8 @@ a.mail {background:#2eab7e url('../images/mail_btn.png') no-repeat;background-si
 .savech {list-style:none;}
 .savech a {margin-bottom:8px;}
 
+input[type="text"]{height:50px!important;}
+
 /* DIALOG */
 
 .overscreen2 {position:fixed;width:100%;height:100%;top:0px;left:0px;z-index:999999999999;}
