@@ -1568,7 +1568,7 @@ $(window).load(function(){
 			var json = {"coach" : coach,"dieta" : dieta}
 			//Request update data
 			var responsedata = apiRH.updatePerfil(json);
-			
+
 			$('.bio').animate({opacity:"0",left:"-40px"}, 200);
 			$('.byel').removeClass('active');
 			setTimeout(function() {
@@ -1586,9 +1586,20 @@ $(window).load(function(){
 		});
 
 		$('.la_img').click(function(){
-			console.log('click');
-
+			if(!$('.overscreen5').is(':visible') ){
+				$('.overscreen5').show();
+			setTimeout(function() {$('.overscreen5').addClass('active');}, 200);
+			} else {
+				$('.overscreen5').removeClass('active');
+				setTimeout(function() {$('.overscreen5').hide();}, 800);
+			}
+			$('#container').toggleClass('blurred');
 		});
+
+		$('#info_pay').click(function(){
+			$('#container').toggleClass('blurred');
+			$('.overscreen5').hide();
+		})
 
 
 		$('.btn-pago').click(function(){
