@@ -207,15 +207,18 @@ img.saltar {position:absolute;bottom:2.5%;left:50%;margin-left:-65px;display:blo
 .coach.img-frame img:last-of-type {position:absolute;/*right:10px;bottom:10px;*/-webkit-filter:drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.5));filter:drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.5););}
 
 .rate-stars img {height:16px;width:auto;margin:3px 0px}
+.rate-stars2 img {height:12px;width:auto;margin:3px 0px}
 
 .slide-coach .name {/*margin-left:5%;*/font-size:110%;margin-top:5px;}
 .slide-coach .rate-stars {/*margin-left:5%;*/}
 .slide-coach .short-descrip {/*margin-left:5%;*/font-size:85%;font-weight:100;/*white-space:nowrap;overflow:hidden;text-overflow:ellipsis;*/width:90%;margin-top:0px;}
 textarea.short-descrip {position:relative;top:-10px;resize:none;}
 
-.bio .name {text-align:left;margin:9px 5% 0px;font-size:110%;}
-.bio .rate-stars {text-align:left;margin-left:5%;margin-bottom:5px;}
-.bio p {font-size:80%;font-weight:100;width:90%;margin:3px 5%;text-align:left;}
+.resena .name {text-align:left;margin:9px 5% 0px;font-size:110%;}
+.resena .rate-stars {text-align:left;padding-left:5%;margin-bottom:0px;border-bottom:1px solid #999;}
+.resena div.nombre_resena, .resena div.resena_cont {font-size:80%;font-weight:100;width:100%;margin:0px;text-align:left;padding:0px 5%;}
+.resena div.nombre_resena {padding-top:6px;font-weight:800;}
+.resena div.resena_cont {border-bottom:1px solid #999;padding-bottom:11px;}
 
 .bio.img-frame {margin-top:3.5%;padding-bottom:60%;}
 .bio.img-frame img {width:auto;height:100%;position:absolute;top:-9999px;bottom:-9999px;left:-9999px;right:-9999px;margin:auto;}
