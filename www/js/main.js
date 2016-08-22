@@ -613,12 +613,10 @@
 				console.log(data_login.mail);
 
 				data_login.pass = $('#pass').val();
-				console.log('here');
 				var responsedata = apiRH.loginNative(data_login);
-				console.log('come');
 			  	console.log("RESPUESTA: " + responsedata);
 
-				if(responsedata){
+				 if(responsedata){
 					
 					localStorage.setItem('user', JSON.stringify(responsedata));
 
@@ -626,7 +624,7 @@
 				 	
 				 	return;
 				}else{
-					alert('Error en la combinación de usuario / contraseña');
+					alert('Error en la combinación de usuario / contrase');
 				}
 			}
 	}); //END VALIDATE

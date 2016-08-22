@@ -82,20 +82,21 @@ function requestHandlerAPI(){
 			/*
 				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
 			*/
-			if(token){
-				localStorage.setItem('token', response.token);
-				localStorage.setItem('mail', response.mail);
-				localStorage.setItem('userId', response.userId);
+			
+			// if(token){
+			localStorage.setItem('token', response.token);
+			localStorage.setItem('mail', response.mail);
+			localStorage.setItem('userId', response.userId);
 
 
-				//this.token = response.token;
+			//this.token = response.token;
 
-				var userId 	= localStorage.getItem('userId');
-				var mail 	= localStorage.getItem('mail');
-				var token 	= localStorage.getItem('token');
+			var userId 	= localStorage.getItem('userId');
+			var mail 	= localStorage.getItem('mail');
+			var token 	= localStorage.getItem('token');
 
-				console.log('TOKEN RESPONSE ' + token);
-			}
+			console.log('TOKEN RESPONSE ' + token);
+			// }
 			//console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + this.token);
 
 			/*
