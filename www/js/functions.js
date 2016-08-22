@@ -2035,11 +2035,28 @@ $(window).load(function(){
 		});
 
 
-					/*
 
-						WEB VIEW BLOG
-						
-					*/
+	$('.btn_cancelar').click(function (e) {
+
+		alert('CANCELAR SUSCRIPTCION');
+
+		var customer_id = localStorage.getItem('customer_id');
+		
+		var response = apiRH.cancelarSuscripcion(customer_id);
+
+		if(response){
+			window.location.assign('index.html');
+			localStorage.clear();
+		}
+
+	});
+
+
+	/*
+
+		WEB VIEW BLOG
+		
+	*/
 	$('#blog').on('click',function(){
 		console.log("click");
 		cordova.InAppBrowser.open('http://www.gingerapp.mx/blogposts/', '_blank', 'location=yes');
