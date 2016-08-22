@@ -625,6 +625,8 @@
 				 	window.location.assign('dieta.html');
 				 	
 				 	return;
+				}else{
+					alert('Error en la combinación de usuario / contraseña');
 				}
 			}
 	}); //END VALIDATE

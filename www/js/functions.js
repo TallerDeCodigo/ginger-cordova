@@ -315,6 +315,7 @@ $(window).on("load resize",function(){
 						$('.co-option.active img:not(.question)').attr("src",'images/coach/tradicional2.png');
 						break;
 				}
+
 				$('#frecuencia_perfil').html(frecuencia +" días por semana");
 				$('#ejercicio-dato').html(frecuencia);
 
@@ -658,7 +659,9 @@ $(window).load(function(){
     	var masuno = i+1;
     	date_string = week[i].toString();
     	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
+    	//$('tr td.day_of_week:nth-of-type('+masuno+') span').attr("data-day" + date_string.substring(8, 11) );
     }
+
 
     	var incremento = 168;
 		var current_day;
@@ -670,12 +673,6 @@ $(window).load(function(){
 
 	    current_day = fecha.hoy().substring(8);
 	    console.log("str> "+current_day);
-
-	    if(current_day  == fecha.hoy().substring(8)){
-	    	 
-	    }
-	    
-
 	    current_day = left + current_day;
 	    //console.log("str> "+current_day);
 
@@ -899,7 +896,9 @@ $(window).load(function(){
 		var timeout;
 		var estatura;
 
-
+/*
+	MEASURE CONTROLS
+*/
 		$("#estatura-up").bind('touchstart', function(){
 			timeout = setInterval(function(){
 				estatura = Number($("#estatura-up").parent().parent().find('input').val());
@@ -2169,5 +2168,7 @@ function displayImage(imgUri) {
 		}
 
 	});
+
+
 
 })(jQuery);

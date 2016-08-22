@@ -82,20 +82,20 @@ function requestHandlerAPI(){
 			/*
 				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
 			*/
+			if(token){
+				localStorage.setItem('token', response.token);
+				localStorage.setItem('mail', response.mail);
+				localStorage.setItem('userId', response.userId);
 
-			localStorage.setItem('token', response.token);
-			localStorage.setItem('mail', response.mail);
-			localStorage.setItem('userId', response.userId);
 
+				//this.token = response.token;
 
-			//this.token = response.token;
+				var userId 	= localStorage.getItem('userId');
+				var mail 	= localStorage.getItem('mail');
+				var token 	= localStorage.getItem('token');
 
-			var userId 	= localStorage.getItem('userId');
-			var mail 	= localStorage.getItem('mail');
-			var token 	= localStorage.getItem('token');
-
-			console.log('TOKEN RESPONSE ' + token);
-
+				console.log('TOKEN RESPONSE ' + token);
+			}
 			//console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + this.token);
 
 			/*
@@ -119,10 +119,11 @@ function requestHandlerAPI(){
 						"password" : pass
 					}
 				}
+
 				var user = this.getRequest('tables/cliente/' + userId, req);
 
-				//console.log(JSON.stringify(user));
-				//console.log(user);
+				console.log(JSON.stringify(user));
+				console.log(user);
 
 				if(user){
 					localStorage.setItem('coach_type', user.perfil.personalidad);
@@ -146,7 +147,7 @@ function requestHandlerAPI(){
 					localStorage.setItem('coach_rate', user.coach.rating);
 					localStorage.setItem('chatPassword', user.coach.chatPassword);
 
-						
+					console.log('AQUI MOTHER');	
 
 					return (userId) ? response : false;
 				}
