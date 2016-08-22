@@ -817,10 +817,7 @@ $(window).load(function(){
 			}
 			$(this).attr({src: "images/hombreh.svg", alt: "1"});
 			$('.type-def').attr("src","images/hombreh.svg");
-
 			$('#update_sexo').attr("value", '1');
-			
-
 		});
 
  
@@ -832,13 +829,9 @@ $(window).load(function(){
 				$('#hombre').attr("src","images/hombre.svg");
 				$('#hombre').attr("alt","");
 			}
-
 			$(this).attr({src: "images/mujerh.svg", alt: "1"});
 			$('.type-def').attr("src","images/mujerh.svg");
-
 			$('#update_sexo').attr("value", '0');
-
-			
 		}); //end click mujer
 
 
@@ -1257,6 +1250,11 @@ $(window).load(function(){
 			//console.log(track_animo);
 		});
 
+
+/*
+	FEED HTML
+*/
+
 		$('#finish1').click(function(){
 			$('.aboutyou').animate({opacity:"0",left:"-40px"}, 200);
 			$('.bpur').removeClass('active');
@@ -1369,7 +1367,7 @@ $(window).load(function(){
 			var dpw 		  		= localStorage.getItem('dpw');
 			var comentario 	  		= localStorage.getItem('comentario');
 
-			//console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+peso_ideal+" > "+zipcode+" > "+plan+" > "+coach_type+" > "+restricciones_ls2+" > "+dpw+" > "+comentario );
+			console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+peso_ideal+" > "+zipcode+" > "+plan+" > "+coach_type+" > "+restricciones_ls2+" > "+dpw+" > "+comentario );
 
 			/*
 				JSON STRUCTURE 	*
