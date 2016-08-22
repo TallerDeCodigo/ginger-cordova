@@ -1277,22 +1277,34 @@ $(window).load(function(){
 	
 			//Zipocode
 			localStorage.setItem('zipcode', $('input[name="zipcode"]').val() );
-			postal = localStorage.getItem('zipcode');
+			var _zipcode = localStorage.getItem('zipcode');
+			console.log("zip>"+_zipcode);
 
 			//genero
 			localStorage.setItem('genero', $('#genre_value').val() );//hacerlo una condicional
+			var _genero = localStorage.getItem('genero');
+			console.log("genero>"+_genero);
 
 			//estatura
 			localStorage.setItem('estatura', $('input[name="estatura"]').val() );
-			
+			var _estatura = localStorage.getItem('estatura');
+			console.log("height>"+_estatura);
+
 			//peso
 			localStorage.setItem('peso', $('input[name="peso"]').val() );
+			var _peso = localStorage.getItem('peso');
+			console.log("weight>"+_peso);
+
 			
 			//edad
 			localStorage.setItem('edad', $('#edad_value').val() );
+			var _edad = localStorage.getItem('edad');
+			console.log("age>"+_edad);
 			
 			//peso ideal
 			localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
+			var _peso_ideal = localStorage.getItem('peso_ideal');
+			console.log("ideal>"+_peso_ideal);
 
 			setTimeout(function() {
         		$(".pagina").hide();
