@@ -1669,6 +1669,13 @@ $(window).load(function(){
 	        		$(".restric").show();
 	        		$(".restric").animate({opacity:"1",left:"0px"}, 200);
 	            }, 250);
+			} else if($('.resena').is(':visible')){
+				$('.resena').animate({opacity:"0",left:"40px"}, 200);
+				setTimeout(function() {
+	        		$(".pagina").hide();
+	        		$(".pcoach1").show();
+	        		$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
+	            }, 250);
 			} else if($('.discount').is(':visible')){
 				$('.discount').animate({opacity:"0",left:"40px"}, 200);
 				$('.byel').addClass('active');
