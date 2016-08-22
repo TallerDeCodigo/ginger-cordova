@@ -6,7 +6,7 @@ $( function() {
 	/*
 		CLEAR LOCAL STORAGE
 	*/
-	
+
 	//localStorage.clear();
 
 	var anchot = document.documentElement.clientWidth;
@@ -665,13 +665,15 @@ $(window).load(function(){
     	var full_date;
 	    var left = fecha.hoy().substring(0,8);
 
-	    //console.log('current_day');
-
 	    current_day = new Date( + new Date().getTime() );
 	    //console.log("obj> "+current_day);
 
 	    current_day = fecha.hoy().substring(8);
-	    //console.log("str> "+current_day);
+	    console.log("str> "+current_day);
+
+	    if(current_day  == fecha.hoy().substring(8)){
+	    	 
+	    }
 	    
 
 	    current_day = left + current_day;
