@@ -1462,6 +1462,7 @@ $(window).load(function(){
 									if(key == 'rating'){
 										rate_stars = value;
 										rate_stars = Math.round(rate_stars);
+										console.log();
 										for (var j = 1; j <= rate_stars; j++) {
 											$(".slide-coach:nth-of-type("+i+") .rate-stars img:nth-of-type("+j+")").attr("src","images/starh.svg");
 										}
@@ -1517,35 +1518,18 @@ $(window).load(function(){
             }
 		});
 
-		// $('.coach.img-frame').click(function(){
-		// 	$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
-		// 	setTimeout(function() {
-  //       		$(".pagina").hide();
-  //       		$(".bio").show();
-  //       		$(".bio").css("left","40px");
-  //       		$(".bio").animate({opacity:"1",left:"0px"}, 200);
-  //           }, 250);
+		// 		$('.coach.img-frame').click(function(){
+		// 		$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
+		// 		setTimeout(function() {
+  		//  	$(".pagina").hide();
+  		//  	$(".bio").show();
+  		//  	$(".bio").css("left","40px");
+  		//  	$(".bio").animate({opacity:"1",left:"0px"}, 200);
+  		//  }, 250);
 		// });
 
 		$('#finish5').click(function(){
 			console.log('click');
-			/*
-				JSON COACH SELECTED	*
-			*/
-
-			var coach = $('.slide-coach').attr('coach');
-			var dieta = $('.slide-coach').attr('dieta');
-
-			var json = {
-				"coach" : coach,
-				"dieta" : dieta
-			}
-
-			//Request update data
-
-			var responsedata = apiRH.updatePerfil(json);
-
-			
 			if(!$('.overscreen4').is(':visible')){
 				$('.overscreen4').show();
 				setTimeout(function() {$('.overscreen4').addClass('active');}, 200);
@@ -1569,8 +1553,23 @@ $(window).load(function(){
 
 		$('#aceptar').click(function(){
 			$('#container').toggleClass('blurred');
-			//$('a.centro img').toggleClass('onn');
 
+			/*
+				JSON COACH SELECTED	*
+			*/
+
+			var coach = $('.slide-coach').attr('coach');
+			var dieta = $('.slide-coach').attr('dieta');
+
+			var json = {
+				"coach" : coach,
+				"dieta" : dieta
+			}
+
+			//Request update data
+
+			var responsedata = apiRH.updatePerfil(json);
+			console.log(responsedata);
 
 			$('.bio').animate({opacity:"0",left:"-40px"}, 200);
 			$('.byel').removeClass('active');
