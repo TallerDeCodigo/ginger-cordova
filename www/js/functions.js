@@ -4,6 +4,8 @@
 
 $( function() {
 
+	//localStorage.clear();
+
 	var anchot = document.documentElement.clientWidth;
 
 	if($('body').hasClass('has-chat')){
@@ -1569,6 +1571,7 @@ $(window).load(function(){
 			//Request update data
 
 			var responsedata = apiRH.updatePerfil(json);
+
 			console.log(responsedata);
 
 			$('.bio').animate({opacity:"0",left:"-40px"}, 200);
