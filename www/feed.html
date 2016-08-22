@@ -77,7 +77,7 @@
 					    			</div>
 					    			<div class="page zip sector-1" style="display:none">
 					    				<div class="box-input-1">
-					    					<input type="text" name="zipcode" maxlength="5" value="00000" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+					    					<input type="text" name="zipcode" maxlength="5" value="06000" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
 					    				</div>
 					    			</div>
 					    		</div>
@@ -510,9 +510,9 @@
 
 					    	<!--
 
-FORMULARIO TARJETA DE CREDITO
+											FORMULARIO TARJETA DE CREDITO
 
-					    -->
+					    															-->
 					    	<div class="conekta pagina" style="display:none">
 					    		<h2>Información de pago</h2>
 					    		<form id="forma_pago" name="forma_pago" method="post">
@@ -521,18 +521,18 @@ FORMULARIO TARJETA DE CREDITO
 						    			<label for="nombre">Nombre (como aparece en tu tarjeta)</label>
 					    			</div>
 					    			<div class="form-label">
-					    				<input type="text" name="card" maxlength="16">
+					    				<input type="text" name="card" maxlength="16" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
 						    			<label for="card">Número de tarjeta</label>
 					    			</div>
 					    			<div class="form-label-2">
-					    				<input type="text" name="mes" maxlength="2">
+					    				<input type="text" name="mes" maxlength="2" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
 						    			<label for="mes">MM</label>
 						    			<span>/</span>
-						    			<input type="text" name="year" maxlength="2">
+						    			<input type="text" name="year" maxlength="2" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
 						    			<label for="year">YY</label>
 					    			</div>
 					    			<div class="form-label-2 segur">
-					    				<input type="text" name="cvc" maxlength="3">
+					    				<input type="text" name="cvc" maxlength="3" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
 						    			<label for="cvc">CVC</label>
 					    			</div>
 					    			<div class="form-label">
@@ -540,7 +540,7 @@ FORMULARIO TARJETA DE CREDITO
 						    			<label for="mail">Correo electrónico</label>
 					    			</div>
 					    			<div class="form-label-2">
-					    				<input type="text" name="cupon">
+					    				<input type="text" name="cupon" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
 						    			<label for="cupon">Cupón</label>
 					    			</div>
 					    			<div class="form-label-2">
@@ -606,7 +606,7 @@ FORMULARIO TARJETA DE CREDITO
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="overscreen5" style="display:none">
 					<div class="ov-filler2"></div>
 					<div class="dialog">

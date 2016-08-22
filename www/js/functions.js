@@ -1805,7 +1805,6 @@ $(window).load(function(){
 
 			}
 			console.log(restricciones_arr);
-
 		});
 
 		$('.me-option').click(function() {
@@ -2024,6 +2023,15 @@ $(window).load(function(){
 					localStorage COMENTARIO
 				*/
 			localStorage.setItem('comentario', $('#comentar').val())
+			var _cmt = localStorage.getItem('comentario');
+
+			if(_cmt != ""){
+				$('#finish4').attr('src', 'images/enter.svg');
+				$('#finish4').css('margin-left', '-25px');
+			}else{
+				$('#finish4').attr('src', 'images/saltar.svg');
+				$('#finish4').css('margin-left', '-65px');
+			}
 		});
 
 		$('.izquii').click(function() {
