@@ -1435,6 +1435,7 @@ $(window).load(function(){
   							if (key=='_id') {
   								// console.log('DIETA ID' + value);
   								// $('.slide-coach').attr('dieta', value);
+  								localStorage.setItem('dieta_id', value);
   							}
 							if(key == 'coach'){	
 								$.each( value, function( key, value ) {
@@ -1446,6 +1447,7 @@ $(window).load(function(){
 										console.log('ID DE COACH: ' + value);
 										localStorage.setItem('coach_id', value);
 										$('.slide-coach:nth-of-type('+i+')').attr('coach', localStorage.getItem("coach_id"));
+										$('.slide-coach:nth-of-type('+i+')').attr('dieta_id', localStorage.getItem("dieta_id"));
 									}
 									if (key=='nombre') {
 										Name = value;
@@ -1561,7 +1563,7 @@ $(window).load(function(){
 			*/
 
 			var coach = $('.slide-coach').attr('coach');
-			var dieta = $('.slide-coach').attr('dieta');
+			var dieta = $('.slide-coach').attr('dieta_id');
 
 			var json = {
 				"coach" : coach,
