@@ -1556,40 +1556,19 @@ $(window).load(function(){
 				setTimeout(function() {$('.overscreen4').hide();}, 800);
 			}
 			$('#container').toggleClass('blurred');
-
-			// $('#container').toggleClass('blurred');
-			// $('a.centro img').toggleClass('onn');
-			// $('.bio').animate({opacity:"0",left:"-40px"}, 200);
-			// $('.byel').removeClass('active');
-			// setTimeout(function() {
-   			//$(".pagina").hide();
-   			//$(".discount").show();
-   			//$(".discount").css("left","40px");
-   			//$(".discount").animate({opacity:"1",left:"0px"}, 200);
-   			//}, 250);
 		});
 
 		$('#aceptar').click(function(){
 			$('#container').toggleClass('blurred');
-
 			/*
 				JSON COACH SELECTED	*
 			*/
-
 			var coach = $('.slide-coach').attr('coach');
 			var dieta = $('.slide-coach').attr('dieta_id');
-
-			var json = {
-				"coach" : coach,
-				"dieta" : dieta
-			}
-
+			var json = {"coach" : coach,"dieta" : dieta}
 			//Request update data
-
 			var responsedata = apiRH.updatePerfil(json);
-
-			console.log(responsedata);
-
+			
 			$('.bio').animate({opacity:"0",left:"-40px"}, 200);
 			$('.byel').removeClass('active');
 			setTimeout(function() {
@@ -1606,6 +1585,12 @@ $(window).load(function(){
 			$('.overscreen4').hide();
 		});
 
+		$('.la_img').click(function(){
+			console.log('click');
+
+		});
+
+
 		$('.btn-pago').click(function(){
 			$('.discount').animate({opacity:"0",left:"-40px"}, 200);
 			setTimeout(function() {
@@ -1615,6 +1600,9 @@ $(window).load(function(){
         		$(".conekta").animate({opacity:"1",left:"0px"}, 200);
             }, 250);
 		});
+
+
+
 
 		$('.back').click(function(){
 			if($('.aboutyou').is(':visible')){
