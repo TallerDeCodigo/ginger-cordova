@@ -108,7 +108,7 @@ function retrieveChatMessages(dialog, beforeDateSent){
 
         messages.items.forEach(function(item, i, arr) {
 
-          dialogsMessages.splice(0, 0, item); //esta vacio
+          dialogsMessages.splice(0, 0, item); 
           //console.log(dialogsMessages.splice(0, 0, item));
 
           console.log('>>>>' + JSON.stringify(item));
@@ -120,6 +120,7 @@ function retrieveChatMessages(dialog, beforeDateSent){
           console.log('idMensaje ' + messageSenderId);
           var messageDateSent = new Date(item.date_sent*1000);
           var messageSenderLogin = getUserLoginById(messageSenderId);
+          console.log(messageSenderId);
           console.log(messageSenderLogin);
 
 
@@ -156,21 +157,24 @@ function retrieveChatMessages(dialog, beforeDateSent){
       console.log(err);
     }
   });
-
+  
   $(".load-msg").delay(100).fadeOut(500);
-}
+  setTimeout(function(){ window.scrollTo(0,document.body.scrollHeight); }, 1);
+}//end retrieveChatMessages
 
 
 // sending messages after confirmation
 function clickSendMessage() {
-  var currentText = $('#message_text').val().trim();
+  var currentText = $('#mensaje-chat').val().trim();
+  console.log(currentText);
   if (currentText.length === 0){
     return;
   }
 
-  $('#message_text').val('').focus();
+  $('#mensaje-chat').val('').focus();
 
   sendMessage(currentText, null);
+  window.scrollTo(0,document.body.scrollHeight);
 }
 
 function clickSendAttachments(inputFile) {
@@ -196,7 +200,6 @@ function clickSendAttachments(inputFile) {
 
 // send text or attachment
 function sendMessage(text, attachmentFileId) {
-
   // stickerpipe.onUserMessageSent(stickerpipe.isSticker(text));
 
   var msg = {
@@ -208,6 +211,8 @@ function sendMessage(text, attachmentFileId) {
     senderId: currentUser.id,
     markable: 1
   };
+
+  console.log(currentUser.id);
   if(attachmentFileId !== null){
     msg["extension"]["attachments"] = [{id: attachmentFileId, type: 'photo'}];
   }

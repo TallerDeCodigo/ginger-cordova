@@ -814,9 +814,7 @@ function requestHandlerAPI(){
 		 */
 		this.loginOauth   =  function(provider, callback){
 			sdk_app_context.showLoader();
-			OAuth.popup(provider)
-			.done(callback)
-			.fail(function(error){
+			OAuth.popup(provider).done(callback).fail(function(error){
 				console.log(error);
 			});
 			return;

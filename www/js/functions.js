@@ -19,10 +19,41 @@ $( function() {
 		
 		var mail = localStorage.getItem('mail');
 		var chatPassword = localStorage.getItem('chatPassword');
-	
-		var user = { login : "michelleronaym@gmail.com", pass : "7eveGyxJBkRMwEe1FSEG"};
+
+		console.log(mail);
+		console.log(chatPassword);
+
+
+		var userLog = JSON.parse(localStorage.getItem('user'));
+		console.log(userLog.chatPassword);
+
+		var uChatCoach = userLog.coach.jid;
 		
-		connectToChat(user);		
+		/*nombre del coach en el header*/
+		$('h2.titulo').html(userLog.coach.nombre + " " + userLog.coach.apellido);
+
+		console.log('COACH ID: ' + uChatCoach);
+
+		uChatCoach = uChatCoach.split('-');
+
+		console.log('ID USER COACH' + uChatCoach[0]);
+
+		localStorage.setItem('cCoachID', uChatCoach[0]);
+
+		var user = { login : userLog.mail, pass : userLog.chatPassword};
+		
+		connectToChat(user);
+		//triggerDialog();
+
+		createNewDialog();
+
+		$('.attach').click(function(){
+
+			$('input[name="galeria"]').trigger('click');
+
+		});
+
+
 	}
 
 
@@ -242,24 +273,19 @@ $(window).on("load resize",function(){
 
 		*/
 	var msg;
-	var msg_return
-	$('#write_ch_coach').on('click', function(){
-		msg = $('#msg_ch_coach').val();
+	var msg_return;
+	$('#send_ch_coach').on('click', function(){
+		msg = $('textarea#espacio_comentario').val();
 		localStorage.setItem('msg_ch_coach', msg);
+		console.log(msg);
 		msg_return = localStorage.getItem('msg_ch_coach');
 		if(msg_return != "undefined" || msg_return != "" || msg_return != null){
 			$('#espacio_comentario').html(msg_return);
+		}else{
+			alert("Para poder cambiar de coach, es necesario que agregues tus comentarios");
 		}
 	});
 
-	$('#send_ch_coach').on('click', function(){
-		
-		if(msg_return == ""){
-			alert("Para poder cambiar de coach, es necesario que agregues tus comentarios");
-		}else{
-			console.log(msg_return);
-		}
-	});
 		/*
 			ADD PROFILE DATA TO PROFILE VIEWS
 		*/
@@ -351,7 +377,7 @@ $(window).on("load resize",function(){
 
 				switch(plan){
 					case "0":
-						$('#plan_perfil').html("Adelgazar");
+						$('#plan_perfil').html("Bajar de peso");
 						$('.pl-option.active img:not(.question)').attr("src",'images/plan/perderpeso2.png');
 						//console.log('adelgazar');
 						break;
@@ -405,31 +431,36 @@ $(window).on("load resize",function(){
 
 			$('#ejercicio').css('left', gridej*(frecuencia-minval_eje));
 			$('#ejercicio-filler').css('width', (gridej*(frecuencia-minval_eje))+20);
-			var arreg = JSON.parse(restricciones);
-			console.log(arreg);
-			for (var i = 0; i < arreg.length; i++) {
-				switch(arreg[i]){
-					case "0": 
-						$('.tipo_restric .re-option:nth-of-type(1) img').attr("src",'images/restric/huevo2.png');
-						break;
-					case "1":
-						$('.tipo_restric .re-option:nth-of-type(2) img').attr("src",'images/restric/pollo2.png');
-						break;
-					case "2":
-						$('.tipo_restric .re-option:nth-of-type(3) img').attr("src",'images/restric/pescado2.png');
-						break;
-					case "3":
-						$('.tipo_restric .re-option:nth-of-type(4) img').attr("src",'images/restric/camaron2.png');
-						break;
-					case "4":
-						$('.tipo_restric .re-option:nth-of-type(5) img').attr("src",'images/restric/lacteos2.png');
-						break;
-					case "5":
-						$('.tipo_restric .re-option:nth-of-type(6) img').attr("src",'images/restric/carne2.png');
-						break;
+			console.log(restricciones);
+			if(restricciones !== undefined){
+				console.log('esta indefinido');
+			}else{
+				var arreg = JSON.parse(restricciones);
+				console.log(arreg);
+				for (var i = 0; i < arreg.length; i++) {
+					switch(arreg[i]){
+						case "0": 
+							$('.tipo_restric .re-option:nth-of-type(1) img').attr("src",'images/restric/huevo2.png');
+							break;
+						case "1":
+							$('.tipo_restric .re-option:nth-of-type(2) img').attr("src",'images/restric/pollo2.png');
+							break;
+						case "2":
+							$('.tipo_restric .re-option:nth-of-type(3) img').attr("src",'images/restric/pescado2.png');
+							break;
+						case "3":
+							$('.tipo_restric .re-option:nth-of-type(4) img').attr("src",'images/restric/camaron2.png');
+							break;
+						case "4":
+							$('.tipo_restric .re-option:nth-of-type(5) img').attr("src",'images/restric/lacteos2.png');
+							break;
+						case "5":
+							$('.tipo_restric .re-option:nth-of-type(6) img').attr("src",'images/restric/carne2.png');
+							break;
+					}
+					arreg[i]++;
+					$('.tipo_restric .re-option:nth-of-type('+arreg[i]+')').addClass('active');
 				}
-				arreg[i]++;
-				$('.tipo_restric .re-option:nth-of-type('+arreg[i]+')').addClass('active');
 			}
 		}
 
@@ -1496,7 +1527,7 @@ $(window).load(function(){
 			$('.borg').removeClass('active');
 			$('.byel').addClass('active');
 
-
+			var restricciones_ls2   = "";
 			var genero 		  		= localStorage.getItem('genero');
 			var peso 		  		= localStorage.getItem('peso');
 			var estatura 	  		= localStorage.getItem('estatura');
@@ -1505,7 +1536,12 @@ $(window).load(function(){
 			var zipcode 	  		= localStorage.getItem('zipcode');
 			var plan 		  		= localStorage.getItem('plan', $('#plan').val() );
 			var coach_type 	  		= localStorage.getItem('coach_type', $('#coach_type').val() );
-			var restricciones_ls2 	= localStorage.getItem('restricciones');
+			if (localStorage.getItem('restricciones') == null) {
+				console.log('viene null');
+				restricciones_ls2 = "";
+			}else{
+				restricciones_ls2 	= localStorage.getItem('restricciones');
+			}
 			var dpw 		  		= localStorage.getItem('dpw');
 			var comentario 	  		= localStorage.getItem('comentario');
 
@@ -1524,7 +1560,7 @@ $(window).load(function(){
 					"estatura" : estatura,
 					"ejercicio" : (dpw>3)?1:0,
 					"objetivo" : plan,
-					"restricciones" : JSON.parse(restricciones_ls2),
+					"restricciones" : (restricciones_ls2 == '')?null:JSON.parse(restricciones_ls2),
 					"personalidad" : coach_type
 				},
 				"cp": zipcode,
@@ -1720,6 +1756,8 @@ $(window).load(function(){
 		$('#cancelar').click(function(){
 			$('#container').toggleClass('blurred');
 			$('.overscreen4').hide();
+			$('.alert_tracking').hide();
+
 		});
 
 		$('.la_img').click(function(){
@@ -1848,7 +1886,7 @@ $(window).load(function(){
 			$(this).attr("value", valor);
 
 			switch ( $('#plan').val() ) {
-				case 'adelgazar' : 
+				case 'adelgazar' :
 					$('#plan').attr("value", "0");
 					break;
 				case 'detox':
@@ -2208,7 +2246,7 @@ $(window).load(function(){
 
 	$('.btn_cancelar').click(function (e) {
 
-		alert('CANCELAR SUSCRIPTCION');
+		// alert('CANCELAR SUSCRIPTCION');
 
 		var customer_id = localStorage.getItem('customer_id');
 		

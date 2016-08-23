@@ -120,7 +120,7 @@
 			console.log('OAUTH');
 
 			try{
-				OAuth.initialize('F_A1PBTm8Vv9WtuftE8CuTqNV7g');
+				OAuth.initialize('a6JLuBGGgfFNhFvcQ2V0tCbdmWI'); //tenia este -> F_A1PBTm8Vv9WtuftE8CuTqNV7g
 				console.log("Initialized Oauth");
 			}
 			catch(err){
