@@ -127,7 +127,7 @@ header a.menu {right:12px;height:32px;width:32px;top:9px;}
 .bola.always {width:40px;height:40px;top:6px;}
 .bola.active {width:30px;height:30px;top:0px;}
 
-.circle-frame {position:absolute;border-radius:50%;overflow:hidden;background:url('../images/noimg.svg') center;background-size:auto 100%;}
+.circle-frame {position:absolute;border-radius:50%;overflow:hidden;background:url('../images/Icon-60@3x.png') center;background-size:100%!important;background-repeat: no-repeat;}
 .circle-frame img {width:auto;height:105%;position:absolute;top:-9999px;bottom:-9999px;left:-9999px;right:-9999px;margin:auto;}
 
 .always .circle-frame {width:32px;height:32px;left:4px;top:4px;}
@@ -564,8 +564,8 @@ body.iosm div.boxx-top div {top:20px;}
 #logo{background:url(../images/logo.svg);background-repeat:no-repeat;background-position: center;height:100px;}
 #logo_soporte{background:url(../images/logo.svg);background-repeat:no-repeat;background-position: center;height:100px;margin-top:30%;}
 .small{font-size: 1.5rem}
-.bg_blur{background: url(../images/fondo.png);background-repeat: no-repeat;-webkit-filter: blur(5px); background-position:center; padding:20px 0px 10px 0px;position:absolute;top:48%;z-index:-99;height:165px;}
-.bg_content{background-color:rgba(255,255,255,0.3);padding:30px 0px 35px 0px;color:#666;}
+.bg_blur{background: url(../images/fondo.png);background-repeat: no-repeat;-webkit-filter: blur(5px); background-position:center; /*padding:20px 0px 10px 0px;*/position:absolute;top:57%;z-index:-99;bottom:12%;/*height:165px;*/}
+.bg_content{background-color:rgba(255,255,255,0.3);padding:30px 0px 35px 0px;color:#666;position:absolute;top:55%;/*z-index:-99;*/bottom:12%;}
 p.small{margin-bottom:0;}
 .smaller{font-size: 1.2rem}
 .bg_content div{margin-top:30px;}
