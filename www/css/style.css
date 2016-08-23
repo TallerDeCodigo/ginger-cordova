@@ -127,7 +127,7 @@ header a.menu {right:12px;height:32px;width:32px;top:9px;}
 .bola.always {width:40px;height:40px;top:6px;}
 .bola.active {width:30px;height:30px;top:0px;}
 
-.circle-frame {position:absolute;border-radius:50%;overflow:hidden;background:url('../images/noimg.svg') center;background-size:auto 100%;}
+.circle-frame {position:absolute;border-radius:50%;overflow:hidden;background:url('../images/Icon-60@3x.png') center;background-size:100%!important;background-repeat: no-repeat;}
 .circle-frame img {width:auto;height:105%;position:absolute;top:-9999px;bottom:-9999px;left:-9999px;right:-9999px;margin:auto;}
 
 .always .circle-frame {width:32px;height:32px;left:4px;top:4px;}
@@ -168,7 +168,7 @@ nav.selector {margin:5% 0px 7%;}
 .exercise p {position:relative;margin-top:7px;color:#767676;font-size:90%;font-weight:700;}
 
 .box-input-1 {border:2px solid #767676;width:180px;border-top:none;position:relative;display:inline-block;height:20px;margin-top:45px;}
-.box-input-1 input {position:relative;top:-16px;background:none;outline:none;text-align:center;border:none;color:#767676;font-size:240%;letter-spacing:0.25em;width:180px!important;height:36px;padding-bottom:10px;}
+.box-input-1 input {position:relative;top:-25px;background:none;outline:none;text-align:center;border:none;color:#767676;font-size:240%;letter-spacing:0.25em;width:180px!important;height:36px;padding-bottom:10px;}
 
 .arrows-vertical {position:relative;display:inline-block;width:36px;height:100px;top:-10px;}
 .arrows-vertical img {transform:rotate(90deg);-webkit-transform:rotate(90deg);height:32px;margin:4px 0px 0px;}
@@ -512,7 +512,7 @@ a.mail {background:#2eab7e url('../images/mail_btn.png') no-repeat;background-si
 .r_peso {margin-top:6.5%;}
 .rojo {position:relative;margin-bottom:25px;overflow:hidden;}
 .rojo img {width:70%;position:relative;display:inline-block;}
-.rojo input {color:#FFF;position:absolute;width:100%;margin:0;top:12.5%;font-weight:900;font-size:600%;left:-2px;margin-top:-20px;background:transparent;text-align: center}
+.rojo input {color:#FFF;position:absolute;width:100%;margin:0;top:6.5%;font-weight:900;font-size:600%;left:-2px;margin-top:-20px;background:transparent;text-align: center}
 .r_peso .arrows-vertical {height:100%;position:relative;-webkit-transform:rotate(90deg);top:-20px;}
 
 .medidas {margin-top:10%;}
@@ -564,8 +564,8 @@ body.iosm div.boxx-top div {top:20px;}
 #logo{background:url(../images/logo.svg);background-repeat:no-repeat;background-position: center;height:100px;}
 #logo_soporte{background:url(../images/logo.svg);background-repeat:no-repeat;background-position: center;height:100px;margin-top:30%;}
 .small{font-size: 1.5rem}
-.bg_blur{background: url(../images/fondo.png);background-repeat: no-repeat;-webkit-filter: blur(5px); background-position:center; padding:20px 0px 10px 0px;position:absolute;top:48%;z-index:-99;height:165px;}
-.bg_content{background-color:rgba(255,255,255,0.3);padding:30px 0px 35px 0px;color:#666;}
+.bg_blur{background: url(../images/fondo.png);background-repeat: no-repeat;-webkit-filter: blur(5px); background-position:center; /*padding:20px 0px 10px 0px;*/position:absolute;top:57%;z-index:-99;bottom:12%;/*height:165px;*/}
+.bg_content{background-color:rgba(255,255,255,0.3);padding:30px 0px 35px 0px;color:#666;position:absolute;top:55%;/*z-index:-99;*/bottom:12%;}
 p.small{margin-bottom:0;}
 .smaller{font-size: 1.2rem}
 .bg_content div{margin-top:30px;}

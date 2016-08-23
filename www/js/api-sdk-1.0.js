@@ -131,7 +131,11 @@ function requestHandlerAPI(){
 					localStorage.setItem('user_name', user.nombre);
 					localStorage.setItem('user_last_name', user.apellido);
 					localStorage.setItem('genero', user.perfil.sexo);
-					localStorage.setItem('edad', user.perfil.edad.real);
+
+					if(user.perfil.edad !== undefined)
+						localStorage.setItem('edad', user.perfil.edad.real);
+					else
+						localStorage.setItem('edad', 0);
 					localStorage.setItem('zipcode', user.cp);
 					localStorage.setItem('estatura', user.perfil.estatura);
 					localStorage.setItem('peso', user.perfil.peso);
@@ -141,16 +145,26 @@ function requestHandlerAPI(){
 					localStorage.setItem('comentarios', user.comentarios);
 					localStorage.setItem('customerId', user.customerId);
 					localStorage.setItem('chatId', user.chatId);
-					localStorage.setItem('dietaId', user.dieta._id);
-					localStorage.setItem('dietaName', user.dieta.nombre);
-					localStorage.setItem('nombre_coach', user.coach.nombre);
-					localStorage.setItem('apellido_coach', user.coach.apellido);
-					localStorage.setItem('coach_rate', user.coach.rating);
-					localStorage.setItem('chatPassword', user.coach.chatPassword);
-
+					if(user.dieta !== undefined)
+						localStorage.setItem('dietaId', user.dieta._id);
+					else
+						localStorage.setItem('dietaId', 0);
+					if(user.dieta !== undefined)
+						localStorage.setItem('dietaName', user.dieta.nombre);
+					else
+						localStorage.setItem('dietaName', '');
+					
+					if(user.coach !== undefined){
+						localStorage.setItem('nombre_coach', user.coach.nombre);
+						localStorage.setItem('apellido_coach', user.coach.apellido);
+						localStorage.setItem('coach_rate', user.coach.rating);
+						localStorage.setItem('chatPassword', user.coach.chatPassword);
+					}	
+					
+					
 					console.log('AQUI MOTHER');	
 
-					return (userId) ? response : false;
+					return (userId) ? user : false;
 				}
 				return false;
 				
@@ -335,15 +349,36 @@ function requestHandlerAPI(){
 
 			console.log("Request Data Cliente");
 
-			
-
-			
-
 			console.log(response.responseText);
 			console.log(response.statusText);
 
 			return (response.responseText == "active_subscription") ? true : false;
 
+		};
+
+		this.getCard = function(){
+			var req = {
+				method : 'GET',
+				url : api_base_url + 'tables/transaction/',	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'Content-Type': 'application/json'
+				},
+				data : {
+					'cliente' : localStorage.getItem('userId'),
+				}
+			}
+			console.log(req);
+
+			var response = this.makeRequest('tables/transaction/', req);
+
+			console.log("Request Data Cliente Transaction");
+
+			console.log(response.responseText);
+			console.log(response.statusText);
+
+			return (response.responseText == "active_subscription") ? true : false;
 		};
 
 		/*

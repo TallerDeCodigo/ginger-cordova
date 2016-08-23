@@ -560,7 +560,7 @@
 						
 						apiRH.save_user_data_clientside(responsedata);
 						
-						window.location.assign('feed.html');
+						window.location.assign('code.html');
 
 						return;
 					}else{
@@ -620,7 +620,14 @@
 					
 					localStorage.setItem('user', JSON.stringify(responsedata));
 
-				 	window.location.assign('dieta.html');
+					var user = JSON.parse(localStorage.getItem('user'));
+
+					console.log('USER: ' + user.customerId);
+
+					if(user.customerId !== undefined)
+				 		window.location.assign('dieta.html');
+				 	else
+				 		window.location.assign('feed.html');
 				 	
 				 	return;
 				}else{
@@ -628,6 +635,31 @@
 				}
 			}
 	}); //END VALIDATE
+
+
+	//-----------------------------
+	//
+	// Validate code
+	//
+	//-----------------------------
+
+	if($('#code_form').length)
+		$('#code_form').validate({
+			rules:{
+				code:"required"
+			},
+			messages:{
+				code:"Proporciona tu código de activación"
+			},
+			submitHandler:function(){
+				// SERVICIO PARA OBTENER EL CODIGO DE VALIDACION
+				
+				window.location.assign('feed.html');
+
+
+			}
+	}); //END VALIDATE
+	
 
 
 	//-----------------------------
@@ -676,21 +708,13 @@
 		successResponseHandler = function(token) 
 		{
 			var response = apiRH.makePayment(token.id);
-
 			// Funcion de mensaje de bienvenida
-
 			if(response){
-				// var coachId = localStorage.setItem('coachId');	
-				// var dietaId = localStorage.setItem('dietaId');
-				// var json = {
-				// 	"coach" : coachId,
-				// 	"dieta" : dietaId	
-				// };	
-				// //Actualizamos Coach y Dieta para el Usuario
-				// var response = apiRH.updatePerfil(JSON);
+				if(response){
 
-				if(response)
+					alert('Muchas felicidades! ya puedes comenzar tu semana gratis');
 					window.location.assign('dieta.html');
+				}
 				else
 					alert("Error al actualizar datos");
 			}else{
