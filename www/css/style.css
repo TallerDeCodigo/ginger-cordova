@@ -168,7 +168,7 @@ nav.selector {margin:5% 0px 7%;}
 .exercise p {position:relative;margin-top:7px;color:#767676;font-size:90%;font-weight:700;}
 
 .box-input-1 {border:2px solid #767676;width:180px;border-top:none;position:relative;display:inline-block;height:20px;margin-top:45px;}
-.box-input-1 input {position:relative;top:-16px;background:none;outline:none;text-align:center;border:none;color:#767676;font-size:240%;letter-spacing:0.25em;width:180px!important;height:36px;padding-bottom:10px;}
+.box-input-1 input {position:relative;top:-25px;background:none;outline:none;text-align:center;border:none;color:#767676;font-size:240%;letter-spacing:0.25em;width:180px!important;height:36px;padding-bottom:10px;}
 
 .arrows-vertical {position:relative;display:inline-block;width:36px;height:100px;top:-10px;}
 .arrows-vertical img {transform:rotate(90deg);-webkit-transform:rotate(90deg);height:32px;margin:4px 0px 0px;}
@@ -512,7 +512,7 @@ a.mail {background:#2eab7e url('../images/mail_btn.png') no-repeat;background-si
 .r_peso {margin-top:6.5%;}
 .rojo {position:relative;margin-bottom:25px;overflow:hidden;}
 .rojo img {width:70%;position:relative;display:inline-block;}
-.rojo input {color:#FFF;position:absolute;width:100%;margin:0;top:12.5%;font-weight:900;font-size:600%;left:-2px;margin-top:-20px;background:transparent;text-align: center}
+.rojo input {color:#FFF;position:absolute;width:100%;margin:0;top:6.5%;font-weight:900;font-size:600%;left:-2px;margin-top:-20px;background:transparent;text-align: center}
 .r_peso .arrows-vertical {height:100%;position:relative;-webkit-transform:rotate(90deg);top:-20px;}
 
 .medidas {margin-top:10%;}

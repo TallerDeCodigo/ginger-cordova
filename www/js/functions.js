@@ -94,6 +94,13 @@ $( function() {
   		var area = localStorage.getItem('measured_area');
   		//console.log(medidas+" "+ area);
 
+  		var responsedata = apiRH.tracking(0, 1);
+
+			//console.log(responsedata);
+
+			if(responsedata)
+				window.location.assign('dieta.html');
+	
   	});
 
 
@@ -358,11 +365,11 @@ $(window).on("load resize",function(){
 					$('#restricciones_perfil').html("Sin restricciones");
 				}else{
 
-					var restricc = [ 'huevos', 'pollo', 'pescado', 'mariscos', 'lacteos', 'carne' ];
-					var parseado = JSON.parse(restricciones);
-					parseado = JSON.stringify(parseado);
-					parseado = parseado.slice(2,3);
-					$('#restricciones_perfil').html(restricc[parseado]);
+					// var restricc = [ 'huevos', 'pollo', 'pescado', 'mariscos', 'lacteos', 'carne' ];
+					// var parseado = JSON.parse(restricciones);
+					// parseado = JSON.stringify(parseado);
+					// parseado = parseado.slice(2,3);
+					// $('#restricciones_perfil').html(restricc[parseado]);
 				}
 
 					/*
@@ -1124,6 +1131,13 @@ $(window).load(function(){
 
 			var track_peso = localStorage.getItem('track_peso');
 			//console.log(track_peso);
+			var responsedata = apiRH.tracking(0, 1);
+
+			//console.log(responsedata);
+
+			if(responsedata)
+				window.location.assign('dieta.html');
+
 		});
 
 
@@ -1252,6 +1266,14 @@ $(window).load(function(){
 
 			var track_animo = localStorage.getItem('track_animo');
 			//console.log(track_animo);
+
+			var responsedata = apiRH.tracking(0, 1);
+
+			//console.log(responsedata);
+
+			if(responsedata)
+				window.location.assign('dieta.html');
+
 		});
 
 
@@ -1927,10 +1949,16 @@ $(window).load(function(){
 			var type 		= localStorage.getItem('track_ejercicio_type');
 			var duracion	= localStorage.getItem('track_ejercicio_duration');
 
-			console.log(intensidad+" "+type+" "+duracion)
-			//SEND JSON EJERCICIO
-			//var json_ejercicio {}
+			console.log(intensidad+" "+type+" "+duracion);
 
+			var responsedata = apiRH.tracking(0, 1);
+
+			//console.log(responsedata);
+
+			if(responsedata)
+				window.location.assign('dieta.html');
+
+			
 
 		});
 

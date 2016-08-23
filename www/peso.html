@@ -32,13 +32,13 @@
 			<div class="rojo">
 				<img src="images/peso.svg">
 				<!-- <p>67.</p> -->
-				<input name="peso_metric" value="67.5">
+				<input name="peso_metric" value="67.5" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
 			</div>
 			<div class="arrows-vertical">
 				<img id="r_peso-up" src="images/leftarrow.png"><br><br>
 				<img id="r_peso-dw" src="images/rightarrow.png">
 			</div>
-			<input id="track_peso" name="track_peso" value="" type="hidden">
+			<input id="track_peso" name="track_peso" value="" type="hidden" >
 		</div>
 		<a id="add_peso" class="btn-gre" href="#">Agregar</a>
 	</div>

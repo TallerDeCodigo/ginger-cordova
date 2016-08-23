@@ -76,7 +76,7 @@
 				</div>
 				<img class="type-def" src="images/hombreh.svg">
 				<div class="box-input-2">
-					<input type="text" style="height:50px!important;" name="estatura" value="1.50" maxlength="4">
+					<input type="text" style="height:50px!important;" name="estatura" value="1.50" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
 					<span>m</span>
 				</div>
 			</div>
@@ -89,7 +89,7 @@
 					<img id="peso-dw" src="images/rightarrow.png">
 				</div>
 				<div class="box-input-2">
-					<input type="text" style="height:50px!important;" name="peso" value="50.0" maxlength="4">
+					<input type="text" style="height:50px!important;" name="peso" value="50.0" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
 					<span>kg</span>
 				</div>
 			</div>
@@ -102,7 +102,7 @@
 					<img id="ideal-dw" src="images/rightarrow.png">
 				</div>
 				<div class="box-input-2">
-					<input type="text" style="height:50px!important;" name="ideal" value="50.0" maxlength="4">
+					<input type="text" style="height:50px!important;" name="ideal" value="50.0" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
 					<span>kg</span>
 				</div>
 			</div>
@@ -156,27 +156,27 @@
 				<div class="mover planes tipo_restric">
 					<div class="plan re-option">
 						<img src="images/restric/camaron.png">
-						<span class="type" value="camaron">Camarón</span>
+						<span class="type" value="0">Camarón</span>
 					</div>
 					<div class="plan re-option">
 						<img src="images/restric/carne.png">
-						<span class="type" value="carne">Carne</span>
+						<span class="type" value="1">Carne</span>
 					</div>
 					<div class="plan re-option">
 						<img src="images/restric/huevo.png">
-						<span class="type" value="huevo">Huevo</span>
+						<span class="type" value="2">Huevo</span>
 					</div>
 					<div class="plan re-option">
 						<img src="images/restric/lacteos.png">
-						<span class="type" value="lacteos">Lácteos</span>
+						<span class="type" value="3">Lácteos</span>
 					</div>
 					<div class="plan re-option">
 						<img src="images/restric/pescado.png">
-						<span class="type" value="pescado">Pescado</span>
+						<span class="type" value="4">Pescado</span>
 					</div>
 					<div class="plan re-option">
 						<img src="images/restric/pollo.png">
-						<span class="type" value="pollo">Pollo</span>
+						<span class="type" value="5">Pollo</span>
 					</div>
 				</div>
 			</div>

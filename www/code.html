@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 	<head>
 		<meta charset="utf-8">
 		<title>Ginger Cliente</title>
@@ -7,39 +6,33 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1, height=device-height">
 		<meta http-equiv="cleartype" content="on">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		
-	    <script type="text/javascript" src="cordova.js"></script>
-		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.runtime.min.js"></script>
+
+		<script type="text/javascript" src="cordova.js"></script>
+	    <script type="text/javascript" src="js/bower_components/handlebars/handlebars.runtime.min.js"></script>
 	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 	    <script src="js/jquery-touch.min.js"></script>
 	    <script type="text/javascript" src="js/functions.js"></script>
-	    <script type="text/javascript" src="js/api-sdk-1.0.js"></script>
 		<script type='text/javascript' src='js/plugins.js'></script>
+		<script type='text/javascript' src='js/api-sdk-1.0.js'></script>
 		<script type="text/javascript" src="js/oauth.js"></script>
 		<script src="js/main.js"></script>
 	</head>
 	<body class="iosm">
-
-	<div id="container" class="profile-data finanzas">
-		<header class="hwhite2">
+		<header class="htrans">
 			<div class="toolbar">
-				<a class="back" href="menu.html"><img src="images/back.svg"></a>
-				<h2 class="titulo">Transacciones</h2>
+				<a href="ingreso.html" class="back" style="display:block"><img src="images/back.svg"></a>
 			</div>
 		</header>
-		<ul>
-			<li><span>Método de pago actual: <strong>Tarjeta</strong></span></li>
-			<li><span>Tarjeta: <strong>VISA **** **** **** 4242</strong></span></li>
-			<li class="sinpoint">
-				<a class="btn-org" href="money.html">Cambiar método de pago</a>	
-			</li>
-			<li class="sinpoint">
-				<a class="btn-org btn_cancelar" href="#">Cancelar suscripción</a>
-			</li>
-			<li><span><strong>Historial de pagos</strong></span></li>
-		</ul>
+	<div id="container" class="login">
+		<img class="logo" src="images/logo.svg">
+		<h4>VALIDACIÓN DE CUENTA</h4>
+		<form id="code_form" name="code_form" method="post">
+			<input id="code" type="password"	 name="code" placeholder="Código de validación">
+			<input id="enviar_login" type="submit" 	 name="enviar_code" value="">
+		</form>
 	</div>
+	</body>
 	<script type="text/javascript">
 		/* Initialize app object and perform initial login check */
 		window.is_feed = true;
@@ -47,6 +40,5 @@
 		//app.render_feed(0, 'all');
 		//app.showLoader();
 	</script>
-	</body>
 </html>
 
