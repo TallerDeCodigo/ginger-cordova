@@ -2087,18 +2087,18 @@ $(window).load(function(){
 	*/
 	$('#blog').on('click',function(){
 		console.log("click");
-		cordova.InAppBrowser.open('http://www.gingerapp.mx/blogposts/', '_blank', 'location=yes');
+		cordova.InAppBrowser.open('https://plumasatomicas.com/', '_blank', 'location=yes');
 	})
 
 	$('#terms_cond').on('click',function(){
 			console.log("click");
-			cordova.InAppBrowser.open('http://www.gingerapp.mx/terminosycondiciones/', '_blank', 'location=yes');
+			cordova.InAppBrowser.open('https://plumasatomicas.com/', '_blank', 'location=yes');
 		})
 
 
 	$('#pol_priv').on('click',function(){
 			console.log("click");
-			cordova.InAppBrowser.open('http://www.gingerapp.mx/avisodeprivacidad/', '_blank', 'location=yes');
+			cordova.InAppBrowser.open('https://plumasatomicas.com/', '_blank', 'location=yes');
 		})
 	}); //END WINDOW LOAD clicks
 
