@@ -76,7 +76,7 @@ h1   { font-size:24px; font-size:2.4rem; } /* =24px */
 /* GENERAL */
 
 body {font-family:'Kohi';text-align:center;font-weight:300;letter-spacing:0.025em;}
-#container {position:absolute;width:100%;height:100%;top:0px;left:0px;padding-top:50px;-webkit-transition:.5s ease-in-out;transition:.5s ease-in-out;min-height:600px;}
+#container {position:absolute;width:100%;height:100%;top:0px;left:0px;padding-top:50px;-webkit-transition:.5s ease-in-out;transition:.5s ease-in-out;min-height:630px;}
 #container.blurred {-webkit-filter:blur(5px);}
 body.perfil2 #container {position:relative;width:100%;background:#f5f1f0;min-height:100%;}
 section {width:100%;overflow:hidden;}
@@ -545,7 +545,8 @@ a.mail {background:#2eab7e url('../images/mail_btn.png') no-repeat;background-si
 
 .overscreen5 {position:fixed;width:100%;height:100%;top:0px;left:0px;z-index:999999999999;overflow:hidden;padding-top:200px;opacity:0;-webkit-transition:.35s ease-in-out;transition:.35s ease-in-out;}
 .overscreen5.active {opacity:1;padding-top:0px;}
-
+.alert_tracking{position:fixed;width:100%;height:100%;top:0px;left:0px;z-index:999999999999;overflow:hidden;padding-top:200px;opacity:0;-webkit-transition:.35s ease-in-out;transition:.35s ease-in-out;}
+.alert_tracking {opacity:1;padding-top:0px;}
 /* iOS - 20px MÁS */
 
 body.iosm header {height:70px;}

@@ -96,10 +96,22 @@ $( function() {
 
   		var responsedata = apiRH.tracking(0, 1);
 
-			//console.log(responsedata);
+  		if(!$('.alert_tracking').is(':visible')){
+  			$('.alert_tracking').show();
+  			setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+  		} else {
+  			$('.alert_tracking').removeClass('active');
+  			setTimeout(function() {$('.alert_tracking').hide();}, 800);
+  		}
+  		$('#container').toggleClass('blurred');
+  		//$('a.centro img').toggleClass('onn');
 
-			if(responsedata)
-				window.location.assign('dieta.html');
+
+  		$('#add_tracking').click(function(){
+  			if(responsedata){
+  				window.location.assign('dieta.html');
+  			}
+  		});
 	
   	});
 
@@ -1069,10 +1081,22 @@ $(window).load(function(){
 
 			var responsedata = apiRH.tracking(0, 1);
 
-			//console.log(responsedata);
+			if(!$('.alert_tracking').is(':visible')){
+				$('.alert_tracking').show();
+				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+			} else {
+				$('.alert_tracking').removeClass('active');
+				setTimeout(function() {$('.alert_tracking').hide();}, 800);
+			}
+			$('#container').toggleClass('blurred');
+			//$('a.centro img').toggleClass('onn');
 
-			if(responsedata)
-				window.location.assign('dieta.html');
+
+			$('#add_tracking').click(function(){
+				if(responsedata){
+					window.location.assign('dieta.html');
+				}
+			});
 
 		});
 
@@ -1133,10 +1157,22 @@ $(window).load(function(){
 			//console.log(track_peso);
 			var responsedata = apiRH.tracking(0, 1);
 
-			//console.log(responsedata);
+			if(!$('.alert_tracking').is(':visible')){
+				$('.alert_tracking').show();
+				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+			} else {
+				$('.alert_tracking').removeClass('active');
+				setTimeout(function() {$('.alert_tracking').hide();}, 800);
+			}
+			$('#container').toggleClass('blurred');
+			//$('a.centro img').toggleClass('onn');
 
-			if(responsedata)
-				window.location.assign('dieta.html');
+
+			$('#add_tracking').click(function(){
+				if(responsedata){
+					window.location.assign('dieta.html');
+				}
+			});
 
 		});
 
@@ -1269,10 +1305,22 @@ $(window).load(function(){
 
 			var responsedata = apiRH.tracking(0, 1);
 
-			//console.log(responsedata);
+			if(!$('.alert_tracking').is(':visible')){
+				$('.alert_tracking').show();
+				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+			} else {
+				$('.alert_tracking').removeClass('active');
+				setTimeout(function() {$('.alert_tracking').hide();}, 800);
+			}
+			$('#container').toggleClass('blurred');
+			//$('a.centro img').toggleClass('onn');
 
-			if(responsedata)
-				window.location.assign('dieta.html');
+
+			$('#add_tracking').click(function(){
+				if(responsedata){
+					window.location.assign('dieta.html');
+				}
+			});
 
 		});
 
@@ -1954,9 +2002,22 @@ $(window).load(function(){
 			var responsedata = apiRH.tracking(0, 1);
 
 			//console.log(responsedata);
+			if(!$('.alert_tracking').is(':visible')){
+				$('.alert_tracking').show();
+				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+			} else {
+				$('.alert_tracking').removeClass('active');
+				setTimeout(function() {$('.alert_tracking').hide();}, 800);
+			}
+			$('#container').toggleClass('blurred');
+			//$('a.centro img').toggleClass('onn');
 
-			if(responsedata)
-				window.location.assign('dieta.html');
+
+			$('#add_tracking').click(function(){
+				if(responsedata){
+					window.location.assign('dieta.html');
+				}
+			});
 
 			
 
