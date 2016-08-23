@@ -369,21 +369,12 @@ $(window).on("load resize",function(){
 					$('#restricciones_perfil').html("Sin restricciones");
 				}else{
 
-<<<<<<< HEAD
 					var restricc = [ 'huevos', 'pollo', 'pescado', 'mariscos', 'lacteos', 'carne' ];
 					var parseado = JSON.parse(restricciones);
 					parseado = JSON.stringify(parseado);
 					parseado = parseado.slice(2,3);
 					$('#restricciones_perfil').html(restricc[parseado]);
 
-
-=======
-					// var restricc = [ 'huevos', 'pollo', 'pescado', 'mariscos', 'lacteos', 'carne' ];
-					// var parseado = JSON.parse(restricciones);
-					// parseado = JSON.stringify(parseado);
-					// parseado = parseado.slice(2,3);
-					// $('#restricciones_perfil').html(restricc[parseado]);
->>>>>>> 08d9adfd1c534f19e0f5c5e22380c9c2ab772723
 				}
 
 					/*
