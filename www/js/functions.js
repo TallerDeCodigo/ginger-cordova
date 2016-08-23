@@ -276,14 +276,35 @@ $(window).on("load resize",function(){
 	var msg_return;
 	$('#send_ch_coach').on('click', function(){
 		msg = $('textarea#espacio_comentario').val();
-		localStorage.setItem('msg_ch_coach', msg);
-		console.log(msg);
-		msg_return = localStorage.getItem('msg_ch_coach');
-		if(msg_return != "undefined" || msg_return != "" || msg_return != null){
-			$('#espacio_comentario').html(msg_return);
+
+		if(!msg){
+			console.log('mensaje vacio');
+
+			if(!$('.alert_chCoach').is(':visible')){
+				$('.alert_chCoach').show();
+				setTimeout(function() {$('.alert_chCoach').addClass('active');}, 200);
+			} else {
+				$('.alert_chCoach').removeClass('active');
+				setTimeout(function() {$('.alert_chCoach').hide();}, 800);
+			}
+
+			$('#container').toggleClass('blurred');
 		}else{
-			alert("Para poder cambiar de coach, es necesario que agregues tus comentarios");
+			console.log(msg);
+			localStorage.setItem('msg_ch_coach', msg);
+
+			console.log("aqui va otro alert");
+			/*Agregar otro alert con la leyenda: Tu mensaje ha sido enviado para revision, nos pondremos en contacto contigo*/
+
+
 		}
+		
+		$('#accept_chCoach').click(function(){
+			console.log('click');
+			$('.alert_chCoach').hide();
+			$('#container').toggleClass('blurred');
+		});
+
 	});
 
 		/*
@@ -2248,14 +2269,87 @@ $(window).load(function(){
 
 		// alert('CANCELAR SUSCRIPTCION');
 
+		if(!$('.cancel_subscription').is(':visible') ){
+			$('.cancel_subscription').show();
+			setTimeout(function() {$('.cancel_subscription').addClass('active');}, 200);
+			} else {
+				$('.cancel_subscription').removeClass('active');
+				setTimeout(function() {$('.cancel_subscription').hide();}, 800);
+			}
+			$('#container').toggleClass('blurred');
+
 		var customer_id = localStorage.getItem('customer_id');
 		
 		var response = apiRH.cancelarSuscripcion(customer_id);
 
-		if(response){
-			window.location.assign('index.html');
-			localStorage.clear();
-		}
+		$('#accept_cancel').click(function(){
+			$('.cancel_subscription').hide();
+			$('#container').toggleClass('blurred');
+
+			if(!$('.cancel_subscription2').is(':visible') ){
+				$('.cancel_subscription2').show();
+				setTimeout(function() {$('.cancel_subscription2').addClass('active');}, 200);
+				} else {
+					$('.cancel_subscription2').removeClass('active');
+					setTimeout(function() {$('.cancel_subscription2').hide();}, 800);
+				}
+				$('#container').toggleClass('blurred');
+
+				$('#accept_ccomment').click(function(){
+					console.log('ventana para comentario');
+					if(!$('.overscreen3').is(':visible') ){
+						$('.overscreen3').show();
+						setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
+					} else {
+						$('.overscreen3').removeClass('active');
+						setTimeout(function() {$('.overscreen3').hide();}, 800);
+					}
+
+					$('#write_ch_coach').click(function(){
+
+						localStorage.setItem('cancel_subscription_cmt', $('#msg_ch_coach').val() );
+
+						if(!$('.cancel_subscription3').is(':visible') ){
+							$('.cancel_subscription3').show();
+							$('.cancel_subscription2').hide();
+							setTimeout(function() {$('.cancel_subscription3').addClass('active');}, 200);
+							} else {
+								$('.cancel_subscription3').removeClass('active');
+								setTimeout(function() {$('.cancel_subscription3').hide();}, 800);
+							}
+
+							$('#accept_comment3').click(function(){
+								console.log('click');
+								$('.cancel_subscription3').hide();
+								$('#container').toggleClass('blurred');
+
+								if(response){
+									window.location.assign('index.html');
+									localStorage.clear();
+								}	
+							});
+
+
+						// $('.cancel_subscription2').hide();
+						// $('#container').toggleClass('blurred');
+					});
+				});
+
+				$('#cancelar2').click(function(){
+					console.log('click');
+					$('.cancel_subscription2').hide();
+					$('#container').toggleClass('blurred');
+				});
+			/*Llamar hasta estar segurisomo de querer cancelar la subscripccion*/
+			// if(response){
+			// window.location.assign('index.html');
+			// localStorage.clear();
+			// }	
+		});
+
+		$('#cancelar').click(function(){
+			$('.cancel_subscription').hide();
+		});
 
 	});
 
