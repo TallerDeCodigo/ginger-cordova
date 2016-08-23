@@ -754,32 +754,44 @@ $(window).load(function(){
 	    	//console.log("Full date > > "+full_date);
 	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
 			for(var i=0; i<dias.length; i++){
-		    	dow[i] = week2[i].toString().slice(8, 11);
+				
+				var nuevo = JSON.stringify(week2[i]);
+
+		    	dow[i] = nuevo.slice(9, 11);
+
 		    	var masuno = i+1;
 		    	//console.log(dow[i]);
 		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
 		    }
-
-
 		});
 
 		$(".lastweek").click(function(){
-			//debe tomar el ultmo dia en el que se encuentra para retroceder a partir de ese punto en el tiempo
-	    	
-	    	full_date = new Date(new Date(  current_day  ).getTime() - incremento * 60 * 60 * 1000);
+			week = getWeekDays( new Date( current_day ) );
+	    	full_date = new Date( + new Date( current_day ).getTime() - incremento * 60 * 60 * 1000);
 	    	var month = full_date.getMonth();
-	    	console.log(month);
+	    	
 	    	$('#month').html(meses[month] );
 	    	$('#year').html(full_date.getFullYear());
+
+	    	for(var i=0; i<dias.length; i++){
+	    		var masuno = i+1;
+	    		date_string = week[i].toString();
+	    		$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
+	    	}
+	    	
 	    	current_day = full_date;
+	    	//console.log("Full date > > "+full_date);
 	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
-			
-				for(var i=0; i<dias.length; i++){
-			    	dow[i] = week2[i].toString().slice(8, 11);
-			    	var masuno = i+1;
-			    	//console.log(dow);
-			    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
-			    }
+			for(var i=0; i<dias.length; i++){
+				
+				var nuevo = JSON.stringify(week2[i]);
+
+		    	dow[i] = nuevo.slice(9, 11);
+
+		    	var masuno = i+1;
+		    	//console.log(dow[i]);
+		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
+		    }
 		});
 
 		//});//end date ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1572,6 +1584,7 @@ $(window).load(function(){
 									
 									if (key=='_id') {
 										$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
+										$(".resena .img-frame:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
 										console.log('ID DE COACH: ' + value);
 										localStorage.setItem('coach_id', value);
 										$('.slide-coach:nth-of-type('+i+')').attr('coach', localStorage.getItem("coach_id"));
@@ -1579,6 +1592,7 @@ $(window).load(function(){
 									}
 									if (key=='nombre') {
 										Name = value;
+										console.log(Name);
 									}
 									if (key=='apellido') {
 										LastN = value;
@@ -1594,7 +1608,6 @@ $(window).load(function(){
 									if(key == 'rating'){
 										rate_stars = value;
 										rate_stars = Math.round(rate_stars);
-										console.log();
 										for (var j = 1; j <= rate_stars; j++) {
 											$(".slide-coach:nth-of-type("+i+") .rate-stars img:nth-of-type("+j+")").attr("src","images/starh.svg");
 										}
