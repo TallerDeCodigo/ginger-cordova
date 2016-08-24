@@ -1420,8 +1420,7 @@ $(window).load(function(){
 			var track_animo = localStorage.getItem('track_animo');
 			//console.log(track_animo);
 
-			var responsedata = apiRH.tracking(0, 1);
-
+		
 			if(!$('.alert_tracking').is(':visible')){
 				$('.alert_tracking').show();
 				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
@@ -1434,8 +1433,11 @@ $(window).load(function(){
 
 
 			$('#add_tracking').click(function(){
+				var responsedata = apiRH.tracking(0, 1);
 				if(responsedata){
 					window.location.assign('dieta.html');
+				}else{
+					alert('Error en la comunicación de datos');
 				}
 			});
 
