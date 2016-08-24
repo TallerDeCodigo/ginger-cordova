@@ -293,9 +293,22 @@ $(window).on("load resize",function(){
 			console.log(msg);
 			localStorage.setItem('msg_ch_coach', msg);
 
-			console.log("aqui va otro alert");
+			console.log("localStorage");
 			/*Agregar otro alert con la leyenda: Tu mensaje ha sido enviado para revision, nos pondremos en contacto contigo*/
+			if(!$('.alert_chCoach2').is(':visible')){
+				$('.alert_chCoach2').show();
+				setTimeout(function() {$('.alert_chCoach2').addClass('active');}, 200);
+			} else {
+				$('.alert_chCoach2').removeClass('active');
+				setTimeout(function() {$('.alert_chCoach2').hide();}, 800);
+			}
 
+			$('#container').toggleClass('blurred');
+			
+			$('#accept_chCoach2').click(function(){
+				 $('.alert_chCoach2').hide();
+				 $('#container').toggleClass('blurred');
+			});
 
 		}
 		

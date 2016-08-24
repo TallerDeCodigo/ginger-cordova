@@ -27,18 +27,27 @@
 		</header>
 		<img class="logo" src="images/logo.svg">
 		<p>Tu solicitud para cambiar Coach se<br>enviará a un supervisor y éste se<br>pondrá en contacto contigo.</p>
-		<textarea id="espacio_comentario" placeholder="'No estoy logrando resultados . .'"></textarea>
-		<span class="com2send">Agregar comentarios</span>
+		<textarea id="espacio_comentario" type="text" placeholder="Agregar comentarios" ></textarea>
+		<!-- <span class="com2send">Agregar comentarios</span> -->
 		<a id="send_ch_coach" class="btn-gre" href="#">Enviar</a>
 	</div>
 	<div class="alert_chCoach" style="display:none">
 		<div class="ov-filler2"></div>
 		<div class="dialog">
-			<h5>Atención</h5>
+			<h5>Comentario</h5>
 			<p>Para poder cambiar de coach es necesario que escribas un comentario</p>
 			<div class="di-options">
 				<a id="accept_chCoach" class="accept">Aceptar</a>
-				<a id="cancel_chCoach" class="cancel">Cancelar</a>
+			</div>
+		</div>
+	</div>
+	<div class="alert_chCoach2" style="display:none">
+		<div class="ov-filler2"></div>
+		<div class="dialog">
+			<h5>Comentario</h5>
+			<p>Tu mensaje ha sido enviado para revision, nos pondremos en contacto contigo</p>
+			<div class="di-options">
+				<a id="accept_chCoach2" class="accept">Aceptar</a>
 			</div>
 		</div>
 	</div>
