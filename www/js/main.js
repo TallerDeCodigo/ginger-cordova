@@ -30,6 +30,14 @@
 				 async: false
 			});
 
+			// var userLog = JSON.parse(localStorage.getItem('user'));
+		
+			// var user = { login : userLog.mail, pass : userLog.chatPassword};
+		
+			// connectToChat(user);
+		
+
+
 			window.loggedIn = false;
 			this.ls 		= window.localStorage;
 			if(is_login)

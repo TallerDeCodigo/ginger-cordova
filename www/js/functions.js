@@ -25,6 +25,7 @@ $( function() {
 
 		var response = apiRH.getTransactions();
 
+		var cadenita = '';
 
 		$.each(response, function( key, value ) {
 			$.each(value, function( key, value ) {
@@ -38,14 +39,28 @@ $( function() {
 						console.log(key + ' :::: ' + value);
 
 						// INSERTAR HTML
+					
+						
+						if(key == 'amount'){
+							// $('.monto').html("$ "+value/100 + ".00");
 
-						if(key == 'amount')
-							$('.pagos').append(' Monto: ' + value / 100 );
+							//$('.pagos').append(' Monto: ' + value / 100 );
+
+							cadenita += '<tr><td>$'+ value/100 +'.00</td>';	
+						}
 
 						if(key == 'paid_at'){
+							var meses_year = ['Enero', 'Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre' ]
+							var r = new Date();
+							console.log( );
 							var d = new Date(value * 1000);
-							$('.pagos').append(' Fecha: ' + d.getUTCFullYear() + '<br/>');						
+							// $('._month').html(meses_year[r.getMonth()] + " " +d.getUTCFullYear() );
+
+							cadenita += '<td> ' + meses_year[r.getMonth()] + " " +d.getUTCFullYear() + '</td></tr>';
+
 						}
+
+
 							
 
 
@@ -55,6 +70,8 @@ $( function() {
 
 				
 		});
+
+		$('#historial tbody').append(cadenita);
 	}
 
 
