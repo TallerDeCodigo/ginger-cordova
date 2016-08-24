@@ -128,7 +128,7 @@ $( function() {
   		var area = localStorage.getItem('measured_area');
   		//console.log(medidas+" "+ area);
 
-  		var responsedata = apiRH.tracking(0, 1);
+  		
 
   		if(!$('.alert_tracking').is(':visible')){
   			$('.alert_tracking').show();
@@ -142,6 +142,8 @@ $( function() {
 
 
   		$('#add_tracking').click(function(){
+
+  			var responsedata = apiRH.tracking(0, 1);
   			if(responsedata){
   				window.location.assign('dieta.html');
   			}
