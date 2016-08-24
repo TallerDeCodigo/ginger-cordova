@@ -1401,6 +1401,7 @@ $(window).load(function(){
 		    	        $('#track_animo').attr("value", "8");
 		    	        break;
     	     	}
+
 		    }, 150);
 		    return false;
 		});
@@ -1409,18 +1410,25 @@ $(window).load(function(){
 		    clearInterval(timeout);
 		    return false;
 		});
+		
+		//--------------------------------------------
+		//
+		// onClick: add_animo Registro de estado de
+		// animo.
+		//
+		//--------------------------------------------
 
-
-				/*
-					localStorage ANIMO
-				*/
 		$('#add_animo').on('click', function(){
+
 			localStorage.setItem('track_animo', $('#track_animo').val() );
 
 			var track_animo = localStorage.getItem('track_animo');
-			//console.log(track_animo);
 
-		
+			if(track_animo == '')
+				track_animo = 0;
+
+			console.log('Estatus: ' + track_animo);
+			
 			if(!$('.alert_tracking').is(':visible')){
 				$('.alert_tracking').show();
 				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
@@ -1428,16 +1436,25 @@ $(window).load(function(){
 				$('.alert_tracking').removeClass('active');
 				setTimeout(function() {$('.alert_tracking').hide();}, 800);
 			}
+
 			$('#container').toggleClass('blurred');
-			//$('a.centro img').toggleClass('onn');
-
-
+			
 			$('#add_tracking').click(function(){
-				var responsedata = apiRH.tracking(0, 1);
-				if(responsedata){
-					window.location.assign('dieta.html');
+				
+				//------------------------------
+				//  @param tracking 1 - Ánimo
+				//  @param value of image selected
+				//-------------------------------
+
+				if(track_animo >= 0){
+					var responsedata = apiRH.tracking(1, track_animo);
+					if(responsedata){
+						window.location.assign('dieta.html');
+					}else{
+						alert('Error al registrar ánimo');
+					}
 				}else{
-					alert('Error en la comunicación de datos');
+					alert('Error al registrar el estado de ánimo');
 				}
 			});
 
