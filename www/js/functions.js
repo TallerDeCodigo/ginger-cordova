@@ -43,7 +43,7 @@ $( function() {
 							$('.pagos').append(' Monto: ' + value / 100 );
 
 						if(key == 'paid_at'){
-							var d = new Date(value);
+							var d = new Date(value * 1000);
 							$('.pagos').append(' Fecha: ' + d.getUTCFullYear() + '<br/>');						
 						}
 							
