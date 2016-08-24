@@ -252,7 +252,7 @@ function requestHandlerAPI(){
 				data : {
 					'tipo' : tipo,
 					'magnitud' : magnitud,
-					'cliente' : "5784f8b5f05f58301260194f",
+					'cliente' : localStorage.getItem('userId'),
 					'coach' : ""
 				}
 			}

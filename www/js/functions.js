@@ -1272,7 +1272,7 @@ $(window).load(function(){
 
 			var track_peso = localStorage.getItem('track_peso');
 			//console.log(track_peso);
-			var responsedata = apiRH.tracking(0, 1);
+			
 
 			if(!$('.alert_tracking').is(':visible')){
 				$('.alert_tracking').show();
@@ -1286,9 +1286,23 @@ $(window).load(function(){
 
 
 			$('#add_tracking').click(function(){
-				if(responsedata){
-					window.location.assign('dieta.html');
+				
+				//------------------------------
+				//  @param tracking 1 - Ánimo
+				//  @param value of image selected
+				//-------------------------------
+
+				if(track_peso >= 0){
+					var responsedata = apiRH.tracking(0, track_peso);
+					if(responsedata){
+						window.location.assign('dieta.html');
+					}else{
+						alert('Error al registrar peso');
+					}
+				}else{
+					alert('Error al registrar peso');
 				}
+				
 			});
 
 		});
@@ -1427,8 +1441,6 @@ $(window).load(function(){
 			if(track_animo == '')
 				track_animo = 0;
 
-			console.log('Estatus: ' + track_animo);
-			
 			if(!$('.alert_tracking').is(':visible')){
 				$('.alert_tracking').show();
 				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
