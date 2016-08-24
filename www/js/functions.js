@@ -40,8 +40,13 @@ $( function() {
 						// INSERTAR HTML
 
 						if(key == 'amount')
-							$('.pagos').append('Monto: ' + value / 100 + '<br/>');
-						
+							$('.pagos').append(' Monto: ' + value / 100 );
+
+						if(key == 'paid_at'){
+							var d = new Date(value);
+							$('.pagos').append(' Fecha: ' + d.getUTCFullYear() + '<br/>');						
+						}
+							
 
 
 					});
