@@ -39,7 +39,8 @@ $( function() {
 						console.log(key + ' :::: ' + value);
 
 						// INSERTAR HTML
-
+					
+						
 						if(key == 'amount'){
 							// $('.monto').html("$ "+value/100 + ".00");
 
@@ -56,7 +57,10 @@ $( function() {
 							// $('._month').html(meses_year[r.getMonth()] + " " +d.getUTCFullYear() );
 
 							cadenita += '<td> ' + meses_year[r.getMonth()] + " " +d.getUTCFullYear() + '</td></tr>';
+
 						}
+
+
 							
 
 
