@@ -131,6 +131,8 @@
 			if(backButtonElement)
 				backButtonElement.addEventListener("click", app.onBackButton, false);
 			return;
+
+			console.log(navigator.camera);
 		},
 
 		// deviceready Event Handler

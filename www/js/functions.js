@@ -15,6 +15,12 @@ $( function() {
 
 	var anchot = document.documentElement.clientWidth;
 
+	$('.add_picture').click(function (e) {
+		
+		app.get_file_from_device('search', 'camera');
+	});
+
+
 	if($('body').hasClass('has-chat')){
 		
 		var mail = localStorage.getItem('mail');
@@ -2422,12 +2428,11 @@ $(window).load(function(){
 		})
 	}); //END WINDOW LOAD clicks
 
-
-
-
-				/*
-					CAMARA
-				*/
+	
+	
+	/*
+		CAMARA
+	*/
 	function setOptions(srcType) {
 	    var options = {
 	        // Some common settings are 20, 50, and 100
@@ -2459,20 +2464,17 @@ $(window).load(function(){
 	        console.debug("Unable to obtain picture: " + error, "app");
 
 	    }, options);
-}
-function displayImage(imgUri) {
+	}
 
-    var elem = document.getElementById('imageFile');
-    elem.src = imgUri;
-}
+	function displayImage(imgUri) {
+
+	    var elem = document.getElementById('imageFile');
+	    elem.src = imgUri;
+	}
 	
-	$('#add_picture_profile').on('click', function(){
-		console.log("camara");
 
-		 setOptions();
-		 openCamera();
 
-	});
+
       
 
 (function($){
