@@ -356,29 +356,26 @@ function requestHandlerAPI(){
 
 		};
 
-		this.getCard = function(){
+		this.getTransactions = function(){
 			var req = {
 				method : 'GET',
-				url : api_base_url + 'tables/transaction/',	//definitr tabla
+				url : api_base_url + 'tables/transaction/?cliente=' + localStorage.getItem('userId'),	//definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
 					'X-ZUMO-AUTH': localStorage.getItem('token'),
 					'Content-Type': 'application/json'
-				},
-				data : {
-					'cliente' : localStorage.getItem('userId'),
 				}
 			}
 			console.log(req);
 
-			var response = this.makeRequest('tables/transaction/', req);
+			var response = this.getRequest('tables/transaction/?cliente=' + localStorage.getItem('userId'), req);
 
 			console.log("Request Data Cliente Transaction");
 
-			console.log(response.responseText);
-			console.log(response.statusText);
+			console.log(response);
 
-			return (response.responseText == "active_subscription") ? true : false;
+			return response;
+
 		};
 
 		/*
@@ -669,10 +666,12 @@ function requestHandlerAPI(){
 			  async: false
 			})
 			 .done(function(response){
+			 	console.log('done');
 				result = response;
 				sdk_app_context.hideLoader(response);
 			})
 			 .fail(function(e){
+			 	console.log('fail');
 				result = false;
 				console.log(JSON.stringify(e));
 			});
@@ -827,22 +826,23 @@ function requestHandlerAPI(){
 		 */
 		this.loginCallbackGP = function(response){
 									//Get profile info
-									response.me()
-									 .done(function(response) {
-										console.log(response);
-										var email = response.email;
-										var username = response.lastname+"_"+response.id;
-										var found = apiRH.create_internal_user(username, email, {gpId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
-										/* End handshake with server by validating token and getting 'me' data */
-										context.endHandshake(username);
+			response.me()
+			 .done(function(response) {
+				console.log(response);
+				var email = response.email;
+				var username = response.lastname+"_"+response.id;
+				var found = apiRH.create_internal_user(username, email, {gpId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
+				/* End handshake with server by validating token and getting 'me' data */
+				context.endHandshake(username);
 
-										window.location.assign('feed.html?filter_feed=all');
-										return;
-									})
-									 .fail(function(error){
-										console.log(error);
-									});
-								};
+				window.location.assign('feed.html?filter_feed=all');
+				return;
+			})
+			 .fail(function(error){
+				console.log(error);
+			});
+		};
+
 		/* 
 		 * Log in callback for Facebook provider
 		 * @return Bool TRUE if authentication was successful
@@ -850,22 +850,22 @@ function requestHandlerAPI(){
 		 * @see API Documentation
 		 */
 		this.loginCallbackFB = function(response){
-									response.me()
-									 .done(function(response){
-									 	console.log(response);
-										var email = response.email;
-										var username = response.lastname+"_"+response.id;
-										var found = apiRH.create_internal_user(username, email, {fbId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
-										/* End handshake with server by validating token and getting 'me' data */
-										context.endHandshake(username);
+			response.me()
+			 .done(function(response){
+			 	console.log(response);
+				var email = response.email;
+				var username = response.lastname+"_"+response.id;
+				var found = apiRH.create_internal_user(username, email, {fbId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
+				/* End handshake with server by validating token and getting 'me' data */
+				context.endHandshake(username);
 
-										window.location.assign('feed.html?filter_feed=all');
-										return;
-									})
-									 .fail(function(error){
-										console.log(error);
-									});
-								};
+				window.location.assign('feed.html?filter_feed=all');
+				return;
+			})
+			 .fail(function(error){
+				console.log(error);
+			});
+		};
 
 		/* 
 		 * Add new image to stack upload

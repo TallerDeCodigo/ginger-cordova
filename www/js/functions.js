@@ -20,6 +20,38 @@ $( function() {
 		app.get_file_from_device('search', 'camera');
 	});
 
+	if($('body').hasClass('has-finanzas')){
+		console.log('Entre a finanzas');
+
+		var response = apiRH.getTransactions();
+
+
+		$.each(response, function( key, value ) {
+			$.each(value, function( key, value ) {
+				
+				console.log(key + ' ::: ' + value);
+
+				if(key == 'body'){
+
+					$.each(value, function( key, value ) {
+
+						console.log(key + ' :::: ' + value);
+
+						// INSERTAR HTML
+
+						if(key == 'amount')
+							$('.pagos').append('Monto: ' + value / 100 + '<br/>');
+						
+
+
+					});
+				}
+			});
+
+				
+		});
+	}
+
 
 	if($('body').hasClass('has-chat')){
 		
