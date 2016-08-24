@@ -38,14 +38,18 @@ $( function() {
 						console.log(key + ' :::: ' + value);
 
 						// INSERTAR HTML
+					
+						
 
 						if(key == 'amount')
-							$('.pagos').append(' Monto: ' + value / 100 );
-
+							$('.pagos').append('' + value / 100 + ' ' );
+						
 						if(key == 'paid_at'){
 							var d = new Date(value * 1000);
-							$('.pagos').append(' Fecha: ' + d.getUTCFullYear() + '<br/>');						
+							$('.pagos').append('' + d.getUTCFullYear() + ' ');						
 						}
+
+
 							
 
 
