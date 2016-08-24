@@ -829,13 +829,13 @@ $(window).load(function(){
     	//$('tr td.day_of_week:nth-of-type('+masuno+') span').attr("data-day" + date_string.substring(8, 11) );
     }
 
-
-    	var incremento = 168;
+    	var incremento = 168.25;
+    	var decremento = 167.75;
 		var current_day;
     	var full_date;
 	    var left = fecha.hoy().substring(0,8);
 
-	    current_day = new Date( + new Date().getTime() );
+	    current_day = new Date( + new Date().getTime() + 1 * 60 * 60 * 1000 );
 	    var dia_semana = current_day.getDay();
 	    dia_semana++;
 	    $('tr td.day_of_week:nth-of-type('+dia_semana+')').trigger('click');
@@ -845,10 +845,10 @@ $(window).load(function(){
 	    current_day = left + current_day;
 	    // console.log("str> "+current_day);
 
-
 		$(".nextweek").click(function(){
 	    	week = getWeekDays( new Date( current_day ) );
 	    	full_date = new Date( + new Date( current_day ).getTime() + incremento * 60 * 60 * 1000);
+	    	// console.log(full_date);
 	    	var month = full_date.getMonth();
 	    	
 	    	$('#month').html(meses[month] );
@@ -866,6 +866,7 @@ $(window).load(function(){
 			for(var i=0; i<dias.length; i++){
 				
 				var nuevo = JSON.stringify(week2[i]);
+				// console.log("wee ::"+week2[i]);
 
 		    	dow[i] = nuevo.slice(9, 11);
 
@@ -877,7 +878,8 @@ $(window).load(function(){
 
 		$(".lastweek").click(function(){
 			week = getWeekDays( new Date( current_day ) );
-	    	full_date = new Date( + new Date( current_day ).getTime() - incremento * 60 * 60 * 1000);
+	    	full_date = new Date( + new Date( current_day ).getTime() - decremento * 60 * 60 * 1000);
+	    	// console.log(full_date);
 	    	var month = full_date.getMonth();
 	    	
 	    	$('#month').html(meses[month] );
@@ -895,6 +897,7 @@ $(window).load(function(){
 			for(var i=0; i<dias.length; i++){
 				
 				var nuevo = JSON.stringify(week2[i]);
+				// console.log("wee ::"+week2[i]);
 
 		    	dow[i] = nuevo.slice(9, 11);
 
