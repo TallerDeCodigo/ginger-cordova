@@ -934,7 +934,7 @@ $(window).load(function(){
 
     var week = new Object();
     var today = fecha.hoy().toString();
-    //console.log(typeof today); 
+    //console.log( today); 
     //console.log(week);
     
     var days = $('.day_of_week');
@@ -981,11 +981,11 @@ $(window).load(function(){
 	    	$('#month').html(meses[month] );
 	    	$('#year').html(full_date.getFullYear());
 
-	    	// for(var i=0; i<dias.length; i++){
-	    	// 	var masuno = i+1;
-	    	// 	date_string = week[i].toString();
-	    	// 	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
-	    	// }
+	    	for(var i=0; i<dias.length; i++){
+	    		var masuno = i+1;
+	    		date_string = week[i].toString();
+	    		$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
+	    	}
 	    	
 	    	current_day = full_date;
 	    	//console.log("Full date > > "+full_date);
@@ -1001,7 +1001,7 @@ $(window).load(function(){
 		    	//console.log(dow[i]);
 		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
 		    	var dataf = new Date(week2[i]);
-		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
+		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate() );
 		    }
 		});
 
@@ -1014,11 +1014,11 @@ $(window).load(function(){
 	    	$('#month').html(meses[month] );
 	    	$('#year').html(full_date.getFullYear());
 
-	    	// for(var i=0; i<dias.length; i++){
-	    	// 	var masuno = i+1;
-	    	// 	date_string = week[i].toString();
-	    	// 	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
-	    	// }
+	    	for(var i=0; i<dias.length; i++){
+	    		var masuno = i+1;
+	    		date_string = week[i].toString();
+	    		$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
+	    	}
 	    	
 	    	current_day = full_date;
 	    	//console.log("Full date > > "+full_date);
