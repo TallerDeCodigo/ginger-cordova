@@ -18,6 +18,8 @@
 			
 			var is_login = apiRH.has_token();
 
+			var data_user = apiRH.getProfile();
+
 			var is_client = localStorage.getItem('customerId');
 
 			var is_current = localStorage.getItem('valido');
@@ -45,27 +47,46 @@
 	
 			/* Check if has a valid token */
 			//var response = apiRH.has_valid_token();
+			
+			console.log('Es login? ' + is_login);	
 
 			if(is_login){
 				
 				console.log('You okay, now you can start making calls');
 				/* Take the user to it's timeline */
-
 				var is_home = window.is_home;
 				var is_feed = window.is_feed;
-
+				
 				if(is_home){
-					return;
-				}else{
-					if(is_feed)
+					console.log(is_client);
+					if(is_client == 'not_set'){
+						window.location.assign('feed.html');
+					}else
 						return;
-					else	
-						window.location.assign('dieta.html?filter_feed=all');
+				}else{
+					
+					if(is_feed){
+						if(is_client == null)
+							window.location.assign('feed.html');
+						else	
+							return;
+
+					}else{
+						console.log('Es cliente?' + is_client);
+						if(is_client == null){
+							window.location.assign('feed.html');
+						}else{
+							window.location.assign('dieta.html?filter_feed=all');
+						}	
+
+					}
 				}	
 				return;
 			}else{
-				//window.location.assign('feed.html');
-				return;
+				
+				// window.location.assign('feed.html');
+				// return;
+
 			}
 			/* Copiado de ondeviceready ----- QUITAR ----- */
 			// var backButtonElement = document.getElementById("backBtn");
@@ -721,7 +742,6 @@
 			// Funcion de mensaje de bienvenida
 			if(response){
 				if(response){
-
 					alert('Muchas felicidades! ya puedes comenzar tu semana gratis');
 					window.location.assign('dieta.html');
 				}

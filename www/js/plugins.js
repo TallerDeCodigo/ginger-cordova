@@ -145,7 +145,7 @@ Swipe.prototype = {
 
     // set new index to allow for expression arguments
     if (this.index != index) {
-    	// $('.ui-state-active').trigger('click');
+    	$('.ui-state-active').trigger('click');
     	console.log('cambio');
     }
 
@@ -154,7 +154,7 @@ Swipe.prototype = {
     $(".weekdays span").removeClass("active");
     var actual = index+1;
     $(".weekdays td:nth-of-type("+actual+") span").addClass("active");
-
+    return true;
   },
 
   getPos: function() {
@@ -171,6 +171,10 @@ Swipe.prototype = {
     clearTimeout(this.interval);
     
     if (this.index) this.slide(0, this.speed);
+
+    // var algo = this.index;
+    // algo++;
+    // console.log($(".weekdays td:nth-of-type("+algo+") span").html());
 
   },
   
@@ -387,6 +391,7 @@ Swipe.prototype = {
     }
     
     e.stopPropagation();
+
   }
 
 };

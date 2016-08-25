@@ -370,6 +370,7 @@ $(window).on("load resize",function(){
 			$('#accept_chCoach2').click(function(){
 				 $('.alert_chCoach2').hide();
 				 $('#container').toggleClass('blurred');
+				 window.location.assign('userdata.html');
 			});
 
 		}
@@ -378,6 +379,7 @@ $(window).on("load resize",function(){
 			console.log('click');
 			$('.alert_chCoach').hide();
 			$('#container').toggleClass('blurred');
+
 		});
 
 	});
@@ -389,24 +391,33 @@ $(window).on("load resize",function(){
 
 		if($('body').hasClass('load_data') || $('body').hasClass('update_data'))
 		{
-
+			var user 			= JSON.parse(localStorage.getItem('user'));
 			var nombre_coach	= localStorage.getItem('nombre_coach');
 			var apellido_coach	= localStorage.getItem('apellido_coach');
 			var nombre 			= localStorage.getItem('user_name');
 			var apellido 		= localStorage.getItem('user_last_name');
-			var sexo 			= localStorage.getItem('genero');
+			var sexo 			= user.perfil.sexo;
 			var edad 			= localStorage.getItem('edad');
-			var cp 	 			= localStorage.getItem('zipcode');
-			var estatura 		= localStorage.getItem('estatura');
-			var peso 			= localStorage.getItem('peso');
-			var ideal 			= localStorage.getItem('peso_ideal');
-			var coach_type 		= localStorage.getItem('coach_type');
-			var frecuencia 		= localStorage.getItem('dpw');
-			var restricciones 	= localStorage.getItem('restricciones');
-			var plan 			= localStorage.getItem('coach_type');
-			var comentario 		= localStorage.getItem('comentarios');
+			var cp 	 			= user.cp;
+			var estatura 		= user.perfil.estatura;
+			var peso 			= user.perfil.peso;
+			var ideal 			= user.pesoDeseado;
+			var coach_type 		= user.perfil.personalidad;
+			var frecuencia 		= user.perfil.ejercicio;
+			var restricciones 	= user.perfil.restricciones;
+			var plan 			= user.perfil.objetivo;
+			var comentario 		= user.comentario;
 			var coach_rate		= localStorage.getItem('coach_rate');
+			localStorage.setItem('restricciones', user.perfil.restricciones);
 
+			$('#coach_type').attr("value", coach_type);
+			$('#plan').attr("value", plan);
+			$('#days_per_week').attr("value", frecuencia);
+			$('#update_sexo').attr("value", sexo);
+			$('.the-comment').html(comentario);
+			
+	
+			console.log(user);
 
 			$('.cpur').html(nombre +" "+ apellido);
 			$('.edit-profile span').html(nombre +" "+ apellido);
@@ -441,21 +452,21 @@ $(window).on("load resize",function(){
 
 			$('.tipo_coach .co-option:nth-of-type('+suma+')').addClass('active');
 
-
+			console.log('Personalidad: ' + coach_type);
 			switch(coach_type){
-					case '0': 
+					case 0: 
 						$('#coach_type_perfil').html("Estricto");
 						$('.co-option.active img:not(.question)').attr("src",'images/coach/estricto2.png');
 						break;
-					case '1':
+					case 1:
 						$('#coach_type_perfil').html("Innovador");
 						$('.co-option.active img:not(.question)').attr("src",'images/coach/innovador2.png');
 						break;
-					case '2':
+					case 2:
 						$('#coach_type_perfil').html("Animador");
 						$('.co-option.active img:not(.question)').attr("src",'images/coach/animador2.png');
 						break;
-					case '3':
+					case 3:
 						$('#coach_type_perfil').html("Tradicional");
 						$('.co-option.active img:not(.question)').attr("src",'images/coach/tradicional2.png');
 						break;
@@ -463,7 +474,9 @@ $(window).on("load resize",function(){
 
 				$('#frecuencia_perfil').html(frecuencia +" días por semana");
 				$('#ejercicio-dato').html(frecuencia);
-
+				console.log('Comentario ' + comentario);
+				if(comentario === 'undefined' || comentario == null)
+					comentario = '';
 				$('#comentario_perfil').html(comentario);
 				$('.the-comment').html(comentario);
 
@@ -472,22 +485,22 @@ $(window).on("load resize",function(){
 					var suma = parseInt(plan)+1;
 
 				switch(plan){
-					case "0":
+					case 0:
 						$('#plan_perfil').html("Bajar de peso");
 						$('.pl-option.active img:not(.question)').attr("src",'images/plan/perderpeso2.png');
 						//console.log('adelgazar');
 						break;
-					case "1":
+					case 1:
 						$('#plan_perfil').html("Detox");
 						$('.pl-option.active img:not(.question)').attr("src",'images/plan/detox2.png');
 						//console.log('detox');
 						break;
-					case "2":
+					case 2:
 						$('#plan_perfil').html("Rendimiento físico");
 						$('.pl-option.active img:not(.question)').attr("src",'images/plan/rendimientofisico2.png');
 						//console.log('bienestar');
 						break;
-					case "3":
+					case 3:
 						$('#plan_perfil').html("Sentirse mejor");
 						$('.pl-option.active img:not(.question)').attr("src",'images/plan/sentirsemejor2.png');
 						//console.log('rendimiento');
@@ -503,23 +516,112 @@ $(window).on("load resize",function(){
 					$('#restricciones_perfil').html("Sin restricciones");
 				}else{
 
+					console.log(restricciones);
+
 					var restricc = [ 'huevos', 'pollo', 'pescado', 'mariscos', 'lacteos', 'carne' ];
-					var parseado = JSON.parse(restricciones);
-					parseado = JSON.stringify(parseado);
-					parseado = parseado.slice(2,3);
-					$('#restricciones_perfil').html(restricc[parseado]);
+					// var parseado = JSON.parse(restricciones);
+					// parseado = JSON.stringify(parseado);
+					// restricciones = restricciones.slice(2,3);
+					
+					for (var i = 0; i < restricciones.length; i++) {
+						console.log(i);
+						if(i == restricciones.length-1)
+							coma = "";
+						else
+							coma = ", ";
+
+						$('#restricciones_perfil').append(restricc[i] + coma);
+					};
+					
 
 				}
 
-					/*
-						NOMBRE DEL COACH
-					*/
+				/*
+					NOMBRE DEL COACH
+				*/
 
-					$('#coach_name').html(nombre_coach + " " + apellido_coach);
+				$('#coach_name').html(nombre_coach + " " + apellido_coach);
 
-					console.log(nombre_coach);
-					console.log(apellido_coach);
+				console.log(nombre_coach);
+				console.log(apellido_coach);
+				console.log(user);
+
+				var star = Math.round(user.coach.rating);
+
+				console.log(Math.round(star));
+
+				var count = 5;
+
+				for (var i = 0; i < star; i++) {
+					$('.rate-stars').append('<img src="images/starh.svg">');
+					console.log(i);
+					
+				};
+				
+				for (var x = 0; x < count - star; x++) {
+					console.log('-' + x);
+					$('.rate-stars').append('<img src="images/star.svg">');
+				};
+
 		}//end if has class
+			var restricciones = [];
+			$('.re-option').click(function() {
+				if(restricciones === undefined)
+				restricciones = [];
+
+
+			var valor = $(this).find('.type').attr('value');
+
+			if (!$(this).hasClass('active')) {
+				
+				console.log("ADDED");
+
+				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
+				$(this).addClass('active');
+				$(this).attr("value", valor);
+				
+				$('.restricciones').attr('value', valor);
+				
+				restricciones.push(valor);
+				
+				localStorage.setItem('restricciones', JSON.stringify(restricciones));
+
+			} else {
+
+				console.log('DELETED');
+
+				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
+				$(this).removeClass('active');
+				$(this).attr("value", "");
+				$('.restricciones').attr('value',"");
+				
+				for(var i=0; i<restricciones.length; i++){
+
+					
+					if( restricciones[i] == valor ){
+
+						var index = restricciones.indexOf(valor);
+
+						restricciones.splice(i, 1);
+
+						localStorage.setItem('restricciones', JSON.stringify(restricciones));
+
+					}//end IF
+
+				}//end FOR				
+				
+			}// end ELSE
+
+			if(restricciones.length == 0 ){
+				$('#finish4').attr('src', 'images/saltar.svg');
+				$('#finish4').css('margin-left', '-65px');
+			}else{
+				$('#finish4').attr('src', 'images/enter.svg');
+				$('#finish4').css('margin-left', '-25px');
+
+			}
+			console.log(restricciones);
+		});
 
 		if ($('body').hasClass('update_data')) {
 			$('#age').css('left', gridag*(edad-minval_age));
@@ -528,34 +630,35 @@ $(window).on("load resize",function(){
 			$('#ejercicio').css('left', gridej*(frecuencia-minval_eje));
 			$('#ejercicio-filler').css('width', (gridej*(frecuencia-minval_eje))+20);
 			console.log(restricciones);
-			if(restricciones !== undefined){
+
+			if(restricciones === undefined){
 				console.log('esta indefinido');
 			}else{
-				var arreg = JSON.parse(restricciones);
-				console.log(arreg);
-				for (var i = 0; i < arreg.length; i++) {
-					switch(arreg[i]){
-						case "0": 
+				//var arreg = JSON.parse(restricciones);
+				// console.log('Restricciones: ' + arreg);
+				for (var i = 0; i < restricciones.length; i++) {
+					switch(restricciones[i]){
+						case 0: 
 							$('.tipo_restric .re-option:nth-of-type(1) img').attr("src",'images/restric/huevo2.png');
 							break;
-						case "1":
+						case 1:
 							$('.tipo_restric .re-option:nth-of-type(2) img').attr("src",'images/restric/pollo2.png');
 							break;
-						case "2":
+						case 2:
 							$('.tipo_restric .re-option:nth-of-type(3) img').attr("src",'images/restric/pescado2.png');
 							break;
-						case "3":
+						case 3:
 							$('.tipo_restric .re-option:nth-of-type(4) img').attr("src",'images/restric/camaron2.png');
 							break;
-						case "4":
+						case 4:
 							$('.tipo_restric .re-option:nth-of-type(5) img').attr("src",'images/restric/lacteos2.png');
 							break;
-						case "5":
+						case 5:
 							$('.tipo_restric .re-option:nth-of-type(6) img').attr("src",'images/restric/carne2.png');
 							break;
 					}
-					arreg[i]++;
-					$('.tipo_restric .re-option:nth-of-type('+arreg[i]+')').addClass('active');
+					restricciones[i]++;
+					$('.tipo_restric .re-option:nth-of-type('+restricciones[i]+')').addClass('active');
 				}
 			}
 		}
@@ -580,6 +683,7 @@ $(window).on("load resize",function(){
 		    if (phase == "move" && (direction == "left" || direction == "right")) {
 		        var duration = 0;
 
+
 		        if (direction == "left") {
 		            scrollImages((IMG_WIDTH * currentImg) + distance, duration);
 		            
@@ -592,8 +696,12 @@ $(window).on("load resize",function(){
 		    } else if (phase == "end") {
 		        if (direction == "right") {
 		            previousImage();
+		            $('#finish5').attr('coach', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('coach'));
+		            $('#finish5').attr('dieta_id', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('dieta_id'));
 		        } else if (direction == "left") {
 		            nextImage();
+		            $('#finish5').attr('coach', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('coach'));
+		            $('#finish5').attr('dieta_id', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('dieta_id'));
 		        }
 		    }
 		} //end swipeStatus
@@ -843,6 +951,8 @@ $(window).load(function(){
     	var masuno = i+1;
     	date_string = week[i].toString();
     	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
+    	var dataf = new Date(date_string);
+    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
     	//$('tr td.day_of_week:nth-of-type('+masuno+') span').attr("data-day" + date_string.substring(8, 11) );
     }
 
@@ -871,11 +981,11 @@ $(window).load(function(){
 	    	$('#month').html(meses[month] );
 	    	$('#year').html(full_date.getFullYear());
 
-	    	for(var i=0; i<dias.length; i++){
-	    		var masuno = i+1;
-	    		date_string = week[i].toString();
-	    		$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
-	    	}
+	    	// for(var i=0; i<dias.length; i++){
+	    	// 	var masuno = i+1;
+	    	// 	date_string = week[i].toString();
+	    	// 	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
+	    	// }
 	    	
 	    	current_day = full_date;
 	    	//console.log("Full date > > "+full_date);
@@ -890,6 +1000,8 @@ $(window).load(function(){
 		    	var masuno = i+1;
 		    	//console.log(dow[i]);
 		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
+		    	var dataf = new Date(week2[i]);
+		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
 		    }
 		});
 
@@ -902,11 +1014,11 @@ $(window).load(function(){
 	    	$('#month').html(meses[month] );
 	    	$('#year').html(full_date.getFullYear());
 
-	    	for(var i=0; i<dias.length; i++){
-	    		var masuno = i+1;
-	    		date_string = week[i].toString();
-	    		$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
-	    	}
+	    	// for(var i=0; i<dias.length; i++){
+	    	// 	var masuno = i+1;
+	    	// 	date_string = week[i].toString();
+	    	// 	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
+	    	// }
 	    	
 	    	current_day = full_date;
 	    	//console.log("Full date > > "+full_date);
@@ -921,6 +1033,8 @@ $(window).load(function(){
 		    	var masuno = i+1;
 		    	//console.log(dow[i]);
 		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
+		    	var dataf = new Date(week2[i]);
+		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
 		    }
 		});
 
@@ -1047,21 +1161,25 @@ $(window).load(function(){
 
 
 			// console.log("ZIP>"+ $('input[name="zipocode"]').val());
-				var genero 				= localStorage.setItem('genero', 	  $('#update_sexo').val() );
-				var edad 				= localStorage.setItem('edad', 		  $('#edad_value').val() );
-				var zipcode 			= localStorage.setItem('zipcode', 	  $('input[name="zipcode"]').val() );
-				var estatura 			= localStorage.setItem('estatura', 	  $('input[name="estatura"]').val() );
-				var peso 				= localStorage.setItem('peso', 		  $('input[name="peso"]').val() );
-				var peso_ideal 			= localStorage.setItem('peso_ideal',  $('input[name="ideal"]').val() );
-				var coach_type 			= localStorage.setItem('coach_type',  $('#coach_type').val() );
-				var dpw 				= localStorage.setItem('dpw', 		  $('#days_per_week').val() );
-				var comentario 			= localStorage.setItem('comentarios', $('#comentar').val() );
-				var plan 				= localStorage.setItem('coach_type',  $('#plan').val() );
-				restricciones 			= localStorage.setItem('restricciones', restricciones_arr);
-
-				var postal 				= localStorage.getItem('zipocode');
+				var genero 				= $('#update_sexo').val();
+				var edad 				= $('#edad_value').val();
+				var zipcode 			= $('input[name="zipcode"]').val();
+				var estatura 			= $('input[name="estatura"]').val();
+				var peso 				= $('input[name="peso"]').val();
+				var peso_ideal 			= $('input[name="ideal"]').val();
+				var coach_type 			= $('#coach_type').val();
+				var dpw 				= $('#days_per_week').val();
+				var comentario 			= $('#comentar').val();
+				var plan 				= $('#plan').val();
+				
+				var restricciones 		= localStorage.getItem('restricciones');
+				var postal 				= $('input[name="zipcode"]').val();
 
 				console.log("POSTAL > > > > "+postal);
+
+				console.log(restricciones);
+
+				restricciones = JSON.stringify(restricciones);
 
 
 				var json = {
@@ -1074,13 +1192,17 @@ $(window).load(function(){
 					"estatura" : estatura,
 					"ejercicio" : dpw,
 					"objetivo" : plan,
-					"restricciones" : JSON.stringify(restricciones_arr),
+					"restricciones" : (restricciones.length>0)?JSON.parse(restricciones):null,
 					"personalidad" : coach_type
 				},
 				"cp": zipcode,
 				"pesoDeseado": peso_ideal,
 				"comentario": comentario
 			}
+
+			console.log(json);
+
+
 
 			var response = apiRH.updatePerfil(json);
 
@@ -1090,9 +1212,6 @@ $(window).load(function(){
 
 
 		});	// end add uodated profile
-
-
-
 
 		var timeout;
 		var estatura;
@@ -1221,8 +1340,8 @@ $(window).load(function(){
 		$("#agua-up").bind('touchstart', function(){
 			timeout = setInterval(function(){
 				agua = Number($('.vaso p span').html());
-				agua=agua+0.5;
-	        	$('.vaso p span').html(agua.toFixed(1));
+				agua=agua+0.25;
+	        	$('.vaso p span').html(agua.toFixed(2));
 	        	$('input[name="litros"]').attr("value", agua);
 		    }, 100);
 		    return false;
@@ -1556,13 +1675,16 @@ $(window).load(function(){
 			}
 
 
-				/*
+			/*
 
-					localstorage PERFIL
+				localstorage PERFIL
 
-				*/
+			*/
 	
 			//Zipocode
+
+			if($('input[name="zipcode"]').val() == '' || $('input[name="zipcode"]').val() == undefined)
+				return;
 			localStorage.setItem('zipcode', $('input[name="zipcode"]').val() );
 			var _zipcode = localStorage.getItem('zipcode');
 			console.log("zip>"+_zipcode);
@@ -1657,7 +1779,7 @@ $(window).load(function(){
 			$('.borg').removeClass('active');
 			$('.byel').addClass('active');
 
-			var restricciones_ls2   = "";
+			var restricciones_ls2   = [];
 			var genero 		  		= localStorage.getItem('genero');
 			var peso 		  		= localStorage.getItem('peso');
 			var estatura 	  		= localStorage.getItem('estatura');
@@ -1723,6 +1845,7 @@ $(window).load(function(){
 					var biografia;
 					var rate_stars;
 					var item = $('.initial').html();
+					var coaches = [];
 
 					$.each( listCoach, function( key, value ) {
 						
@@ -1735,7 +1858,7 @@ $(window).load(function(){
 
   						// console.log('Lista de Coaches ' + listCoach);
 
-
+  						
   						$.each( value, function( key, value ) {
   							// console.log( key + " :: " + value );
   							if (key=='_id') {
@@ -1749,12 +1872,26 @@ $(window).load(function(){
 									// console.log( key + " ::: " + value );
 									
 									if (key=='_id') {
-										$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
-										$(".resena .img-frame:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
-										console.log('ID DE COACH: ' + value);
-										localStorage.setItem('coach_id', value);
-										$('.slide-coach:nth-of-type('+i+')').attr('coach', localStorage.getItem("coach_id"));
-										$('.slide-coach:nth-of-type('+i+')').attr('dieta_id', localStorage.getItem("dieta_id"));
+										var noexiste = true;
+										for (var j = 0; j < coaches.length; j++) {
+											// console.log('entra al for');
+
+											if (coaches[j]==value){
+												// console.log('sdfsdfsdfsdfregdfgdfgfgdfg');
+												noexiste = false;
+											}
+										}
+										if (noexiste) {
+											coaches.push(value);
+											console.log(coaches);
+
+											$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
+											$(".resena .img-frame:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
+											console.log('ID DE COACH: ' + value);
+											localStorage.setItem('coach_id', value);
+											$('.slide-coach:nth-of-type('+i+')').attr('coach', localStorage.getItem("coach_id"));
+											$('.slide-coach:nth-of-type('+i+')').attr('dieta_id', localStorage.getItem("dieta_id"));
+										}
 									}
 									if (key=='nombre') {
 										Name = value;
@@ -1762,7 +1899,7 @@ $(window).load(function(){
 									}
 									if (key=='apellido') {
 										LastN = value;
-										var coach_name = Name +" "+LastN 
+										var coach_name = Name +" "+LastN;
 										$('.slide-coach:nth-of-type('+i+') .name.coach_name').html(coach_name);
 									}
 									if (key=='frase') {
@@ -1866,8 +2003,8 @@ $(window).load(function(){
 			/*
 				JSON COACH SELECTED	*
 			*/
-			var coach = $('.slide-coach').attr('coach');
-			var dieta = $('.slide-coach').attr('dieta_id');
+			var coach = $('#finish5').attr('coach');
+			var dieta = $('#finish5').attr('dieta_id');
 			var json = {"coach" : coach,"dieta" : dieta}
 			//Request update data
 			var responsedata = apiRH.updatePerfil(json);
@@ -1917,12 +2054,9 @@ $(window).load(function(){
             }, 250);
 		});
 
-
-
-
 		$('.back').click(function(){
 			if($('.aboutyou').is(':visible')){
-				window.location.assign('crear.html');
+				window.location.assign('inicio.html');
 			} 
 			if($('.objetive').is(':visible')){
 				$('.objetive').animate({opacity:"0",left:"40px"}, 200);
@@ -2065,60 +2199,7 @@ $(window).load(function(){
 
 		
 		
-		$('.re-option').click(function() {
-			var valor = $(this).find('.type').attr('value');
-
-			if (!$(this).hasClass('active')) {
-				
-				console.log("ADDED");
-
-				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
-				$(this).addClass('active');
-				$(this).attr("value", valor);
-				
-				$('.restricciones').attr('value', valor);
-				
-				restricciones_arr.push(valor);
-				
-				localStorage.setItem('restricciones', JSON.stringify(restricciones_arr));
-
-			} else {
-
-				console.log('DELETED');
-
-				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
-				$(this).removeClass('active');
-				$(this).attr("value", "");
-				$('.restricciones').attr('value',"");
-				
-				for(var i=0; i<restricciones_arr.length; i++){
-
-					
-					if( restricciones_arr[i] == valor ){
-
-						var index = restricciones_arr.indexOf(valor);
-
-						restricciones_arr.splice(i, 1);
-
-						localStorage.setItem('restricciones', JSON.stringify(restricciones_arr));
-
-					}//end IF
-
-				}//end FOR				
-				
-			}// end ELSE
-
-			if(restricciones_arr.length == 0 ){
-				$('#finish4').attr('src', 'images/saltar.svg');
-				$('#finish4').css('margin-left', '-65px');
-			}else{
-				$('#finish4').attr('src', 'images/enter.svg');
-				$('#finish4').css('margin-left', '-25px');
-
-			}
-			console.log(restricciones_arr);
-		});
-
+		
 		$('.me-option').click(function() {
 			var valor = $(this).find('.type').attr('value');
 			$('.me-option').each(function() {
@@ -2271,15 +2352,39 @@ $(window).load(function(){
 		$('svg.consume').click(function() {
 			$(this).parent().parent().addClass('consumido');
 			$(this).html('<use xlink:href="#consume2"></use>');
+			
+			console.log($(this).parent().parent().attr('data'));
+			console.log($(this).parent().parent().parent().parent().parent().parent().attr('data'));
 
-			apiRH.makeCosume();
+			var idPlatillo = $(this).parent().parent().attr('data');
+			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
+
+			var json = {
+				"plato" : idPlatillo, 
+	            "fecha" : cosumoFecha,
+	            "comida"  : 0,
+	            "platillo": 0,
+	            "consumido": true
+			};
+			
+			apiRH.makeCosume(json);
 
 		});
 
 		$('svg.noconsu').click(function() {
 			$(this).parent().parent().addClass('cancelado');
 			$(this).html('<use xlink:href="#noconsu2"></use>');
-			apiRH.makeCosume();
+			var idPlatillo = $(this).parent().parent().attr('data');
+			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
+			var json = {
+				"plato" : idPlatillo, 
+	            "fecha" : cosumoFecha,
+	            "comida"  : 0,
+	            "platillo": 0,
+	            "consumido": false
+			};
+			
+			apiRH.makeCosume(json);
 		});
 
 		$('svg.commenn').click(function() {
