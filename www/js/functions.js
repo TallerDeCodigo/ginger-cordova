@@ -2014,19 +2014,30 @@ $(window).load(function(){
 				$('.name_on').html(_co_name+" "+_co_last);
 
 				var count = 5;
+				console.log($('.rate-stars_inner img').length);
 
-				for (var i = 0; i < _co_rate; i++) {
-					$('.rate-stars').append('<img src="images/starh.svg">');
-					console.log(i);
+
+				/*
+					FAlTA TERMINAR LOGICA PARA NO REPETIR ESTRELLAS
+				*/
+
+				if( $('.rate-stars_inner').length < 5){
+
+					for (var i = 0; i < _co_rate; i++) {
+						$('.rate-stars_inner').append('<img src="images/starh.svg">');
+					};
 					
-				};
-				
-				for (var x = 0; x < count - _co_rate; x++) {
-					console.log('-' + x);
-					$('.rate-stars').append('<img src="images/star.svg">');
-				};
-			}
+					for (var x = 0; x < count - _co_rate; x++) {
+						console.log('-' + x);
+						$('.rate-stars_inner').append('<img src="images/star.svg">');
+					};
 
+				}else if($('.rate-stars_inner').length == 5){
+						console.log('do nothing');
+					}else{
+						console.log('ya tiene estrellas');
+					}//end if
+			}
 		});
 
 		$('#aceptar').click(function(){
