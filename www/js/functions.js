@@ -566,9 +566,9 @@ $(window).on("load resize",function(){
 		}//end if has class
 			var restricciones = [];
 			$('.re-option').click(function() {
-				if(restricciones === undefined)
-				restricciones = [];
-
+				if(restricciones === 'undefined'){
+					restricciones = [];
+				}
 
 			var valor = $(this).find('.type').attr('value');
 
@@ -1812,7 +1812,7 @@ $(window).load(function(){
 					"estatura" : estatura,
 					"ejercicio" : (dpw>3)?1:0,
 					"objetivo" : plan,
-					"restricciones" : (restricciones_ls2 == '')?null:JSON.parse(restricciones_ls2),
+					"restricciones" : (restricciones_ls2 === 'undefined')?null:JSON.parse(restricciones_ls2),
 					"personalidad" : coach_type
 				},
 				"cp": zipcode,
