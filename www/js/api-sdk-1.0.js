@@ -825,37 +825,121 @@ function requestHandlerAPI(){
 		 * @return null
 		 * @see loginCallbackTW, loginCallbackFB, loginCallbackGP
 		 */
-		this.loginOauth   =  function(provider, callback){
+		this.loginOauth   =  function(provider){
+			OAuth.initialize('a6JLuBGGgfFNhFvcQ2V0tCbdmWI');
+			console.log('LOGIN OAUTH');
 			sdk_app_context.showLoader();
-			OAuth.popup(provider).done(callback).fail(function(error){
-				console.log(error);
-			});
+			var fb_name;
+			var fb_lastname;
+			var fb_email;
+			var fb_avatar;
+			var fb_Id;
+			
+			OAuth.popup(provider)
+				.done(function(result){
+					console.log(result);
+					result.me().done(function(data){
+					 fb_name = data.name;
+					 fb_lastname = data.lastname;
+					 fb_email = data.email;
+					 fb_avatar = data.avatar;
+					 fb_Id = data.id;
+
+					 var req = {
+					 	method : 'post',
+					 	url : api_base_url + 'api/signup',
+					 	headers: {
+					 		'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					 		'X-ZUMO-AUTH': '',
+					 		'Content-Type': 'application/json'
+					 	},
+					 	data : {
+					 		"nombre" : fb_name,
+					 		"apellido" :fb_lastname,
+					 		"mail" : fb_email,
+					 		"password" : fb_Id
+					 	}
+					 }
+
+					 /*
+						MAKE REQUEST
+					 */
+					 sdk_app_context.showLoader();
+					 var result = {};
+
+					 $.ajax({
+					   type: 'POST',
+					   headers: req.headers,
+					   url: window.api_base_url+'api/signup',
+					   data: JSON.stringify(req.data),
+					   dataType: 'json',
+					   async: false
+					 })
+					  .done(function(response){
+					 	result = response;
+					 	console.log(response);
+					 	localStorage.setItem('token', 	response.token);
+					 	localStorage.setItem('mail', 	response.mail);
+					 	localStorage.setItem('chatId', 	response.jid);
+					 	localStorage.setItem('userId', 	response._id);
+					 	sdk_app_context.hideLoader(response);
+					 })
+					  .fail(function(e){
+					 	result = e;
+					 	console.log(JSON.stringify(e));
+					 });
+
+					  //console.log(JSON.stringify(response));
+
+					  var userId 	= localStorage.getItem('userId');
+					  var mail 		= localStorage.getItem('mail');
+					  var token 	= localStorage.getItem('token');
+
+					  console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
+
+					  	//var user = this.getRequest('api/cliente', req);
+
+
+					  	/*
+							GET REQUEST
+					  	*/
+					  	sdk_app_context.showLoader();
+					  	var result = {};
+					  	
+					  	$.ajax({
+					  	  type: 'GET',
+					  	  headers: req.headers,
+					  	  url: window.api_base_url+'api/cliente?='+userId,
+					  	  //data: JSON.stringify(req.data),
+					  	  dataType: 'json',
+					  	  async: false
+					  	})
+					  	 .done(function(response){
+					  	 	console.log('done');
+					  		result = response;
+					  		sdk_app_context.hideLoader(response);
+					  	})
+					  	 .fail(function(e){
+					  	 	console.log('fail');
+					  		result = false;
+					  		console.log(JSON.stringify(e));
+					  	});
+
+					  	return result;
+
+					  	console.log(JSON.stringify(user));
+
+					  	localStorage.setItem('users', JSON.stringify(user));
+					
+						//window.location.assign('feed.html');
+					});
+				}).fail(function(error){
+					console.log(error);
+				});
+
 			return;
 		};
-		/* 
-		 * Log in callback for Twitter provider
-		 * @return Bool TRUE if authentication was successful
-		 * @see loginOauth
-		 * @see API Documentation
-		 */
-		this.loginCallbackGP = function(response){
-									//Get profile info
-			response.me()
-			 .done(function(response) {
-				console.log(response);
-				var email = response.email;
-				var username = response.lastname+"_"+response.id;
-				var found = apiRH.create_internal_user(username, email, {gpId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
-				/* End handshake with server by validating token and getting 'me' data */
-				context.endHandshake(username);
 
-				window.location.assign('feed.html?filter_feed=all');
-				return;
-			})
-			 .fail(function(error){
-				console.log(error);
-			});
-		};
 
 		/* 
 		 * Log in callback for Facebook provider
@@ -864,14 +948,18 @@ function requestHandlerAPI(){
 		 * @see API Documentation
 		 */
 		this.loginCallbackFB = function(response){
+			console.log('LOGIN CALLBACK FB');
 			response.me()
 			 .done(function(response){
+			 	console.log("en loginCallback FB");
 			 	console.log(response);
 				var email = response.email;
 				var username = response.lastname+"_"+response.id;
 				var found = apiRH.create_internal_user(username, email, {fbId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
 				/* End handshake with server by validating token and getting 'me' data */
 				context.endHandshake(username);
+
+				console.log(email +"  "+ username);
 
 				window.location.assign('feed.html?filter_feed=all');
 				return;

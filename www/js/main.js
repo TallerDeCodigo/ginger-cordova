@@ -606,12 +606,31 @@
 			/* Requesting logout from server */
 			//var response = apiRH.logOut({user_login : user, request_token : apiRH.get_request_token() });
 			//if(response.success){
-				app.toast('Has cerrado la sesión, hasta pronto');
-					localStorage.clear();
-				window.location.assign('index.html');
+				if(!$('.overscreen5').is(':visible') ){
+					$('.overscreen5').show();
+				setTimeout(function() {$('.overscreen5').addClass('active');}, 200);
+				} else {
+					$('.overscreen5').removeClass('active');
+					setTimeout(function() {$('.overscreen5').hide();}, 800);
+				}
+				$('#container').toggleClass('blurred');
+				//app.toast('Has cerrado la sesión, hasta pronto');
+					//localStorage.clear();
+					//window.location.assign('index.html');
 				return;
 			//}
 			app.toast('No ha sido posible crear tu cuenta, inténtalo de nuevo por favor.');
+			return;
+		});
+
+		$('.accept').click(function(){
+			localStorage.clear();
+			window.location.assign('index.html');
+			return;
+		});
+		$('.cancel').click(function(){
+			$('.overscreen5').hide();
+			$('#container').toggleClass('blurred');
 			return;
 		});
 
@@ -700,8 +719,8 @@
 	//-----------------------------
 
 	$('.face').click(function (e) {
-
-		apiRH.loginOauth('facebook', 'loginCallbackFB');
+		console.log('CLICK FACEBOOK');
+		apiRH.loginOauth('facebook');
 		
 		e.preventDefault();
 

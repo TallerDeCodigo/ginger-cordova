@@ -7,6 +7,16 @@ var gridej;
 var minval_eje;
 
 $( function() {
+
+	window.fbAsyncInit = function() {
+	FB.init({
+	  	appId      : '239633319765955',
+	  	cookie     : true,  // enable cookies to allow the server to access 
+	                      // the session
+	  	xfbml      : true,  // parse social plugins on this page
+	  	version    : 'v2.7' // use graph api version 2.5
+		});
+	}
 	/*
 		CLEAR LOCAL STORAGE
 	*/
@@ -410,7 +420,7 @@ $(window).on("load resize",function(){
 			var coach_rate		= localStorage.getItem('coach_rate');
 			localStorage.setItem('restricciones', user.perfil.restricciones);
 
-			console.log('HUEVOS: ' + restricciones.length);
+			//console.log('HUEVOS: ' + restricciones.length);
 
 			$('#coach_type').attr("value", coach_type);
 			$('#plan').attr("value", plan);
@@ -1168,7 +1178,18 @@ $(window).load(function(){
 				*/
 		var restricciones_arr = new Array();
 		$('#add_updated_profile').on('click', function(){
+			if(!$('.overscreen7').is(':visible')){
+				$('.overscreen7').show();
+				setTimeout(function() {$('.overscreen7').addClass('active');}, 200);
+			} else {
+				$('.overscreen7').removeClass('active');
+				setTimeout(function() {$('.overscreen7').hide();}, 800);
+			}
+			$('#container').toggleClass('blurred');
+		});//end click add updated profile
 
+
+		$('#_alert_chCoach').click(function(){
 
 			// console.log("ZIP>"+ $('input[name="zipocode"]').val());
 				var genero 				= $('#update_sexo').val();
@@ -1210,15 +1231,11 @@ $(window).load(function(){
 
 			console.log(json);
 
-
-
 			var response = apiRH.updatePerfil(json);
 
-			if(response) 
+			if(response){
 				window.location.assign('userdata.html');
-
-
-
+			}
 		});	// end add uodated profile
 
 		var timeout;
@@ -1890,9 +1907,15 @@ $(window).load(function(){
 										}
 										if (noexiste) {
 											coaches.push(value);
-											$(".cslider .slide-coach:nth-of-type("+i+") div.rate-stars").attr('data-rate', listCoach[j].coach.rating );
-											$(".cslider .slide-coach:nth-of-type("+i+") div.rate-stars").attr('data-name', listCoach[j].coach.nombre );
-											$(".cslider .slide-coach:nth-of-type("+i+") div.rate-stars").attr('data-last', listCoach[j].coach.apellido );
+											console.log(listCoach);
+											if(!listCoach[j].coach){
+												console.log('nada');
+											}else{
+												$(".cslider .slide-coach:nth-of-type("+i+") div.rate-stars").attr('data-rate', listCoach[j].coach.rating );
+												$(".cslider .slide-coach:nth-of-type("+i+") div.rate-stars").attr('data-name', listCoach[j].coach.nombre );
+												$(".cslider .slide-coach:nth-of-type("+i+") div.rate-stars").attr('data-last', listCoach[j].coach.apellido );
+
+											}
 											$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
 											$(".resena .img-frame:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
 											console.log('ID DE COACH: ' + value);
@@ -2029,22 +2052,24 @@ $(window).load(function(){
 					FAlTA TERMINAR LOGICA PARA NO REPETIR ESTRELLAS
 				*/
 
-				if( $('.rate-stars_inner').length < 5){
-
-					for (var i = 0; i < _co_rate; i++) {
-						$('.rate-stars_inner').append('<img src="images/starh.svg">');
-					};
+				//if( $('.rate-stars_inner').length < 5){
+					for (var j = 1; j <= _co_rate; j++) {
+						$(".rate-stars_inner img:nth-of-type("+j+")").attr("src","images/starh.svg");
+					}
+				// 	for (var i = 0; i < _co_rate; i++) {
+				// 		$('.rate-stars_inner').append('<img src="images/starh.svg">');
+				// 	};
 					
-					for (var x = 0; x < count - _co_rate; x++) {
-						console.log('-' + x);
-						$('.rate-stars_inner').append('<img src="images/star.svg">');
-					};
+				// 	for (var x = 0; x < count - _co_rate; x++) {
+				// 		console.log('-' + x);
+				// 		$('.rate-stars_inner').append('<img src="images/star.svg">');
+				// 	};
 
-				}else if($('.rate-stars_inner').length == 5){
-						console.log('do nothing');
-					}else{
-						console.log('ya tiene estrellas');
-					}//end if
+				// }else if($('.rate-stars_inner').length == 5){
+				// 		console.log('do nothing');
+				// 	}else{
+				// 		console.log('ya tiene estrellas');
+				// 	}//end if
 			}
 		});
 
