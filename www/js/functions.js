@@ -1849,8 +1849,7 @@ $(window).load(function(){
 
 					$.each( listCoach, function( key, value ) {
 						
-						// console.log("PASE" );
-						// console.log(listCoach);
+						console.log(listCoach);
 						
 						// $('.initial').remove();
 						// $(".wrap-cslide").append('<div class="csilder">'+item+'</div>');
@@ -1883,8 +1882,9 @@ $(window).load(function(){
 										}
 										if (noexiste) {
 											coaches.push(value);
-											console.log(coaches);
-
+											$(".cslider .slide-coach:nth-of-type("+i+") div.rate-stars").attr('data-rate', listCoach[j].coach.rating );
+											$(".cslider .slide-coach:nth-of-type("+i+") div.rate-stars").attr('data-name', listCoach[j].coach.nombre );
+											$(".cslider .slide-coach:nth-of-type("+i+") div.rate-stars").attr('data-last', listCoach[j].coach.apellido );
 											$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
 											$(".resena .img-frame:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
 											console.log('ID DE COACH: ' + value);
@@ -1989,6 +1989,11 @@ $(window).load(function(){
 		});
 
 		$('.bt-review').click(function(){
+			localStorage.setItem('coach_aidi', $(this).parent().parent().attr('coach') );
+			localStorage.setItem('co_name',$(this).parent().attr('data-name') );
+			localStorage.setItem('co_last',$(this).parent().attr('data-last') );
+			localStorage.setItem('co_rate',$(this).parent().attr('data-rate') );
+
 			$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
 			setTimeout(function() {
         		$(".pagina").hide();
@@ -1996,6 +2001,32 @@ $(window).load(function(){
         		$(".resena").css("left","40px");
         		$(".resena").animate({opacity:"1",left:"0px"}, 200);
             }, 250);
+
+			if( $('div').hasClass('resena') ){
+				var _aidi = localStorage.getItem('coach_aidi')
+				var _co_name = localStorage.getItem('co_name');
+				var _co_last = localStorage.getItem('co_last');
+				var _co_rate = localStorage.getItem('co_rate');
+				var _co_rate = Math.round(_co_rate);
+				console.log(_aidi);
+				console.log(_co_name+" "+_co_last+" "+_co_rate);
+				$("img.la_foto_resena").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+_aidi+".png");
+				$('.name_on').html(_co_name+" "+_co_last);
+
+				var count = 5;
+
+				for (var i = 0; i < _co_rate; i++) {
+					$('.rate-stars').append('<img src="images/starh.svg">');
+					console.log(i);
+					
+				};
+				
+				for (var x = 0; x < count - _co_rate; x++) {
+					console.log('-' + x);
+					$('.rate-stars').append('<img src="images/star.svg">');
+				};
+			}
+
 		});
 
 		$('#aceptar').click(function(){
