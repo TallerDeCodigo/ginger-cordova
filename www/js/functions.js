@@ -410,6 +410,8 @@ $(window).on("load resize",function(){
 			var coach_rate		= localStorage.getItem('coach_rate');
 			localStorage.setItem('restricciones', user.perfil.restricciones);
 
+			console.log('HUEVOS: ' + restricciones.length);
+
 			$('#coach_type').attr("value", coach_type);
 			$('#plan').attr("value", plan);
 			$('#days_per_week').attr("value", frecuencia);
@@ -511,27 +513,30 @@ $(window).on("load resize",function(){
 				
 				//COMPRUEBA SI LAS RESTRICCIONES ESTAN DEFINIDAS
 
-				if(restricciones == 'undefined'){
+				if(restricciones == 'undefined' || restricciones == "" || restricciones == null){
 					console.log('no definido ');
 					$('#restricciones_perfil').html("Sin restricciones");
 				}else{
 
 					console.log(restricciones);
 
-					var restricc = [ 'huevos', 'pollo', 'pescado', 'mariscos', 'lacteos', 'carne' ];
+					var restricc = [ 'huevo', 'pollo', 'pescado', 'mariscos', 'lacteos', 'carne' ];
 					// var parseado = JSON.parse(restricciones);
 					// parseado = JSON.stringify(parseado);
 					// restricciones = restricciones.slice(2,3);
-					
-					for (var i = 0; i < restricciones.length; i++) {
-						console.log(i);
-						if(i == restricciones.length-1)
-							coma = "";
-						else
-							coma = ", ";
+					if(restricciones){
+						for (var i = 0; i < restricciones.length; i++) {
+							console.log(i);
+							if(i == restricciones.length-1)
+								coma = "";
+							else
+								coma = ", ";
 
-						$('#restricciones_perfil').append(restricc[i] + coma);
-					};
+							$('#restricciones_perfil').append(restricc[restricciones[i]] + coma);
+						};
+					}else{
+						console.log("no hay restricciones");
+					}
 					
 
 				}
@@ -571,7 +576,7 @@ $(window).on("load resize",function(){
 				}
 
 			var valor = $(this).find('.type').attr('value');
-
+				console.log(valor);
 			if (!$(this).hasClass('active')) {
 				
 				console.log("ADDED");
@@ -584,7 +589,7 @@ $(window).on("load resize",function(){
 				
 				restricciones.push(valor);
 				
-				localStorage.setItem('restricciones', JSON.stringify(restricciones));
+				console.log(localStorage.setItem('restricciones', JSON.stringify(restricciones)) );
 
 			} else {
 
@@ -596,7 +601,6 @@ $(window).on("load resize",function(){
 				$('.restricciones').attr('value',"");
 				
 				for(var i=0; i<restricciones.length; i++){
-
 					
 					if( restricciones[i] == valor ){
 
@@ -621,6 +625,7 @@ $(window).on("load resize",function(){
 
 			}
 			console.log(restricciones);
+
 		});
 
 		if ($('body').hasClass('update_data')) {
@@ -629,6 +634,7 @@ $(window).on("load resize",function(){
 
 			$('#ejercicio').css('left', gridej*(frecuencia-minval_eje));
 			$('#ejercicio-filler').css('width', (gridej*(frecuencia-minval_eje))+20);
+			
 			console.log(restricciones);
 
 			if(restricciones === undefined){
@@ -636,8 +642,12 @@ $(window).on("load resize",function(){
 			}else{
 				//var arreg = JSON.parse(restricciones);
 				// console.log('Restricciones: ' + arreg);
-				for (var i = 0; i < restricciones.length; i++) {
-					switch(restricciones[i]){
+				 var uRes = JSON.parse(localStorage.getItem('user'));
+
+
+				for (var i = 0; i < uRes.perfil.restricciones.length; i++) {
+					
+					switch(uRes.perfil.restricciones[i]){
 						case 0: 
 							$('.tipo_restric .re-option:nth-of-type(1) img').attr("src",'images/restric/huevo2.png');
 							break;
@@ -657,8 +667,8 @@ $(window).on("load resize",function(){
 							$('.tipo_restric .re-option:nth-of-type(6) img').attr("src",'images/restric/carne2.png');
 							break;
 					}
-					restricciones[i]++;
-					$('.tipo_restric .re-option:nth-of-type('+restricciones[i]+')').addClass('active');
+					uRes.perfil.restricciones[i]++;
+					$('.tipo_restric .re-option:nth-of-type('+uRes.perfil.restricciones[i]+')').addClass('active');
 				}
 			}
 		}
@@ -1178,8 +1188,6 @@ $(window).load(function(){
 				console.log("POSTAL > > > > "+postal);
 
 				console.log(restricciones);
-
-				restricciones = JSON.stringify(restricciones);
 
 
 				var json = {
