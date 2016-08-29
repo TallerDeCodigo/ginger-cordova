@@ -413,7 +413,7 @@ $(window).on("load resize",function(){
 			var nombre 			= localStorage.getItem('user_name');
 			var apellido 		= localStorage.getItem('user_last_name');
 			var sexo 			= user.perfil.sexo;
-			var edad 			= localStorage.getItem('edad');
+			var edad 			= user.perfil.fechaNacimiento;
 			var cp 	 			= user.cp;
 			var estatura 		= user.perfil.estatura;
 			var peso 			= user.perfil.peso;
@@ -425,6 +425,13 @@ $(window).on("load resize",function(){
 			var comentario 		= user.comentario;
 			var coach_rate		= localStorage.getItem('coach_rate');
 			localStorage.setItem('restricciones', user.perfil.restricciones);
+
+			console.log(edad.substring(0, 4) );
+			var date_hoy =  new Date();
+			date_hoy = date_hoy.getFullYear();
+			var _edad_calc = date_hoy - Number( edad.substring(0, 4));
+
+			console.log(_edad_calc);
 
 			//console.log('HUEVOS: ' + restricciones.length);
 
@@ -446,8 +453,9 @@ $(window).on("load resize",function(){
 				$('#sexo_perfil').html('Hombre');
 			}
 
-			$('#anos_perfil').html(edad + " años");
-			$('#age-dato').html(edad);
+			console.log(edad);
+			$('#anos_perfil').html(_edad_calc + " años");
+			$('#age-dato').html(_edad_calc);
 
 			$('#cp_perfil').html(cp);
 			$('input[name="zipcode"]').attr("value",cp);
@@ -653,13 +661,13 @@ $(window).on("load resize",function(){
 			
 			console.log(restricciones);
 
-			if(restricciones === undefined){
+			if(restricciones === undefined || restricciones == null || restricciones == ""){
 				console.log('esta indefinido');
 			}else{
 				//var arreg = JSON.parse(restricciones);
 				// console.log('Restricciones: ' + arreg);
 				 var uRes = JSON.parse(localStorage.getItem('user'));
-
+				 console.log(uRes);
 
 				for (var i = 0; i < uRes.perfil.restricciones.length; i++) {
 					
@@ -994,7 +1002,7 @@ $(window).load(function(){
 	    $('tr td.day_of_week:nth-of-type('+dia_semana+')').trigger('click');
 
 	    current_day = fecha.hoy().substring(8);
-	    console.log("str> "+current_day);
+	    //console.log("str> "+current_day);
 	    current_day = left + current_day;
 	    // console.log("str> "+current_day);
 
@@ -1196,9 +1204,11 @@ $(window).load(function(){
 
 
 		$('#_alert_chCoach').click(function(){
-
+			console.log('CLICK EN ALERT CH-COACH');
 			// console.log("ZIP>"+ $('input[name="zipocode"]').val());
 				var genero 				= $('#update_sexo').val();
+
+				localStorage.setItem('edad', $('#edad_value').val() );
 				var edad 				= $('#edad_value').val();
 				var zipcode 			= $('input[name="zipcode"]').val();
 				var estatura 			= $('input[name="estatura"]').val();
@@ -1208,26 +1218,45 @@ $(window).load(function(){
 				var dpw 				= $('#days_per_week').val();
 				var comentario 			= $('#comentar').val();
 				var plan 				= $('#plan').val();
-				
+
 				var restricciones 		= localStorage.getItem('restricciones');
 				var postal 				= $('input[name="zipcode"]').val();
+				localStorage.setItem('edad', edad);
 
+				var _usr_age = localStorage.getItem('edad');
+				$('#anos_perfil').html(_usr_age+" años");
+				
 				console.log("POSTAL > > > > "+postal);
 
-				console.log(restricciones);
+				
+				/*calcula fecha de naciemiento a partr de la edad del cliente*/
 
+
+				var ageyears = new Date();
+				var _year =ageyears.getFullYear();
+				var _mes = ageyears.getMonth() +1;
+				var _dia = ageyears.getDate();
+				var _yob = _year - edad;
+				
+				var fecha_born = _yob+"/"+ _mes +"/"+_dia;
+				console.log(typeof fecha_born);
+				// fecha_born.toString();
+
+				var born = new Date(fecha_born);
+				//console.log(edad);
+				console.log(born);
 
 				var json = {
 				"sexo" : genero,
-				"fechaNacimiento" : "1984-04-21",
+				"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
 				"perfil":{
-					"fechaNacimiento" : "1984-04-21",
+					"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
 					"sexo" : genero,
 					"peso" : peso,
 					"estatura" : estatura,
 					"ejercicio" : dpw,
 					"objetivo" : plan,
-					"restricciones" : (restricciones.length>0)?JSON.parse(restricciones):null,
+					"restricciones" :(restricciones.length>0)?JSON.parse(restricciones):null,
 					"personalidad" : coach_type
 				},
 				"cp": zipcode,
@@ -1714,8 +1743,9 @@ $(window).load(function(){
 	
 			//Zipocode
 
-			if($('input[name="zipcode"]').val() == '' || $('input[name="zipcode"]').val() == undefined)
+			if($('input[name="zipcode"]').val() == '' || $('input[name="zipcode"]').val() == undefined){
 				return;
+			}
 			localStorage.setItem('zipcode', $('input[name="zipcode"]').val() );
 			var _zipcode = localStorage.getItem('zipcode');
 			console.log("zip>"+_zipcode);
@@ -1738,8 +1768,8 @@ $(window).load(function(){
 			
 			//edad
 			localStorage.setItem('edad', $('#edad_value').val() );
-			var _edad = localStorage.getItem('edad');
-			console.log("age>"+_edad);
+			//var _edad = localStorage.getItem('edad');
+			//console.log("age>"+_edad);
 			
 			//peso ideal
 			localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
@@ -1753,7 +1783,7 @@ $(window).load(function(){
         		$(".objetive").animate({opacity:"1",left:"0px"}, 200);
             }, 250);
             $(".back").show();
-		});
+		});//END FINISH1 REGISTRO APP
 
 		$('#finish2').click(function(){
 			$('.objetive').animate({opacity:"0",left:"-40px"}, 200);
@@ -1779,7 +1809,7 @@ $(window).load(function(){
         		$(".exercise").css("left","40px");
         		$(".exercise").animate({opacity:"1",left:"0px"}, 200);
             }, 250);
-		});
+		});//END FINISH2 REGISTRO APP
 
 		$('#finish3').click(function(){
 			$('.exercise').animate({opacity:"0",left:"-40px"}, 200);
@@ -1803,9 +1833,9 @@ $(window).load(function(){
         		$(".restric").css("left","40px");
         		$(".restric").animate({opacity:"1",left:"0px"}, 200);
             }, 250);
-		});
+		});//END FINISH3 REGISTRO APP
 
-		$('#finish4').click(function(){
+		$('#finish4').click(function(){ 
 			$('.restric').animate({opacity:"0",left:"-40px"}, 200);
 			$('.borg').removeClass('active');
 			$('.byel').addClass('active');
