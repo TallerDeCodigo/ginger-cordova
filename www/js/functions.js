@@ -1914,14 +1914,6 @@ $(window).load(function(){
 										if (noexiste) {
 											coaches.push(value);
 											console.log(listCoach);
-											if(!listCoach[j].coach){
-												console.log('nada');
-											}else{
-												$(".cslider .slide-coach:nth-of-type("+i+") div.rate-stars").attr('data-rate', listCoach[j].coach.rating );
-												$(".cslider .slide-coach:nth-of-type("+i+") div.rate-stars").attr('data-name', listCoach[j].coach.nombre );
-												$(".cslider .slide-coach:nth-of-type("+i+") div.rate-stars").attr('data-last', listCoach[j].coach.apellido );
-
-											}
 											$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
 											$(".resena .img-frame:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
 											console.log('ID DE COACH: ' + value);
@@ -1938,6 +1930,7 @@ $(window).load(function(){
 										LastN = value;
 										var coach_name = Name +" "+LastN;
 										$('.slide-coach:nth-of-type('+i+') .name.coach_name').html(coach_name);
+										$('.slide-coach:nth-of-type('+i+')').attr("data-name",coach_name);
 									}
 									if (key=='frase') {
 										$(".slide-coach:nth-of-type("+i+") p.short-descrip b").html(value);
@@ -1948,6 +1941,7 @@ $(window).load(function(){
 									if(key == 'rating'){
 										rate_stars = value;
 										rate_stars = Math.round(rate_stars);
+										$(".slide-coach:nth-of-type("+i+")").attr("data-rate",rate_stars);
 										for (var j = 1; j <= rate_stars; j++) {
 											$(".slide-coach:nth-of-type("+i+") .rate-stars img:nth-of-type("+j+")").attr("src","images/starh.svg");
 										}
@@ -2026,10 +2020,10 @@ $(window).load(function(){
 		});
 
 		$('.bt-review').click(function(){
-			localStorage.setItem('coach_aidi', $(this).parent().parent().attr('coach') );
-			localStorage.setItem('co_name',$(this).parent().attr('data-name') );
-			localStorage.setItem('co_last',$(this).parent().attr('data-last') );
-			localStorage.setItem('co_rate',$(this).parent().attr('data-rate') );
+			// localStorage.setItem('coach_aidi', $(this).parent().parent().attr('coach') );
+			// localStorage.setItem('co_name',$(this).parent().attr('data-name') );
+			// localStorage.setItem('co_last',$(this).parent().attr('data-last') );
+			// localStorage.setItem('co_rate',$(this).parent().attr('data-rate') );
 
 			$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
 			setTimeout(function() {
@@ -2039,44 +2033,18 @@ $(window).load(function(){
         		$(".resena").animate({opacity:"1",left:"0px"}, 200);
             }, 250);
 
-			if( $('div').hasClass('resena') ){
-				var _aidi = localStorage.getItem('coach_aidi')
-				var _co_name = localStorage.getItem('co_name');
-				var _co_last = localStorage.getItem('co_last');
-				var _co_rate = localStorage.getItem('co_rate');
+			// if( $('div').hasClass('resena') ){
+				var _aidi = $(this).parent().parent().attr('coach');
+				var _co_name = $(this).parent().parent().attr('data-name');
+				var _co_rate = $(this).parent().parent().attr('data-rate');
 				var _co_rate = Math.round(_co_rate);
-				console.log(_aidi);
-				console.log(_co_name+" "+_co_last+" "+_co_rate);
 				$("img.la_foto_resena").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+_aidi+".png");
-				$('.name_on').html(_co_name+" "+_co_last);
+				$('.name_on').html(_co_name);
 
-				var count = 5;
-				console.log($('.rate-stars_inner img').length);
-
-
-				/*
-					FAlTA TERMINAR LOGICA PARA NO REPETIR ESTRELLAS
-				*/
-
-				//if( $('.rate-stars_inner').length < 5){
-					for (var j = 1; j <= _co_rate; j++) {
-						$(".rate-stars_inner img:nth-of-type("+j+")").attr("src","images/starh.svg");
-					}
-				// 	for (var i = 0; i < _co_rate; i++) {
-				// 		$('.rate-stars_inner').append('<img src="images/starh.svg">');
-				// 	};
-					
-				// 	for (var x = 0; x < count - _co_rate; x++) {
-				// 		console.log('-' + x);
-				// 		$('.rate-stars_inner').append('<img src="images/star.svg">');
-				// 	};
-
-				// }else if($('.rate-stars_inner').length == 5){
-				// 		console.log('do nothing');
-				// 	}else{
-				// 		console.log('ya tiene estrellas');
-				// 	}//end if
-			}
+				for (var j = 1; j <= _co_rate; j++) {
+					$(".rate-stars_inner img:nth-of-type("+j+")").attr("src","images/starh.svg");
+				}
+			// }
 		});
 
 		$('#aceptar').click(function(){
