@@ -614,7 +614,7 @@
 					setTimeout(function() {$('.overscreen5').hide();}, 800);
 				}
 				$('#container').toggleClass('blurred');
-				//app.toast('Has cerrado la sesión, hasta pronto');
+					//app.toast('Has cerrado la sesión, hasta pronto');
 					//localStorage.clear();
 					//window.location.assign('index.html');
 				return;
@@ -623,12 +623,12 @@
 			return;
 		});
 
-		$('.accept').click(function(){
+		$('.logout').click(function(){
 			localStorage.clear();
 			window.location.assign('index.html');
 			return;
 		});
-		$('.cancel').click(function(){
+		$('.logout_cancel').click(function(){
 			$('.overscreen5').hide();
 			$('#container').toggleClass('blurred');
 			return;

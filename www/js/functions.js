@@ -123,6 +123,12 @@ $( function() {
 
 		});
 
+		
+		// $('#mensaje-chat').on('focus', function(e) {
+		// 	console.log('si esta aqui');
+		//     e.preventDefault(); e.stopPropagation();
+		//     window.scrollTo(0,100); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px. 
+		// });
 
 	}
 
