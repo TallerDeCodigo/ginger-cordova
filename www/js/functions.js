@@ -426,6 +426,8 @@ $(window).on("load resize",function(){
 			var coach_rate		= localStorage.getItem('coach_rate');
 			localStorage.setItem('restricciones', user.perfil.restricciones);
 
+			console.log(comentario);
+
 			console.log(edad.substring(0, 4) );
 			var date_hoy =  new Date();
 			date_hoy = date_hoy.getFullYear();
@@ -453,9 +455,18 @@ $(window).on("load resize",function(){
 				$('#sexo_perfil').html('Hombre');
 			}
 
+			if (sexo) {
+				$('#hombre').attr('src','images/hombreh.svg');
+				$('#mujer').attr('src','images/mujere.svg');
+			} else {
+				$('#hombre').attr('src','images/hombree.svg');
+				$('#mujer').attr('src','images/mujerh.svg');
+			}
+
 			console.log(edad);
 			$('#anos_perfil').html(_edad_calc + " años");
 			$('#age-dato').html(_edad_calc);
+			$('#edad_value').val(_edad_calc);
 
 			$('#cp_perfil').html(cp);
 			$('input[name="zipcode"]').attr("value",cp);
@@ -550,13 +561,14 @@ $(window).on("load resize",function(){
 					// restricciones = restricciones.slice(2,3);
 					if(restricciones){
 						for (var i = 0; i < restricciones.length; i++) {
-							console.log(i);
+							// console.log(i);
 							if(i == restricciones.length-1)
 								coma = "";
 							else
 								coma = ", ";
 
 							$('#restricciones_perfil').append(restricc[restricciones[i]] + coma);
+							// $('.tipo_restric .re-option:nth-of-type('+i+') img').attr('src');
 						};
 					}else{
 						console.log("no hay restricciones");
@@ -653,8 +665,8 @@ $(window).on("load resize",function(){
 		});
 
 		if ($('body').hasClass('update_data')) {
-			$('#age').css('left', gridag*(edad-minval_age));
-			$('#age-filler').css('width', (gridag*(edad-minval_age))+20);
+			$('#age').css('left', gridag*(_edad_calc-minval_age));
+			$('#age-filler').css('width', (gridag*(_edad_calc-minval_age))+20);
 
 			$('#ejercicio').css('left', gridej*(frecuencia-minval_eje));
 			$('#ejercicio-filler').css('width', (gridej*(frecuencia-minval_eje))+20);
@@ -1216,17 +1228,17 @@ $(window).load(function(){
 				var peso_ideal 			= $('input[name="ideal"]').val();
 				var coach_type 			= $('#coach_type').val();
 				var dpw 				= $('#days_per_week').val();
-				var comentario 			= $('#comentar').val();
+				var comentario 			= $('.the-comment').html();
 				var plan 				= $('#plan').val();
-
 				var restricciones 		= localStorage.getItem('restricciones');
 				var postal 				= $('input[name="zipcode"]').val();
-				localStorage.setItem('edad', edad);
-
-				var _usr_age = localStorage.getItem('edad');
-				$('#anos_perfil').html(_usr_age+" años");
 				
 				console.log("POSTAL > > > > "+postal);
+				console.log(comentario);
+				console.log(localStorage.getItem('restricciones'));
+				//console.log(JSON.parse(restricciones));
+				restricciones = restricciones.split(",")
+				console.log(restricciones);
 
 				
 				/*calcula fecha de naciemiento a partr de la edad del cliente*/
@@ -1246,6 +1258,15 @@ $(window).load(function(){
 				//console.log(edad);
 				console.log(born);
 
+				var manda_restricciones;
+
+				if (restricciones == "") {
+					manda_restricciones = null;
+					console.log('restricciones null');
+				} else {
+					manda_restricciones = restricciones;
+				}
+
 				var json = {
 				"sexo" : genero,
 				"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
@@ -1256,7 +1277,7 @@ $(window).load(function(){
 					"estatura" : estatura,
 					"ejercicio" : dpw,
 					"objetivo" : plan,
-					"restricciones" :(restricciones.length>0)?JSON.parse(restricciones):null,
+					"restricciones" :manda_restricciones, //(restricciones.length>0)?JSON.parse(restricciones):null,
 					"personalidad" : coach_type
 				},
 				"cp": zipcode,
@@ -1860,14 +1881,27 @@ $(window).load(function(){
 
 			console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+peso_ideal+" > "+zipcode+" > "+plan+" > "+coach_type+" > "+restricciones_ls2+" > "+dpw+" > "+comentario );
 
+			var ageyears = new Date();
+			var _year =ageyears.getFullYear();
+			var _mes = ageyears.getMonth() +1;
+			var _dia = ageyears.getDate();
+			var _yob = _year - edad;
+			
+			var fecha_born = _yob+"/"+ _mes +"/"+_dia;
+			console.log(typeof fecha_born);
+			// fecha_born.toString();
+
+			var born = new Date(fecha_born);
+			//console.log(edad);
+			console.log(born);
 			/*
 				JSON STRUCTURE 	*
 			*/
 			var json = {
 				"sexo" : genero,
-				"fechaNacimiento" : "1984-04-21",
+				"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
 				"perfil":{
-					"fechaNacimiento" : "1984-04-21",
+					"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
 					"sexo" : genero,
 					"peso" : peso,
 					"estatura" : estatura,
@@ -2654,18 +2688,18 @@ $(window).load(function(){
 	*/
 	$('#blog').on('click',function(){
 		console.log("click");
-		cordova.InAppBrowser.open('https://plumasatomicas.com/', '_blank', 'location=yes');
+		cordova.InAppBrowser.open('https://gingerapp.mx/', '_blank', 'location=yes');
 	})
 
 	$('#terms_cond').on('click',function(){
 			console.log("click");
-			cordova.InAppBrowser.open('https://plumasatomicas.com/', '_blank', 'location=yes');
+			cordova.InAppBrowser.open('https://gingerapp.mx/', '_blank', 'location=yes');
 		})
 
 
 	$('#pol_priv').on('click',function(){
 			console.log("click");
-			cordova.InAppBrowser.open('https://plumasatomicas.com/', '_blank', 'location=yes');
+			cordova.InAppBrowser.open('https://gingerapp.mx/', '_blank', 'location=yes');
 		})
 	}); //END WINDOW LOAD clicks
 
