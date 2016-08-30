@@ -431,7 +431,14 @@ $(window).on("load resize",function(){
 			localStorage.setItem('restricciones', user.perfil.restricciones);
 
 			//console.log(restricciones.toString() );
-			console.log(comentario);
+			console.log(restricciones);
+
+			if( $('.type').attr('value') != "" ){
+				console.log("attribute");
+				// $('.re-option img').attr('src','images/restric'++'2.png' );
+			}
+			
+
 			$('#comentario_perfil i').html(comentario);
 			//console.log(edad.substring(0, 4) );
 			var date_hoy =  new Date();
@@ -595,6 +602,50 @@ $(window).on("load resize",function(){
 					}
 					
 
+				}
+
+
+				$('#age').css('left', gridag*(_edad_calc-minval_age));
+				$('#age-filler').css('width', (gridag*(_edad_calc-minval_age))+20);
+
+				$('#ejercicio').css('left', gridej*(frecuencia-minval_eje));
+				$('#ejercicio-filler').css('width', (gridej*(frecuencia-minval_eje))+20);
+				
+				console.log(restricciones);
+
+				if(restricciones === undefined || restricciones == null || restricciones == ""){
+					console.log('esta indefinido');
+				}else{
+					//var arreg = JSON.parse(restricciones);
+					// console.log('Restricciones: ' + arreg);
+					 var uRes = JSON.parse(localStorage.getItem('user'));
+					 console.log(uRes);
+
+					for (var i = 0; i < uRes.perfil.restricciones.length; i++) {
+						
+						switch(uRes.perfil.restricciones[i]){
+							case 0: 
+								$('.tipo_restric .re-option:nth-of-type(1) img').attr("src",'images/restric/huevo2.png');
+								break;
+							case 1:
+								$('.tipo_restric .re-option:nth-of-type(2) img').attr("src",'images/restric/pollo2.png');
+								break;
+							case 2:
+								$('.tipo_restric .re-option:nth-of-type(3) img').attr("src",'images/restric/pescado2.png');
+								break;
+							case 3:
+								$('.tipo_restric .re-option:nth-of-type(4) img').attr("src",'images/restric/camaron2.png');
+								break;
+							case 4:
+								$('.tipo_restric .re-option:nth-of-type(5) img').attr("src",'images/restric/lacteos2.png');
+								break;
+							case 5:
+								$('.tipo_restric .re-option:nth-of-type(6) img').attr("src",'images/restric/carne2.png');
+								break;
+						}
+						uRes.perfil.restricciones[i]++;
+						$('.tipo_restric .re-option:nth-of-type('+uRes.perfil.restricciones[i]+')').addClass('active');
+					}
 				}
 
 				/*
@@ -781,49 +832,8 @@ $(window).on("load resize",function(){
 		});
 
 		if ($('body').hasClass('update_data')) {
-			$('#age').css('left', gridag*(_edad_calc-minval_age));
-			$('#age-filler').css('width', (gridag*(_edad_calc-minval_age))+20);
-
-			$('#ejercicio').css('left', gridej*(frecuencia-minval_eje));
-			$('#ejercicio-filler').css('width', (gridej*(frecuencia-minval_eje))+20);
 			
-			console.log(restricciones);
-
-			if(restricciones === undefined || restricciones == null || restricciones == ""){
-				console.log('esta indefinido');
-			}else{
-				//var arreg = JSON.parse(restricciones);
-				// console.log('Restricciones: ' + arreg);
-				 var uRes = JSON.parse(localStorage.getItem('user'));
-				 console.log(uRes);
-
-				for (var i = 0; i < uRes.perfil.restricciones.length; i++) {
-					
-					switch(uRes.perfil.restricciones[i]){
-						case 0: 
-							$('.tipo_restric .re-option:nth-of-type(1) img').attr("src",'images/restric/huevo2.png');
-							break;
-						case 1:
-							$('.tipo_restric .re-option:nth-of-type(2) img').attr("src",'images/restric/pollo2.png');
-							break;
-						case 2:
-							$('.tipo_restric .re-option:nth-of-type(3) img').attr("src",'images/restric/pescado2.png');
-							break;
-						case 3:
-							$('.tipo_restric .re-option:nth-of-type(4) img').attr("src",'images/restric/camaron2.png');
-							break;
-						case 4:
-							$('.tipo_restric .re-option:nth-of-type(5) img').attr("src",'images/restric/lacteos2.png');
-							break;
-						case 5:
-							$('.tipo_restric .re-option:nth-of-type(6) img').attr("src",'images/restric/carne2.png');
-							break;
-					}
-					uRes.perfil.restricciones[i]++;
-					$('.tipo_restric .re-option:nth-of-type('+uRes.perfil.restricciones[i]+')').addClass('active');
-				}
-			}
-		}
+		} //END IF BODY HAS CLASS UPDATE DATA
 
 		/* SWIPE COACH */	
 
