@@ -709,9 +709,7 @@ $(window).on("load resize",function(){
 						
 						// console.log("POSTAL > > > > "+postal);
 						// console.log("comentario>>>> "+comentario);
-						console.log(typeof restricciones);
-						retricciones
-						console.log(JSON.stringify(restricciones));
+						console.log(restricciones);
 						//restricciones = restricciones.split(",")
 
 						
@@ -725,11 +723,13 @@ $(window).on("load resize",function(){
 						var born = new Date(fecha_born);
 						var manda_restricciones;
 
-						if (restricciones == "") {
-							manda_restricciones = null;
+						console.log(restricciones.length );
+
+						if (restricciones.length < 0) {
+							restricciones = [];
 							console.log('restricciones null');
 						} else {
-							manda_restricciones = restricciones;
+							restricciones = restricciones;
 						}
 
 						var json = {
@@ -742,7 +742,7 @@ $(window).on("load resize",function(){
 							"estatura" : estatura,
 							"ejercicio" : dpw,
 							"objetivo" : plan,
-							"restricciones" :(restricciones.length>0)?JSON.parse(restricciones):null,
+							"restricciones" :(restricciones.length>0||restricciones!="")?JSON.parse(restricciones):null,
 							"personalidad" : coach_type
 						},
 						"cp": zipcode,
