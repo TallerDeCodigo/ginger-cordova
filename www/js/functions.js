@@ -646,7 +646,7 @@ $(window).on("load resize",function(){
 						uRes.perfil.restricciones[i]++;
 						$('.tipo_restric .re-option:nth-of-type('+uRes.perfil.restricciones[i]+')').addClass('active');
 					}
-				}
+				}//end if restricciones
 
 				/*
 					NOMBRE DEL COACH
@@ -707,35 +707,29 @@ $(window).on("load resize",function(){
 						var restricciones 		= localStorage.getItem('restricciones');
 						var postal 				= $('input[name="zipcode"]').val();
 						
-						console.log("POSTAL > > > > "+postal);
-						console.log("comentario>>>> "+comentario);
-						console.log(localStorage.getItem('restricciones'));
-						//console.log(JSON.parse(restricciones));
-						//restricciones = restricciones.split(",")
+						// console.log("POSTAL > > > > "+postal);
+						// console.log("comentario>>>> "+comentario);
 						console.log(restricciones);
+						//restricciones = restricciones.split(",")
 
 						
 						/*calcula fecha de naciemiento a partr de la edad del cliente*/
-
-
 						var ageyears = new Date();
 						var _year =ageyears.getFullYear();
 						var _mes = ageyears.getMonth() +1;
 						var _dia = ageyears.getDate();
 						var _yob = _year - edad;
-						
 						var fecha_born = _yob+"/"+ _mes +"/"+_dia;
-						console.log(typeof fecha_born);
-
 						var born = new Date(fecha_born);
-
 						var manda_restricciones;
 
-						if (restricciones == "") {
-							manda_restricciones = null;
+						console.log(restricciones.length );
+
+						if (restricciones.length < 0) {
+							restricciones = [];
 							console.log('restricciones null');
 						} else {
-							manda_restricciones = restricciones;
+							restricciones = restricciones;
 						}
 
 						var json = {
@@ -748,7 +742,7 @@ $(window).on("load resize",function(){
 							"estatura" : estatura,
 							"ejercicio" : dpw,
 							"objetivo" : plan,
-							"restricciones" :(restricciones.length>0)?JSON.parse(restricciones):null,
+							"restricciones" :(restricciones.length>0||restricciones!="")?JSON.parse(restricciones):null,
 							"personalidad" : coach_type
 						},
 						"cp": zipcode,
