@@ -646,7 +646,7 @@ $(window).on("load resize",function(){
 						uRes.perfil.restricciones[i]++;
 						$('.tipo_restric .re-option:nth-of-type('+uRes.perfil.restricciones[i]+')').addClass('active');
 					}
-				}
+				}//end if restricciones
 
 				/*
 					NOMBRE DEL COACH
