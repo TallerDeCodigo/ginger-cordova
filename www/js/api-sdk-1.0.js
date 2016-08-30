@@ -281,7 +281,6 @@ function requestHandlerAPI(){
 				data : data
 			}
 
-
 			console.log(JSON.stringify(req));
 
 			var response = this.makePatchRequest('tables/cliente/' + localStorage.getItem('userId'), req);

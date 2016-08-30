@@ -426,12 +426,13 @@ $(window).on("load resize",function(){
 			var frecuencia 		= user.perfil.ejercicio;
 			var restricciones 	= user.perfil.restricciones;
 			var plan 			= user.perfil.objetivo;
-			var comentario 		= user.comentario;
+			var comentario 		= localStorage.getItem('comentario');
 			var coach_rate		= localStorage.getItem('coach_rate');
 			localStorage.setItem('restricciones', user.perfil.restricciones);
 
-			console.log(restricciones.toString() );
-
+			//console.log(restricciones.toString() );
+			console.log(comentario);
+			$('#comentario_perfil i').html(comentario);
 			//console.log(edad.substring(0, 4) );
 			var date_hoy =  new Date();
 			date_hoy = date_hoy.getFullYear();
@@ -442,7 +443,18 @@ $(window).on("load resize",function(){
 			$('#plan').attr("value", plan);
 			$('#days_per_week').attr("value", frecuencia);
 			$('#update_sexo').attr("value", sexo);
-			$('.the-comment').html(comentario);
+
+			if( $('.the-comment').html() != " " ){
+				console.log(comentario);
+				$('.comentario').show();
+				$('.the-comment').html(comentario);
+				$('.yes').addClass('active');
+				$('.not').removeClass('active');
+
+			}else{
+				console.log('comentario vacio'+ comentario);
+				$('.comentario').hide();
+			}	
 			
 	
 			// console.log(user);
@@ -490,7 +502,7 @@ $(window).on("load resize",function(){
 
 			$('.tipo_coach .co-option:nth-of-type('+suma+')').addClass('active');
 
-			console.log('Personalidad: ' + coach_type);
+			//console.log('Personalidad: ' + coach_type);
 			switch(coach_type){
 					case 0: 
 						$('#coach_type_perfil').html("Estricto");
@@ -512,13 +524,18 @@ $(window).on("load resize",function(){
 
 				$('#frecuencia_perfil').html(frecuencia +" días por semana");
 				$('#ejercicio-dato').html(frecuencia);
+
+
+				/*
+					COMENTA
+				*/
 				console.log('Comentario ' + comentario);
 				if(comentario === 'undefined' || comentario == null){
-					comentario = '';
+					$('.comentario').html(comentario);
+					$('.the-comment').html(comentario);
+				}else{
+					$('.the-comment').html(comentario);
 				}
-
-				$('#comentario_perfil').html(comentario);
-				$('.the-comment').html(comentario);
 
 
 					var suma = parseInt(plan)+1;
@@ -586,24 +603,24 @@ $(window).on("load resize",function(){
 
 				$('#coach_name').html(nombre_coach + " " + apellido_coach);
 
-				console.log(nombre_coach);
-				console.log(apellido_coach);
-				console.log(user);
+				// console.log(nombre_coach);
+				// console.log(apellido_coach);
+				// console.log(user);
 
 				var star = Math.round(user.coach.rating);
 
-				console.log(Math.round(star));
+				//console.log(Math.round(star));
 
 				var count = 5;
 
 				for (var i = 0; i < star; i++) {
 					$('.rate-stars').append('<img src="images/starh.svg">');
-					console.log(i);
+					//console.log(i);
 					
 				};
 				
 				for (var x = 0; x < count - star; x++) {
-					console.log('-' + x);
+					//console.log('-' + x);
 					$('.rate-stars').append('<img src="images/star.svg">');
 				};
 
