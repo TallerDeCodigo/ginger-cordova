@@ -707,28 +707,22 @@ $(window).on("load resize",function(){
 						var restricciones 		= localStorage.getItem('restricciones');
 						var postal 				= $('input[name="zipcode"]').val();
 						
-						console.log("POSTAL > > > > "+postal);
-						console.log("comentario>>>> "+comentario);
-						console.log(localStorage.getItem('restricciones'));
-						//console.log(JSON.parse(restricciones));
+						// console.log("POSTAL > > > > "+postal);
+						// console.log("comentario>>>> "+comentario);
+						console.log(typeof restricciones);
+						retricciones
+						console.log(JSON.stringify(restricciones));
 						//restricciones = restricciones.split(",")
-						console.log(restricciones);
 
 						
 						/*calcula fecha de naciemiento a partr de la edad del cliente*/
-
-
 						var ageyears = new Date();
 						var _year =ageyears.getFullYear();
 						var _mes = ageyears.getMonth() +1;
 						var _dia = ageyears.getDate();
 						var _yob = _year - edad;
-						
 						var fecha_born = _yob+"/"+ _mes +"/"+_dia;
-						console.log(typeof fecha_born);
-
 						var born = new Date(fecha_born);
-
 						var manda_restricciones;
 
 						if (restricciones == "") {
