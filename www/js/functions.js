@@ -513,14 +513,16 @@ $(window).on("load resize",function(){
 				$('#frecuencia_perfil').html(frecuencia +" días por semana");
 				$('#ejercicio-dato').html(frecuencia);
 				console.log('Comentario ' + comentario);
-				if(comentario === 'undefined' || comentario == null)
+				if(comentario === 'undefined' || comentario == null){
 					comentario = '';
+				}
+
 				$('#comentario_perfil').html(comentario);
 				$('.the-comment').html(comentario);
 
 
-					$('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 					var suma = parseInt(plan)+1;
+					$('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 
 				switch(plan){
 					case 0:
@@ -604,6 +606,102 @@ $(window).on("load resize",function(){
 					console.log('-' + x);
 					$('.rate-stars').append('<img src="images/star.svg">');
 				};
+
+
+				var restricciones_arr = new Array();
+				$('#add_updated_profile').on('click', function(){
+					if(!$('.overscreen7').is(':visible')){
+						$('.overscreen7').show();
+						setTimeout(function() {$('.overscreen7').addClass('active');}, 200);
+					} else {
+						$('.overscreen7').removeClass('active');
+						setTimeout(function() {$('.overscreen7').hide();}, 800);
+					}
+					$('#container').toggleClass('blurred');
+				});//end click add updated profile
+
+
+				$('#_alert_chCoach').click(function(){
+					console.log('CLICK EN ALERT CH-COACH');
+					// console.log("ZIP>"+ $('input[name="zipocode"]').val());
+						var genero 				= $('#update_sexo').val();
+
+						localStorage.setItem('edad', $('#edad_value').val() );
+						var edad 				= $('#edad_value').val();
+						var zipcode 			= $('input[name="zipcode"]').val();
+						var estatura 			= $('input[name="estatura"]').val();
+						var peso 				= $('input[name="peso"]').val();
+						var peso_ideal 			= $('input[name="ideal"]').val();
+						var coach_type 			= $('#coach_type').val();
+						var dpw 				= $('#days_per_week').val();
+						var comentario 			= $('.the-comment').html();
+						var plan 				= $('#plan').val();
+						var restricciones 		= localStorage.getItem('restricciones');
+						var postal 				= $('input[name="zipcode"]').val();
+						
+						console.log("POSTAL > > > > "+postal);
+						console.log("comentario>>>> "+comentario);
+						console.log(localStorage.getItem('restricciones'));
+						//console.log(JSON.parse(restricciones));
+						//restricciones = restricciones.split(",")
+						console.log(restricciones);
+
+						
+						/*calcula fecha de naciemiento a partr de la edad del cliente*/
+
+
+						var ageyears = new Date();
+						var _year =ageyears.getFullYear();
+						var _mes = ageyears.getMonth() +1;
+						var _dia = ageyears.getDate();
+						var _yob = _year - edad;
+						
+						var fecha_born = _yob+"/"+ _mes +"/"+_dia;
+						console.log(typeof fecha_born);
+
+						var born = new Date(fecha_born);
+
+						var manda_restricciones;
+
+						if (restricciones == "") {
+							manda_restricciones = null;
+							console.log('restricciones null');
+						} else {
+							manda_restricciones = restricciones;
+						}
+
+						var json = {
+						"sexo" : genero,
+						"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
+						"perfil":{
+							"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
+							"sexo" : genero,
+							"peso" : peso,
+							"estatura" : estatura,
+							"ejercicio" : dpw,
+							"objetivo" : plan,
+							"restricciones" :(restricciones.length>0)?JSON.parse(restricciones):null,
+							"personalidad" : coach_type
+						},
+						"cp": zipcode,
+						"pesoDeseado": peso_ideal,
+						"comentario": comentario
+					}
+
+					console.log(json);
+
+					var response = apiRH.updatePerfil(json);
+
+					if(response){
+						window.location.assign('userdata.html');
+					}
+				});	// end click _alert_chCoach
+
+				$('#_cancel_chCoach').click(function(){
+					$('.overscreen7').hide();
+					$('#container').toggleClass('blurred');
+				});
+
 
 		}//end if has class
 			var restricciones = [];
@@ -778,17 +876,12 @@ $(window).load(function(){
 			var today = new Date();
 			var hoy = today.getDay();
 			var day_index;
-
-			console.log('AQUIIII');
-
 			var dieta = app.get_diet(localStorage.getItem('dietaId'));
-
 			var arr_desayuno
 			var arr_snack1
 			var arr_comida
 			var arr_snack2
 			var arr_cena
-
 			var comm_id;
 			var platillo_id;
 			var comentarios = dieta.comentarios;
@@ -1203,94 +1296,7 @@ $(window).load(function(){
 				/*
 					add_localStorage UPDATED PROFILE
 				*/
-		var restricciones_arr = new Array();
-		$('#add_updated_profile').on('click', function(){
-			if(!$('.overscreen7').is(':visible')){
-				$('.overscreen7').show();
-				setTimeout(function() {$('.overscreen7').addClass('active');}, 200);
-			} else {
-				$('.overscreen7').removeClass('active');
-				setTimeout(function() {$('.overscreen7').hide();}, 800);
-			}
-			$('#container').toggleClass('blurred');
-		});//end click add updated profile
-
-
-		$('#_alert_chCoach').click(function(){
-			console.log('CLICK EN ALERT CH-COACH');
-			// console.log("ZIP>"+ $('input[name="zipocode"]').val());
-				var genero 				= $('#update_sexo').val();
-
-				localStorage.setItem('edad', $('#edad_value').val() );
-				var edad 				= $('#edad_value').val();
-				var zipcode 			= $('input[name="zipcode"]').val();
-				var estatura 			= $('input[name="estatura"]').val();
-				var peso 				= $('input[name="peso"]').val();
-				var peso_ideal 			= $('input[name="ideal"]').val();
-				var coach_type 			= $('#coach_type').val();
-				var dpw 				= $('#days_per_week').val();
-				var comentario 			= $('.the-comment').html();
-				var plan 				= $('#plan').val();
-				var restricciones 		= localStorage.getItem('restricciones');
-				var postal 				= $('input[name="zipcode"]').val();
-				
-				console.log("POSTAL > > > > "+postal);
-				console.log("comentario>>>> "+comentario);
-				console.log(localStorage.getItem('restricciones'));
-				//console.log(JSON.parse(restricciones));
-				//restricciones = restricciones.split(",")
-				console.log(restricciones);
-
-				
-				/*calcula fecha de naciemiento a partr de la edad del cliente*/
-
-
-				var ageyears = new Date();
-				var _year =ageyears.getFullYear();
-				var _mes = ageyears.getMonth() +1;
-				var _dia = ageyears.getDate();
-				var _yob = _year - edad;
-				
-				var fecha_born = _yob+"/"+ _mes +"/"+_dia;
-				console.log(typeof fecha_born);
-
-				var born = new Date(fecha_born);
-
-				var manda_restricciones;
-
-				if (restricciones == "") {
-					manda_restricciones = null;
-					console.log('restricciones null');
-				} else {
-					manda_restricciones = restricciones;
-				}
-
-				var json = {
-				"sexo" : genero,
-				"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
-				"perfil":{
-					"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
-					"sexo" : genero,
-					"peso" : peso,
-					"estatura" : estatura,
-					"ejercicio" : dpw,
-					"objetivo" : plan,
-					"restricciones" :(restricciones.length>0)?JSON.parse(restricciones):null,
-					"personalidad" : coach_type
-				},
-				"cp": zipcode,
-				"pesoDeseado": peso_ideal,
-				"comentario": comentario
-			}
-
-			console.log(json);
-
-			var response = apiRH.updatePerfil(json);
-
-			if(response){
-				window.location.assign('userdata.html');
-			}
-		});	// end add uodated profile
+		
 
 		var timeout;
 		var estatura;
@@ -2246,17 +2252,20 @@ $(window).load(function(){
 		$('.pl-option').click(function() {
 
 			var valor = $(this).find('.type').attr('value');
+			console.log(valor)
 			$('#plan').attr('value', valor);
 
 			$('.pl-option').each(function() {
 			    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
-			      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
-			      $(this).removeClass('active');
-			      $(this).attr("value", "");
+			    	console.log( $(this).find('img').attr('src').substr(-5, 1) );
+			      	$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
+			      	$(this).removeClass('active');
+			      	$(this).attr("value", "");
 			    }
 			});
 
 			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
+
 			$(this).addClass('active');
 			$(this).attr("value", valor);
 
