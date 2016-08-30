@@ -430,17 +430,14 @@ $(window).on("load resize",function(){
 			var coach_rate		= localStorage.getItem('coach_rate');
 			localStorage.setItem('restricciones', user.perfil.restricciones);
 
-			console.log(comentario);
+			console.log(restricciones.toString() );
 
-			console.log(edad.substring(0, 4) );
+			//console.log(edad.substring(0, 4) );
 			var date_hoy =  new Date();
 			date_hoy = date_hoy.getFullYear();
 			var _edad_calc = date_hoy - Number( edad.substring(0, 4));
-
-			console.log(_edad_calc);
-
+			//console.log(_edad_calc);
 			//console.log('HUEVOS: ' + restricciones.length);
-
 			$('#coach_type').attr("value", coach_type);
 			$('#plan').attr("value", plan);
 			$('#days_per_week').attr("value", frecuencia);
@@ -448,7 +445,7 @@ $(window).on("load resize",function(){
 			$('.the-comment').html(comentario);
 			
 	
-			console.log(user);
+			// console.log(user);
 
 			$('.cpur').html(nombre +" "+ apellido);
 			$('.edit-profile span').html(nombre +" "+ apellido);
@@ -572,7 +569,7 @@ $(window).on("load resize",function(){
 								coma = ", ";
 
 							$('#restricciones_perfil').append(restricc[restricciones[i]] + coma);
-							// $('.tipo_restric .re-option:nth-of-type('+i+') img').attr('src');
+							//$('.tipo_restric .re-option:nth-of-type('+i+') img').attr('src', 'images/restric/'+  +'.png');
 						};
 					}else{
 						console.log("no hay restricciones");
@@ -1238,10 +1235,10 @@ $(window).load(function(){
 				var postal 				= $('input[name="zipcode"]').val();
 				
 				console.log("POSTAL > > > > "+postal);
-				console.log(comentario);
+				console.log("comentario>>>> "+comentario);
 				console.log(localStorage.getItem('restricciones'));
 				//console.log(JSON.parse(restricciones));
-				restricciones = restricciones.split(",")
+				//restricciones = restricciones.split(",")
 				console.log(restricciones);
 
 				
@@ -1256,13 +1253,10 @@ $(window).load(function(){
 				
 				var fecha_born = _yob+"/"+ _mes +"/"+_dia;
 				console.log(typeof fecha_born);
-				// fecha_born.toString();
 
 				var born = new Date(fecha_born);
-				//console.log(edad);
 
 				var manda_restricciones;
-				// console.log(born);
 
 				if (restricciones == "") {
 					manda_restricciones = null;
@@ -1281,7 +1275,7 @@ $(window).load(function(){
 					"estatura" : estatura,
 					"ejercicio" : dpw,
 					"objetivo" : plan,
-					"restricciones" :manda_restricciones, //(restricciones.length>0)?JSON.parse(restricciones):null,
+					"restricciones" :(restricciones.length>0)?JSON.parse(restricciones):null,
 					"personalidad" : coach_type
 				},
 				"cp": zipcode,
