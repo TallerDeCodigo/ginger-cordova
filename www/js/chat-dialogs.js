@@ -113,7 +113,7 @@ function retrieveChatDialogs() {
 
         //  and trigger the 1st dialog
         //
-        //triggerDialog(resDialogs.items[0]._id);
+        triggerDialog(resDialogs.items[0]._id);
 
         // hide login form
         //$("#loginForm").modal("hide");
@@ -209,15 +209,15 @@ function triggerDialog(dialogId){
   kids.removeClass('active').addClass('inactive');
 
   // select
-  $('#'+dialogId).removeClass('inactive').addClass('active');
+  // $('#'+dialogId).removeClass('inactive').addClass('active');
 
-  $('.list-group-item.active .badge').text(0).delay(250).fadeOut(500);
+  // $('.list-group-item.active .badge').text(0).delay(250).fadeOut(500);
 
-  $('#messages-list').html('');
+  // $('#messages-list').html('');
 
-  $('#dialogs-list').hide();
-  $('.menu-bar').hide();
-  $('.escribir').show();
+  // $('#dialogs-list').hide();
+  // $('.menu-bar').hide();
+  // $('.escribir').show();
 
   // load chat history
   //
@@ -287,7 +287,7 @@ function createNewDialog() {
 
   // //$("#add_new_dialog").modal("hide");
   // $('#add_new_dialog .progress').show();
-  usersIds[0] = 2418107;
+  usersIds[0] = localStorage.getItem('cCoachID');
   
   var dialogName;
   var dialogOccupants;

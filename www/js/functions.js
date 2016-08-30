@@ -106,14 +106,18 @@ $( function() {
 
 		uChatCoach = uChatCoach.split('-');
 
-		console.log('ID USER COACH' + uChatCoach[0]);
+		console.log('ID USER COACH ' + uChatCoach[0]);
 
 		localStorage.setItem('cCoachID', uChatCoach[0]);
 
 		var user = { login : userLog.mail, pass : userLog.chatPassword};
 		
+
+		//Login to chat
+
 		connectToChat(user);
-		//triggerDialog();
+		
+		//triggerDialog('57c4dca3a28f9a8288000008');
 
 		createNewDialog();
 
@@ -548,7 +552,7 @@ $(window).on("load resize",function(){
 				
 				//COMPRUEBA SI LAS RESTRICCIONES ESTAN DEFINIDAS
 
-				if(restricciones == 'undefined' || restricciones == "" || restricciones == null){
+				if(restricciones === 'undefined' || restricciones == "" || restricciones == null){
 					console.log('no definido ');
 					$('#restricciones_perfil').html("Sin restricciones");
 				}else{
@@ -1256,9 +1260,9 @@ $(window).load(function(){
 
 				var born = new Date(fecha_born);
 				//console.log(edad);
-				console.log(born);
 
 				var manda_restricciones;
+				// console.log(born);
 
 				if (restricciones == "") {
 					manda_restricciones = null;
