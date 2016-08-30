@@ -2031,7 +2031,7 @@ $(window).load(function(){
 										$(".slide-coach:nth-of-type("+i+") p.short-descrip b").html(value);
 									}
 									if (key=='bio') {
-										$(".slide-coach:nth-of-type("+i+") textarea.short-descrip").val(value);
+										$(".slide-coach:nth-of-type("+i+") textarea.short-descrip").html(value);
 									}
 									if(key == 'rating'){
 										rate_stars = value;
