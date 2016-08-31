@@ -718,12 +718,12 @@
 	//
 	//-----------------------------
 
-	$('.face').click(function (e) {
-		console.log('CLICK FACEBOOK');
+	$('.face').click(function () {
+		
+		console.log('CLICK FACEBOOK LOGIN');
+		
 		apiRH.loginOauth('facebook');
 		
-		e.preventDefault();
-
 	});
 
 
