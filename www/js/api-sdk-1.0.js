@@ -851,7 +851,7 @@ function requestHandlerAPI(){
 					console.log(result);
 					result.me().done(function(data){
 
-					 fb_name 		= data.name;
+					 fb_name 		= data.firstname;
 					 fb_lastname 	= data.lastname;
 					 fb_email 		= data.email;
 					 fb_avatar 		= data.avatar;
@@ -901,21 +901,17 @@ function requestHandlerAPI(){
 					 	localStorage.setItem('userId', 	response._id);
 					 	
 					 	sdk_app_context.hideLoader(response);
-					 })
-					  .fail(function(e){
-					 	result = e;
-					 	console.log(JSON.stringify(e));
-					 });
 
-					  var userId 	= localStorage.getItem('userId');
-					  var mail 		= localStorage.getItem('mail');
-					  var token 	= localStorage.getItem('token');
+					 	var userId 	= localStorage.getItem('userId');
+					  	var mail 		= localStorage.getItem('mail');
+					  	var token 	= localStorage.getItem('token');
 
-					  console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
+					  	console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
 					  	
 					  	/*
 							GET REQUEST
 					  	*/
+
 					  	sdk_app_context.showLoader();
 
 					  	var req = {
@@ -945,9 +941,9 @@ function requestHandlerAPI(){
 					  	 	console.log('fail');
 					  		result = false;
 					  		console.log(JSON.stringify(e));
+					  		alert(JSON.stringify(e));
+					  		return;
 					  	});
-
-					  	//return result;
 
 					  	console.log(JSON.stringify(result));
 
@@ -960,11 +956,27 @@ function requestHandlerAPI(){
 					  	}else{
 					  		window.location.assign('dieta.html');	
 					  	}
-					
-						//
+
+					 })
+					.fail(function(e){
+					 	result = e;
+					 	console.log(result.responseText);
+					 	console.log('Result: ' + result.responseText);
+					 	console.log(JSON.parse(result.responseText));
+					 	
+					 	var m = JSON.parse(result.responseText);
+					 	if(m.code == 422){
+					 		alert('El usuario ya se encuentra registrado, puedes hacer login con facebook');
+					 	}else{
+					 		alert('Error al hacer el registro de usuario');
+					 	}
+					 	return;
+					});
+
 					});
 					
 				}).fail(function(error){
+					alert('*** Error ***');
 					console.log(error);
 				});
 
@@ -984,15 +996,125 @@ function requestHandlerAPI(){
 			 .done(function(response){
 			 	console.log("en loginCallback FB");
 			 	console.log(response);
-				var email = response.email;
-				var username = response.lastname+"_"+response.id;
-				var found = apiRH.create_internal_user(username, email, {fbId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
+				// var email = response.email;
+				// var username = response.lastname+"_"+response.id;
+				// var found = apiRH.create_internal_user(username, email, {fbId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
 				/* End handshake with server by validating token and getting 'me' data */
-				context.endHandshake(username);
+				// context.endHandshake(username);
+				// console.log(email +"  "+ username);
 
-				console.log(email +"  "+ username);
+				var email 	= response.email;
+				var pass 	= response.id;
+				var req = {
+					method : 'post',
+					url : api_base_url + 'api/login',
+					headers: {
+						'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+						'Content-Type': 'application/json'
+					},
+					data : {
+						"tipo" : "cliente",
+						"mail" : email,
+						"password" : pass
+					}
+				}
+				var response = this.makeRequest('api/login', req);
 
-				window.location.assign('feed.html?filter_feed=all');
+				//console.log(response);
+
+				/*
+					GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
+				*/
+				
+				// if(token){
+				localStorage.setItem('token', response.token);
+				localStorage.setItem('mail', response.mail);
+				localStorage.setItem('userId', response.userId);
+
+
+				//this.token = response.token;
+
+				var userId 	= localStorage.getItem('userId');
+				var mail 	= localStorage.getItem('mail');
+				var token 	= localStorage.getItem('token');
+
+				console.log('TOKEN RESPONSE ' + token);
+				// }
+				//console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + this.token);
+
+				/*
+					REGRESA LA RESPUESTA DEL SERVIDOR CON EL USER ID, MAIL Y TOKEN
+				*/
+
+				//console.log(token);
+
+				if(token){
+					var req = {
+						method : 'post',
+						url : api_base_url + 'tables/cliente/',
+						headers: {
+							'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+							'X-ZUMO-AUTH': token,
+							'Content-Type': 'application/json'
+						},
+						data : {
+							"tipo" : "cliente",
+							"mail" : email,
+							"password" : pass
+						}
+					}
+
+					var user = this.getRequest('tables/cliente/' + userId, req);
+
+					console.log(JSON.stringify(user));
+					console.log(user);
+
+					if(user){
+						localStorage.setItem('coach_type', user.perfil.personalidad);
+						localStorage.setItem('user_name', user.nombre);
+						localStorage.setItem('user_last_name', user.apellido);
+						localStorage.setItem('genero', user.perfil.sexo);
+
+						if(user.perfil.edad !== undefined)
+							localStorage.setItem('edad', user.perfil.edad.real);
+						else
+							localStorage.setItem('edad', 0);
+						localStorage.setItem('zipcode', user.cp);
+						localStorage.setItem('estatura', user.perfil.estatura);
+						localStorage.setItem('peso', user.perfil.peso);
+						localStorage.setItem('peso_ideal', user.pesoDeseado);
+						localStorage.setItem('dpw', user.perfil.ejercicio);
+						localStorage.setItem('restricciones', user.restricciones);
+						localStorage.setItem('comentarios', user.comentarios);
+						localStorage.setItem('customerId', user.customerId);
+						localStorage.setItem('chatId', user.chatId);
+						if(user.dieta !== undefined)
+							localStorage.setItem('dietaId', user.dieta._id);
+						else
+							localStorage.setItem('dietaId', 0);
+						if(user.dieta !== undefined)
+							localStorage.setItem('dietaName', user.dieta.nombre);
+						else
+							localStorage.setItem('dietaName', '');
+						
+						if(user.coach !== undefined){
+							localStorage.setItem('nombre_coach', user.coach.nombre);
+							localStorage.setItem('apellido_coach', user.coach.apellido);
+							localStorage.setItem('coach_rate', user.coach.rating);
+							localStorage.setItem('chatPassword', user.coach.chatPassword);
+						}	
+						
+						
+						console.log('AQUI MOTHER FUCKER');	
+
+						return (userId) ? window.location.assign('dieta.html') : false;
+
+						
+					}
+					return;
+					
+				}
+
 				return;
 			})
 			 .fail(function(error){
@@ -1000,33 +1122,7 @@ function requestHandlerAPI(){
 			});
 		};
 
-		/* 
-		 * Add new image to stack upload
-		 * @param File image
-		 * @param Array stack
-		 * @return void
-		 */
-		this.addImageToStack = 	function(image){
-									console.log(JSON.stringify(image));
-									$(".close_on_touch").trigger('click');
-									var stackPiece = Handlebars.templates['stackImage'];
-									var html = stackPiece(image);
-									$(".insert_here").append(html);
-								};
-
-		this.endHandshake = function(user_login){
-								var exists  = context.getRequest('user/exists/'+ user_login, null);
-								if(exists.success){
-									/* Validate token */
-									data = {
-												user_id     : 'none',
-												token       : apiRH.get_request_token(),
-												validate_id   : (exists.data.user_id) ? exists.data.user_id : 'none'
-											};
-									response = this.makeRequest('user/validateToken/', data);
-									context.save_user_data_clientside(exists.data);
-								}
-							};
+		
 
 		this.transfer_win = function (r) {
 									app.toast("Se ha publicado una imagen");
