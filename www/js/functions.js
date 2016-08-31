@@ -2557,6 +2557,8 @@ $(window).load(function(){
 		});
 
 		$('a.logout').click(function() {
+			console.log('click_logout');
+			localStorage.clear();
 			$('.overscreen2').show();
 			setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
 		});
