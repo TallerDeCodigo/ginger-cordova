@@ -206,9 +206,6 @@ $( function() {
 
   		var medidas = localStorage.getItem('medidas');
   		var area = localStorage.getItem('measured_area');
-  		//console.log(medidas+" "+ area);
-
-  		
 
   		if(!$('.alert_tracking').is(':visible')){
   			$('.alert_tracking').show();
@@ -225,8 +222,14 @@ $( function() {
 
   			var responsedata = apiRH.tracking(0, 1);
   			if(responsedata){
-  				window.location.assign('dieta.html');
+
+  				console.log(medidas+" "+ area);
+  				//window.location.assign('dieta.html');
   			}
+  		});
+  		$('#add_cancelar').click(function(){
+  			$('.alert_tracking').hide();
+  			$('#container').toggleClass('blurred');
   		});
 	
   	});
