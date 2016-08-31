@@ -241,6 +241,7 @@ function requestHandlerAPI(){
 		};
 
 		this.tracking = function(tipo, magnitud){
+			
 			var req = {
 				method : 'post',
 				url : api_base_url + 'tables/medicion/',	//definitr tabla

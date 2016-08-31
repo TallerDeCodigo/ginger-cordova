@@ -82,7 +82,7 @@ $( function() {
 		});
 
 		$('#historial tbody').append(cadenita);
-	}
+	}//end finanzas
 
 
 	if($('body').hasClass('has-chat')){
@@ -134,7 +134,7 @@ $( function() {
 		//     window.scrollTo(0,100); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px. 
 		// });
 
-	}
+	}//end has class has chat
 
 
 	/*EDAD*/
@@ -196,44 +196,42 @@ $( function() {
   	});
 
 
-		/*
-			localStorage MEDIDAS / MEASURED AREA
-		*/
-  	$('#add_medidas').on('click', function(){
-  		
-  		localStorage.setItem( 'medidas', $('#medida-dato').val() );
-  		localStorage.setItem('measured_area', $('#measured_area').val() )
+    if( $('body').hasClass('measures') ){
+	  	$('#add_medidas').on('click', function(){
+			/*
+				localStorage MEDIDAS / MEASURED AREA
+														*/
+	  		
+	  		localStorage.setItem( 'medidas', $('#medida-dato').val() );
+	  		localStorage.setItem('measured_area', $('#measured_area').val() )
 
-  		var medidas = localStorage.getItem('medidas');
-  		var area = localStorage.getItem('measured_area');
+	  		if(!$('.alert_tracking').is(':visible')){
+	  			$('.alert_tracking').show();
+	  			setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+	  		} else {
+	  			$('.alert_tracking').removeClass('active');
+	  			setTimeout(function() {$('.alert_tracking').hide();}, 800);
+	  		}
+	  		$('#container').toggleClass('blurred');
+	  		//$('a.centro img').toggleClass('onn');
+	  	});
+	  		$('#add_tracking').click(function(){
 
-  		if(!$('.alert_tracking').is(':visible')){
-  			$('.alert_tracking').show();
-  			setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
-  		} else {
-  			$('.alert_tracking').removeClass('active');
-  			setTimeout(function() {$('.alert_tracking').hide();}, 800);
-  		}
-  		$('#container').toggleClass('blurred');
-  		//$('a.centro img').toggleClass('onn');
-
-
-  		$('#add_tracking').click(function(){
-
-  			var responsedata = apiRH.tracking(0, 1);
-  			if(responsedata){
-
-  				console.log(medidas+" "+ area);
-  				//window.location.assign('dieta.html');
-  			}
-  		});
-  		$('#add_cancelar').click(function(){
-  			$('.alert_tracking').hide();
-  			$('#container').toggleClass('blurred');
-  		});
-	
-  	});
-
+		  		var medidas = localStorage.getItem('medidas');
+		  		var area = localStorage.getItem('measured_area');
+	  			var responsedata = apiRH.tracking(area, medidas);
+	  			if(responsedata){
+	  				console.log(area+" "+medidas);
+	  				//window.location.assign('dieta.html');
+	  			}
+	  			$('.alert_tracking').hide();
+	  			$('#container').toggleClass('blurred');
+	  		});
+	  		$('#add_cancelar').click(function(){
+	  			$('.alert_tracking').hide();
+	  			$('#container').toggleClass('blurred');
+	  		});
+    }//end if body has class measures
 
 
 		/*HORAS MINUTOS*/
@@ -1444,147 +1442,151 @@ $(window).load(function(){
 		    return false;
 		});
 
-		var agua;
+		if($('body').hasClass('water') ){
+			var agua;
 
-		$("#agua-up").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				agua = Number($('.vaso p span').html());
-				agua=agua+0.25;
-	        	$('.vaso p span').html(agua.toFixed(2));
-	        	$('input[name="litros"]').attr("value", agua);
-		    }, 100);
-		    return false;
-		});
-
-		$("#agua-up").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
-
-		$("#agua-dw").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				agua = Number($('.vaso p span').html());
-				if (agua>0.4) {
-					agua=agua-0.5;
-		        	$('.vaso p span').html(agua.toFixed(1));
+			$("#agua-up").bind('touchstart', function(){
+				timeout = setInterval(function(){
+					agua = Number($('.vaso p span').html());
+					agua=agua+0.25;
+		        	$('.vaso p span').html(agua.toFixed(2));
 		        	$('input[name="litros"]').attr("value", agua);
+			    }, 100);
+			    return false;
+			});
+
+			$("#agua-up").bind('touchend', function(){
+			    clearInterval(timeout);
+			    return false;
+			});
+
+			$("#agua-dw").bind('touchstart', function(){
+				timeout = setInterval(function(){
+					agua = Number($('.vaso p span').html());
+					if (agua>0.4) {
+						agua=agua-0.5;
+			        	$('.vaso p span').html(agua.toFixed(1));
+			        	$('input[name="litros"]').attr("value", agua);
+					}
+			    }, 100);
+			    return false;
+			});
+
+			$("#agua-dw").bind('touchend', function(){
+			    clearInterval(timeout);
+			    return false;
+			});
+
+
+					/*
+						localStorage AGUA
+					*/
+			$('#add_agua').on('click', function(){
+				localStorage.setItem('agua', $('input[name="litros"]').val() );
+
+				var agua = localStorage.getItem('agua');
+
+				//console.log(0 + ' -+- ' + agua);
+
+				var responsedata = apiRH.tracking(0, 1);
+
+				if(!$('.alert_tracking').is(':visible')){
+					$('.alert_tracking').show();
+					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+				} else {
+					$('.alert_tracking').removeClass('active');
+					setTimeout(function() {$('.alert_tracking').hide();}, 800);
 				}
-		    }, 100);
-		    return false;
-		});
-
-		$("#agua-dw").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
-
-
-				/*
-					localStorage AGUA
-				*/
-		$('#add_agua').on('click', function(){
-			localStorage.setItem('agua', $('input[name="litros"]').val() );
-
-			var agua = localStorage.getItem('agua');
-
-			//console.log(0 + ' -+- ' + agua);
-
-			var responsedata = apiRH.tracking(0, 1);
-
-			if(!$('.alert_tracking').is(':visible')){
-				$('.alert_tracking').show();
-				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
-			} else {
-				$('.alert_tracking').removeClass('active');
-				setTimeout(function() {$('.alert_tracking').hide();}, 800);
-			}
-			$('#container').toggleClass('blurred');
-			//$('a.centro img').toggleClass('onn');
-
-
+				$('#container').toggleClass('blurred');
+				//$('a.centro img').toggleClass('onn');
+			});
 			$('#add_tracking').click(function(){
 				if(responsedata){
 					window.location.assign('dieta.html');
 				}
+				$('.alert_tracking').hide();
+				$('#container').toggleClass('blurred');
+			});
+			$('#cancelar').click(function(){
+				$('.alert_tracking').hide();
+				$('#container').toggleClass('blurred');
+			});
+		}
+
+		if( $('boody').hasClass('weight') ){
+			var r_peso;
+
+			$("#r_peso-up").bind('touchstart', function(){
+				timeout = setInterval(function(){
+					r_peso = Number($('.r_peso input[name="peso_metric"]').val() );
+			        if (r_peso<99) {
+						r_peso=r_peso+0.5;
+			        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(1));
+			        	$('input[name="track_peso"]').attr('value', r_peso);
+					} else {
+						r_peso=r_peso+1;
+			        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(0));
+			        	$('input[name="track_peso"]').attr('value', r_peso);
+					}
+			    }, 100);
+			    return false;
 			});
 
-		});
+			$("#r_peso-up").bind('touchend', function(){
+			    clearInterval(timeout);
+			    return false;
+			});
 
-		var r_peso;
-
-		$("#r_peso-up").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				r_peso = Number($('.r_peso input[name="peso_metric"]').val() );
-		        if (r_peso<99) {
-					r_peso=r_peso+0.5;
-		        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(1));
-		        	$('input[name="track_peso"]').attr('value', r_peso);
-				} else {
-					r_peso=r_peso+1;
-		        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(0));
-		        	$('input[name="track_peso"]').attr('value', r_peso);
-				}
-		    }, 100);
-		    return false;
-		});
-
-		$("#r_peso-up").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
-
-		$("#r_peso-dw").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				r_peso = Number($('.r_peso input[name="peso_metric"]').val());
-				if (r_peso>0.4) {
-					if (r_peso<100.1) {
-						r_peso=r_peso-0.5;
-						$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(1));
-						$('input[name="track_peso"]').attr('value', r_peso);
-					} else {
-						r_peso=r_peso-1;
-						$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(0));
-						$('input[name="track_peso"]').attr('value', r_peso);
+			$("#r_peso-dw").bind('touchstart', function(){
+				timeout = setInterval(function(){
+					r_peso = Number($('.r_peso input[name="peso_metric"]').val());
+					if (r_peso>0.4) {
+						if (r_peso<100.1) {
+							r_peso=r_peso-0.5;
+							$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(1));
+							$('input[name="track_peso"]').attr('value', r_peso);
+						} else {
+							r_peso=r_peso-1;
+							$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(0));
+							$('input[name="track_peso"]').attr('value', r_peso);
+						}
 					}
-				}
-		    }, 100);
-		    return false;
-		});
+			    }, 100);
+			    return false;
+			});
 
-		$("#r_peso-dw").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
-
-
-				/*
-					localStorage PESO 	*
-				*/
-		$('#add_peso').on('click', function(){
-			localStorage.setItem('track_peso', $('input[name="track_peso"]').val() );
-
-			var track_peso = localStorage.getItem('track_peso');
-			//console.log(track_peso);
-			
-
-			if(!$('.alert_tracking').is(':visible')){
-				$('.alert_tracking').show();
-				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
-			} else {
-				$('.alert_tracking').removeClass('active');
-				setTimeout(function() {$('.alert_tracking').hide();}, 800);
-			}
-			$('#container').toggleClass('blurred');
-			//$('a.centro img').toggleClass('onn');
+			$("#r_peso-dw").bind('touchend', function(){
+			    clearInterval(timeout);
+			    return false;
+			});
 
 
-			$('#add_tracking').click(function(){
+					/*
+						localStorage PESO 	*
+					*/
+			$('#add_peso').on('click', function(){
+				localStorage.setItem('track_peso', $('input[name="track_peso"]').val() );
+
+				var track_peso = localStorage.getItem('track_peso');
+				//console.log(track_peso);
 				
+
+				if(!$('.alert_tracking').is(':visible')){
+					$('.alert_tracking').show();
+					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+				} else {
+					$('.alert_tracking').removeClass('active');
+					setTimeout(function() {$('.alert_tracking').hide();}, 800);
+				}
+				$('#container').toggleClass('blurred');
+				//$('a.centro img').toggleClass('onn');
+			});
+
+			$('#add_tracking').click(function(){	
 				//------------------------------
 				//  @param tracking 1 - Ánimo
 				//  @param value of image selected
 				//-------------------------------
-
 				if(track_peso >= 0){
 					var responsedata = apiRH.tracking(0, track_peso);
 					if(responsedata){
@@ -1595,162 +1597,167 @@ $(window).load(function(){
 				}else{
 					alert('Error al registrar peso');
 				}
-				
+				$('.alert_tracking').hide();
+				$('#container').toggleClass('blurred');
 			});
 
-		});
+			$('#cancelar').click(function(){
+				$('.alert_tracking').hide();
+				$('#container').toggleClass('blurred');
+			});
+		}//END IF BODY HAS CLASS WEIGHT
 
+		if( $('body').hasClass('mood') ){
 
+			var valor = 0;
+			var animo = [ 'increible', 'feliz', 'bien', 'regular', 'triste', 'cansado', 'hambriento', 'frustrado', 'motivado' ];
 
-		var valor = 0;
-		var animo = [ 'increible', 'feliz', 'bien', 'regular', 'triste', 'cansado', 'hambriento', 'frustrado', 'motivado' ];
+			$("#animo-up").bind('touchstart', function(){
+				timeout = setInterval(function(){
+					if (valor < 8) {
+						valor++;
+					} else {
+						valor = 0;
+					}
+			        
+			        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
+			        if (animo[valor]=="increible") {
+			        	$('.carita h4').html("increíble");
+			        } else {
+			        	$('.carita h4').html(animo[valor]);
+			        }
+			        
 
-		$("#animo-up").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				if (valor < 8) {
-					valor++;
-				} else {
-					valor = 0;
-				}
-		        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
-		        if (animo[valor]=="increible") {
-		        	$('.carita h4').html("increíble");
-		        } else {
-		        	$('.carita h4').html(animo[valor]);
-		        }
-		        
+					$('#track_animo').attr("value", animo[valor]);
 
-				$('#track_animo').attr("value", animo[valor]);
+			        switch ($('#track_animo').val() ) {
+			    	    case 'increible' :
+			    	        $('#track_animo').attr("value", "0");
+			    	        break;
+			    	    case 'feliz' :
+			    	        $('#track_animo').attr("value", "1");
+			    	        break;
+			    	    case 'bien' :
+			    	        $('#track_animo').attr("value", "2");
+			    	        break;
+			    	    case 'regular' :
+			    	        $('#track_animo').attr("value", "3");
+			    	        break;
+			    	    case 'triste' :
+			    	        $('#track_animo').attr("value", "4");
+			    	        break;    
+			    	    case 'cansado' :
+			    	        $('#track_animo').attr("value", "5");
+			    	        break;   
+			    	    case 'hambriento' :
+			    	        $('#track_animo').attr("value", "6");
+			    	        break;     
+			    	    case 'frustrado' :
+			    	        $('#track_animo').attr("value", "7");
+			    	        break; 
+			    	    case 'motivado' :
+			    	        $('#track_animo').attr("value", "8");
+			    	        break;
+	    	     	}
 
-		        switch ($('#track_animo').val() ) {
-		    	    case 'increible' :
-		    	        $('#track_animo').attr("value", "0");
-		    	        break;
-		    	    case 'feliz' :
-		    	        $('#track_animo').attr("value", "1");
-		    	        break;
-		    	    case 'bien' :
-		    	        $('#track_animo').attr("value", "2");
-		    	        break;
-		    	    case 'regular' :
-		    	        $('#track_animo').attr("value", "3");
-		    	        break;
-		    	    case 'triste' :
-		    	        $('#track_animo').attr("value", "4");
-		    	        break;    
-		    	    case 'cansado' :
-		    	        $('#track_animo').attr("value", "5");
-		    	        break;   
-		    	    case 'hambriento' :
-		    	        $('#track_animo').attr("value", "6");
-		    	        break;     
-		    	    case 'frustrado' :
-		    	        $('#track_animo').attr("value", "7");
-		    	        break; 
-		    	    case 'motivado' :
-		    	        $('#track_animo').attr("value", "8");
-		    	        break;
-    	     	}
+			        // 0 - 8 estados de animo
 
-		        // 0 - 8 estados de animo
+			    }, 150);
+			    return false;
+			}); //END BIND TOUCH START
 
-		    }, 150);
-		    return false;
-		});
+			$("#animo-up").bind('touchend', function(){
+			    clearInterval(timeout);
+			    return false;
+			});
 
-		$("#animo-up").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
+			$("#animo-dw").bind('touchstart', function(){
+				timeout = setInterval(function(){
+					if (valor > 0) {
+						valor--;
+					} else {
+						valor = 8;
+					}
+			        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
+			        if (animo[valor]=="increible") {
+			        	$('.carita h4').html("increíble");
+			        } else {
+			        	$('.carita h4').html(animo[valor]);
+			        }
 
-		$("#animo-dw").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				if (valor > 0) {
-					valor--;
-				} else {
-					valor = 8;
-				}
-		        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
-		        if (animo[valor]=="increible") {
-		        	$('.carita h4').html("increíble");
-		        } else {
-		        	$('.carita h4').html(animo[valor]);
-		        }
+			        $('#track_animo').attr("value", animo[valor]);
 
-		        $('#track_animo').attr("value", animo[valor]);
+			        switch ($('#track_animo').val() ) {
+			    	    case 'increible' :
+			    	        $('#track_animo').attr("value", "0");
+			    	        break;
+			    	    case 'feliz' :
+			    	        $('#track_animo').attr("value", "1");
+			    	        break;
+			    	    case 'bien' :
+			    	        $('#track_animo').attr("value", "2");
+			    	        break;
+			    	    case 'regular' :
+			    	        $('#track_animo').attr("value", "3");
+			    	        break;
+			    	    case 'triste' :
+			    	        $('#track_animo').attr("value", "4");
+			    	        break;    
+			    	    case 'cansado' :
+			    	        $('#track_animo').attr("value", "5");
+			    	        break;   
+			    	    case 'hambriento' :
+			    	        $('#track_animo').attr("value", "6");
+			    	        break;     
+			    	    case 'frustrado' :
+			    	        $('#track_animo').attr("value", "7");
+			    	        break; 
+			    	    case 'motivado' :
+			    	        $('#track_animo').attr("value", "8");
+			    	        break;
+	    	     	}
 
-		        switch ($('#track_animo').val() ) {
-		    	    case 'increible' :
-		    	        $('#track_animo').attr("value", "0");
-		    	        break;
-		    	    case 'feliz' :
-		    	        $('#track_animo').attr("value", "1");
-		    	        break;
-		    	    case 'bien' :
-		    	        $('#track_animo').attr("value", "2");
-		    	        break;
-		    	    case 'regular' :
-		    	        $('#track_animo').attr("value", "3");
-		    	        break;
-		    	    case 'triste' :
-		    	        $('#track_animo').attr("value", "4");
-		    	        break;    
-		    	    case 'cansado' :
-		    	        $('#track_animo').attr("value", "5");
-		    	        break;   
-		    	    case 'hambriento' :
-		    	        $('#track_animo').attr("value", "6");
-		    	        break;     
-		    	    case 'frustrado' :
-		    	        $('#track_animo').attr("value", "7");
-		    	        break; 
-		    	    case 'motivado' :
-		    	        $('#track_animo').attr("value", "8");
-		    	        break;
-    	     	}
+			    }, 150);
+			    return false;
+			});//END BIND TOUCH START DOS
 
-		    }, 150);
-		    return false;
-		});
-
-		$("#animo-dw").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
-		
-		//--------------------------------------------
-		//
-		// onClick: add_animo Registro de estado de
-		// animo.
-		//
-		//--------------------------------------------
-
-		$('#add_animo').on('click', function(){
-
-			localStorage.setItem('track_animo', $('#track_animo').val() );
-
-			var track_animo = localStorage.getItem('track_animo');
-
-			if(track_animo == '')
-				track_animo = 0;
-
-			if(!$('.alert_tracking').is(':visible')){
-				$('.alert_tracking').show();
-				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
-			} else {
-				$('.alert_tracking').removeClass('active');
-				setTimeout(function() {$('.alert_tracking').hide();}, 800);
-			}
-
-			$('#container').toggleClass('blurred');
+			$("#animo-dw").bind('touchend', function(){
+			    clearInterval(timeout);
+			    return false;
+			});
 			
+			//--------------------------------------------
+			//
+			// onClick: add_animo Registro de estado de
+			// animo.
+			//
+			//--------------------------------------------
+
+			$('#add_animo').on('click', function(){
+
+				localStorage.setItem('track_animo', $('#track_animo').val() );
+
+				var track_animo = localStorage.getItem('track_animo');
+
+				if(track_animo == ''){
+					track_animo = 0;
+				}
+
+				if(!$('.alert_tracking').is(':visible')){
+					$('.alert_tracking').show();
+					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+				} else {
+					$('.alert_tracking').removeClass('active');
+					setTimeout(function() {$('.alert_tracking').hide();}, 800);
+				}
+				$('#container').toggleClass('blurred');
+			});
+
 			$('#add_tracking').click(function(){
-				
 				//------------------------------
 				//  @param tracking 1 - Ánimo
 				//  @param value of image selected
 				//-------------------------------
-
 				if(track_animo >= 0){
 					var responsedata = apiRH.tracking(1, track_animo);
 					if(responsedata){
@@ -1762,14 +1769,11 @@ $(window).load(function(){
 					alert('Error al registrar el estado de ánimo');
 				}
 			});
-
-		});
-
+		}
 
 /*
 	FEED HTML
 */
-
 		$('#finish1').click(function(){
 			$('.aboutyou').animate({opacity:"0",left:"-40px"}, 200);
 			$('.bpur').removeClass('active');
@@ -1782,7 +1786,6 @@ $(window).load(function(){
 			}else{
 				$('#genre_value').attr('value', 0);
 			}
-
 
 			/*
 
