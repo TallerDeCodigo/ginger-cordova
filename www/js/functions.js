@@ -1065,7 +1065,7 @@ $(window).load(function(){
     var fecha = new Date();
     var weekNumber = (new Date()).getWeek();
     var meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sept", "Oct", "Nov", "Dic"];
-	var dias = ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+	var dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado","Domingo"];
 
 	//console.log(weekNumber);
   	var ano = fecha.getFullYear();
@@ -1079,11 +1079,11 @@ $(window).load(function(){
     	$('#year').html(ano);
 
     function getWeekDays(fromDate){
-     var sunday = new Date(fromDate.setDate(fromDate.getDate()-fromDate.getDay())),result = [new Date(sunday)];
-     while (sunday.setDate(sunday.getDate()+1) && sunday.getDay()!==0) {
-      result.push(new Date(sunday));
-     }
-     return result;
+		var sunday = new Date(fromDate.setDate(fromDate.getDate()-fromDate.getDay())),result = [new Date(sunday)];
+     	while (sunday.setDate(sunday.getDate()+1) && sunday.getDay()!==0) {
+      		result.push(new Date(sunday));
+     	}
+		return result;
     }
 
     var week = new Object();
@@ -1104,6 +1104,7 @@ $(window).load(function(){
     for(var i=0; i<dias.length; i++){
     	var masuno = i+1;
     	date_string = week[i].toString();
+    	console.log(date_string);
     	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
     	var dataf = new Date(date_string);
     	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
