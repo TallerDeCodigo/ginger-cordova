@@ -732,77 +732,74 @@
 
 	$('#send_fPago').on('click', function(){
 
-		/*ALERT*/
-		if(!$('.overscreen6').is(':visible') ){
-			$('.overscreen6').show();
-		setTimeout(function() {$('.overscreen6').addClass('active');}, 200);
-		} else {
-			$('.overscreen6').removeClass('active');
-			setTimeout(function() {$('.overscreen6').hide();}, 800);
-		}
-		$('#container').toggleClass('blurred');
+	   		console.log("click to next");
 
-		console.log("Aquí ------");
+	   		var  t_nombre   = $('input[name="nombre"]').val(); 
+	   		var  t_card 	= $('input[name="card"]').val(); 
+	   		var  t_mes  	= $('input[name="mes"]').val(); 
+	   		var  t_ano 		= $('input[name="year"]').val(); 
+	   		var  t_cvc 		= $('input[name="cvc"]').val(); 
+	   		var  t_mail 	= $('input[name="mail"]').val(); 
+	   		var  t_cupon 	= $('input[name="cupon"]').val(); 
+	   		var  t_terms 	= $('input[name="terms"]').val(); 
+
+	   		Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
+	   		
+	   		var errorResponseHandler, successResponseHandler, tokenParams;
+
+	   		tokenParams = {
+	   		  "card": {
+	   		    "number": t_card,
+	   		    "name": t_nombre,
+	   		    "exp_year": t_ano,
+	   		    "exp_month": t_mes,
+	   		    "cvc": t_cvc
+	   		  }
+	   		};
+
+	   		successResponseHandler = function(token) 
+	   		{
+	   			var response = apiRH.makePayment(token.id);
+	   			// Funcion de mensaje de bienvenida
+	   			if(response){
+	   				
+	   				if(response){
+
+	   					if(!$('.overscreen6').is(':visible') ){
+	   						$('.overscreen6').show();
+	   					setTimeout(function() {$('.overscreen6').addClass('active');}, 200);
+	   					} else {
+	   						$('.overscreen6').removeClass('active');
+	   						setTimeout(function() {$('.overscreen6').hide();}, 800);
+	   					}
+	   					$('#container').toggleClass('blurred');
+
+	   					$('#go_next').click(function(){
+	   						$('.overscreen6').hide();
+	   						$('#container').toggleClass('blurred');
+	   						window.location.assign('dieta.html');
+	   					});
+
+	   				}
+	   				else
+	   					alert("Error al actualizar datos");
+	   			}else{
+	   				alert("Error al procesar tu pago");
+	   			}
+	   			return;
+	   		};
+
+	   		/* Después de recibir un error */
+
+	   		errorResponseHandler = function(error) {
+	   		  return console.log(error.message);  //error de conectividad
+	   		  alert('Error al procesar tu pago' + error.message);
+	   		};
+
+	   		/* Tokenizar una tarjeta en Conekta */
+
+	   		Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
 	});//endCLICK
-
-   	$('#go_next').click(function(){
-   		console.log("click to next");
-   		$('.overscreen6').hide();
-   		$('#container').toggleClass('blurred');
-
-   		var  t_nombre   = $('input[name="nombre"]').val(); 
-   		var  t_card 	= $('input[name="card"]').val(); 
-   		var  t_mes  	= $('input[name="mes"]').val(); 
-   		var  t_ano 		= $('input[name="year"]').val(); 
-   		var  t_cvc 		= $('input[name="cvc"]').val(); 
-   		var  t_mail 	= $('input[name="mail"]').val(); 
-   		var  t_cupon 	= $('input[name="cupon"]').val(); 
-   		var  t_terms 	= $('input[name="terms"]').val(); 
-
-   		Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
-   		
-   		var errorResponseHandler, successResponseHandler, tokenParams;
-
-   		tokenParams = {
-   		  "card": {
-   		    "number": t_card,
-   		    "name": t_nombre,
-   		    "exp_year": t_ano,
-   		    "exp_month": t_mes,
-   		    "cvc": t_cvc
-   		  }
-   		};
-
-   		successResponseHandler = function(token) 
-   		{
-   			var response = apiRH.makePayment(token.id);
-   			// Funcion de mensaje de bienvenida
-   			if(response){
-   				if(response){
-   					//alert('¡Muchas felicidades! ya puedes comenzar tu semana gratis'); 
-   					window.location.assign('dieta.html');
-   				}
-   				else
-   					alert("Error al actualizar datos");
-   			}else{
-   				alert("Error al procesar tu pago");
-   			}
-   			return;
-   		};
-
-   		/* Después de recibir un error */
-
-   		errorResponseHandler = function(error) {
-   		  return console.log(error.message);  //error de conectividad
-   		  alert('Error al procesar tu pago' + error.message);
-   		};
-
-   		/* Tokenizar una tarjeta en Conekta */
-
-   		Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
-
-
-   	});
 
 		//MARK NOTIFICATION AS READ
 		$('.main').on('tap', '.each_notification a', function(e){

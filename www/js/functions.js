@@ -774,12 +774,10 @@ $(window).on("load resize",function(){
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 				$(this).addClass('active');
 				$(this).attr("value", valor);
-				
 				$('.restricciones').attr('value', valor);
 				
 				restricciones.push(valor);
-				
-				console.log(localStorage.setItem('restricciones', JSON.stringify(restricciones)) );
+				localStorage.setItem('restricciones', JSON.stringify(restricciones) );
 
 			} else {
 
@@ -797,6 +795,7 @@ $(window).on("load resize",function(){
 						var index = restricciones.indexOf(valor);
 
 						restricciones.splice(i, 1);
+						console.log(restricciones);
 
 						localStorage.setItem('restricciones', JSON.stringify(restricciones));
 
@@ -816,7 +815,7 @@ $(window).on("load resize",function(){
 			}
 			console.log(restricciones);
 
-		});
+		});//enc click re-option
 
 		if ($('body').hasClass('update_data')) {
 			
@@ -1772,7 +1771,11 @@ $(window).load(function(){
 	FEED HTML
 */
 
-		$('.circle-frame').find('img').attr('src', localStorage.getItem('avatar') + '?type=large');
+		if( localStorage.getItem('avatar') ){
+			$('.circle-frame').find('img').attr('src', localStorage.getItem('avatar') + '?type=large');
+		}else{
+			$('.circle-frame').find('img').remove();
+		}
 	
 		$('#finish1').click(function(){
 			$('.aboutyou').animate({opacity:"0",left:"-40px"}, 200);
