@@ -1476,11 +1476,9 @@ $(window).load(function(){
 			$('#add_agua').on('click', function(){
 				localStorage.setItem('agua', $('input[name="litros"]').val() );
 
-				var agua = localStorage.getItem('agua');
 
 				//console.log(0 + ' -+- ' + agua);
 
-				var responsedata = apiRH.tracking(0, 1);
 
 				if(!$('.alert_tracking').is(':visible')){
 					$('.alert_tracking').show();
@@ -1493,6 +1491,12 @@ $(window).load(function(){
 				//$('a.centro img').toggleClass('onn');
 			});
 			$('#add_tracking').click(function(){
+
+				var agua = localStorage.getItem('agua');
+				console.log(agua);
+													/*ajustar los tipos para cada tracking*/
+				var responsedata = apiRH.tracking(0, agua);
+
 				if(responsedata){
 					window.location.assign('dieta.html');
 				}
@@ -1909,7 +1913,7 @@ $(window).load(function(){
 			var dpw 		  		= localStorage.getItem('dpw');
 			var comentario 	  		= localStorage.getItem('comentario');
 
-			console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+peso_ideal+" > "+zipcode+" > "+plan+" > "+coach_type+" > "+restricciones_ls2+" > "+dpw+" > "+comentario );
+			console.log("genero> " + genero +"peso > "+ peso+"estatura > "+estatura+" edad > "+edad+" ideal > "+peso_ideal+" zip > "+zipcode+" plan > "+plan+" coach > "+coach_type+" restricciones > "+restricciones_ls2+" dpw > "+dpw+" comentario > "+comentario );
 
 			var ageyears = new Date();
 			var _year =ageyears.getFullYear();
@@ -2404,100 +2408,108 @@ $(window).load(function(){
 
 		});
 
-		$('.ej-option').click(function() {
-			var valor = $(this).find('.type').attr('value');
-			$('.ej-option').each(function() {
-			    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
-			      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
-			      $(this).removeClass('active');
-			      $(this).attr('value', "");
-			    }
-			}); 
-			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
-			$(this).addClass('active');
-			$("#ejercicio_type").attr('value', valor);
+		if( $('body').hasClass('excercise') ){
 
-				//'caminar', 'correr', 'pesas', 'cross', 'bici', 'estacionaria', 'eliptica', 'cardio', 'yoga', 'pilates', 'tenis', 'otro'
+					$('.ej-option').click(function() {
+						var valor = $(this).find('.type').attr('value');
+						$('.ej-option').each(function() {
+						    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
+						      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
+						      $(this).removeClass('active');
+						      $(this).attr('value', "");
+						    }
+						}); 
 
-			switch($("#ejercicio_type").val() ){
-				case 'caminar' :
-				$('#ejercicio_type').attr('value','10');
-    	        break;
-    	        case 'correr' :
-				$('#ejercicio_type').attr('value','11');
-    	        break;
-    	        case 'pesas' :
-				$('#ejercicio_type').attr('value','12');
-    	        break;
-    	        case 'cross' :
-				$('#ejercicio_type').attr('value','13');
-    	        break;
-    	        case 'bici' :
-				$('#ejercicio_type').attr('value','14');
-    	        break;
-    	        case 'estacionaria' :
-				$('#ejercicio_type').attr('value','15');
-    	        break;
-    	        case 'eliptica' :
-				$('#ejercicio_type').attr('value','16');
-    	        break;
-    	        case 'cardio' :
-				$('#ejercicio_type').attr('value','17');
-    	        break;
-    	        case 'yoga' :
-				$('#ejercicio_type').attr('value','18');
-    	        break;
-    	        case 'pilates' :
-				$('#ejercicio_type').attr('value','19');
-    	        break;
-    	        case 'tenis' :
-				$('#ejercicio_type').attr('value','20');
-    	        break;
-    	        case 'otro	' :
-				$('#ejercicio_type').attr('value','21');
-    	        break;
-			}
+						$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
+						$(this).addClass('active');
+						$("#ejercicio_type").attr('value', valor);
 
-		});
+							//'caminar', 'correr', 'pesas', 'cross', 'bici', 'estacionaria', 'eliptica', 'cardio', 'yoga', 'pilates', 'tenis', 'otro'
 
-				/*
-					localStorage EJERCICIO / DURACION / INTENSIDAD
-				 */
-		$('#add_ejercicio').on('click', function(){
+						switch($("#ejercicio_type").val() ){
+							case 'caminar' :
+							$('#ejercicio_type').attr('value','10');
+			    	        break;
+			    	        case 'correr' :
+							$('#ejercicio_type').attr('value','11');
+			    	        break;
+			    	        case 'pesas' :
+							$('#ejercicio_type').attr('value','12');
+			    	        break;
+			    	        case 'cross' :
+							$('#ejercicio_type').attr('value','13');
+			    	        break;
+			    	        case 'bici' :
+							$('#ejercicio_type').attr('value','14');
+			    	        break;
+			    	        case 'estacionaria' :
+							$('#ejercicio_type').attr('value','15');
+			    	        break;
+			    	        case 'eliptica' :
+							$('#ejercicio_type').attr('value','16');
+			    	        break;
+			    	        case 'cardio' :
+							$('#ejercicio_type').attr('value','17');
+			    	        break;
+			    	        case 'yoga' :
+							$('#ejercicio_type').attr('value','18');
+			    	        break;
+			    	        case 'pilates' :
+							$('#ejercicio_type').attr('value','19');
+			    	        break;
+			    	        case 'tenis' :
+							$('#ejercicio_type').attr('value','20');
+			    	        break;
+			    	        case 'otro	' :
+							$('#ejercicio_type').attr('value','21');
+			    	        break;
+						}
 
-			localStorage.setItem('track_ejercicio_type', 		$('#ejercicio_type').val() );
-			localStorage.setItem('track_ejercicio_duration',	$('#duracion').val() );
-			localStorage.setItem('track_ejercicio_intensidad', 	$('#intensidad').val() );
+					});
 
-			var intensidad  = localStorage.getItem('track_ejercicio_intensidad');
-			var type 		= localStorage.getItem('track_ejercicio_type');
-			var duracion	= localStorage.getItem('track_ejercicio_duration');
+							/*
+								localStorage EJERCICIO / DURACION / INTENSIDAD
+							 */
+					$('#add_ejercicio').on('click', function(){
 
-			console.log(intensidad+" "+type+" "+duracion);
-
-			var responsedata = apiRH.tracking(0, 1);
-
-			//console.log(responsedata);
-			if(!$('.alert_tracking').is(':visible')){
-				$('.alert_tracking').show();
-				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
-			} else {
-				$('.alert_tracking').removeClass('active');
-				setTimeout(function() {$('.alert_tracking').hide();}, 800);
-			}
-			$('#container').toggleClass('blurred');
-			//$('a.centro img').toggleClass('onn');
+						localStorage.setItem('track_ejercicio_type', 		$('#ejercicio_type').val() );
+						localStorage.setItem('track_ejercicio_duration',	$('#duracion').val() );
+						localStorage.setItem('track_ejercicio_intensidad', 	$('#intensidad').val() );
 
 
-			$('#add_tracking').click(function(){
-				if(responsedata){
-					window.location.assign('dieta.html');
-				}
-			});
 
-			
 
-		});
+						//console.log(responsedata);
+						if(!$('.alert_tracking').is(':visible')){
+							$('.alert_tracking').show();
+							setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+						} else {
+							$('.alert_tracking').removeClass('active');
+							setTimeout(function() {$('.alert_tracking').hide();}, 800);
+						}
+						$('#container').toggleClass('blurred');
+					});
+
+						$('#add_tracking').click(function(){
+							
+							var intensidad  = localStorage.getItem('track_ejercicio_intensidad');
+							var type 		= localStorage.getItem('track_ejercicio_type');
+							var duracion	= localStorage.getItem('track_ejercicio_duration');
+							
+							var responsedata = apiRH.tracking(type, duracion);
+	
+							if(responsedata){
+								console.log(intensidad+" "+type+" "+duracion);	
+								console.log('exito');
+								//window.location.assign('dieta.html');
+							}else{
+								alert('error al insertar datos ');
+							}
+							$('.alert_tracking').hide();
+							$('#container').toggleClass('blurred');
+						});
+		}//endif 
+		
 
 		$('.centro').click(function() {
 			if(!$('.overscreen').is(':visible')){
