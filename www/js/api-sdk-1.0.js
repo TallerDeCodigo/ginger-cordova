@@ -839,11 +839,17 @@ function requestHandlerAPI(){
 				.done(function(result){
 					console.log(result);
 					result.me().done(function(data){
-					 fb_name = data.name;
-					 fb_lastname = data.lastname;
-					 fb_email = data.email;
-					 fb_avatar = data.avatar;
-					 fb_Id = data.id;
+
+					 fb_name 		= data.name;
+					 fb_lastname 	= data.lastname;
+					 fb_email 		= data.email;
+					 fb_avatar 		= data.avatar;
+					 fb_Id 			= data.id;
+
+
+					 console.log(data);
+
+					 localStorage.setItem("avatar", fb_avatar);
 
 					 var req = {
 					 	method : 'post',
@@ -878,10 +884,11 @@ function requestHandlerAPI(){
 					  .done(function(response){
 					 	result = response;
 					 	console.log(response);
+
 					 	localStorage.setItem('token', 	response.token);
 					 	localStorage.setItem('mail', 	response.mail);
-					 	localStorage.setItem('chatId', 	response.jid);
 					 	localStorage.setItem('userId', 	response._id);
+					 	
 					 	sdk_app_context.hideLoader(response);
 					 })
 					  .fail(function(e){
@@ -889,28 +896,32 @@ function requestHandlerAPI(){
 					 	console.log(JSON.stringify(e));
 					 });
 
-					  //console.log(JSON.stringify(response));
-
 					  var userId 	= localStorage.getItem('userId');
 					  var mail 		= localStorage.getItem('mail');
 					  var token 	= localStorage.getItem('token');
 
 					  console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
-
-					  	//var user = this.getRequest('api/cliente', req);
-
-
+					  	
 					  	/*
 							GET REQUEST
 					  	*/
 					  	sdk_app_context.showLoader();
+
+					  	var req = {
+						 	method : 'post',
+						 	url : api_base_url + 'api/signup',
+						 	headers: {
+						 		'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+						 		'X-ZUMO-AUTH': localStorage.getItem('token'),
+						 		'Content-Type': 'application/json'
+						 	}
+						 }
 					  	var result = {};
 					  	
 					  	$.ajax({
 					  	  type: 'GET',
 					  	  headers: req.headers,
-					  	  url: window.api_base_url+'api/cliente'+userId,
-					  	  //data: JSON.stringify(req.data),
+					  	  url: window.api_base_url+'tables/cliente/'+userId,
 					  	  dataType: 'json',
 					  	  async: false
 					  	})
@@ -925,14 +936,23 @@ function requestHandlerAPI(){
 					  		console.log(JSON.stringify(e));
 					  	});
 
-					  	return result;
+					  	//return result;
 
-					  	console.log(JSON.stringify(user));
+					  	console.log(JSON.stringify(result));
 
-					  	localStorage.setItem('users', JSON.stringify(user));
+					  	localStorage.setItem('users', JSON.stringify(result));
+
+					  	var u = JSON.parse(localStorage.getItem('users'));
+
+					  	if(u.customerId == 'no_set'){
+					  		window.location.assign('feed.html');	
+					  	}else{
+					  		window.location.assign('dieta.html');	
+					  	}
 					
-						//window.location.assign('feed.html');
+						//
 					});
+					
 				}).fail(function(error){
 					console.log(error);
 				});

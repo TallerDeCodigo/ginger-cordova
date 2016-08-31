@@ -1774,12 +1774,20 @@ $(window).load(function(){
 /*
 	FEED HTML
 */
+<<<<<<< HEAD
+=======
+		$('.circle-frame').find('img').attr('src', localStorage.getItem('avatar'));
+	
+>>>>>>> 128c23842a33e1e06eeb2407717d8348a38503f6
 		$('#finish1').click(function(){
 			$('.aboutyou').animate({opacity:"0",left:"-40px"}, 200);
 			$('.bpur').removeClass('active');
 			$('.bgre').addClass('active');
 
 			//console.log($('#hombre').attr('alt') );
+
+
+
 
 			if($('#hombre').attr('alt') == '1' ){
 				$('#genre_value').attr('value', 1);
