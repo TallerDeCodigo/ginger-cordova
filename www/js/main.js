@@ -794,7 +794,7 @@
 
    		errorResponseHandler = function(error) {
    		  return console.log(error.message);  //error de conectividad
-   		  alert('Error al procesar tu pago');
+   		  alert('Error al procesar tu pago' + error.message);
    		};
 
    		/* Tokenizar una tarjeta en Conekta */
