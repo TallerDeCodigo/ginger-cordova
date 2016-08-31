@@ -2139,6 +2139,34 @@ $(window).load(function(){
 					$(".rate-stars_inner img:nth-of-type("+j+")").attr("src","images/starh.svg");
 				}
 			// }
+
+			var resenas = apiRH.getResenas('54f3c16f4b6614a8119e6439');
+
+			console.log(resenas);
+
+			
+			$.each(resenas, function(key, value){
+				console.log(key + ' :::: ' + value);	
+				$.each(value, function(key, value){
+										
+					$('.resena.pagina').append('<div class="nombre_resena"><div class="rate-stars2"></div></div><div class="resena_cont"></div>');
+
+					if(key == 'comment'){
+						$('.resena_cont').html(value);
+						console.log(value);	
+					}
+
+					if(key == 'calificacion'){
+						for (var i = 0; i < calificacion; i++) {
+							$('.rate-stars2').append('<img src="images/star.svg">');
+						}						
+					}
+				});
+			});
+			
+
+
+
 		});
 
 		$('#aceptar').click(function(){

@@ -449,14 +449,49 @@ function requestHandlerAPI(){
 			return (response) ? response : false;
 		};
 
-		/* 
-		 * Log Out from the API and disable token server side
-		 * @param user_data JSON {user_login : 'username', request_token : 'XY0XXX0Y0XYYYXXX'}
-		 * @return status Bool true is successfully logged in; false if an error ocurred
-		 */
-		this.logOut =  function(user_data){
-								return this.makeRequest('api/'+user_data.user_login+'/logout/', { request_token: user_data.request_token });
-							};
+		this.getResenas = function(idCoach){
+			var req = {
+				method : 'GET',
+				url : api_base_url + 'api/rating/?coach=' + idCoach,	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'Content-Type': 'application/json'
+				}
+			};
+
+			var response = this.getRequest('tables/rating/?coach=' + idCoach, req);
+
+			console.log(response);  //llega aqui con la respuesta del servidor
+
+			return (response) ? response : false;
+		};
+
+		this.makeResena = function(data){
+
+			var req = {
+				method : 'POST',
+				url : api_base_url + 'api/rating/',	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'Content-Type': 'application/json'
+				},
+				data : {
+					"calificacion": data.calificacion,
+   					"comment": data.comentarios,
+    				"coach": data.coach,
+    				"dieta": data.dieta 
+				}
+			};
+
+			var response = this.makeRequest('tables/rating/', req);
+
+			console.log(response);  //llega aqui con la respuesta del servidor
+
+			return (response) ? response : false;
+		};
+
 		/* 
 		 * Creates an internal user to make calls to the API
 		 * @param username String
@@ -486,30 +521,6 @@ function requestHandlerAPI(){
 								user_role: 		data.role,
 								user_profile: 	data.profile_url,
 							}));
-
-				/*
-				if(user_role == 'administrator') user_role = 'maker';
-				this.ls.setItem('dedalo_log_info', 	JSON.stringify({
-														user_login: 	data.user_login,
-														username: 		data.user_login,
-														user_id: 		data.user_id,
-														user_role: 		data.role,
-														user_profile: 	data.profile_url,
-													}));
-				*/									
-				/* Also save user ME info */
-
-				/*
-				$.getJSON(api_base_url+data.user_login+'/me/')
-				 .done(function(response){
-				 	apiRH.ls.setItem('me', JSON.stringify(response));
-				 	apiRH.ls.setItem('me.logged', true);
-				 	console.log(response);
-				})
-				 .fail(function(err){
-					console.log(err);
-				});
-				*/
 		};
 		/* 
 		 * Request new passive token from the API 

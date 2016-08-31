@@ -221,7 +221,7 @@ textarea.short-descrip {position:relative;top:-5px;resize:none;text-align: justi
 .resena div.resena_cont {border-bottom:1px solid #999;padding-bottom:11px;}
 
 .bio.img-frame {margin-top:3.5%;padding-bottom:60%;}
-.bio.img-frame img {width:auto;height:100%;position:absolute;top:-9999px;bottom:-9999px;left:-9999px;right:-9999px;margin:auto;}
+.bio.img-frame img {width:auto;height:auto;position:absolute;top:-9999px;bottom:-9999px;left:-9999px;right:-9999px;margin:auto;}
 
 .bt-review {position:relative;display:inline-block;top:-6px;margin-left:5px;background:#8041b7;border-radius:2px;text-align:center;color:#FFF;font-weight:700;font-size:80%;line-height:18px;padding:0px 5px;}
 .bt-review:before {content:"";position:absolute;left:-3px;top:4px;z-index:-1;content:"";background:#8041b7;width:10px;height:10px;transform:rotate(45deg);-webkit-transform:rotate(45deg);border-radius:15%;}
