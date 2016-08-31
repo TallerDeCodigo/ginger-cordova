@@ -2140,7 +2140,7 @@ $(window).load(function(){
 				}
 			// }
 
-			var resenas = apiRH.getResenas('54f3c16f4b6614a8119e6439');
+			var resenas = apiRH.getResenas(_aidi);
 
 			console.log(resenas);
 
