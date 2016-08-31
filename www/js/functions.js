@@ -1769,13 +1769,17 @@ $(window).load(function(){
 /*
 	FEED HTML
 */
-
+		$('.circle-frame').find('img').attr('src', localStorage.getItem('avatar'));
+	
 		$('#finish1').click(function(){
 			$('.aboutyou').animate({opacity:"0",left:"-40px"}, 200);
 			$('.bpur').removeClass('active');
 			$('.bgre').addClass('active');
 
 			//console.log($('#hombre').attr('alt') );
+
+
+
 
 			if($('#hombre').attr('alt') == '1' ){
 				$('#genre_value').attr('value', 1);
