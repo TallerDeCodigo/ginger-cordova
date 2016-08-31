@@ -857,7 +857,6 @@ function requestHandlerAPI(){
 					 fb_avatar 		= data.avatar;
 					 fb_Id 			= data.id;
 
-
 					 console.log(data);
 
 					 localStorage.setItem("avatar", fb_avatar);
@@ -896,6 +895,128 @@ function requestHandlerAPI(){
 					 	result = response;
 					 	console.log(response);
 
+					 	if(response.Status == "ERROR")
+					 	{
+					 		alert("El usuario ya se encuentra registrado, favor de hacer login");
+					 		console.log('Error usuario registrado');
+
+					 		var req = {
+								method : 'post',
+								url : api_base_url + 'api/login',
+								headers: {
+									'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+									'Content-Type': 'application/json'
+								},
+								data : {
+									"tipo" : "cliente",
+									"mail" : fb_email,
+									"password" : fb_Id
+								}
+							}
+
+							console.log(req.data);
+							//REQUEST TO LOGIN
+							$.ajax({
+							   type: 'POST',
+							   headers: req.headers,
+							   url: window.api_base_url+'api/login',
+							   data: JSON.stringify(req.data),
+							   dataType: 'json',
+							   async: false })
+							  .done(function(response){
+							  		
+							  		console.log(req);
+
+							  		localStorage.setItem('token', response.token);
+									localStorage.setItem('mail', response.mail);
+									localStorage.setItem('userId', response.userId);
+
+									var userId 	= localStorage.getItem('userId');
+									var mail 	= localStorage.getItem('mail');
+									var token 	= localStorage.getItem('token');
+
+									console.log('TOKEN RESPONSE ' + token);
+
+									if(token){
+										var req = {
+											method : 'post',
+											url : api_base_url + 'tables/cliente/',
+											headers: {
+												'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+												'X-ZUMO-AUTH': token,
+												'Content-Type': 'application/json'
+											}
+										}
+
+										$.ajax({
+										   type: 'GET',
+										   headers: req.headers,
+										   url: window.api_base_url+'tables/cliente/'+ userId,
+										   data: JSON.stringify(req.data),
+										   dataType: 'json',
+										   async: false })
+										  .done(function(user){
+
+										  	console.log(JSON.stringify(user));
+											console.log(user);
+
+											if(user){
+												localStorage.setItem('coach_type', user.perfil.personalidad);
+												localStorage.setItem('user_name', user.nombre);
+												localStorage.setItem('user_last_name', user.apellido);
+												localStorage.setItem('genero', user.perfil.sexo);
+
+												if(user.perfil.edad !== undefined)
+													localStorage.setItem('edad', user.perfil.edad.real);
+												else
+													localStorage.setItem('edad', 0);
+												localStorage.setItem('zipcode', user.cp);
+												localStorage.setItem('estatura', user.perfil.estatura);
+												localStorage.setItem('peso', user.perfil.peso);
+												localStorage.setItem('peso_ideal', user.pesoDeseado);
+												localStorage.setItem('dpw', user.perfil.ejercicio);
+												localStorage.setItem('restricciones', user.restricciones);
+												localStorage.setItem('comentarios', user.comentarios);
+												localStorage.setItem('customerId', user.customerId);
+												localStorage.setItem('chatId', user.chatId);
+												if(user.dieta !== undefined)
+													localStorage.setItem('dietaId', user.dieta._id);
+												else
+													localStorage.setItem('dietaId', 0);
+												if(user.dieta !== undefined)
+													localStorage.setItem('dietaName', user.dieta.nombre);
+												else
+													localStorage.setItem('dietaName', '');
+												
+												if(user.coach !== undefined){
+													localStorage.setItem('nombre_coach', user.coach.nombre);
+													localStorage.setItem('apellido_coach', user.coach.apellido);
+													localStorage.setItem('coach_rate', user.coach.rating);
+													localStorage.setItem('chatPassword', user.coach.chatPassword);
+												}	
+												
+												if(user.customerId !== undefined)
+											 		window.location.assign('dieta.html');
+											 	else
+											 		window.location.assign('feed.html');
+
+											}
+											return ;
+
+										  })
+										  .fail(function(e){
+										  		console.log('Error');	
+										  });
+									}
+									return ;
+
+							  })
+							  .fail(function(e){
+							  		console.log('-- -- -- Error -- -- --');
+							  });
+							  return;
+					 	}
+
 					 	localStorage.setItem('token', 	response.token);
 					 	localStorage.setItem('mail', 	response.mail);
 					 	localStorage.setItem('userId', 	response._id);
@@ -903,7 +1024,7 @@ function requestHandlerAPI(){
 					 	sdk_app_context.hideLoader(response);
 
 					 	var userId 	= localStorage.getItem('userId');
-					  	var mail 		= localStorage.getItem('mail');
+					  	var mail 	= localStorage.getItem('mail');
 					  	var token 	= localStorage.getItem('token');
 
 					  	console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
@@ -976,7 +1097,7 @@ function requestHandlerAPI(){
 					 	if(m.code == 422){
 					 		console.log('Error usuario registrado');
 
-					 			var req = {
+					 		var req = {
 								method : 'post',
 								url : api_base_url + 'api/login',
 								headers: {
@@ -989,6 +1110,8 @@ function requestHandlerAPI(){
 									"password" : fb_Id
 								}
 							}
+
+							console.log(req.data);
 							//REQUEST TO LOGIN
 							$.ajax({
 							   type: 'POST',
@@ -998,7 +1121,9 @@ function requestHandlerAPI(){
 							   dataType: 'json',
 							   async: false })
 							  .done(function(response){
-							  		console.log(response);
+							  		
+							  		console.log(req);
+
 							  		localStorage.setItem('token', response.token);
 									localStorage.setItem('mail', response.mail);
 									localStorage.setItem('userId', response.userId);
