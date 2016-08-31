@@ -1944,7 +1944,7 @@ $(window).load(function(){
 				},
 				"cp": zipcode,
 				"pesoDeseado": peso_ideal,
-				"comentario": comentario
+				"comentarios": comentario
 			}
 
 			//Request update data

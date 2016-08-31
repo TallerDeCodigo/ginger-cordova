@@ -742,7 +742,7 @@
 		}
 		$('#container').toggleClass('blurred');
 
-
+		console.log("Aquí ------");
 
 		// var  t_nombre   = $('input[name="nombre"]').val(); 
 		// var  t_card 	= $('input[name="card"]').val(); 
