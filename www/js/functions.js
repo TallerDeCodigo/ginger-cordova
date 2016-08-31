@@ -67,18 +67,10 @@ $( function() {
 							// $('._month').html(meses_year[r.getMonth()] + " " +d.getUTCFullYear() );
 
 							cadenita += '<td> ' + meses_year[r.getMonth()] + " " +d.getUTCFullYear() + '</td></tr>';
-
 						}
-
-
-							
-
-
 					});
 				}
 			});
-
-				
 		});
 
 		$('#historial tbody').append(cadenita);
@@ -1738,6 +1730,7 @@ $(window).load(function(){
 				localStorage.setItem('track_animo', $('#track_animo').val() );
 
 				var track_animo = localStorage.getItem('track_animo');
+					console.log(track_animo);
 
 				if(track_animo == ''){
 					track_animo = 0;
@@ -1774,11 +1767,9 @@ $(window).load(function(){
 /*
 	FEED HTML
 */
-<<<<<<< HEAD
-=======
+
 		$('.circle-frame').find('img').attr('src', localStorage.getItem('avatar'));
 	
->>>>>>> 128c23842a33e1e06eeb2407717d8348a38503f6
 		$('#finish1').click(function(){
 			$('.aboutyou').animate({opacity:"0",left:"-40px"}, 200);
 			$('.bpur').removeClass('active');
