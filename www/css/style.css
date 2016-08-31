@@ -230,7 +230,7 @@ textarea.short-descrip {position:relative;top:-5px;resize:none;text-align: justi
 .la_img {width:94%;height:auto;}
 .semana {color:#555;}
 .satis {font-weight:900;font-size:110%;text-shadow:0px 0px 2px #EEE;}
-.btn-iniciar {color:#8041b7;font-weight:800;font-size:110%;display:inline-block;padding:5px 15px;}
+.btn-iniciar {color:#8041b7;font-weight:800;font-size:110%;display:inline-block;padding:5px 15px;background: #ffd156;}
 .btn-pago, .btn-pago1 {color:#FFF;font-weight:800;font-size:120%;display:inline-block;padding:5px 15px;background:#43c2a7;border-radius:3px;}
 .letritas {font-size:75%;margin:4%;}
 

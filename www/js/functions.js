@@ -456,24 +456,24 @@ $(window).on("load resize",function(){
 				$('.comentario').hide();
 			}	
 			
-	
-			// console.log(user);
+			$('.profile.circle-frame').find('img').attr('src', localStorage.getItem('avatar') + '?type=large');
 
 			$('.cpur').html(nombre +" "+ apellido);
 			$('.edit-profile span').html(nombre +" "+ apellido);
 
 			if(sexo == 0){
-				$('#sexo_perfil').html('Mujer');
-			}else{
 				$('#sexo_perfil').html('Hombre');
+			}else{
+				$('#sexo_perfil').html('Mujer');
+				
 			}
 
 			if (sexo) {
-				$('#hombre').attr('src','images/hombreh.svg');
+				$('#hombre').attr('src','images/hombre.svg');
 				$('#mujer').attr('src','images/mujere.svg');
 			} else {
-				$('#hombre').attr('src','images/hombree.svg');
-				$('#mujer').attr('src','images/mujerh.svg');
+				$('#hombre').attr('src','images/hombreh.svg');
+				$('#mujer').attr('src','images/mujere.svg');
 			}
 
 			console.log(edad);
@@ -1280,29 +1280,29 @@ $(window).load(function(){
 		$("#hombre").click(function(){
 			if ($(this).hasClass('edition')) {
 				$('#mujer').attr("src","images/mujere.svg");
-				$('#update_sexo').attr("value", '0');
+				$('#update_sexo').attr("value", '1');
 
 			} else {
 				$('#mujer').attr("src","images/mujer.svg");
 				$('#mujer').attr("alt","");
 			}
-			$(this).attr({src: "images/hombreh.svg", alt: "1"});
+			$(this).attr({src: "images/hombreh.svg", alt: "0"});
 			$('.type-def').attr("src","images/hombreh.svg");
-			$('#update_sexo').attr("value", '1');
+			$('#update_sexo').attr("value", '0');
 		});
 
  
 		$("#mujer").click(function(){
 			if ($(this).hasClass('edition')) {
 				$('#hombre').attr("src","images/hombree.svg");
-				$('#update_sexo').attr("value", '1');
+				$('#update_sexo').attr("value", '0');
 			} else {
 				$('#hombre').attr("src","images/hombre.svg");
 				$('#hombre').attr("alt","");
 			}
 			$(this).attr({src: "images/mujerh.svg", alt: "1"});
 			$('.type-def').attr("src","images/mujerh.svg");
-			$('#update_sexo').attr("value", '0');
+			$('#update_sexo').attr("value", '1');
 		}); //end click mujer
 
 
@@ -1768,7 +1768,7 @@ $(window).load(function(){
 	FEED HTML
 */
 
-		$('.circle-frame').find('img').attr('src', localStorage.getItem('avatar'));
+		$('.circle-frame').find('img').attr('src', localStorage.getItem('avatar') + '?type=large');
 	
 		$('#finish1').click(function(){
 			$('.aboutyou').animate({opacity:"0",left:"-40px"}, 200);
