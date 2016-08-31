@@ -908,7 +908,7 @@ function requestHandlerAPI(){
 					  	$.ajax({
 					  	  type: 'GET',
 					  	  headers: req.headers,
-					  	  url: window.api_base_url+'api/cliente?='+userId,
+					  	  url: window.api_base_url+'api/cliente'+userId,
 					  	  //data: JSON.stringify(req.data),
 					  	  dataType: 'json',
 					  	  async: false
