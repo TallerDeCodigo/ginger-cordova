@@ -19,7 +19,7 @@
 		<script src="js/main.js"></script>
 </head>
 
-	<body class="iosm">
+	<body class="has-change-payment iosm">
 		<div id="container" class="money">
 			<header class="hwhite2">
 				<div class="toolbar">
@@ -72,18 +72,9 @@
 		</div>
 	</body>
 
-	<!-- ******* CONEKTA ******** 
-
-   <script type="text/javascript" src="https://conektaapi.s3.amazonaws.com/v0.5.0/js/conekta.js"></script>
-   <script type="text/javascript">
-    //Conekta.setPublishableKey('key_KJysdbf6PotS2ut2'); //v3.2
-    Conekta.setPublicKey('key_C3MaVjaR7emXdiyRGTcbjFQ'); //v5+
-   </script>-->
 	<script type="text/javascript">
 		/* Initialize app object and perform initial login check */
-		window.is_feed = true;
+		window.is_feed = false;
 		app.initialize();
-		//app.render_feed(0, 'all');
-		//app.showLoader();
 	</script>
 </html>	

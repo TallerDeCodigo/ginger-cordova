@@ -370,6 +370,29 @@ function requestHandlerAPI(){
 
 		};
 
+		this.changePayment = function(token){
+			var req = {
+				method : 'POST',
+				url : api_base_url + 'api/change_payment/',	//definitr tabla
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'Content-Type': 'application/json'
+				},
+				data : {
+					'cliente' : localStorage.getItem('userId'),
+					'tokenId' : token
+				}
+			}
+			console.log(req);
+
+			var response = this.makeRequest('api/change_payment', req);
+
+			if(response)
+				return true;
+			return false;
+		};
+
 		this.getTransactions = function(){
 			var req = {
 				method : 'GET',
