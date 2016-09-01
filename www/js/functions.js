@@ -1447,6 +1447,10 @@ $(window).load(function(){
 				timeout = setInterval(function(){
 					agua = Number($('.vaso p span').html());
 					agua=agua+0.25;
+
+					if(agua == 10.00)
+						agua = 10.00;	
+
 		        	$('.vaso p span').html(agua.toFixed(2));
 		        	$('input[name="litros"]').attr("value", agua);
 			    }, 100);
@@ -1461,8 +1465,8 @@ $(window).load(function(){
 			$("#agua-dw").bind('touchstart', function(){
 				timeout = setInterval(function(){
 					agua = Number($('.vaso p span').html());
-					if (agua>0.4) {
-						agua=agua-0.5;
+					if (agua>0.25) {
+						agua=agua-0.25;
 			        	$('.vaso p span').html(agua.toFixed(1));
 			        	$('input[name="litros"]').attr("value", agua);
 					}
@@ -1476,15 +1480,11 @@ $(window).load(function(){
 			});
 
 
-					/*
-						localStorage AGUA
-					*/
+			/*
+				localStorage AGUA
+			*/
 			$('#add_agua').on('click', function(){
 				localStorage.setItem('agua', $('input[name="litros"]').val() );
-
-
-				//console.log(0 + ' -+- ' + agua);
-
 
 				if(!$('.alert_tracking').is(':visible')){
 					$('.alert_tracking').show();
@@ -1496,12 +1496,20 @@ $(window).load(function(){
 				$('#container').toggleClass('blurred');
 				//$('a.centro img').toggleClass('onn');
 			});
+
+			//----------------------------
+			//
+			// Tracking Water
+			//
+			//----------------------------
+
 			$('#add_tracking').click(function(){
 
 				var agua = localStorage.getItem('agua');
 				console.log(agua);
-													/*ajustar los tipos para cada tracking*/
-				var responsedata = apiRH.tracking(0, agua);
+				/*ajustar los tipos para cada tracking 7 Agua*/
+
+				var responsedata = apiRH.tracking(7, agua);
 
 				if(responsedata){
 					window.location.assign('dieta.html');
@@ -1570,16 +1578,16 @@ $(window).load(function(){
 			});
 
 
-					/*
-						localStorage PESO 	*
-					*/
+			/*
+				localStorage PESO 	*
+			*/
 			$('#add_peso').on('click', function(){
 				localStorage.setItem('track_peso', $('input[name="track_peso"]').val() );
-
-				var track_peso = localStorage.getItem('track_peso');
-				//console.log(track_peso);
 				
-
+				var track_peso = localStorage.getItem('track_peso');
+				
+				console.log(track_peso);
+				
 				if(!$('.alert_tracking').is(':visible')){
 					$('.alert_tracking').show();
 					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
@@ -1592,19 +1600,22 @@ $(window).load(function(){
 			});
 
 			$('#add_tracking').click(function(){	
-				//------------------------------
-				//  @param tracking 1 - Ánimo
-				//  @param value of image selected
-				//-------------------------------
-				if(track_peso >= 0){
+				track_peso = $('input[name="track_peso"]').val();
+
+
+				if(track_peso >= 30){
+
+					console.log('Peso <<<');
+
 					var responsedata = apiRH.tracking(0, track_peso);
+					
 					if(responsedata){
 						window.location.assign('dieta.html');
 					}else{
 						alert('Error al registrar peso');
 					}
 				}else{
-					alert('Error al registrar peso');
+					alert('El peso debe de ser mayor a 40');
 				}
 				$('.alert_tracking').hide();
 				$('#container').toggleClass('blurred');
