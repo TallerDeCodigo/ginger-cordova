@@ -40,7 +40,7 @@ $( function() {
 		$.each(response, function( key, value ) {
 			$.each(value, function( key, value ) {
 				
-				console.log(key + ' ::: ' + value);
+				console.log(key + ' ::' + value);
 
 				if(key == 'body'){
 
@@ -49,8 +49,19 @@ $( function() {
 						console.log(key + ' :::: ' + value);
 
 						// INSERTAR HTML
-					
+
+						if(key == 'created_at'){
+							var d = new Date(value * 1000);
+							$('.miembro').append(d.getDate()+'-'+(d.getMonth()+1) +'-' + d.getFullYear());
+						}
+
+						if(key == 'trial_end'){
+							var d = new Date(value * 1000);
+							$('.suscripcion').append(d.getDate()+'-'+(d.getMonth()+1) +'-' + d.getFullYear());
+						}
+
 						
+				
 						if(key == 'amount'){
 							// $('.monto').html("$ "+value/100 + ".00");
 
@@ -66,7 +77,7 @@ $( function() {
 							var d = new Date(value * 1000);
 							// $('._month').html(meses_year[r.getMonth()] + " " +d.getUTCFullYear() );
 
-							cadenita += '<td> ' + meses_year[r.getMonth()] + " " +d.getUTCFullYear() + '</td></tr>';
+							cadenita += '<td> ' + meses_year[r.getMonth()+1] + " " +d.getUTCFullYear() + '</td></tr>';
 						}
 					});
 				}
@@ -75,6 +86,70 @@ $( function() {
 
 		$('#historial tbody').append(cadenita);
 	}//end finanzas
+
+
+	if($('body').hasClass('has-change-payment')){
+
+
+
+		$('.enter').click(function () {
+
+			var  t_nombre   = $('input[name="nombre"]').val(); 
+	   		var  t_card 	= $('input[name="card"]').val(); 
+	   		var  t_mes  	= $('input[name="mes"]').val(); 
+	   		var  t_ano 		= $('input[name="year"]').val(); 
+	   		var  t_cvc 		= $('input[name="cvc"]').val(); 
+	   		var  t_mail 	= $('input[name="mail"]').val(); 
+	   		var  t_cupon 	= $('input[name="cupon"]').val(); 
+	   		var  t_terms 	= $('input[name="terms"]').val(); 
+
+	   		Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
+	   		
+	   		var errorResponseHandler, successResponseHandler, tokenParams;
+
+	   		tokenParams = {
+	   		  "card": {
+	   		    "number": t_card,
+	   		    "name": t_nombre,
+	   		    "exp_year": t_ano,
+	   		    "exp_month": t_mes,
+	   		    "cvc": t_cvc
+	   		  }
+	   		};
+
+	   		successResponseHandler = function(token) 
+	   		{
+	   			var response = apiRH.changePayment(token.id);
+	   			// Funcion de mensaje de bienvenida
+	   			if(response){
+	   				
+	   				if(response)
+	   				{
+	   					alert('Los datos se han actualizado');
+	   				}
+	   				else
+	   					alert("Error al actualizar datos");
+	   			}else{
+	   				alert("Error al procesar tu pago");
+	   			}
+	   			return;
+	   		};
+
+	   		/* Después de recibir un error */
+
+	   		errorResponseHandler = function(error) {
+	   		  return console.log(error.message);  //error de conectividad
+	   		  alert('Error al procesar tu pago' + error.message);
+	   		};
+
+	   		/* Tokenizar una tarjeta en Conekta */
+
+	   		Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
+			
+		});
+			
+
+	}
 
 
 	if($('body').hasClass('has-chat')){
