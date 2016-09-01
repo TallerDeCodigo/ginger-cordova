@@ -193,7 +193,6 @@ function requestHandlerAPI(){
 
 		};
 
-
 		/* 
 		 * Register a new user account the old fashioned way
 		 * @param data_login JSON {user_login, user_password}
