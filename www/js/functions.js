@@ -67,22 +67,14 @@ $( function() {
 							// $('._month').html(meses_year[r.getMonth()] + " " +d.getUTCFullYear() );
 
 							cadenita += '<td> ' + meses_year[r.getMonth()] + " " +d.getUTCFullYear() + '</td></tr>';
-
 						}
-
-
-							
-
-
 					});
 				}
 			});
-
-				
 		});
 
 		$('#historial tbody').append(cadenita);
-	}
+	}//end finanzas
 
 
 	if($('body').hasClass('has-chat')){
@@ -134,7 +126,7 @@ $( function() {
 		//     window.scrollTo(0,100); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px. 
 		// });
 
-	}
+	}//end has class has chat
 
 
 	/*EDAD*/
@@ -196,41 +188,42 @@ $( function() {
   	});
 
 
-		/*
-			localStorage MEDIDAS / MEASURED AREA
-		*/
-  	$('#add_medidas').on('click', function(){
-  		
-  		localStorage.setItem( 'medidas', $('#medida-dato').val() );
-  		localStorage.setItem('measured_area', $('#measured_area').val() )
+    if( $('body').hasClass('measures') ){
+	  	$('#add_medidas').on('click', function(){
+			/*
+				localStorage MEDIDAS / MEASURED AREA
+														*/
+	  		
+	  		localStorage.setItem( 'medidas', $('#medida-dato').val() );
+	  		localStorage.setItem('measured_area', $('#measured_area').val() )
 
-  		var medidas = localStorage.getItem('medidas');
-  		var area = localStorage.getItem('measured_area');
-  		//console.log(medidas+" "+ area);
+	  		if(!$('.alert_tracking').is(':visible')){
+	  			$('.alert_tracking').show();
+	  			setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+	  		} else {
+	  			$('.alert_tracking').removeClass('active');
+	  			setTimeout(function() {$('.alert_tracking').hide();}, 800);
+	  		}
+	  		$('#container').toggleClass('blurred');
+	  		//$('a.centro img').toggleClass('onn');
+	  	});
+	  		$('#add_tracking').click(function(){
 
-  		
-
-  		if(!$('.alert_tracking').is(':visible')){
-  			$('.alert_tracking').show();
-  			setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
-  		} else {
-  			$('.alert_tracking').removeClass('active');
-  			setTimeout(function() {$('.alert_tracking').hide();}, 800);
-  		}
-  		$('#container').toggleClass('blurred');
-  		//$('a.centro img').toggleClass('onn');
-
-
-  		$('#add_tracking').click(function(){
-
-  			var responsedata = apiRH.tracking(0, 1);
-  			if(responsedata){
-  				window.location.assign('dieta.html');
-  			}
-  		});
-	
-  	});
-
+		  		var medidas = localStorage.getItem('medidas');
+		  		var area = localStorage.getItem('measured_area');
+	  			var responsedata = apiRH.tracking(area, medidas);
+	  			if(responsedata){
+	  				console.log(area+" "+medidas);
+	  				//window.location.assign('dieta.html');
+	  			}
+	  			$('.alert_tracking').hide();
+	  			$('#container').toggleClass('blurred');
+	  		});
+	  		$('#add_cancelar').click(function(){
+	  			$('.alert_tracking').hide();
+	  			$('#container').toggleClass('blurred');
+	  		});
+    }//end if body has class measures
 
 
 		/*HORAS MINUTOS*/
@@ -463,24 +456,24 @@ $(window).on("load resize",function(){
 				$('.comentario').hide();
 			}	
 			
-	
-			// console.log(user);
+			$('.profile.circle-frame').find('img').attr('src', localStorage.getItem('avatar') + '?type=large');
 
 			$('.cpur').html(nombre +" "+ apellido);
 			$('.edit-profile span').html(nombre +" "+ apellido);
 
 			if(sexo == 0){
-				$('#sexo_perfil').html('Mujer');
-			}else{
 				$('#sexo_perfil').html('Hombre');
+			}else{
+				$('#sexo_perfil').html('Mujer');
+				
 			}
 
 			if (sexo) {
-				$('#hombre').attr('src','images/hombreh.svg');
+				$('#hombre').attr('src','images/hombre.svg');
 				$('#mujer').attr('src','images/mujere.svg');
 			} else {
-				$('#hombre').attr('src','images/hombree.svg');
-				$('#mujer').attr('src','images/mujerh.svg');
+				$('#hombre').attr('src','images/hombreh.svg');
+				$('#mujer').attr('src','images/mujere.svg');
 			}
 
 			console.log(edad);
@@ -781,12 +774,10 @@ $(window).on("load resize",function(){
 				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 				$(this).addClass('active');
 				$(this).attr("value", valor);
-				
 				$('.restricciones').attr('value', valor);
 				
 				restricciones.push(valor);
-				
-				console.log(localStorage.setItem('restricciones', JSON.stringify(restricciones)) );
+				localStorage.setItem('restricciones', JSON.stringify(restricciones) );
 
 			} else {
 
@@ -804,6 +795,7 @@ $(window).on("load resize",function(){
 						var index = restricciones.indexOf(valor);
 
 						restricciones.splice(i, 1);
+						console.log(restricciones);
 
 						localStorage.setItem('restricciones', JSON.stringify(restricciones));
 
@@ -823,7 +815,7 @@ $(window).on("load resize",function(){
 			}
 			console.log(restricciones);
 
-		});
+		});//enc click re-option
 
 		if ($('body').hasClass('update_data')) {
 			
@@ -1072,7 +1064,7 @@ $(window).load(function(){
     var fecha = new Date();
     var weekNumber = (new Date()).getWeek();
     var meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sept", "Oct", "Nov", "Dic"];
-	var dias = ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+	var dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado","Domingo"];
 
 	//console.log(weekNumber);
   	var ano = fecha.getFullYear();
@@ -1086,17 +1078,15 @@ $(window).load(function(){
     	$('#year').html(ano);
 
     function getWeekDays(fromDate){
-     var sunday = new Date(fromDate.setDate(fromDate.getDate()-fromDate.getDay())),result = [new Date(sunday)];
-     while (sunday.setDate(sunday.getDate()+1) && sunday.getDay()!==0) {
-      result.push(new Date(sunday));
-     }
-     return result;
+		var sunday = new Date(fromDate.setDate(fromDate.getDate()-fromDate.getDay())),result = [new Date(sunday)];
+     	while (sunday.setDate(sunday.getDate()+1) && sunday.getDay()!==0) {
+      		result.push(new Date(sunday));
+     	}
+		return result;
     }
 
     var week = new Object();
     var today = fecha.hoy().toString();
-    //console.log( today); 
-    //console.log(week);
     
     var days = $('.day_of_week');
     var dow = [];
@@ -1107,21 +1097,30 @@ $(window).load(function(){
     week = getWeekDays( new Date(today) );
 
     //console.log("str> "+today);
-    
-    for(var i=0; i<dias.length; i++){
-    	var masuno = i+1;
-    	date_string = week[i].toString();
+    var domingo;
+
+    for(var i=1; i<dias.length; i++){
+    	var masuno = i;
+    	date_string = week[i].toString();    	
     	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
     	var dataf = new Date(date_string);
     	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
-    	//$('tr td.day_of_week:nth-of-type('+masuno+') span').attr("data-day" + date_string.substring(8, 11) );
     }
 
-    	var incremento = 168.25;
-    	var decremento = 167.75;
-		var current_day;
-    	var full_date;
-	    var left = fecha.hoy().substring(0,8);
+    date_string = week[0].toString();
+
+    console.log(date_string);
+
+    $('tr td.day_of_week:nth-of-type(7) span').html(date_string.substring(8, 11));
+    var dataf = new Date(date_string);
+    console.log(dataf);
+    $('#toda_la_dieta li:nth-of-type(7)').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
+
+	var incremento = 168.25;
+	var decremento = 167.75;
+	var current_day;
+	var full_date;
+    var left = fecha.hoy().substring(0,8);
 
 	    current_day = new Date( + new Date().getTime() + 1 * 60 * 60 * 1000 );
 	    var dia_semana = current_day.getDay();
@@ -1151,7 +1150,7 @@ $(window).load(function(){
 	    	current_day = full_date;
 	    	//console.log("Full date > > "+full_date);
 	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
-			for(var i=0; i<dias.length; i++){
+			for(var i=1; i<dias.length; i++){
 				
 				var nuevo = JSON.stringify(week2[i]);
 				// console.log("wee ::"+week2[i]);
@@ -1175,7 +1174,7 @@ $(window).load(function(){
 	    	$('#month').html(meses[month] );
 	    	$('#year').html(full_date.getFullYear());
 
-	    	for(var i=0; i<dias.length; i++){
+	    	for(var i=1; i<dias.length; i++){
 	    		var masuno = i+1;
 	    		date_string = week[i].toString();
 	    		$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
@@ -1287,29 +1286,29 @@ $(window).load(function(){
 		$("#hombre").click(function(){
 			if ($(this).hasClass('edition')) {
 				$('#mujer').attr("src","images/mujere.svg");
-				$('#update_sexo').attr("value", '0');
+				$('#update_sexo').attr("value", '1');
 
 			} else {
 				$('#mujer').attr("src","images/mujer.svg");
 				$('#mujer').attr("alt","");
 			}
-			$(this).attr({src: "images/hombreh.svg", alt: "1"});
+			$(this).attr({src: "images/hombreh.svg", alt: "0"});
 			$('.type-def').attr("src","images/hombreh.svg");
-			$('#update_sexo').attr("value", '1');
+			$('#update_sexo').attr("value", '0');
 		});
 
  
 		$("#mujer").click(function(){
 			if ($(this).hasClass('edition')) {
 				$('#hombre').attr("src","images/hombree.svg");
-				$('#update_sexo').attr("value", '1');
+				$('#update_sexo').attr("value", '0');
 			} else {
 				$('#hombre').attr("src","images/hombre.svg");
 				$('#hombre').attr("alt","");
 			}
 			$(this).attr({src: "images/mujerh.svg", alt: "1"});
 			$('.type-def').attr("src","images/mujerh.svg");
-			$('#update_sexo').attr("value", '0');
+			$('#update_sexo').attr("value", '1');
 		}); //end click mujer
 
 
@@ -1441,314 +1440,347 @@ $(window).load(function(){
 		    return false;
 		});
 
-		var agua;
+		if($('body').hasClass('water') ){
+			var agua;
 
-		$("#agua-up").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				agua = Number($('.vaso p span').html());
-				agua=agua+0.25;
-	        	$('.vaso p span').html(agua.toFixed(2));
-	        	$('input[name="litros"]').attr("value", agua);
-		    }, 100);
-		    return false;
-		});
+			$("#agua-up").bind('touchstart', function(){
+				timeout = setInterval(function(){
+					agua = Number($('.vaso p span').html());
+					agua=agua+0.25;
 
-		$("#agua-up").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
+					if(agua == 10.00)
+						agua = 10.00;	
 
-		$("#agua-dw").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				agua = Number($('.vaso p span').html());
-				if (agua>0.4) {
-					agua=agua-0.5;
-		        	$('.vaso p span').html(agua.toFixed(1));
+		        	$('.vaso p span').html(agua.toFixed(2));
 		        	$('input[name="litros"]').attr("value", agua);
+			    }, 100);
+			    return false;
+			});
+
+			$("#agua-up").bind('touchend', function(){
+			    clearInterval(timeout);
+			    return false;
+			});
+
+			$("#agua-dw").bind('touchstart', function(){
+				timeout = setInterval(function(){
+					agua = Number($('.vaso p span').html());
+					if (agua>0.25) {
+						agua=agua-0.25;
+			        	$('.vaso p span').html(agua.toFixed(1));
+			        	$('input[name="litros"]').attr("value", agua);
+					}
+			    }, 100);
+			    return false;
+			});
+
+			$("#agua-dw").bind('touchend', function(){
+			    clearInterval(timeout);
+			    return false;
+			});
+
+
+			/*
+				localStorage AGUA
+			*/
+			$('#add_agua').on('click', function(){
+				localStorage.setItem('agua', $('input[name="litros"]').val() );
+
+				if(!$('.alert_tracking').is(':visible')){
+					$('.alert_tracking').show();
+					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+				} else {
+					$('.alert_tracking').removeClass('active');
+					setTimeout(function() {$('.alert_tracking').hide();}, 800);
 				}
-		    }, 100);
-		    return false;
-		});
+				$('#container').toggleClass('blurred');
+				//$('a.centro img').toggleClass('onn');
+			});
 
-		$("#agua-dw").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
-
-
-				/*
-					localStorage AGUA
-				*/
-		$('#add_agua').on('click', function(){
-			localStorage.setItem('agua', $('input[name="litros"]').val() );
-
-			var agua = localStorage.getItem('agua');
-
-			//console.log(0 + ' -+- ' + agua);
-
-			var responsedata = apiRH.tracking(0, 1);
-
-			if(!$('.alert_tracking').is(':visible')){
-				$('.alert_tracking').show();
-				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
-			} else {
-				$('.alert_tracking').removeClass('active');
-				setTimeout(function() {$('.alert_tracking').hide();}, 800);
-			}
-			$('#container').toggleClass('blurred');
-			//$('a.centro img').toggleClass('onn');
-
+			//----------------------------
+			//
+			// Tracking Water
+			//
+			//----------------------------
 
 			$('#add_tracking').click(function(){
+
+				var agua = localStorage.getItem('agua');
+				console.log(agua);
+				/*ajustar los tipos para cada tracking 7 Agua*/
+
+				var responsedata = apiRH.tracking(7, agua);
+
 				if(responsedata){
 					window.location.assign('dieta.html');
 				}
+				$('.alert_tracking').hide();
+				$('#container').toggleClass('blurred');
 			});
 
-		});
+			$('.cancel').click(function(){
+				$('.alert_tracking').hide();
+				$('#container').toggleClass('blurred');
+			});
+		}
 
-		var r_peso;
+		if( $('body').hasClass('weight') ){
+			var r_peso;
+			var usr_peso;
+			var response = localStorage.getItem('user');
+			response = JSON.parse(response);
+			usr_peso = response.perfil.peso;
+			$('.r_peso input[name="peso_metric"]').attr("value",usr_peso );
 
-		$("#r_peso-up").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				r_peso = Number($('.r_peso input[name="peso_metric"]').val() );
-		        if (r_peso<99) {
-					r_peso=r_peso+0.5;
-		        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(1));
-		        	$('input[name="track_peso"]').attr('value', r_peso);
-				} else {
-					r_peso=r_peso+1;
-		        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(0));
-		        	$('input[name="track_peso"]').attr('value', r_peso);
-				}
-		    }, 100);
-		    return false;
-		});
+			$("#r_peso-up").bind('touchstart', function(){
+				timeout = setInterval(function(){
+					r_peso = Number($('.r_peso input[name="peso_metric"]').val() );
 
-		$("#r_peso-up").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
-
-		$("#r_peso-dw").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				r_peso = Number($('.r_peso input[name="peso_metric"]').val());
-				if (r_peso>0.4) {
-					if (r_peso<100.1) {
-						r_peso=r_peso-0.5;
-						$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(1));
-						$('input[name="track_peso"]').attr('value', r_peso);
+			        if (r_peso<99) {
+						r_peso=r_peso+0.5;
+			        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(1));
+			        	$('input[name="track_peso"]').attr('value', r_peso);
 					} else {
-						r_peso=r_peso-1;
-						$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(0));
-						$('input[name="track_peso"]').attr('value', r_peso);
+						r_peso=r_peso+1;
+			        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(0));
+			        	$('input[name="track_peso"]').attr('value', r_peso);
 					}
-				}
-		    }, 100);
-		    return false;
-		});
+			    }, 100);
+			    return false;
+			});
 
-		$("#r_peso-dw").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
+			$("#r_peso-up").bind('touchend', function(){
+			    clearInterval(timeout);
+			    return false;
+			});
+
+			$("#r_peso-dw").bind('touchstart', function(){
+				timeout = setInterval(function(){
+					r_peso = Number($('.r_peso input[name="peso_metric"]').val());
+					if (r_peso>0.4) {
+						if (r_peso<100.1) {
+							r_peso=r_peso-0.5;
+							$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(1));
+							$('input[name="track_peso"]').attr('value', r_peso);
+						} else {
+							r_peso=r_peso-1;
+							$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(0));
+							$('input[name="track_peso"]').attr('value', r_peso);
+						}
+					}
+			    }, 100);
+			    return false;
+			});
+
+			$("#r_peso-dw").bind('touchend', function(){
+			    clearInterval(timeout);
+			    return false;
+			});
 
 
-				/*
-					localStorage PESO 	*
-				*/
-		$('#add_peso').on('click', function(){
-			localStorage.setItem('track_peso', $('input[name="track_peso"]').val() );
-
-			var track_peso = localStorage.getItem('track_peso');
-			//console.log(track_peso);
-			
-
-			if(!$('.alert_tracking').is(':visible')){
-				$('.alert_tracking').show();
-				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
-			} else {
-				$('.alert_tracking').removeClass('active');
-				setTimeout(function() {$('.alert_tracking').hide();}, 800);
-			}
-			$('#container').toggleClass('blurred');
-			//$('a.centro img').toggleClass('onn');
-
-
-			$('#add_tracking').click(function(){
+			/*
+				localStorage PESO 	*
+			*/
+			$('#add_peso').on('click', function(){
+				localStorage.setItem('track_peso', $('input[name="track_peso"]').val() );
 				
-				//------------------------------
-				//  @param tracking 1 - Ánimo
-				//  @param value of image selected
-				//-------------------------------
+				var track_peso = localStorage.getItem('track_peso');
+				
+				console.log(track_peso);
+				
+				if(!$('.alert_tracking').is(':visible')){
+					$('.alert_tracking').show();
+					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+				} else {
+					$('.alert_tracking').removeClass('active');
+					setTimeout(function() {$('.alert_tracking').hide();}, 800);
+				}
+				$('#container').toggleClass('blurred');
+				//$('a.centro img').toggleClass('onn');
+			});
 
-				if(track_peso >= 0){
+			$('#add_tracking').click(function(){	
+				
+				track_peso = $('input[name="track_peso"]').val();
+
+
+				if(track_peso >= 30){
+
+					console.log('Peso <<<');
+
 					var responsedata = apiRH.tracking(0, track_peso);
+					
 					if(responsedata){
 						window.location.assign('dieta.html');
 					}else{
 						alert('Error al registrar peso');
 					}
 				}else{
-					alert('Error al registrar peso');
+					alert('El peso debe de ser mayor a 40');
 				}
-				
+				$('.alert_tracking').hide();
+				$('#container').toggleClass('blurred');
 			});
 
-		});
+			$('.cancel').click(function(){
+				$('.alert_tracking').hide();
+				$('#container').toggleClass('blurred');
+			});
+		}//END IF BODY HAS CLASS WEIGHT
 
+		if( $('body').hasClass('mood') ){
 
+			var valor = 0;
+			var animo = [ 'increible', 'feliz', 'bien', 'regular', 'triste', 'cansado', 'hambriento', 'frustrado', 'motivado' ];
 
-		var valor = 0;
-		var animo = [ 'increible', 'feliz', 'bien', 'regular', 'triste', 'cansado', 'hambriento', 'frustrado', 'motivado' ];
+			$("#animo-up").bind('touchstart', function(){
+				timeout = setInterval(function(){
+					if (valor < 8) {
+						valor++;
+					} else {
+						valor = 0;
+					}
+			        
+			        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
+			        if (animo[valor]=="increible") {
+			        	$('.carita h4').html("increíble");
+			        } else {
+			        	$('.carita h4').html(animo[valor]);
+			        }
+			        
 
-		$("#animo-up").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				if (valor < 8) {
-					valor++;
-				} else {
-					valor = 0;
-				}
-		        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
-		        if (animo[valor]=="increible") {
-		        	$('.carita h4').html("increíble");
-		        } else {
-		        	$('.carita h4').html(animo[valor]);
-		        }
-		        
+					$('#track_animo').attr("value", animo[valor]);
 
-				$('#track_animo').attr("value", animo[valor]);
+			        switch ($('#track_animo').val() ) {
+			    	    case 'increible' :
+			    	        $('#track_animo').attr("value", "0");
+			    	        break;
+			    	    case 'feliz' :
+			    	        $('#track_animo').attr("value", "1");
+			    	        break;
+			    	    case 'bien' :
+			    	        $('#track_animo').attr("value", "2");
+			    	        break;
+			    	    case 'regular' :
+			    	        $('#track_animo').attr("value", "3");
+			    	        break;
+			    	    case 'triste' :
+			    	        $('#track_animo').attr("value", "4");
+			    	        break;    
+			    	    case 'cansado' :
+			    	        $('#track_animo').attr("value", "5");
+			    	        break;   
+			    	    case 'hambriento' :
+			    	        $('#track_animo').attr("value", "6");
+			    	        break;     
+			    	    case 'frustrado' :
+			    	        $('#track_animo').attr("value", "7");
+			    	        break; 
+			    	    case 'motivado' :
+			    	        $('#track_animo').attr("value", "8");
+			    	        break;
+	    	     	}
 
-		        switch ($('#track_animo').val() ) {
-		    	    case 'increible' :
-		    	        $('#track_animo').attr("value", "0");
-		    	        break;
-		    	    case 'feliz' :
-		    	        $('#track_animo').attr("value", "1");
-		    	        break;
-		    	    case 'bien' :
-		    	        $('#track_animo').attr("value", "2");
-		    	        break;
-		    	    case 'regular' :
-		    	        $('#track_animo').attr("value", "3");
-		    	        break;
-		    	    case 'triste' :
-		    	        $('#track_animo').attr("value", "4");
-		    	        break;    
-		    	    case 'cansado' :
-		    	        $('#track_animo').attr("value", "5");
-		    	        break;   
-		    	    case 'hambriento' :
-		    	        $('#track_animo').attr("value", "6");
-		    	        break;     
-		    	    case 'frustrado' :
-		    	        $('#track_animo').attr("value", "7");
-		    	        break; 
-		    	    case 'motivado' :
-		    	        $('#track_animo').attr("value", "8");
-		    	        break;
-    	     	}
+			        // 0 - 8 estados de animo
 
-		        // 0 - 8 estados de animo
+			    }, 150);
+			    return false;
+			}); //END BIND TOUCH START
 
-		    }, 150);
-		    return false;
-		});
+			$("#animo-up").bind('touchend', function(){
+			    clearInterval(timeout);
+			    return false;
+			});
 
-		$("#animo-up").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
+			$("#animo-dw").bind('touchstart', function(){
+				timeout = setInterval(function(){
+					if (valor > 0) {
+						valor--;
+					} else {
+						valor = 8;
+					}
+			        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
+			        if (animo[valor]=="increible") {
+			        	$('.carita h4').html("increíble");
+			        } else {
+			        	$('.carita h4').html(animo[valor]);
+			        }
 
-		$("#animo-dw").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				if (valor > 0) {
-					valor--;
-				} else {
-					valor = 8;
-				}
-		        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
-		        if (animo[valor]=="increible") {
-		        	$('.carita h4').html("increíble");
-		        } else {
-		        	$('.carita h4').html(animo[valor]);
-		        }
+			        $('#track_animo').attr("value", animo[valor]);
 
-		        $('#track_animo').attr("value", animo[valor]);
+			        switch ($('#track_animo').val() ) {
+			    	    case 'increible' :
+			    	        $('#track_animo').attr("value", "0");
+			    	        break;
+			    	    case 'feliz' :
+			    	        $('#track_animo').attr("value", "1");
+			    	        break;
+			    	    case 'bien' :
+			    	        $('#track_animo').attr("value", "2");
+			    	        break;
+			    	    case 'regular' :
+			    	        $('#track_animo').attr("value", "3");
+			    	        break;
+			    	    case 'triste' :
+			    	        $('#track_animo').attr("value", "4");
+			    	        break;    
+			    	    case 'cansado' :
+			    	        $('#track_animo').attr("value", "5");
+			    	        break;   
+			    	    case 'hambriento' :
+			    	        $('#track_animo').attr("value", "6");
+			    	        break;     
+			    	    case 'frustrado' :
+			    	        $('#track_animo').attr("value", "7");
+			    	        break; 
+			    	    case 'motivado' :
+			    	        $('#track_animo').attr("value", "8");
+			    	        break;
+	    	     	}
 
-		        switch ($('#track_animo').val() ) {
-		    	    case 'increible' :
-		    	        $('#track_animo').attr("value", "0");
-		    	        break;
-		    	    case 'feliz' :
-		    	        $('#track_animo').attr("value", "1");
-		    	        break;
-		    	    case 'bien' :
-		    	        $('#track_animo').attr("value", "2");
-		    	        break;
-		    	    case 'regular' :
-		    	        $('#track_animo').attr("value", "3");
-		    	        break;
-		    	    case 'triste' :
-		    	        $('#track_animo').attr("value", "4");
-		    	        break;    
-		    	    case 'cansado' :
-		    	        $('#track_animo').attr("value", "5");
-		    	        break;   
-		    	    case 'hambriento' :
-		    	        $('#track_animo').attr("value", "6");
-		    	        break;     
-		    	    case 'frustrado' :
-		    	        $('#track_animo').attr("value", "7");
-		    	        break; 
-		    	    case 'motivado' :
-		    	        $('#track_animo').attr("value", "8");
-		    	        break;
-    	     	}
+			    }, 150);
+			    return false;
+			});//END BIND TOUCH START DOS
 
-		    }, 150);
-		    return false;
-		});
-
-		$("#animo-dw").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
-		
-		//--------------------------------------------
-		//
-		// onClick: add_animo Registro de estado de
-		// animo.
-		//
-		//--------------------------------------------
-
-		$('#add_animo').on('click', function(){
-
-			localStorage.setItem('track_animo', $('#track_animo').val() );
-
-			var track_animo = localStorage.getItem('track_animo');
-
-			if(track_animo == '')
-				track_animo = 0;
-
-			if(!$('.alert_tracking').is(':visible')){
-				$('.alert_tracking').show();
-				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
-			} else {
-				$('.alert_tracking').removeClass('active');
-				setTimeout(function() {$('.alert_tracking').hide();}, 800);
-			}
-
-			$('#container').toggleClass('blurred');
+			$("#animo-dw").bind('touchend', function(){
+			    clearInterval(timeout);
+			    return false;
+			});
 			
+			//--------------------------------------------
+			//
+			// onClick: add_animo Registro de estado de
+			// animo.
+			//
+			//--------------------------------------------
+
+			$('#add_animo').on('click', function(){
+
+				localStorage.setItem('track_animo', $('#track_animo').val() );
+
+				var track_animo = localStorage.getItem('track_animo');
+					console.log(track_animo);
+
+				if(localStorage.getItem('track_animo') == ''){
+					track_animo = 0;
+				}
+
+				if(!$('.alert_tracking').is(':visible')){
+					$('.alert_tracking').show();
+					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+				} else {
+					$('.alert_tracking').removeClass('active');
+					setTimeout(function() {$('.alert_tracking').hide();}, 800);
+				}
+				$('#container').toggleClass('blurred');
+			});
+
 			$('#add_tracking').click(function(){
-				
 				//------------------------------
 				//  @param tracking 1 - Ánimo
 				//  @param value of image selected
 				//-------------------------------
-
-				if(track_animo >= 0){
+				if(localStorage.getItem('track_animo') >= 0){
 					var responsedata = apiRH.tracking(1, track_animo);
 					if(responsedata){
 						window.location.assign('dieta.html');
@@ -1759,14 +1791,18 @@ $(window).load(function(){
 					alert('Error al registrar el estado de ánimo');
 				}
 			});
-
-		});
-
+		}
 
 /*
 	FEED HTML
 */
 
+		if( localStorage.getItem('avatar') ){
+			$('.circle-frame').find('img').attr('src', localStorage.getItem('avatar') + '?type=large');
+		}else{
+			$('.circle-frame').find('img').remove();
+		}
+	
 		$('#finish1').click(function(){
 			$('.aboutyou').animate({opacity:"0",left:"-40px"}, 200);
 			$('.bpur').removeClass('active');
@@ -1774,12 +1810,14 @@ $(window).load(function(){
 
 			//console.log($('#hombre').attr('alt') );
 
+
+
+
 			if($('#hombre').attr('alt') == '1' ){
 				$('#genre_value').attr('value', 1);
 			}else{
 				$('#genre_value').attr('value', 0);
 			}
-
 
 			/*
 
@@ -1904,7 +1942,7 @@ $(window).load(function(){
 			var dpw 		  		= localStorage.getItem('dpw');
 			var comentario 	  		= localStorage.getItem('comentario');
 
-			console.log("genero> " + genero +" > "+ peso+" > "+estatura+" > "+edad+" > "+peso_ideal+" > "+zipcode+" > "+plan+" > "+coach_type+" > "+restricciones_ls2+" > "+dpw+" > "+comentario );
+			console.log("genero> " + genero +"peso > "+ peso+"estatura > "+estatura+" edad > "+edad+" ideal > "+peso_ideal+" zip > "+zipcode+" plan > "+plan+" coach > "+coach_type+" restricciones > "+restricciones_ls2+" dpw > "+dpw+" comentario > "+comentario );
 
 			var ageyears = new Date();
 			var _year =ageyears.getFullYear();
@@ -1937,7 +1975,7 @@ $(window).load(function(){
 				},
 				"cp": zipcode,
 				"pesoDeseado": peso_ideal,
-				"comentario": comentario
+				"comentarios": comentario
 			}
 
 			//Request update data
@@ -2134,6 +2172,34 @@ $(window).load(function(){
 					$(".rate-stars_inner img:nth-of-type("+j+")").attr("src","images/starh.svg");
 				}
 			// }
+
+			var resenas = apiRH.getResenas(_aidi);
+
+			console.log(resenas);
+
+			
+			$.each(resenas, function(key, value){
+				console.log(key + ' :::: ' + value);	
+				$.each(value, function(key, value){
+										
+					$('.resena.pagina').append('<div class="nombre_resena"><div class="rate-stars2"></div></div><div class="resena_cont"></div>');
+
+					if(key == 'comment'){
+						$('.resena_cont').html(value);
+						console.log(value);	
+					}
+
+					if(key == 'calificacion'){
+						for (var i = 0; i < calificacion; i++) {
+							$('.rate-stars2').append('<img src="images/star.svg">');
+						}						
+					}
+				});
+			});
+			
+
+
+
 		});
 
 		$('#aceptar').click(function(){
@@ -2371,100 +2437,108 @@ $(window).load(function(){
 
 		});
 
-		$('.ej-option').click(function() {
-			var valor = $(this).find('.type').attr('value');
-			$('.ej-option').each(function() {
-			    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
-			      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
-			      $(this).removeClass('active');
-			      $(this).attr('value', "");
-			    }
-			}); 
-			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
-			$(this).addClass('active');
-			$("#ejercicio_type").attr('value', valor);
+		if( $('body').hasClass('excercise') ){
 
-				//'caminar', 'correr', 'pesas', 'cross', 'bici', 'estacionaria', 'eliptica', 'cardio', 'yoga', 'pilates', 'tenis', 'otro'
+					$('.ej-option').click(function() {
+						var valor = $(this).find('.type').attr('value');
+						$('.ej-option').each(function() {
+						    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
+						      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
+						      $(this).removeClass('active');
+						      $(this).attr('value', "");
+						    }
+						}); 
 
-			switch($("#ejercicio_type").val() ){
-				case 'caminar' :
-				$('#ejercicio_type').attr('value','10');
-    	        break;
-    	        case 'correr' :
-				$('#ejercicio_type').attr('value','11');
-    	        break;
-    	        case 'pesas' :
-				$('#ejercicio_type').attr('value','12');
-    	        break;
-    	        case 'cross' :
-				$('#ejercicio_type').attr('value','13');
-    	        break;
-    	        case 'bici' :
-				$('#ejercicio_type').attr('value','14');
-    	        break;
-    	        case 'estacionaria' :
-				$('#ejercicio_type').attr('value','15');
-    	        break;
-    	        case 'eliptica' :
-				$('#ejercicio_type').attr('value','16');
-    	        break;
-    	        case 'cardio' :
-				$('#ejercicio_type').attr('value','17');
-    	        break;
-    	        case 'yoga' :
-				$('#ejercicio_type').attr('value','18');
-    	        break;
-    	        case 'pilates' :
-				$('#ejercicio_type').attr('value','19');
-    	        break;
-    	        case 'tenis' :
-				$('#ejercicio_type').attr('value','20');
-    	        break;
-    	        case 'otro	' :
-				$('#ejercicio_type').attr('value','21');
-    	        break;
-			}
+						$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
+						$(this).addClass('active');
+						$("#ejercicio_type").attr('value', valor);
 
-		});
+							//'caminar', 'correr', 'pesas', 'cross', 'bici', 'estacionaria', 'eliptica', 'cardio', 'yoga', 'pilates', 'tenis', 'otro'
 
-				/*
-					localStorage EJERCICIO / DURACION / INTENSIDAD
-				 */
-		$('#add_ejercicio').on('click', function(){
+						switch($("#ejercicio_type").val() ){
+							case 'caminar' :
+							$('#ejercicio_type').attr('value','10');
+			    	        break;
+			    	        case 'correr' :
+							$('#ejercicio_type').attr('value','11');
+			    	        break;
+			    	        case 'pesas' :
+							$('#ejercicio_type').attr('value','12');
+			    	        break;
+			    	        case 'cross' :
+							$('#ejercicio_type').attr('value','13');
+			    	        break;
+			    	        case 'bici' :
+							$('#ejercicio_type').attr('value','14');
+			    	        break;
+			    	        case 'estacionaria' :
+							$('#ejercicio_type').attr('value','15');
+			    	        break;
+			    	        case 'eliptica' :
+							$('#ejercicio_type').attr('value','16');
+			    	        break;
+			    	        case 'cardio' :
+							$('#ejercicio_type').attr('value','17');
+			    	        break;
+			    	        case 'yoga' :
+							$('#ejercicio_type').attr('value','18');
+			    	        break;
+			    	        case 'pilates' :
+							$('#ejercicio_type').attr('value','19');
+			    	        break;
+			    	        case 'tenis' :
+							$('#ejercicio_type').attr('value','20');
+			    	        break;
+			    	        case 'otro	' :
+							$('#ejercicio_type').attr('value','21');
+			    	        break;
+						}
 
-			localStorage.setItem('track_ejercicio_type', 		$('#ejercicio_type').val() );
-			localStorage.setItem('track_ejercicio_duration',	$('#duracion').val() );
-			localStorage.setItem('track_ejercicio_intensidad', 	$('#intensidad').val() );
+					});
 
-			var intensidad  = localStorage.getItem('track_ejercicio_intensidad');
-			var type 		= localStorage.getItem('track_ejercicio_type');
-			var duracion	= localStorage.getItem('track_ejercicio_duration');
+							/*
+								localStorage EJERCICIO / DURACION / INTENSIDAD
+							 */
+					$('#add_ejercicio').on('click', function(){
 
-			console.log(intensidad+" "+type+" "+duracion);
-
-			var responsedata = apiRH.tracking(0, 1);
-
-			//console.log(responsedata);
-			if(!$('.alert_tracking').is(':visible')){
-				$('.alert_tracking').show();
-				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
-			} else {
-				$('.alert_tracking').removeClass('active');
-				setTimeout(function() {$('.alert_tracking').hide();}, 800);
-			}
-			$('#container').toggleClass('blurred');
-			//$('a.centro img').toggleClass('onn');
+						localStorage.setItem('track_ejercicio_type', 		$('#ejercicio_type').val() );
+						localStorage.setItem('track_ejercicio_duration',	$('#duracion').val() );
+						localStorage.setItem('track_ejercicio_intensidad', 	$('#intensidad').val() );
 
 
-			$('#add_tracking').click(function(){
-				if(responsedata){
-					window.location.assign('dieta.html');
-				}
-			});
 
-			
 
-		});
+						//console.log(responsedata);
+						if(!$('.alert_tracking').is(':visible')){
+							$('.alert_tracking').show();
+							setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+						} else {
+							$('.alert_tracking').removeClass('active');
+							setTimeout(function() {$('.alert_tracking').hide();}, 800);
+						}
+						$('#container').toggleClass('blurred');
+					});
+
+						$('#add_tracking').click(function(){
+							
+							var intensidad  = localStorage.getItem('track_ejercicio_intensidad');
+							var type 		= localStorage.getItem('track_ejercicio_type');
+							var duracion	= localStorage.getItem('track_ejercicio_duration');
+							
+							var responsedata = apiRH.tracking(type, duracion);
+	
+							if(responsedata){
+								console.log(intensidad+" "+type+" "+duracion);	
+								console.log('exito');
+								//window.location.assign('dieta.html');
+							}else{
+								alert('error al insertar datos ');
+							}
+							$('.alert_tracking').hide();
+							$('#container').toggleClass('blurred');
+						});
+		}//endif 
+		
 
 		$('.centro').click(function() {
 			if(!$('.overscreen').is(':visible')){

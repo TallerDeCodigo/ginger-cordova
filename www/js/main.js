@@ -606,12 +606,12 @@
 			/* Requesting logout from server */
 			//var response = apiRH.logOut({user_login : user, request_token : apiRH.get_request_token() });
 			//if(response.success){
-				if(!$('.overscreen5').is(':visible') ){
-					$('.overscreen5').show();
-				setTimeout(function() {$('.overscreen5').addClass('active');}, 200);
+				if(!$('.overscreen2').is(':visible') ){
+					$('.overscreen2').show();
+				setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
 				} else {
-					$('.overscreen5').removeClass('active');
-					setTimeout(function() {$('.overscreen5').hide();}, 800);
+					$('.overscreen2').removeClass('active');
+					setTimeout(function() {$('.overscreen2').hide();}, 800);
 				}
 				$('#container').toggleClass('blurred');
 					//app.toast('Has cerrado la sesión, hasta pronto');
@@ -629,7 +629,7 @@
 			return;
 		});
 		$('.logout_cancel').click(function(){
-			$('.overscreen5').hide();
+			$('.overscreen2').hide();
 			$('#container').toggleClass('blurred');
 			return;
 		});
@@ -718,12 +718,12 @@
 	//
 	//-----------------------------
 
-	$('.face').click(function (e) {
-		console.log('CLICK FACEBOOK');
+	$('.face').click(function () {
+		
+		console.log('CLICK FACEBOOK LOGIN');
+		
 		apiRH.loginOauth('facebook');
 		
-		e.preventDefault();
-
 	});
 
 
@@ -732,130 +732,74 @@
 
 	$('#send_fPago').on('click', function(){
 
-		/*ALERT*/
-		if(!$('.overscreen6').is(':visible') ){
-			$('.overscreen6').show();
-		setTimeout(function() {$('.overscreen6').addClass('active');}, 200);
-		} else {
-			$('.overscreen6').removeClass('active');
-			setTimeout(function() {$('.overscreen6').hide();}, 800);
-		}
-		$('#container').toggleClass('blurred');
+	   		console.log("click to next");
 
+	   		var  t_nombre   = $('input[name="nombre"]').val(); 
+	   		var  t_card 	= $('input[name="card"]').val(); 
+	   		var  t_mes  	= $('input[name="mes"]').val(); 
+	   		var  t_ano 		= $('input[name="year"]').val(); 
+	   		var  t_cvc 		= $('input[name="cvc"]').val(); 
+	   		var  t_mail 	= $('input[name="mail"]').val(); 
+	   		var  t_cupon 	= $('input[name="cupon"]').val(); 
+	   		var  t_terms 	= $('input[name="terms"]').val(); 
 
+	   		Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
+	   		
+	   		var errorResponseHandler, successResponseHandler, tokenParams;
 
-		// var  t_nombre   = $('input[name="nombre"]').val(); 
-		// var  t_card 	= $('input[name="card"]').val(); 
-		// var  t_mes  	= $('input[name="mes"]').val(); 
-		// var  t_ano 		= $('input[name="year"]').val(); 
-		// var  t_cvc 		= $('input[name="cvc"]').val(); 
-		// var  t_mail 	= $('input[name="mail"]').val(); 
-		// var  t_cupon 	= $('input[name="cupon"]').val(); 
-		// var  t_terms 	= $('input[name="terms"]').val(); 
+	   		tokenParams = {
+	   		  "card": {
+	   		    "number": t_card,
+	   		    "name": t_nombre,
+	   		    "exp_year": t_ano,
+	   		    "exp_month": t_mes,
+	   		    "cvc": t_cvc
+	   		  }
+	   		};
 
-		// Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
-		
-		// var errorResponseHandler, successResponseHandler, tokenParams;
+	   		successResponseHandler = function(token) 
+	   		{
+	   			var response = apiRH.makePayment(token.id);
+	   			// Funcion de mensaje de bienvenida
+	   			if(response){
+	   				
+	   				if(response){
 
-		// tokenParams = {
-		//   "card": {
-		//     "number": t_card,
-		//     "name": t_nombre,
-		//     "exp_year": t_ano,
-		//     "exp_month": t_mes,
-		//     "cvc": t_cvc
-		//   }
-		// };
+	   					if(!$('.overscreen6').is(':visible') ){
+	   						$('.overscreen6').show();
+	   					setTimeout(function() {$('.overscreen6').addClass('active');}, 200);
+	   					} else {
+	   						$('.overscreen6').removeClass('active');
+	   						setTimeout(function() {$('.overscreen6').hide();}, 800);
+	   					}
+	   					$('#container').toggleClass('blurred');
 
-		// successResponseHandler = function(token) 
-		// {
-		// 	var response = apiRH.makePayment(token.id);
-		// 	// Funcion de mensaje de bienvenida
-		// 	if(response){
-		// 		if(response){
-		// 			alert('¡Muchas felicidades! ya puedes comenzar tu semana gratis'); 
-		// 			window.location.assign('dieta.html');
-		// 		}
-		// 		else
-		// 			alert("Error al actualizar datos");
-		// 	}else{
-		// 		alert("Error al procesar tu pago");
-		// 	}
-		// 	return;
-		// };
+	   					$('#go_next').click(function(){
+	   						$('.overscreen6').hide();
+	   						$('#container').toggleClass('blurred');
+	   						window.location.assign('dieta.html');
+	   					});
 
-		// /* Después de recibir un error */
+	   				}
+	   				else
+	   					alert("Error al actualizar datos");
+	   			}else{
+	   				alert("Error al procesar tu pago");
+	   			}
+	   			return;
+	   		};
 
-		// errorResponseHandler = function(error) {
-		//   return console.log(error.message);  //error de conectividad
-		//   alert('Error al procesar tu pago');
-		// };
+	   		/* Después de recibir un error */
 
-		// /* Tokenizar una tarjeta en Conekta */
+	   		errorResponseHandler = function(error) {
+	   		  return console.log(error.message);  //error de conectividad
+	   		  alert('Error al procesar tu pago' + error.message);
+	   		};
 
-		// Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
+	   		/* Tokenizar una tarjeta en Conekta */
 
-
+	   		Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
 	});//endCLICK
-
-   	$('#go_next').click(function(){
-   		console.log("click to next");
-   		$('.overscreen6').hide();
-   		$('#container').toggleClass('blurred');
-
-   		var  t_nombre   = $('input[name="nombre"]').val(); 
-   		var  t_card 	= $('input[name="card"]').val(); 
-   		var  t_mes  	= $('input[name="mes"]').val(); 
-   		var  t_ano 		= $('input[name="year"]').val(); 
-   		var  t_cvc 		= $('input[name="cvc"]').val(); 
-   		var  t_mail 	= $('input[name="mail"]').val(); 
-   		var  t_cupon 	= $('input[name="cupon"]').val(); 
-   		var  t_terms 	= $('input[name="terms"]').val(); 
-
-   		Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
-   		
-   		var errorResponseHandler, successResponseHandler, tokenParams;
-
-   		tokenParams = {
-   		  "card": {
-   		    "number": t_card,
-   		    "name": t_nombre,
-   		    "exp_year": t_ano,
-   		    "exp_month": t_mes,
-   		    "cvc": t_cvc
-   		  }
-   		};
-
-   		successResponseHandler = function(token) 
-   		{
-   			var response = apiRH.makePayment(token.id);
-   			// Funcion de mensaje de bienvenida
-   			if(response){
-   				if(response){
-   					//alert('¡Muchas felicidades! ya puedes comenzar tu semana gratis'); 
-   					window.location.assign('dieta.html');
-   				}
-   				else
-   					alert("Error al actualizar datos");
-   			}else{
-   				alert("Error al procesar tu pago");
-   			}
-   			return;
-   		};
-
-   		/* Después de recibir un error */
-
-   		errorResponseHandler = function(error) {
-   		  return console.log(error.message);  //error de conectividad
-   		  alert('Error al procesar tu pago');
-   		};
-
-   		/* Tokenizar una tarjeta en Conekta */
-
-   		Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
-
-
-   	});
 
 		//MARK NOTIFICATION AS READ
 		$('.main').on('tap', '.each_notification a', function(e){
