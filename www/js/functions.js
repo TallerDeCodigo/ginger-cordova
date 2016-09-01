@@ -1600,6 +1600,7 @@ $(window).load(function(){
 			});
 
 			$('#add_tracking').click(function(){	
+				
 				track_peso = $('input[name="track_peso"]').val();
 
 
@@ -1760,7 +1761,7 @@ $(window).load(function(){
 				var track_animo = localStorage.getItem('track_animo');
 					console.log(track_animo);
 
-				if(track_animo == ''){
+				if(localStorage.getItem('track_animo') == ''){
 					track_animo = 0;
 				}
 
@@ -1779,7 +1780,7 @@ $(window).load(function(){
 				//  @param tracking 1 - Ánimo
 				//  @param value of image selected
 				//-------------------------------
-				if(track_animo >= 0){
+				if(localStorage.getItem('track_animo') >= 0){
 					var responsedata = apiRH.tracking(1, track_animo);
 					if(responsedata){
 						window.location.assign('dieta.html');
