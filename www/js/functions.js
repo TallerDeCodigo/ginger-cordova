@@ -834,13 +834,18 @@ $(window).on("load resize",function(){
 
 
 		}//end if has class
+if( $('body').hasClass('coach-cambio') ){
 
+	$('#espacio_comentario').css('border', '1px solid red');
+
+}
 
 			var restricciones = [];
 				 restricciones =  localStorage.getItem('restricciones');
-				 restricciones = JSON.parse("["+restricciones+"]");
-
-				 console.log(typeof restricciones);
+				 console.log(restricciones);
+				 if(restricciones !== 'undefined'){
+				 	restricciones = JSON.parse("["+restricciones+"]");
+				 }
 				 console.log(restricciones.length);
 			$('.re-option').click(function() {
 				if(restricciones === 'undefined' ){
