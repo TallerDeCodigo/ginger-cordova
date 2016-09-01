@@ -1509,12 +1509,18 @@ $(window).load(function(){
 			});
 		}
 
-		if( $('boody').hasClass('weight') ){
+		if( $('body').hasClass('weight') ){
 			var r_peso;
+			var usr_peso;
+			var response = localStorage.getItem('user');
+			response = JSON.parse(response);
+			usr_peso = response.perfil.peso;
+			$('.r_peso input[name="peso_metric"]').attr("value",usr_peso );
 
 			$("#r_peso-up").bind('touchstart', function(){
 				timeout = setInterval(function(){
 					r_peso = Number($('.r_peso input[name="peso_metric"]').val() );
+
 			        if (r_peso<99) {
 						r_peso=r_peso+0.5;
 			        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(1));
