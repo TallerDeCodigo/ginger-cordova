@@ -1509,7 +1509,8 @@ $(window).load(function(){
 				$('.alert_tracking').hide();
 				$('#container').toggleClass('blurred');
 			});
-			$('#cancelar').click(function(){
+
+			$('.cancel').click(function(){
 				$('.alert_tracking').hide();
 				$('#container').toggleClass('blurred');
 			});
