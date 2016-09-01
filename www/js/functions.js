@@ -501,12 +501,6 @@ $(window).on("load resize",function(){
 			//console.log(restricciones.toString() );
 			console.log(restricciones);
 
-			if( $('.type').attr('value') != "" ){
-				console.log("attribute");
-				// $('.re-option img').attr('src','images/restric'++'2.png' );
-			}
-			
-
 			$('#comentario_perfil i').html(comentario);
 			//console.log(edad.substring(0, 4) );
 			var date_hoy =  new Date();
@@ -694,21 +688,27 @@ $(window).on("load resize",function(){
 						switch(uRes.perfil.restricciones[i]){
 							case 0: 
 								$('.tipo_restric .re-option:nth-of-type(1) img').attr("src",'images/restric/huevo2.png');
+
 								break;
 							case 1:
 								$('.tipo_restric .re-option:nth-of-type(2) img').attr("src",'images/restric/pollo2.png');
+
 								break;
 							case 2:
 								$('.tipo_restric .re-option:nth-of-type(3) img').attr("src",'images/restric/pescado2.png');
+
 								break;
 							case 3:
 								$('.tipo_restric .re-option:nth-of-type(4) img').attr("src",'images/restric/camaron2.png');
+
 								break;
 							case 4:
 								$('.tipo_restric .re-option:nth-of-type(5) img').attr("src",'images/restric/lacteos2.png');
+
 								break;
 							case 5:
 								$('.tipo_restric .re-option:nth-of-type(6) img').attr("src",'images/restric/carne2.png');
+
 								break;
 						}
 						uRes.perfil.restricciones[i]++;
@@ -834,10 +834,22 @@ $(window).on("load resize",function(){
 
 
 		}//end if has class
+
+
 			var restricciones = [];
+				 restricciones =  localStorage.getItem('restricciones');
+
+				 console.log(typeof restricciones);
+				 console.log(restricciones.length);
 			$('.re-option').click(function() {
-				if(restricciones === 'undefined'){
+				console.log('click');
+
+				if(restricciones === 'undefined' ){
 					restricciones = [];
+				}else if(restricciones.length > 0){
+					// restricciones = restricciones;
+					// console.log(restricciones);
+					// console.log(restricciones.length);
 				}
 
 			var valor = $(this).find('.type').attr('value');
@@ -852,6 +864,8 @@ $(window).on("load resize",function(){
 				$('.restricciones').attr('value', valor);
 				
 				restricciones.push(valor);
+				console.log(restricciones.length);
+				console.log(restricciones);
 				localStorage.setItem('restricciones', JSON.stringify(restricciones) );
 
 			} else {
@@ -862,21 +876,25 @@ $(window).on("load resize",function(){
 				$(this).removeClass('active');
 				$(this).attr("value", "");
 				$('.restricciones').attr('value',"");
-				
 				for(var i=0; i<restricciones.length; i++){
 					
 					if( restricciones[i] == valor ){
-
+						console.log('entro al loop');
 						var index = restricciones.indexOf(valor);
+						console.log(valor);
+						console.log(restricciones.length);
+						console.log(restricciones);
 
 						restricciones.splice(i, 1);
-						console.log(restricciones);
+						
 
 						localStorage.setItem('restricciones', JSON.stringify(restricciones));
 
 					}//end IF
 
 				}//end FOR				
+						console.log(restricciones.length);
+						console.log(restricciones);
 				
 			}// end ELSE
 
@@ -891,6 +909,8 @@ $(window).on("load resize",function(){
 			console.log(restricciones);
 
 		});//enc click re-option
+
+
 
 		if ($('body').hasClass('update_data')) {
 			
