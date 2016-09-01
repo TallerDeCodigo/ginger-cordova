@@ -1447,6 +1447,10 @@ $(window).load(function(){
 				timeout = setInterval(function(){
 					agua = Number($('.vaso p span').html());
 					agua=agua+0.25;
+
+					if(agua == 10.00)
+						agua = 10.00;	
+
 		        	$('.vaso p span').html(agua.toFixed(2));
 		        	$('input[name="litros"]').attr("value", agua);
 			    }, 100);
@@ -1462,7 +1466,7 @@ $(window).load(function(){
 				timeout = setInterval(function(){
 					agua = Number($('.vaso p span').html());
 					if (agua>0.4) {
-						agua=agua-0.5;
+						agua=agua-0.25;
 			        	$('.vaso p span').html(agua.toFixed(1));
 			        	$('input[name="litros"]').attr("value", agua);
 					}
