@@ -838,12 +838,11 @@ $(window).on("load resize",function(){
 
 			var restricciones = [];
 				 restricciones =  localStorage.getItem('restricciones');
+				 restricciones = JSON.parse("["+restricciones+"]");
 
 				 console.log(typeof restricciones);
 				 console.log(restricciones.length);
 			$('.re-option').click(function() {
-				console.log('click');
-
 				if(restricciones === 'undefined' ){
 					restricciones = [];
 				}else if(restricciones.length > 0){
