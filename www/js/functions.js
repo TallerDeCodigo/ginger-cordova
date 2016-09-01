@@ -1087,8 +1087,6 @@ $(window).load(function(){
 
     var week = new Object();
     var today = fecha.hoy().toString();
-    //console.log( today); 
-    //console.log(week);
     
     var days = $('.day_of_week');
     var dow = [];
@@ -1099,22 +1097,30 @@ $(window).load(function(){
     week = getWeekDays( new Date(today) );
 
     //console.log("str> "+today);
-    
-    for(var i=0; i<dias.length; i++){
-    	var masuno = i+1;
-    	date_string = week[i].toString();
-    	console.log(date_string);
+    var domingo;
+
+    for(var i=1; i<dias.length; i++){
+    	var masuno = i;
+    	date_string = week[i].toString();    	
     	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
     	var dataf = new Date(date_string);
     	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
-    	//$('tr td.day_of_week:nth-of-type('+masuno+') span').attr("data-day" + date_string.substring(8, 11) );
     }
 
-    	var incremento = 168.25;
-    	var decremento = 167.75;
-		var current_day;
-    	var full_date;
-	    var left = fecha.hoy().substring(0,8);
+    date_string = week[0].toString();
+
+    console.log(date_string);
+
+    $('tr td.day_of_week:nth-of-type(7) span').html(date_string.substring(8, 11));
+    var dataf = new Date(date_string);
+    console.log(dataf);
+    $('#toda_la_dieta li:nth-of-type(7)').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
+
+	var incremento = 168.25;
+	var decremento = 167.75;
+	var current_day;
+	var full_date;
+    var left = fecha.hoy().substring(0,8);
 
 	    current_day = new Date( + new Date().getTime() + 1 * 60 * 60 * 1000 );
 	    var dia_semana = current_day.getDay();
@@ -1144,7 +1150,7 @@ $(window).load(function(){
 	    	current_day = full_date;
 	    	//console.log("Full date > > "+full_date);
 	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
-			for(var i=0; i<dias.length; i++){
+			for(var i=1; i<dias.length; i++){
 				
 				var nuevo = JSON.stringify(week2[i]);
 				// console.log("wee ::"+week2[i]);
@@ -1168,7 +1174,7 @@ $(window).load(function(){
 	    	$('#month').html(meses[month] );
 	    	$('#year').html(full_date.getFullYear());
 
-	    	for(var i=0; i<dias.length; i++){
+	    	for(var i=1; i<dias.length; i++){
 	    		var masuno = i+1;
 	    		date_string = week[i].toString();
 	    		$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
