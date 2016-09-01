@@ -1465,7 +1465,7 @@ $(window).load(function(){
 			$("#agua-dw").bind('touchstart', function(){
 				timeout = setInterval(function(){
 					agua = Number($('.vaso p span').html());
-					if (agua>0.4) {
+					if (agua>0.25) {
 						agua=agua-0.25;
 			        	$('.vaso p span').html(agua.toFixed(1));
 			        	$('input[name="litros"]').attr("value", agua);
@@ -1480,15 +1480,11 @@ $(window).load(function(){
 			});
 
 
-					/*
-						localStorage AGUA
-					*/
+			/*
+				localStorage AGUA
+			*/
 			$('#add_agua').on('click', function(){
 				localStorage.setItem('agua', $('input[name="litros"]').val() );
-
-
-				//console.log(0 + ' -+- ' + agua);
-
 
 				if(!$('.alert_tracking').is(':visible')){
 					$('.alert_tracking').show();
@@ -1504,8 +1500,9 @@ $(window).load(function(){
 
 				var agua = localStorage.getItem('agua');
 				console.log(agua);
-													/*ajustar los tipos para cada tracking*/
-				var responsedata = apiRH.tracking(0, agua);
+				/*ajustar los tipos para cada tracking 7 Agua*/
+				
+				var responsedata = apiRH.tracking(7, agua);
 
 				if(responsedata){
 					window.location.assign('dieta.html');

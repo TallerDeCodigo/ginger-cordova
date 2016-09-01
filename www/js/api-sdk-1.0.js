@@ -254,7 +254,7 @@ function requestHandlerAPI(){
 					'tipo' : tipo,
 					'magnitud' : magnitud,
 					'cliente' : localStorage.getItem('userId'),
-					'coach' : ""
+					'coach' : localStorage.getItem('coach_id')
 				}
 			}
 			console.log(req);
