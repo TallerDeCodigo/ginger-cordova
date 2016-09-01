@@ -834,11 +834,6 @@ $(window).on("load resize",function(){
 
 
 		}//end if has class
-if( $('body').hasClass('coach-cambio') ){
-
-	$('#espacio_comentario').css('border', '1px solid red');
-
-}
 
 			var restricciones = [];
 				 restricciones =  localStorage.getItem('restricciones');
@@ -983,6 +978,10 @@ if( $('body').hasClass('coach-cambio') ){
 $(window).load(function(){
 	$(function() {
 
+		/*
+			DIETA
+		*/
+
 		if($('body').hasClass('dieta') ){
 
 			var today = new Date();
@@ -1002,12 +1001,12 @@ $(window).load(function(){
 			var receta;
 			var nombre_receta;
 			var ingredientes;
-
-
 			var losplatos = [];
 			var i=0;
 
+			
 			$.each( dieta.platillos, function( key, value ) {
+				//console.log(dieta.platillos[i].ingredientes);
 				losplatos[i]=[];
 				$.each( value, function( key, value ) {
 					// console.log(key+":::"+value);
@@ -1033,7 +1032,7 @@ $(window).load(function(){
 
 			$.each( dieta.comentarios, function( key, value ) {
 				loscomentarios[i]=[];
-				console.log(loscomentarios);
+				//console.log(loscomentarios);
 				j=0;
 				$.each( value, function( key, value ) {
 					loscomentarios[i][j]=value;
@@ -1094,6 +1093,8 @@ $(window).load(function(){
 												}
 												if (losplatos[i][4]!="") {
 													$(masadentro+' p.comentario').html(losplatos[i][4]);
+													//console.log(dieta.platillos[i].ingredientes);
+													$('.plat-comentario').html('hola');
 												} else {
 													$(masadentro+' p.comentario').hide();
 												}
