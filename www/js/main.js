@@ -606,12 +606,12 @@
 			/* Requesting logout from server */
 			//var response = apiRH.logOut({user_login : user, request_token : apiRH.get_request_token() });
 			//if(response.success){
-				if(!$('.overscreen5').is(':visible') ){
-					$('.overscreen5').show();
-				setTimeout(function() {$('.overscreen5').addClass('active');}, 200);
+				if(!$('.overscreen2').is(':visible') ){
+					$('.overscreen2').show();
+				setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
 				} else {
-					$('.overscreen5').removeClass('active');
-					setTimeout(function() {$('.overscreen5').hide();}, 800);
+					$('.overscreen2').removeClass('active');
+					setTimeout(function() {$('.overscreen2').hide();}, 800);
 				}
 				$('#container').toggleClass('blurred');
 					//app.toast('Has cerrado la sesión, hasta pronto');
@@ -629,7 +629,7 @@
 			return;
 		});
 		$('.logout_cancel').click(function(){
-			$('.overscreen5').hide();
+			$('.overscreen2').hide();
 			$('#container').toggleClass('blurred');
 			return;
 		});
