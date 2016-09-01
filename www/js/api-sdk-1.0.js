@@ -843,7 +843,8 @@ function requestHandlerAPI(){
 					 fb_email = data.email;
 					 fb_avatar = data.avatar;
 					 fb_Id = data.id;
-
+					 console.log(fb_name+" > "+fb_lastname+" > "+fb_email+" > "+fb_Id);
+					 
 					 var req = {
 					 	method : 'post',
 					 	url : api_base_url + 'api/signup',
