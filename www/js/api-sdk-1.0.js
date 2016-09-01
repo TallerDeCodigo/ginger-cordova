@@ -258,15 +258,10 @@ function requestHandlerAPI(){
 				}
 			}
 			console.log(req);
-
 			var response = this.makeRequest('tables/medicion', req);
-
 			console.log("Request Data Cliente");
-
 			console.log(response);  //llega aqui con la respuesta del servidor
-
 			return (response) ? response : false;
-
 		};
 
 

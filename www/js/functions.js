@@ -1496,12 +1496,19 @@ $(window).load(function(){
 				$('#container').toggleClass('blurred');
 				//$('a.centro img').toggleClass('onn');
 			});
+
+			//----------------------------
+			//
+			// Tracking Water
+			//
+			//----------------------------
+
 			$('#add_tracking').click(function(){
 
 				var agua = localStorage.getItem('agua');
 				console.log(agua);
 				/*ajustar los tipos para cada tracking 7 Agua*/
-				
+
 				var responsedata = apiRH.tracking(7, agua);
 
 				if(responsedata){
@@ -1571,16 +1578,16 @@ $(window).load(function(){
 			});
 
 
-					/*
-						localStorage PESO 	*
-					*/
+			/*
+				localStorage PESO 	*
+			*/
 			$('#add_peso').on('click', function(){
 				localStorage.setItem('track_peso', $('input[name="track_peso"]').val() );
-
-				var track_peso = localStorage.getItem('track_peso');
-				//console.log(track_peso);
 				
-
+				var track_peso = localStorage.getItem('track_peso');
+				
+				console.log(track_peso);
+				
 				if(!$('.alert_tracking').is(':visible')){
 					$('.alert_tracking').show();
 					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
@@ -1593,19 +1600,22 @@ $(window).load(function(){
 			});
 
 			$('#add_tracking').click(function(){	
-				//------------------------------
-				//  @param tracking 1 - Ánimo
-				//  @param value of image selected
-				//-------------------------------
-				if(track_peso >= 0){
+				track_peso = $('input[name="track_peso"]').val();
+
+
+				if(track_peso >= 30){
+
+					console.log('Peso <<<');
+
 					var responsedata = apiRH.tracking(0, track_peso);
+					
 					if(responsedata){
 						window.location.assign('dieta.html');
 					}else{
 						alert('Error al registrar peso');
 					}
 				}else{
-					alert('Error al registrar peso');
+					alert('El peso debe de ser mayor a 40');
 				}
 				$('.alert_tracking').hide();
 				$('#container').toggleClass('blurred');
