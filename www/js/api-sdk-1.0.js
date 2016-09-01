@@ -370,6 +370,8 @@ function requestHandlerAPI(){
 
 		};
 
+		
+
 		this.changePayment = function(token){
 			var req = {
 				method : 'POST',

@@ -613,8 +613,8 @@ $(window).on("load resize",function(){
 				}
 
 
-					var suma = parseInt(plan)+1;
-					$('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
+				var suma = parseInt(plan)+1;
+				$('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
 
 				switch(plan){
 					case 0:
@@ -663,7 +663,7 @@ $(window).on("load resize",function(){
 								coma = ", ";
 
 							$('#restricciones_perfil').append(restricc[restricciones[i]] + coma);
-							//$('.tipo_restric .re-option:nth-of-type('+i+') img').attr('src', 'images/restric/'+  +'.png');
+							
 						};
 					}else{
 						console.log("no hay restricciones");
