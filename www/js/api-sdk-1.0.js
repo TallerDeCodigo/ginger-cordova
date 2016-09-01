@@ -161,8 +161,8 @@ function requestHandlerAPI(){
 						localStorage.setItem('chatPassword', user.coach.chatPassword);
 					}	
 					
-					
-					console.log('AQUI MOTHER');	
+				
+					console.log('here mother fucker');	
 
 					return (userId) ? user : false;
 				}
@@ -173,7 +173,9 @@ function requestHandlerAPI(){
 			return false;
 		};
 
-
+		/**
+		 * Get cosumed
+		 **/
 		this.getDietCosumed = function(data){
 
 			var req = {
@@ -259,6 +261,10 @@ function requestHandlerAPI(){
 			return (response.nuevo) ? response : false;
 		};
 
+		/**
+		  * Resgistro de tracking 
+		  **/
+
 		this.tracking = function(tipo, magnitud){
 			
 			var req = {
@@ -283,6 +289,9 @@ function requestHandlerAPI(){
 			return (response) ? response : false;
 		};
 
+		/**
+		  * update perfil
+		  **/
 
 		this.updatePerfil = function(data){
 			var req = {
@@ -370,7 +379,7 @@ function requestHandlerAPI(){
 
 		};
 
-		
+
 
 		this.changePayment = function(token){
 			var req = {
@@ -1410,7 +1419,7 @@ function requestHandlerAPI(){
 													console.log(JSON.stringify(ft));
 													this.transfer_options.params = params;
 													ft.upload(  this.transfer_options.fileUrl, 
-																encodeURI(api_base_url+user+"/content/search/advanced/"), 
+																encodeURI('https://gingerfiles.blob.core.windows.net/clientes/'), 
 																context.search_transfer_win, 
 																context.transfer_fail, 
 																this.transfer_options
