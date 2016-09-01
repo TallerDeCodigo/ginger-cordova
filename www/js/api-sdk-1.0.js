@@ -1015,40 +1015,42 @@ function requestHandlerAPI(){
 												localStorage.setItem('user_last_name', user.apellido);
 												localStorage.setItem('genero', user.perfil.sexo);
 
-												if(user.perfil.edad !== undefined)
+												if(user.perfil.edad !== 'undefined')
 													localStorage.setItem('edad', user.perfil.edad.real);
-												else
+												else{
+
 													localStorage.setItem('edad', 0);
-												localStorage.setItem('zipcode', user.cp);
-												localStorage.setItem('estatura', user.perfil.estatura);
-												localStorage.setItem('peso', user.perfil.peso);
-												localStorage.setItem('peso_ideal', user.pesoDeseado);
-												localStorage.setItem('dpw', user.perfil.ejercicio);
-												localStorage.setItem('restricciones', user.restricciones);
-												localStorage.setItem('comentarios', user.comentarios);
-												localStorage.setItem('customerId', user.customerId);
-												localStorage.setItem('chatId', user.chatId);
-												if(user.dieta !== undefined)
+													localStorage.setItem('zipcode', user.cp);
+													localStorage.setItem('estatura', user.perfil.estatura);
+													localStorage.setItem('peso', user.perfil.peso);
+													localStorage.setItem('peso_ideal', user.pesoDeseado);
+													localStorage.setItem('dpw', user.perfil.ejercicio);
+													localStorage.setItem('restricciones', user.restricciones);
+													localStorage.setItem('comentarios', user.comentarios);
+													localStorage.setItem('customerId', user.customerId);
+													localStorage.setItem('chatId', user.chatId);
+												}
+												if(user.dieta !== 'undefined'){
 													localStorage.setItem('dietaId', user.dieta._id);
-												else
+												}else{
 													localStorage.setItem('dietaId', 0);
-												if(user.dieta !== undefined)
+												}
+												if(user.dieta !== 'undefined'){
 													localStorage.setItem('dietaName', user.dieta.nombre);
-												else
+												}else{
 													localStorage.setItem('dietaName', '');
-												
-												if(user.coach !== undefined){
+												}
+												if(user.coach !== 'undefined'){
 													localStorage.setItem('nombre_coach', user.coach.nombre);
 													localStorage.setItem('apellido_coach', user.coach.apellido);
 													localStorage.setItem('coach_rate', user.coach.rating);
 													localStorage.setItem('chatPassword', user.coach.chatPassword);
 												}	
-												
-												if(user.customerId !== undefined)
+												if(user.customerId !== 'undefined'){
 											 		window.location.assign('dieta.html');
-											 	else
+												}else{
 											 		window.location.assign('feed.html');
-
+											 	}
 											}
 											return ;
 
@@ -1072,7 +1074,7 @@ function requestHandlerAPI(){
 					 	
 					 	sdk_app_context.hideLoader(response);
 
-					 	var userId 	= localStorage.getItem('userId');
+					 	var userId 	= localStorage.getItem('user_id');
 					  	var mail 	= localStorage.getItem('mail');
 					  	var token 	= localStorage.getItem('token');
 

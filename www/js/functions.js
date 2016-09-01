@@ -835,20 +835,28 @@ $(window).on("load resize",function(){
 
 		}//end if has class
 
+
+
+
 			var restricciones = [];
 				 restricciones =  localStorage.getItem('restricciones');
-				 console.log(restricciones);
-				 if(restricciones !== 'undefined'){
+				 console.log('restricciones> '+restricciones);
+				 if(restricciones == null || restricciones === 'undefined'){
+				 	restricciones = [];
+				 	console.log("es vacio> " +typeof restricciones );
+				 }else{
 				 	restricciones = JSON.parse("["+restricciones+"]");
+				 	console.log(restricciones.length);
+				 	console.log(restricciones);
 				 }
-				 console.log(restricciones.length);
+
 			$('.re-option').click(function() {
+
 				if(restricciones === 'undefined' ){
 					restricciones = [];
 				}else if(restricciones.length > 0){
-					// restricciones = restricciones;
-					// console.log(restricciones);
-					// console.log(restricciones.length);
+					console.log(restricciones);
+					console.log(restricciones.length);
 				}
 
 			var valor = $(this).find('.type').attr('value');
@@ -907,7 +915,7 @@ $(window).on("load resize",function(){
 			}
 			console.log(restricciones);
 
-		});//enc click re-option
+		});//end click re-option
 
 
 
@@ -987,7 +995,7 @@ $(window).load(function(){
 			var today = new Date();
 			var hoy = today.getDay();
 			var day_index;
-			var dieta = app.get_diet(localStorage.getItem('dietaId'));
+			var dieta = app.get_diet(localStorage.getItem('dieta_id'));
 			var arr_desayuno
 			var arr_snack1
 			var arr_comida
@@ -1004,7 +1012,8 @@ $(window).load(function(){
 			var losplatos = [];
 			var i=0;
 
-			
+			console.log(dieta);
+
 			$.each( dieta.platillos, function( key, value ) {
 				//console.log(dieta.platillos[i].ingredientes);
 				losplatos[i]=[];
@@ -1209,11 +1218,11 @@ $(window).load(function(){
 
     date_string = week[0].toString();
 
-    console.log(date_string);
+    //console.log(date_string);
 
     $('tr td.day_of_week:nth-of-type(7) span').html(date_string.substring(8, 11));
     var dataf = new Date(date_string);
-    console.log(dataf);
+    //console.log(dataf);
     $('#toda_la_dieta li:nth-of-type(7)').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
 
 	var incremento = 168.25;
@@ -2020,6 +2029,7 @@ $(window).load(function(){
 		});//END FINISH3 REGISTRO APP
 
 		$('#finish4').click(function(){ 
+
 			$('.restric').animate({opacity:"0",left:"-40px"}, 200);
 			$('.borg').removeClass('active');
 			$('.byel').addClass('active');
@@ -2038,12 +2048,18 @@ $(window).load(function(){
 				restricciones_ls2 = "";
 			}else{
 				restricciones_ls2 	= localStorage.getItem('restricciones');
+				console.log(restricciones_ls2);
 			}
 			var dpw 		  		= localStorage.getItem('dpw');
 			var comentario 	  		= localStorage.getItem('comentario');
 
 			console.log("genero> " + genero +"peso > "+ peso+"estatura > "+estatura+" edad > "+edad+" ideal > "+peso_ideal+" zip > "+zipcode+" plan > "+plan+" coach > "+coach_type+" restricciones > "+restricciones_ls2+" dpw > "+dpw+" comentario > "+comentario );
 
+			console.log(restricciones_ls2);
+			if(restricciones_ls2 === 'undefined'){
+				console.log(restricciones_ls2);
+			}
+			//console.log( JSON.parse(restricciones_ls2) );
 			var ageyears = new Date();
 			var _year =ageyears.getFullYear();
 			var _mes = ageyears.getMonth() +1;
@@ -2076,7 +2092,7 @@ $(window).load(function(){
 				"cp": zipcode,
 				"pesoDeseado": peso_ideal,
 				"comentarios": comentario
-			}
+			}//end json
 
 			//Request update data
 
@@ -2222,7 +2238,9 @@ $(window).load(function(){
             }else{
             	alert('Error en la actualización de datos');
             }
-		});
+		});//end FINISH 4
+
+
 
 		// 		$('.coach.img-frame').click(function(){
 		// 		$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
@@ -2296,11 +2314,7 @@ $(window).load(function(){
 					}
 				});
 			});
-			
-
-
-
-		});
+		});//END BT-REVIEW
 
 		$('#aceptar').click(function(){
 			$('#container').toggleClass('blurred');
@@ -2309,9 +2323,10 @@ $(window).load(function(){
 			*/
 			var coach = $('#finish5').attr('coach');
 			var dieta = $('#finish5').attr('dieta_id');
-			var json = {"coach" : coach,"dieta" : dieta}
+			var json = {"coach" : coach,"dieta" : dieta};
 			//Request update data
 			var responsedata = apiRH.updatePerfil(json);
+			console.log(responsedata);
 
 			$('.bio').animate({opacity:"0",left:"-40px"}, 200);
 			$('.byel').removeClass('active');
