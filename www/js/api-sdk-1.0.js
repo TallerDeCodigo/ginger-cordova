@@ -174,6 +174,26 @@ function requestHandlerAPI(){
 		};
 
 
+		this.getDietCosumed = function(data){
+
+			var req = {
+				method : 'get',
+				url : api_base_url + 'tables/cliente/',
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': token,
+					'Content-Type': 'application/json'
+				},
+				data : {
+					"tipo" : "cliente",
+					"mail" : email,
+					"password" : pass
+				}
+			}
+
+		};
+
+
 		/* 
 		 * Register a new user account the old fashioned way
 		 * @param data_login JSON {user_login, user_password}
@@ -783,7 +803,7 @@ function requestHandlerAPI(){
 
 		};
 
-		this.getConsumed = function(){
+		this.getConsumed = function(data){
 			sdk_app_context.showLoader();
 			var result = {};
 			//"https://gingerservice.azure-mobile.net/tables/consumo?coach=\(FeedUserDefaults .coachId())&dieta=\(FeedUserDefaults .dietId())&inicio=\(formatter.stringFromDate(date))&fin=\(formatter.stringFromDate(date2))"
