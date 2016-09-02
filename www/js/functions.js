@@ -2303,22 +2303,21 @@ $(window).load(function(){
 
 			
 			$.each(resenas, function(key, value){
-				console.log(key + ' :::: ' + value);	
-				$.each(value, function(key, value){
-										
-					$('.resena.pagina').append('<div class="nombre_resena"><div class="rate-stars2"></div></div><div class="resena_cont"></div>');
+				console.log(key + ' :::: ' + JSON.stringify(value));	
+				var html_comment 	= "";
+				var html_stars 		= "";
+				$.each(value, function(inner_key, inner_value){
+					console.log(inner_key + ' ::--:: ' + JSON.stringify(inner_value));
+					// TODO: Replace with template		
+					if(inner_key == 'comment')
+						html_comment = inner_value;
 
-					if(key == 'comment'){
-						$('.resena_cont').html(value);
-						console.log(value);	
-					}
-
-					if(key == 'calificacion'){
-						for (var i = 0; i < calificacion; i++) {
-							$('.rate-stars2').append('<img src="images/star.svg">');
-						}						
+					if(inner_key == 'calificacion'){
+						for (var i = 0; i < inner_value; i++)
+							html_stars += '<img src="images/star.svg">';				
 					}
 				});
+				$('.resena.pagina').append('<div class="nombre_resena"><div class="rate-stars2">'+html_stars+'</div></div><div class="resena_cont">'+html_comment+'</div>');
 			});
 		});//END BT-REVIEW
 
@@ -2932,7 +2931,7 @@ $(window).load(function(){
 	// 		console.log("click");
 	// 		cordova.InAppBrowser.open('https://gingerapp.mx/', '_blank', 'location=yes');
 	// 	})
-	
+
 	}); //END WINDOW LOAD clicks
 
 	
