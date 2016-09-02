@@ -569,6 +569,8 @@
 					cpass: "Las contraseñas que proporcionaste no coinciden"
 				},
 				submitHandler: function(){
+					console.log('creando usuario sin facebook');
+
 
 					var data_login  	= app.getFormData('#create_account');
 
@@ -641,7 +643,8 @@
 	LOGIN WITHOUT FACEBOOK
 							*/
 
-	if($('#login_form').length)
+	if($('#login_form').length){
+
 		$('#login_form').validate({
 			rules:{
 				mail:{
@@ -658,6 +661,9 @@
 				pass:"Este campo es requerido para acceder a tu cuenta"
 			},
 			submitHandler:function(){
+
+				console.log('login sin facebook');
+
 				var data_login	= app.getFormData("#login_form");
 
 				console.log(data_login.mail);
@@ -684,7 +690,8 @@
 					alert('Error en la combinación de usuario / contrase');
 				}
 			}
-	}); //END VALIDATE
+		}); //END VALIDATE
+	}
 
 
 	//-----------------------------

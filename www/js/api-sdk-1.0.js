@@ -228,9 +228,6 @@ function requestHandlerAPI(){
 
 			console.log(response);  //llega aqui con la respuesta del servidor
 
-			this.token = localStorage.getItem('token');
-
-			console.log('TOKEN: ' + this.token );
 
 			/*
 				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
@@ -241,6 +238,9 @@ function requestHandlerAPI(){
 			localStorage.setItem('chatId', response.jid);
 			localStorage.setItem('userId', response._id);
 
+			this.token = localStorage.getItem('token');
+
+			console.log('TOKEN: ' + this.token );
 			console.log(JSON.stringify(response));
 
 			var userId 	= localStorage.getItem('userId');
@@ -251,14 +251,15 @@ function requestHandlerAPI(){
 
 
 			// Function 
+			console.log(req);
+			//var user = this.getRequest('api/cliente', req);
 
-			var user = this.getRequest('api/cliente', req);
+			//console.log(user);
 
-			console.log(JSON.stringify(user));
-
-			localStorage.setItem('users', JSON.stringify(user));
+			//localStorage.setItem('users', JSON.stringify(user));
 
 			return (response.nuevo) ? response : false;
+			console.log(response);
 		};
 
 		/**
@@ -649,8 +650,8 @@ function requestHandlerAPI(){
 		 * @return JSON encoded response
 		 */
 		this.makeRequest = function(endpoint, data){
-			
-			console.log('DATA SEND: ' + data); //llega a makerequest
+			console.log('DATA SEND MAKE REQUEST: ');
+			console.log(data);
 
 			sdk_app_context.showLoader();
 			var result = {};
@@ -665,15 +666,16 @@ function requestHandlerAPI(){
 			})
 			 .done(function(response){
 				result = response;
-				console.log('DONE ' + response);
+				console.log('<<DONE>>');
+				console.log(response);
 				sdk_app_context.hideLoader(response);
 			})
 			 .fail(function(e){
 				result = e;
 				console.log(JSON.stringify(e));
 			});
-
-			 console.log('resuelt ' + result);
+			 console.log('>->->->-result->->->->');
+			 console.log( result);
 			return result;
 		};
 

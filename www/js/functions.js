@@ -683,6 +683,8 @@ $(window).on("load resize",function(){
 					 var uRes = JSON.parse(localStorage.getItem('user'));
 					 console.log(uRes);
 
+					 console.log('aqui');
+
 					for (var i = 0; i < uRes.perfil.restricciones.length; i++) {
 						
 						switch(uRes.perfil.restricciones[i]){
@@ -839,25 +841,26 @@ $(window).on("load resize",function(){
 
 
 			var restricciones = [];
-				 restricciones =  localStorage.getItem('restricciones');
-				 console.log('restricciones> '+restricciones);
-				 if(restricciones == null || restricciones === 'undefined'){
-				 	restricciones = [];
-				 	console.log("es vacio> " +typeof restricciones );
-				 }else{
-				 	restricciones = JSON.parse("["+restricciones+"]");
-				 	console.log(restricciones.length);
-				 	console.log(restricciones);
-				 }
+				 // restricciones =  localStorage.getItem('restricciones');
+				 // console.log('restricciones> '+restricciones);
+				 // if(restricciones == null || restricciones === 'undefined'){
+				 // 	restricciones = [];
+				 // 	console.log("es vacio> " +typeof restricciones );
+				 // }else{
+				 // 	restricciones = JSON.parse("["+restricciones+"]");
+				 // 	console.log(restricciones.length);
+				 // 	console.log(restricciones);
+				 // }
 
 			$('.re-option').click(function() {
 
 				if(restricciones === 'undefined' ){
 					restricciones = [];
-				}else if(restricciones.length > 0){
-					console.log(restricciones);
-					console.log(restricciones.length);
 				}
+				// else if(restricciones.length > 0){
+				// 	console.log(restricciones);
+				// 	console.log(restricciones.length);
+				// }
 
 			var valor = $(this).find('.type').attr('value');
 				console.log(valor);
