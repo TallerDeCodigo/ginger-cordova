@@ -841,26 +841,26 @@ $(window).on("load resize",function(){
 
 
 			var restricciones = [];
-				 // restricciones =  localStorage.getItem('restricciones');
-				 // console.log('restricciones> '+restricciones);
-				 // if(restricciones == null || restricciones === 'undefined'){
-				 // 	restricciones = [];
-				 // 	console.log("es vacio> " +typeof restricciones );
-				 // }else{
-				 // 	restricciones = JSON.parse("["+restricciones+"]");
-				 // 	console.log(restricciones.length);
-				 // 	console.log(restricciones);
-				 // }
+				 restricciones =  localStorage.getItem('restricciones');
+				 console.log('restricciones> '+restricciones);
+				 if(restricciones == null || restricciones === 'undefined'){
+				 	restricciones = [];
+				 	console.log("es vacio> " +typeof restricciones );
+				 }else{
+				 	restricciones = JSON.parse("["+restricciones+"]");
+				 	console.log(restricciones.length);
+				 	console.log(restricciones);
+				 }
 
 			$('.re-option').click(function() {
 
 				if(restricciones === 'undefined' ){
 					restricciones = [];
 				}
-				// else if(restricciones.length > 0){
-				// 	console.log(restricciones);
-				// 	console.log(restricciones.length);
-				// }
+				else if(restricciones.length > 0){
+					console.log(restricciones);
+					console.log(restricciones.length);
+				}
 
 			var valor = $(this).find('.type').attr('value');
 				console.log(valor);
@@ -984,6 +984,9 @@ $(window).on("load resize",function(){
 		    var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
 		    imgs.css("transform", "translate(" + value + "px,0)");
 		}//end scrollImages
+
+		$('#finish5').attr('coach', $('.slide-coach:nth-of-type(1)').attr('coach'));
+        $('#finish5').attr('dieta_id', $('.slide-coach:nth-of-type(1)').attr('dieta_id'));
 });// end Window on Load Resize swipe / dietas 
 
 $(window).load(function(){
@@ -2324,9 +2327,15 @@ $(window).load(function(){
 			/*
 				JSON COACH SELECTED	*
 			*/
+
+			console.log('aquiiiiiiii');
+
 			var coach = $('#finish5').attr('coach');
 			var dieta = $('#finish5').attr('dieta_id');
+
 			var json = {"coach" : coach,"dieta" : dieta};
+
+			console.log(json);
 			//Request update data
 			var responsedata = apiRH.updatePerfil(json);
 			console.log(responsedata);

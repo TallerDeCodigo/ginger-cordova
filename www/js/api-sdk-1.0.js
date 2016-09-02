@@ -58,6 +58,7 @@ function requestHandlerAPI(){
 		 * @param data_login JSON {user_login, user_password}
 		 * @return status Bool true is successfully logged in; false if an error ocurred
 		 */
+		 
 		this.loginNative =  function(data_login){
 
 		var email = data_login.mail;
