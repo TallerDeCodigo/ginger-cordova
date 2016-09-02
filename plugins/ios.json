@@ -39,6 +39,9 @@
         },
         "nl.x-services.plugins.toast": {
             "PACKAGE_NAME": "org.ginger.app"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
         }
     },
     "dependent_plugins": {

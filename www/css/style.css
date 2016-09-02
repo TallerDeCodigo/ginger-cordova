@@ -617,3 +617,8 @@ p.small{margin-bottom:0;}
 .coach-cambio p {margin-top:15px;font-weight:100;line-height:160%;font-size:110%;}
 .coach-cambio span.com2send {color:#43c2a7;font-weight:700;font-size:110%;display:block;padding:35px 15%;}
 #espacio_comentario{width:80%;margin:0 auto; height:20%;background: transparent;}
+
+ 
+/* Coming Soon */
+.coming_soon{background-color: #7b53a2;}
+.image_message{display: block; width: 100%; height: auto; position: absolute; bottom: 0;}

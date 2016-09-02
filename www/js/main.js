@@ -48,8 +48,6 @@
 			/* Check if has a valid token */
 			//var response = apiRH.has_valid_token();
 			
-			console.log('Es login? ' + is_login);	
-
 			if(is_login){
 				
 				console.log('You okay, now you can start making calls');
@@ -76,7 +74,7 @@
 						if(is_client == null){
 							window.location.assign('feed.html');
 						}else{
-							window.location.assign('dieta.html?filter_feed=all');
+							window.location.assign('dieta.html');
 						}	
 
 					}

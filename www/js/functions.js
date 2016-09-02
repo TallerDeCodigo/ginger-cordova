@@ -2917,21 +2917,22 @@ $(window).load(function(){
 		WEB VIEW BLOG
 		
 	*/
-	$('#blog').on('click',function(){
-		console.log("click");
-		cordova.InAppBrowser.open('https://gingerapp.mx/', '_blank', 'location=yes');
-	})
+	// $('#blog').on('click',function(){
+	// 	console.log("click");
+	// 	cordova.InAppBrowser.open('https://gingerapp.mx/', '_blank', 'location=yes');
+	// })
 
-	$('#terms_cond').on('click',function(){
-			console.log("click");
-			cordova.InAppBrowser.open('https://gingerapp.mx/', '_blank', 'location=yes');
-		})
+	// $('#terms_cond').on('click',function(){
+	// 		console.log("click");
+	// 		cordova.InAppBrowser.open('https://gingerapp.mx/', '_blank', 'location=yes');
+	// 	})
 
 
-	$('#pol_priv').on('click',function(){
-			console.log("click");
-			cordova.InAppBrowser.open('https://gingerapp.mx/', '_blank', 'location=yes');
-		})
+	// $('#pol_priv').on('click',function(){
+	// 		console.log("click");
+	// 		cordova.InAppBrowser.open('https://gingerapp.mx/', '_blank', 'location=yes');
+	// 	})
+	
 	}); //END WINDOW LOAD clicks
 
 	
