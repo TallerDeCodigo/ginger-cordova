@@ -498,9 +498,6 @@ $(window).on("load resize",function(){
 			var coach_rate		= localStorage.getItem('coach_rate');
 			localStorage.setItem('restricciones', user.perfil.restricciones);
 
-			//console.log(restricciones.toString() );
-			console.log(restricciones);
-
 			$('#comentario_perfil i').html(comentario);
 			//console.log(edad.substring(0, 4) );
 			var date_hoy =  new Date();
@@ -521,7 +518,6 @@ $(window).on("load resize",function(){
 				$('.not').removeClass('active');
 
 			}else{
-				console.log('comentario vacio'+ comentario);
 				$('.comentario').hide();
 			}	
 			
@@ -545,7 +541,6 @@ $(window).on("load resize",function(){
 				$('#mujer').attr('src','images/mujere.svg');
 			}
 
-			console.log(edad);
 			$('#anos_perfil').html(_edad_calc + " años");
 			$('#age-dato').html(_edad_calc);
 			$('#edad_value').val(_edad_calc);
@@ -566,12 +561,9 @@ $(window).on("load resize",function(){
 			$('input[name="ideal"]').attr("value", ideal);
 
 			var suma = parseInt(coach_type)+1;
-			//console.log('suma '+suma);
-			//console.log('coach type> '+ coach_type);
 
 			$('.tipo_coach .co-option:nth-of-type('+suma+')').addClass('active');
 
-			//console.log('Personalidad: ' + coach_type);
 			switch(coach_type){
 					case 0: 
 						$('#coach_type_perfil').html("Estricto");
@@ -2139,7 +2131,7 @@ $(window).load(function(){
 
   						
   						$.each( value, function( key, value ) {
-  							// console.log( key + " :: " + value );
+  							console.log( key + " :: " + value );
   							if (key=='_id') {
   								// console.log('DIETA ID' + value);
   								// $('.slide-coach').attr('dieta', value);
@@ -2148,7 +2140,7 @@ $(window).load(function(){
 							if(key == 'coach'){	
 								$.each( value, function( key, value ) {
 									
-									// console.log( key + " ::: " + value );
+									console.log( key + " ::: " + value );
 									
 									if (key=='_id') {
 										var noexiste = true;
@@ -2162,10 +2154,10 @@ $(window).load(function(){
 										}
 										if (noexiste) {
 											coaches.push(value);
-											console.log(listCoach);
+											// console.log(listCoach);
 											$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
 											$(".resena .img-frame:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
-											console.log('ID DE COACH: ' + value);
+											// console.log('ID DE COACH: ' + value);
 											localStorage.setItem('coach_id', value);
 											$('.slide-coach:nth-of-type('+i+')').attr('coach', localStorage.getItem("coach_id"));
 											$('.slide-coach:nth-of-type('+i+')').attr('dieta_id', localStorage.getItem("dieta_id"));
@@ -2195,8 +2187,9 @@ $(window).load(function(){
 											$(".slide-coach:nth-of-type("+i+") .rate-stars img:nth-of-type("+j+")").attr("src","images/starh.svg");
 										}
 									}
-									if (key=='calificaciones') {
-										if (value=="1") {
+									if (key == 'calificaciones') {
+										// console.log("calificaciones :::: "+value);
+										if (value == "1") {
 											$(".slide-coach:nth-of-type("+i+") div.no-review").html(value+" valoración");
 										} else {
 											$(".slide-coach:nth-of-type("+i+") div.no-review").html(value+" valoraciones");
@@ -2271,10 +2264,6 @@ $(window).load(function(){
 		});
 
 		$('.bt-review').click(function(){
-			// localStorage.setItem('coach_aidi', $(this).parent().parent().attr('coach') );
-			// localStorage.setItem('co_name',$(this).parent().attr('data-name') );
-			// localStorage.setItem('co_last',$(this).parent().attr('data-last') );
-			// localStorage.setItem('co_rate',$(this).parent().attr('data-rate') );
 
 			$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
 			setTimeout(function() {
@@ -2300,14 +2289,21 @@ $(window).load(function(){
 			var resenas = apiRH.getResenas(_aidi);
 
 			console.log(resenas);
-
 			
+			$('.insert_stars').empty();
+			var count = resenas.length;
+			if(count){
+				var verb = (count == 1) ? " valoración" : " valoraciones";
+				$('.resena.pagina .no-review').html(count+verb);
+			}else{
+				$('.resena.pagina .no-review').html("sin valoraciones");
+			}
 			$.each(resenas, function(key, value){
-				console.log(key + ' :::: ' + JSON.stringify(value));	
+				// console.log(key + ' :::: ' + JSON.stringify(value));
 				var html_comment 	= "";
 				var html_stars 		= "";
 				$.each(value, function(inner_key, inner_value){
-					console.log(inner_key + ' ::--:: ' + JSON.stringify(inner_value));
+					// console.log(inner_key + ' ::--:: ' + JSON.stringify(inner_value));
 					// TODO: Replace with template		
 					if(inner_key == 'comment')
 						html_comment = inner_value;
@@ -2317,7 +2313,7 @@ $(window).load(function(){
 							html_stars += '<img src="images/star.svg">';				
 					}
 				});
-				$('.resena.pagina').append('<div class="nombre_resena"><div class="rate-stars2">'+html_stars+'</div></div><div class="resena_cont">'+html_comment+'</div>');
+				$('.insert_stars').append('<div class="nombre_resena"><div class="rate-stars2">'+html_stars+'</div></div><div class="resena_cont">'+html_comment+'</div>');
 			});
 		});//END BT-REVIEW
 

@@ -728,7 +728,7 @@ function requestHandlerAPI(){
 			  async: false
 			})
 			 .done(function(response){
-			 	console.log('done');
+			 	// console.log('done');
 				result = response;
 				sdk_app_context.hideLoader(response);
 			})
@@ -1500,8 +1500,8 @@ function requestHandlerAPI(){
 				var user = this.getRequest('tables/cliente/' + userId, req);
 
 				localStorage.setItem('user', JSON.stringify(user));
-				console.log(JSON.stringify(user));
-				console.log(user);
+				// console.log(JSON.stringify(user));
+				// console.log(user);
 
 				if(user){
 					localStorage.setItem('coach_type', user.perfil.personalidad);
@@ -1539,9 +1539,6 @@ function requestHandlerAPI(){
 						localStorage.setItem('chatPassword', user.coach.chatPassword);
 					}	
 					
-					
-					console.log('AQUI MOTHER');	
-
 					return (userId) ? user : false;
 				}
 				return false;

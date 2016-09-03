@@ -166,7 +166,7 @@ function retrieveChatMessages(dialog, beforeDateSent){
 // sending messages after confirmation
 function clickSendMessage() {
   var currentText = $('#mensaje-chat').val().trim();
-  console.log(currentText);
+
   if (currentText.length === 0){
     return;
   }
@@ -212,7 +212,6 @@ function sendMessage(text, attachmentFileId) {
     markable: 1
   };
 
-  console.log(currentUser.id);
   if(attachmentFileId !== null){
     msg["extension"]["attachments"] = [{id: attachmentFileId, type: 'photo'}];
   }
@@ -264,7 +263,7 @@ function setupIsTypingHandler() {
   QB.chat.onMessageTypingListener = onMessageTyping;
 
   $("#message_text").focus().keyup(function(){
-
+    console.log("typing");
     if (typeof isTypingTimerId === 'undefined') {
 
       // send 'is typing' status
