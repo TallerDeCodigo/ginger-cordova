@@ -334,7 +334,7 @@ body.dieta #container {background:#f5f1f0;}
 div.acc-selector {width:100%;color:#FFF;font-weight:900;font-size:150%;letter-spacing:0.06em;margin-bottom:-10px;border-top-left-radius:7px;border-top-right-radius:7px;height:74px;line-height:69px;outline:none;}
 div.acc-content {width:100%;background:#f5f1f0;text-align:left;}
 
-.platillo {width:100%;padding-top:10px;}
+.platillo {width:100%;padding-top:10px;border-bottom:1px solid #cfcfcf!important;}
 .platillo h5 {font-size:115%;margin-bottom:18px;padding-left:4px;}
 
 nav.botones {float:right;margin:2px 0px 5px 15px;}
@@ -358,7 +358,7 @@ nav.botones {float:right;margin:2px 0px 5px 15px;}
 
 .platillo a.more {display:inline-block;width:100%;height:28px;text-align:right;padding-right:2px;border-bottom:1px solid #cfcfcf;}
 div.acc-content .platillo:last-of-type a.more {border:none;}
-a.more.presionado {border-bottom:1px solid #cfcfcf!important;}
+/*a.more.presionado {border-bottom:1px solid #cfcfcf!important;}*/
 
 div.extra-info {border-bottom:1px solid #cfcfcf;padding:1px 5px 7px 5px;}
 .plat-comentario {color:#FFF;text-align:left;border-radius:10px;border-bottom-left-radius:0px;margin:2px 0px 0px 13px;position:relative;padding:3px 3px 3px 8px;}
