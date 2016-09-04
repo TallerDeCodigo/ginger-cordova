@@ -2912,7 +2912,7 @@ $(window).load(function(){
 
 										if(key == 'comment'){
 											console.log('comentario: ' +value);
-											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('div').find('p').html(value);
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 										}
 
 									});
@@ -2941,11 +2941,9 @@ $(window).load(function(){
 
 										if(key == 'comment'){
 											console.log('comentario: ' +value);
-											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('div').find('p').html(value);
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 										}
-
-
-
+										
 									});
 								});
 							}
@@ -2973,7 +2971,7 @@ $(window).load(function(){
 
 										if(key == 'comment'){
 											console.log('comentario: ' +value);
-											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.comida [data="'+platillo+'"]').find('div').find('p').html(value);
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.comida [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 										}
 									});
 								});
@@ -3002,7 +3000,7 @@ $(window).load(function(){
 
 										if(key == 'comment'){
 											console.log('comentario: ' +value);
-											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack2 [data="'+platillo+'"]').find('div').find('p').html(value);
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack2 [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 										}
 
 									});
@@ -3032,7 +3030,7 @@ $(window).load(function(){
 
 										if(key == 'comment'){
 											console.log('comentario: ' +value);
-											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.cena [data="'+platillo+'"]').find('div').find('p').html(value);
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.cena [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 										}
 
 
