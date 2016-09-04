@@ -3,7 +3,7 @@ function buildMessageHTML(messageText, messageSenderId, messageDateSent, attachm
 
   var messageAttach;
   if(attachmentFileId){
-      messageAttach = '<a href="http://api.quickblox.com/blobs/'+attachmentFileId+'/download.xml?token='+token+'"><img src="http://api.quickblox.com/blobs/'+attachmentFileId+'/download.xml?token='+token+'" alt="attachment" class="attachments img-responsive" /></a>';
+	  messageAttach = '<a href="http://api.quickblox.com/blobs/'+attachmentFileId+'/download.xml?token='+token+'"><img src="http://api.quickblox.com/blobs/'+attachmentFileId+'/download.xml?token='+token+'" alt="attachment" class="attachments img-responsive" /></a>';
   }
 
 	var isMessageSticker = ""; //stickerpipe.isSticker(messageText);
@@ -26,7 +26,7 @@ function buildMessageHTML(messageText, messageSenderId, messageDateSent, attachm
 		// });
 	}
 
-    // var messageHtml =
+	// var messageHtml =
 		// 	'<div class="list-group-item" id="'+messageId+'" onclick="clickToAddMsg('+"'"+messageId+"'"+')">'+
 		// 		'<time datetime="'+messageDateSent+ '" class="pull-right">'
 		// 			+jQuery.timeago(messageDateSent)+
@@ -45,10 +45,10 @@ function buildMessageHTML(messageText, messageSenderId, messageDateSent, attachm
   console.log( localStorage.getItem('idSender') );
   console.log(sender);
   var messageHtml = '<div class="list-group-item" id="'+messageId+'" onclick="clickToAddMsg('+"'"+messageId+"'"+')">'+
-                    '<div class="'+ sender +'">' +
-                    '<p>' + messageTextHtml + '</p>'+
-                    '</div>' + 
-                    '</div>';
+					'<div class="'+ sender +'">' +
+					'<p>' + messageTextHtml + '</p>'+
+					'</div>' + 
+					'</div>';
   return messageHtml;
 }
 
@@ -72,11 +72,11 @@ function buildDialogHtml(dialogId, dialogUnreadMessagesCount, dialogIcon, dialog
 // build html for typing status
 function buildTypingUserHtml(userId, userLogin) {
   var typingUserHtml =
-      '<div id="'+userId+'_typing" class="list-group-item typing">'+
-        '<time class="pull-right">writing now</time>'+
-        '<h4 class="list-group-item-heading">'+ userLogin+'</h4>'+
-        '<p class="list-group-item-text"> . . . </p>'+
-      '</div>';
+	  '<div id="'+userId+'_typing" class="list-group-item typing">'+
+		'<time class="pull-right">writing now</time>'+
+		'<h4 class="list-group-item-heading">'+ userLogin+'</h4>'+
+		'<p class="list-group-item-text"> . . . </p>'+
+	  '</div>';
 
   return typingUserHtml;
 }
@@ -85,16 +85,16 @@ function buildTypingUserHtml(userId, userLogin) {
 function buildUserHtml(userLogin, userId, isNew) {
   var userHtml = "<a href='#' id='" + userId;
   if(isNew){
-    userHtml += "_new'";
+	userHtml += "_new'";
   }else{
-    userHtml += "'";
+	userHtml += "'";
   }
   userHtml += " class='col-md-12 col-sm-12 col-xs-12 users_form' onclick='";
   userHtml += "clickToAdd";
   userHtml += "(\"";
   userHtml += userId;
   if(isNew){
-    userHtml += "_new";
+	userHtml += "_new";
   }
   userHtml += "\")'>";
   userHtml += userLogin;
@@ -102,3 +102,31 @@ function buildUserHtml(userLogin, userId, isNew) {
 
   return userHtml;
 }
+
+var nuevo = 0;
+
+var fixWithKeyboard = function(){
+	console.log("In fix keyboard");
+	$(window).resize();
+	$(document).resize();
+	nuevo++;
+	$('#container').addClass('conteclado');
+	$('#container').css('height',document.documentElement.clientHeight+"px");
+	var calculate = document.documentElement.clientHeight-43;
+	$('.escribir').css('top',calculate+"px");
+	$('#mensaje-chat').focus();
+	console.log(nuevo+" "+document.documentElement.clientHeight);
+	// $('#container').scrollTop($('#container').prop("scrollHeight"));
+	$('body').scrollTop(0);
+}
+$('h2.titulo').click(function(){
+ 	return fixWithKeyboard();
+});
+
+// window.addEventListener('native.keyboardshow', function () {
+// 	console.log('keyboard '+document.documentElement.clientHeight);
+// 	return fixWithKeyboard();
+// 	console.log("After fix keyboard event");
+// 	// $(window).resize();
+// 	// $(document).resize();
+// });
