@@ -1105,6 +1105,10 @@ $(window).load(function(){
 												} else {
 													$(masadentro+' p.comentario').hide();
 												}
+
+												if (losplatos[i][3]!="ingredientes") {
+												 	$(masadentro+' p.ingredientes').html(losplatos[i][3]);
+												}
 											}
 										}
 									}
@@ -2703,7 +2707,10 @@ $(window).load(function(){
 
 		$('svg.noconsu').click(function() {
 			$(this).parent().parent().addClass('cancelado');
+			
 			$(this).html('<use xlink:href="#noconsu2"></use>');
+
+
 			var idPlatillo = $(this).parent().parent().attr('data');
 			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
 			var json = {
