@@ -310,6 +310,9 @@ input.send {position:absolute;border-style:none; outline:none;background:none;ri
 
 .chat section {padding-bottom:50px;}
 
+.escribir {height:43px;}
+/*.conteclado {overflow-x:hidden;overflow-y:scroll;}*/
+
 /* DIETA */
 
 body.dieta #container {background:#f5f1f0;}
