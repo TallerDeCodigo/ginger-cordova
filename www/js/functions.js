@@ -1186,7 +1186,8 @@ $(window).load(function(){
 
     function getWeekDays(fromDate){
 		var sunday = new Date(fromDate.setDate(fromDate.getDate()-fromDate.getDay())),result = [new Date(sunday)];
-     	while (sunday.setDate(sunday.getDate()+1) && sunday.getDay()!==0) {
+     	while (sunday.setDate(sunday.getDate()+1) && sunday.getDay()!==0) 
+     	{
       		result.push(new Date(sunday));
      	}
 		return result;
@@ -1206,28 +1207,20 @@ $(window).load(function(){
     //console.log("str> "+today);
     var domingo;
 
-    for(var i=1; i<dias.length; i++){
-    	var masuno = i;
+    for(var i=0; i<dias.length; i++){
+    	var masuno = i+1;
     	date_string = week[i].toString();    	
     	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
     	var dataf = new Date(date_string);
     	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
     }
 
-    date_string = week[0].toString();
-
-    //console.log(date_string);
-
-    $('tr td.day_of_week:nth-of-type(7) span').html(date_string.substring(8, 11));
-    var dataf = new Date(date_string);
-    //console.log(dataf);
-    $('#toda_la_dieta li:nth-of-type(7)').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
-
-	var incremento = 168.25;
-	var decremento = 167.75;
-	var current_day;
-	var full_date;
-    var left = fecha.hoy().substring(0,8);
+   
+		var incremento = 168.25;
+		var decremento = 167.75;
+		var current_day;
+		var full_date;
+    	var left = fecha.hoy().substring(0,8);
 
 	    current_day = new Date( + new Date().getTime() + 1 * 60 * 60 * 1000 );
 	    var dia_semana = current_day.getDay();
@@ -1235,9 +1228,9 @@ $(window).load(function(){
 	    $('tr td.day_of_week:nth-of-type('+dia_semana+')').trigger('click');
 
 	    current_day = fecha.hoy().substring(8);
-	    //console.log("str> "+current_day);
+	    
 	    current_day = left + current_day;
-	    // console.log("str> "+current_day);
+	    
 
 		$(".nextweek").click(function(){
 	    	week = getWeekDays( new Date( current_day ) );
@@ -1257,7 +1250,7 @@ $(window).load(function(){
 	    	current_day = full_date;
 	    	//console.log("Full date > > "+full_date);
 	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
-			for(var i=1; i<dias.length; i++){
+			for(var i=0; i<dias.length; i++){
 				
 				var nuevo = JSON.stringify(week2[i]);
 				// console.log("wee ::"+week2[i]);
@@ -1281,7 +1274,7 @@ $(window).load(function(){
 	    	$('#month').html(meses[month] );
 	    	$('#year').html(full_date.getFullYear());
 
-	    	for(var i=1; i<dias.length; i++){
+	    	for(var i=0; i<dias.length; i++){
 	    		var masuno = i+1;
 	    		date_string = week[i].toString();
 	    		$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
