@@ -103,30 +103,33 @@ function buildUserHtml(userLogin, userId, isNew) {
   return userHtml;
 }
 
-var nuevo = 0;
+var initialViewHeight = document.documentElement.clientHeight;
 
 var fixWithKeyboard = function(){
 	console.log("In fix keyboard");
+	// Keyboard.disableScrollingInShrinkView(true);
+	Keyboard.shrinkView(true);
 	$(window).resize();
 	$(document).resize();
-	nuevo++;
-	$('#container').addClass('conteclado');
-	$('#container').css('height',document.documentElement.clientHeight+"px");
 	var calculate = document.documentElement.clientHeight-43;
+	console.log(calculate);
+	Keyboard.shrinkView(false);
+	$('#container, .pre-scrollable').addClass('conteclado');
+	$('#container').css('max-height',document.documentElement.clientHeight+"px");
+
 	$('.escribir').css('top',calculate+"px");
 	$('#mensaje-chat').focus();
-	console.log(nuevo+" "+document.documentElement.clientHeight);
+	console.log(" "+document.documentElement.clientHeight);
 	// $('#container').scrollTop($('#container').prop("scrollHeight"));
 	$('body').scrollTop(0);
 }
-$('h2.titulo').click(function(){
- 	return fixWithKeyboard();
-});
 
-// window.addEventListener('native.keyboardshow', function () {
-// 	console.log('keyboard '+document.documentElement.clientHeight);
-// 	return fixWithKeyboard();
-// 	console.log("After fix keyboard event");
-// 	// $(window).resize();
-// 	// $(document).resize();
-// });
+window.addEventListener('keyboardDidShow', function () {
+	console.log('keyboard '+document.documentElement.clientHeight);
+	return fixWithKeyboard();
+});
+window.addEventListener('keyboardDidHide', function () {
+	console.log('keyboard '+document.documentElement.clientHeight);
+	$('#container, .pre-scrollable').removeClass('conteclado');
+	$('.escribir').css('top',"initial");
+});

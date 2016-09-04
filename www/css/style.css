@@ -277,14 +277,13 @@ input[type=checkbox]:not(old):checked + span {background-position: 0 -29px;}
 /* CHAT */
 
 #mensaje-chat{z-index: -1; margin-top: 0px!important}
-.foot-chat{position:absolute;bottom: 0;left:0;right:0;z-index: 99}
-/*.foot-chat {position:fixed;background:#f5f1f0;width:100%;bottom:0px;padding:6px 70px 2px 40px;border-top:1px solid #CCC;}
+.foot-chat {position:fixed;background:#f5f1f0;width:100%;bottom:0px;padding:6px 70px 2px 40px;border-top:1px solid #CCC;}
 .foot-chat a {position:absolute;}
 .attach {left:10px;bottom:4px;}
 .attach img {width:22px;height:auto;}
 .send {right:4px;bottom:5px;height:27px;width:61px;line-height:27px;font-weight:700;}
 
-.foot-chat textarea {width:100%;resize:none;outline:none;border:1px solid #CCC;border-radius:3px;padding:4px 5px 1px;}*/
+.foot-chat textarea {width:100%;resize:none;outline:none;border:1px solid #CCC;border-radius:3px;padding:4px 5px 1px;}
 
 textarea.short-descrip{height: 90px;background:transparent;}
 
@@ -311,7 +310,8 @@ input.send {position:absolute;border-style:none; outline:none;background:none;ri
 .chat section {padding-bottom:50px;}
 
 .escribir {height:43px;}
-/*.conteclado {overflow-x:hidden;overflow-y:scroll;}*/
+#container.conteclado {min-height: 0; overflow: hidden;}
+.pre-scrollable.conteclado {display: block; overflow: scroll; margin-bottom: 2rem;}
 
 /* DIETA */
 
