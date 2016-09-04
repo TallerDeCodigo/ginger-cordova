@@ -242,7 +242,9 @@ function sendMessage(text, attachmentFileId) {
 function showMessage(userId, msg, attachmentFileId) {
   // add a message to list
   var userLogin = getUserLoginById(userId);
-  var messageHtml = buildMessageHTML(msg.body, userLogin, new Date(), attachmentFileId, msg.id);
+  console.log("User_id ::: "+userId);
+  console.log("User_login ::: "+userLogin);
+  var messageHtml = buildMessageHTML(msg.body, userId, new Date(), attachmentFileId, msg.id);
 
   $('#messages-list').append(messageHtml);
 
