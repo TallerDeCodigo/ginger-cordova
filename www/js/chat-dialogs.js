@@ -45,36 +45,36 @@ function retrieveChatDialogs() {
 			var minutes;
 			var message_time;
 
-			if(!resDialogs.items.length){
-				console.log("No dialogs");
-				$("#load-img").change(function(){
-					var inputFile = $("input[type=file]")[0].files[0];
-					if (inputFile) {
-						$("#progress").show(0);
-					}
+			// if(!resDialogs.items.length){
+			// 	console.log("No dialogs");
+			// 	$("#load-img").change(function(){
+			// 		var inputFile = $("input[type=file]")[0].files[0];
+			// 		if (inputFile) {
+			// 			$("#progress").show(0);
+			// 		}
 
-					clickSendAttachments(inputFile);
-				});
+			// 		clickSendAttachments(inputFile);
+			// 	});
 
-				return;
-			}
-			$.each(resDialogs, function( key, value ){
-				console.log('for> '+resDialogs.items[i].name);
+			// 	return;
+			// }
+			// $.each(resDialogs, function( key, value ){
+			// 	console.log('for> '+resDialogs.items[i].name);
 				
-				var date_millis = resDialogs.items[i].last_message_date_sent;
-				var secs = date_millis*1000;
+			// 	var date_millis = resDialogs.items[i].last_message_date_sent;
+			// 	var secs = date_millis*1000;
 				
-				time = new Date(secs)
-				hours = time.getHours();
-				minutes = time.getMinutes();
-				message_time = hours+ ":"+minutes;
+			// 	time = new Date(secs)
+			// 	hours = time.getHours();
+			// 	minutes = time.getMinutes();
+			// 	message_time = hours+ ":"+minutes;
 
-				//console.log(hours+ ":"+minutes);
-					//$('.lista_chat').append('<li class="persona"><div class="circle-frame"><img src="images/muestra.png"></div><h5>'+ resDialogs.items[i].name+'</h5><p>'+ resDialogs.items[i].last_message +'</p><div class="no-leido">'+message_time+'</div></li>');
+			// 	console.log(hours+ ":"+minutes);
+			// 		$('.lista_chat').append('<li class="persona"><div class="circle-frame"><img src="images/muestra.png"></div><h5>'+ resDialogs.items[i].name+'</h5><p>'+ resDialogs.items[i].last_message +'</p><div class="no-leido">'+message_time+'</div></li>');
 
-				i++;
-				console.log("Inside each");
-			});
+			// 	i++;
+			// 	console.log("Inside each");
+			// });
 			
 			console.log("resDialogs");
 			console.log(resDialogs);
