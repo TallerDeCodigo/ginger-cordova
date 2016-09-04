@@ -298,12 +298,12 @@ input.send {position:absolute;border-style:none; outline:none;background:none;ri
 
 .foot-chat textarea {width:100%;resize:none;outline:none;border:1px solid #CCC;border-radius:3px;padding:4px 5px 1px;}
 
-.outgoing {float:left;background:#42c2a7;width:75%;color:#FFF;text-align:left;border-radius:10px;margin:12px 0px 0px 13px;position:relative;}
-.incoming {float:right;background:#7f4ab8;width:75%;color:#FFF;text-align:left;border-radius:10px;margin:12px 13px 0px 0px;position:relative;}
-.outgoing:after {content:"";position:absolute;left:-11px;bottom:0px;width:11px;height:14px;background:url('../images/incom.svg');}
-.incoming:after {content:"";position:absolute;right:-11px;bottom:0px;width:11px;height:14px;background:url('../images/outgo.svg');}
-.outgoing:not(.withimg) {border-bottom-left-radius:0px;}
-.incoming:not(.withimg) {border-bottom-right-radius:0px;}
+.incoming {float:left;background:#42c2a7;width:75%;color:#FFF;text-align:left;border-radius:10px;margin:12px 0px 0px 13px;position:relative;}
+.outgoing {float:right;background:#7f4ab8;width:75%;color:#FFF;text-align:left;border-radius:10px;margin:12px 13px 0px 0px;position:relative;}
+.incoming:after {content:"";position:absolute;left:-11px;bottom:0px;width:11px;height:14px;background:url('../images/incom.svg');}
+.outgoing:after {content:"";position:absolute;right:-11px;bottom:0px;width:11px;height:14px;background:url('../images/outgo.svg');}
+.incoming:not(.withimg) {border-bottom-left-radius:0px;}
+.outgoing:not(.withimg) {border-bottom-right-radius:0px;}
 .withimg {overflow:hidden;}
 .outgoing p, .incoming p {margin:0;padding:7px 11px 7px 11px;}
 .outgoing img, .incoming img {margin:0;width:100%;margin-bottom:-4px;}

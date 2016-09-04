@@ -40,15 +40,15 @@ function buildMessageHTML(messageText, messageSenderId, messageDateSent, attachm
 		// 	'</div>';
 
 
-  var sender = (localStorage.getItem('idSender') == messageSenderId)?'incoming':'outgoing';  
+  var sender = ((localStorage.getItem('idSender') == messageSenderId) || !messageSenderId) ? 'outgoing' : 'incoming';  
   console.log('Mensaje ID SENDER: ' + messageSenderId);
   console.log( localStorage.getItem('idSender') );
   console.log(sender);
   var messageHtml = '<div class="list-group-item" id="'+messageId+'" onclick="clickToAddMsg('+"'"+messageId+"'"+')">'+
-        '<div class="'+ sender +'">' +
-        '<p>' + messageTextHtml + '</p>'+
-        '</div>' + 
-        '</div>';
+                    '<div class="'+ sender +'">' +
+                    '<p>' + messageTextHtml + '</p>'+
+                    '</div>' + 
+                    '</div>';
   return messageHtml;
 }
 
