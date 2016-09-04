@@ -37,11 +37,11 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "org.ginger.app"
         },
-        "nl.x-services.plugins.toast": {
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "org.ginger.app"
         },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        "nl.x-services.plugins.toast": {
+            "PACKAGE_NAME": "org.ginger.app"
         }
     },
     "dependent_plugins": {

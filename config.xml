@@ -23,6 +23,7 @@
     <access origin="https://*.google.com" />
     <access origin="https://*.googleapis.com" />
     <access origin="https://*.gstatic.com" />
+    <access origin="http://ginger-admin.cloudapp.net" />
     
     <platform name="android">
         <allow-intent href="market:*" />    

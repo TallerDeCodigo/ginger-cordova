@@ -25,9 +25,9 @@ $( function() {
 
 	var anchot = document.documentElement.clientWidth;
 
-	$('.add_picture').click(function (e) {
-		
-		app.get_file_from_device('search', 'camera');
+	$('.add_picture').click(function (e) 
+	{
+		app.get_file_from_device('profile', 'camera');
 	});
 
 	if($('body').hasClass('has-finanzas')){
@@ -753,6 +753,8 @@ $(window).on("load resize",function(){
 
 				$('#_alert_chCoach').click(function(){
 					console.log('CLICK EN ALERT CH-COACH');
+
+						apiRH.initializeProfileFileTransfer();
 					// console.log("ZIP>"+ $('input[name="zipocode"]').val());
 						var genero 				= $('#update_sexo').val();
 
@@ -1009,7 +1011,7 @@ $(window).load(function(){
 			var ingredientes;
 			var losplatos = [];
 			var i=0;
-
+			console.log(' --- estructura de la dieta ---');
 			console.log(dieta);
 
 			$.each( dieta.platillos, function( key, value ) {
@@ -1027,7 +1029,22 @@ $(window).load(function(){
 					 	losplatos[i][2]=value;
 					}
 					if (key=="ingredientes") {
-					 	losplatos[i][3]=value;
+						console.log(' --- ingredientes --- ' + key + ' vlue ' + value);	 	
+					 	var ing = '';
+					 	if(value.length > 0){
+
+						 	$.each(value, function(key, value){
+						 		if(value._id != null){
+						 			ing = ing + value._id.nombre;
+						 			console.log('fghfghfghfgh <<<<<<'+ value._id.nombre);	
+						 		}	
+						 	});
+					 	}else{
+					 		console.log('sin ingredientes');
+					 	}
+
+					 	losplatos[i][3]=ing;
+					 	console.log(losplatos[i][3]);
 					}
 				});
 				i++;
@@ -1093,21 +1110,34 @@ $(window).load(function(){
 												// console.log(losplatos[i][1]+"<"+losplatos[i][2]+"<"+losplatos[i][4]);
 												$(masadentro).attr("data", losplatos[i][0]);
 												$(masadentro+' h5').html(losplatos[i][1]);
+												//Receta
 												if (losplatos[i][2]!="") {
 													$(masadentro+' p.receta').html(losplatos[i][2]);
 												} else {
 													$(masadentro+' p.receta').hide();
 												}
+												//Comentarios
 												if (losplatos[i][4]!="") {
 													$(masadentro+' p.comentario').html(losplatos[i][4]);
-													//console.log(dieta.platillos[i].ingredientes);
-													$('.plat-comentario').html('hola');
+													//Comentarios del usuario
+													$('.plat-comentario').html(	'');
+
+
 												} else {
 													$(masadentro+' p.comentario').hide();
 												}
 
 												if (losplatos[i][3]!="ingredientes") {
-												 	$(masadentro+' p.ingredientes').html(losplatos[i][3]);
+													
+													console.log('Aquí puto: ' + losplatos[i][3]);	
+
+													$.each(losplatos[i][3], function(key, value){
+
+														console.log('Ingredientes: ' + $(masadentro+' p.ingredientes').html(value));	
+														$(masadentro+' p.ingredientes').html(value)
+
+													});
+												 	//$(masadentro+' p.ingredientes').html(losplatos[i][3]);
 												}
 											}
 										}
@@ -1901,10 +1931,16 @@ $(window).load(function(){
 	FEED HTML
 */
 
-		if( localStorage.getItem('avatar') ){
-			$('.circle-frame').find('img').attr('src', localStorage.getItem('avatar') + '?type=large');
+		if(localStorage.getItem('avatar-admin')){
+			$('.circle-frame').find('img').attr('src', 'http://ginger-admin.cloudapp.net/pictures/' + localStorage.getItem('avatar-admin'));
 		}else{
-			$('.circle-frame').find('img').remove();
+
+			if( localStorage.getItem('avatar') ){
+				$('.circle-frame').find('img').attr('src', localStorage.getItem('avatar') + '?type=large');
+			}else{
+				$('.circle-frame').find('img').remove();
+			}
+
 		}
 	
 		$('#finish1').click(function(){
@@ -2794,10 +2830,13 @@ $(window).load(function(){
 			$('.the-comment').show();
 			$('li.comentario').show();
 			$('.little-comment').hide();
-				/*
-					localStorage COMENTARIO
-				*/
+			
+			/*
+				localStorage COMENTARIO
+			*/
+
 			localStorage.setItem('comentario', $('#comentar').val())
+			
 			var _cmt = localStorage.getItem('comentario');
 
 			if(_cmt != ""){
