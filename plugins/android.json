@@ -39,6 +39,9 @@
         },
         "nl.x-services.plugins.toast": {
             "PACKAGE_NAME": "org.ginger.app"
+        },
+        "cordova-plugin-keyboard": {
+            "PACKAGE_NAME": "org.ginger.app"
         }
     },
     "dependent_plugins": {

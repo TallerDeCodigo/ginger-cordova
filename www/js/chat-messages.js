@@ -9,7 +9,7 @@ function submit_handler(form) {
 }
 
 function setupMsgScrollHandler() {
-  var msgWindow = $('.col-md-8 .list-group.pre-scrollable');
+  var msgWindow = $('.list-group.pre-scrollable');
   var msgList = $('#messages-list');
 
   msgList.scroll(function() {
