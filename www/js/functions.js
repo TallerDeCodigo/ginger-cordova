@@ -1254,11 +1254,17 @@ $(window).load(function(){
     	var dia = "";
     	if((dataf.getMonth()+1) < 10)
     		mes = '0'+(dataf.getMonth()+1);
+    	else
+    		mes = (dataf.getMonth()+1);
 
-    	if((dataf.getDate()+1) < 10)
+    	if((dataf.getDate()) < 10)
     		dia = '0'+(dataf.getDate());
+    	else
+    		dia = (dataf.getDate());
 
     	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+mes+'-'+ dia);
+
+    	console.log(dia);
     }
 
    
@@ -1307,7 +1313,21 @@ $(window).load(function(){
 		    	//console.log(dow[i]);
 		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
 		    	var dataf = new Date(week2[i]);
-		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-0'+(dataf.getMonth()+1)+'-'+ dataf.getDate() );
+
+		    	var mes = "";
+		    	var dia = "";
+		    	if((dataf.getMonth()+1) < 10)
+		    		mes = '0'+(dataf.getMonth()+1);
+		    	else
+		    		mes = (dataf.getMonth()+1);
+
+
+		    	if((dataf.getDate()) < 10)
+		    		dia = '0'+(dataf.getDate());
+		    	else
+		    		dia = (dataf.getDate());
+
+		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+mes+'-'+ dia );
 		    }
 		});
 
@@ -1340,7 +1360,18 @@ $(window).load(function(){
 		    	//console.log(dow[i]);
 		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
 		    	var dataf = new Date(week2[i]);
-		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-0'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
+		    	var mes = "";
+		    	var dia = "";
+		    	if((dataf.getMonth()+1) < 10)
+		    		mes = '0'+(dataf.getMonth()+1);
+		    	else
+    				mes = (dataf.getMonth()+1);
+
+		    	if((dataf.getDate()) < 10)
+		    		dia = '0'+(dataf.getDate());
+		    	else
+		    		dia = (dataf.getDate());
+		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+mes+'-'+dia);
 		    }
 		});
 
