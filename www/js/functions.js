@@ -1010,7 +1010,6 @@ $(window).load(function(){
 			var i=0;
 			console.log(' --- estructura de la dieta ---');
 			console.log(dieta);
-
 			$.each( dieta.platillos, function( key, value ) {
 				//console.log(dieta.platillos[i].ingredientes);
 				losplatos[i]=[];
@@ -2817,6 +2816,8 @@ $(window).load(function(){
 		});
 
 		$('svg.commenn').click(function() {
+			console.log('click');
+			$('#comentar').val(''); /*AQUI SE ELIMINA EL COMENTARIO DEL TEXTAREA CUANDO SE HACE CLICK EN EL ICONO QUE LO ABRE*/
 			$('.overscreen3').show();
 			setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
 			$('.overscreen3 textarea').focus();
@@ -2845,8 +2846,7 @@ $(window).load(function(){
 				comida = 3;
 			if($(this).parent().parent().parent().hasClass('cena'))
 				comida = 4;
-			
-
+		
 			var json = {
 				"plato" : idPlatillo, 
 	            "fecha" : cosumoFecha,
@@ -3092,7 +3092,7 @@ $(window).load(function(){
 		$('.send_cmt').click(function() {
 			$('.overscreen3').removeClass('active');
 			setTimeout(function() {$('.overscreen3').hide();}, 500);
-			$('.the-comment').html($('#comentar').val());
+			$('.the-comment').html($('#comentar').val());  		/*ESTE ELIMINA EL COMENTARIO ANTERIOR AL HACER CLICK EN EL BOTON ENVIAR COMENTARIO*/
 			$('.the-comment').show();
 			$('li.comentario').show();
 			$('.little-comment').hide();
@@ -3101,7 +3101,7 @@ $(window).load(function(){
 				localStorage COMENTARIO
 			*/
 
-			localStorage.setItem('comentario', $('#comentar').val())
+			localStorage.setItem('comentario', $('#comentar').val()) /*AQUI SE GUARDA EL COMENTARIO EN LOCALSTORAGE*/
 			
 			var _cmt = localStorage.getItem('comentario');
 
