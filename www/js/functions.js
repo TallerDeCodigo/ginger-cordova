@@ -2763,7 +2763,6 @@ $(window).load(function(){
 				//$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');
 			}
 			
-			
 			var json = {
 				"plato" : idPlatillo, 
 	            "fecha" : cosumoFecha,
@@ -2827,8 +2826,10 @@ $(window).load(function(){
 			setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
 			$('.overscreen3 textarea').focus();
 			var idPlatillo = $(this).parent().parent().attr('data');
+			var nPlatillo = $(this).parent().parent().attr('platillo');
 			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
 			var comida = -1;
+			var mensaje = "";
 			
 			if($(this).parent().parent().parent().hasClass('desayuno'))
 				comida = 0;
@@ -2857,8 +2858,8 @@ $(window).load(function(){
 				"plato" : idPlatillo, 
 	            "fecha" : cosumoFecha,
 	            "comida"  : comida,
-	            "platillo": 0,
-	            "comment" : "blalbablablablablabl"
+	            "platillo": nPlatillo,
+	            "comment" : mensaje
 			};
 			
 			apiRH.makeCosume(json);
