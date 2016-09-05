@@ -1094,10 +1094,6 @@ function requestHandlerAPI(){
 					  	var token 	= localStorage.getItem('token');
 
 					  	console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
-					  	
-					  	/*
-							GET REQUEST
-					  	*/
 
 					  	sdk_app_context.showLoader();
 
@@ -1313,8 +1309,6 @@ function requestHandlerAPI(){
 			});
 		};
 
-		
-
 		this.transfer_win = function (r) {
 									app.toast("Se ha publicado una imagen");
 									window.location.reload(true);
@@ -1450,8 +1444,6 @@ function requestHandlerAPI(){
 				app.toast("Still processing...")
 			}
 		};
-
-
 
 		this.fileselect_win = function (r) {
 			console.log('selected win: ' + r);

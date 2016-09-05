@@ -1138,7 +1138,9 @@ $(window).load(function(){
 														$(masadentro+' p.ingredientes').html(value)
 
 													});
-												 	//$(masadentro+' p.ingredientes').html(losplatos[i][3]);
+												 	
+												}else{
+													$(masadentro+' p.comentario').hide();
 												}
 											}
 										}
@@ -2778,6 +2780,7 @@ $(window).load(function(){
 			
 			apiRH.makeCosume(json);
 
+
 		});
 
 		$('svg.noconsu').click(function() {
@@ -2943,7 +2946,7 @@ $(window).load(function(){
 											console.log('comentario: ' +value);
 											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 										}
-										
+
 									});
 								});
 							}
