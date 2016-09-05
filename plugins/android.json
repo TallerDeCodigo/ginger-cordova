@@ -43,7 +43,7 @@
         "nl.x-services.plugins.toast": {
             "PACKAGE_NAME": "org.ginger.app"
         },
-        "cordova-plugin-keyboard": {
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "org.ginger.app"
         }
     },

@@ -106,30 +106,41 @@ function buildUserHtml(userLogin, userId, isNew) {
 var initialViewHeight = document.documentElement.clientHeight;
 
 var fixWithKeyboard = function(){
-	console.log("In fix keyboard");
-	// Keyboard.disableScrollingInShrinkView(true);
-	Keyboard.shrinkView(true);
+
+	//Keyboard.disableScrollingInShrinkView(false);
 	$(window).resize();
 	$(document).resize();
+	$('#container').addClass('conteclado');
+	$('#container').css('height',document.documentElement.clientHeight+"px");
 	var calculate = document.documentElement.clientHeight-43;
-	console.log(calculate);
-	Keyboard.shrinkView(false);
-	$('#container, .pre-scrollable').addClass('conteclado');
-	$('#container').css('max-height',document.documentElement.clientHeight+"px");
-
-	$('.escribir').css('top',calculate+"px");
 	$('#mensaje-chat').focus();
-	console.log(" "+document.documentElement.clientHeight);
-	// $('#container').scrollTop($('#container').prop("scrollHeight"));
+	$('#container').scrollTop($('#container').prop("scrollHeight"));
 	$('body').scrollTop(0);
+	$('#messages-list').trigger("click");
+	$('.escribir').css('top',calculate+"px");
 }
 
+window.openKeyboard = false;
+
+
+/* Keyboard shown event */
 window.addEventListener('keyboardDidShow', function () {
-	console.log('keyboard '+document.documentElement.clientHeight);
+	console.log('keyboard did show');
+	window.openKeyboard = true;
 	return fixWithKeyboard();
 });
+
+/* Keyboard hidden event */
 window.addEventListener('keyboardDidHide', function () {
-	console.log('keyboard '+document.documentElement.clientHeight);
-	$('#container, .pre-scrollable').removeClass('conteclado');
+	console.log('keyboard did hide');
+	window.openKeyboard = false;
+	$('#container').removeClass('conteclado');
+	$('#container').css('height', document.documentElement.clientHeight+"px");
 	$('.escribir').css('top',"initial");
+});
+
+/* Hide keyboard on scroll */
+$('#messages-list').scroll( function(){
+	console.log("scrollin keyboard:: "+window.openKeyboard);
+	if(window.openKeyboard) Keyboard.hide();
 });

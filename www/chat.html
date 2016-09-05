@@ -21,34 +21,30 @@
 		
 	</head>
 	<body id="chat" class="has-chat iosm">
-	<div id="container" class="chat">
 		<header class="hwhite2">
 			<div class="toolbar">
 				<a href="dieta.html" class="back"><img src="images/back.svg"></a>
-				<h2 class="titulo">María Medina</h2>
+				<h2 class="titulo"></h2>
 			</div>
 		</header>
-		<section>
-			<!-- <ul class="lista_chat" id="dialogs-list">
-			</ul> -->	
+		<div id="container" class="chat">
+
 			<div class="content list-group pre-scrollable nice-scroll" id="messages-list">
 				<!-- list of chat messages will be here -->
 			</div>
+			
 			<footer class="foot-chat escribir">
+				<div class="ghost_writer visible"></div>
 				<form class="form-inline" role="form" method="POST" action="" onsubmit="return submit_handler(this)">
 					<input type="file" name="galeria" style="z-index:-1; position:absolute; ">
 					<a href="#" class="attach"><img src="images/attach.svg"></a>
 					<textarea id="mensaje-chat" rows="1" onfocus="if(this.innerHTML=='Mensaje') {this.innerHTML='';}">Mensaje</textarea>
 					<input type="submit" class="send cpur" value="Enviar" onclick="clickSendMessage()">
-					<!-- <button  type="submit" id="send_btn" class="btn btn-default send cpur" onclick="clickSendMessage()">Enviar</button> -->
 				</form>
-				<!-- <a href="#" class="attach"><img src="images/attach.svg"></a>
-				<textarea id="mensaje-chat" rows="1" onfocus="if(this.innerHTML=='Mensaje') {this.innerHTML='';}">Mensaje</textarea>
-				<a class="send cpur" href="#">Enviar</a> -->
+
 			</footer>
-		</section>
-		
-	</div>
+			
+		</div>
 	</body>
 	<script src="js/chat-config.js"></script>
 	<script src="js/chat-connection.js"></script>

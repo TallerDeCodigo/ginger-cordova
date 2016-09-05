@@ -1127,8 +1127,6 @@ $(window).load(function(){
 
 												if (losplatos[i][3]!="ingredientes") {
 													
-													console.log('Aquí puto: ' + losplatos[i][3]);	
-
 													$.each(losplatos[i][3], function(key, value){
 
 														console.log('Ingredientes: ' + $(masadentro+' p.ingredientes').html(value));	
