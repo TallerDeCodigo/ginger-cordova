@@ -335,7 +335,7 @@
 			}
 			catch(err){
 				console.log('Toasting error: ' + JSON.stringify(err)); // imprime esto con un JSON vacio
-				alert(message);
+				app.toast(message);
 			}
 			return;
 		},
@@ -685,7 +685,7 @@
 				 	
 				 	return;
 				}else{
-					alert('Error en la combinación de usuario / contrase');
+					app.toast('Error en la combinación de usuario / contraseña, por favor intenta de nuevo.');
 				}
 			}
 		}); //END VALIDATE
@@ -787,9 +787,9 @@
 
 	   				}
 	   				else
-	   					alert("Error al actualizar datos");
+	   					app.toast("Error al actualizar datos");
 	   			}else{
-	   				alert("Error al procesar tu pago");
+	   				app.toast("Error al procesar tu pago");
 	   			}
 	   			return;
 	   		};
@@ -798,7 +798,7 @@
 
 	   		errorResponseHandler = function(error) {
 	   		  return console.log(error.message);  //error de conectividad
-	   		  alert('Error al procesar tu pago' + error.message);
+	   		  app.toast('Error al procesar tu pago' + error.message);
 	   		};
 
 	   		/* Tokenizar una tarjeta en Conekta */
