@@ -2773,7 +2773,12 @@ $(window).load(function(){
 			if(comida == -1)
 				return;
 			
-			apiRH.makeCosume(json);
+			var result = apiRH.makeCosume(json);
+
+			if(result){
+				//Llamar a consumidos
+				//window.getConsumed();
+			}
 
 
 		});
@@ -2817,20 +2822,25 @@ $(window).load(function(){
 	            "consumido": false
 			};
 			
-			apiRH.makeCosume(json);
+			var result = apiRH.makeCosume(json);
+
+			if(result){
+
+				//Llamar a consumidos
+				//window.getConsumed();
+			}
+
 		});
 
 		$('svg.commenn').click(function() {
 			console.log('click');
 			$('#comentar').val(''); /*AQUI SE ELIMINA EL COMENTARIO DEL TEXTAREA CUANDO SE HACE CLICK EN EL ICONO QUE LO ABRE*/
 			$('.overscreen3').show();
-			setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
-			$('.overscreen3 textarea').focus();
+
 			var idPlatillo = $(this).parent().parent().attr('data');
 			var nPlatillo = $(this).parent().parent().attr('platillo');
 			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
 			var comida = -1;
-			var mensaje = "";
 			
 			if($(this).parent().parent().parent().hasClass('desayuno'))
 				comida = 0;
@@ -2842,27 +2852,15 @@ $(window).load(function(){
 				comida = 3;
 			if($(this).parent().parent().parent().hasClass('cena'))
 				comida = 4;
+
+			$('.overscreen3').attr('idPlatillo', idPlatillo);
+			$('.overscreen3').attr('nPlatillo', nPlatillo);
+			$('.overscreen3').attr('cosumoFecha', cosumoFecha);
+			$('.overscreen3').attr('comida', comida);
+
+			setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
+
 			
-			if($(this).parent().parent().parent().hasClass('desayuno'))
-				comida = 0;
-			if($(this).parent().parent().parent().hasClass('snack1'))
-				comida = 1;
-			if($(this).parent().parent().parent().hasClass('comida'))
-				comida = 2;
-			if($(this).parent().parent().parent().hasClass('snack2'))
-				comida = 3;
-			if($(this).parent().parent().parent().hasClass('cena'))
-				comida = 4;
-		
-			var json = {
-				"plato" : idPlatillo, 
-	            "fecha" : cosumoFecha,
-	            "comida"  : comida,
-	            "platillo": nPlatillo,
-	            "comment" : mensaje
-			};
-			
-			apiRH.makeCosume(json);
 		});
 
 		var texto = 'Mostrar Completados';
@@ -3104,14 +3102,30 @@ $(window).load(function(){
 			$('.the-comment').show();
 			$('li.comentario').show();
 			$('.little-comment').hide();
-			
 			/*
 				localStorage COMENTARIO
 			*/
-
 			localStorage.setItem('comentario', $('#comentar').val()) /*AQUI SE GUARDA EL COMENTARIO EN LOCALSTORAGE*/
 			
 			var _cmt = localStorage.getItem('comentario');
+
+			$('.overscreen3 textarea').focus();
+
+
+		
+			var json = {
+				"plato" : $('.overscreen3').attr('idplatillo'), 
+	            "fecha" : $('.overscreen3').attr('cosumoFecha'),
+	            "comida"  : $('.overscreen3').attr('comida'),
+	            "platillo": $('.overscreen3').attr('nPlatillo'),
+	            "comment" : _cmt
+			};
+			
+			var result = apiRH.makeCosume(json);
+
+			if(result){
+				getConsumed();
+			}
 
 			if(_cmt != ""){
 				$('#finish4').attr('src', 'images/enter.svg');
