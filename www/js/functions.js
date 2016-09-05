@@ -1010,7 +1010,6 @@ $(window).load(function(){
 			var i=0;
 			console.log(' --- estructura de la dieta ---');
 			console.log(dieta);
-
 			$.each( dieta.platillos, function( key, value ) {
 				//console.log(dieta.platillos[i].ingredientes);
 				losplatos[i]=[];
@@ -1105,8 +1104,8 @@ $(window).load(function(){
 									if (key=="platillo") {				
 										for (var i = 0; i < losplatos.length; i++) {
 											if (value==losplatos[i][0]) {
-												// console.log(losplatos[i][1]+"<"+losplatos[i][2]+"<"+losplatos[i][4]);
 												$(masadentro).attr("data", losplatos[i][0]);
+												$(masadentro).attr("platillo", i);
 												$(masadentro+' h5').html(losplatos[i][1]);
 												//Receta
 												if (losplatos[i][2]!="") {
@@ -1150,6 +1149,7 @@ $(window).load(function(){
 											if (value==losplatos[i][0]) {
 												// console.log(losplatos[i][1]+"<"+losplatos[i][2]+"<"+losplatos[i][4]);
 												$(masadentro).attr("data", losplatos[i][0]);
+												$(masadentro).attr("platillo", i);
 												$(masadentro+' h5').html(losplatos[i][1]);
 												if (losplatos[i][2]!="") {
 													$(masadentro+' p.receta').html(losplatos[i][2]);
@@ -2735,6 +2735,7 @@ $(window).load(function(){
 			console.log($(this).parent().parent().parent().parent().parent().parent().attr('data'));
 
 			var idPlatillo = $(this).parent().parent().attr('data');
+			var nPlatillo = $(this).parent().parent().attr('platillo');
 			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
 			var comida = -1;
 
@@ -2752,28 +2753,32 @@ $(window).load(function(){
 			if($(this).parent().find('svg.consume').find('use').attr('xlink:href') == '#consume2'){
 				$(this).html('<use xlink:href="#consume"></use>');	
 				$(this).parent().find('svg.noconsu').find('use').attr('xlink:href', '#noconsu2');
-				cosumo = true;	
+				cosumo = false;	
 					
 			}else{
 				$(this).html('<use xlink:href="#consume2"></use>');
 				$(this).parent().find('svg.noconsu').find('use').attr('xlink:href', '#noconsu');
-				cosumo = false;
+				cosumo = true;
 				//$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');
 			}
-			
 			
 			var json = {
 				"plato" : idPlatillo, 
 	            "fecha" : cosumoFecha,
 	            "comida"  : comida,
-	            "platillo": 0,
+	            "platillo": nPlatillo,
 	            "consumido": cosumo
 			};
 
 			if(comida == -1)
 				return;
 			
-			apiRH.makeCosume(json);
+			var result = apiRH.makeCosume(json);
+
+			if(result){
+				//Llamar a consumidos
+				//window.getConsumed();
+			}
 
 
 		});
@@ -2783,8 +2788,10 @@ $(window).load(function(){
 			$(this).parent().parent().addClass('cancelado');
 
 			var idPlatillo = $(this).parent().parent().attr('data');
+			var nPlatillo = $(this).parent().parent().attr('platillo');
 			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
 			var comida = -1;
+			var consumo = false;
 			
 			if($(this).parent().parent().parent().hasClass('desayuno'))
 				comida = 0;
@@ -2799,28 +2806,39 @@ $(window).load(function(){
 			
 			if($(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume2')){
 				$(this).html('<use xlink:href="#noconsu2"></use>');		
-				$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');		
+				$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');
+				var consumo = true;		
 			}else{
 				$(this).html('<use xlink:href="#noconsu"></use>');	
 				$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');
+				var consumo = false;
 			}
 			
 			var json = {
 				"plato" : idPlatillo, 
 	            "fecha" : cosumoFecha,
 	            "comida"  : comida,
-	            "platillo": 0,
+	            "platillo": nPlatillo,
 	            "consumido": false
 			};
 			
-			apiRH.makeCosume(json);
+			var result = apiRH.makeCosume(json);
+
+			if(result){
+
+				//Llamar a consumidos
+				//window.getConsumed();
+			}
+
 		});
 
 		$('svg.commenn').click(function() {
+			console.log('click');
+			$('#comentar').val(''); /*AQUI SE ELIMINA EL COMENTARIO DEL TEXTAREA CUANDO SE HACE CLICK EN EL ICONO QUE LO ABRE*/
 			$('.overscreen3').show();
-			setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
-			$('.overscreen3 textarea').focus();
+
 			var idPlatillo = $(this).parent().parent().attr('data');
+			var nPlatillo = $(this).parent().parent().attr('platillo');
 			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
 			var comida = -1;
 			
@@ -2834,28 +2852,15 @@ $(window).load(function(){
 				comida = 3;
 			if($(this).parent().parent().parent().hasClass('cena'))
 				comida = 4;
-			
-			if($(this).parent().parent().parent().hasClass('desayuno'))
-				comida = 0;
-			if($(this).parent().parent().parent().hasClass('snack1'))
-				comida = 1;
-			if($(this).parent().parent().parent().hasClass('comida'))
-				comida = 2;
-			if($(this).parent().parent().parent().hasClass('snack2'))
-				comida = 3;
-			if($(this).parent().parent().parent().hasClass('cena'))
-				comida = 4;
-			
 
-			var json = {
-				"plato" : idPlatillo, 
-	            "fecha" : cosumoFecha,
-	            "comida"  : comida,
-	            "platillo": 0,
-	            "comment" : "blalbablablablablabl"
-			};
+			$('.overscreen3').attr('idPlatillo', idPlatillo);
+			$('.overscreen3').attr('nPlatillo', nPlatillo);
+			$('.overscreen3').attr('cosumoFecha', cosumoFecha);
+			$('.overscreen3').attr('comida', comida);
+
+			setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
+
 			
-			apiRH.makeCosume(json);
 		});
 
 		var texto = 'Mostrar Completados';
@@ -2866,6 +2871,7 @@ $(window).load(function(){
 
 		
 		function getcosumed(){
+			
 			var response = apiRH.getConsumed('2016-09-01', '2016-09-30');
 
 			console.log(JSON.stringify(response));
@@ -3092,18 +3098,34 @@ $(window).load(function(){
 		$('.send_cmt').click(function() {
 			$('.overscreen3').removeClass('active');
 			setTimeout(function() {$('.overscreen3').hide();}, 500);
-			$('.the-comment').html($('#comentar').val());
+			$('.the-comment').html($('#comentar').val());  		/*ESTE ELIMINA EL COMENTARIO ANTERIOR AL HACER CLICK EN EL BOTON ENVIAR COMENTARIO*/
 			$('.the-comment').show();
 			$('li.comentario').show();
 			$('.little-comment').hide();
-			
 			/*
 				localStorage COMENTARIO
 			*/
-
-			localStorage.setItem('comentario', $('#comentar').val())
+			localStorage.setItem('comentario', $('#comentar').val()) /*AQUI SE GUARDA EL COMENTARIO EN LOCALSTORAGE*/
 			
 			var _cmt = localStorage.getItem('comentario');
+
+			$('.overscreen3 textarea').focus();
+
+
+		
+			var json = {
+				"plato" : $('.overscreen3').attr('idplatillo'), 
+	            "fecha" : $('.overscreen3').attr('cosumoFecha'),
+	            "comida"  : $('.overscreen3').attr('comida'),
+	            "platillo": $('.overscreen3').attr('nPlatillo'),
+	            "comment" : _cmt
+			};
+			
+			var result = apiRH.makeCosume(json);
+
+			if(result){
+				getConsumed();
+			}
 
 			if(_cmt != ""){
 				$('#finish4').attr('src', 'images/enter.svg');
