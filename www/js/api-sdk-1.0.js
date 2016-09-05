@@ -829,6 +829,7 @@ function requestHandlerAPI(){
 			 .done(function(response){
 				result = response;
 				sdk_app_context.hideLoader(response);
+				console.log(response);
 			})
 			 .fail(function(e){
 				result = false;
@@ -839,15 +840,27 @@ function requestHandlerAPI(){
 
 		};
 
-		this.getConsumed = function(data){
+		this.getConsumed = function(FechaIni, FechaFin){
 			sdk_app_context.showLoader();
 			var result = {};
-			//"https://gingerservice.azure-mobile.net/tables/consumo?coach=\(FeedUserDefaults .coachId())&dieta=\(FeedUserDefaults .dietId())&inicio=\(formatter.stringFromDate(date))&fin=\(formatter.stringFromDate(date2))"
+
+			var req = {
+				method : 'GET',
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'Content-Type': 'application/json'
+				}
+			}
+
+			var user = JSON.parse(localStorage.getItem('user'));
+
+			var idCoach = user.coach._id;
+
 			$.ajax({
 			  type: 'GET',
-			  headers: data.headers,
-			  url: window.api_base_url+endpoint,
-			  data: JSON.stringify(data.data),
+			  headers: req.headers,
+			  url: 'https://gingerservice.azure-mobile.net/tables/consumo?coach=' + idCoach + '&dieta=' + localStorage.getItem('dietaId') + '&inicio=' + FechaIni + '&fin='+FechaFin,
 			  dataType: 'json',
 			  async: false
 			})
@@ -901,7 +914,6 @@ function requestHandlerAPI(){
 				.done(function(result){
 					console.log(result);
 					result.me().done(function(data){
-
 
 					 fb_name 		= data.firstname;
 					 fb_lastname 	= data.lastname;
@@ -1082,10 +1094,6 @@ function requestHandlerAPI(){
 					  	var token 	= localStorage.getItem('token');
 
 					  	console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
-					  	
-					  	/*
-							GET REQUEST
-					  	*/
 
 					  	sdk_app_context.showLoader();
 
@@ -1301,14 +1309,12 @@ function requestHandlerAPI(){
 			});
 		};
 
-		
-
 		this.transfer_win = function (r) {
 									app.toast("Se ha publicado una imagen");
 									window.location.reload(true);
 								};
 		this.profile_transfer_win = function (r) {
-									// app.toast("Imagen de perfil modificada");
+									 app.toast("Imagen de perfil modificada");
 									// window.location.reload(true);
 									return true;
 								};
@@ -1317,51 +1323,57 @@ function requestHandlerAPI(){
 		 * @param 
 		 */
 		this.search_transfer_win = function (r) {
-									setTimeout(function() {
-										app.toast("Thanks! Dedalo is processing your request.");
-										app.registerTemplate('success_advanced_search');
-										var template = Handlebars.templates['success_advanced_search'];
-										console.log(JSON.parse(r.response));
-										$('.main').html( template(JSON.parse(r.response)) );
-										setTimeout(function(){
-											app.hideLoader();
-										}, 2000);
+			setTimeout(function() {
+				app.toast("Thanks! Dedalo is processing your request.");
+				app.registerTemplate('success_advanced_search');
+				var template = Handlebars.templates['success_advanced_search'];
+				console.log(JSON.parse(r.response));
+				$('.main').html( template(JSON.parse(r.response)) );
+				setTimeout(function(){
+					app.hideLoader();
+				}, 2000);
 
-										return true;
-									}, 0);
-								};
+				return true;
+			}, 0);
+		};
 		/*
 		 * Advanced search fail callback
 		 * @param 
 		 */
 		this.transfer_fail = function (error) {
-								setTimeout(function() {
-									console.log(JSON.stringify(error));
-									alert("An error has occurred: Code = " + error.code);
-									console.log("upload error source " + error.source);
-									console.log("upload error target " + error.target);
-								}, 0);
-							};
+			setTimeout(function() {
+				console.log(JSON.stringify(error));
+				alert("An error has occurred: Code = " + error.code);
+				console.log("upload error source " + error.source);
+				console.log("upload error target " + error.target);
+			}, 0);
+		};
 		
 		/*
 		 * Prepare params for Profile File transfer
 		 * @param fileURL
 		 */
 		this.prepareProfileFileTransfer = function(fileURL){
-									app.showLoader();
-									this.transfer_options = new FileUploadOptions();
-									this.transfer_options.fileUrl = fileURL;
-									this.transfer_options.fileKey = "file";
-									this.transfer_options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
-									this.transfer_options.mimeType = "image/jpeg";
-									console.log(this.transfer_options);
-									var params = {};
-										params.client = "app";
-									this.transfer_options.params = params;
-									this.upload_ready = true;
-									console.log("prepareProfileTransfer");
-									app.hideLoader();
-								};
+
+			console.log('destination enter');
+			app.showLoader();
+			this.transfer_options = new FileUploadOptions();
+			this.transfer_options.fileUrl = fileURL;
+			this.transfer_options.fileKey = "file";
+			this.transfer_options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+			this.transfer_options.mimeType = "image/jpeg";
+			console.log(this.transfer_options.fileUrl);
+
+			console.log(this.transfer_options);
+			var params = {};
+				params.client = "app";
+			this.transfer_options.params = params;
+			this.upload_ready = true;
+			console.log("prepareProfileTransfer");
+			localStorage.setItem('avatar-admin', fileName);
+			apiRH.initializeProfileFileTransfer();
+			app.hideLoader();
+		};
 		
 		/*
 		 * Initialize Profile File transfer
@@ -1369,16 +1381,16 @@ function requestHandlerAPI(){
 		 * @see prepareProfileTransfer MUST be executed before
 		 */
 		this.initializeProfileFileTransfer = function(){
-									if(this.upload_ready){
-										var ft = new FileTransfer();
-										ft.upload(  this.transfer_options.fileUrl, 
-													encodeURI(api_base_url+"transfers/"+user+"/profile/"), 
-													context.profile_transfer_win, 
-													context.transfer_fail, 
-													this.transfer_options
-												);
-									}
-								};
+			if(this.upload_ready){
+				var ft = new FileTransfer();
+				ft.upload(  this.transfer_options.fileUrl, 
+					encodeURI("http://ginger-admin.cloudapp.net/rogue.php"), 
+					context.profile_transfer_win, 
+					context.transfer_fail, 
+					this.transfer_options
+				);
+			}
+		};
 
 		/**
 		 * Prepare params for Search File transfer
@@ -1418,30 +1430,30 @@ function requestHandlerAPI(){
 		 * Dedalo approved
 		 */
 		this.initializeSearchFileTransfer = function(params){
-												user = (user) ? user : "not_logged";
-												if(this.upload_ready){
-													var ft = new FileTransfer();
-													console.log(JSON.stringify(ft));
-													this.transfer_options.params = params;
-													ft.upload(  this.transfer_options.fileUrl, 
-																encodeURI('https://gingerfiles.blob.core.windows.net/clientes/'), 
-																context.search_transfer_win, 
-																context.transfer_fail, 
-																this.transfer_options
-															);
-													app.toast("Still processing...")
-												}
-											};
-								
-
+			user = (user) ? user : "not_logged";
+			if(this.upload_ready){
+				var ft = new FileTransfer();
+				console.log(JSON.stringify(ft));
+				this.transfer_options.params = params;
+				ft.upload(  this.transfer_options.fileUrl, 
+							encodeURI('http://ginger-admin.cloudapp.net/rogue.php'), 
+							context.search_transfer_win, 
+							context.transfer_fail, 
+							this.transfer_options
+						);
+				app.toast("Still processing...")
+			}
+		};
 
 		this.fileselect_win = function (r) {
-								if(!r && r == '')
-									return;
-								return context.prepareProfileFileTransfer(r);
-							};
+			console.log('selected win: ' + r);
+			if(!r && r == '')
+				return;
+			return context.prepareProfileFileTransfer(r);
+		};
 
 		this.search_fileselect_win = function (r) {
+			console.log('search win: ' + r);
 								setTimeout(function() {
 									console.log("r ::: "+r);
 									console.log("Seach file sent");
@@ -1452,10 +1464,21 @@ function requestHandlerAPI(){
 							};
 
 		this.profileselect_win = function (r) {
-								if(!r && r == '')
-									
-									return context.prepareProfileFileTransfer(r);
-							};
+			console.log('profile win: ' + r);
+			if(!r && r == '')
+				return;
+			
+			console.log("IMAGE: " + r);
+
+			if(r != '')
+			{
+				$('.profile.circle-frame.edition').html('<img src="'+ r +'"/>');
+				console.log('archivo: ' + $('.profile.circle-frame').find('img').attr('src'));
+			}
+
+			return context.prepareProfileFileTransfer(r);
+		};
+
 		this.fileselect_fail = function (error) {
 								app.toast("An error has occurred: " + error);
 							};

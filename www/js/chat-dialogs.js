@@ -75,9 +75,7 @@ function retrieveChatDialogs() {
 			// 	i++;
 			// 	console.log("Inside each");
 			// });
-			
-			console.log("resDialogs");
-			console.log(resDialogs);
+
 			resDialogs.items.forEach(function(item, i, arr) {
 				console.log(item);
 				var dialogId 		= item._id;
