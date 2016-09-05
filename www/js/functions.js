@@ -194,7 +194,6 @@ $( function() {
 
 		});
 
-		
 		// $('#mensaje-chat').on('focus', function(e) {
 		// 	console.log('si esta aqui');
 		//     e.preventDefault(); e.stopPropagation();
@@ -265,9 +264,7 @@ $( function() {
 
     if( $('body').hasClass('measures') ){
 	  	$('#add_medidas').on('click', function(){
-			/*
-				localStorage MEDIDAS / MEASURED AREA
-														*/
+			/* localStorage MEDIDAS / MEASURED AREA */
 	  		
 	  		localStorage.setItem( 'medidas', $('#medida-dato').val() );
 	  		localStorage.setItem('measured_area', $('#measured_area').val() )
@@ -754,7 +751,7 @@ $(window).on("load resize",function(){
 				$('#_alert_chCoach').click(function(){
 					console.log('CLICK EN ALERT CH-COACH');
 
-						apiRH.initializeProfileFileTransfer();
+						
 					// console.log("ZIP>"+ $('input[name="zipocode"]').val());
 						var genero 				= $('#update_sexo').val();
 
@@ -1087,6 +1084,7 @@ $(window).load(function(){
 
 			$.each( dieta.estructura, function( key, value ) {
 				// los dias de la semana
+				
 				if(key=="domingo"){dia_prueba=1;} else if (key=="lunes") {dia_prueba=2;} else if (key=="martes") {dia_prueba=3;} else if (key=="miercoles") {dia_prueba=4;} else if (key=="jueves") {dia_prueba=5;} else if (key=="viernes") {dia_prueba=6;} else if (key=="sabado") {dia_prueba=7;}
 				var estoyen = '#toda_la_dieta li:nth-of-type('+dia_prueba+') ';
 
@@ -1135,7 +1133,9 @@ $(window).load(function(){
 														$(masadentro+' p.ingredientes').html(value)
 
 													});
-												 	//$(masadentro+' p.ingredientes').html(losplatos[i][3]);
+												 	
+												}else{
+													$(masadentro+' p.comentario').hide();
 												}
 											}
 										}
@@ -1169,8 +1169,14 @@ $(window).load(function(){
 						});
 					});
 				});
+				
+				setTimeout(getcosumed, 2000);
+
 			});//END DIETA ESTRUCTURA
+	
 		}
+
+
 	});//END FUNCTION
 
 
@@ -1244,7 +1250,15 @@ $(window).load(function(){
     	date_string = week[i].toString();    	
     	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
     	var dataf = new Date(date_string);
-    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
+    	var mes = "";
+    	var dia = "";
+    	if((dataf.getMonth()+1) < 10)
+    		mes = '0'+(dataf.getMonth()+1);
+
+    	if((dataf.getDate()+1) < 10)
+    		dia = '0'+(dataf.getDate());
+
+    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+mes+'-'+ dia);
     }
 
    
@@ -1293,7 +1307,7 @@ $(window).load(function(){
 		    	//console.log(dow[i]);
 		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
 		    	var dataf = new Date(week2[i]);
-		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate() );
+		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-0'+(dataf.getMonth()+1)+'-'+ dataf.getDate() );
 		    }
 		});
 
@@ -1326,7 +1340,7 @@ $(window).load(function(){
 		    	//console.log(dow[i]);
 		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
 		    	var dataf = new Date(week2[i]);
-		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
+		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-0'+(dataf.getMonth()+1)+'-'+ dataf.getDate());
 		    }
 		});
 
@@ -2658,9 +2672,6 @@ $(window).load(function(){
 						localStorage.setItem('track_ejercicio_duration',	$('#duracion').val() );
 						localStorage.setItem('track_ejercicio_intensidad', 	$('#intensidad').val() );
 
-
-
-
 						//console.log(responsedata);
 						if(!$('.alert_tracking').is(':visible')){
 							$('.alert_tracking').show();
@@ -2719,38 +2730,85 @@ $(window).load(function(){
 
 		$('svg.consume').click(function() {
 			$(this).parent().parent().addClass('consumido');
-			$(this).html('<use xlink:href="#consume2"></use>');
-			
+			var cosumo = false;
 			console.log($(this).parent().parent().attr('data'));
 			console.log($(this).parent().parent().parent().parent().parent().parent().attr('data'));
 
 			var idPlatillo = $(this).parent().parent().attr('data');
 			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
+			var comida = -1;
 
+			if($(this).parent().parent().parent().hasClass('desayuno'))
+				comida = 0;
+			if($(this).parent().parent().parent().hasClass('snack1'))
+				comida = 1;
+			if($(this).parent().parent().parent().hasClass('comida'))
+				comida = 2;
+			if($(this).parent().parent().parent().hasClass('snack2'))
+				comida = 3;
+			if($(this).parent().parent().parent().hasClass('cena'))
+				comida = 4;
+			
+			if($(this).parent().find('svg.consume').find('use').attr('xlink:href') == '#consume2'){
+				$(this).html('<use xlink:href="#consume"></use>');	
+				$(this).parent().find('svg.noconsu').find('use').attr('xlink:href', '#noconsu2');
+				cosumo = true;	
+					
+			}else{
+				$(this).html('<use xlink:href="#consume2"></use>');
+				$(this).parent().find('svg.noconsu').find('use').attr('xlink:href', '#noconsu');
+				cosumo = false;
+				//$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');
+			}
+			
+			
 			var json = {
 				"plato" : idPlatillo, 
 	            "fecha" : cosumoFecha,
-	            "comida"  : 0,
+	            "comida"  : comida,
 	            "platillo": 0,
-	            "consumido": true
+	            "consumido": cosumo
 			};
+
+			if(comida == -1)
+				return;
 			
 			apiRH.makeCosume(json);
+
 
 		});
 
 		$('svg.noconsu').click(function() {
-			$(this).parent().parent().addClass('cancelado');
-			
-			$(this).html('<use xlink:href="#noconsu2"></use>');
 
+			$(this).parent().parent().addClass('cancelado');
 
 			var idPlatillo = $(this).parent().parent().attr('data');
 			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
+			var comida = -1;
+			
+			if($(this).parent().parent().parent().hasClass('desayuno'))
+				comida = 0;
+			if($(this).parent().parent().parent().hasClass('snack1'))
+				comida = 1;
+			if($(this).parent().parent().parent().hasClass('comida'))
+				comida = 2;
+			if($(this).parent().parent().parent().hasClass('snack2'))
+				comida = 3;
+			if($(this).parent().parent().parent().hasClass('cena'))
+				comida = 4;
+			
+			if($(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume2')){
+				$(this).html('<use xlink:href="#noconsu2"></use>');		
+				$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');		
+			}else{
+				$(this).html('<use xlink:href="#noconsu"></use>');	
+				$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');
+			}
+			
 			var json = {
 				"plato" : idPlatillo, 
 	            "fecha" : cosumoFecha,
-	            "comida"  : 0,
+	            "comida"  : comida,
 	            "platillo": 0,
 	            "consumido": false
 			};
@@ -2762,19 +2820,229 @@ $(window).load(function(){
 			$('.overscreen3').show();
 			setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
 			$('.overscreen3 textarea').focus();
+			var idPlatillo = $(this).parent().parent().attr('data');
+			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
+			var comida = -1;
+			
+			if($(this).parent().parent().parent().hasClass('desayuno'))
+				comida = 0;
+			if($(this).parent().parent().parent().hasClass('snack1'))
+				comida = 1;
+			if($(this).parent().parent().parent().hasClass('comida'))
+				comida = 2;
+			if($(this).parent().parent().parent().hasClass('snack2'))
+				comida = 3;
+			if($(this).parent().parent().parent().hasClass('cena'))
+				comida = 4;
+			
+			if($(this).parent().parent().parent().hasClass('desayuno'))
+				comida = 0;
+			if($(this).parent().parent().parent().hasClass('snack1'))
+				comida = 1;
+			if($(this).parent().parent().parent().hasClass('comida'))
+				comida = 2;
+			if($(this).parent().parent().parent().hasClass('snack2'))
+				comida = 3;
+			if($(this).parent().parent().parent().hasClass('cena'))
+				comida = 4;
+			
+
+			var json = {
+				"plato" : idPlatillo, 
+	            "fecha" : cosumoFecha,
+	            "comida"  : comida,
+	            "platillo": 0,
+	            "comment" : "blalbablablablablabl"
+			};
+			
+			apiRH.makeCosume(json);
 		});
 
 		var texto = 'Mostrar Completados';
 
 		$('.toggle-complete').click(function() {
-			if ($(this).html()=='Mostrar Completados') {
-				$(this).html('Ocultar Completados');
-				$('.platillo.consumido').show();
-			} else {
-				$(this).html('Mostrar Completados');
-				$('.platillo.consumido').hide();
-			}	
+			
 		});
+
+		
+		function getcosumed(){
+			var response = apiRH.getConsumed('2016-09-01', '2016-09-30');
+
+			console.log(JSON.stringify(response));
+
+			$.each(response, function(key, value){
+				
+				console.log(key + '::::' + value);
+
+				if(key == 'consumos')
+
+					$.each(value, function(key, value){
+						//Fechas
+						console.log(key + ':::::::.' + value);
+
+						var fecha =	key;
+
+						$.each(value, function(key, value){
+							console.log(key + ':::::::::::' + value);
+
+							if(key == 'desayuno'){
+								console.log('desayuno');
+								$.each(value, function(key, value){
+									var platillo = '';
+									$.each(value, function(key, value){
+										console.log(key + '------' + value );	
+
+										if(key == 'plato'){
+											platillo = value;
+										}
+										
+										if(key == 'consumido'){
+											console.log('consumido::: ' + value);
+											if(value){
+												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').addClass('consumido');
+												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('nav').find('svg.consume').find('use').attr('xlink:href', '#consume2');
+												
+											}else if(key == 'consumido' && !value){
+												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').addClass('cancelado');
+												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('nav').find('svg.noconsu').find('use').attr('xlink:href', '#noconsu2');	
+											}
+										}
+
+										if(key == 'comment'){
+											console.log('comentario: ' +value);
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
+										}
+
+									});
+								});
+							}
+
+							if(key == 'snack1'){
+								console.log('snack1');
+								$.each(value, function(key, value){
+									var platillo = '';
+									$.each(value, function(key, value){
+										console.log(key + '------' + value );	
+
+										if(key == 'plato'){
+											platillo = value;
+										}
+
+										if(key == 'consumido' && value){
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').addClass('consumido');
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('nav').find('svg.consume').find('use').attr('xlink:href', '#consume2');
+											
+										}else if(key == 'consumido' && !value){
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').addClass('cancelado');
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('nav').find('svg.noconsu').find('use').attr('xlink:href', '#noconsu2');	
+										}
+
+										if(key == 'comment'){
+											console.log('comentario: ' +value);
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
+										}
+
+									});
+								});
+							}
+
+							if(key == 'comida'){
+								console.log('comida');
+								$.each(value, function(key, value){
+
+									var platillo = '';
+									$.each(value, function(key, value){
+										console.log(key + '------' + value );	
+
+										if(key == 'plato'){
+											platillo = value;
+										}
+
+										if(key == 'consumido' && value){
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.comida [data="'+platillo+'"]').addClass('consumido');
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.comida [data="'+platillo+'"]').find('nav').find('svg.consume').find('use').attr('xlink:href', '#consume2');
+											
+										}else if(key == 'consumido' && !value){
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.comida [data="'+platillo+'"]').addClass('cancelado');
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.comida [data="'+platillo+'"]').find('nav').find('svg.noconsu').find('use').attr('xlink:href', '#noconsu2');	
+										}
+
+										if(key == 'comment'){
+											console.log('comentario: ' +value);
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.comida [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
+										}
+									});
+								});
+							}
+
+							if(key == 'snack2'){
+								console.log('snack2');
+								$.each(value, function(key, value){
+
+									var platillo = '';
+									$.each(value, function(key, value){
+										console.log(key + '------' + value );	
+
+										if(key == 'plato'){
+											platillo = value;
+										}
+
+										if(key == 'consumido' && value){
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack2 [data="'+platillo+'"]').addClass('consumido');
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack2 [data="'+platillo+'"]').find('nav').find('svg.consume').find('use').attr('xlink:href', '#consume2');
+											
+										}else if(key == 'consumido' && !value){
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack2 [data="'+platillo+'"]').addClass('cancelado');
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack2 [data="'+platillo+'"]').find('nav').find('svg.noconsu').find('use').attr('xlink:href', '#noconsu2');	
+										}
+
+										if(key == 'comment'){
+											console.log('comentario: ' +value);
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack2 [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
+										}
+
+									});
+								});
+							}
+
+							if(key == 'cena'){
+								console.log('cena');
+								$.each(value, function(key, value){
+
+									var platillo = '';
+									$.each(value, function(key, value){
+										console.log(key + '------' + value );	
+
+										if(key == 'plato'){
+											platillo = value;
+										}
+
+										if(key == 'consumido' && value){
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.cena [data="'+platillo+'"]').addClass('consumido');
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.cena [data="'+platillo+'"]').find('nav').find('svg.consume').find('use').attr('xlink:href', '#consume2');
+											
+										}else if(key == 'consumido' && !value){
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.cena [data="'+platillo+'"]').addClass('cancelado');
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.cena [data="'+platillo+'"]').find('nav').find('svg.noconsu').find('use').attr('xlink:href', '#noconsu2');	
+										}
+
+										if(key == 'comment'){
+											console.log('comentario: ' +value);
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.cena [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
+										}
+
+
+									});
+								});
+							}
+
+
+						});
+					});
+			});
+
+		}
+
 
 		$('.di-options a').click(function() {
 			$('.overscreen2').removeClass('active');

@@ -829,6 +829,7 @@ function requestHandlerAPI(){
 			 .done(function(response){
 				result = response;
 				sdk_app_context.hideLoader(response);
+				console.log(response);
 			})
 			 .fail(function(e){
 				result = false;
@@ -839,15 +840,27 @@ function requestHandlerAPI(){
 
 		};
 
-		this.getConsumed = function(data){
+		this.getConsumed = function(FechaIni, FechaFin){
 			sdk_app_context.showLoader();
 			var result = {};
-			//"https://gingerservice.azure-mobile.net/tables/consumo?coach=\(FeedUserDefaults .coachId())&dieta=\(FeedUserDefaults .dietId())&inicio=\(formatter.stringFromDate(date))&fin=\(formatter.stringFromDate(date2))"
+
+			var req = {
+				method : 'GET',
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'Content-Type': 'application/json'
+				}
+			}
+
+			var user = JSON.parse(localStorage.getItem('user'));
+
+			var idCoach = user.coach._id;
+
 			$.ajax({
 			  type: 'GET',
-			  headers: data.headers,
-			  url: window.api_base_url+endpoint,
-			  data: JSON.stringify(data.data),
+			  headers: req.headers,
+			  url: 'https://gingerservice.azure-mobile.net/tables/consumo?coach=' + idCoach + '&dieta=' + localStorage.getItem('dietaId') + '&inicio=' + FechaIni + '&fin='+FechaFin,
 			  dataType: 'json',
 			  async: false
 			})
@@ -901,7 +914,6 @@ function requestHandlerAPI(){
 				.done(function(result){
 					console.log(result);
 					result.me().done(function(data){
-
 
 					 fb_name 		= data.firstname;
 					 fb_lastname 	= data.lastname;
@@ -1082,10 +1094,6 @@ function requestHandlerAPI(){
 					  	var token 	= localStorage.getItem('token');
 
 					  	console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
-					  	
-					  	/*
-							GET REQUEST
-					  	*/
 
 					  	sdk_app_context.showLoader();
 
@@ -1301,8 +1309,6 @@ function requestHandlerAPI(){
 			});
 		};
 
-		
-
 		this.transfer_win = function (r) {
 									app.toast("Se ha publicado una imagen");
 									window.location.reload(true);
@@ -1438,8 +1444,6 @@ function requestHandlerAPI(){
 				app.toast("Still processing...")
 			}
 		};
-
-
 
 		this.fileselect_win = function (r) {
 			console.log('selected win: ' + r);
