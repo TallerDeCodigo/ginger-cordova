@@ -523,7 +523,7 @@ $(window).on("load resize",function(){
 			$('.cpur').html(nombre +" "+ apellido);
 			$('.edit-profile span').html(nombre +" "+ apellido);
 
-			if(sexo == 0){
+			if(sexo == 1){
 				$('#sexo_perfil').html('Hombre');
 			}else{
 				$('#sexo_perfil').html('Mujer');
@@ -1463,29 +1463,29 @@ $(window).load(function(){
 		$("#hombre").click(function(){
 			if ($(this).hasClass('edition')) {
 				$('#mujer').attr("src","images/mujere.svg");
-				$('#update_sexo').attr("value", '1');
+				$('#update_sexo').attr("value", '0');
 
 			} else {
 				$('#mujer').attr("src","images/mujer.svg");
 				$('#mujer').attr("alt","");
 			}
-			$(this).attr({src: "images/hombreh.svg", alt: "0"});
+			$(this).attr({src: "images/hombreh.svg", alt: "1"});
 			$('.type-def').attr("src","images/hombreh.svg");
-			$('#update_sexo').attr("value", '0');
+			$('#update_sexo').attr("value", '1');
 		});
 
  
 		$("#mujer").click(function(){
 			if ($(this).hasClass('edition')) {
 				$('#hombre').attr("src","images/hombree.svg");
-				$('#update_sexo').attr("value", '0');
+				$('#update_sexo').attr("value", '1');
 			} else {
 				$('#hombre').attr("src","images/hombre.svg");
 				$('#hombre').attr("alt","");
 			}
-			$(this).attr({src: "images/mujerh.svg", alt: "1"});
+			$(this).attr({src: "images/mujerh.svg", alt: "0"});
 			$('.type-def').attr("src","images/mujerh.svg");
-			$('#update_sexo').attr("value", '1');
+			$('#update_sexo').attr("value", '0');
 		}); //end click mujer
 
 
@@ -3141,8 +3141,6 @@ $(window).load(function(){
 			var _cmt = localStorage.getItem('comentario');
 
 			$('.overscreen3 textarea').focus();
-
-
 		
 			var json = {
 				"plato" : $('.overscreen3').attr('idplatillo'), 
@@ -3155,7 +3153,7 @@ $(window).load(function(){
 			var result = apiRH.makeCosume(json);
 
 			if(result){
-				getConsumed();
+				//getConsumed();
 			}
 
 			if(_cmt != ""){
