@@ -331,7 +331,7 @@ body.dieta #container {background:#f5f1f0;}
 .weekdays td span {width:22px;height:22px;position:relative;display:inline-block;border-radius:50%;line-height:21px;}
 .weekdays td span.active {background:#33cc99;color:#FFF;}
 
-#scroller {width:92%;position:absolute;height:calc(100% - 245px);top:163px;left:4%;}
+#scroller {width:92%;position:absolute;height:calc(100% - 230px);top:163px;left:4%;}
 #scroller > ul {height:100%;position:absolute;}
 #scroller > ul > li {position:relative;height:330px;}
 .dieta-wrapper {position:absolute;width:100%;height:100%;overflow-y:scroll;left:0px;top:0px;}
