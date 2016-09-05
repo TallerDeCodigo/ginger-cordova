@@ -1773,19 +1773,20 @@ $(window).load(function(){
 				$('#container').toggleClass('blurred');
 			});
 		}//END IF BODY HAS CLASS WEIGHT
-
+		
 		if( $('body').hasClass('mood') ){
 
 			var valor = 0;
 			var animo = [ 'increible', 'feliz', 'bien', 'regular', 'triste', 'cansado', 'hambriento', 'frustrado', 'motivado' ];
 
-			$("#animo-up").bind('touchstart', function(){
+			$("#animo-up").bind('touchstart click', function(){
 				timeout = setInterval(function(){
 					if (valor < 8) {
 						valor++;
 					} else {
 						valor = 0;
 					}
+					
 			        
 			        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
 			        if (animo[valor]=="increible") {
@@ -1838,7 +1839,7 @@ $(window).load(function(){
 			    return false;
 			});
 
-			$("#animo-dw").bind('touchstart', function(){
+			$("#animo-dw").bind('touchstart click', function(){
 				timeout = setInterval(function(){
 					if (valor > 0) {
 						valor--;
