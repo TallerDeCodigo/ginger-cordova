@@ -1105,8 +1105,8 @@ $(window).load(function(){
 									if (key=="platillo") {				
 										for (var i = 0; i < losplatos.length; i++) {
 											if (value==losplatos[i][0]) {
-												// console.log(losplatos[i][1]+"<"+losplatos[i][2]+"<"+losplatos[i][4]);
 												$(masadentro).attr("data", losplatos[i][0]);
+												$(masadentro).attr("platillo", i);
 												$(masadentro+' h5').html(losplatos[i][1]);
 												//Receta
 												if (losplatos[i][2]!="") {
@@ -1150,6 +1150,7 @@ $(window).load(function(){
 											if (value==losplatos[i][0]) {
 												// console.log(losplatos[i][1]+"<"+losplatos[i][2]+"<"+losplatos[i][4]);
 												$(masadentro).attr("data", losplatos[i][0]);
+												$(masadentro).attr("platillo", i);
 												$(masadentro+' h5').html(losplatos[i][1]);
 												if (losplatos[i][2]!="") {
 													$(masadentro+' p.receta').html(losplatos[i][2]);
@@ -2735,6 +2736,7 @@ $(window).load(function(){
 			console.log($(this).parent().parent().parent().parent().parent().parent().attr('data'));
 
 			var idPlatillo = $(this).parent().parent().attr('data');
+			var nPlatillo = $(this).parent().parent().attr('platillo');
 			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
 			var comida = -1;
 
@@ -2752,12 +2754,12 @@ $(window).load(function(){
 			if($(this).parent().find('svg.consume').find('use').attr('xlink:href') == '#consume2'){
 				$(this).html('<use xlink:href="#consume"></use>');	
 				$(this).parent().find('svg.noconsu').find('use').attr('xlink:href', '#noconsu2');
-				cosumo = true;	
+				cosumo = false;	
 					
 			}else{
 				$(this).html('<use xlink:href="#consume2"></use>');
 				$(this).parent().find('svg.noconsu').find('use').attr('xlink:href', '#noconsu');
-				cosumo = false;
+				cosumo = true;
 				//$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');
 			}
 			
@@ -2766,7 +2768,7 @@ $(window).load(function(){
 				"plato" : idPlatillo, 
 	            "fecha" : cosumoFecha,
 	            "comida"  : comida,
-	            "platillo": 0,
+	            "platillo": nPlatillo,
 	            "consumido": cosumo
 			};
 
@@ -2783,8 +2785,10 @@ $(window).load(function(){
 			$(this).parent().parent().addClass('cancelado');
 
 			var idPlatillo = $(this).parent().parent().attr('data');
+			var nPlatillo = $(this).parent().parent().attr('platillo');
 			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
 			var comida = -1;
+			var consumo = false;
 			
 			if($(this).parent().parent().parent().hasClass('desayuno'))
 				comida = 0;
@@ -2799,17 +2803,19 @@ $(window).load(function(){
 			
 			if($(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume2')){
 				$(this).html('<use xlink:href="#noconsu2"></use>');		
-				$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');		
+				$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');
+				var consumo = true;		
 			}else{
 				$(this).html('<use xlink:href="#noconsu"></use>');	
 				$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');
+				var consumo = false;
 			}
 			
 			var json = {
 				"plato" : idPlatillo, 
 	            "fecha" : cosumoFecha,
 	            "comida"  : comida,
-	            "platillo": 0,
+	            "platillo": nPlatillo,
 	            "consumido": false
 			};
 			
@@ -2866,6 +2872,7 @@ $(window).load(function(){
 
 		
 		function getcosumed(){
+			
 			var response = apiRH.getConsumed('2016-09-01', '2016-09-30');
 
 			console.log(JSON.stringify(response));
