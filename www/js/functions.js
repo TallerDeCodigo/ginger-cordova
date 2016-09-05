@@ -194,7 +194,6 @@ $( function() {
 
 		});
 
-		
 		// $('#mensaje-chat').on('focus', function(e) {
 		// 	console.log('si esta aqui');
 		//     e.preventDefault(); e.stopPropagation();
@@ -265,9 +264,7 @@ $( function() {
 
     if( $('body').hasClass('measures') ){
 	  	$('#add_medidas').on('click', function(){
-			/*
-				localStorage MEDIDAS / MEASURED AREA
-														*/
+			/* localStorage MEDIDAS / MEASURED AREA */
 	  		
 	  		localStorage.setItem( 'medidas', $('#medida-dato').val() );
 	  		localStorage.setItem('measured_area', $('#measured_area').val() )
