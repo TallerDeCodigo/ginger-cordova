@@ -1264,7 +1264,7 @@ $(window).load(function(){
 
     	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+mes+'-'+ dia);
 
-    	console.log(dia);
+    	// console.log(dia);
     }
 
    
@@ -2906,8 +2906,8 @@ $(window).load(function(){
 			
 			var response = apiRH.getConsumed('2016-09-01', '2016-09-30');
 
-			console.log(JSON.stringify(response));
-
+			// console.log(JSON.stringify(response));
+			console.log("length ::: "+JSON.stringify(response));
 			$.each(response, function(key, value){
 				
 				console.log(key + '::::' + value);
@@ -3072,13 +3072,13 @@ $(window).load(function(){
 
 									});
 								});
+								// app.hideLoader();
 							}
 
 
 						});
 					});
 			});
-
 		}
 
 

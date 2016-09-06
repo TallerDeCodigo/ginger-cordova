@@ -14,16 +14,11 @@
 			/* Initialize API request handler */
 			window.apiRH = new requestHandlerAPI().construct(app);
 
-			console.log('token');
 			
 			var is_login = apiRH.has_token();
-
 			var data_user = apiRH.getProfile();
-
 			var is_client = localStorage.getItem('customerId');
-
 			var is_current = localStorage.getItem('valido');
-
 			console.log(is_login);
 
 			/* IMPORTANT to set requests to be syncronous */
@@ -31,14 +26,6 @@
 			$.ajaxSetup({
 				 async: false
 			});
-
-			// var userLog = JSON.parse(localStorage.getItem('user'));
-		
-			// var user = { login : userLog.mail, pass : userLog.chatPassword};
-		
-			// connectToChat(user);
-		
-
 
 			window.loggedIn = false;
 			this.ls 		= window.localStorage;
@@ -86,13 +73,7 @@
 				// return;
 
 			}
-			/* Copiado de ondeviceready ----- QUITAR ----- */
-			// var backButtonElement = document.getElementById("backBtn");
-			// if(backButtonElement)
-			// 	backButtonElement.addEventListener("click", app.onBackButton, false);
-			
-			/* Requesting passive token if no token is previously stored */
-			//console.log("Token::: "+apiRH.request_token().get_request_token());
+
 		},
 		registerHelpers : function() {
 			Handlebars.registerHelper('if_eq', function(a, b, opts) {
@@ -127,7 +108,7 @@
 		        // EVERY OTHER DEVICE
 		        history.go(-1);
 		    }
-		    console.log("BAck");
+		    console.log("Back");
 		},
 
 		// deviceready Event Handler
@@ -147,7 +128,7 @@
 			console.log('OAUTH');
 
 			try{
-				OAuth.initialize('a6JLuBGGgfFNhFvcQ2V0tCbdmWI'); //tenia este -> F_A1PBTm8Vv9WtuftE8CuTqNV7g
+				OAuth.initialize('7-ipR3QS-__wrorRTpdedM8-_v8');
 				console.log("Initialized Oauth");
 			}
 			catch(err){
@@ -161,7 +142,6 @@
 
 			console.log(navigator.camera);
 		},
-
 		// deviceready Event Handler
 		onMobileInit: function() {
 			app.receivedEvent('mobileinit');
@@ -213,30 +193,19 @@
 				for (var key in obj) 
 					if (hasOwnProperty.call(obj, key)) return false;
 				return true;
-		},								/*SE PUEDE BORRAR A PARTIR DE ESTE PUNTO*/
-		render_feed : function(offset, filter){
+		},
+		render_login : function(){
 			app.showLoader();
-			$.getJSON(api_base_url+'feed/'+offset+'/'+filter , function(response){
-			})
-			 .fail(function(err){
-				console.log(JSON.stringify(err));
+			$(document).ready(function(){
 				app.hideLoader();
-				app.toast("Failed connecting to our servers, please check your Internet connection.")
-			})
-			 .done(function(response){
-				var data = app.gatherEnvironment(response);
-					data.home_active = true;
-				var feed_tpl = Handlebars.templates['feed'];
-				console.log(data);
-				var html 	 = feed_tpl(data);
-				$('.main').html( html );
-				setTimeout(function(){	
-					app.hideLoader();
-					if(!loggedIn)
-						$('#account1').trigger('click');
-				}, 2000);
 			});
-			
+		},
+		render_chat : function(){
+			app.showLoader();
+		},
+		render_myPlan : function(){
+			console.log("Render my plan");
+			return app.showLoader();
 		},
 		render_search_composite : function(){
 			user = (user) ? user : "not_logged";
@@ -304,16 +273,11 @@
 				app.hideLoader();
 			}, 2000);
 		},
-		render_direct_photo : function(){
-			//app.registerTemplate('direct_photo');
-			var data = app.gatherEnvironment(null, "Advanced search");
-			var template = Handlebars.templates['direct_photo'];
-
-			$('.main').html( template(data) );
-			setTimeout(function(){
-				app.hideLoader();
-			}, 2000);
-
+		back_with_logout : function(event){
+			var link = $(event.target).attr('href');
+			localStorage.clear();
+			window.location.assign(link);
+			return;
 		},
 		get_file_from_device: function(destination, source)
 		{
@@ -632,6 +596,10 @@
 			$('.overscreen2').hide();
 			$('#container').toggleClass('blurred');
 			return;
+		});
+
+		$('.back_with_logout').click(function(e){
+			return back_with_logout(e);
 		});
 
 

@@ -4434,77 +4434,70 @@
 			</ul>
 		</div>
 	</div>
-	<footer class="menu-bar">
-		<a href="#" class="active">
-			<img src="images/menu/plan2.svg">
-			<span>mi plan</span>
-		</a>
-		<a href="chat.html">
-			<img src="images/menu/chat.svg">
-			<span>chat</span>
-		</a>
-		<a class="centro">
-			<img src="images/menu/mas.svg">
-		</a>
-		<a href="proximamente.html">
-			<img src="images/menu/progreso.svg">
-			<span>progreso</span>
-		</a>
-		<a href="proximamente.html">
-			<img src="images/menu/shop.svg">
-			<span>list</span>
-		</a>
-	</footer>
-	<div class="overscreen" style="display:none;">
-		<div class="ov-filler"></div>
-		<a class="ruedas rueda-1" href="ejercicio.html">
-			<img src="images/menu/ejercicio.svg">
-			<span>EJERCICIO</span>
-		</a>
-		<a class="ruedas rueda-2" href="agua.html">
-			<img src="images/menu/agua.svg">
-			<span>AGUA</span>
-		</a>
-		<a class="ruedas rueda-3" href="peso.html">
-			<img src="images/menu/peso.svg">
-			<span>PESO</span>
-		</a>
-		<a class="ruedas rueda-4" href="medidas.html">
-			<img src="images/menu/medidas.svg">
-			<span>MEDIDAS</span>
-		</a>
-		<a class="ruedas rueda-5" href="animo.html">
-			<img src="images/menu/animo.svg">
-			<span>ÁNIMO</span>
-		</a>
-	</div>
-	<div class="overscreen3" style="display:none">
-		<div class="boxx-top">
-			<div>
-				<a class="izquii">Cancelar</a>
-				<a class="add send_cmt">Enviar</a>
-			</div>
+		<footer class="menu-bar">
+			<a href="#" class="active">
+				<img src="images/menu/plan2.svg">
+				<span>mi plan</span>
+			</a>
+			<a href="chat.html">
+				<img src="images/menu/chat.svg">
+				<span>chat</span>
+			</a>
+			<a class="centro">
+				<img src="images/menu/mas.svg">
+			</a>
+			<a href="proximamente.html">
+				<img src="images/menu/progreso.svg">
+				<span>progreso</span>
+			</a>
+			<a href="proximamente.html">
+				<img src="images/menu/shop.svg">
+				<span>list</span>
+			</a>
+		</footer>
+		<div class="overscreen" style="display:none;">
+			<div class="ov-filler"></div>
+			<a class="ruedas rueda-1" href="ejercicio.html">
+				<img src="images/menu/ejercicio.svg">
+				<span>EJERCICIO</span>
+			</a>
+			<a class="ruedas rueda-2" href="agua.html">
+				<img src="images/menu/agua.svg">
+				<span>AGUA</span>
+			</a>
+			<a class="ruedas rueda-3" href="peso.html">
+				<img src="images/menu/peso.svg">
+				<span>PESO</span>
+			</a>
+			<a class="ruedas rueda-4" href="medidas.html">
+				<img src="images/menu/medidas.svg">
+				<span>MEDIDAS</span>
+			</a>
+			<a class="ruedas rueda-5" href="animo.html">
+				<img src="images/menu/animo.svg">
+				<span>ÁNIMO</span>
+			</a>
 		</div>
-		<textarea id="comentar" placeholder="Escribe tu comentario aquí..."></textarea>
-	</div>
-	<!-- <div class="overscreen6" style="display:none">
-		<div class="ov-filler2"></div>
-		<div class="dialog">
-			<h5>¡Muchas Felicidades!</h5>
-			<p>Ya puedes comenzar tu semana gratis</p>
-			<div class="di-options">
-				<a id="go_next" class="accept">Aceptar</a>
+		<div class="overscreen3" style="display:none">
+			<div class="boxx-top">
+				<div>
+					<a class="izquii">Cancelar</a>
+					<a class="add send_cmt">Enviar</a>
+				</div>
 			</div>
+			<textarea id="comentar" placeholder="Escribe tu comentario aquí..."></textarea>
 		</div>
-	</div> -->
-	<script type='text/javascript' src='js/plugins.js'></script>
+		<div class="loader_container" id="spinner">
+			<div class="loading"></div>
+		</div>
+
+		<script type='text/javascript' src='js/plugins.js'></script>
+	</body>
 	<script type="text/javascript">
 		/* Initialize app object and perform initial login check */
 		window.is_home = true;
 		app.initialize();
-		//app.render_feed(0, 'all');
-		//app.showLoader();
+		app.render_myPlan();
 	</script>
-	</body>
 </html>
 

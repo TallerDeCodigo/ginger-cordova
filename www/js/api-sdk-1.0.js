@@ -1,14 +1,3 @@
-/*
- *	Search for localStorage support
- *
- */
-
-if (localStorage) {
-	console.log("Local storage supported");
-} else {
-  console.log("Local storage not supported");
-}
-
 /* 
  * Prototype: requestHandlerAPI 
  * @params token (optional if not executing auth requests) Locally saved user token
@@ -45,7 +34,7 @@ function requestHandlerAPI(){
 	this.ls = window.localStorage;
 	/* Constructor */
 	this.construct = function(app_context){
-					console.log('Initialized ginger api-sdk1.0');
+					console.log('Initialized Ginger api-sdk1.0');
 					if(this.ls.getItem('request_token')) this.token = this.ls.getItem('request_token');
 					sdk_app_context = app_context;
 					/* For chaining purposes ::) */
@@ -160,11 +149,7 @@ function requestHandlerAPI(){
 						localStorage.setItem('apellido_coach', user.coach.apellido);
 						localStorage.setItem('coach_rate', user.coach.rating);
 						localStorage.setItem('chatPassword', user.coach.chatPassword);
-					}	
-					
-				
-					console.log('here mother fucker');	
-
+					}
 					return (userId) ? user : false;
 				}
 				return false;

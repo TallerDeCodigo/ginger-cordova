@@ -634,3 +634,51 @@ p.small{margin-bottom:0;}
 .coming_soon{background-color: #7b53a2;}
 .image_message{display: block; width: 100%; height: auto; position: absolute; bottom: 0;}
 .insert_stars{overflow: auto;}
+
+/*Loader*/
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+.loader_container{
+  	width: 100%;
+    height: 100vh;
+    display: block;
+    display: none;
+    margin: 0;
+    position: fixed;
+    z-index: 99999999;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.45);
+}
+
+.loading {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  margin: 44vh auto;
+  display: block;
+  border-radius: 50%;
+  border: 0.45rem solid rgb(78, 17, 128);
+  border-top-color: white;
+  -webkit-animation: spin 1s infinite linear;
+          animation: spin 1s infinite linear;
+}

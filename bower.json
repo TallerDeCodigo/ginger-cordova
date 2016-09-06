@@ -1,17 +1,17 @@
 {
-  "name": "dedalo",
+  "name": "Ginger",
   "homepage": "http://www.gingerapp.mx",
   "authors": [
     "John Falcon <john@tallerdecodigo.com>"
   ],
-  "description": "Plataforma digital de servicios personalizados de sali=ud 1:1",
+  "description": "",
   "main": "",
   "license": "MIT",
   "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
-    //"bower_components",
+    "bower_components",
     "test",
     "tests"
   ],
@@ -28,7 +28,7 @@
     "org.apache.cordova.media",
     "org.apache.cordova.media-capture",
     "org.apache.cordova.network-information",
-    "org.apache.cordova.splashscreen",
+    "org.apache.cordova.splashscreen"
   ],
   "dependencies": {
     "handlebars": "^4.0.5"

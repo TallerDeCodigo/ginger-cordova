@@ -45,6 +45,9 @@
 			</footer>
 			
 		</div>
+		<div class="loader_container" id="spinner">
+			<div class="loading"></div>
+		</div>
 	</body>
 	<script src="js/chat-config.js"></script>
 	<script src="js/chat-connection.js"></script>
@@ -53,12 +56,9 @@
 	<script src="js/chat-dialogs.js"></script>
 	<script src="js/chat-users.js"></script>
 	<script type="text/javascript">
-		/* Initialize app object and perform initial login check */
-	
 		window.is_feed = true;
 		app.initialize();
-		//app.render_feed(0, 'all');
-		//app.showLoader();
+		app.render_chat();
 	</script>
 </html>
 

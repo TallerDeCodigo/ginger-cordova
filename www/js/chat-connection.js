@@ -9,31 +9,20 @@ function connectToChat(user) {
 	//
 	QB.createSession({email: user.login, password: user.pass}, function(err, res) {
 
-		console.log(user);
-
 		currentUser = user;
-
-		console.log("usr> "+user.login);
-		console.log("pass> "+user.pass);
 
 		console.log(res);
 		if (res) {
 			// save session token
 			token = res.token;
 
-			console.log(' TOKEN ' + token);
-
 			user.id = res.user_id;
 
-			console.log('LOG ID: ' + user.id);
 			mergeUsers([{user: user}]);
 
 			QB.chat.connect({userId: user.id, password: user.pass}, function(err, roster) {
-				console.log("id> "+user.id);
 
 				localStorage.setItem('idSender', user.id);
-
-				console.log("id> "+user.pass);
 				if (err) {
 					console.log(err);
 				} else {
@@ -55,6 +44,8 @@ function connectToChat(user) {
 					// setup scroll events handler
 					//
 					setupMsgScrollHandler();
+
+					app.hideLoader();
 				}
 			});
 		}
