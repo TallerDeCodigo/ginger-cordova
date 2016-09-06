@@ -1,14 +1,3 @@
-/*
- *	Search for localStorage support
- *
- */
-
-if (localStorage) {
-	console.log("Local storage supported");
-} else {
-  console.log("Local storage not supported");
-}
-
 /* 
  * Prototype: requestHandlerAPI 
  * @params token (optional if not executing auth requests) Locally saved user token
@@ -45,7 +34,7 @@ function requestHandlerAPI(){
 	this.ls = window.localStorage;
 	/* Constructor */
 	this.construct = function(app_context){
-					console.log('Initialized ginger api-sdk1.0');
+					console.log('Initialized Ginger api-sdk1.0');
 					if(this.ls.getItem('request_token')) this.token = this.ls.getItem('request_token');
 					sdk_app_context = app_context;
 					/* For chaining purposes ::) */
@@ -60,50 +49,37 @@ function requestHandlerAPI(){
 		 */
 		this.loginNative =  function(data_login){
 
-		var email = data_login.mail;
-		var pass = data_login.pass;
-		var req = {
-				method : 'post',
-				url : api_base_url + 'api/login',
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'Content-Type': 'application/json'
-				},
-				data : {
-					"tipo" : "cliente",
-					"mail" : email,
-					"password" : pass
-				}
+			var email = data_login.mail;
+			var pass = data_login.pass;
+			var req = {
+					method : 'post',
+					url : api_base_url + 'api/login',
+					headers: {
+						'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+						'Content-Type': 'application/json'
+					},
+					data : {
+						"tipo" : "cliente",
+						"mail" : email,
+						"password" : pass
+					}
 			}
 			var response = this.makeRequest('api/login', req);
-
-			//console.log(response);
-
-			/*
-				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
-			*/
 			
-			// if(token){
+			/* GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE  */
 			localStorage.setItem('token', response.token);
 			localStorage.setItem('mail', response.mail);
 			localStorage.setItem('userId', response.userId);
-
-
-			//this.token = response.token;
 
 			var userId 	= localStorage.getItem('userId');
 			var mail 	= localStorage.getItem('mail');
 			var token 	= localStorage.getItem('token');
 
 			console.log('TOKEN RESPONSE ' + token);
-			// }
-			//console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + this.token);
 
 			/*
 				REGRESA LA RESPUESTA DEL SERVIDOR CON EL USER ID, MAIL Y TOKEN
 			*/
-
-			//console.log(token);
 
 			if(token){
 				var req = {
@@ -136,15 +112,15 @@ function requestHandlerAPI(){
 						localStorage.setItem('edad', user.perfil.edad.real);
 					else
 						localStorage.setItem('edad', 0);
-					localStorage.setItem('zipcode', user.cp);
-					localStorage.setItem('estatura', user.perfil.estatura);
-					localStorage.setItem('peso', user.perfil.peso);
-					localStorage.setItem('peso_ideal', user.pesoDeseado);
-					localStorage.setItem('dpw', user.perfil.ejercicio);
-					localStorage.setItem('restricciones', user.restricciones);
-					localStorage.setItem('comentarios', user.comentarios);
-					localStorage.setItem('customerId', user.customerId);
-					localStorage.setItem('chatId', user.chatId);
+						localStorage.setItem('zipcode', user.cp);
+						localStorage.setItem('estatura', user.perfil.estatura);
+						localStorage.setItem('peso', user.perfil.peso);
+						localStorage.setItem('peso_ideal', user.pesoDeseado);
+						localStorage.setItem('dpw', user.perfil.ejercicio);
+						localStorage.setItem('restricciones', user.restricciones);
+						localStorage.setItem('comentarios', user.comentarios);
+						localStorage.setItem('customerId', user.customerId);
+						localStorage.setItem('chatId', user.chatId);
 					if(user.dieta !== undefined)
 						localStorage.setItem('dietaId', user.dieta._id);
 					else
@@ -160,10 +136,6 @@ function requestHandlerAPI(){
 						localStorage.setItem('coach_rate', user.coach.rating);
 						localStorage.setItem('chatPassword', user.coach.chatPassword);
 					}	
-					
-				
-					console.log('here mother fucker');	
-
 					return (userId) ? user : false;
 				}
 				return false;
@@ -225,9 +197,6 @@ function requestHandlerAPI(){
 				}
 
 			var response = this.makeRequest('api/signup', req);
-
-			console.log(response);  //llega aqui con la respuesta del servidor
-
 			this.token = localStorage.getItem('token');
 
 			console.log('TOKEN: ' + this.token );

@@ -149,7 +149,7 @@
 			console.log('OAUTH');
 
 			try{
-				OAuth.initialize('a6JLuBGGgfFNhFvcQ2V0tCbdmWI'); //tenia este -> F_A1PBTm8Vv9WtuftE8CuTqNV7g
+				OAuth.initialize('7-ipR3QS-__wrorRTpdedM8-_v8');
 				console.log("Initialized Oauth");
 			}
 			catch(err){
@@ -306,16 +306,12 @@
 				app.hideLoader();
 			}, 2000);
 		},
-		render_direct_photo : function(){
-			//app.registerTemplate('direct_photo');
-			var data = app.gatherEnvironment(null, "Advanced search");
-			var template = Handlebars.templates['direct_photo'];
-
-			$('.main').html( template(data) );
-			setTimeout(function(){
-				app.hideLoader();
-			}, 2000);
-
+		back_with_logout : function(event){
+			var link = $(event.target).attr("href");
+			console.log(link);
+			localStorage.clear();
+			window.location.assign(link);
+			return;
 		},
 		get_file_from_device: function(destination, source)
 		{
@@ -634,6 +630,10 @@
 			return;
 		});
 
+		$('.back_with_logout').on("click", function(e){
+			e.preventDefault();
+			return app.back_with_logout(e);
+		});
 
 // ----------------------------------------------------------------------
 
