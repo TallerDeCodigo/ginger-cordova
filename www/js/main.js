@@ -201,10 +201,7 @@
 			});
 		},
 		render_settings : function(){
-			app.showLoader();
-			$(document).ready(function(){
-				return app.hideLoader();
-			});
+			return app.showLoader();
 		},
 		render_chat : function(){
 			return app.showLoader();

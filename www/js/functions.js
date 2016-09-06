@@ -1501,15 +1501,21 @@ $(window).load(function(){
 /*
 	MEASURE CONTROLS
 */
-		$("#estatura-up").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				estatura = Number($("#estatura-up").parent().parent().find('input').val());
-		        estatura=estatura+0.01;
-		        $("#estatura-up").parent().parent().find('input').val(estatura.toFixed(2));
-		        $('input[name="estatura"]').attr("value", estatura);
-
-
-		    }, 100);
+		var flag = false;
+		var flag_down = false;
+		$("#estatura-up").on('touchstart click', function(e){
+			e.stopPropagation(); e.preventDefault();
+			// if(!flag){
+			// 	flag = true;
+				console.log(e);
+				timeout = setInterval(function(){
+					estatura = Number($("#estatura-up").parent().parent().find('input').val());
+			        estatura=estatura+0.01;
+			        $("#estatura-up").parent().parent().find('input').val(estatura.toFixed(2));
+			        $('input[name="estatura"]').attr("value", estatura);
+			        flag = false;
+			    }, 120);
+			// }
 		    return false;
 		});
 
@@ -1518,13 +1524,19 @@ $(window).load(function(){
 		    return false;
 		});
 
-		$("#estatura-dw").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				estatura = Number($("#estatura-dw").parent().parent().find('input').val());
-		        estatura=estatura-0.01;
-		        $("#estatura-dw").parent().parent().find('input').val(estatura.toFixed(2));
-		        $('input[name="estatura"]').attr("value", estatura);
-		    }, 100);
+		$("#estatura-dw").on('touchstart click', function(e){
+			e.stopPropagation(); e.preventDefault();
+			// if(!flag_down){
+			// 	flag_down = true;
+				console.log(e);
+				timeout = setInterval(function(){
+					estatura = Number($("#estatura-dw").parent().parent().find('input').val());
+			        estatura=estatura-0.01;
+			        $("#estatura-dw").parent().parent().find('input').val(estatura.toFixed(2));
+			        $('input[name="estatura"]').attr("value", estatura);
+			        flag_down = false;
+			    }, 120);
+			// }
 		    return false;
 		});
 
@@ -1546,7 +1558,7 @@ $(window).load(function(){
 					peso=peso+1;
 		        	$("#peso-up").parent().parent().find('input').val(peso.toFixed(0));
 				}
-		    }, 100);
+		    }, 120);
 		    return false;
 		});
 
@@ -1566,7 +1578,7 @@ $(window).load(function(){
 					peso=peso-1;
 					$("#peso-dw").parent().parent().find('input').val(peso.toFixed(0));
 				}
-		    }, 100);
+		    }, 120);
 		    return false;
 		});
 

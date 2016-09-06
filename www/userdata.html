@@ -21,48 +21,49 @@
 
 	<body class="perfil2 load_data update_data iosm">
 
-	<div id="container">
-		<header class="hwhite2">
-			<div class="toolbar">
-				<a class="back" href="menu.html"><img src="images/back.svg"></a>
+		<div id="container">
+			<header class="hwhite2">
+				<div class="toolbar">
+					<a class="back" href="menu.html"><img src="images/back.svg"></a>
+				</div>
+			</header>
+			<div class="profile circle-frame">
+				<img src="">
 			</div>
-		</header>
-		<div class="profile circle-frame">
-			<img src="">
-		</div>
-		<h2 class="cpur"></h2>
-		<div class="profile-data">
-		<a class="edit-profile" href="edituser.html"><img src="images/profile/pencil.svg">Datos de <span></span></a>
-			<ul>
-				<li><span>Objetivo:						<strong id="plan_perfil"></strong></span></li>
-				<li><span>Sexo: 						<strong id="sexo_perfil"></strong></span></li>
-				<li><span>Edad: 						<strong id="anos_perfil"></strong></span></li>
-				<li><span>Código Postal: 				<strong id="cp_perfil"></strong></span></li>
-				<li><span>Altura: 						<strong id="estatura_perfil"></strong></span></li>
-				<li><span>Peso: 						<strong id="peso_perfil"></strong></span></li>
-				<li><span>Peso Ideal: 					<strong id="ideal_perfil"></strong></span></li>
-				<li><span>Tipo de Coach: 				<strong id="coach_type_perfil"></strong></span></li>
-				<li><span>Frecuencia de Ejercicio: 		<strong id="frecuencia_perfil"></strong></span></li>
-				<li><span>Restricciones Alimenticias: 	<strong id="restricciones_perfil"></strong></span></li>
-				<li class="comentario"><span id="comentario_perfil"><i></i></span></li>
-			</ul>
-			<div class="profile-bottom">
+			<h2 class="cpur"></h2>
+			<div class="profile-data">
+			<a class="edit-profile" href="edituser.html"><img src="images/profile/pencil.svg">Datos de <span></span></a>
 				<ul>
-					<li>
-						<span>Coach: <strong id="coach_name"></strong></span>
-						<div class="rate-stars">
-						</div>
-					</li>
-					<li>
-						<a class="btn-org" href="cambiocoach.html">Cambiar Coach</a>	
-					</li>
+					<li><span>Objetivo:						<strong id="plan_perfil"></strong></span></li>
+					<li><span>Sexo: 						<strong id="sexo_perfil"></strong></span></li>
+					<li><span>Edad: 						<strong id="anos_perfil"></strong></span></li>
+					<li><span>Código Postal: 				<strong id="cp_perfil"></strong></span></li>
+					<li><span>Altura: 						<strong id="estatura_perfil"></strong></span></li>
+					<li><span>Peso: 						<strong id="peso_perfil"></strong></span></li>
+					<li><span>Peso Ideal: 					<strong id="ideal_perfil"></strong></span></li>
+					<li><span>Tipo de Coach: 				<strong id="coach_type_perfil"></strong></span></li>
+					<li><span>Frecuencia de Ejercicio: 		<strong id="frecuencia_perfil"></strong></span></li>
+					<li><span>Restricciones Alimenticias: 	<strong id="restricciones_perfil"></strong></span></li>
+					<li class="comentario"><span id="comentario_perfil"><i></i></span></li>
 				</ul>
+				<div class="profile-bottom">
+					<ul>
+						<li>
+							<span>Coach: <strong id="coach_name"></strong></span>
+							<div class="rate-stars">
+							</div>
+						</li>
+						<li>
+							<a class="btn-org" href="cambiocoach.html">Cambiar Coach</a>	
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="loader_container" id="spinner">
-		<div class="loading"></div>
-	</div>
+		<div class="loader_container" id="spinner">
+			<div class="loading"></div>
+		</div>
+	</body>
 	<script type="text/javascript">
 		/* Initialize app object and perform initial login check */
 		window.is_feed = true;
@@ -70,7 +71,5 @@
 		app.render_settings();
 		//app.showLoader();
 	</script>
-
-	</body>
 </html>
 
