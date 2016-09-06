@@ -825,7 +825,7 @@ $(window).on("load resize",function(){
 					$('#container').toggleClass('blurred');
 				});
 
-
+				app.hideLoader();
 		}//end if has class
 
 

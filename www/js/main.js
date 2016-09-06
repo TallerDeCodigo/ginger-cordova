@@ -197,30 +197,23 @@
 		render_login : function(){
 			app.showLoader();
 			$(document).ready(function(){
-				app.hideLoader();
+				return app.hideLoader();
+			});
+		},
+		render_settings : function(){
+			app.showLoader();
+			$(document).ready(function(){
+				return app.hideLoader();
 			});
 		},
 		render_chat : function(){
-			app.showLoader();
-		},
-		render_myPlan : function(){
-			console.log("Render my plan");
 			return app.showLoader();
 		},
-		render_search_composite : function(){
-			user = (user) ? user : "not_logged";
-			$.getJSON(api_base_url+user+'/content/search-composite/')
-			 .done(function(response){
-				console.log(JSON.stringify(response));
-				response.search_active =  true;
-				var data 	 = app.gatherEnvironment(response);
-					data.search_active = true;
-				var template = Handlebars.templates['search'];
-				$('.main').html( template(data) );
-			})
-			 .fail(function(error){
-				console.log(JSON.stringify(error));
-			 });
+		render_myPlan : function(){
+			return app.showLoader();
+		},
+		render_menu : function(){
+			return app.showLoader();
 		},
 		render_search_results : function(search_term){
 			$.getJSON(api_base_url+'content/search/'+search_term)
