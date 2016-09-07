@@ -115,18 +115,12 @@
 		onDeviceReady: function() {
 			app.receivedEvent('deviceready');
 
-
-
-
 			/*   ___    _         _   _     
 			*  / _ \  / \  _   _| |_| |__  
 			* | | | |/ _ \| | | | __| '_ \ 
 			* | |_| / ___ \ |_| | |_| | | |
 			*  \___/_/   \_\__,_|\__|_| |_|
-			*/                              
-
-			console.log('OAUTH');
-
+			*/
 			try{
 				OAuth.initialize('7-ipR3QS-__wrorRTpdedM8-_v8');
 				console.log("Initialized Oauth");
