@@ -273,7 +273,7 @@
 		    if (err) {
 		      console.log(err);
 		    } else {
-		    	$('#image_stage').addClass("visible").append("<img src='cdvfile://"+inputFile+"' class='chat-img' >");
+		    	// $('#image_stage').addClass("visible").append("<img src='cdvfile://"+inputFile+"' class='chat-img' >");
 			    $("#progress").fadeOut(400, function() {
 			        $(".input-group-btn_change_load").removeClass("visibility_hidden");
 			    });
@@ -647,6 +647,42 @@
 				}
 		}); //END VALIDATE
 		
+		var initialViewHeight = document.documentElement.clientHeight;
+
+		var fixWithKeyboard = function(){
+
+			Keyboard.disableScrollingInShrinkView(false);
+			Keyboard.shrinkView(true);
+			$(window).resize();
+			$(document).resize();
+			// $('#container').addClass('conteclado');
+			// $('#container').css('height',document.documentElement.clientHeight+"px");
+			// var calculate = document.documentElement.clientHeight-43;
+			// $('#mensaje-chat').focus();
+			// $('#container').scrollTop($('#container').prop("scrollHeight"));
+			// $('body').scrollTop(0);
+			// $('#messages-list').trigger("click");
+			// $('.escribir').css('top',calculate+"px");
+		}
+
+		window.openKeyboard = false;
+
+		/* Keyboard shown event */
+		window.addEventListener('keyboardDidShow', function () {
+			console.log('keyboard did show');
+			window.openKeyboard = true;
+			return fixWithKeyboard();
+		});
+
+		/* Keyboard hidden event */
+		window.addEventListener('keyboardDidHide', function () {
+			console.log('keyboard did hide');
+			window.openKeyboard = false;
+			$('#container').removeClass('conteclado');
+			$('#container').css('height', document.documentElement.clientHeight+"px");
+			$('.escribir').css('top',"initial");
+		});
+
 
 
 		//-----------------------------

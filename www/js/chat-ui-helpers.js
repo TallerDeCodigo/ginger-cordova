@@ -104,43 +104,6 @@ function buildUserHtml(userLogin, userId, isNew) {
   return userHtml;
 }
 
-var initialViewHeight = document.documentElement.clientHeight;
-
-var fixWithKeyboard = function(){
-
-	Keyboard.disableScrollingInShrinkView(false);
-	Keyboard.shrinkView(true);
-	$(window).resize();
-	$(document).resize();
-	$('#container').addClass('conteclado');
-	$('#container').css('height',document.documentElement.clientHeight+"px");
-	var calculate = document.documentElement.clientHeight-43;
-	$('#mensaje-chat').focus();
-	$('#container').scrollTop($('#container').prop("scrollHeight"));
-	$('body').scrollTop(0);
-	$('#messages-list').trigger("click");
-	$('.escribir').css('top',calculate+"px");
-}
-
-window.openKeyboard = false;
-
-
-/* Keyboard shown event */
-window.addEventListener('keyboardDidShow', function () {
-	console.log('keyboard did show');
-	window.openKeyboard = true;
-	return fixWithKeyboard();
-});
-
-/* Keyboard hidden event */
-window.addEventListener('keyboardDidHide', function () {
-	console.log('keyboard did hide');
-	window.openKeyboard = false;
-	$('#container').removeClass('conteclado');
-	$('#container').css('height', document.documentElement.clientHeight+"px");
-	$('.escribir').css('top',"initial");
-});
-
 /* Hide keyboard on scroll */
 $('#messages-list').scroll( function(){
 	console.log("scrollin keyboard:: "+window.openKeyboard);
