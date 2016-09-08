@@ -107,7 +107,8 @@ var initialViewHeight = document.documentElement.clientHeight;
 
 var fixWithKeyboard = function(){
 
-	//Keyboard.disableScrollingInShrinkView(false);
+	Keyboard.disableScrollingInShrinkView(false);
+	Keyboard.shrinkView(true);
 	$(window).resize();
 	$(document).resize();
 	$('#container').addClass('conteclado');

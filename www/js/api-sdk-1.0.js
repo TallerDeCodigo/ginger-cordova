@@ -636,6 +636,7 @@ function requestHandlerAPI(){
 		 * @return JSON encoded response
 		 */
 		this.makeRequest = function(endpoint, data){
+			app.showLoader();
 			console.log('DATA SEND MAKE REQUEST: ');
 			console.log(data);
 
@@ -655,6 +656,7 @@ function requestHandlerAPI(){
 				console.log('<<DONE>>');
 				console.log(response);
 				sdk_app_context.hideLoader(response);
+				app.hideLoader();
 			})
 			 .fail(function(e){
 				result = e;

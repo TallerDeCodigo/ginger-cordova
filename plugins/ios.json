@@ -31,13 +31,13 @@
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "org.ginger.app"
         },
+        "cordova-plugin-keyboard": {
+            "PACKAGE_NAME": "org.ginger.app"
+        },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "org.ginger.app"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "org.ginger.app"
-        },
-        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "org.ginger.app"
         },
         "nl.x-services.plugins.toast": {
