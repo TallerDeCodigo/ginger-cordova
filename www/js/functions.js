@@ -169,6 +169,11 @@ $( function() {
 		/*nombre del coach en el header*/
 		$('h2.titulo').html(userLog.coach.nombre + " " + userLog.coach.apellido);
 
+		$('document').on('click', '.attach', function(e){
+			console.log("Attach???");
+			e.preventDefault();
+			return app.get_file_from_device("chat", "camera");
+		});
 		console.log('COACH ID: ' + uChatCoach);
 
 		uChatCoach = uChatCoach.split('-');
@@ -187,12 +192,6 @@ $( function() {
 		//triggerDialog('57c4dca3a28f9a8288000008');
 
 		createNewDialog();
-
-		$('.attach').click(function(){
-
-			$('input[name="galeria"]').trigger('click');
-
-		});
 
 		// $('#mensaje-chat').on('focus', function(e) {
 		// 	console.log('si esta aqui');

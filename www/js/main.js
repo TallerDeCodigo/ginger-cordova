@@ -267,6 +267,26 @@
 		{
 			apiRH.getFileFromDevice(destination, source);		
 		},
+		triggerSendAttachments: function(inputFile) {
+		  // upload image
+		  QB.content.createAndUpload({name: inputFile.name, file: inputFile, type:
+		        inputFile.type, size: inputFile.size, 'public': false}, function(err, response){
+		    if (err) {
+		      console.log(err);
+		    } else {
+
+		      $("#progress").fadeOut(400, function() {
+		        $(".input-group-btn_change_load").removeClass("visibility_hidden");
+		      });
+
+		      var uploadedFile = response;
+
+		      sendMessage("[attachment]", uploadedFile.id);
+
+		      $("input[type=file]").val('');
+		    }
+		  });
+		},
 		showLoader: function(){
 			$('#spinner').show();
 		},
@@ -346,8 +366,6 @@
 			});
 
 		},//END UPDATE PERFIL
-
-
 		feed_user_defaults: function(firstName,lastName,email,customerId,password,token,userId,chatId,chatPassword,coachId,coachQuickblox,dietId,user,exerciseValue,picture)
 		{
 			var req = {
@@ -402,42 +420,6 @@
 				console.log(response);	
 			});
 		},
-
-
-		// get_consumed:function(){
-		// 	var req = {
-		// 		method : 'GET',
-		// 		url : api_base_url + '/tables/consumo?coach='+localStorage.getItem('coach')+'&dieta='+ $localeStorage.getItem('dietaId')+'&inicio=&fin='),  //definitr tabla
-		// 		headers: {
-		// 			'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-		// 			'X-ZUMO-AUTH': localStorage.getItem('token'),
-		// 			'Content-Type': 'application/json'
-		// 		}
-		// 	}
-
-		// 	$.ajax({
-		// 	  type: 'GET',
-		// 	  headers: req.headers,
-		// 	  url:  req.url,
-		// 	  dataType: 'json',
-		// 	  async: false
-		// 	})
-		// 	 .done(function(response){
-		// 	 	console.log(response);
-		// 		result = response;
-		// 		localStorage.setItem('dieta', response);
-		// 		sdk_app_context.hideLoader(response);
-		// 	})
-		// 	 .fail(function(e){
-		// 		result = false;
-		// 		console.log(JSON.stringify(e));
-		// 	});
-
-		// 	//console.log(result);
-		// 	return result;
-		// },
-
-
 		get_diet: function(dietId)
 		{
 			var req = {
@@ -644,154 +626,119 @@
 	}
 
 
-	//-----------------------------
-	//
-	// Validate code
-	//
-	//-----------------------------
+		//-----------------------------
+		//
+		// Validate code
+		//
+		//-----------------------------
 
-	if($('#code_form').length)
-		$('#code_form').validate({
-			rules:{
-				code:"required"
-			},
-			messages:{
-				code:"Proporciona tu código de activación"
-			},
-			submitHandler:function(){
-				// SERVICIO PARA OBTENER EL CODIGO DE VALIDACION
-				
-				window.location.assign('feed.html');
-
-
-			}
-	}); //END VALIDATE
-	
+		if($('#code_form').length)
+			$('#code_form').validate({
+				rules:{
+					code:"required"
+				},
+				messages:{
+					code:"Proporciona tu código de activación"
+				},
+				submitHandler:function(){
+					// SERVICIO PARA OBTENER EL CODIGO DE VALIDACION
+					
+					window.location.assign('feed.html');
 
 
-	//-----------------------------
-	//
-	// Login Facebook
-	//
-	//-----------------------------
-
-	$('.face').click(function () {
+				}
+		}); //END VALIDATE
 		
-		console.log('CLICK FACEBOOK LOGIN');
-		
-		apiRH.loginOauth('facebook');
-		
-	});
 
 
+		//-----------------------------
+		//
+		// Login Facebook
+		//
+		//-----------------------------
 
-/*TARJETA DE CREDITO*/
-
-	$('#send_fPago').on('click', function(){
-
-	   		console.log("click to next");
-
-	   		var  t_nombre   = $('input[name="nombre"]').val(); 
-	   		var  t_card 	= $('input[name="card"]').val(); 
-	   		var  t_mes  	= $('input[name="mes"]').val(); 
-	   		var  t_ano 		= $('input[name="year"]').val(); 
-	   		var  t_cvc 		= $('input[name="cvc"]').val(); 
-	   		var  t_mail 	= $('input[name="mail"]').val(); 
-	   		var  t_cupon 	= $('input[name="cupon"]').val(); 
-	   		var  t_terms 	= $('input[name="terms"]').val(); 
-
-	   		Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
-	   		
-	   		var errorResponseHandler, successResponseHandler, tokenParams;
-
-	   		tokenParams = {
-	   		  "card": {
-	   		    "number": t_card,
-	   		    "name": t_nombre,
-	   		    "exp_year": t_ano,
-	   		    "exp_month": t_mes,
-	   		    "cvc": t_cvc
-	   		  }
-	   		};
-
-	   		successResponseHandler = function(token) 
-	   		{
-	   			var response = apiRH.makePayment(token.id);
-	   			// Funcion de mensaje de bienvenida
-	   			if(response){
-	   				
-	   				if(response){
-
-	   					if(!$('.overscreen6').is(':visible') ){
-	   						$('.overscreen6').show();
-	   					setTimeout(function() {$('.overscreen6').addClass('active');}, 200);
-	   					} else {
-	   						$('.overscreen6').removeClass('active');
-	   						setTimeout(function() {$('.overscreen6').hide();}, 800);
-	   					}
-	   					$('#container').toggleClass('blurred');
-
-	   					$('#go_next').click(function(){
-	   						$('.overscreen6').hide();
-	   						$('#container').toggleClass('blurred');
-	   						window.location.assign('dieta.html');
-	   					});
-
-	   				}
-	   				else
-	   					app.toast("Error al actualizar datos");
-	   			}else{
-	   				app.toast("Error al procesar tu pago");
-	   			}
-	   			return;
-	   		};
-
-	   		/* Después de recibir un error */
-
-	   		errorResponseHandler = function(error) {
-	   		  return console.log(error.message);  //error de conectividad
-	   		  app.toast('Error al procesar tu pago' + error.message);
-	   		};
-
-	   		/* Tokenizar una tarjeta en Conekta */
-
-	   		Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
-	});//endCLICK
-
-		//MARK NOTIFICATION AS READ
-		$('.main').on('tap', '.each_notification a', function(e){
-			e.preventDefault();
-			var redirect = $(this).attr('href');
-			var $context = $(this);
-			if($context.hasClass('read')) return false;
-			var context_id = $context.data('id');
+		$('.face').click(function () {
 			
-			var response = apiRH.makeRequest(user+'/notifications/read/'+context_id);
-			if(response){
-				$context.addClass('read');
-			}
-			//window.location.assign(redirect);
+			console.log('CLICK FACEBOOK LOGIN');
+			
+			apiRH.loginOauth('facebook');
 			
 		});
 
-		/* Pagination Load more posts */
-		$(document).on('tap', '#load_more_posts', function(e){
-			e.preventDefault();
-			var offset = $(this).data('page');
-			app.get_user_timeline(offset);
-			e.stopPropagation();
-		});
-
-		/* Pagination Load more search results */
-		$(document).on('tap', '#load_more_results', function(e){
-			e.preventDefault();
-			var offset = $(this).data('page');
-			var GET = app.getUrlVars();
-
-			app.get_search_results(GET.searchbox, offset);
-			e.stopPropagation();
-		});
 
 
+		/*TARJETA DE CREDITO*/
+		$('#send_fPago').on('click', function(){
+
+		   		console.log("click to next");
+
+		   		var  t_nombre   = $('input[name="nombre"]').val(); 
+		   		var  t_card 	= $('input[name="card"]').val(); 
+		   		var  t_mes  	= $('input[name="mes"]').val(); 
+		   		var  t_ano 		= $('input[name="year"]').val(); 
+		   		var  t_cvc 		= $('input[name="cvc"]').val(); 
+		   		var  t_mail 	= $('input[name="mail"]').val(); 
+		   		var  t_cupon 	= $('input[name="cupon"]').val(); 
+		   		var  t_terms 	= $('input[name="terms"]').val(); 
+
+		   		Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
+		   		
+		   		var errorResponseHandler, successResponseHandler, tokenParams;
+
+		   		tokenParams = {
+		   		  "card": {
+		   		    "number": t_card,
+		   		    "name": t_nombre,
+		   		    "exp_year": t_ano,
+		   		    "exp_month": t_mes,
+		   		    "cvc": t_cvc
+		   		  }
+		   		};
+
+		   		successResponseHandler = function(token) 
+		   		{
+		   			var response = apiRH.makePayment(token.id);
+		   			// Funcion de mensaje de bienvenida
+		   			if(response){
+		   				
+		   				if(response){
+
+		   					if(!$('.overscreen6').is(':visible') ){
+		   						$('.overscreen6').show();
+		   					setTimeout(function() {$('.overscreen6').addClass('active');}, 200);
+		   					} else {
+		   						$('.overscreen6').removeClass('active');
+		   						setTimeout(function() {$('.overscreen6').hide();}, 800);
+		   					}
+		   					$('#container').toggleClass('blurred');
+
+		   					$('#go_next').click(function(){
+		   						$('.overscreen6').hide();
+		   						$('#container').toggleClass('blurred');
+		   						window.location.assign('dieta.html');
+		   					});
+
+		   				}
+		   				else
+		   					app.toast("Error al actualizar datos");
+		   			}else{
+		   				app.toast("Error al procesar tu pago");
+		   			}
+		   			return;
+		   		};
+
+		   		/* Después de recibir un error */
+
+		   		errorResponseHandler = function(error) {
+		   		  return console.log(error.message);  //error de conectividad
+		   		  app.toast('Error al procesar tu pago' + error.message);
+		   		};
+
+		   		/* Tokenizar una tarjeta en Conekta */
+
+		   		Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
+		});//endCLICK
+
+		
 	});
 

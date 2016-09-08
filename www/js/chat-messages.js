@@ -177,26 +177,7 @@ function clickSendMessage() {
   window.scrollTo(0,document.body.scrollHeight);
 }
 
-function clickSendAttachments(inputFile) {
-  // upload image
-  QB.content.createAndUpload({name: inputFile.name, file: inputFile, type:
-        inputFile.type, size: inputFile.size, 'public': false}, function(err, response){
-    if (err) {
-      console.log(err);
-    } else {
 
-      $("#progress").fadeOut(400, function() {
-        $(".input-group-btn_change_load").removeClass("visibility_hidden");
-      });
-
-      var uploadedFile = response;
-
-      sendMessage("[attachment]", uploadedFile.id);
-
-      $("input[type=file]").val('');
-    }
-  });
-}
 
 // send text or attachment
 function sendMessage(text, attachmentFileId) {

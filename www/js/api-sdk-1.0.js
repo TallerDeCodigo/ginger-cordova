@@ -514,9 +514,9 @@ function requestHandlerAPI(){
 				},
 				data : {
 					"calificacion": data.calificacion,
-   					"comment": data.comentarios,
-    				"coach": data.coach,
-    				"dieta": data.dieta 
+					"comment": data.comentarios,
+					"coach": data.coach,
+					"dieta": data.dieta 
 				}
 			};
 
@@ -715,12 +715,12 @@ function requestHandlerAPI(){
 			  async: false
 			})
 			 .done(function(response){
-			 	// console.log('done');
+				// console.log('done');
 				result = response;
 				sdk_app_context.hideLoader(response);
 			})
 			 .fail(function(e){
-			 	console.log('fail');
+				console.log('fail');
 				result = false;
 				console.log(JSON.stringify(e));
 			});
@@ -776,11 +776,11 @@ function requestHandlerAPI(){
 							xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 							xhr.onload = function() {
 								console.log(xhr.status);
-							    if (xhr.status === 200) {
-							        var userInfo = JSON.parse(xhr.responseText);
-							        console.log(userInfo);
-							        sdk_app_context.hideLoader();
-							    }
+								if (xhr.status === 200) {
+									var userInfo = JSON.parse(xhr.responseText);
+									console.log(userInfo);
+									sdk_app_context.hideLoader();
+								}
 							};
 							xhr.send(data);
 							/* ContentType is important to parse the data server side since PUT doesn't handle multipart form data */
@@ -913,19 +913,19 @@ function requestHandlerAPI(){
 					 localStorage.setItem("avatar", fb_avatar);
 
 					 var req = {
-					 	method : 'post',
-					 	url : api_base_url + 'api/signup',
-					 	headers: {
-					 		'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					 		'X-ZUMO-AUTH': '',
-					 		'Content-Type': 'application/json'
-					 	},
-					 	data : {
-					 		"nombre" : fb_name,
-					 		"apellido" :fb_lastname,
-					 		"mail" : fb_email,
-					 		"password" : fb_Id
-					 	}
+						method : 'post',
+						url : api_base_url + 'api/signup',
+						headers: {
+							'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+							'X-ZUMO-AUTH': '',
+							'Content-Type': 'application/json'
+						},
+						data : {
+							"nombre" : fb_name,
+							"apellido" :fb_lastname,
+							"mail" : fb_email,
+							"password" : fb_Id
+						}
 					 }
 
 					 /*
@@ -943,15 +943,15 @@ function requestHandlerAPI(){
 					   async: false
 					 })
 					  .done(function(response){
-					 	result = response;
-					 	console.log(response);
+						result = response;
+						console.log(response);
 
-					 	if(response.Status == "ERROR")
-					 	{
-					 		alert("El usuario ya se encuentra registrado, favor de hacer login");
-					 		console.log('Error usuario registrado');
+						if(response.Status == "ERROR")
+						{
+							alert("El usuario ya se encuentra registrado, favor de hacer login");
+							console.log('Error usuario registrado');
 
-					 		var req = {
+							var req = {
 								method : 'post',
 								url : api_base_url + 'api/login',
 								headers: {
@@ -975,10 +975,10 @@ function requestHandlerAPI(){
 							   dataType: 'json',
 							   async: false })
 							  .done(function(response){
-							  		
-							  		console.log(req);
+									
+									console.log(req);
 
-							  		localStorage.setItem('token', response.token);
+									localStorage.setItem('token', response.token);
 									localStorage.setItem('mail', response.mail);
 									localStorage.setItem('userId', response.userId);
 
@@ -1008,7 +1008,7 @@ function requestHandlerAPI(){
 										   async: false })
 										  .done(function(user){
 
-										  	console.log(JSON.stringify(user));
+											console.log(JSON.stringify(user));
 											console.log(user);
 
 											if(user){
@@ -1049,104 +1049,104 @@ function requestHandlerAPI(){
 													localStorage.setItem('chatPassword', user.coach.chatPassword);
 												}	
 												if(user.customerId !== 'undefined'){
-											 		window.location.assign('dieta.html');
+													window.location.assign('dieta.html');
 												}else{
-											 		window.location.assign('feed.html');
-											 	}
+													window.location.assign('feed.html');
+												}
 											}
 											return ;
 
 										  })
 										  .fail(function(e){
-										  		console.log('Error');	
+												console.log('Error');	
 										  });
 									}
 									return ;
 
 							  })
 							  .fail(function(e){
-							  		console.log('-- -- -- Error -- -- --');
+									console.log('-- -- -- Error -- -- --');
 							  });
 							  return;
-					 	}
+						}
 
-					 	localStorage.setItem('token', 	response.token);
-					 	localStorage.setItem('mail', 	response.mail);
-					 	localStorage.setItem('userId', 	response._id);
-					 	
-					 	sdk_app_context.hideLoader(response);
+						localStorage.setItem('token', 	response.token);
+						localStorage.setItem('mail', 	response.mail);
+						localStorage.setItem('userId', 	response._id);
+						
+						sdk_app_context.hideLoader(response);
 
-					 	var userId 	= localStorage.getItem('user_id');
-					  	var mail 	= localStorage.getItem('mail');
-					  	var token 	= localStorage.getItem('token');
+						var userId 	= localStorage.getItem('user_id');
+						var mail 	= localStorage.getItem('mail');
+						var token 	= localStorage.getItem('token');
 
-					  	console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
+						console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
 
-					  	sdk_app_context.showLoader();
+						sdk_app_context.showLoader();
 
-					  	var req = {
-						 	method : 'post',
-						 	url : api_base_url + 'api/signup',
-						 	headers: {
-						 		'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-						 		'X-ZUMO-AUTH': localStorage.getItem('token'),
-						 		'Content-Type': 'application/json'
-						 	}
+						var req = {
+							method : 'post',
+							url : api_base_url + 'api/signup',
+							headers: {
+								'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+								'X-ZUMO-AUTH': localStorage.getItem('token'),
+								'Content-Type': 'application/json'
+							}
 						 }
-					  	var result = {};
-					  	
-					  	$.ajax({
-					  	  type: 'GET',
-					  	  headers: req.headers,
-					  	  url: window.api_base_url+'tables/cliente/'+userId,
-					  	  dataType: 'json',
-					  	  async: false
-					  	})
-					  	 .done(function(response){
-					  	 	console.log('done');
-					  		result = response;
-					  		sdk_app_context.hideLoader(response);
-					  	})
-					  	 .fail(function(e){
-					  	 	console.log('fail');
-					  		result = false;
-					  		console.log(JSON.stringify(e));
-					  		alert(JSON.stringify(e));
-					  		return;
-					  	});
+						var result = {};
+						
+						$.ajax({
+						  type: 'GET',
+						  headers: req.headers,
+						  url: window.api_base_url+'tables/cliente/'+userId,
+						  dataType: 'json',
+						  async: false
+						})
+						 .done(function(response){
+							console.log('done');
+							result = response;
+							sdk_app_context.hideLoader(response);
+						})
+						 .fail(function(e){
+							console.log('fail');
+							result = false;
+							console.log(JSON.stringify(e));
+							alert(JSON.stringify(e));
+							return;
+						});
 
-					  	console.log(JSON.stringify(result));
+						console.log(JSON.stringify(result));
 
-					  	localStorage.setItem('users', JSON.stringify(result));
+						localStorage.setItem('users', JSON.stringify(result));
 
-					  	var u = JSON.parse(localStorage.getItem('users'));
+						var u = JSON.parse(localStorage.getItem('users'));
 
-					  	if(u.customerId == 'no_set'){
-					  		window.location.assign('feed.html');	
-					  	}else{
-					  		window.location.assign('dieta.html');	
-					  	}
+						if(u.customerId == 'no_set'){
+							window.location.assign('feed.html');	
+						}else{
+							window.location.assign('dieta.html');	
+						}
 
 					 })
 					.fail(function(e){
-					 	result = e;
-					 	console.log(result.responseText);
-					 	console.log('Result: ' + result.responseText);
-					 	console.log(JSON.parse(result.responseText));
-					 	
-					 	var m = JSON.parse(result.responseText);
+						result = e;
+						console.log(result.responseText);
+						console.log('Result: ' + result.responseText);
+						console.log(JSON.parse(result.responseText));
+						
+						var m = JSON.parse(result.responseText);
 
-					 	//----------------------------
-					 	//
-					 	//	Login si ya existe
-					 	//
-					 	//----------------------------
+						//----------------------------
+						//
+						//	Login si ya existe
+						//
+						//----------------------------
 
 
-					 	if(m.code == 422){
-					 		console.log('Error usuario registrado');
+						if(m.code == 422){
+							console.log('Error usuario registrado');
 
-					 		var req = {
+							var req = {
 								method : 'post',
 								url : api_base_url + 'api/login',
 								headers: {
@@ -1170,10 +1170,10 @@ function requestHandlerAPI(){
 							   dataType: 'json',
 							   async: false })
 							  .done(function(response){
-							  		
-							  		console.log(req);
+									
+									console.log(req);
 
-							  		localStorage.setItem('token', response.token);
+									localStorage.setItem('token', response.token);
 									localStorage.setItem('mail', response.mail);
 									localStorage.setItem('userId', response.userId);
 
@@ -1203,7 +1203,7 @@ function requestHandlerAPI(){
 										   async: false })
 										  .done(function(user){
 
-										  	console.log(JSON.stringify(user));
+											console.log(JSON.stringify(user));
 											console.log(user);
 
 											if(user){
@@ -1246,19 +1246,19 @@ function requestHandlerAPI(){
 
 										  })
 										  .fail(function(e){
-										  		console.log('Error');	
+												console.log('Error');	
 										  });
 									}
 									return ;
 
 							  })
 							  .fail(function(e){
-							  		console.log('-- -- -- Error -- -- --');
+									console.log('-- -- -- Error -- -- --');
 							  });
-					 	}else{
-					 		alert('Error al hacer el registro de usuario');
-					 	}
-					 	return;
+						}else{
+							alert('Error al hacer el registro de usuario');
+						}
+						return;
 					});
 
 					});
@@ -1282,8 +1282,8 @@ function requestHandlerAPI(){
 			console.log('LOGIN CALLBACK FB');
 			response.me()
 			 .done(function(response){
-			 	console.log("en loginCallback FB");
-			 	console.log(response);
+				console.log("en loginCallback FB");
+				console.log(response);
 				// var email = response.email;
 				// var username = response.lastname+"_"+response.id;
 				// var found = apiRH.create_internal_user(username, email, {fbId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
@@ -1380,33 +1380,24 @@ function requestHandlerAPI(){
 		};
 
 		/**
-		 * Prepare params for Search File transfer
+		 * Prepare params for Chat File transfer
 		 * @param fileURL
 		 * @param source
 		 */
-		this.prepareSearchFileTransfer = function(fileURL, source){
+		this.prepareChatFileTransfer = function(fileURL, source){
 									app.showLoader();
-									console.log(fileURL);
-									this.transfer_options = new FileUploadOptions();
-									this.transfer_options.fileUrl 		= fileURL;
-									this.transfer_options.fileLocal		= "file://"+fileURL;
-									this.transfer_options.fileKey 		= "file";
-									this.transfer_options.fileName 		= fileURL.substr(fileURL.lastIndexOf('/') + 1);
-									this.transfer_options.httpMethod 	= "POST";
-									this.transfer_options.mimeType 		= "image/jpeg";
-									this.transfer_options.quality 		= 50;
-									this.transfer_options.correctOrientation = true;
-									this.transfer_options.chunkedMode 	= false;
-									// this.transfer_options.headers 		= "{'Content-Type':'multipart/form-data'}";
-									console.log(this.transfer_options);
-									var params = {};
-										params.client = "app";
-									this.transfer_options.params = params;
-									this.upload_ready = true;
-									var image = {thumb: this.transfer_options.fileLocal};
-									console.log(JSON.stringify(image));
-									apiRH.addImageToStack(image);
-									console.log("prepareSearchTransfer");
+									this.chat_upload_params = 	{
+																	name: fileURL.substr(fileURL.lastIndexOf('/') + 1), 
+																	file: fileURL, 
+																	type: "image/jpeg", 
+																	public: false
+																};
+									
+									// var image = {thumb: this.transfer_options.fileLocal};
+									console.log(JSON.stringify(this.chat_upload_params));
+									$('#image_stage').addClass("visible").append("<img src='"+fileUrl+"' class='chat-img' >");
+									console.log("prepareChatFileTransfer");
+									this.initializeChatFileTransfer(this.chat_upload_params);
 									app.hideLoader();
 								};
 
@@ -1416,20 +1407,28 @@ function requestHandlerAPI(){
 		 * @see prepareProfileTransfer MUST be executed before
 		 * Dedalo approved
 		 */
-		this.initializeSearchFileTransfer = function(params){
-			user = (user) ? user : "not_logged";
-			if(this.upload_ready){
-				var ft = new FileTransfer();
-				console.log(JSON.stringify(ft));
-				this.transfer_options.params = params;
-				ft.upload(  this.transfer_options.fileUrl, 
-							encodeURI('http://ginger-admin.cloudapp.net/rogue.php'), 
-							context.search_transfer_win, 
-							context.transfer_fail, 
-							this.transfer_options
-						);
-				app.toast("Still processing...")
-			}
+		this.initializeChatFileTransfer = function(params){
+			QB.content.createAndUpload(params, function(err, response){
+			  if (err) {
+				console.log(err);
+			  } else {
+				var uploadedFileId = response.id;
+			 
+				// prepare a message
+				//
+				var msg = {
+				  type: currentDialog.type == 3 ? 'chat' : 'groupchat',
+				  body: "attachment",
+				  extension: {
+					save_to_history: 1,
+				  }
+				};
+				msg["extension"]["attachments"] = [{id: uploadedFileId, type: 'photo'}];
+			 
+				// send a message
+				// ...
+			  }
+			});
 		};
 
 		this.fileselect_win = function (r) {
@@ -1439,14 +1438,14 @@ function requestHandlerAPI(){
 			return context.prepareProfileFileTransfer(r);
 		};
 
-		this.search_fileselect_win = function (r) {
-			console.log('search win: ' + r);
+		this.chat_fileselect_win = function (r) {
+			console.log('chat win: ' + r);
 								setTimeout(function() {
 									console.log("r ::: "+r);
-									console.log("Seach file sent");
+									console.log("Chat file sent");
 									if(!r && r == '')
 										return;
-									return context.prepareSearchFileTransfer(r);
+									return context.prepareChatFileTransfer(r);
 								}, 0);
 							};
 
@@ -1470,7 +1469,7 @@ function requestHandlerAPI(){
 								app.toast("An error has occurred: " + error);
 							};
 		/**
-		 * @param String destination Upload destination Options: "profile", "event"
+		 * @param String destination Upload destination Options: "profile", "chat"
 		 * @param String source Source to get media file from Options: "camera", "gallery"
 		 * @return void
 		 */
@@ -1479,13 +1478,14 @@ function requestHandlerAPI(){
 			this.photoDestinationType = navigator.camera.DestinationType;
 			var sourcetype =  navigator.camera.PictureSourceType.PHOTOLIBRARY;
 			if(source == "camera") sourcetype =  navigator.camera.PictureSourceType.CAMERA;
+			console.log("Sourcetype ::: "+sourcetype);
 			if(destination == 'profile')
 				navigator.camera.getPicture(context.profileselect_win, context.fileselect_fail, { quality: 50,
 					destinationType: this.photoDestinationType.FILE_URI,
 					sourceType: sourcetype,
 					mediaType: navigator.camera.MediaType.ALLMEDIA  });
-			if(destination == 'search')
-				navigator.camera.getPicture(context.search_fileselect_win, context.fileselect_fail, { quality: 100,
+			if(destination == 'chat')
+				navigator.camera.getPicture(context.chat_fileselect_win, context.fileselect_fail, { quality: 50,
 						destinationType: this.photoDestinationType.FILE_URI,
 						sourceType: sourcetype,
 						mediaType: navigator.camera.MediaType.ALLMEDIA  });

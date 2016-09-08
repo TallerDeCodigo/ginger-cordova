@@ -292,11 +292,19 @@ input[type=checkbox]:not(old):checked + span {background-position: 0 -29px;}
 
 textarea.short-descrip{height: 90px;background:transparent;}
 
+body.iosm #container.chat_container{}
+.chat_container .content.list-group{}
+.chat_container .{}
+.chat_stage{display: none; position: absolute; z-index: 9; top: -70px; left: 0; background-color: #eae7e7;}
+.chat_stage.visible{display: block; background-color: #cac6c6d9; position: absolute; bottom: 43px; z-index: 9;}
+.chat_stage .chat-img{ position: relative; width: auto; height: 60px; float: right;}
+
+
 /*new*/
 
 .foot-chat {position:fixed;background:#f5f1f0;width:100%;bottom:0px;padding:6px 70px 2px 40px;border-top:1px solid #CCC;}
 .foot-chat a {position:absolute;}
-.attach {left:10px;bottom:4px;}
+.attach {left:10px;bottom:4px; display: block;}
 .attach img {width:22px;height:auto;}
 input.send {position:absolute;border-style:none; outline:none;background:none;right:4px;bottom:5px;height:27px;width:61px;line-height:27px;font-weight:700;}
 
