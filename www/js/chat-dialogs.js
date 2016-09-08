@@ -82,12 +82,12 @@ function retrieveChatDialogs() {
 				//
 				$("#load-img").change(function(){
 					var inputFile = $("input[type=file]")[0].files[0];
+					console.log(inputFile);
 					if (inputFile) {
 						$("#progress").show(0);
 						$(".input-group-btn_change_load").addClass("visibility_hidden");
 					}
-
-					triggerSendAttachments(inputFile);
+					app.triggerSendAttachments(inputFile);
 				});
 			});
 		}

@@ -1386,19 +1386,37 @@ function requestHandlerAPI(){
 		 */
 		this.prepareChatFileTransfer = function(fileURL, source){
 									app.showLoader();
-									this.chat_upload_params = 	{
-																	name: fileURL.substr(fileURL.lastIndexOf('/') + 1), 
-																	file: fileURL, 
-																	type: "image/jpeg", 
-																	public: false
-																};
+									// var myFSO 		= new ActiveXObject("Scripting.FileSystemObject");
+									// var thefile 	= myFSO.getFile(fileUrl);
+									// var size 		= thefile.size;
+									// console.log("size ::: "+size);
+									var xhr = new XMLHttpRequest();
+									xhr.open('GET', fileUrl, true);
+									xhr.onreadystatechange = function(){
+										console.log(xhr.getResponseHeader('Content-Length'));
+										if ( xhr.readyState == 4 ) {
+										    if ( xhr.status == 200 ) {
+										     	alert('Size in bytes: ' + xhr.getResponseHeader('Content-Length'));
+												this.chat_upload_params = 	{
+																				name: fileURL.substr(fileURL.lastIndexOf('/') + 1), 
+																				file: fileURL, 
+																				type: "image/jpeg", 
+																				size: 123213, 
+																				public: false
+																			};
+
+												// var image = {thumb: this.transfer_options.fileLocal};
+												console.log(JSON.stringify(this.chat_upload_params));
+												// $('#image_stage').addClass("visible").append("<img src='cdvfile://"+fileUrl+"' class='chat-img' >");
+												return this.initializeChatFileTransfer(this.chat_upload_params);
+												app.hideLoader();
+										    } else {
+										      alert('ERROR');
+										    }
+										}
+									};
+									xhr.send(null);
 									
-									// var image = {thumb: this.transfer_options.fileLocal};
-									console.log(JSON.stringify(this.chat_upload_params));
-									$('#image_stage').addClass("visible").append("<img src='"+fileUrl+"' class='chat-img' >");
-									console.log("prepareChatFileTransfer");
-									this.initializeChatFileTransfer(this.chat_upload_params);
-									app.hideLoader();
 								};
 
 		/*
@@ -1408,7 +1426,9 @@ function requestHandlerAPI(){
 		 * Dedalo approved
 		 */
 		this.initializeChatFileTransfer = function(params){
+			console.log("You make me laugh, shaddy man");
 			QB.content.createAndUpload(params, function(err, response){
+				console.log("Response :: "+JSON.stringify(response));
 			  if (err) {
 				console.log(err);
 			  } else {

@@ -169,11 +169,6 @@ $( function() {
 		/*nombre del coach en el header*/
 		$('h2.titulo').html(userLog.coach.nombre + " " + userLog.coach.apellido);
 
-		$('document').on('click', '.attach', function(e){
-			console.log("Attach???");
-			e.preventDefault();
-			return app.get_file_from_device("chat", "camera");
-		});
 		console.log('COACH ID: ' + uChatCoach);
 
 		uChatCoach = uChatCoach.split('-');

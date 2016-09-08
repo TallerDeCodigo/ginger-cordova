@@ -45,10 +45,11 @@ function buildMessageHTML(messageText, messageSenderId, messageDateSent, attachm
   console.log( localStorage.getItem('idSender') );
   console.log(sender);
   var messageHtml = '<div class="list-group-item" id="'+messageId+'" onclick="clickToAddMsg('+"'"+messageId+"'"+')">'+
-					'<div class="'+ sender +'">' +
-					'<p>' + messageTextHtml + '</p>'+
-					'</div>' + 
-					'</div>';
+						'<div class="'+ sender +'">' +
+						'<p>' + messageTextHtml + '</p>'+
+						'</div>' + 
+					'</div>'+
+					'<div class="clearfix"></div>';
   return messageHtml;
 }
 

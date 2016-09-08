@@ -263,8 +263,7 @@
 			window.location.assign(link);
 			return;
 		},
-		get_file_from_device: function(destination, source)
-		{
+		get_file_from_device: function(destination, source) {
 			apiRH.getFileFromDevice(destination, source);		
 		},
 		triggerSendAttachments: function(inputFile) {
@@ -274,14 +273,13 @@
 		    if (err) {
 		      console.log(err);
 		    } else {
+		    	$('#image_stage').addClass("visible").append("<img src='cdvfile://"+inputFile+"' class='chat-img' >");
+			    $("#progress").fadeOut(400, function() {
+			        $(".input-group-btn_change_load").removeClass("visibility_hidden");
+			    });
+		      	var uploadedFile = response;
 
-		      $("#progress").fadeOut(400, function() {
-		        $(".input-group-btn_change_load").removeClass("visibility_hidden");
-		      });
-
-		      var uploadedFile = response;
-
-		      sendMessage("[attachment]", uploadedFile.id);
+		      	sendMessage("[attachment]", uploadedFile.id);
 
 		      $("input[type=file]").val('');
 		    }
