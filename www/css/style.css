@@ -93,7 +93,7 @@ pre {font-family:'Kohi';font-weight:300;}
     -webkit-user-select: none; 
 }*/
 .openkeyboard .htrans{position: absolute; top: 0;}
-.openkeyboard .hwhite2{position: fixed; top: 0;}
+.openkeyboard .hwhite2{position: absolute!important;}
 .openkeyboard .escribir.foot-chat{position: absolute;}
 .openkeyboard .chat_container{}
 
