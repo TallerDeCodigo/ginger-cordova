@@ -16,29 +16,7 @@ function buildMessageHTML(messageText, messageSenderId, messageDateSent, attachm
 		messageTextHtml = messageAttach;
 	} else if (isMessageSticker) {
 		messageTextHtml = '<div class="message-sticker-container"></div>';
-
-		// stickerpipe.parseStickerFromText(messageText, function(sticker, isAsync) {
-		// 	if (isAsync) {
-		// 		$('#' + messageId + ' .message-sticker-container').html(sticker.html);
-		// 	} else {
-		// 		messageTextHtml = sticker.html;
-		// 	}
-		// });
 	}
-
-	// var messageHtml =
-		// 	'<div class="list-group-item" id="'+messageId+'" onclick="clickToAddMsg('+"'"+messageId+"'"+')">'+
-		// 		'<time datetime="'+messageDateSent+ '" class="pull-right">'
-		// 			+jQuery.timeago(messageDateSent)+
-		// 		'</time>'+
-
-		// 		'<h4 class="list-group-item-heading">'+messageSenderId+'</h4>'+
-		// 		'<p class="list-group-item-text">'+
-		// 			messageTextHtml +
-		// 		'</p>'
-		// 		+delivered+read+
-		// 	'</div>';
-
 
   var sender = (localStorage.getItem('idSender') == messageSenderId) ? 'outgoing' : 'incoming';  
   console.log('Mensaje ID SENDER: ' + messageSenderId);

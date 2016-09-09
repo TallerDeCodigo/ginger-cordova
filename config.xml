@@ -24,6 +24,7 @@
     <access origin="https://*.googleapis.com" />
     <access origin="https://*.gstatic.com" />
     <access origin="http://ginger-admin.cloudapp.net" />
+    <access origin="http://api.quickblox.com/blobs/*" />
     
     <platform name="android">
         <allow-intent href="market:*" />    
@@ -36,11 +37,12 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <allow-intent href="https://gingerservice.azure-mobile.net/*" />
-        <allow-intent href="https://sketchfab.com/models/*" />
+        <allow-intent href="http://api.quickblox.com/blobs/*" />
         <access origin="https://sketchfab.com/models/*" />
         <allow-navigation href="https://sketchfab.com/models/*" />
         <allow-navigation href="https://gingerservice.azure-mobile.net/*" />
         <allow-navigation href="*://*.googleapis.com/*"/>
+        <allow-navigation href="http://api.quickblox.com/blobs/*" />
         
     </platform>
 

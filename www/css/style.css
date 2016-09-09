@@ -92,6 +92,10 @@ pre {font-family:'Kohi';font-weight:300;}
     -webkit-touch-callout: none;
     -webkit-user-select: none; 
 }*/
+.openkeyboard .htrans{position: absolute; top: 0;}
+.openkeyboard .hwhite2{position: fixed; top: 0;}
+.openkeyboard .escribir.foot-chat{position: absolute;}
+.openkeyboard .chat_container{}
 
 h2 {margin:10px 0px 0px;font-weight:100;font-size:140%;}
 h4 {margin:10px 0px 12px;font-weight:700;font-size:130%;color:#333;}
@@ -293,7 +297,7 @@ input[type=checkbox]:not(old):checked + span {background-position: 0 -29px;}
 textarea.short-descrip{height: 90px;background:transparent;}
 
 body.iosm #container.chat_container{}
-.chat_container .content.list-group{ padding-bottom: 7rem; position: relative; z-index: 5;}
+.chat_container .content.list-group{ padding-bottom: 7rem; position: relative; z-index: 5; min-height: 80vh;}
 .chat_container{}
 .chat_stage{display: none; position: absolute; z-index: 9; top: -70px; left: 0; background-color: #eae7e7;}
 .chat_stage.visible{display: block; background-color: #cac6c6d9; position: absolute; bottom: 43px; z-index: 9;}

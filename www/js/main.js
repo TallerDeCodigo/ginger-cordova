@@ -573,55 +573,104 @@
 	LOGIN WITHOUT FACEBOOK
 							*/
 
-	if($('#login_form').length){
+		if($('#login_form').length){
 
-		$('#login_form').validate({
-			rules:{
-				mail:{
-					required:true,
-					email:true
+			$('#login_form').validate({
+				rules:{
+					mail:{
+						required:true,
+						email:true
+					},
+					pass:"required"
 				},
-				pass:"required"
-			},
-			messages:{
-				mail:{
-					required:"Debes proporcionar un correo",
-					email:"Proporciona un correo válido"
+				messages:{
+					mail:{
+						required:"Debes proporcionar un correo",
+						email:"Proporciona un correo válido"
+					},
+					pass:"Este campo es requerido para acceder a tu cuenta"
 				},
-				pass:"Este campo es requerido para acceder a tu cuenta"
-			},
-			submitHandler:function(){
+				submitHandler:function(){
 
-				console.log('login sin facebook');
+					console.log('login sin facebook');
 
-				var data_login	= app.getFormData("#login_form");
+					var data_login	= app.getFormData("#login_form");
 
-				console.log(data_login.mail);
+					console.log(data_login.mail);
 
-				data_login.pass = $('#pass').val();
-				var responsedata = apiRH.loginNative(data_login);
-			  	console.log("RESPUESTA: " + responsedata);
+					data_login.pass = $('#pass').val();
+					var responsedata = apiRH.loginNative(data_login);
+				  	console.log("RESPUESTA: " + responsedata);
 
-				 if(responsedata){
-					
-					localStorage.setItem('user', JSON.stringify(responsedata));
+					 if(responsedata){
+						
+						localStorage.setItem('user', JSON.stringify(responsedata));
 
-					var user = JSON.parse(localStorage.getItem('user'));
+						var user = JSON.parse(localStorage.getItem('user'));
 
-					console.log('USER: ' + user.customerId);
+						console.log('USER: ' + user.customerId);
 
-					if(user.customerId !== undefined)
-				 		window.location.assign('dieta.html');
-				 	else
-				 		window.location.assign('feed.html');
-				 	
-				 	return;
-				}else{
-					app.toast('Error en la combinación de usuario / contraseña, por favor intenta de nuevo.');
+						if(user.customerId !== undefined)
+					 		window.location.assign('dieta.html');
+					 	else
+					 		window.location.assign('feed.html');
+					 	
+					 	return;
+					}else{
+						app.toast('Error en la combinación de usuario / contraseña, por favor intenta de nuevo.');
+					}
 				}
+			}); //END VALIDATE
+		}
+
+		//-----------------------------
+		//
+		// Keyboard events for iOS
+		//
+		//-----------------------------
+		console.log("Initializing events");
+		var initialViewHeight = document.documentElement.clientHeight;
+
+		var fixWithKeyboard = function(){
+
+			Keyboard.disableScrollingInShrinkView(false);
+			Keyboard.shrinkView(false);
+			$(window).resize();
+			$(document).resize();
+			$('body').addClass("openkeyboard");
+			if($('#container').hasClass("chat")){
+				console.log("container has chat");
+				// $('#container').addClass('conteclado');
+				// $('#container').css('height',document.documentElement.clientHeight+"px");
+				var calculate = document.documentElement.clientHeight-43;
+				console.log(calculate);
+				// $('#mensaje-chat').focus();
+				// $('#container').scrollTop($('#container').prop("scrollHeight"));
+				// $('body').scrollTop(0);
+				// $('#messages-list').trigger("click");
+				// $('.escribir').css('top',calculate+"px");
 			}
-		}); //END VALIDATE
-	}
+		}
+
+		window.openKeyboard = false;
+
+		/* Keyboard shown event */
+		window.addEventListener('keyboardDidShow', function () {
+			console.log('keyboard did show');
+			// console.log(e));
+			window.openKeyboard = true;
+			return fixWithKeyboard();
+		});
+
+		/* Keyboard hidden event */
+		window.addEventListener('keyboardDidHide', function () {
+			console.log('keyboard did hide');
+			window.openKeyboard = false;
+			$('#container').removeClass('conteclado');
+			$('body').removeClass("openkeyboard");
+			$('#container').css('height', document.documentElement.clientHeight+"px");
+			$('.escribir').css('top',"initial");
+		});
 
 
 		//-----------------------------
@@ -646,42 +695,6 @@
 
 				}
 		}); //END VALIDATE
-		
-		var initialViewHeight = document.documentElement.clientHeight;
-
-		var fixWithKeyboard = function(){
-
-			Keyboard.disableScrollingInShrinkView(false);
-			Keyboard.shrinkView(true);
-			$(window).resize();
-			$(document).resize();
-			// $('#container').addClass('conteclado');
-			// $('#container').css('height',document.documentElement.clientHeight+"px");
-			// var calculate = document.documentElement.clientHeight-43;
-			// $('#mensaje-chat').focus();
-			// $('#container').scrollTop($('#container').prop("scrollHeight"));
-			// $('body').scrollTop(0);
-			// $('#messages-list').trigger("click");
-			// $('.escribir').css('top',calculate+"px");
-		}
-
-		window.openKeyboard = false;
-
-		/* Keyboard shown event */
-		window.addEventListener('keyboardDidShow', function () {
-			console.log('keyboard did show');
-			window.openKeyboard = true;
-			return fixWithKeyboard();
-		});
-
-		/* Keyboard hidden event */
-		window.addEventListener('keyboardDidHide', function () {
-			console.log('keyboard did hide');
-			window.openKeyboard = false;
-			$('#container').removeClass('conteclado');
-			$('#container').css('height', document.documentElement.clientHeight+"px");
-			$('.escribir').css('top',"initial");
-		});
 
 
 
@@ -721,12 +734,12 @@
 
 		   		tokenParams = {
 		   		  "card": {
-		   		    "number": t_card,
-		   		    "name": t_nombre,
-		   		    "exp_year": t_ano,
-		   		    "exp_month": t_mes,
-		   		    "cvc": t_cvc
-		   		  }
+			   		    "number"	: t_card,
+			   		    "name"		: t_nombre,
+			   		    "exp_year"	: t_ano,
+			   		    "exp_month"	: t_mes,
+			   		    "cvc"		: t_cvc
+			   		  }
 		   		};
 
 		   		successResponseHandler = function(token) 
@@ -772,6 +785,7 @@
 
 		   		Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
 		});//endCLICK
+
 
 		
 	});

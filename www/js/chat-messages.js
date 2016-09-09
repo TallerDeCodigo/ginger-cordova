@@ -153,6 +153,10 @@ function retrieveChatMessages(dialog, beforeDateSent){
           if (i > 5) {$('#messages-list').scrollTop($('#messages-list').prop('scrollHeight'));}
         });
       }
+      setTimeout(function(){
+        app.hideLoader();
+        $('body').scrollTop($('#messages-list').prop('scrollHeight'));
+      }, 2400);
     }else{
       console.log(err);
     }
