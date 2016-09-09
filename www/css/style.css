@@ -88,10 +88,10 @@ input, textarea {font-family:'Kohi';font-weight:100;-webkit-appearance:none;bord
 pre {font-family:'Kohi';font-weight:300;}
 ::-webkit-scrollbar {display:none;}
 /* Disable selection/copy in UIWebView */
-/**:not(input, textarea) {
+.page.peso {
     -webkit-touch-callout: none;
     -webkit-user-select: none; 
-}*/
+}
 .openkeyboard .htrans{position: absolute; top: 0;}
 .openkeyboard .hwhite2{position: absolute!important;}
 .openkeyboard .escribir.foot-chat{position: absolute;}

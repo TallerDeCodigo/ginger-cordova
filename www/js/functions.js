@@ -1508,7 +1508,7 @@ $(window).load(function(){
 			        $("#estatura-up").parent().parent().find('input').val(estatura.toFixed(2));
 			        $('input[name="estatura"]').attr("value", estatura);
 			        flag = false;
-			    }, 120);
+			    }, 124);
 			// }
 		    return false;
 		});
@@ -1529,7 +1529,7 @@ $(window).load(function(){
 			        $("#estatura-dw").parent().parent().find('input').val(estatura.toFixed(2));
 			        $('input[name="estatura"]').attr("value", estatura);
 			        flag_down = false;
-			    }, 120);
+			    }, 124);
 			// }
 		    return false;
 		});
@@ -1552,7 +1552,7 @@ $(window).load(function(){
 					peso=peso+1;
 		        	$("#peso-up").parent().parent().find('input').val(peso.toFixed(0));
 				}
-		    }, 120);
+		    }, 124);
 		    return false;
 		});
 
@@ -1572,7 +1572,7 @@ $(window).load(function(){
 					peso=peso-1;
 					$("#peso-dw").parent().parent().find('input').val(peso.toFixed(0));
 				}
-		    }, 120);
+		    }, 124);
 		    return false;
 		});
 
@@ -1594,7 +1594,7 @@ $(window).load(function(){
 					ideal=ideal+1;
 		        	$("#ideal-up").parent().parent().find('input').val(ideal.toFixed(0));
 				} 
-		    }, 100);
+		    }, 124);
 		    return false;
 		});
 
@@ -1614,7 +1614,7 @@ $(window).load(function(){
 					ideal=ideal-1;
 					$("#ideal-dw").parent().parent().find('input').val(ideal.toFixed(0));
 				}
-		    }, 100);
+		    }, 124);
 		    return false;
 		});
 
@@ -1636,7 +1636,7 @@ $(window).load(function(){
 
 		        	$('.vaso p span').html(agua.toFixed(2));
 		        	$('input[name="litros"]').attr("value", agua);
-			    }, 100);
+			    }, 124);
 			    return false;
 			});
 
@@ -1653,7 +1653,7 @@ $(window).load(function(){
 			        	$('.vaso p span').html(agua.toFixed(1));
 			        	$('input[name="litros"]').attr("value", agua);
 					}
-			    }, 100);
+			    }, 124);
 			    return false;
 			});
 
@@ -1728,7 +1728,7 @@ $(window).load(function(){
 			        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(0));
 			        	$('input[name="track_peso"]').attr('value', r_peso);
 					}
-			    }, 100);
+			    }, 124);
 			    return false;
 			});
 
@@ -1751,7 +1751,7 @@ $(window).load(function(){
 							$('input[name="track_peso"]').attr('value', r_peso);
 						}
 					}
-			    }, 100);
+			    }, 124);
 			    return false;
 			});
 
@@ -1867,7 +1867,7 @@ $(window).load(function(){
 
 			        // 0 - 8 estados de animo
 
-			    }, 150);
+			    }, 124);
 			    return false;
 			}); //END BIND TOUCH START
 
@@ -1922,7 +1922,7 @@ $(window).load(function(){
 			    	        break;
 	    	     	}
 
-			    }, 150);
+			    }, 124);
 			    return false;
 			});//END BIND TOUCH START DOS
 
