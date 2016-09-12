@@ -15,7 +15,7 @@
 		
 		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.runtime.min.js"></script>
 	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+	    <script src="js/bower_components/jquery-ui/jquery-ui.min.js"></script>
 	    <script src="js/jquery-touch.min.js"></script>
 	    
 	    <script type="text/javascript" src="js/api-sdk-1.0.js"></script>
@@ -538,18 +538,18 @@
 						    			<label for="nombre">Nombre (como aparece en tu tarjeta)</label>
 					    			</div>
 					    			<div class="form-label">
-					    				<input type="text" name="card" maxlength="16" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+					    				<input type="number" name="card" maxlength="16" placeholder="" onkeypress='return event.charCode >= 46 && event.charCode <= 57' pattern="[0-9]*">
 						    			<label for="card">Número de tarjeta</label>
 					    			</div>
 					    			<div class="form-label-2">
-					    				<input type="text" name="mes" maxlength="2" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+					    				<input type="text" name="mes" maxlength="2" placeholder="" onkeypress='return event.charCode >= 46 && event.charCode <= 57' pattern="[0-9]*">
 						    			<label for="mes">MM</label>
 						    			<span>/</span>
-						    			<input type="text" name="year" maxlength="2" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+						    			<input type="text" name="year" maxlength="2" placeholder="" onkeypress='return event.charCode >= 46 && event.charCode <= 57' pattern="[0-9]*">
 						    			<label for="year">YY</label>
 					    			</div>
 					    			<div class="form-label-2 segur">
-					    				<input type="text" name="cvc" maxlength="4" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+					    				<input type="text" name="cvc" maxlength="4" placeholder="" onkeypress='return event.charCode >= 46 && event.charCode <= 57' pattern="[0-9]*">
 						    			<label for="cvc">CVC</label>
 					    			</div>
 					    			<div class="form-label">

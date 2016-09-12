@@ -669,8 +669,6 @@ function requestHandlerAPI(){
 
 		this.makePatchRequest = function(endpoint, data){
 			
-			console.log(data.data); //llega a makerequest
-
 			sdk_app_context.showLoader();
 			var result = {};
 

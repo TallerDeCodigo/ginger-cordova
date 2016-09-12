@@ -10,11 +10,11 @@ $( function() {
 
 	window.fbAsyncInit = function() {
 	FB.init({
-	  	appId      : '239633319765955',
-	  	cookie     : true,  // enable cookies to allow the server to access 
-	                      // the session
-	  	xfbml      : true,  // parse social plugins on this page
-	  	version    : 'v2.7' // use graph api version 2.5
+		appId      : '239633319765955',
+		cookie     : true,  // enable cookies to allow the server to access 
+						  // the session
+		xfbml      : true,  // parse social plugins on this page
+		version    : 'v2.7' // use graph api version 2.5
 		});
 	}
 	/*
@@ -95,56 +95,56 @@ $( function() {
 		$('.enter').click(function () {
 
 			var  t_nombre   = $('input[name="nombre"]').val(); 
-	   		var  t_card 	= $('input[name="card"]').val(); 
-	   		var  t_mes  	= $('input[name="mes"]').val(); 
-	   		var  t_ano 		= $('input[name="year"]').val(); 
-	   		var  t_cvc 		= $('input[name="cvc"]').val(); 
-	   		var  t_mail 	= $('input[name="mail"]').val(); 
-	   		var  t_cupon 	= $('input[name="cupon"]').val(); 
-	   		var  t_terms 	= $('input[name="terms"]').val(); 
+			var  t_card 	= $('input[name="card"]').val(); 
+			var  t_mes  	= $('input[name="mes"]').val(); 
+			var  t_ano 		= $('input[name="year"]').val(); 
+			var  t_cvc 		= $('input[name="cvc"]').val(); 
+			var  t_mail 	= $('input[name="mail"]').val(); 
+			var  t_cupon 	= $('input[name="cupon"]').val(); 
+			var  t_terms 	= $('input[name="terms"]').val(); 
 
-	   		Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
-	   		
-	   		var errorResponseHandler, successResponseHandler, tokenParams;
+			Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
+			
+			var errorResponseHandler, successResponseHandler, tokenParams;
 
-	   		tokenParams = {
-	   		  "card": {
-	   		    "number": t_card,
-	   		    "name": t_nombre,
-	   		    "exp_year": t_ano,
-	   		    "exp_month": t_mes,
-	   		    "cvc": t_cvc
-	   		  }
-	   		};
+			tokenParams = {
+			  "card": {
+				"number": t_card,
+				"name": t_nombre,
+				"exp_year": t_ano,
+				"exp_month": t_mes,
+				"cvc": t_cvc
+			  }
+			};
 
-	   		successResponseHandler = function(token) 
-	   		{
-	   			var response = apiRH.changePayment(token.id);
-	   			// Funcion de mensaje de bienvenida
-	   			if(response){
-	   				
-	   				if(response)
-	   				{
-	   					alert('Los datos se han actualizado');
-	   				}
-	   				else
-	   					alert("Error al actualizar datos");
-	   			}else{
-	   				alert("Error al procesar tu pago");
-	   			}
-	   			return;
-	   		};
+			successResponseHandler = function(token) 
+			{
+				var response = apiRH.changePayment(token.id);
+				// Funcion de mensaje de bienvenida
+				if(response){
+					
+					if(response)
+					{
+						alert('Los datos se han actualizado');
+					}
+					else
+						alert("Error al actualizar datos");
+				}else{
+					alert("Error al procesar tu pago");
+				}
+				return;
+			};
 
-	   		/* Después de recibir un error */
+			/* Después de recibir un error */
 
-	   		errorResponseHandler = function(error) {
-	   		  return console.log(error.message);  //error de conectividad
-	   		  alert('Error al procesar tu pago' + error.message);
-	   		};
+			errorResponseHandler = function(error) {
+			  return console.log(error.message);  //error de conectividad
+			  alert('Error al procesar tu pago' + error.message);
+			};
 
-	   		/* Tokenizar una tarjeta en Conekta */
+			/* Tokenizar una tarjeta en Conekta */
 
-	   		Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
+			Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
 			
 		});
 			
@@ -207,7 +207,7 @@ $( function() {
 		gridag = ($('.age .drag-parent').width()-30)/rango_age;
 	}
 
-    $('#age').draggable(
+	$('#age').draggable(
 	{ 
 	containment:"parent",axis:"x",grid:[gridag,gridag],drag:function(){
 		var percent = $('.age .drag-parent').width()-30;
@@ -219,7 +219,7 @@ $( function() {
 	});
 
 	/*DPW*/
-  	minval_eje = 0; 
+	minval_eje = 0; 
 	var maxval_eje = 7;
 	var rango_eje = maxval_eje-minval_eje;
 	if ($('.pagina').hasClass('aboutyou')) {
@@ -227,143 +227,144 @@ $( function() {
 	} else {
 		gridej = ($('.exercise .drag-parent').width()-30)/rango_eje;
 	}
-    $('#ejercicio').draggable(
-    	{ 
-    		containment:"parent",axis:"x",grid:[gridej,gridej],drag:function()
-    	{
-		    	var percent = $('.exercise .drag-parent').width()-30;
-		    	var donde = Math.round(((($('#ejercicio').position().left)*rango_eje)/percent)+minval_eje);
-		    	$("#ejercicio-filler").css("width",$('#ejercicio').position().left+20);
-		    	$('#ejercicio-dato').html(donde);
-		    	$('#days_per_week').attr("value", donde);
-      		}
-  		});
+	$('#ejercicio').draggable(
+		{ 
+			containment:"parent",axis:"x",grid:[gridej,gridej],drag:function()
+		{
+				var percent = $('.exercise .drag-parent').width()-30;
+				var donde = Math.round(((($('#ejercicio').position().left)*rango_eje)/percent)+minval_eje);
+				$("#ejercicio-filler").css("width",$('#ejercicio').position().left+20);
+				$('#ejercicio-dato').html(donde);
+				$('#days_per_week').attr("value", donde);
+				console.log(donde);
+			}
+		});
 
 
 	/*MEDIDAS*/
-  	var minval_med = 20; 
+	var minval_med = 20; 
 	var maxval_med = 250;
 	var rango_med = maxval_med-minval_med;
-  	var gridme = ($('.medida .drag-parent').width()-30)/rango_med;
-    $('#medida').draggable({ 
-    		containment:"parent",axis:"x",grid:[gridme,gridme],drag:function(){
-		    	var percent = $('.medida .drag-parent').width()-30;
-		    	var donde = Math.round(((($('#medida').position().left)*rango_med)/percent)+minval_med);
-		    	$("#medida-filler").css("width",$('#medida').position().left+20);
-		    	$('#medida-dato-span').html(donde);
-		    	$('#medida-dato').attr('value',donde);
-      		}
-  	});
+	var gridme = ($('.medida .drag-parent').width()-30)/rango_med;
+	$('#medida').draggable({ 
+			containment:"parent",axis:"x",grid:[gridme,gridme],drag:function(){
+				var percent = $('.medida .drag-parent').width()-30;
+				var donde = Math.round(((($('#medida').position().left)*rango_med)/percent)+minval_med);
+				$("#medida-filler").css("width",$('#medida').position().left+20);
+				$('#medida-dato-span').html(donde);
+				$('#medida-dato').attr('value',donde);
+			}
+	});
 
 
-    if( $('body').hasClass('measures') ){
-	  	$('#add_medidas').on('click', function(){
+	if( $('body').hasClass('measures') ){
+		$('#add_medidas').on('click', function(){
 			/* localStorage MEDIDAS / MEASURED AREA */
-	  		
-	  		localStorage.setItem( 'medidas', $('#medida-dato').val() );
-	  		localStorage.setItem('measured_area', $('#measured_area').val() )
+			
+			localStorage.setItem( 'medidas', $('#medida-dato').val() );
+			localStorage.setItem('measured_area', $('#measured_area').val() )
 
-	  		if(!$('.alert_tracking').is(':visible')){
-	  			$('.alert_tracking').show();
-	  			setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
-	  		} else {
-	  			$('.alert_tracking').removeClass('active');
-	  			setTimeout(function() {$('.alert_tracking').hide();}, 800);
-	  		}
-	  		$('#container').toggleClass('blurred');
-	  		//$('a.centro img').toggleClass('onn');
-	  	});
-	  		$('#add_tracking').click(function(){
+			if(!$('.alert_tracking').is(':visible')){
+				$('.alert_tracking').show();
+				setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+			} else {
+				$('.alert_tracking').removeClass('active');
+				setTimeout(function() {$('.alert_tracking').hide();}, 800);
+			}
+			$('#container').toggleClass('blurred');
+			//$('a.centro img').toggleClass('onn');
+		});
+			$('#add_tracking').click(function(){
 
-		  		var medidas = localStorage.getItem('medidas');
-		  		var area = localStorage.getItem('measured_area');
-	  			var responsedata = apiRH.tracking(area, medidas);
-	  			if(responsedata){
-	  				console.log(area+" "+medidas);
-	  				//window.location.assign('dieta.html');
-	  			}
-	  			$('.alert_tracking').hide();
-	  			$('#container').toggleClass('blurred');
-	  		});
-	  		$('#add_cancelar').click(function(){
-	  			$('.alert_tracking').hide();
-	  			$('#container').toggleClass('blurred');
-	  		});
-    }//end if body has class measures
+				var medidas = localStorage.getItem('medidas');
+				var area = localStorage.getItem('measured_area');
+				var responsedata = apiRH.tracking(area, medidas);
+				if(responsedata){
+					console.log(area+" "+medidas);
+					//window.location.assign('dieta.html');
+				}
+				$('.alert_tracking').hide();
+				$('#container').toggleClass('blurred');
+			});
+			$('#add_cancelar').click(function(){
+				$('.alert_tracking').hide();
+				$('#container').toggleClass('blurred');
+			});
+	}//end if body has class measures
 
 
 		/*HORAS MINUTOS*/
-  	var minval_hora = 0; 
+	var minval_hora = 0; 
 	var maxval_hora = 16;
 	var rango_hora = maxval_hora-minval_hora;
-  	var gridhr = ($('.horaeje .drag-parent').width()-30)/rango_hora;
-    $('#horaeje').draggable({ containment:"parent",axis:"x",grid:[gridhr,gridhr],drag:function(){
-    	var percent = $('.horaeje .drag-parent').width()-30;
-    	var donde = Math.round(((($('#horaeje').position().left)*rango_hora)/percent)+minval_hora);
-    	$("#horaeje-filler").css("width",$('#horaeje').position().left+20);
-    	var hora = (donde/4);
-    	hora = hora.toString().substr(0,1);
-    	var minutos = (donde/4)*60;
-    	if (minutos>179) {
-    		minutos = minutos-180;
-    	} else if (minutos>119) {
-    		minutos = minutos-120;
-    	} else if (minutos>59) {
-    		minutos = minutos-60;
-    	}
-    	if (minutos==0 || minutos==60) {
-    		minutos="00";
-    	}
-    	$('#horaeje-dato').html(hora+":"+minutos);
-    	$('#duracion').attr("value", hora+":"+minutos);
-      }
-  	});
+	var gridhr = ($('.horaeje .drag-parent').width()-30)/rango_hora;
+	$('#horaeje').draggable({ containment:"parent",axis:"x",grid:[gridhr,gridhr],drag:function(){
+		var percent = $('.horaeje .drag-parent').width()-30;
+		var donde = Math.round(((($('#horaeje').position().left)*rango_hora)/percent)+minval_hora);
+		$("#horaeje-filler").css("width",$('#horaeje').position().left+20);
+		var hora = (donde/4);
+		hora = hora.toString().substr(0,1);
+		var minutos = (donde/4)*60;
+		if (minutos>179) {
+			minutos = minutos-180;
+		} else if (minutos>119) {
+			minutos = minutos-120;
+		} else if (minutos>59) {
+			minutos = minutos-60;
+		}
+		if (minutos==0 || minutos==60) {
+			minutos="00";
+		}
+		$('#horaeje-dato').html(hora+":"+minutos);
+		$('#duracion').attr("value", hora+":"+minutos);
+	  }
+	});
 
-  	var minval_int = 0; 
+	var minval_int = 0; 
 	var maxval_int = 3;
 	var rango_int = maxval_int-minval_int;
-  	var gridin = ($('.inteje .drag-parent').width()-30)/rango_int;
-    $('#inteje').draggable({ containment:"parent",axis:"x",grid:[gridin,gridin],drag:function(){
-    	var percent = $('.inteje .drag-parent').width()-30;
-    	var donde = Math.round(((($('#inteje').position().left)*rango_int)/percent)+minval_int);
-    	$("#inteje-filler").css("width",$('#inteje').position().left+20);
-    	var text_int;
-    	switch (donde) {
-    	    case 0:
-    	        text_int = "baja";
-    	        break;
-    	    case 1:
-    	        text_int = "moderada";
-    	        break;
-    	    case 2:
-    	        text_int = "alta";
-    	        break;
-    	    case 3:
-    	        text_int = "extrema";
-    	        break;
-    	}
+	var gridin = ($('.inteje .drag-parent').width()-30)/rango_int;
+	$('#inteje').draggable({ containment:"parent",axis:"x",grid:[gridin,gridin],drag:function(){
+		var percent = $('.inteje .drag-parent').width()-30;
+		var donde = Math.round(((($('#inteje').position().left)*rango_int)/percent)+minval_int);
+		$("#inteje-filler").css("width",$('#inteje').position().left+20);
+		var text_int;
+		switch (donde) {
+			case 0:
+				text_int = "baja";
+				break;
+			case 1:
+				text_int = "moderada";
+				break;
+			case 2:
+				text_int = "alta";
+				break;
+			case 3:
+				text_int = "extrema";
+				break;
+		}
 
-    	$('#intensidad').attr('value',text_int);
+		$('#intensidad').attr('value',text_int);
 
-    	switch ($('#intensidad').val() ) {
-    	    case 'baja':
-    	        $('#intensidad').attr('value','0');
-    	        break;
-    	    case 'moderada':
-    	        $('#intensidad').attr('value','1');;
-    	        break;
-    	    case 'alta' :
-    	        $('#intensidad').attr('value','2');
-    	        break;
-    	    case 'extrema' :
-    	        $('#intensidad').attr('value','3');
-    	        break;
-    	}
-    	$('#inteje-dato').html(text_int);
-      }
-  	});
+		switch ($('#intensidad').val() ) {
+			case 'baja':
+				$('#intensidad').attr('value','0');
+				break;
+			case 'moderada':
+				$('#intensidad').attr('value','1');;
+				break;
+			case 'alta' :
+				$('#intensidad').attr('value','2');
+				break;
+			case 'extrema' :
+				$('#intensidad').attr('value','3');
+				break;
+		}
+		$('#inteje-dato').html(text_int);
+	  }
+	});
 
-  	$( ".accordion" ).accordion({collapsible:true,active:false,animate:300,heightStyle:"content"});
+	$( ".accordion" ).accordion({collapsible:true,active:false,animate:300,heightStyle:"content"});
 });//end function
 
 
@@ -829,12 +830,12 @@ $(window).on("load resize",function(){
 				 restricciones =  localStorage.getItem('restricciones');
 				 console.log('restricciones> '+restricciones);
 				 if(restricciones == null || restricciones === 'undefined'){
-				 	restricciones = [];
-				 	console.log("es vacio> " +typeof restricciones );
+					restricciones = [];
+					console.log("es vacio> " +typeof restricciones );
 				 }else{
-				 	restricciones = JSON.parse("["+restricciones+"]");
-				 	console.log(restricciones.length);
-				 	console.log(restricciones);
+					restricciones = JSON.parse("["+restricciones+"]");
+					console.log(restricciones.length);
+					console.log(restricciones);
 				 }
 
 			$('.re-option').click(function() {
@@ -913,7 +914,7 @@ $(window).on("load resize",function(){
 
 		/* SWIPE COACH */	
 
-	    var IMG_WIDTH = ancho*0.8125;
+		var IMG_WIDTH = ancho*0.8125;
 		var currentImg = 0;
 		var maxImages = tamano;
 		var speed = 500;
@@ -923,55 +924,55 @@ $(window).on("load resize",function(){
 		var swipeOptions = { triggerOnTouchEnd: true, swipeStatus: swipeStatus, allowPageScroll: "vertical", threshold: 75 };
 
 		$(function createSwipe () {
-		    imgs = $(".cslider");
-		    imgs.swipe(swipeOptions);
+			imgs = $(".cslider");
+			imgs.swipe(swipeOptions);
 		}); //end createSwipe
 
 		function swipeStatus(event, phase, direction, distance) {
-		    if (phase == "move" && (direction == "left" || direction == "right")) {
-		        var duration = 0;
+			if (phase == "move" && (direction == "left" || direction == "right")) {
+				var duration = 0;
 
 
-		        if (direction == "left") {
-		            scrollImages((IMG_WIDTH * currentImg) + distance, duration);
-		            
-		        } else if (direction == "right") {
-		            scrollImages((IMG_WIDTH * currentImg) - distance, duration);
-		        }
+				if (direction == "left") {
+					scrollImages((IMG_WIDTH * currentImg) + distance, duration);
+					
+				} else if (direction == "right") {
+					scrollImages((IMG_WIDTH * currentImg) - distance, duration);
+				}
 
-		    } else if (phase == "cancel") {
-		        scrollImages(IMG_WIDTH * currentImg, speed);
-		    } else if (phase == "end") {
-		        if (direction == "right") {
-		            previousImage();
-		            $('#finish5').attr('coach', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('coach'));
-		            $('#finish5').attr('dieta_id', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('dieta_id'));
-		        } else if (direction == "left") {
-		            nextImage();
-		            $('#finish5').attr('coach', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('coach'));
-		            $('#finish5').attr('dieta_id', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('dieta_id'));
-		        }
-		    }
+			} else if (phase == "cancel") {
+				scrollImages(IMG_WIDTH * currentImg, speed);
+			} else if (phase == "end") {
+				if (direction == "right") {
+					previousImage();
+					$('#finish5').attr('coach', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('coach'));
+					$('#finish5').attr('dieta_id', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('dieta_id'));
+				} else if (direction == "left") {
+					nextImage();
+					$('#finish5').attr('coach', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('coach'));
+					$('#finish5').attr('dieta_id', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('dieta_id'));
+				}
+			}
 		} //end swipeStatus
 
 		function previousImage() {
-		    currentImg = Math.max(currentImg - 1, 0);
-		    scrollImages(IMG_WIDTH * currentImg, speed);
+			currentImg = Math.max(currentImg - 1, 0);
+			scrollImages(IMG_WIDTH * currentImg, speed);
 		}//end previousImage
 
 		function nextImage() {
-		    currentImg = Math.min(currentImg + 1, maxImages - 1);
-		    scrollImages(IMG_WIDTH * currentImg, speed);
+			currentImg = Math.min(currentImg + 1, maxImages - 1);
+			scrollImages(IMG_WIDTH * currentImg, speed);
 		}//end nextImage
 
 		function scrollImages(distance, duration) {
-		    imgs.css("transition-duration", (duration / 1000).toFixed(1) + "s");
-		    var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
-		    imgs.css("transform", "translate(" + value + "px,0)");
+			imgs.css("transition-duration", (duration / 1000).toFixed(1) + "s");
+			var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
+			imgs.css("transform", "translate(" + value + "px,0)");
 		}//end scrollImages
 
 		$('#finish5').attr('coach', $('.slide-coach:nth-of-type(1)').attr('coach'));
-        $('#finish5').attr('dieta_id', $('.slide-coach:nth-of-type(1)').attr('dieta_id'));
+		$('#finish5').attr('dieta_id', $('.slide-coach:nth-of-type(1)').attr('dieta_id'));
 });// end Window on Load Resize swipe / dietas 
 
 $(window).load(function(){
@@ -1010,31 +1011,31 @@ $(window).load(function(){
 				$.each( value, function( key, value ) {
 					// console.log(key+":::"+value);
 					if (key=="_id") {
-					 	losplatos[i][0]=value;
+						losplatos[i][0]=value;
 					}
 					if (key=="descripcion") {
-					 	losplatos[i][1]=value;
+						losplatos[i][1]=value;
 					}
 					if (key=="receta") {
-					 	losplatos[i][2]=value;
+						losplatos[i][2]=value;
 					}
 					if (key=="ingredientes") {
 						console.log(' --- ingredientes --- ' + key + ' vlue ' + value);	 	
-					 	var ing = '';
-					 	if(value.length > 0){
+						var ing = '';
+						if(value.length > 0){
 
-						 	$.each(value, function(key, value){
-						 		if(value._id != null){
-						 			ing = ing + value._id.nombre;
-						 			console.log('fghfghfghfgh <<<<<<'+ value._id.nombre);	
-						 		}	
-						 	});
-					 	}else{
-					 		console.log('sin ingredientes');
-					 	}
+							$.each(value, function(key, value){
+								if(value._id != null){
+									ing = ing + value._id.nombre;
+									console.log('fghfghfghfgh <<<<<<'+ value._id.nombre);	
+								}	
+							});
+						}else{
+							console.log('sin ingredientes');
+						}
 
-					 	losplatos[i][3]=ing;
-					 	console.log(losplatos[i][3]);
+						losplatos[i][3]=ing;
+						console.log(losplatos[i][3]);
 					}
 				});
 				i++;
@@ -1126,7 +1127,7 @@ $(window).load(function(){
 														$(masadentro+' p.ingredientes').html(value)
 
 													});
-												 	
+													
 												}else{
 													$(masadentro+' p.comentario').hide();
 												}
@@ -1175,9 +1176,9 @@ $(window).load(function(){
 
 
 	$('.platillo').each(function() {
-	    if ($(this).attr('data') === undefined) {
-	      $(this).remove();
-	    }
+		if ($(this).attr('data') === undefined) {
+		  $(this).remove();
+		}
 	});
 	
 	/** 	
@@ -1188,185 +1189,185 @@ $(window).load(function(){
 	
 	// OBTIENE EL NUMERO DE LA SEMANA EN LA QUE NOS ENCONTRAMOS 
 	Date.prototype.getWeek = function() {
-        var eneroUno = new Date(this.getFullYear(), 0, 1);
-        return Math.ceil((((this - eneroUno) / 86400000) + eneroUno.getDay() + 1) / 7);
-    }
+		var eneroUno = new Date(this.getFullYear(), 0, 1);
+		return Math.ceil((((this - eneroUno) / 86400000) + eneroUno.getDay() + 1) / 7);
+	}
 
-    //OBTIENE LA FECHA DE HOY EN FULL FORMAT
-    Date.prototype.hoy = function() {
-      var mm = this.getMonth() + 1; // getMonth() is zero-based
-      var dd = this.getDate();
+	//OBTIENE LA FECHA DE HOY EN FULL FORMAT
+	Date.prototype.hoy = function() {
+	  var mm = this.getMonth() + 1; // getMonth() is zero-based
+	  var dd = this.getDate();
 
-      return [this.getFullYear(), !mm[1] && '/' + '0', mm, !dd[1] && '/', dd].join('');
-    };
+	  return [this.getFullYear(), !mm[1] && '/' + '0', mm, !dd[1] && '/', dd].join('');
+	};
 
-    var fecha = new Date();
-    var weekNumber = (new Date()).getWeek();
-    var meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sept", "Oct", "Nov", "Dic"];
+	var fecha = new Date();
+	var weekNumber = (new Date()).getWeek();
+	var meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sept", "Oct", "Nov", "Dic"];
 	var dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado","Domingo"];
 
 	//console.log(weekNumber);
-  	var ano = fecha.getFullYear();
-  	var mes = meses[fecha.getMonth()];
-  	//console.log(fecha.hoy());
-  	mes = mes.slice(0,3);
+	var ano = fecha.getFullYear();
+	var mes = meses[fecha.getMonth()];
+	//console.log(fecha.hoy());
+	mes = mes.slice(0,3);
 	/*
 		IMPRIME EL MES Y EL ANO EN EL HEADER DE LA PANTALLA
 	*/
-    	$('#month').html(mes);
-    	$('#year').html(ano);
+		$('#month').html(mes);
+		$('#year').html(ano);
 
-    function getWeekDays(fromDate){
+	function getWeekDays(fromDate){
 		var sunday = new Date(fromDate.setDate(fromDate.getDate()-fromDate.getDay())),result = [new Date(sunday)];
-     	while (sunday.setDate(sunday.getDate()+1) && sunday.getDay()!==0) 
-     	{
-      		result.push(new Date(sunday));
-     	}
+		while (sunday.setDate(sunday.getDate()+1) && sunday.getDay()!==0) 
+		{
+			result.push(new Date(sunday));
+		}
 		return result;
-    }
+	}
 
-    var week = new Object();
-    var today = fecha.hoy().toString();
-    
-    var days = $('.day_of_week');
-    var dow = [];
-    var str;
-    var d = new Date();
-    var date_string;
-    
-    week = getWeekDays( new Date(today) );
+	var week = new Object();
+	var today = fecha.hoy().toString();
+	
+	var days = $('.day_of_week');
+	var dow = [];
+	var str;
+	var d = new Date();
+	var date_string;
+	
+	week = getWeekDays( new Date(today) );
 
-    //console.log("str> "+today);
-    var domingo;
+	//console.log("str> "+today);
+	var domingo;
 
-    for(var i=0; i<dias.length; i++){
-    	var masuno = i+1;
-    	date_string = week[i].toString();    	
-    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
-    	var dataf = new Date(date_string);
-    	var mes = "";
-    	var dia = "";
-    	if((dataf.getMonth()+1) < 10)
-    		mes = '0'+(dataf.getMonth()+1);
-    	else
-    		mes = (dataf.getMonth()+1);
+	for(var i=0; i<dias.length; i++){
+		var masuno = i+1;
+		date_string = week[i].toString();    	
+		$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
+		var dataf = new Date(date_string);
+		var mes = "";
+		var dia = "";
+		if((dataf.getMonth()+1) < 10)
+			mes = '0'+(dataf.getMonth()+1);
+		else
+			mes = (dataf.getMonth()+1);
 
-    	if((dataf.getDate()) < 10)
-    		dia = '0'+(dataf.getDate());
-    	else
-    		dia = (dataf.getDate());
+		if((dataf.getDate()) < 10)
+			dia = '0'+(dataf.getDate());
+		else
+			dia = (dataf.getDate());
 
-    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+mes+'-'+ dia);
+		$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+mes+'-'+ dia);
 
-    	// console.log(dia);
-    }
+		// console.log(dia);
+	}
 
    
 		var incremento = 168.25;
 		var decremento = 167.75;
 		var current_day;
 		var full_date;
-    	var left = fecha.hoy().substring(0,8);
+		var left = fecha.hoy().substring(0,8);
 
-	    current_day = new Date( + new Date().getTime() + 1 * 60 * 60 * 1000 );
-	    var dia_semana = current_day.getDay();
-	    dia_semana++;
-	    $('tr td.day_of_week:nth-of-type('+dia_semana+')').trigger('click');
+		current_day = new Date( + new Date().getTime() + 1 * 60 * 60 * 1000 );
+		var dia_semana = current_day.getDay();
+		dia_semana++;
+		$('tr td.day_of_week:nth-of-type('+dia_semana+')').trigger('click');
 
-	    current_day = fecha.hoy().substring(8);
-	    
-	    current_day = left + current_day;
-	    
+		current_day = fecha.hoy().substring(8);
+		
+		current_day = left + current_day;
+		
 
 		$(".nextweek").click(function(){
-	    	week = getWeekDays( new Date( current_day ) );
-	    	full_date = new Date( + new Date( current_day ).getTime() + incremento * 60 * 60 * 1000);
-	    	// console.log(full_date);
-	    	var month = full_date.getMonth();
-	    	
-	    	$('#month').html(meses[month] );
-	    	$('#year').html(full_date.getFullYear());
+			week = getWeekDays( new Date( current_day ) );
+			full_date = new Date( + new Date( current_day ).getTime() + incremento * 60 * 60 * 1000);
+			// console.log(full_date);
+			var month = full_date.getMonth();
+			
+			$('#month').html(meses[month] );
+			$('#year').html(full_date.getFullYear());
 
-	    	for(var i=0; i<dias.length; i++){
-	    		var masuno = i+1;
-	    		date_string = week[i].toString();
-	    		$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
-	    	}
-	    	
-	    	current_day = full_date;
-	    	//console.log("Full date > > "+full_date);
-	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
+			for(var i=0; i<dias.length; i++){
+				var masuno = i+1;
+				date_string = week[i].toString();
+				$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
+			}
+			
+			current_day = full_date;
+			//console.log("Full date > > "+full_date);
+			var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
 			for(var i=0; i<dias.length; i++){
 				
 				var nuevo = JSON.stringify(week2[i]);
 				// console.log("wee ::"+week2[i]);
 
-		    	dow[i] = nuevo.slice(9, 11);
+				dow[i] = nuevo.slice(9, 11);
 
-		    	var masuno = i+1;
-		    	//console.log(dow[i]);
-		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
-		    	var dataf = new Date(week2[i]);
+				var masuno = i+1;
+				//console.log(dow[i]);
+				$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
+				var dataf = new Date(week2[i]);
 
-		    	var mes = "";
-		    	var dia = "";
-		    	if((dataf.getMonth()+1) < 10)
-		    		mes = '0'+(dataf.getMonth()+1);
-		    	else
-		    		mes = (dataf.getMonth()+1);
+				var mes = "";
+				var dia = "";
+				if((dataf.getMonth()+1) < 10)
+					mes = '0'+(dataf.getMonth()+1);
+				else
+					mes = (dataf.getMonth()+1);
 
 
-		    	if((dataf.getDate()) < 10)
-		    		dia = '0'+(dataf.getDate());
-		    	else
-		    		dia = (dataf.getDate());
+				if((dataf.getDate()) < 10)
+					dia = '0'+(dataf.getDate());
+				else
+					dia = (dataf.getDate());
 
-		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+mes+'-'+ dia );
-		    }
+				$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+mes+'-'+ dia );
+			}
 		});
 
 		$(".lastweek").click(function(){
 			week = getWeekDays( new Date( current_day ) );
-	    	full_date = new Date( + new Date( current_day ).getTime() - decremento * 60 * 60 * 1000);
-	    	// console.log(full_date);
-	    	var month = full_date.getMonth();
-	    	
-	    	$('#month').html(meses[month] );
-	    	$('#year').html(full_date.getFullYear());
+			full_date = new Date( + new Date( current_day ).getTime() - decremento * 60 * 60 * 1000);
+			// console.log(full_date);
+			var month = full_date.getMonth();
+			
+			$('#month').html(meses[month] );
+			$('#year').html(full_date.getFullYear());
 
-	    	for(var i=0; i<dias.length; i++){
-	    		var masuno = i+1;
-	    		date_string = week[i].toString();
-	    		$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
-	    	}
-	    	
-	    	current_day = full_date;
-	    	//console.log("Full date > > "+full_date);
-	    	var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
+			for(var i=0; i<dias.length; i++){
+				var masuno = i+1;
+				date_string = week[i].toString();
+				$('tr td.day_of_week:nth-of-type('+masuno+') span').html(date_string.substring(8, 11));
+			}
+			
+			current_day = full_date;
+			//console.log("Full date > > "+full_date);
+			var week2 = getWeekDays( new Date( "'" + full_date + "'" ) );
 			for(var i=0; i<dias.length; i++){
 				
 				var nuevo = JSON.stringify(week2[i]);
 				// console.log("wee ::"+week2[i]);
 
-		    	dow[i] = nuevo.slice(9, 11);
+				dow[i] = nuevo.slice(9, 11);
 
-		    	var masuno = i+1;
-		    	//console.log(dow[i]);
-		    	$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
-		    	var dataf = new Date(week2[i]);
-		    	var mes = "";
-		    	var dia = "";
-		    	if((dataf.getMonth()+1) < 10)
-		    		mes = '0'+(dataf.getMonth()+1);
-		    	else
-    				mes = (dataf.getMonth()+1);
+				var masuno = i+1;
+				//console.log(dow[i]);
+				$('tr td.day_of_week:nth-of-type('+masuno+') span').html(dow[i]);
+				var dataf = new Date(week2[i]);
+				var mes = "";
+				var dia = "";
+				if((dataf.getMonth()+1) < 10)
+					mes = '0'+(dataf.getMonth()+1);
+				else
+					mes = (dataf.getMonth()+1);
 
-		    	if((dataf.getDate()) < 10)
-		    		dia = '0'+(dataf.getDate());
-		    	else
-		    		dia = (dataf.getDate());
-		    	$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+mes+'-'+dia);
-		    }
+				if((dataf.getDate()) < 10)
+					dia = '0'+(dataf.getDate());
+				else
+					dia = (dataf.getDate());
+				$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+mes+'-'+dia);
+			}
 		});
 
 		//});//end date ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1387,10 +1388,10 @@ $(window).load(function(){
 			$(this).addClass('active');
 			$(".sector-1").animate({opacity:"0"}, 200);
 			setTimeout(function() {
-        		$(".sector-1").hide();
-        		$(".genre").show();
-        		$(".genre").animate({opacity:"1"}, 200);
-            }, 210);
+				$(".sector-1").hide();
+				$(".genre").show();
+				$(".genre").animate({opacity:"1"}, 200);
+			}, 210);
 		});
 
 		$(".age-bt").click(function(){
@@ -1399,10 +1400,10 @@ $(window).load(function(){
 			$(this).addClass('active');
 			$(".sector-1").animate({opacity:"0"}, 200);
 			setTimeout(function() {
-        		$(".sector-1").hide();
-        		$(".age").show();
-        		$(".age").animate({opacity:"1"}, 200);
-            }, 210);
+				$(".sector-1").hide();
+				$(".age").show();
+				$(".age").animate({opacity:"1"}, 200);
+			}, 210);
 		});
 
 		$(".zip-bt").click(function(){
@@ -1410,11 +1411,11 @@ $(window).load(function(){
 			$(this).addClass('active');
 			$(".sector-1").animate({opacity:"0"}, 200);
 			setTimeout(function() {
-        		$(".sector-1").hide();
-        		$(".zip").show();
-        		$(".zip").animate({opacity:"1"}, 200);
-        		$(".zip input").focus();
-            }, 210);
+				$(".sector-1").hide();
+				$(".zip").show();
+				$(".zip").animate({opacity:"1"}, 200);
+				$(".zip input").focus();
+			}, 210);
 		});
 
 		$(".mido-bt").click(function(){
@@ -1422,10 +1423,10 @@ $(window).load(function(){
 			$(this).addClass('active');
 			$(".sector-2").animate({opacity:"0"}, 200);
 			setTimeout(function() {
-        		$(".sector-2").hide();
-        		$(".mido").show();
-        		$(".mido").animate({opacity:"1"}, 200);
-            }, 210);
+				$(".sector-2").hide();
+				$(".mido").show();
+				$(".mido").animate({opacity:"1"}, 200);
+			}, 210);
 		});
 
 		$(".peso-bt").click(function(){
@@ -1433,10 +1434,10 @@ $(window).load(function(){
 			$(this).addClass('active');
 			$(".sector-2").animate({opacity:"0"}, 200);
 			setTimeout(function() {
-        		$(".sector-2").hide();
-        		$(".peso").show();
-        		$(".peso").animate({opacity:"1"}, 200);
-            }, 210);
+				$(".sector-2").hide();
+				$(".peso").show();
+				$(".peso").animate({opacity:"1"}, 200);
+			}, 210);
 		});
 
 		$(".ideal-bt").click(function(){
@@ -1444,10 +1445,10 @@ $(window).load(function(){
 			$(this).addClass('active');
 			$(".sector-2").animate({opacity:"0"}, 200);
 			setTimeout(function() {
-        		$(".sector-2").hide();
-        		$(".ideal").show();
-        		$(".ideal").animate({opacity:"1"}, 200);
-            }, 210);
+				$(".sector-2").hide();
+				$(".ideal").show();
+				$(".ideal").animate({opacity:"1"}, 200);
+			}, 210);
 		});
 
 			/*
@@ -1489,139 +1490,156 @@ $(window).load(function(){
 				*/
 		
 
-		var timeout;
-		var estatura;
 
-/*
-	MEASURE CONTROLS
-*/
-		var flag = false;
-		var flag_down = false;
-		$("#estatura-up").on('touchstart click', function(e){
-			e.stopPropagation(); e.preventDefault();
-			// if(!flag){
-			// 	flag = true;
-				console.log(e);
-				timeout = setInterval(function(){
-					estatura = Number($("#estatura-up").parent().parent().find('input').val());
-			        estatura=estatura+0.01;
-			        $("#estatura-up").parent().parent().find('input').val(estatura.toFixed(2));
-			        $('input[name="estatura"]').attr("value", estatura);
-			        flag = false;
-			    }, 150);
-			// }
-		    return false;
-		});
+	/* MEASUREMENT CONTROLS */
+	var timeout;
+	var estatura;
+	var timeoutFlag = null;
+	var timer = 200;
 
-		$("#estatura-up").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
+	var stickyTouchHandler = function(event) {
 
-		$("#estatura-dw").on('touchstart click', function(e){
-			e.stopPropagation(); e.preventDefault();
-			// if(!flag_down){
-			// 	flag_down = true;
-				console.log(e);
-				timeout = setInterval(function(){
-					estatura = Number($("#estatura-dw").parent().parent().find('input').val());
-			        estatura=estatura-0.01;
-			        $("#estatura-dw").parent().parent().find('input').val(estatura.toFixed(2));
-			        $('input[name="estatura"]').attr("value", estatura);
-			        flag_down = false;
-			    }, 150);
-			// }
-		    return false;
-		});
+		/*** Exit if trashy event ***/
+		if(!event.originalEvent && !event.originalEvent.changedTouches)
+			return false;
 
-		$("#estatura-dw").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
+	    var touches = event.originalEvent.changedTouches,
+	        first = touches[0],
+	        type = "";
+	    switch(event.type) {
+	        case "touchstart": type = "mousedown"; 	break;
+	        case "touchmove":  type = "mousemove"; 	break;        
+	        case "touchend":   type = "mouseup"; 	break;
+	        default: return;
+	    }
 
-		var peso;
+	    var simulatedEvent = document.createEvent("MouseEvent");
+	    simulatedEvent.initMouseEvent(type, true, true, window, 1, 
+	                              first.screenX, first.screenY, 
+	                              first.clientX, first.clientY, false, 
+	                              false, false, false, 0/*left*/, null);
+	    first.target.dispatchEvent(simulatedEvent);
+	    event.preventDefault();
+	}
 
-		$("#peso-up").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				peso = Number($("#peso-up").parent().parent().find('input').val());
-				if (peso<99) {
-					peso=peso+0.5;
-		        	$("#peso-up").parent().parent().find('input').val(peso.toFixed(1));
-		        	$('input[name="peso"]').attr("value", peso);
-				} else {
-					peso=peso+1;
-		        	$("#peso-up").parent().parent().find('input').val(peso.toFixed(0));
-				}
-		    }, 150);
-		    return false;
-		});
+	var clearTimeoutLogic = function(){
+		if(timeoutFlag){
+			clearInterval(timeout);
+	 	}else{
+	 		setTimeout(function(){
+	 			clearInterval(timeout);
+	 			timeoutFlag = false;
+	 		}, timer);
+	 	}
+		timeoutFlag = false;
+		return false;
+	}
 
-		$("#peso-up").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
 
-		$("#peso-dw").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				peso = Number($("#peso-dw").parent().parent().find('input').val());
-				if (peso<100.1) {
-					peso=peso-0.5;
-					$("#peso-dw").parent().parent().find('input').val(peso.toFixed(1));
-					$('input[name="peso"]').attr("value", peso);
-				} else {
-					peso=peso-1;
-					$("#peso-dw").parent().parent().find('input').val(peso.toFixed(0));
-				}
-		    }, 150);
-		    return false;
-		});
+	$("#estatura-up").bind('touchstart touchend', stickyTouchHandler);
 
-		$("#peso-dw").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
+	$("#estatura-up").bind('mousedown', function(e){
+		e.preventDefault();
+		timeout = setInterval(function(){
+			estatura = Number($("#estatura-up").parent().parent().find('input').val());
+			estatura = estatura+0.01;
+			$("#estatura-up").parent().parent().find('input').val(estatura.toFixed(2));
+			$('input[name="estatura"]').attr( "value", estatura );
+			timeoutFlag = true;
+		}, timer);
+		return false;
+	})
+	 .bind('mouseup', clearTimeoutLogic);
+	
+	$("#estatura-dw").bind('touchstart touchend', stickyTouchHandler);
 
-		var ideal;
+	$("#estatura-dw").bind('mousedown', function(e){
+		e.preventDefault();
+		timeout = setInterval(function(){
+			estatura = Number($("#estatura-dw").parent().parent().find('input').val());
+			estatura=estatura-0.01;
+			$("#estatura-dw").parent().parent().find('input').val(estatura.toFixed(2));
+			$('input[name="estatura"]').attr("value", estatura);
+			// return false;
+		}, timer);
+		return false;
+	})
+	 .bind('mouseup', clearTimeoutLogic);
 
-		$("#ideal-up").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				ideal = Number($("#ideal-up").parent().parent().find('input').val());
-		        if (ideal<99) {
-					ideal=ideal+0.5;
-		        	$("#ideal-up").parent().parent().find('input').val(ideal.toFixed(1));
-		        	$('input[name="ideal"]').attr("value", ideal);
-				} else {
-					ideal=ideal+1;
-		        	$("#ideal-up").parent().parent().find('input').val(ideal.toFixed(0));
-				} 
-		    }, 150);
-		    return false;
-		});
+	var peso;
+	
+	$("#peso-up").bind('touchstart touchend', stickyTouchHandler);
+	$("#peso-up").bind('mousedown', function(e){
+		e.preventDefault();
+		timeout = setInterval(function(){
+			peso = Number($("#peso-up").parent().parent().find('input').val());
+			if (peso<99) {
+				peso=peso+0.5;
+				$("#peso-up").parent().parent().find('input').val(peso.toFixed(1));
+				$('input[name="peso"]').attr("value", peso);
+			} else {
+				peso=peso+1;
+				$("#peso-up").parent().parent().find('input').val(peso.toFixed(0));
+			}
+		}, timer);
+		return false;
+	})
+	 .bind('mouseup', clearTimeoutLogic);
 
-		$("#ideal-up").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
+	$("#peso-dw").bind('touchstart touchend', stickyTouchHandler);
+	$("#peso-dw").bind('mousedown', function(e){
+		e.preventDefault();
+		timeout = setInterval(function(){
+			peso = Number($("#peso-dw").parent().parent().find('input').val());
+			if (peso<100.1) {
+				peso=peso-0.5;
+				$("#peso-dw").parent().parent().find('input').val(peso.toFixed(1));
+				$('input[name="peso"]').attr("value", peso);
+			} else {
+				peso=peso-1;
+				$("#peso-dw").parent().parent().find('input').val(peso.toFixed(0));
+			}
+		}, timer);
+		return false;
+	})
+	 .bind('mouseup', clearTimeoutLogic);
 
-		$("#ideal-dw").bind('touchstart', function(){
-			timeout = setInterval(function(){
-				ideal = Number($("#ideal-dw").parent().parent().find('input').val());
-		        if (ideal<100.1) {
-					ideal=ideal-0.5;
-					$("#ideal-dw").parent().parent().find('input').val(ideal.toFixed(1));
-					$('input[name="ideal"]').attr("value", ideal);
-				} else {
-					ideal=ideal-1;
-					$("#ideal-dw").parent().parent().find('input').val(ideal.toFixed(0));
-				}
-		    }, 150);
-		    return false;
-		});
+	var ideal;
 
-		$("#ideal-dw").bind('touchend', function(){
-		    clearInterval(timeout);
-		    return false;
-		});
+	$("#ideal-up").bind('touchstart touchend', stickyTouchHandler);
+	$("#ideal-up").bind('mousedown', function(){
+		timeout = setInterval(function(){
+			ideal = Number($("#ideal-up").parent().parent().find('input').val());
+			if (ideal<99) {
+				ideal=ideal+0.5;
+				$("#ideal-up").parent().parent().find('input').val(ideal.toFixed(1));
+				$('input[name="ideal"]').attr("value", ideal);
+			} else {
+				ideal=ideal+1;
+				$("#ideal-up").parent().parent().find('input').val(ideal.toFixed(0));
+			} 
+		}, timer);
+		return false;
+	})
+	 .bind('mouseup', clearTimeoutLogic);
+
+	$("#ideal-dw").bind('touchstart touchend', stickyTouchHandler);
+	$("#ideal-dw").bind('mousedown', function(){
+		timeout = setInterval(function(){
+			ideal = Number($("#ideal-dw").parent().parent().find('input').val());
+			if (ideal<100.1) {
+				ideal=ideal-0.5;
+				$("#ideal-dw").parent().parent().find('input').val(ideal.toFixed(1));
+				$('input[name="ideal"]').attr("value", ideal);
+			} else {
+				ideal=ideal-1;
+				$("#ideal-dw").parent().parent().find('input').val(ideal.toFixed(0));
+			}
+		}, timer);
+		return false;
+	})
+	 .bind('mouseup', clearTimeoutLogic);
+	 
 
 		if($('body').hasClass('water') ){
 			var agua;
@@ -1634,15 +1652,15 @@ $(window).load(function(){
 					if(agua == 10.00)
 						agua = 10.00;	
 
-		        	$('.vaso p span').html(agua.toFixed(2));
-		        	$('input[name="litros"]').attr("value", agua);
-			    }, 150);
-			    return false;
+					$('.vaso p span').html(agua.toFixed(2));
+					$('input[name="litros"]').attr("value", agua);
+				}, 150);
+				return false;
 			});
 
 			$("#agua-up").bind('touchend', function(){
-			    clearInterval(timeout);
-			    return false;
+				clearInterval(timeout);
+				return false;
 			});
 
 			$("#agua-dw").bind('touchstart', function(){
@@ -1650,16 +1668,16 @@ $(window).load(function(){
 					agua = Number($('.vaso p span').html());
 					if (agua>0.25) {
 						agua=agua-0.25;
-			        	$('.vaso p span').html(agua.toFixed(1));
-			        	$('input[name="litros"]').attr("value", agua);
+						$('.vaso p span').html(agua.toFixed(1));
+						$('input[name="litros"]').attr("value", agua);
 					}
-			    }, 150);
-			    return false;
+				}, 150);
+				return false;
 			});
 
 			$("#agua-dw").bind('touchend', function(){
-			    clearInterval(timeout);
-			    return false;
+				clearInterval(timeout);
+				return false;
 			});
 
 
@@ -1719,22 +1737,22 @@ $(window).load(function(){
 				timeout = setInterval(function(){
 					r_peso = Number($('.r_peso input[name="peso_metric"]').val() );
 
-			        if (r_peso<99) {
+					if (r_peso<99) {
 						r_peso=r_peso+0.5;
-			        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(1));
-			        	$('input[name="track_peso"]').attr('value', r_peso);
+						$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(1));
+						$('input[name="track_peso"]').attr('value', r_peso);
 					} else {
 						r_peso=r_peso+1;
-			        	$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(0));
-			        	$('input[name="track_peso"]').attr('value', r_peso);
+						$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(0));
+						$('input[name="track_peso"]').attr('value', r_peso);
 					}
-			    }, 150);
-			    return false;
+				}, 150);
+				return false;
 			});
 
 			$("#r_peso-up").bind('touchend', function(){
-			    clearInterval(timeout);
-			    return false;
+				clearInterval(timeout);
+				return false;
 			});
 
 			$("#r_peso-dw").bind('touchstart', function(){
@@ -1751,13 +1769,13 @@ $(window).load(function(){
 							$('input[name="track_peso"]').attr('value', r_peso);
 						}
 					}
-			    }, 150);
-			    return false;
+				}, 150);
+				return false;
 			});
 
 			$("#r_peso-dw").bind('touchend', function(){
-			    clearInterval(timeout);
-			    return false;
+				clearInterval(timeout);
+				return false;
 			});
 
 
@@ -1824,56 +1842,56 @@ $(window).load(function(){
 						valor = 0;
 					}
 					
-			        
-			        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
-			        if (animo[valor]=="increible") {
-			        	$('.carita h4').html("increíble");
-			        } else {
-			        	$('.carita h4').html(animo[valor]);
-			        }
-			        
+					
+					$('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
+					if (animo[valor]=="increible") {
+						$('.carita h4').html("increíble");
+					} else {
+						$('.carita h4').html(animo[valor]);
+					}
+					
 
 					$('#track_animo').attr("value", animo[valor]);
 
-			        switch ($('#track_animo').val() ) {
-			    	    case 'increible' :
-			    	        $('#track_animo').attr("value", "0");
-			    	        break;
-			    	    case 'feliz' :
-			    	        $('#track_animo').attr("value", "1");
-			    	        break;
-			    	    case 'bien' :
-			    	        $('#track_animo').attr("value", "2");
-			    	        break;
-			    	    case 'regular' :
-			    	        $('#track_animo').attr("value", "3");
-			    	        break;
-			    	    case 'triste' :
-			    	        $('#track_animo').attr("value", "4");
-			    	        break;    
-			    	    case 'cansado' :
-			    	        $('#track_animo').attr("value", "5");
-			    	        break;   
-			    	    case 'hambriento' :
-			    	        $('#track_animo').attr("value", "6");
-			    	        break;     
-			    	    case 'frustrado' :
-			    	        $('#track_animo').attr("value", "7");
-			    	        break; 
-			    	    case 'motivado' :
-			    	        $('#track_animo').attr("value", "8");
-			    	        break;
-	    	     	}
+					switch ($('#track_animo').val() ) {
+						case 'increible' :
+							$('#track_animo').attr("value", "0");
+							break;
+						case 'feliz' :
+							$('#track_animo').attr("value", "1");
+							break;
+						case 'bien' :
+							$('#track_animo').attr("value", "2");
+							break;
+						case 'regular' :
+							$('#track_animo').attr("value", "3");
+							break;
+						case 'triste' :
+							$('#track_animo').attr("value", "4");
+							break;    
+						case 'cansado' :
+							$('#track_animo').attr("value", "5");
+							break;   
+						case 'hambriento' :
+							$('#track_animo').attr("value", "6");
+							break;     
+						case 'frustrado' :
+							$('#track_animo').attr("value", "7");
+							break; 
+						case 'motivado' :
+							$('#track_animo').attr("value", "8");
+							break;
+					}
 
-			        // 0 - 8 estados de animo
+					// 0 - 8 estados de animo
 
-			    }, 150);
-			    return false;
+				}, 150);
+				return false;
 			}); //END BIND TOUCH START
 
 			$("#animo-up").bind('touchend', function(){
-			    clearInterval(timeout);
-			    return false;
+				clearInterval(timeout);
+				return false;
 			});
 
 			$("#animo-dw").bind('touchstart click', function(){
@@ -1883,52 +1901,52 @@ $(window).load(function(){
 					} else {
 						valor = 8;
 					}
-			        $('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
-			        if (animo[valor]=="increible") {
-			        	$('.carita h4').html("increíble");
-			        } else {
-			        	$('.carita h4').html(animo[valor]);
-			        }
+					$('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
+					if (animo[valor]=="increible") {
+						$('.carita h4').html("increíble");
+					} else {
+						$('.carita h4').html(animo[valor]);
+					}
 
-			        $('#track_animo').attr("value", animo[valor]);
+					$('#track_animo').attr("value", animo[valor]);
 
-			        switch ($('#track_animo').val() ) {
-			    	    case 'increible' :
-			    	        $('#track_animo').attr("value", "0");
-			    	        break;
-			    	    case 'feliz' :
-			    	        $('#track_animo').attr("value", "1");
-			    	        break;
-			    	    case 'bien' :
-			    	        $('#track_animo').attr("value", "2");
-			    	        break;
-			    	    case 'regular' :
-			    	        $('#track_animo').attr("value", "3");
-			    	        break;
-			    	    case 'triste' :
-			    	        $('#track_animo').attr("value", "4");
-			    	        break;    
-			    	    case 'cansado' :
-			    	        $('#track_animo').attr("value", "5");
-			    	        break;   
-			    	    case 'hambriento' :
-			    	        $('#track_animo').attr("value", "6");
-			    	        break;     
-			    	    case 'frustrado' :
-			    	        $('#track_animo').attr("value", "7");
-			    	        break; 
-			    	    case 'motivado' :
-			    	        $('#track_animo').attr("value", "8");
-			    	        break;
-	    	     	}
+					switch ($('#track_animo').val() ) {
+						case 'increible' :
+							$('#track_animo').attr("value", "0");
+							break;
+						case 'feliz' :
+							$('#track_animo').attr("value", "1");
+							break;
+						case 'bien' :
+							$('#track_animo').attr("value", "2");
+							break;
+						case 'regular' :
+							$('#track_animo').attr("value", "3");
+							break;
+						case 'triste' :
+							$('#track_animo').attr("value", "4");
+							break;    
+						case 'cansado' :
+							$('#track_animo').attr("value", "5");
+							break;   
+						case 'hambriento' :
+							$('#track_animo').attr("value", "6");
+							break;     
+						case 'frustrado' :
+							$('#track_animo').attr("value", "7");
+							break; 
+						case 'motivado' :
+							$('#track_animo').attr("value", "8");
+							break;
+					}
 
-			    }, 150);
-			    return false;
+				}, 150);
+				return false;
 			});//END BIND TOUCH START DOS
 
 			$("#animo-dw").bind('touchend', function(){
-			    clearInterval(timeout);
-			    return false;
+				clearInterval(timeout);
+				return false;
 			});
 			
 			//--------------------------------------------
@@ -2051,12 +2069,12 @@ $(window).load(function(){
 			console.log("ideal>"+_peso_ideal);
 
 			setTimeout(function() {
-        		$(".pagina").hide();
-        		$(".objetive").show();
-        		$(".objetive").css("left","40px");
-        		$(".objetive").animate({opacity:"1",left:"0px"}, 200);
-            }, 250);
-            $(".back").show();
+				$(".pagina").hide();
+				$(".objetive").show();
+				$(".objetive").css("left","40px");
+				$(".objetive").animate({opacity:"1",left:"0px"}, 200);
+			}, 250);
+			$(".back").show();
 		});//END FINISH1 REGISTRO APP
 
 		$('#finish2').click(function(){
@@ -2078,11 +2096,11 @@ $(window).load(function(){
 			console.log("coachType> "+ coach_type);
 
 			setTimeout(function() {
-        		$(".pagina").hide();
-        		$(".exercise").show();
-        		$(".exercise").css("left","40px");
-        		$(".exercise").animate({opacity:"1",left:"0px"}, 200);
-            }, 250);
+				$(".pagina").hide();
+				$(".exercise").show();
+				$(".exercise").css("left","40px");
+				$(".exercise").animate({opacity:"1",left:"0px"}, 200);
+			}, 250);
 		});//END FINISH2 REGISTRO APP
 
 		$('#finish3').click(function(){
@@ -2090,23 +2108,21 @@ $(window).load(function(){
 			$('.bred').removeClass('active');
 			$('.borg').addClass('active');
 
-				/*
-					localStorage FRECUENCIA DE EJERCICIO
-				*/
-			//frecuencia de ejercicio
+			/*
+				localStorage FRECUENCIA DE EJERCICIO
+			*/
 			localStorage.setItem('dpw', $('#days_per_week').val() );
 			var _dpw = localStorage.getItem('dpw');
-			console.log(_dpw);
 
 			// var dpw = localStorage.getItem('dpw');
 			// console.log(" dias por semana> > > "+dpw);
 
 			setTimeout(function() {
-        		$(".pagina").hide();
-        		$(".restric").show();
-        		$(".restric").css("left","40px");
-        		$(".restric").animate({opacity:"1",left:"0px"}, 200);
-            }, 250);
+				$(".pagina").hide();
+				$(".restric").show();
+				$(".restric").css("left","40px");
+				$(".restric").animate({opacity:"1",left:"0px"}, 200);
+			}, 250);
 		});//END FINISH3 REGISTRO APP
 
 		$('#finish4').click(function(){ 
@@ -2132,6 +2148,7 @@ $(window).load(function(){
 				console.log(restricciones_ls2);
 			}
 			var dpw 		  		= localStorage.getItem('dpw');
+			console.log("Saving dpw "+dpw);
 			var comentario 	  		= localStorage.getItem('comentario');
 
 			console.log("genero> " + genero +"peso > "+ peso+"estatura > "+estatura+" edad > "+edad+" ideal > "+peso_ideal+" zip > "+zipcode+" plan > "+plan+" coach > "+coach_type+" restricciones > "+restricciones_ls2+" dpw > "+dpw+" comentario > "+comentario );
@@ -2165,7 +2182,7 @@ $(window).load(function(){
 					"sexo" : genero,
 					"peso" : peso,
 					"estatura" : estatura,
-					"ejercicio" : (dpw>3)?1:0,
+					"ejercicio" : dpw,
 					"objetivo" : plan,
 					"restricciones" : (restricciones_ls2 === 'undefined')?null:JSON.parse(restricciones_ls2),
 					"personalidad" : coach_type
@@ -2208,18 +2225,18 @@ $(window).load(function(){
 						
 						// $('.initial').remove();
 						// $(".wrap-cslide").append('<div class="csilder">'+item+'</div>');
-  						// console.log( key + ": " + value );
+						// console.log( key + ": " + value );
 
-  						// console.log('Lista de Coaches ' + listCoach);
+						// console.log('Lista de Coaches ' + listCoach);
 
-  						
-  						$.each( value, function( key, value ) {
-  							console.log( key + " :: " + value );
-  							if (key=='_id') {
-  								// console.log('DIETA ID' + value);
-  								// $('.slide-coach').attr('dieta', value);
-  								localStorage.setItem('dieta_id', value);
-  							}
+						
+						$.each( value, function( key, value ) {
+							console.log( key + " :: " + value );
+							if (key=='_id') {
+								// console.log('DIETA ID' + value);
+								// $('.slide-coach').attr('dieta', value);
+								localStorage.setItem('dieta_id', value);
+							}
 							if(key == 'coach'){	
 								$.each( value, function( key, value ) {
 									
@@ -2281,16 +2298,16 @@ $(window).load(function(){
 
 								});																
 							}
-  						});
+						});
 
-  						i++;
+						i++;
 
 					});
 
 					$('.slide-coach').each(function() {
-					    if ($(this).attr('coach') === undefined) {
-					      $(this).remove();
-					    }
+						if ($(this).attr('coach') === undefined) {
+						  $(this).remove();
+						}
 					});
 
 					$(window).resize();
@@ -2310,16 +2327,16 @@ $(window).load(function(){
 
 
 					setTimeout(function() {
-		        		$(".pagina").hide();
-		        		$(".pcoach1").show();
-		        		$(".pcoach1").css("left","40px");
-		        		$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
-		            }, 250);
-		            
+						$(".pagina").hide();
+						$(".pcoach1").show();
+						$(".pcoach1").css("left","40px");
+						$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
+					}, 250);
+					
 				}
-            }else{
-            	alert('Error en la actualización de datos');
-            }
+			}else{
+				alert('Error en la actualización de datos');
+			}
 		});//end FINISH 4
 
 
@@ -2327,11 +2344,11 @@ $(window).load(function(){
 		// 		$('.coach.img-frame').click(function(){
 		// 		$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
 		// 		setTimeout(function() {
-  		//  	$(".pagina").hide();
-  		//  	$(".bio").show();
-  		//  	$(".bio").css("left","40px");
-  		//  	$(".bio").animate({opacity:"1",left:"0px"}, 200);
-  		//  }, 250);
+		//  	$(".pagina").hide();
+		//  	$(".bio").show();
+		//  	$(".bio").css("left","40px");
+		//  	$(".bio").animate({opacity:"1",left:"0px"}, 200);
+		//  }, 250);
 		// });
 
 		$('#finish5').click(function(){
@@ -2350,11 +2367,11 @@ $(window).load(function(){
 
 			$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
 			setTimeout(function() {
-        		$(".pagina").hide();
-        		$(".resena").show();
-        		$(".resena").css("left","40px");
-        		$(".resena").animate({opacity:"1",left:"0px"}, 200);
-            }, 250);
+				$(".pagina").hide();
+				$(".resena").show();
+				$(".resena").css("left","40px");
+				$(".resena").animate({opacity:"1",left:"0px"}, 200);
+			}, 250);
 
 			// if( $('div').hasClass('resena') ){
 				var _aidi = $(this).parent().parent().attr('coach');
@@ -2421,12 +2438,12 @@ $(window).load(function(){
 			$('.bio').animate({opacity:"0",left:"-40px"}, 200);
 			$('.byel').removeClass('active');
 			setTimeout(function() {
-        		$(".pagina").hide();
-        		$(".discount").show();
-        		$(".discount").css("left","40px");
-        		$(".discount").animate({opacity:"1",left:"0px"}, 200);
-            }, 250);
-            $('.overscreen4').hide();
+				$(".pagina").hide();
+				$(".discount").show();
+				$(".discount").css("left","40px");
+				$(".discount").animate({opacity:"1",left:"0px"}, 200);
+			}, 250);
+			$('.overscreen4').hide();
 		});
 
 		$('#cancelar').click(function(){
@@ -2456,11 +2473,11 @@ $(window).load(function(){
 		$('.btn-pago').click(function(){
 			$('.discount').animate({opacity:"0",left:"-40px"}, 200);
 			setTimeout(function() {
-        		$(".pagina").hide();
-        		$(".conekta").show();
-        		$(".conekta").css("left","40px");
-        		$(".conekta").animate({opacity:"1",left:"0px"}, 200);
-            }, 250);
+				$(".pagina").hide();
+				$(".conekta").show();
+				$(".conekta").css("left","40px");
+				$(".conekta").animate({opacity:"1",left:"0px"}, 200);
+			}, 250);
 		});
 
 		$('.back').click(function(){
@@ -2472,68 +2489,68 @@ $(window).load(function(){
 				$('.bgre').removeClass('active');
 				$('.bpur').addClass('active');
 				setTimeout(function() {
-	        		$(".pagina").hide();
-	        		$(".aboutyou").show();
-	        		$(".aboutyou").animate({opacity:"1",left:"0px"}, 200);
-	            }, 250);
-	            //$(".back").hide();
+					$(".pagina").hide();
+					$(".aboutyou").show();
+					$(".aboutyou").animate({opacity:"1",left:"0px"}, 200);
+				}, 250);
+				//$(".back").hide();
 			} else if($('.exercise').is(':visible')){
 				$('.exercise').animate({opacity:"0",left:"40px"}, 200);
 				$('.bred').removeClass('active');
 				$('.bgre').addClass('active');
 				setTimeout(function() {
-	        		$(".pagina").hide();
-	        		$(".objetive").show();
-	        		$(".objetive").animate({opacity:"1",left:"0px"}, 200);
-	            }, 250);
+					$(".pagina").hide();
+					$(".objetive").show();
+					$(".objetive").animate({opacity:"1",left:"0px"}, 200);
+				}, 250);
 			} else if($('.restric').is(':visible')){
 				$('.restric').animate({opacity:"0",left:"40px"}, 200);
 				$('.borg').removeClass('active');
 				$('.bred').addClass('active');
 				setTimeout(function() {
-	        		$(".pagina").hide();
-	        		$(".exercise").show();
-	        		$(".exercise").animate({opacity:"1",left:"0px"}, 200);
-	            }, 250);
+					$(".pagina").hide();
+					$(".exercise").show();
+					$(".exercise").animate({opacity:"1",left:"0px"}, 200);
+				}, 250);
 			} else if($('.pcoach1').is(':visible')){
 				$('.pcoach1').animate({opacity:"0",left:"40px"}, 200);
 				$('.byel').removeClass('active');
 				$('.borg').addClass('active');
 				setTimeout(function() {
-	        		$(".pagina").hide();
-	        		$(".restric").show();
-	        		$(".restric").animate({opacity:"1",left:"0px"}, 200);
-	            }, 250);
+					$(".pagina").hide();
+					$(".restric").show();
+					$(".restric").animate({opacity:"1",left:"0px"}, 200);
+				}, 250);
 			} else if($('.resena').is(':visible')){
 				$('.resena').animate({opacity:"0",left:"40px"}, 200);
 				setTimeout(function() {
-	        		$(".pagina").hide();
-	        		$(".pcoach1").show();
-	        		$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
-	            }, 250);
+					$(".pagina").hide();
+					$(".pcoach1").show();
+					$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
+				}, 250);
 			} else if($('.discount').is(':visible')){
 				$('.discount').animate({opacity:"0",left:"40px"}, 200);
 				$('.byel').addClass('active');
 				setTimeout(function() {
-	        		$(".pagina").hide();
-	        		$(".pcoach1").show();
-	        		$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
-	            }, 250);
+					$(".pagina").hide();
+					$(".pcoach1").show();
+					$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
+				}, 250);
 			} else if($('.conekta').is(':visible')){
 				$('.conekta').animate({opacity:"0",left:"40px"}, 200);
 				setTimeout(function() {
-	        		$(".pagina").hide();
-	        		$(".discount").show();
-	        		$(".discount").animate({opacity:"1",left:"0px"}, 200);
-	            }, 250);
+					$(".pagina").hide();
+					$(".discount").show();
+					$(".discount").animate({opacity:"1",left:"0px"}, 200);
+				}, 250);
 			}
 		});
 
 		var labelID;
 
 		$('label').click(function() {
-	       labelID = 'input[name="'+$(this).attr('for')+'"]';
-	       $(labelID).focus();
+		   labelID = 'input[name="'+$(this).attr('for')+'"]';
+		   $(labelID).focus();
 		});
 
 		$("input").focus(function() {
@@ -2548,12 +2565,12 @@ $(window).load(function(){
 			$('#plan').attr('value', valor);
 
 			$('.pl-option').each(function() {
-			    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
-			    	console.log( $(this).find('img').attr('src').substr(-5, 1) );
-			      	$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
-			      	$(this).removeClass('active');
-			      	$(this).attr("value", "");
-			    }
+				if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
+					console.log( $(this).find('img').attr('src').substr(-5, 1) );
+					$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
+					$(this).removeClass('active');
+					$(this).attr("value", "");
+				}
 			});
 
 			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
@@ -2575,17 +2592,17 @@ $(window).load(function(){
 					$('#plan').attr("value", "3");
 					break;
 			}
- 		});
+		});
 		$('.co-option img:not(.question)').click(function() {
 			var valor = $(this).parent().find('.type').attr('value');
 			$('#coach_type').attr('value', valor);
 
 			$('.co-option').each(function() {
-			    if ($(this).find('img:not(.question)').attr('src').substr(-5, 1)=="2") {
-			      $(this).find('img:not(.question)').attr("src",$(this).find('img:not(.question)').attr('src').slice(0, -5)+".png");
-			      $(this).removeClass('active');
-			      $(this).attr("value", "");
-			    }
+				if ($(this).find('img:not(.question)').attr('src').substr(-5, 1)=="2") {
+				  $(this).find('img:not(.question)').attr("src",$(this).find('img:not(.question)').attr('src').slice(0, -5)+".png");
+				  $(this).removeClass('active');
+				  $(this).attr("value", "");
+				}
 			}); 
 			$(this).attr("src",$(this).attr('src').slice(0, -4)+"2.png");
 			$(this).parent().addClass('active');
@@ -2615,11 +2632,11 @@ $(window).load(function(){
 		$('.me-option').click(function() {
 			var valor = $(this).find('.type').attr('value');
 			$('.me-option').each(function() {
-			    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
-			      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
-			      $(this).removeClass('active');
-			      $('#measured_area').attr('value', "");
-			    }
+				if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
+				  $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
+				  $(this).removeClass('active');
+				  $('#measured_area').attr('value', "");
+				}
 			}); 
 			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
 			$(this).addClass('active');
@@ -2647,11 +2664,11 @@ $(window).load(function(){
 					$('.ej-option').click(function() {
 						var valor = $(this).find('.type').attr('value');
 						$('.ej-option').each(function() {
-						    if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
-						      $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
-						      $(this).removeClass('active');
-						      $(this).attr('value', "");
-						    }
+							if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
+							  $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
+							  $(this).removeClass('active');
+							  $(this).attr('value', "");
+							}
 						}); 
 
 						$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
@@ -2663,40 +2680,40 @@ $(window).load(function(){
 						switch($("#ejercicio_type").val() ){
 							case 'caminar' :
 							$('#ejercicio_type').attr('value','10');
-			    	        break;
-			    	        case 'correr' :
+							break;
+							case 'correr' :
 							$('#ejercicio_type').attr('value','11');
-			    	        break;
-			    	        case 'pesas' :
+							break;
+							case 'pesas' :
 							$('#ejercicio_type').attr('value','12');
-			    	        break;
-			    	        case 'cross' :
+							break;
+							case 'cross' :
 							$('#ejercicio_type').attr('value','13');
-			    	        break;
-			    	        case 'bici' :
+							break;
+							case 'bici' :
 							$('#ejercicio_type').attr('value','14');
-			    	        break;
-			    	        case 'estacionaria' :
+							break;
+							case 'estacionaria' :
 							$('#ejercicio_type').attr('value','15');
-			    	        break;
-			    	        case 'eliptica' :
+							break;
+							case 'eliptica' :
 							$('#ejercicio_type').attr('value','16');
-			    	        break;
-			    	        case 'cardio' :
+							break;
+							case 'cardio' :
 							$('#ejercicio_type').attr('value','17');
-			    	        break;
-			    	        case 'yoga' :
+							break;
+							case 'yoga' :
 							$('#ejercicio_type').attr('value','18');
-			    	        break;
-			    	        case 'pilates' :
+							break;
+							case 'pilates' :
 							$('#ejercicio_type').attr('value','19');
-			    	        break;
-			    	        case 'tenis' :
+							break;
+							case 'tenis' :
 							$('#ejercicio_type').attr('value','20');
-			    	        break;
-			    	        case 'otro	' :
+							break;
+							case 'otro	' :
 							$('#ejercicio_type').attr('value','21');
-			    	        break;
+							break;
 						}
 
 					});
@@ -2802,10 +2819,10 @@ $(window).load(function(){
 			
 			var json = {
 				"plato" : idPlatillo, 
-	            "fecha" : cosumoFecha,
-	            "comida"  : comida,
-	            "platillo": nPlatillo,
-	            "consumido": cosumo
+				"fecha" : cosumoFecha,
+				"comida"  : comida,
+				"platillo": nPlatillo,
+				"consumido": cosumo
 			};
 
 			if(comida == -1)
@@ -2854,10 +2871,10 @@ $(window).load(function(){
 			
 			var json = {
 				"plato" : idPlatillo, 
-	            "fecha" : cosumoFecha,
-	            "comida"  : comida,
-	            "platillo": nPlatillo,
-	            "consumido": false
+				"fecha" : cosumoFecha,
+				"comida"  : comida,
+				"platillo": nPlatillo,
+				"consumido": false
 			};
 			
 			var result = apiRH.makeCosume(json);
@@ -2936,6 +2953,7 @@ $(window).load(function(){
 									console.log('desayuno');
 									$.each(value, function(key, value){
 										var platillo = '';
+										var commentFlag = false;
 										$.each(value, function(key, value){
 											console.log(key + '------' + value );	
 
@@ -2956,11 +2974,15 @@ $(window).load(function(){
 											}
 
 											if(key == 'comment'){
+												commentFlag = !commentFlag;
 												console.log('comentario: ' +value);
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 											}
 
 										});
+										if(!commentFlag)
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('div').find('comment_sub').hide();
+										commentFlag = !commentFlag;
 									});
 								}
 
@@ -2968,6 +2990,7 @@ $(window).load(function(){
 									console.log('snack1');
 									$.each(value, function(key, value){
 										var platillo = '';
+										var commentFlag = false;
 										$.each(value, function(key, value){
 											console.log(key + '------' + value );	
 
@@ -2985,10 +3008,15 @@ $(window).load(function(){
 											}
 
 											if(key == 'comment'){
+												commentFlag = true;
 												console.log('comentario: ' +value);
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 											}
-
+											if(!commentFlag){
+												console.log("comment Flag not");
+												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('div').find('comment_sub').hide();
+											}
+											commentFlag = false;
 										});
 									});
 								}
@@ -3153,10 +3181,10 @@ $(window).load(function(){
 		
 			var json = {
 				"plato" : $('.overscreen3').attr('idplatillo'), 
-	            "fecha" : $('.overscreen3').attr('cosumoFecha'),
-	            "comida"  : $('.overscreen3').attr('comida'),
-	            "platillo": $('.overscreen3').attr('nPlatillo'),
-	            "comment" : _cmt
+				"fecha" : $('.overscreen3').attr('cosumoFecha'),
+				"comida"  : $('.overscreen3').attr('comida'),
+				"platillo": $('.overscreen3').attr('nPlatillo'),
+				"comment" : _cmt
 			};
 			
 			var result = apiRH.makeCosume(json);
@@ -3301,48 +3329,48 @@ $(window).load(function(){
 		CAMARA
 	*/
 	function setOptions(srcType) {
-	    var options = {
-	        // Some common settings are 20, 50, and 100
-	        quality: 50,
-	        destinationType: Camera.DestinationType.FILE_URI,
-	        // In this app, dynamically set the picture source, Camera or photo gallery
-	        sourceType: srcType,
-	        encodingType: Camera.EncodingType.JPEG,
-	        mediaType: Camera.MediaType.PICTURE,
-	        allowEdit: true,
-	        correctOrientation: true  //Corrects Android orientation quirks
-	    }
-	    return options;
+		var options = {
+			// Some common settings are 20, 50, and 100
+			quality: 50,
+			destinationType: Camera.DestinationType.FILE_URI,
+			// In this app, dynamically set the picture source, Camera or photo gallery
+			sourceType: srcType,
+			encodingType: Camera.EncodingType.JPEG,
+			mediaType: Camera.MediaType.PICTURE,
+			allowEdit: true,
+			correctOrientation: true  //Corrects Android orientation quirks
+		}
+		return options;
 	}
 
 	function openCamera(selection) {
 
-	    var srcType = Camera.PictureSourceType.CAMERA;
-	    var options = setOptions(srcType);
-	    var func = createNewFileEntry;
+		var srcType = Camera.PictureSourceType.CAMERA;
+		var options = setOptions(srcType);
+		var func = createNewFileEntry;
 
-	    navigator.camera.getPicture(function cameraSuccess(imageUri) {
+		navigator.camera.getPicture(function cameraSuccess(imageUri) {
 
-	        //displayImage(imageUri);
-	        // You may choose to copy the picture, save it somewhere, or upload.
-	        func(imageUri);
+			//displayImage(imageUri);
+			// You may choose to copy the picture, save it somewhere, or upload.
+			func(imageUri);
 
-	    }, function cameraError(error) {
-	        console.debug("Unable to obtain picture: " + error, "app");
+		}, function cameraError(error) {
+			console.debug("Unable to obtain picture: " + error, "app");
 
-	    }, options);
+		}, options);
 	}
 
 	function displayImage(imgUri) {
 
-	    var elem = document.getElementById('imageFile');
-	    elem.src = imgUri;
+		var elem = document.getElementById('imageFile');
+		elem.src = imgUri;
 	}
 	
 
 
 
-      
+	  
 
 (function($){
 

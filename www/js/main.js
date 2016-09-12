@@ -619,6 +619,7 @@
 					}else{
 						app.toast('Error en la combinación de usuario / contraseña, por favor intenta de nuevo.');
 					}
+					app.hideLoader();
 				}
 			}); //END VALIDATE
 		}
@@ -783,7 +784,7 @@
 
 		   		errorResponseHandler = function(error) {
 		   		  return console.log(error.message);  //error de conectividad
-		   		  app.toast('Error al procesar tu pago' + error.message);
+		   		  app.toast('Error al procesar tu pago, ' + error.message);
 		   		};
 
 		   		/* Tokenizar una tarjeta en Conekta */
