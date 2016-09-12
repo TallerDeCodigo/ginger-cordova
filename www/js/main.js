@@ -655,7 +655,7 @@
 				return;
 			}
 			Keyboard.disableScrollingInShrinkView(false);
-			Keyboard.shrinkView(false);
+			Keyboard.shrinkView(true);
 		}
 
 		window.openKeyboard = false;

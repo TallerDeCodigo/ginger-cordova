@@ -154,8 +154,8 @@ function retrieveChatMessages(dialog, beforeDateSent){
         });
       }
       setTimeout(function(){
-        app.hideLoader();
         $('body').scrollTop($('#messages-list').prop('scrollHeight'));
+        app.hideLoader();
       }, 2400);
     }else{
       console.log(err);
