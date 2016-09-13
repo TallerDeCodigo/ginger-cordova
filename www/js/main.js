@@ -648,13 +648,16 @@
 		}
 
 		var fixWithKeyboard = function(){
-			
 			$('body').addClass("openkeyboard");
-			calculate = (!calculate) ? document.documentElement.clientHeight : calculate;			
-			$('#container').animate({ height: calculate+"px"}, 120, 'swing', function(){
-				$('.escribir').slideToggle('fast');
-			});
-			return;
+			if($('#container').hasClass("chat")){
+
+				calculate = (!calculate) ? document.documentElement.clientHeight : calculate;			
+				$('#container').animate({ height: calculate+"px"}, 120, 'swing', function(){
+					$('.escribir').slideToggle('fast');
+				});
+				return;
+			}
+			
 		}
 
 		window.openKeyboard = false;

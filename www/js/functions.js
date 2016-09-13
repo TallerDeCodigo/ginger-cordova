@@ -5,6 +5,7 @@ var minval_age;
 
 var gridej;
 var minval_eje;
+var anchot = document.documentElement.clientWidth;
 
 $( function() {
 
@@ -23,8 +24,7 @@ $( function() {
 
 	//localStorage.clear();
 
-	var anchot = document.documentElement.clientWidth;
-
+	console.log("Anchot :: "+anchot);
 	$('.add_picture').click(function (e) 
 	{
 		app.get_file_from_device('profile', 'camera');
@@ -3144,15 +3144,15 @@ $(window).load(function(){
 							console.log(key + ':::::::.' + value);
 
 							var fecha =	key;
+							var commentFlag = false;
 
 							$.each(value, function(key, value){
 								console.log(key + ':::::::::::' + value);
 
 								if(key == 'desayuno'){
-									console.log('desayuno');
+
 									$.each(value, function(key, value){
 										var platillo = '';
-										var commentFlag = false;
 										$.each(value, function(key, value){
 											console.log(key + '------' + value );	
 
@@ -3173,15 +3173,20 @@ $(window).load(function(){
 											}
 
 											if(key == 'comment'){
-												commentFlag = !commentFlag;
+												commentFlag = true;
 												console.log('comentario: ' +value);
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 											}
 
 										});
-										if(!commentFlag)
+										console.log("commentFlag");
+										console.log(commentFlag);
+										if(!commentFlag){
+											console.log("removing");
+											console.log($('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]'));
 											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('div').find('comment_sub').hide();
-										commentFlag = !commentFlag;
+										}
+										commentFlag = false;
 									});
 								}
 

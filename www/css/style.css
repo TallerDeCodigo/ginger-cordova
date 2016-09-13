@@ -127,6 +127,8 @@ pre {font-family:'Kohi';font-weight:300;}
 .openkeyboard #container.chat_container{display: block; overflow: hidden;}
 .openkeyboard #messages-list.content.list-group{position: absolute; bottom: 0; padding-bottom: 8rem;}
 
+.openkeyboard .overscreen3.active{position: absolute;}
+
 h2 {margin:10px 0px 0px;font-weight:100;font-size:140%;}
 h4 {margin:10px 0px 12px;font-weight:700;font-size:130%;color:#333;}
 
@@ -404,6 +406,8 @@ nav.botones {float:right;margin:2px 0px 5px 15px;}
 .comida .plat-comentario {background:#e2376c;}
 .snack2 .plat-comentario {background:#ff9933;}
 .cena .plat-comentario {background:#ffd156;}
+
+.plat-comentario:empty{display: none;}
 
 
 .platillo p.receta, .platillo p.comentario {padding:0px 5px 0px 50px;font-size:95%;position:relative;min-height:28px;margin-top:4px;}
