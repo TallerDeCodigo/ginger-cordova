@@ -593,6 +593,7 @@ a.mail {background:#2eab7e url('../images/mail_btn.png') no-repeat;background-si
 .medidas .page .slider-point {background:url('../images/slider1.svg');}
 .me-option.active {color:#ff873e!important;}
 .metrica-dato{left: 46%; top: 4vh; position: absolute;}
+.medidas .sld-wrapper{margin-left: 4vw;}
 
 .r_ejercicio .sld-wrapper {margin-bottom:0;margin-top:1%;}
 .r_ejercicio .page {position:relative;height:65px;top:-10px;}

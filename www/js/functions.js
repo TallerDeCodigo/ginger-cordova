@@ -1376,6 +1376,18 @@ $(window).load(function(){
 
 	$("#estatura-up").bind('mousedown', function(e){
 		e.preventDefault();
+		if (clickTimer == null) {
+        	clickTimer = setTimeout(function () {
+	            clickTimer = null;
+	        }, 320)
+	    } else {
+	        clearTimeout(clickTimer);
+	        clickTimer = null;
+	        e.preventDefault();
+	        e.stopPropagation();
+	        console.log("double");
+	        return false;
+	    }
 		timeout = setInterval(function(){
 			estatura = Number($("#estatura-up").parent().parent().find('input').val());
 			estatura = estatura+0.01;
@@ -1391,6 +1403,18 @@ $(window).load(function(){
 
 	$("#estatura-dw").bind('mousedown', function(e){
 		e.preventDefault();
+		if (clickTimer == null) {
+        	clickTimer = setTimeout(function () {
+	            clickTimer = null;
+	        }, 320)
+	    } else {
+	        clearTimeout(clickTimer);
+	        clickTimer = null;
+	        e.preventDefault();
+	        e.stopPropagation();
+	        console.log("double");
+	        return false;
+	    }
 		timeout = setInterval(function(){
 			estatura = Number($("#estatura-dw").parent().parent().find('input').val());
 			estatura=estatura-0.01;
@@ -1407,6 +1431,18 @@ $(window).load(function(){
 	$("#peso-up").bind('touchstart touchend', stickyTouchHandler);
 	$("#peso-up").bind('mousedown', function(e){
 		e.preventDefault();
+		if (clickTimer == null) {
+        	clickTimer = setTimeout(function () {
+	            clickTimer = null;
+	        }, 320)
+	    } else {
+	        clearTimeout(clickTimer);
+	        clickTimer = null;
+	        e.preventDefault();
+	        e.stopPropagation();
+	        console.log("double");
+	        return false;
+	    }
 		timeout = setInterval(function(){
 			peso = Number($("#peso-up").parent().parent().find('input').val());
 			if (peso<99) {
@@ -1425,6 +1461,18 @@ $(window).load(function(){
 	$("#peso-dw").bind('touchstart touchend', stickyTouchHandler);
 	$("#peso-dw").bind('mousedown', function(e){
 		e.preventDefault();
+		if (clickTimer == null) {
+        	clickTimer = setTimeout(function () {
+	            clickTimer = null;
+	        }, 320)
+	    } else {
+	        clearTimeout(clickTimer);
+	        clickTimer = null;
+	        e.preventDefault();
+	        e.stopPropagation();
+	        console.log("double");
+	        return false;
+	    }
 		timeout = setInterval(function(){
 			peso = Number($("#peso-dw").parent().parent().find('input').val());
 			if (peso<100.1) {
@@ -1443,7 +1491,19 @@ $(window).load(function(){
 	var ideal;
 
 	$("#ideal-up").bind('touchstart touchend', stickyTouchHandler);
-	$("#ideal-up").bind('mousedown', function(){
+	$("#ideal-up").bind('mousedown', function(e){
+		if (clickTimer == null) {
+        	clickTimer = setTimeout(function () {
+	            clickTimer = null;
+	        }, 320)
+	    } else {
+	        clearTimeout(clickTimer);
+	        clickTimer = null;
+	        e.preventDefault();
+	        e.stopPropagation();
+	        console.log("double");
+	        return false;
+	    }
 		timeout = setInterval(function(){
 			ideal = Number($("#ideal-up").parent().parent().find('input').val());
 			if (ideal<99) {
@@ -1460,7 +1520,19 @@ $(window).load(function(){
 	 .bind('mouseup', clearTimeoutLogic);
 
 	$("#ideal-dw").bind('touchstart touchend', stickyTouchHandler);
-	$("#ideal-dw").bind('mousedown', function(){
+	$("#ideal-dw").bind('mousedown', function(e){
+		if (clickTimer == null) {
+        	clickTimer = setTimeout(function () {
+	            clickTimer = null;
+	        }, 320)
+	    } else {
+	        clearTimeout(clickTimer);
+	        clickTimer = null;
+	        e.preventDefault();
+	        e.stopPropagation();
+	        console.log("double");
+	        return false;
+	    }
 		timeout = setInterval(function(){
 			ideal = Number($("#ideal-dw").parent().parent().find('input').val());
 			if (ideal<100.1) {
@@ -1482,7 +1554,19 @@ $(window).load(function(){
 
 			$("#agua-up").bind('touchstart touchend', stickyTouchHandler);
 
-			$("#agua-up").bind('mousedown', function(){
+			$("#agua-up").bind('mousedown', function(e){
+				if (clickTimer == null) {
+		        	clickTimer = setTimeout(function () {
+			            clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(clickTimer);
+			        clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        console.log("double");
+			        return false;
+			    }
 				timeout = setInterval(function(){
 					agua = Number($('.vaso p span').html());
 					agua=agua+0.25;
@@ -1499,7 +1583,19 @@ $(window).load(function(){
 
 			$("#agua-dw").bind('touchstart touchend', stickyTouchHandler);
 
-			$("#agua-dw").bind('mousedown', function(){
+			$("#agua-dw").bind('mousedown', function(e){
+				if (clickTimer == null) {
+		        	clickTimer = setTimeout(function () {
+			            clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(clickTimer);
+			        clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        console.log("double");
+			        return false;
+			    }
 				timeout = setInterval(function(){
 					agua = Number($('.vaso p span').html());
 					if (agua>0.25) {
@@ -1566,8 +1662,19 @@ $(window).load(function(){
 			$('.r_peso input[name="peso_metric"]').attr("value",usr_peso );
 
 			$("#r_peso-up").bind('touchstart touchend', stickyTouchHandler);
-
-			$("#r_peso-up").bind('mousedown', function(){
+			$("#r_peso-up").bind('mousedown', function(e){
+				if (clickTimer == null) {
+		        	clickTimer = setTimeout(function () {
+			            clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(clickTimer);
+			        clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        console.log("double");
+			        return false;
+			    }
 				timeout = setInterval(function(){
 					r_peso = Number($('.r_peso input[name="peso_metric"]').val() );
 
@@ -1586,7 +1693,19 @@ $(window).load(function(){
 			 .bind('mouseup', clearTimeoutLogic);
 
 			$("#r_peso-dw").bind('touchstart touchend', stickyTouchHandler);
-			$("#r_peso-dw").bind('mousedown', function(){
+			$("#r_peso-dw").bind('mousedown', function(e){
+				if (clickTimer == null) {
+		        	clickTimer = setTimeout(function () {
+			            clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(clickTimer);
+			        clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        console.log("double");
+			        return false;
+			    }
 				timeout = setInterval(function(){
 					r_peso = Number($('.r_peso input[name="peso_metric"]').val());
 					if (r_peso>0.4) {
@@ -1662,7 +1781,19 @@ $(window).load(function(){
 			var animo = [ 'increible', 'feliz', 'bien', 'regular', 'triste', 'cansado', 'hambriento', 'frustrado', 'motivado' ];
 
 			$("#animo-up").bind('touchstart touchend', stickyTouchHandler);
-			$("#animo-up").bind('mousedown', function(){
+			$("#animo-up").bind('mousedown', function(e){
+				if (clickTimer == null) {
+		        	clickTimer = setTimeout(function () {
+			            clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(clickTimer);
+			        clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        console.log("double");
+			        return false;
+			    }
 				timeout = setInterval(function(){
 					if (valor < 8) {
 						valor++;
@@ -1717,7 +1848,19 @@ $(window).load(function(){
 			 .bind('mouseup', clearTimeoutLogic);
 
 			$("#animo-dw").bind('touchstart touchend', stickyTouchHandler);
-			$("#animo-dw").bind('mousedown', function(){
+			$("#animo-dw").bind('mousedown', function(e){
+				if (clickTimer == null) {
+		        	clickTimer = setTimeout(function () {
+			            clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(clickTimer);
+			        clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        console.log("double");
+			        return false;
+			    }
 				timeout = setInterval(function(){
 					if (valor > 0) {
 						valor--;
@@ -1870,8 +2013,6 @@ $(window).load(function(){
 	$("#medida-up").bind('touchstart touchend', stickyTouchHandler);
 	$("#medida-up").bind('mousedown', function(e){
 		e.preventDefault();
-		// if(clickTimer || timeout)
-		// 	return clearTimeoutLogic();
 		if (clickTimer == null) {
         	clickTimer = setTimeout(function () {
 	            clickTimer = null;
@@ -1902,6 +2043,18 @@ $(window).load(function(){
 	$("#medida-dw").bind('touchstart touchend', stickyTouchHandler);
 	$("#medida-dw").bind('mousedown', function(e){
 		e.preventDefault();
+		if (clickTimer == null) {
+        	clickTimer = setTimeout(function () {
+	            clickTimer = null;
+	        }, 320)
+	    } else {
+	        clearTimeout(clickTimer);
+	        clickTimer = null;
+	        e.preventDefault();
+	        e.stopPropagation();
+	        console.log("double");
+	        return false;
+	    }
 		timeout = setInterval(function(){
 			medida = Number($("#medida-dw").parent().parent().find('input').val());
 			if (medida<100.1) {
