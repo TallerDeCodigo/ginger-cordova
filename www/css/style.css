@@ -124,7 +124,8 @@ pre {font-family:'Kohi';font-weight:300;}
 .openkeyboard .htrans{position: absolute; top: 0;}
 .openkeyboard .hwhite2{position: absolute!important;}
 .openkeyboard .escribir.foot-chat{position: absolute;}
-.openkeyboard .chat_container{}
+.openkeyboard #container.chat_container{display: block; overflow: hidden;}
+.openkeyboard #messages-list.content.list-group{position: absolute; bottom: 0; padding-bottom: 8rem;}
 
 h2 {margin:10px 0px 0px;font-weight:100;font-size:140%;}
 h4 {margin:10px 0px 12px;font-weight:700;font-size:130%;color:#333;}
@@ -214,7 +215,7 @@ nav.selector {margin:5% 0px 7%;}
 .box-input-2 {width:115px;position:relative;display:inline-block;top:-38px;}
 .box-input-2:before {content:"";position:absolute;left:0px;top:-5%;width:6px;border:2px solid #767676;border-right:none;height:106%;}
 .box-input-2:after {content:"";position:absolute;right:0px;top:-5%;width:6px;border:2px solid #767676;border-left:none;height:106%;}
-.box-input-2 input {position:relative;background:none;outline:none;text-align:center;border:none;color:#767676;font-size:240%;font-weight:900;letter-spacing:0.05em;width:75px!important;height:35px;}
+.box-input-2 input {position:relative;background:none;outline:none;text-align:center;border:none;color:#767676;font-size:240%;font-weight:900;letter-spacing:0.05em;width:75px!important;}
 .box-input-2 span {color:#767676;font-size:120%;font-weight:700;}
 
 img.enter {position:absolute;bottom:2.5%;left:50%;margin-left:-25px;display:block;height:50px;}

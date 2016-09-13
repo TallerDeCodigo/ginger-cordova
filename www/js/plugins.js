@@ -147,6 +147,7 @@ Swipe.prototype = {
     if (this.index != index) {
     	$('.ui-state-active').trigger('click');
     	console.log('cambio');
+    	app.hideLoader();
     }
 
     this.index = index;

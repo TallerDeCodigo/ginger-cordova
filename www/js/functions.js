@@ -1331,6 +1331,7 @@ $(window).load(function(){
 	var estatura;
 	var timeoutFlag = null;
 	var timer = 200;
+	var clickTimer = null;
 
 	var stickyTouchHandler = function(event) {
 
@@ -1869,6 +1870,20 @@ $(window).load(function(){
 	$("#medida-up").bind('touchstart touchend', stickyTouchHandler);
 	$("#medida-up").bind('mousedown', function(e){
 		e.preventDefault();
+		// if(clickTimer || timeout)
+		// 	return clearTimeoutLogic();
+		if (clickTimer == null) {
+        	clickTimer = setTimeout(function () {
+	            clickTimer = null;
+	        }, 320)
+	    } else {
+	        clearTimeout(clickTimer);
+	        clickTimer = null;
+	        e.preventDefault();
+	        e.stopPropagation();
+	        console.log("double");
+	        return false;
+	    }
 		timeout = setInterval(function(){
 			medida = Number($("#medida-up").parent().parent().find('input').val());
 			if (medida<99) {
@@ -1900,7 +1915,11 @@ $(window).load(function(){
 		}, timer);
 		return false;
 	})
-	 .bind('mouseup', clearTimeoutLogic);
+	 .bind('mouseup', clearTimeoutLogic)
+	 .dblclick(function(){
+		console.log("Double click");
+	});
+
 	$('#medida').draggable({ 
 			containment:"parent",axis:"x",grid:[gridme,gridme],drag:function(){
 				var percent = $('.medida .drag-parent').width()-30;
