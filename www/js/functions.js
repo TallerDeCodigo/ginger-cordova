@@ -1554,9 +1554,13 @@ $(window).load(function(){
 
 		var date = new Date();
 		var date_today = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
-		var agua_local = parseInt(localStorage.getItem('agua'));
+		var agua_local = parseFloat(localStorage.getItem('agua'));
 		var agua_lastSaved = localStorage.getItem('agua_lastSaved');
 		var agua = (agua_lastSaved != date_today ) ? 0 : agua_local;
+
+		/*** Setting initial value if progress ***/
+		$('input[name="litros"]').val(agua);
+		$('.vaso p span').text(agua);
 
 		$("#agua-up").bind('touchstart touchend', stickyTouchHandler);
 		$("#agua-up").bind('mousedown', function(e){
@@ -1636,12 +1640,9 @@ $(window).load(function(){
 		//----------------------------
 
 		$('#add_tracking').click(function(){
-			var date = new Date();
-			var date_today = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
-			console.log(date_today);
-			var agua_local = parseInt(localStorage.getItem('agua'));
-			var agua_lastSaved = localStorage.getItem('agua_lastSaved');
-			var agua = (agua_lastSaved != date_today ) ? $('input[name="litros"]').val() : agua_local+$('input[name="litros"]').val();
+			agua_local = parseInt(localStorage.getItem('agua'));
+			agua_lastSaved = localStorage.getItem('agua_lastSaved');
+			agua = (agua_lastSaved != date_today ) ? $('input[name="litros"]').val() : agua_local+$('input[name="litros"]').val();
 			console.log("Agua :: "+agua);
 			// Si el last_saved es otro día distinto que hoy, regresar  variable a cero
 			localStorage.setItem('agua_lastSaved', date_today );
