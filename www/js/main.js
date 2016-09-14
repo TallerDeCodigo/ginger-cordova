@@ -301,7 +301,7 @@
 			}
 			catch(err){
 				console.log('Toasting error: ' + JSON.stringify(err)); // imprime esto con un JSON vacio
-				app.toast(message);
+				alert(message);
 			}
 			return;
 		},
@@ -634,7 +634,9 @@
 		var calculate = null;
 
 		/*** Fix keyboard defaults ***/
+		console.log(typeof Keyboard);
 		if(typeof Keyboard != 'undefined'){
+			console.log("Keyboard not undefined");
 			Keyboard.disableScrollingInShrinkView(false);
 			Keyboard.shrinkView(false);
 		}

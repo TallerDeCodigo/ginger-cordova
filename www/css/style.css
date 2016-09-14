@@ -682,8 +682,8 @@ p.small{margin-bottom:0;}
 
  
 /* Coming Soon */
-.coming_soon{background-color: #7b53a2;}
-.image_message{display: block; width: 100%; height: auto; position: absolute; bottom: 0;}
+.coming_soon{background-color: #f4f1f0;}
+.image_message{display: block; width: 100%; height: auto; position: relative; margin-top: 21vh;}
 .insert_stars{overflow: auto;}
 
 /*Loader*/
