@@ -244,11 +244,9 @@ $(window).on("load resize",function(){
 	$(".slide-coach:first-of-type").css("margin-left",ancho*0.09375);
 	$(".cslider").css("width",csld);
 
-		/*
-
-			ENVIA MENSAJE AL ADMIN PARA AUTORIZAR CAMBIO DE COACH
-
-		*/
+	/*
+		ENVIA MENSAJE AL ADMIN PARA AUTORIZAR CAMBIO DE COACH
+	*/
 	var msg;
 	var msg_return;
 	$('#send_ch_coach').on('click', function(){
@@ -269,8 +267,8 @@ $(window).on("load resize",function(){
 		}else{
 			console.log(msg);
 			localStorage.setItem('msg_ch_coach', msg);
+			localStorage.setItem('coach_status', "pending_change");
 
-			console.log("localStorage");
 			/*Agregar otro alert con la leyenda: Tu mensaje ha sido enviado para revision, nos pondremos en contacto contigo*/
 			if(!$('.alert_chCoach2').is(':visible')){
 				$('.alert_chCoach2').show();
@@ -291,7 +289,6 @@ $(window).on("load resize",function(){
 		}
 		
 		$('#accept_chCoach').click(function(){
-			console.log('click');
 			$('.alert_chCoach').hide();
 			$('#container').toggleClass('blurred');
 
@@ -323,6 +320,8 @@ $(window).on("load resize",function(){
 			var plan 			= user.perfil.objetivo;
 			var comentario 		= localStorage.getItem('comentario');
 			var coach_rate		= localStorage.getItem('coach_rate');
+			var coach_status	= localStorage.getItem('coach_status');
+			var msg_ch_coach	= localStorage.getItem('msg_ch_coach');
 			localStorage.setItem('restricciones', user.perfil.restricciones);
 
 			$('#comentario_perfil i').html(comentario);
@@ -656,6 +655,11 @@ $(window).on("load resize",function(){
 				});
 
 				app.hideLoader();
+				var text = (coach_status != 'pending_change') ? "Cambiar Coach" : "En revisión";
+				var href = (coach_status != 'pending_change') ? "cambiocoach.html" : "";
+				$('#change_coach').text(text);
+				$('#change_coach').attr('href', href);
+
 		}//end if has class
 
 
@@ -1970,7 +1974,8 @@ $(window).load(function(){
 				if(localStorage.getItem('track_animo') >= 0){
 					var responsedata = apiRH.tracking(1, track_animo);
 					if(responsedata){
-						window.location.assign('dieta.html');
+						app.toast("Se ha guardado tu ánimo");
+						return;
 					}else{
 						alert('Error al registrar ánimo');
 					}
@@ -2095,15 +2100,15 @@ $(window).load(function(){
 		console.log("Double click");
 	});
 
-	$('#medida').draggable({ 
-			containment:"parent",axis:"x",grid:[gridme,gridme],drag:function(){
-				var percent = $('.medida .drag-parent').width()-30;
-				var donde = Math.round(((($('#medida').position().left)*rango_med)/percent)+minval_med);
-				$("#medida-filler").css("width",$('#medida').position().left+20);
-				$('#medida-dato-span').html(donde);
-				$('#medida-dato').attr('value',donde);
-			}
-	});
+	// $('#medida').draggable({ 
+	// 		containment:"parent",axis:"x",grid:[gridme,gridme],drag:function(){
+	// 			var percent = $('.medida .drag-parent').width()-30;
+	// 			var donde = Math.round(((($('#medida').position().left)*rango_med)/percent)+minval_med);
+	// 			$("#medida-filler").css("width",$('#medida').position().left+20);
+	// 			$('#medida-dato-span').html(donde);
+	// 			$('#medida-dato').attr('value',donde);
+	// 		}
+	// });
 
 
 	if( $('body').hasClass('measures') ){
@@ -2130,6 +2135,7 @@ $(window).load(function(){
 				var responsedata = apiRH.tracking(area, medidas);
 				if(responsedata){
 					console.log(area+" "+medidas);
+					app.toast("Se han agregado tus medidas");
 					//window.location.assign('dieta.html');
 				}
 				$('.alert_tracking').hide();
