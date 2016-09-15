@@ -463,7 +463,7 @@ $(window).on("load resize",function(){
 
 					console.log(restricciones);
 
-					var restricc = [ 'huevo', 'pollo', 'pescado', 'mariscos', 'lacteos', 'carne' ];
+					var restricc = [ 'huevo', 'pollo', 'pescado', 'mariscos', 'lácteos', 'carne' ];
 					// var parseado = JSON.parse(restricciones);
 					// parseado = JSON.stringify(parseado);
 					// restricciones = restricciones.slice(2,3);
@@ -814,7 +814,7 @@ $(window).load(function(){
 	$(function() {
 
 		/*
-			DIETA
+			DIETA BODY CLASS
 		*/
 
 		if($('body').hasClass('dieta') ){
@@ -1003,8 +1003,12 @@ $(window).load(function(){
 				setTimeout(getcosumed, 2000);
 
 			});//END DIETA ESTRUCTURA
-	
-		}
+			
+			$('.cancel').on('click', function(){
+				$('.comment_pop').hide();
+			});
+
+		} /*** END BODY CLASS DIETA ***/
 
 
 	});//END FUNCTION
@@ -1557,7 +1561,7 @@ $(window).load(function(){
 		var agua_local = parseFloat(localStorage.getItem('agua'));
 		var agua_lastSaved = localStorage.getItem('agua_lastSaved');
 		var agua = (agua_lastSaved != date_today ) ? 0 : agua_local;
-
+		console.log(agua);
 		/*** Setting initial value if progress ***/
 		$('input[name="litros"]').val(agua);
 		$('.vaso p span').text(agua);
@@ -1640,33 +1644,35 @@ $(window).load(function(){
 		//----------------------------
 
 		$('#add_tracking').click(function(){
-			agua_local = parseInt(localStorage.getItem('agua'));
+			agua_local = parseFloat(localStorage.getItem('agua'));
 			agua_lastSaved = localStorage.getItem('agua_lastSaved');
-			agua = (agua_lastSaved != date_today ) ? $('input[name="litros"]').val() : agua_local+$('input[name="litros"]').val();
-			console.log("Agua :: "+agua);
-			// Si el last_saved es otro día distinto que hoy, regresar  variable a cero
+			agua = parseFloat($('input[name="litros"]').val());
+
 			localStorage.setItem('agua_lastSaved', date_today );
 			localStorage.setItem('agua', agua );
 
 			var agua = localStorage.getItem('agua');
 			console.log(agua);
 
-			/*ajustar los tipos para cada tracking 7 Agua*/
+			/*TODO: Get from catalogue and use same method 7 Agua*/
 			var responsedata = apiRH.tracking(7, agua);
 
-			if(responsedata){
-				console.log(responsedata);
+			if(responsedata)
 				app.toast("Se ha guardado correctamente tu progreso");
-				// window.location.assign('agua.html');
-			}
+
 			$('.alert_tracking').hide();
 			$('#container').toggleClass('blurred');
 		});
 
 		$('.cancel').click(function(){
+			console.log("Agua: "+agua_local);
+			$('input[name="litros"]').val(agua_local);
+			$('.vaso p span').text(agua_local);
 			$('.alert_tracking').hide();
 			$('#container').toggleClass('blurred');
 		});
+
+
 	} /*** END water ***/
 
 		if( $('body').hasClass('weight') ){
@@ -1774,12 +1780,12 @@ $(window).load(function(){
 					var responsedata = apiRH.tracking(0, track_peso);
 					
 					if(responsedata){
-						window.location.assign('dieta.html');
+						app.toast("Se ha guardado correctamente tu peso")
 					}else{
-						alert('Error al registrar peso');
+						app.toast('Error al registrar peso');
 					}
 				}else{
-					alert('El peso debe de ser mayor a 40');
+					app.toast('El peso debe de ser mayor a 40');
 				}
 				$('.alert_tracking').hide();
 				$('#container').toggleClass('blurred');
@@ -2962,8 +2968,7 @@ $(window).load(function(){
 							var responsedata = apiRH.tracking(type, duracion);
 	
 							if(responsedata){
-								console.log(intensidad+" "+type+" "+duracion);	
-								console.log('exito');
+								app.toast("Se ha guardado tu progreso correctamente")
 								//window.location.assign('dieta.html');
 							}else{
 								alert('error al insertar datos ');
@@ -3105,10 +3110,10 @@ $(window).load(function(){
 		$('svg.commenn').click(function() {
 			console.log('click');
 			$('#comentar').val(''); /*AQUI SE ELIMINA EL COMENTARIO DEL TEXTAREA CUANDO SE HACE CLICK EN EL ICONO QUE LO ABRE*/
-			$('.overscreen3').show();
+			$('.comment_pop').show();
 
-			var idPlatillo = $(this).parent().parent().attr('data');
-			var nPlatillo = $(this).parent().parent().attr('platillo');
+			var idPlatillo 	= $(this).parent().parent().attr('data');
+			var nPlatillo 	= $(this).parent().parent().attr('platillo');
 			var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
 			var comida = -1;
 			
@@ -3123,12 +3128,12 @@ $(window).load(function(){
 			if($(this).parent().parent().parent().hasClass('cena'))
 				comida = 4;
 
-			$('.overscreen3').attr('idPlatillo', idPlatillo);
-			$('.overscreen3').attr('nPlatillo', nPlatillo);
-			$('.overscreen3').attr('cosumoFecha', cosumoFecha);
-			$('.overscreen3').attr('comida', comida);
+			$('.comment_pop').attr('idPlatillo', idPlatillo);
+			$('.comment_pop').attr('nPlatillo', nPlatillo);
+			$('.comment_pop').attr('cosumoFecha', cosumoFecha);
+			$('.comment_pop').attr('comida', comida);
 
-			setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
+			setTimeout(function() {$('.comment_pop').addClass('active');}, 200);
 
 			
 		});
@@ -3384,8 +3389,8 @@ $(window).load(function(){
 		});
 
 		$('.send_cmt').click(function() {
-			$('.overscreen3').removeClass('active');
-			setTimeout(function() {$('.overscreen3').hide();}, 500);
+			$('.comment_pop').removeClass('active');
+			setTimeout(function() {$('.comment_pop').hide();}, 500);
 			$('.the-comment').html($('#comentar').val());  		/*ESTE ELIMINA EL COMENTARIO ANTERIOR AL HACER CLICK EN EL BOTON ENVIAR COMENTARIO*/
 			$('.the-comment').show();
 			$('li.comentario').show();
@@ -3397,13 +3402,13 @@ $(window).load(function(){
 			
 			var _cmt = localStorage.getItem('comentario');
 
-			$('.overscreen3 textarea').focus();
+			$('.comment_pop textarea').focus();
 		
 			var json = {
-				"plato" : $('.overscreen3').attr('idplatillo'), 
-				"fecha" : $('.overscreen3').attr('cosumoFecha'),
-				"comida"  : $('.overscreen3').attr('comida'),
-				"platillo": $('.overscreen3').attr('nPlatillo'),
+				"plato" : $('.comment_pop').attr('idplatillo'), 
+				"fecha" : $('.comment_pop').attr('cosumoFecha'),
+				"comida"  : $('.comment_pop').attr('comida'),
+				"platillo": $('.comment_pop').attr('nPlatillo'),
 				"comment" : _cmt
 			};
 			
@@ -3411,6 +3416,7 @@ $(window).load(function(){
 
 			if(result){
 				//getConsumed();
+				app.toast("Has agregado un comentario");
 			}
 
 			if(_cmt != ""){
@@ -3423,8 +3429,8 @@ $(window).load(function(){
 		});
 
 		$('.izquii').click(function() {
-			$('.overscreen3').removeClass('active');
-			setTimeout(function() {$('.overscreen3').hide();}, 500);
+			$('.comment_pop').removeClass('active');
+			setTimeout(function() {$('.comment_pop').hide();}, 500);
 			$('.siono').removeClass('active');
 			$('.siono.not').addClass('active');
 		});
