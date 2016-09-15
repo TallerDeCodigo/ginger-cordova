@@ -648,6 +648,8 @@
 
 		var fixWithKeyboard = function(){
 			$('body').addClass("openkeyboard");
+			$(html).resize();
+			$(body).resize();
 			if($('#container').hasClass("chat")){
 
 				calculate = (!calculate) ? document.documentElement.clientHeight : calculate;			
@@ -676,9 +678,9 @@
 			$('.escribir').css('bottom', 0);
 		});
 
-		$('#mensaje-chat').on('click', function(){
-			$('.escribir').hide();
-		});
+		// $('#mensaje-chat').on('click', function(){
+		// 	$('.escribir').hide();
+		// });
 
 
 //-----------------------------

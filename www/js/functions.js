@@ -31,11 +31,9 @@ $( function() {
 	});
 
 	if($('body').hasClass('has-finanzas')){
-		console.log('Entre a finanzas');
 
 		var response = apiRH.getTransactions();
-
-		var cadenita = '';
+		var myString = '';
 
 		$.each(response, function( key, value ) {
 			$.each(value, function( key, value ) {
@@ -43,7 +41,6 @@ $( function() {
 				console.log(key + ' ::' + value);
 
 				if(key == 'body'){
-
 					$.each(value, function( key, value ) {
 
 						console.log(key + ' :::: ' + value);
@@ -67,7 +64,7 @@ $( function() {
 
 							//$('.pagos').append(' Monto: ' + value / 100 );
 
-							cadenita += '<tr><td>$'+ value/100 +'.00</td>';	
+							myString += '<tr><td>$'+ value/100 +'.00</td>';	
 						}
 
 						if(key == 'paid_at'){
@@ -77,14 +74,14 @@ $( function() {
 							var d = new Date(value * 1000);
 							// $('._month').html(meses_year[r.getMonth()] + " " +d.getUTCFullYear() );
 
-							cadenita += '<td> ' + meses_year[r.getMonth()+1] + " " +d.getUTCFullYear() + '</td></tr>';
+							myString += '<td> ' + meses_year[r.getMonth()+1] + " " +d.getUTCFullYear() + '</td></tr>';
 						}
 					});
 				}
 			});
 		});
 
-		$('#historial tbody').append(cadenita);
+		$('#historial tbody').append(myString);
 	}//end finanzas
 
 
@@ -125,12 +122,12 @@ $( function() {
 					
 					if(response)
 					{
-						alert('Los datos se han actualizado');
+						app.toast('Los datos se han actualizado');
 					}
 					else
-						alert("Error al actualizar datos");
+						app.toast("Error al actualizar datos");
 				}else{
-					alert("Error al procesar tu pago");
+					app.toast("Error al procesar tu pago");
 				}
 				return;
 			};
@@ -139,11 +136,10 @@ $( function() {
 
 			errorResponseHandler = function(error) {
 			  return console.log(error.message);  //error de conectividad
-			  alert('Error al procesar tu pago' + error.message);
+			  app.toast('Error al procesar tu pago' + error.message);
 			};
 
 			/* Tokenizar una tarjeta en Conekta */
-
 			Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
 			
 		});
@@ -3476,12 +3472,13 @@ $(window).load(function(){
 
 				$('#accept_ccomment').click(function(){
 					console.log('ventana para comentario');
-					if(!$('.overscreen3').is(':visible') ){
-						$('.overscreen3').show();
-						setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
+					$('.cancel_subscription2').hide();
+					if(!$('.comment_pop').is(':visible') ){
+						$('.comment_pop').show();
+						setTimeout(function() {$('.comment_pop').addClass('active');}, 200);
 					} else {
-						$('.overscreen3').removeClass('active');
-						setTimeout(function() {$('.overscreen3').hide();}, 800);
+						$('.comment_pop').removeClass('active');
+						setTimeout(function() {$('.comment_pop').hide();}, 800);
 					}
 
 					$('#write_ch_coach').click(function(){
@@ -3503,8 +3500,8 @@ $(window).load(function(){
 								$('#container').toggleClass('blurred');
 
 								if(response){
-									window.location.assign('index.html');
 									localStorage.clear();
+									window.location.assign('index.html');
 								}	
 							});
 
@@ -3515,9 +3512,14 @@ $(window).load(function(){
 				});
 
 				$('#cancelar2').click(function(){
-					console.log('click');
 					$('.cancel_subscription2').hide();
 					$('#container').toggleClass('blurred');
+				});
+
+				$('.cancel.comment').click(function(){
+					$('.comment_pop').hide();
+					$('#container').toggleClass('blurred');
+					app.toast("Membresía no afectada");
 				});
 			/*Llamar hasta estar segurisomo de querer cancelar la subscripccion*/
 			// if(response){
