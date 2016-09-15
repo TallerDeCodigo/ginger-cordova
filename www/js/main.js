@@ -592,15 +592,13 @@
 				},
 				submitHandler:function(){
 
-					console.log('login sin facebook');
-
+					app.showLoader();
 					var data_login	= app.getFormData("#login_form");
 
 					console.log(data_login.mail);
 
 					data_login.pass = $('#pass').val();
 					var responsedata = apiRH.loginNative(data_login);
-				  	console.log("RESPUESTA: " + responsedata);
 
 					 if(responsedata){
 						
@@ -617,7 +615,7 @@
 					 	
 					 	return;
 					}else{
-						app.toast('Error en la combinación de usuario / contraseña, por favor intenta de nuevo.');
+						app.toast('Hay un error en tus datos, por favor intenta de nuevo.');
 					}
 					app.hideLoader();
 				}
@@ -653,9 +651,9 @@
 			if($('#container').hasClass("chat")){
 
 				calculate = (!calculate) ? document.documentElement.clientHeight : calculate;			
-				$('#container').animate({ height: calculate+"px"}, 120, 'swing', function(){
-					$('.escribir').slideToggle('fast');
+				$('#container').animate({ height: calculate+"px"}, 240, 'swing', function(){
 				});
+					$('.escribir').slideToggle('fast');
 				return;
 			}
 			
@@ -678,9 +676,9 @@
 			$('.escribir').css('bottom', 0);
 		});
 
-		// $('#mensaje-chat').on('click', function(){
-		// 	$('.escribir').hide();
-		// });
+		$('#mensaje-chat').on('click', function(){
+			$('.escribir').hide();
+		});
 
 
 //-----------------------------
