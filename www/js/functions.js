@@ -466,6 +466,7 @@ $(window).on("load resize",function(){
 					// var parseado = JSON.parse(restricciones);
 					// parseado = JSON.stringify(parseado);
 					// restricciones = restricciones.slice(2,3);
+					$('#restricciones_perfil').text("");
 					if(restricciones){
 						for (var i = 0; i < restricciones.length; i++) {
 							// console.log(i);

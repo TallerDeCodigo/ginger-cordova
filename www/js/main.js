@@ -624,19 +624,16 @@
 			}); //END VALIDATE
 		}
 
-		//-----------------------------
-		//
-		// Keyboard events for iOS
-		//
-		//-----------------------------
-		console.log("Initializing events");
+//-----------------------------
+//
+// Keyboard events for iOS
+//
+//-----------------------------
 		var initialViewHeight = document.documentElement.clientHeight;
 		var calculate = null;
 
 		/*** Fix keyboard defaults ***/
-		console.log(typeof Keyboard);
 		if(typeof Keyboard != 'undefined'){
-			console.log("Keyboard not undefined");
 			Keyboard.disableScrollingInShrinkView(false);
 			Keyboard.shrinkView(false);
 		}
@@ -684,12 +681,11 @@
 		});
 
 
-		//-----------------------------
-		//
-		// Validate code
-		//
-		//-----------------------------
-
+//-----------------------------
+//
+// Validate code
+//
+//-----------------------------
 		if($('#code_form').length)
 			$('#code_form').validate({
 				rules:{
