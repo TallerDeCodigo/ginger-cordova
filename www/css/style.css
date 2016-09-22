@@ -254,7 +254,7 @@ img.saltar {position:absolute;bottom:2.5%;left:50%;margin-left:-65px;display:blo
 
 .slide-coach .name {font-size:110%;margin-top:5px;}
 .slide-coach .rate-stars {}
-.slide-coach .short-descrip {font-size: 85%; font-weight: 100; width: 90%; margin-top: 0px;}
+.slide-coach .short-descrip {font-size: 97%; font-weight: 100; width: 90%; margin-top: 10px;}
 .short-descrip {position: relative; top: -5px; resize: none; text-align: justify !important;}
 
 .resena .name {text-align:left;margin:9px 5% 0px;font-size: 2rem;}
@@ -328,7 +328,7 @@ input[type=checkbox]:not(old):checked + span {background-position: 0 -29px;}
 
 .foot-chat textarea {width:100%;resize:none;outline:none;border:1px solid #CCC;border-radius:3px;padding:4px 5px 1px;}
 
-textarea.short-descrip{height: 90px;background:transparent;}
+textarea.short-descrip{ height: 20vh!important;background:transparent;}
 
 body.iosm #container.chat_container{}
 .chat_container .content.list-group{ background-color: #e9ebee; padding-bottom: 7rem; position: relative; z-index: 5; min-height: 85vh;}

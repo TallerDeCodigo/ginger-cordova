@@ -639,7 +639,6 @@ function requestHandlerAPI(){
 			app.showLoader();
 			console.log(' ::: MAKE REQUEST ::: ');
 			// console.log(data);
-
 			var result = {};
 
 			$.ajax({
@@ -719,6 +718,7 @@ function requestHandlerAPI(){
 				console.log('fail');
 				result = false;
 				console.log(JSON.stringify(e));
+				app.hideLoader();
 			});
 
 			return result;
