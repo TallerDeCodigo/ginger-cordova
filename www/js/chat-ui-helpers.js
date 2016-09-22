@@ -2,6 +2,7 @@
 function buildMessageHTML(messageText, messageSenderId, messageDateSent, attachmentFileId, messageId, status){
 
   var messageAttach;
+  // var date = new Date(messageDateSent);
   if(attachmentFileId){
 	  messageAttach = '<a href="http://api.quickblox.com/blobs/'+attachmentFileId+'/download.xml?token='+token+'"><img src="http://api.quickblox.com/blobs/'+attachmentFileId+'/download.xml?token='+token+'" alt="attachment" class="attachments img-responsive" /></a>';
   }
@@ -9,8 +10,12 @@ function buildMessageHTML(messageText, messageSenderId, messageDateSent, attachm
 	var isMessageSticker = ""; //stickerpipe.isSticker(messageText);
 
   var delivered = '<img class="icon-small" src="images/delivered.jpg" alt="" id="delivered_'+messageId+'">';
-  var read = '<img class="icon-small" src="images/read.jpg" alt="" id="read_'+messageId+'">';
+  // var read = '';
+  // if(status)
+  //   read = (messageDateSent && status) '<i class="material-icons">done</i>';
 
+  console.log("Statuss ::: "+status);
+  console.log("Statuss ::: "+messageDateSent);
 	var messageTextHtml = messageText;
 	if (messageAttach) {
 		messageTextHtml = messageAttach;

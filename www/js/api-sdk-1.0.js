@@ -637,10 +637,9 @@ function requestHandlerAPI(){
 		 */
 		this.makeRequest = function(endpoint, data){
 			app.showLoader();
-			console.log('DATA SEND MAKE REQUEST: ');
-			console.log(data);
+			console.log(' ::: MAKE REQUEST ::: ');
+			// console.log(data);
 
-			sdk_app_context.showLoader();
 			var result = {};
 
 			$.ajax({
@@ -654,16 +653,15 @@ function requestHandlerAPI(){
 			 .done(function(response){
 				result = response;
 				console.log('<<DONE>>');
-				console.log(response);
-				sdk_app_context.hideLoader(response);
+				// console.log(response);
 				app.hideLoader();
 			})
 			 .fail(function(e){
 				result = e;
 				console.log(JSON.stringify(e));
 			});
-			 console.log('>->->->-result->->->->');
-			 console.log( result);
+			console.log('>->->->-result->->->->');
+			console.log( result);
 			return result;
 		};
 

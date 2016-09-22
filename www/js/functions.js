@@ -18,13 +18,7 @@ $( function() {
 		version    : 'v2.7' // use graph api version 2.5
 		});
 	}
-	/*
-		CLEAR LOCAL STORAGE
-	*/
 
-	//localStorage.clear();
-
-	console.log("Anchot :: "+anchot);
 	$('.add_picture').click(function (e) 
 	{
 		app.get_file_from_device('profile', 'camera');
@@ -3371,17 +3365,17 @@ $(window).load(function(){
 		});
 
 		$('.com2send').click(function() {
-			$('.overscreen3').show();
-			setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
-			$('.overscreen3 textarea').focus();
+			$('.comment_pop').show();
+			setTimeout(function() {$('.comment_pop').addClass('active');}, 200);
+			$('.comment_pop textarea').focus();
 		});
 
 		$('.siono').click(function() {
 			$('.siono').removeClass('active');
 			$(this).addClass('active');
 			if ($(this).hasClass('yes')) {
-				$('.overscreen3').show();
-				setTimeout(function() {$('.overscreen3').addClass('active');}, 200);
+				$('.comment_pop').show();
+				setTimeout(function() {$('.comment_pop').addClass('active');}, 200);
 				$('#comentar').focus();
 			} else {
 				$('.the-comment').html("");
@@ -3397,7 +3391,7 @@ $(window).load(function(){
 			$('.the-comment').html($('#comentar').val());  		/*ESTE ELIMINA EL COMENTARIO ANTERIOR AL HACER CLICK EN EL BOTON ENVIAR COMENTARIO*/
 			$('.the-comment').show();
 			$('li.comentario').show();
-			$('.little-comment').hide();
+			// $('.little-comment').hide();
 			/*
 				localStorage COMENTARIO
 			*/
@@ -3612,8 +3606,6 @@ $(window).load(function(){
 	"use strict";
 
 	$(function(){
-
-		console.log('hello from functions.js');
 
 		/**
 		 * Validación de emails

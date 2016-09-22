@@ -232,7 +232,7 @@
 					    		<span class="little-comment">Medicamentos, enfermedades, condiciones, alergias o cualquier otra cosa que nos quieras contar</span>
 			    				<div id="si" class="siono yes">Sí</div>
 			    				<div id="no" class="siono not active">No</div>
-					    		<span class="the-comment" style="display:none">Sufro de hipertensión y odio comer lentejas porque me provocan malestar estomacal, también soy intolerante a los hongos</span>
+					    		<span class="the-comment" style="display:none"></span>
 					    		<img id="finish4" class="saltar" src="images/saltar.svg">
 
 					    	</div>
@@ -538,7 +538,7 @@
 						    			<label for="nombre">Nombre (como aparece en tu tarjeta)</label>
 					    			</div>
 					    			<div class="form-label">
-					    				<input type="number" name="card" maxlength="16" placeholder="" onkeypress='return event.charCode >= 46 && event.charCode <= 57' pattern="[0-9]*">
+					    				<input type="number" name="card" onKeyDown="if(this.value.length==16) return false;" placeholder="" onkeypress='return event.charCode >= 46 && event.charCode <= 57' pattern="[0-9]*">
 						    			<label for="card">Número de tarjeta</label>
 					    			</div>
 					    			<div class="form-label-2">
@@ -602,16 +602,18 @@
 						</div>
 					</div>
 				</div>
-				<div class="overscreen3" style="display:none">
-					<div class="boxx-top">
-						<div>
-							<a class="izquii">Cancelar</a>
-							<a class="add send_cmt">Enviar</a>
+				<div class="comment_pop" style="display:none">
+					<div class="ov-filler2"></div>
+					<div class="dialog">
+						<h5>Cuéntanos más de ti</h5>
+						<textarea id="comentar" placeholder=""></textarea>
+						<div class="di-options">
+							<a class="accept send_cmt">Aceptar</a>
+							<a class="cancel comment">Cancelar</a>
 						</div>
 					</div>
-					<textarea id="comentar" placeholder="Escribe tu comentario aquí..."></textarea>
 				</div>
-
+				
 				<div class="overscreen4" style="display:none">
 					<div class="ov-filler2"></div>
 					<div class="dialog">
@@ -651,6 +653,9 @@
 									-->
 
 		</section>
+		<div class="loader_container" id="spinner">
+			<div class="loading"></div>
+		</div>
 	</body>
 
 	<script type="text/javascript">

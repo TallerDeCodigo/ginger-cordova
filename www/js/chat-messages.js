@@ -135,8 +135,8 @@ function retrieveChatMessages(dialog, beforeDateSent){
               messageAttachmentFileId = item.attachments[0].id;
             }
           }
-
-          var messageHtml = buildMessageHTML(messageText, messageSenderId, messageDateSent, messageAttachmentFileId, messageId);
+          console.log("Show_message ::: "+JSON.stringify(item));
+          var messageHtml = buildMessageHTML(messageText, messageSenderId, messageDateSent, messageAttachmentFileId, messageId, item.read);
 
           $('#messages-list').prepend(messageHtml);
 
@@ -227,8 +227,7 @@ function sendMessage(text, attachmentFileId) {
 function showMessage(userId, msg, attachmentFileId) {
   // add a message to list
   var userLogin = getUserLoginById(userId);
-  console.log("User_id ::: "+userId);
-  console.log("User_login ::: "+userLogin);
+  console.log("Show_message ::: "+JSON.stringify(msg));
   var messageHtml = buildMessageHTML(msg.body, userId, new Date(), attachmentFileId, msg.id);
 
   $('#messages-list').append(messageHtml);

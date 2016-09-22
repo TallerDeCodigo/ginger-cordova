@@ -19,7 +19,7 @@
 			var data_user = apiRH.getProfile();
 			var is_client = localStorage.getItem('customerId');
 			var is_current = localStorage.getItem('valido');
-			console.log(is_login);
+			// console.log(is_login);
 
 			/* IMPORTANT to set requests to be syncronous */
 			/* TODO test all requests without the following code 'cause of deprecation */
@@ -31,10 +31,7 @@
 			this.ls 		= window.localStorage;
 			if(is_login)
 				loggedIn = true;
-	
-			/* Check if has a valid token */
-			//var response = apiRH.has_valid_token();
-			
+				
 			if(is_login){
 				
 				console.log('You okay, now you can start making calls');
@@ -461,12 +458,12 @@
  *                                                                         |___/ 
  */
 	jQuery(document).ready(function($) {
+		
 		/* 
 
 			Create a new account the old fashioned way 
 
 		*/
-	
 
 		if($('#create_account').length)
 			$('#create_account').validate({
@@ -477,11 +474,11 @@
 							email: true
 						},
 					pass: {
-						required:true,
-						minlength:7
+						required: true,
+						minlength: 7
 					},
 					cpass: {
-						required:true,
+						required: true,
 						equalTo:"#pass"
 					},
 				},
@@ -490,41 +487,38 @@
 					mail: {
 							required: "Debes proporcionar un correo",
 							email: "Por favor proporciona un correo válido"
-						},
-					pass: "La contraseña debe ser de por lo menos siete caracteres",
+					},
+					pass: {
+						required :"Debes registrar una contraseña",
+						minlength :"Tu contraseña debe contener al menos siete caracteres"
+					},
 					cpass: "Las contraseñas que proporcionaste no coinciden"
 				},
 				submitHandler: function(){
-					console.log('creando usuario sin facebook');
-
-
+					app.showLoader();
+					console.log('Creating native user');
 					var data_login  	= app.getFormData('#create_account');
-
 					console.log(data_login);
 
-/*
-	stores user name
-*/
+					/*
+						stores user name
+					*/
 					localStorage.setItem('user_name', data_login.user);
 					localStorage.setItem('user_last_name', data_login.last_name);
 
 					data_login.pass 	= $('#pass').val();
 					
 					var responsedata 	= apiRH.registerNative(data_login);  
-					
-					//console.log(responsedata);						//llega hasta aqui con un valor FALSE
+					console.log(responsedata);
 
-					if(responsedata) {
-						//console.log(responsedata);
-						
+					if(responsedata) {						
+
 						apiRH.save_user_data_clientside(responsedata);
-						
 						window.location.assign('code.html');
-
+						app.hideLoader();
 						return;
 					}else{
-						app.toast('Lo sentimos, el nombre de usuario ya existe.'); //dispara el toast con el mensaje.
-						//e.preventDefault();
+						return app.toast('Lo sentimos, el email o usuario ya existe.');
 					}
 				}
 			});
@@ -592,13 +586,15 @@
 				},
 				submitHandler:function(){
 
-					app.showLoader();
+					console.log('login sin facebook');
+
 					var data_login	= app.getFormData("#login_form");
 
 					console.log(data_login.mail);
 
 					data_login.pass = $('#pass').val();
 					var responsedata = apiRH.loginNative(data_login);
+				  	console.log("RESPUESTA: " + responsedata);
 
 					 if(responsedata){
 						
@@ -615,23 +611,25 @@
 					 	
 					 	return;
 					}else{
-						app.toast('Hay un error en tus datos, por favor intenta de nuevo.');
+						app.toast('Error en la combinación de usuario / contraseña, por favor intenta de nuevo.');
 					}
 					app.hideLoader();
 				}
 			}); //END VALIDATE
 		}
 
-//-----------------------------
-//
-// Keyboard events for iOS
-//
-//-----------------------------
+		//-----------------------------
+		//
+		// Keyboard events for iOS
+		//
+		//-----------------------------
+		console.log("Initializing events");
 		var initialViewHeight = document.documentElement.clientHeight;
 		var calculate = null;
 
 		/*** Fix keyboard defaults ***/
 		if(typeof Keyboard != 'undefined'){
+			console.log("Keyboard not undefined");
 			Keyboard.disableScrollingInShrinkView(false);
 			Keyboard.shrinkView(false);
 		}
@@ -646,14 +644,12 @@
 
 		var fixWithKeyboard = function(){
 			$('body').addClass("openkeyboard");
-			$(html).resize();
-			$(body).resize();
 			if($('#container').hasClass("chat")){
 
 				calculate = (!calculate) ? document.documentElement.clientHeight : calculate;			
 				$('#container').animate({ height: calculate+"px"}, 240, 'swing', function(){
-				});
 					$('.escribir').slideToggle('fast');
+				});
 				return;
 			}
 			
@@ -664,6 +660,7 @@
 		/* Keyboard shown event */
 		window.addEventListener('keyboardDidShow', function () {
 			
+			$('.escribir').hide();
 			window.openKeyboard = true;
 			return fixWithKeyboard();
 		});
@@ -676,16 +673,12 @@
 			$('.escribir').css('bottom', 0);
 		});
 
-		$('#mensaje-chat').on('click', function(){
-			$('.escribir').hide();
-		});
+		//-----------------------------
+		//
+		// Validate code
+		//
+		//-----------------------------
 
-
-//-----------------------------
-//
-// Validate code
-//
-//-----------------------------
 		if($('#code_form').length)
 			$('#code_form').validate({
 				rules:{
