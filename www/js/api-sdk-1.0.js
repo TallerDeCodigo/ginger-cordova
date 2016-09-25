@@ -248,6 +248,23 @@ function requestHandlerAPI(){
 			console.log(response);
 		};
 
+		this.validateRegistrationCode = function(code, email){
+			var req = {
+				method : 'post',
+				url : api_base_url + 'api/validatecode/',
+				headers: {
+					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'Content-Type': 'application/json'
+				},
+				data : {
+					'code': code, 
+					'mail': email
+				}
+			}
+			return this.makeRequest('api/validatecode/', req);
+		};
+
 		/**
 		  * Resgistro de tracking 
 		  **/
@@ -638,7 +655,7 @@ function requestHandlerAPI(){
 		this.makeRequest = function(endpoint, data){
 			app.showLoader();
 			console.log(' ::: MAKE REQUEST ::: ');
-			// console.log(data);
+			console.log(data);
 			var result = {};
 
 			$.ajax({
@@ -649,15 +666,17 @@ function requestHandlerAPI(){
 			  dataType: 'json',
 			  async: false
 			})
+			 .always(function(response){
+				setTimeout(function(){
+					app.hideLoader();
+				}, 2000);
+			})
 			 .done(function(response){
 				result = response;
-				console.log('<<DONE>>');
-				// console.log(response);
-				app.hideLoader();
 			})
 			 .fail(function(e){
-				result = e;
-				console.log(JSON.stringify(e));
+				console.log(e);
+				return false;
 			});
 			console.log('>->->->-result->->->->');
 			console.log( result);

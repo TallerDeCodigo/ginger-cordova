@@ -1358,6 +1358,7 @@ $(window).load(function(){
 	}
 
 	var clearTimeoutLogic = function(){
+		console.log("Clear timeout logic");
 		if(timeoutFlag){
 			clearInterval(timeout);
 	 	}else{
@@ -2233,6 +2234,9 @@ $(window).load(function(){
 
 			if($('#zipInput').val() == ''){
 				$('.overscreenzip').show();
+				$('.accept.zipcode').click(function(){
+					$('.overscreenzip').hide().removeClass('active');;
+				});
 				setTimeout(function() {$('.overscreenzip').addClass('active');}, 200);
 				return;
 			}

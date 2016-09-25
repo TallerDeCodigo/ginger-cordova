@@ -22,15 +22,29 @@
 				<a href="ingreso.html" class="back" style="display:block"><img src="images/back.svg"></a>
 			</div>
 		</header>
-	<div id="container" class="login">
-		<img class="logo" src="images/logo.svg">
-		<h4>VALIDACIÓN DE CUENTA</h4>
-		<form id="code_form" name="code_form" method="post">
-			<p>Hemos enviado un código de a tu correo electrónico</p>
-			<input id="code" type="number" name="code" placeholder="Código de validación">
-			<input id="enviar_login" type="submit" name="enviar_code" value="">
-		</form>
-	</div>
+		<div id="container" class="login">
+			<img class="logo" src="images/logo.svg">
+			<h4>VALIDACIÓN DE CUENTA</h4>
+			<form id="code_form" name="code_form" method="post">
+				<p>Hemos enviado un código de a tu correo electrónico</p>
+				<input id="code" type="number" name="code" placeholder="Código de validación">
+				<input id="enviar_login" type="submit" name="enviar_code" value="">
+			</form>
+		</div>
+
+		<div class="overscreen7" style="display:none">
+			<div class="ov-filler2"></div>
+			<div class="dialog">
+				<h5>Atención</h5>
+				<p>El código de validación que has introducido no es correcto, revisa la información e intenta nuevamente.</p>
+				<div class="di-options">
+					<a id="_alert_validate" class="accept">Aceptar</a>
+				</div>
+			</div>
+		</div>
+		<div class="loader_container" id="spinner">
+			<div class="loading"></div>
+		</div>
 	</body>
 	<script type="text/javascript">
 		/* Initialize app object and perform initial login check */

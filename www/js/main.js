@@ -688,9 +688,24 @@
 					code:"Proporciona tu código de activación"
 				},
 				submitHandler:function(){
-					// SERVICIO PARA OBTENER EL CODIGO DE VALIDACION
-					
-					window.location.assign('feed.html');
+					app.showLoader();
+					var form_data = app.getFormData("#code_form");
+					var res = apiRH.validateRegistrationCode(form_data.code, localStorage.mail);
+					if( res.length ){
+						window.location.assign('feed.html');
+						console.log(res);
+						return;
+					}else{
+						$('.overscreen7').show().addClass('active');
+						$('#container').toggleClass('blurred');
+						$('#_alert_validate').on('click', function(){
+							$('.overscreen7').hide().removeClass('active');
+							$('#container').toggleClass('blurred');
+						});
+						console.log(res);
+						return;
+					}
+
 
 
 				}
