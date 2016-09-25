@@ -126,15 +126,15 @@ function requestHandlerAPI(){
 						localStorage.setItem('edad', user.perfil.edad.real);
 					else
 						localStorage.setItem('edad', 0);
-					localStorage.setItem('zipcode', user.cp);
-					localStorage.setItem('estatura', user.perfil.estatura);
-					localStorage.setItem('peso', user.perfil.peso);
-					localStorage.setItem('peso_ideal', user.pesoDeseado);
-					localStorage.setItem('dpw', user.perfil.ejercicio);
-					localStorage.setItem('restricciones', user.restricciones);
-					localStorage.setItem('comentarios', user.comentarios);
-					localStorage.setItem('customerId', user.customerId);
-					localStorage.setItem('chatId', user.chatId);
+						localStorage.setItem('zipcode', user.cp);
+						localStorage.setItem('estatura', user.perfil.estatura);
+						localStorage.setItem('peso', user.perfil.peso);
+						localStorage.setItem('peso_ideal', user.pesoDeseado);
+						localStorage.setItem('dpw', user.perfil.ejercicio);
+						localStorage.setItem('restricciones', user.restricciones);
+						localStorage.setItem('comentarios', user.comentarios);
+						localStorage.setItem('customerId', user.customerId);
+						localStorage.setItem('chatId', user.chatId);
 					if(user.dieta !== undefined)
 						localStorage.setItem('dietaId', user.dieta._id);
 					else

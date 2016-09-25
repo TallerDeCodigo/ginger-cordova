@@ -222,7 +222,8 @@ nav.selector {margin:5% 0px 7%;}
 
 img.enter {position:absolute;bottom:2.5%;left:50%;margin-left:-25px;display:block;height:50px;}
 img.saltar {position:absolute;bottom:2.5%;left:50%;margin-left:-65px;display:block;height:50px;}
-
+.openkeyboard img.enter,
+.openkeyboard img.saltar{display: none;}
 
 .sld-wrapper {position:relative;text-align:left;overflow-y:hidden;overflow-x:scroll;width:100%;margin:3.5% 0px 7%;}
 .mover {position:relative;}
@@ -538,7 +539,7 @@ a.mail {background:#2eab7e url('../images/mail_btn.png') no-repeat;background-si
 
 /* DIALOG */
 
-.overscreen2 {position:fixed;width:100%;height:100%;top:0px;left:0px;z-index:999999999999;}
+.overscreen2, .overscreenzip {position:fixed;width:100%;height:100%;top:0px;left:0px;z-index:999999999999;}
 .ov-filler2 {position:absolute;left:0px;top:0px;width:100%;height:100%;background:rgba(0,0,0,0.4);opacity:0;-webkit-transition:.15s ease-in-out;transition:.15s ease-in-out;}
 .active .ov-filler2 {opacity:1;}
 

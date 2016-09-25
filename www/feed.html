@@ -75,7 +75,7 @@
 					    			</div>
 					    			<div class="page zip sector-1" style="display:none">
 					    				<div class="box-input-1">
-					    					<input type="number" min="1" max="99999" name="zipcode" style="height:50px!important;" placeholder="06000" onkeypress='return event.charCode >= 46 && event.charCode <= 57' pattern="[0-9]*" >
+					    					<input id="zipInput" type="number" min="1" max="99999" name="zipcode" style="height:50px!important;" placeholder="06000" onkeypress='return event.charCode >= 46 && event.charCode <= 57' pattern="[0-9]*" >
 					    				</div>
 					    			</div>
 					    		</div>
@@ -382,6 +382,16 @@
 					<div class="dialog">
 						<h5>Estricto</h5>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut ipsum eget mauris euismod.</p>
+						<div class="di-options">
+							<a class="accept">Aceptar</a>
+						</div>
+					</div>
+				</div>
+				<div class="overscreenzip" style="display:none">
+					<div class="ov-filler2"></div>
+					<div class="dialog">
+						<h5>Código postal</h5>
+						<p>No has introducido un Código Postal</p>
 						<div class="di-options">
 							<a class="accept">Aceptar</a>
 						</div>

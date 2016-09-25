@@ -2230,6 +2230,12 @@ $(window).load(function(){
 		}
 	
 		$('#finish1').click(function(){
+
+			if($('#zipInput').val() == ''){
+				$('.overscreenzip').show();
+				setTimeout(function() {$('.overscreenzip').addClass('active');}, 200);
+				return;
+			}
 			$('.aboutyou').animate({opacity:"0",left:"-40px"}, 200);
 			$('.bpur').removeClass('active');
 			$('.bgre').addClass('active');
