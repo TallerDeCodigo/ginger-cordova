@@ -1355,6 +1355,7 @@ $(window).load(function(){
 	                              false, false, false, 0/*left*/, null);
 	    first.target.dispatchEvent(simulatedEvent);
 	    event.preventDefault();
+	    return true;
 	}
 
 	var clearTimeoutLogic = function(){
@@ -1365,6 +1366,7 @@ $(window).load(function(){
 	 		setTimeout(function(){
 	 			clearInterval(timeout);
 	 			timeoutFlag = false;
+	 			return true;
 	 		}, timer);
 	 	}
 		timeoutFlag = false;
@@ -1375,7 +1377,7 @@ $(window).load(function(){
 	$("#estatura-up").bind('touchstart touchend', stickyTouchHandler);
 
 	$("#estatura-up").bind('mousedown', function(e){
-		e.preventDefault();
+		// e.preventDefault();
 		if (clickTimer == null) {
         	clickTimer = setTimeout(function () {
 	            clickTimer = null;
