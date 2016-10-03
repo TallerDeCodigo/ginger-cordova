@@ -658,10 +658,10 @@ $(window).on("load resize",function(){
 
 			var restricciones = [];
 				 restricciones =  localStorage.getItem('restricciones');
-				 console.log('restricciones> '+restricciones);
+				 // console.log('restricciones> '+restricciones);
 				 if(restricciones == null || restricciones === 'undefined'){
 					restricciones = [];
-					console.log("es vacio> " +typeof restricciones );
+					// console.log("es vacio> " +typeof restricciones );
 				 }else{
 					restricciones = JSON.parse("["+restricciones+"]");
 					console.log(restricciones.length);
