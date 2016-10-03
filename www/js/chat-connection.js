@@ -11,7 +11,6 @@ function connectToChat(user) {
 
 		currentUser = user;
 
-		console.log(res);
 		if (res) {
 			// save session token
 			token = res.token;
