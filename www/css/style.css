@@ -469,7 +469,7 @@ div.acc-content .platillo:last-of-type div.extra-info {border:none;}
 .ini-options a {width:90px;height:90px;background:blue;display:inline-block;vertical-align:top;border-radius:50%;color:#FFF;font-weight:700;}
 
 a.morado {margin-right:15%;line-height:88px;background:rgba(128,65,183,0.55);}
-a.verde {padding-top:28px;background:rgba(0,183,166,0.55);}
+a.verde {padding-top :28px; background: rgba(0,183,166,0.55); }
 
 /* SEGUNDO */
 
@@ -477,8 +477,8 @@ a.verde {padding-top:28px;background:rgba(0,183,166,0.55);}
 .seg-options {position:absolute;width:100%;height:120px;top:72.5%;}
 .seg-options a {width:80%;height:36px;line-height:36px;color:#FFF;font-weight:700;display:inline-block;text-align:left;padding-left:48px;font-size:105%;margin:12px 0px;}
 
-a.face {background:#4b66a1 url('../images/fb_btn.png') no-repeat;background-size:auto 100%;}
-a.mail {background:#2eab7e url('../images/mail_btn.png') no-repeat;background-size:auto 100%;}
+a.face { background:#4b66a1 url('../images/fb_btn.png') no-repeat;background-size:auto 100%; }
+a.mail { background:#2eab7e url('../images/mail_btn.png') no-repeat;background-size:auto 100%; }
 
 /* PERFIL */
 

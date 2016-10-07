@@ -15,6 +15,8 @@ window.initializeEvents = function(){
 		$('.hook').on('click', function(e){
 			e.preventDefault();
 			app.showLoader();
+			if( $(this).data('resource') == "entermode" )
+				return app.render_entermode( $(this).attr('href') );
 			if( $(this).data('resource') == "login" )
 				return app.render_login( $(this).attr('href') );
 			if( $(this).data('resource') == "register" )

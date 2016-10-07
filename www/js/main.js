@@ -197,15 +197,23 @@
 				$('.rootContainer').html( html );
 			}
 		},
-		render_pick_login : function(url){
+		render_entermode : function(url){
 			app.showLoader();
 			app.check_or_renderContainer();
-			console.log("Rendering Pick login type");
+			console.log("Rendering Enter mode");
 			var data = this.gatherEnvironment();
 			data.is_scrollable = false;
-			return this.switchView('pick-login', data, '.view', url, 'inicio');
+			return this.switchView('entermode', data, '.view', url, 'inicio');
 		},
 		render_login : function(url){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering Login");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('login', data, '.view', url, 'login');
+		},
+		render_login_email : function(url){
 			app.showLoader();
 			app.check_or_renderContainer();
 			console.log("Rendering Login");
@@ -339,7 +347,7 @@
 			if(!keepLoader)
 				return setTimeout(function(){
 					if(window.firstTime)
-						window.firstTime = false;				
+						window.firstTime = false;
 					app.hideLoader();
 					initializeEvents();
 				}, 2000);
