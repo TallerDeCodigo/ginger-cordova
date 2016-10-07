@@ -396,22 +396,22 @@ body.dieta #container {background:#f5f1f0;}
 div.acc-selector {width:100%;color:#FFF;font-weight:900;font-size:150%;letter-spacing:0.06em;margin-bottom:-10px;border-top-left-radius:7px;border-top-right-radius:7px;height:74px;line-height:69px;outline:none;}
 div.acc-content {width:100%;background:#f5f1f0;text-align:left;}
 
-.platillo {width:100%;padding-top:10px;border-bottom:1px solid #cfcfcf!important;}
-.platillo h5 {font-size:115%;margin-bottom:18px;padding-left:4px;}
+.platillo {width:100%; padding-top:10px; border-bottom:1px solid #cfcfcf!important; }
+.platillo h5 {font-size:115%; margin-bottom:18px; padding-left:4px;}
 
-nav.botones {float:right;margin:2px 0px 5px 15px;}
-.platillo svg {width:28px;margin-left:10px;}
+nav.botones {float:right; margin:2px 0px 5px 15px;}
+.platillo svg {width:28px; margin-left:10px;}
 .desayuno svg {fill:#8041b7;}
 .snack1 svg {fill:#33cc99;}
 .comida svg {fill:#e2376c;}
 .snack2 svg {fill:#ff9933;}
 .cena svg {fill:#ffd156;}
 
-.desayuno .plat-comentario {background:#8041b7;}
-.snack1 .plat-comentario {background:#33cc99;}
-.comida .plat-comentario {background:#e2376c;}
-.snack2 .plat-comentario {background:#ff9933;}
-.cena .plat-comentario {background:#ffd156;}
+.desayuno .plat-comentario {background: #8041b7;}
+.snack1 .plat-comentario {background: #33cc99;}
+.comida .plat-comentario {background: #e2376c;}
+.snack2 .plat-comentario {background: #ff9933;}
+.cena .plat-comentario {background: #ffd156;}
 
 .plat-comentario:empty{display: none;}
 .comment_pop textarea{ width: 95%; padding: 0.5rem; resize: none; height: 80px; border: 1px solid #d6d8ef; margin-bottom: 1rem;}
@@ -450,17 +450,17 @@ div.acc-content .platillo:last-of-type div.extra-info {border:none;}
 .ruedas img {position:relative;display:inline-block;width:50%;height:auto;margin-top:7px;}
 .ruedas span {position:relative;display:block;top:-4px;font-weight:900;font-size:30%;letter-spacing:-0.03em;}
 
-.overscreen .rueda-1 {bottom:-47px;left:50%;-webkit-transform:scale(0.5) rotate(150deg);opacity:0;-webkit-transition:.15s ease-in-out;transition:.15s ease-in-out;}
-.overscreen .rueda-2 {bottom:-47px;left:50%;-webkit-transform:scale(0.5) rotate(150deg);opacity:0;-webkit-transition:.2s ease-in-out;transition:.2s ease-in-out;}
-.overscreen .rueda-3 {bottom:-47px;left:50%;-webkit-transform:scale(0.5) rotate(150deg);opacity:0;-webkit-transition:.3s ease-in-out;transition:.3s ease-in-out;}
-.overscreen .rueda-4 {bottom:-47px;left:50%;-webkit-transform:scale(0.5) rotate(150deg);opacity:0;-webkit-transition:.35s ease-in-out;transition:.35s ease-in-out;}
-.overscreen .rueda-5 {bottom:-47px;left:50%;-webkit-transform:scale(0.5) rotate(150deg);opacity:0;-webkit-transition:.4s ease-in-out;transition:.4s ease-in-out;}
+.overscreen .rueda-1{ bottom:-47px; left:50%; -webkit-transform:scale(0.5) rotate(150deg); opacity:0; -webkit-transition:.15s ease-in-out; transition:.15s ease-in-out;}
+.overscreen .rueda-2{ bottom:-47px; left:50%; -webkit-transform:scale(0.5) rotate(150deg); opacity:0; -webkit-transition:.2s ease-in-out; transition:.2s ease-in-out;}
+.overscreen .rueda-3{ bottom:-47px; left:50%; -webkit-transform:scale(0.5) rotate(150deg); opacity:0; -webkit-transition:.3s ease-in-out; transition:.3s ease-in-out;}
+.overscreen .rueda-4{ bottom:-47px; left:50%; -webkit-transform:scale(0.5) rotate(150deg); opacity:0; -webkit-transition:.35s ease-in-out; transition:.35s ease-in-out;}
+.overscreen .rueda-5{ bottom:-47px; left:50%; -webkit-transform:scale(0.5) rotate(150deg); opacity:0; -webkit-transition:.4s ease-in-out; transition:.4s ease-in-out;}
 
-.active .rueda-1 {bottom:10px;left:17%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
-.active .rueda-2 {bottom:50px;left:31%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
-.active .rueda-3 {bottom:68px;left:50%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
-.active .rueda-4 {bottom:50px;left:69%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
-.active .rueda-5 {bottom:10px;left:83%;-webkit-transform:scale(1.0) rotate(0deg);opacity:1;}
+.active .rueda-1 { bottom:10px; left:17%; -webkit-transform:scale(1.0) rotate(0deg); opacity:1;}
+.active .rueda-2 { bottom:50px; left:31%; -webkit-transform:scale(1.0) rotate(0deg); opacity:1;}
+.active .rueda-3 { bottom:68px; left:50%; -webkit-transform:scale(1.0) rotate(0deg); opacity:1;}
+.active .rueda-4 { bottom:50px; left:69%; -webkit-transform:scale(1.0) rotate(0deg); opacity:1;}
+.active .rueda-5 { bottom:10px; left:83%; -webkit-transform:scale(1.0) rotate(0deg); opacity:1;}
 
 /* INICIO */
 

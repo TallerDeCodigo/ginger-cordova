@@ -19,13 +19,14 @@
 			var data_user = apiRH.getProfile();
 			var is_client = localStorage.getItem('customerId');
 			var is_current = localStorage.getItem('valido');
-			// console.log(is_login);
 
 			/* IMPORTANT to set requests to be syncronous */
 			/* TODO test all requests without the following code 'cause of deprecation */
 			$.ajaxSetup({
 				 async: false
 			});
+
+			this.registerCompiledPartials();
 
 			window.loggedIn = false;
 			this.ls 		= window.localStorage;
@@ -91,6 +92,26 @@
 				}
 			});
 			return;
+		},
+		registerTemplate : function(name) {
+			$.ajax({
+				url : 'views/' + name + '.hbs',
+				success : function(response) {
+						if (Handlebars.templates === undefined)
+							Handlebars.templates = {};
+					Handlebars.templates[name] = Handlebars.compile(response);
+				}
+			});
+			return;
+		},
+		registerCompiledPartials: function() {
+			console.log("Register pre compiled partials");
+			/* Add files to be loaded here */
+			var filenames = ['header', 'loader'];
+			
+			filenames.forEach(function (filename) {
+					Handlebars.registerPartial(filename, Handlebars.templates[filename]);
+			});
 		},
 		bindEvents: function() {
 			document.addEventListener('deviceready', app.onDeviceReady, false);

@@ -1,15 +1,13 @@
-	<header class="htrans">
-		<div class="toolbar">
-			<a href="inicio.html" class="back" style="display:block"><img src="images/back.svg"></a>
-		</div>
-	</header>
-
-	<div id="container" class="segundo">
-		<div class="seg-options">
-			<a class="face" href="">Ingresar con Facebook</a>
-			<a class="mail" href="login.html">Ingresar con e-mail</a>
-		</div>
-	</div>
-	<div class="loader_container" id="spinner">
-		<div class="loading"></div>
+	{{> header}}
+	<div class="login ">
+		<img class="logo" src="images/logo.svg">
+		<h4>CREAR UNA CUENTA</h4>
+		<form id="create_account" name="create_account" method="post">
+			<input id="user" 		type="text" 	name="user" 	 placeholder="Nombre">
+			<input id="last_name" 	type="text" 	name="last_name" placeholder="Apellido">
+			<input id="mail" 		type="email" 	name="mail"		 placeholder="Correo electrónico">
+			<input id="pass" 		type="password" name="pass" 	 placeholder="Contraseña">
+			<input id="c_pass" 		type="password" name="cpass" 	 placeholder="Confirmar contraseña">
+			<input id="enviar" 		type="submit" 	name="enviar" 	 value="">
+		</form>
 	</div>

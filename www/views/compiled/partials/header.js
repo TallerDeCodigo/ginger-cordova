@@ -1,0 +1,1 @@
+!function(){var a=Handlebars.template,e=Handlebars.templates=Handlebars.templates||{};e["header"]=a({compiler:[7,">= 4.0.0"],main:function(a,e,s,r,n){return'<header class="htrans">\n	<div class="toolbar">\n		<a data-resource="entermode" href="inicio.html" class="back hook" style="display:block"><img src="images/back.svg"></a>\n	</div>\n</header>'},useData:!0})}();
