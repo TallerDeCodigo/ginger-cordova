@@ -13,7 +13,7 @@
 			this.bindEvents();
 			/* Initialize API request handler */
 			window.apiRH = new requestHandlerAPI().construct(app);
-
+			window.firstTime = true;
 			
 			var is_login = apiRH.has_token();
 			var data_user = apiRH.getProfile();
@@ -188,11 +188,38 @@
 					if (hasOwnProperty.call(obj, key)) return false;
 				return true;
 		},
-		render_login : function(){
+		check_or_renderContainer : function(){
+			/*** First time loading home ***/
+			if(window.firstTime){
+				console.log("Rendering first time");
+				var container_template = Handlebars.templates['container'];
+				var html 	 = container_template();
+				$('.rootContainer').html( html );
+			}
+		},
+		render_pick_login : function(url){
 			app.showLoader();
-			$(document).ready(function(){
-				return app.hideLoader();
-			});
+			app.check_or_renderContainer();
+			console.log("Rendering Pick login type");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('pick-login', data, '.view', url, 'inicio');
+		},
+		render_login : function(url){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering Login");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('login', data, '.view', url, 'login');
+		},
+		render_register : function(url){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering Register new user");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('register', data, '.view', url, 'segundo');
 		},
 		render_settings : function(){
 			return app.showLoader();
@@ -204,6 +231,9 @@
 			return app.showLoader();
 		},
 		render_menu : function(){
+			return app.showLoader();
+		},
+		render_create_account : function(){
 			return app.showLoader();
 		},
 		render_search_results : function(search_term){
@@ -284,6 +314,41 @@
 		      $("input[type=file]").val('');
 		    }
 		  });
+		},
+		switchView: function(newTemplate, data, targetSelector, recordUrl, targetClass, keepLoader){
+			/* Push to history if url is supplied */
+			if(recordUrl) window.history.pushState(newTemplate, newTemplate, '/'+recordUrl);
+			
+			var template = Handlebars.templates[newTemplate];
+			if(!template){
+				console.log("Template doesn't exist");
+				return false;
+			}
+			$(targetSelector).fadeOut('fast', function(){
+
+				if(targetClass) $(targetSelector).attr('class','view').addClass(targetClass);
+				$(targetSelector).html( template(data) ).css("opacity", 1)
+												 .css("display", "block")
+												 .css("margin-left", "20px")
+												 .animate(	{
+																'margin-left': "0",
+																opacity: 1
+															}, 240);
+			});
+			console.log("KeepLoader :: "+keepLoader);
+			if(!keepLoader)
+				return setTimeout(function(){
+					if(window.firstTime)
+						window.firstTime = false;				
+					app.hideLoader();
+					initializeEvents();
+				}, 2000);
+				
+			return setTimeout(function(){
+					if(window.firstTime)
+						window.firstTime = false;				
+					initializeEvents();
+				}, 2000);
 		},
 		showLoader: function(){
 			$('#spinner').show();
@@ -418,8 +483,7 @@
 				console.log(response);	
 			});
 		},
-		get_diet: function(dietId)
-		{
+		get_diet: function(dietId){
 			var req = {
 				method : 'GET',
 				url : api_base_url + 'tables/dieta/' + dietId,  //definitr tabla
@@ -626,7 +690,7 @@
 		// Keyboard events for iOS
 		//
 		//-----------------------------
-		console.log("Initializing events");
+		console.log("Initializing keyboard events");
 		var initialViewHeight = document.documentElement.clientHeight;
 		var calculate = null;
 
@@ -655,7 +719,7 @@
 				});
 				return;
 			}
-			
+
 		}
 
 		window.openKeyboard = false;
@@ -676,12 +740,12 @@
 			$('.escribir').css('bottom', 0);
 		});
 
+
 		//-----------------------------
 		//
 		// Validate verification code
 		//
 		//-----------------------------
-
 		if($('#code_form').length)
 			$('#code_form').validate({
 				rules:{

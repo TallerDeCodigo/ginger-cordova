@@ -129,6 +129,9 @@ pre {font-family:'Kohi';font-weight:300;}
 
 .openkeyboard .overscreen3.active{position: absolute;}
 
+.view{width: 100%; min-height: 100vh; height: 100%;}
+.view.inicio{ height: 100vh; margin-top: -9.5vh;}
+
 h2 {margin:10px 0px 0px;font-weight:100;font-size:140%;}
 h4 {margin:10px 0px 12px;font-weight:700;font-size:130%;color:#333;}
 
@@ -470,7 +473,7 @@ a.verde {padding-top:28px;background:rgba(0,183,166,0.55);}
 
 /* SEGUNDO */
 
-.segundo {background:#f4f1f0 url('../images/fondo_login.png');background-size:100% auto;}
+.segundo { background: #f4f1f0 url('../images/fondo_login.png'); background-size:100% auto; margin-top: -9.5vh; }
 .seg-options {position:absolute;width:100%;height:120px;top:72.5%;}
 .seg-options a {width:80%;height:36px;line-height:36px;color:#FFF;font-weight:700;display:inline-block;text-align:left;padding-left:48px;font-size:105%;margin:12px 0px;}
 
