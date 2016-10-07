@@ -221,13 +221,21 @@
 			data.is_scrollable = false;
 			return this.switchView('login', data, '.view', url, 'login');
 		},
-		render_register : function(url){
+		render_register : function( url ){
 			app.showLoader();
 			app.check_or_renderContainer();
-			console.log("Rendering Register new user");
+			console.log("Rendering Register landing");
 			var data = this.gatherEnvironment();
 			data.is_scrollable = false;
 			return this.switchView('register', data, '.view', url, 'segundo');
+		},
+		render_register_mail : function( url ){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering Register by Email");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('register-mail', data, '.view', url, 'segundo');
 		},
 		render_settings : function(){
 			return app.showLoader();

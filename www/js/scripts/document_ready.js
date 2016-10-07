@@ -17,10 +17,15 @@ window.initializeEvents = function(){
 			app.showLoader();
 			if( $(this).data('resource') == "entermode" )
 				return app.render_entermode( $(this).attr('href') );
-			if( $(this).data('resource') == "login" )
-				return app.render_login( $(this).attr('href') );
 			if( $(this).data('resource') == "register" )
 				return app.render_register( $(this).attr('href') );
+				if( $(this).data('resource') == "register-mail" )
+					return app.render_register_mail( $(this).attr('href') );
+			
+			if( $(this).data('resource') == "login" )
+				return app.render_login( $(this).attr('href') );
+				if( $(this).data('resource') == "login-mail" )
+					return app.render_login_mail( $(this).attr('href') );
 
 			e.stopPropagation();
 		});
