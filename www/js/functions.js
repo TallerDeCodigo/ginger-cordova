@@ -273,6 +273,7 @@ $(window).on("load resize",function(){
 			$('#accept_chCoach2').click(function(){
 				 $('.alert_chCoach2').hide();
 				 $('#container').toggleClass('blurred');
+				 // TODO: Use render methods not hard loading
 				 window.location.assign('userdata.html');
 			});
 
@@ -636,6 +637,7 @@ $(window).on("load resize",function(){
 					var response = apiRH.updatePerfil(json);
 
 					if(response){
+						// TODO: Use render methods not hard loading
 						window.location.assign('userdata.html');
 					}
 				});	// end click _alert_chCoach
@@ -2711,7 +2713,8 @@ $(window).load(function(){
 		});
 
 		$('.back').click(function(){
-			if($('.aboutyou').is(':visible')){
+			if( $('.aboutyou').is(':visible') ){
+				// TODO: Use render methods not hard loading
 				window.location.assign('inicio.html');
 			} 
 			if($('.objetive').is(':visible')){
@@ -3507,6 +3510,7 @@ $(window).load(function(){
 
 								if(response){
 									localStorage.clear();
+									// TODO: Use render methods not hard loading
 									window.location.assign('index.html');
 								}	
 							});

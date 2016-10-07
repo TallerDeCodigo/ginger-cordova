@@ -1064,8 +1064,10 @@ function requestHandlerAPI(){
 													localStorage.setItem('chatPassword', user.coach.chatPassword);
 												}	
 												if(user.customerId !== 'undefined'){
+													// TODO: Use render methods not hard loading
 													window.location.assign('dieta.html');
 												}else{
+													// TODO: Use render methods not hard loading
 													window.location.assign('feed.html');
 												}
 											}
@@ -1137,8 +1139,10 @@ function requestHandlerAPI(){
 						var u = JSON.parse(localStorage.getItem('users'));
 
 						if(u.customerId == 'no_set'){
+							// TODO: Use render methods not hard loading
 							window.location.assign('feed.html');	
 						}else{
+							// TODO: Use render methods not hard loading
 							window.location.assign('dieta.html');	
 						}
 

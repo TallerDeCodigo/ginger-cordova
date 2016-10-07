@@ -42,6 +42,7 @@
 				if(is_home){
 					console.log(is_client);
 					if(is_client == 'not_set'){
+						// TODO: Use render methods not hard loading
 						window.location.assign('feed.html');
 					}else
 						return;
@@ -56,8 +57,10 @@
 					}else{
 						console.log('Es cliente?' + is_client);
 						if(is_client == null){
+							// TODO: Use render methods not hard loading
 							window.location.assign('feed.html');
 						}else{
+							// TODO: Use render methods not hard loading
 							window.location.assign('dieta.html');
 						}	
 
@@ -675,7 +678,7 @@
 
 		//-----------------------------
 		//
-		// Validate code
+		// Validate verification code
 		//
 		//-----------------------------
 
@@ -688,12 +691,18 @@
 					code:"Proporciona tu código de activación"
 				},
 				submitHandler:function(){
-					app.showLoader();
+					
+					setTimeout(function(){
+						app.showLoader();
+					}, 800);
+
 					var form_data = app.getFormData("#code_form");
 					var res = apiRH.validateRegistrationCode(form_data.code, localStorage.mail);
+					console.log(res);
 					if( res.length ){
+						app.toast("Tu código ha sido validado correctamente!");
+						// TODO: Use render methods not hard loading
 						window.location.assign('feed.html');
-						console.log(res);
 						return;
 					}else{
 						$('.overscreen7').show().addClass('active');
@@ -702,14 +711,13 @@
 							$('.overscreen7').hide().removeClass('active');
 							$('#container').toggleClass('blurred');
 						});
-						console.log(res);
 						return;
 					}
 
 
 
 				}
-		}); //END VALIDATE
+			});
 
 
 
