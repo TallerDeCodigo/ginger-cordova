@@ -216,7 +216,7 @@
 		render_login_email : function(url){
 			app.showLoader();
 			app.check_or_renderContainer();
-			console.log("Rendering Login");
+			console.log("Rendering Login email");
 			var data = this.gatherEnvironment();
 			data.is_scrollable = false;
 			return this.switchView('login', data, '.view', url, 'login');
