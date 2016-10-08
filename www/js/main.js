@@ -240,7 +240,7 @@
 			console.log("Rendering Login email");
 			var data = this.gatherEnvironment();
 			data.is_scrollable = false;
-			return this.switchView('login', data, '.view', url, 'login');
+			return this.switchView('login-mail', data, '.view', url, 'segundo');
 		},
 		render_register : function( url ){
 			app.showLoader();

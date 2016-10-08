@@ -401,11 +401,11 @@ div.acc-content {width:100%;background:#f5f1f0;text-align:left;}
 
 nav.botones {float:right; margin:2px 0px 5px 15px;}
 .platillo svg {width:28px; margin-left:10px;}
-.desayuno svg {fill:#8041b7;}
-.snack1 svg {fill:#33cc99;}
-.comida svg {fill:#e2376c;}
-.snack2 svg {fill:#ff9933;}
-.cena svg {fill:#ffd156;}
+.desayuno svg {fill: #8041b7;}
+.snack1 svg {fill: #33cc99;}
+.comida svg {fill: #e2376c;}
+.snack2 svg {fill: #ff9933;}
+.cena svg {fill: #ffd156;}
 
 .desayuno .plat-comentario {background: #8041b7;}
 .snack1 .plat-comentario {background: #33cc99;}

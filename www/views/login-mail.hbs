@@ -1,15 +1,17 @@
+
 	<header class="htrans">
 		<div class="toolbar">
-			<a href="inicio.html" class="back hook" data-resource="entermode" style="display:block"><img src="images/back.svg"></a>
+			<a data-resource="entermode" href="ingreso.html" class="back hook back_with_logout" style="display:block">
+				<img src="images/back.svg">
+			</a>
 		</div>
 	</header>
-
-	<div id="container" class="segundo">
-		<div class="seg-options">
-			<a class="face" href="">Ingresar con Facebook</a>
-			<a class="mail" href="login.html">Ingresar con e-mail</a>
-		</div>
-	</div>
-	<div class="loader_container" id="spinner">
-		<div class="loading"></div>
+	<div>
+		<img class="logo" src="images/logo.svg">
+		<h4>INICIAR SESIÓN</h4>
+		<form id="login_form" name="login_form" method="POST" >
+			<input id="mail" type="email" name="mail" placeholder="Correo electrónico">
+			<input id="pass" type="password" name="pass" placeholder="Contraseña">
+			<input id="enviar_login" type="submit"  value="">
+		</form>
 	</div>
