@@ -57,6 +57,9 @@
 
 					}else{
 						console.log('Es cliente?' + is_client);
+						if(!app.ls.getItem('email_verification')){
+							return app.render_validate_code();
+						}
 						if(is_client == null){
 							// TODO: Use render methods not hard loading
 							window.location.assign('feed.html');
@@ -105,10 +108,8 @@
 			return;
 		},
 		registerCompiledPartials: function() {
-			console.log("Register pre compiled partials");
 			/* Add files to be loaded here */
 			var filenames = ['header', 'loader'];
-			
 			filenames.forEach(function (filename) {
 					Handlebars.registerPartial(filename, Handlebars.templates[filename]);
 			});
@@ -240,7 +241,7 @@
 			console.log("Rendering Login email");
 			var data = this.gatherEnvironment();
 			data.is_scrollable = false;
-			return this.switchView('login-mail', data, '.view', url, 'segundo');
+			return this.switchView('login-mail', data, '.view', url, 'login');
 		},
 		render_register : function( url ){
 			app.showLoader();
@@ -257,6 +258,14 @@
 			var data = this.gatherEnvironment();
 			data.is_scrollable = false;
 			return this.switchView('register-mail', data, '.view', url, 'segundo');
+		},
+		render_validate_code : function( url ){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering Validation Code");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('code', data, '.view', url, 'login');
 		},
 		render_settings : function(){
 			return app.showLoader();
@@ -372,7 +381,7 @@
 																opacity: 1
 															}, 240);
 			});
-			console.log("KeepLoader :: "+keepLoader);
+
 			if(!keepLoader)
 				return setTimeout(function(){
 					if(window.firstTime)
@@ -563,69 +572,7 @@
  */
 	jQuery(document).ready(function($) {
 		
-		/* 
-
-			Create a new account the old fashioned way 
-
-		*/
-
-		if($('#create_account').length)
-			$('#create_account').validate({
-				rules: {
-					user: "required",
-					mail: {
-							required: true,
-							email: true
-						},
-					pass: {
-						required: true,
-						minlength: 7
-					},
-					cpass: {
-						required: true,
-						equalTo:"#pass"
-					},
-				},
-				messages: {
-					user: "Debes proporcionar un nombre de usuario",
-					mail: {
-							required: "Debes proporcionar un correo",
-							email: "Por favor proporciona un correo válido"
-					},
-					pass: {
-						required :"Debes registrar una contraseña",
-						minlength :"Tu contraseña debe contener al menos siete caracteres"
-					},
-					cpass: "Las contraseñas que proporcionaste no coinciden"
-				},
-				submitHandler: function(){
-					app.showLoader();
-					console.log('Creating native user');
-					var data_login  	= app.getFormData('#create_account');
-					console.log(data_login);
-
-					/*
-						stores user name
-					*/
-					localStorage.setItem('user_name', data_login.user);
-					localStorage.setItem('user_last_name', data_login.last_name);
-
-					data_login.pass 	= $('#pass').val();
-					
-					var responsedata 	= apiRH.registerNative(data_login);  
-					console.log(responsedata);
-
-					if(responsedata) {						
-
-						apiRH.save_user_data_clientside(responsedata);
-						window.location.assign('code.html');
-						app.hideLoader();
-						return;
-					}else{
-						return app.toast('Lo sentimos, el email o usuario ya existe.');
-					}
-				}
-			});
+		
 
 		/* Log Out from the API */
 		$('#logout').on('click', function(e){
@@ -667,60 +614,7 @@
 
 // ----------------------------------------------------------------------
 
-/*
-	LOGIN WITHOUT FACEBOOK
-							*/
 
-		if($('#login_form').length){
-
-			$('#login_form').validate({
-				rules:{
-					mail:{
-						required:true,
-						email:true
-					},
-					pass:"required"
-				},
-				messages:{
-					mail:{
-						required:"Debes proporcionar un correo",
-						email:"Proporciona un correo válido"
-					},
-					pass:"Este campo es requerido para acceder a tu cuenta"
-				},
-				submitHandler:function(){
-
-					console.log('login sin facebook');
-
-					var data_login	= app.getFormData("#login_form");
-
-					console.log(data_login.mail);
-
-					data_login.pass = $('#pass').val();
-					var responsedata = apiRH.loginNative(data_login);
-				  	console.log("RESPUESTA: " + responsedata);
-
-					 if(responsedata){
-						
-						localStorage.setItem('user', JSON.stringify(responsedata));
-
-						var user = JSON.parse(localStorage.getItem('user'));
-
-						console.log('USER: ' + user.customerId);
-
-						if(user.customerId !== undefined)
-					 		window.location.assign('dieta.html');
-					 	else
-					 		window.location.assign('feed.html');
-					 	
-					 	return;
-					}else{
-						app.toast('Error en la combinación de usuario / contraseña, por favor intenta de nuevo.');
-					}
-					app.hideLoader();
-				}
-			}); //END VALIDATE
-		}
 
 		//-----------------------------
 		//

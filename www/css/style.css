@@ -129,11 +129,14 @@ pre {font-family:'Kohi';font-weight:300;}
 
 .openkeyboard .overscreen3.active{position: absolute;}
 
-.view{width: 100%; min-height: 100vh; height: 100%;}
+.view{width: 100%; min-height: 100vh; height: 100%; margin-top: -9.5vh; padding-top: 70px;}
 .view.inicio{ height: 100vh; margin-top: -9.5vh;}
 
 h2 {margin:10px 0px 0px;font-weight:100;font-size:140%;}
 h4 {margin:10px 0px 12px;font-weight:700;font-size:130%;color:#333;}
+
+	/*Prevent events layer*/
+	.preventEvents *{ pointer-events: none!important;}
 
 /* COLORS */ 
 
@@ -307,13 +310,13 @@ input[type=checkbox]:not(old):checked + span {background-position: 0 -29px;}
 
 /* LOGIN */
 .login {background:#f5f1f0;}
-.login img {margin-top:15px;}
+/*.login img {margin-top:15px;}*/
 .login .logo {width:50%;margin-top:10px;}
 .login form {margin-top:15%;}
 .login input {width:88%;border-radius:3px;outline:none;border:none;background:#FFF;margin:3% 0px;padding:4px 5px 1px;font-size:120%;font-weight:100;}
 .login input[type="submit"]{height:50px;}
 
-#enviar_login{background: url(../images/enter.svg);background-position: center;background-repeat: no-repeat;}
+.login .send_login{background: url(../images/enter.svg);background-position: center;background-repeat: no-repeat;}
 
 /*CREAR CUENTA*/
 #enviar{background: url(../images/enter.svg);background-position: center;background-repeat: no-repeat;}
@@ -401,7 +404,8 @@ div.acc-content {width:100%;background:#f5f1f0;text-align:left;}
 
 nav.botones {float:right; margin:2px 0px 5px 15px;}
 .platillo svg {width:28px; margin-left:10px;}
-.desayuno svg {fill: #8041b7;}
+.desayuno svg {fill: 
+	#8041b7;}
 .snack1 svg {fill: #33cc99;}
 .comida svg {fill: #e2376c;}
 .snack2 svg {fill: #ff9933;}
