@@ -1535,7 +1535,7 @@ function requestHandlerAPI(){
 			var token 	= localStorage.getItem('token');
 			var userId 	= localStorage.getItem('userId');
 
-			if(token){
+			if(token && userId){
 				var req = {
 					method : 'post',
 					url : api_base_url + 'tables/cliente/',
@@ -1593,6 +1593,7 @@ function requestHandlerAPI(){
 				return false;
 				
 			}
+			return false;
 		};
 
 

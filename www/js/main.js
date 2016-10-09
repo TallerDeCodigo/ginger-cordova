@@ -16,7 +16,6 @@
 			window.firstTime = true;
 			
 			var is_login = apiRH.has_token();
-			var data_user = apiRH.getProfile();
 			var is_client = localStorage.getItem('customerId');
 			var is_current = localStorage.getItem('valido');
 
@@ -58,6 +57,7 @@
 					}else{
 						console.log('Es cliente?' + is_client);
 						if(!app.ls.getItem('email_verification')){
+							console.log("Validate some codes");
 							return app.render_validate_code();
 						}
 						if(is_client == null){
