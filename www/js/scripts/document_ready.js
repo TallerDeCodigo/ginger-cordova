@@ -57,17 +57,24 @@ window.initializeEvents = function(){
 
 					 if(responsedata){
 						
-						localStorage.setItem('user', JSON.stringify(responsedata));
-						var user = JSON.parse(localStorage.getItem('user'));
+						app.ls.setItem( 'user', JSON.stringify(responsedata) );
+						var user = JSON.parse( localStorage.getItem('user') );
+						var verified = app.ls.getItem( 'email_verification' );
 
-						if(user.customerId !== undefined)
+						if(user.customerId !== undefined){
+							// TODO: Load interface via switch method
+							app.ls.setItem( 'email_verification', true );
 					 		window.location.assign('dieta.html');
-					 	else
-					 		window.location.assign('feed.html');
+						} else if(!verified){
+							// TODO: Load interface via switch method
+					 		return app.render_code();
+					 	}else{
+					 		window.location.assign('record.html');
+					 	}
 					 	
 					 	return;
 					}else{
-						app.toast('Error en la combinación de usuario / contraseña, por favor intenta de nuevo.');
+						app.toast('Tu usuario o contraseña son incorrectos, por favor intenta de nuevo.');
 					}
 					app.hideLoader();
 				}

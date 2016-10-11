@@ -283,7 +283,7 @@ function requestHandlerAPI(){
 					'tipo' : tipo,
 					'magnitud' : magnitud,
 					'cliente' : localStorage.getItem('userId'),
-					'coach' : localStorage.getItem('coach_id')
+					'coach' : localStorage.getItem('coachId')
 				}
 			}
 			console.log(req);
@@ -1068,7 +1068,7 @@ function requestHandlerAPI(){
 													window.location.assign('dieta.html');
 												}else{
 													// TODO: Use render methods not hard loading
-													window.location.assign('feed.html');
+													window.location.assign('record.html');
 												}
 											}
 											return ;
@@ -1140,7 +1140,7 @@ function requestHandlerAPI(){
 
 						if(u.customerId == 'no_set'){
 							// TODO: Use render methods not hard loading
-							window.location.assign('feed.html');	
+							window.location.assign('record.html');	
 						}else{
 							// TODO: Use render methods not hard loading
 							window.location.assign('dieta.html');	

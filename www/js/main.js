@@ -43,14 +43,14 @@
 					console.log(is_client);
 					if(is_client == 'not_set'){
 						// TODO: Use render methods not hard loading
-						window.location.assign('feed.html');
+						window.location.assign('record.html');
 					}else
 						return;
 				}else{
 					
 					if(is_feed){
 						if(is_client == null)
-							window.location.assign('feed.html');
+							window.location.assign('record.html');
 						else	
 							return;
 
@@ -62,7 +62,7 @@
 						}
 						if(is_client == null){
 							// TODO: Use render methods not hard loading
-							window.location.assign('feed.html');
+							window.location.assign('record.html');
 						}else{
 							// TODO: Use render methods not hard loading
 							window.location.assign('dieta.html');
@@ -73,7 +73,7 @@
 				return;
 			}else{
 				
-				// window.location.assign('feed.html');
+				// window.location.assign('record.html');
 				// return;
 
 			}
@@ -263,6 +263,14 @@
 			app.showLoader();
 			app.check_or_renderContainer();
 			console.log("Rendering Validation Code");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('code', data, '.view', url, 'login');
+		},
+		render_initial_record : function( url ){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering Initial Questions");
 			var data = this.gatherEnvironment();
 			data.is_scrollable = false;
 			return this.switchView('code', data, '.view', url, 'login');
@@ -697,7 +705,7 @@
 					if( res.length ){
 						app.toast("Tu código ha sido validado correctamente!");
 						// TODO: Use render methods not hard loading
-						window.location.assign('feed.html');
+						window.location.assign('record.html');
 						return;
 					}else{
 						$('.overscreen7').show().addClass('active');

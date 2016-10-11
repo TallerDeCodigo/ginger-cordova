@@ -816,10 +816,13 @@ $(window).load(function(){
 
 		if($('body').hasClass('dieta') ){
 
+			var dietId = localStorage.getItem('dietaId');
+			console.log("Diet Id ::: "+dietId);
+
 			var today = new Date();
 			var hoy = today.getDay();
 			var day_index;
-			var dieta = app.get_diet(localStorage.getItem('dieta_id'));
+			var dieta = app.get_diet(dietId);
 			var arr_desayuno
 			var arr_snack1
 			var arr_comida
@@ -2467,7 +2470,7 @@ $(window).load(function(){
 							if (key=='_id') {
 								// console.log('DIETA ID' + value);
 								// $('.slide-coach').attr('dieta', value);
-								localStorage.setItem('dieta_id', value);
+								localStorage.setItem('dietaId', value);
 							}
 							if(key == 'coach'){	
 								$.each( value, function( key, value ) {
@@ -2492,7 +2495,7 @@ $(window).load(function(){
 											// console.log('ID DE COACH: ' + value);
 											localStorage.setItem('coach_id', value);
 											$('.slide-coach:nth-of-type('+i+')').attr('coach', localStorage.getItem("coach_id"));
-											$('.slide-coach:nth-of-type('+i+')').attr('dieta_id', localStorage.getItem("dieta_id"));
+											$('.slide-coach:nth-of-type('+i+')').attr('dieta_id', localStorage.getItem("dietaId"));
 										}
 									}
 									if (key=='nombre') {
@@ -2648,7 +2651,7 @@ $(window).load(function(){
 				$('.insert_stars').append('<div class="nombre_resena"><div class="rate-stars2">'+html_stars+'</div></div><div class="resena_cont">'+html_comment+'</div>');
 			});
 		});//END BT-REVIEW
-
+		console.log("Lorem from the functions");
 		$('#aceptar').click(function(){
 			$('#container').toggleClass('blurred');
 			/*
