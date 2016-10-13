@@ -19,17 +19,20 @@ function requestHandlerAPI(){
 							platform: this.device_platform,
 							version: this.device_platform_version
 						};
+
+	/*** Request headers ***/
+	this.headers = 	{
+						'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+						'X-ZUMO-AUTH': window.localStorage.getItem('token'),
+						'Content-Type': 'application/json'
+					};
+					console.log(this.headers);
+
 	var context = this;
 	window.sdk_app_context = null;
 
-	/* 
-		Production API URL 
-							*/
-
-	window.api_base_url = "https://gingerservice.azure-mobile.net/";  //servicios ginger
-	/* Development local API URL */
-	// window.api_base_url = "http://dedalo.dev/rest/v1/";
-	// window.api_base_url = "http://localhost/~manuelon/dedalo/rest/v1/";
+	/*  Production API URL  */
+	window.api_base_url = "https://gingerservice.azure-mobile.net/";
 	
 	this.ls = window.localStorage;
 	/* Constructor */
@@ -41,7 +44,10 @@ function requestHandlerAPI(){
 					return this;
 				};
 				
-		/*** Methods ***/
+/***********************/
+/*** API sdk Methods ***/
+/***********************/
+		
 		/* 
 		 * Manage pseudo Log in process to use protected API calls
 		 * @param data_login JSON {user_login, user_password}
@@ -50,50 +56,40 @@ function requestHandlerAPI(){
 		 
 		this.loginNative =  function(data_login){
 
-		var email = data_login.mail;
-		var pass = data_login.pass;
-		var req = {
-				method : 'post',
-				url : api_base_url + 'api/login',
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'Content-Type': 'application/json'
-				},
-				data : {
-					"tipo" : "cliente",
-					"mail" : email,
-					"password" : pass
-				}
-			}
+			var email = data_login.mail;
+			var pass = data_login.pass;
+			var req = {
+						method 	: 'post',
+						url 	: api_base_url + 'api/login',
+						headers	: {
+							'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
+							'Content-Type'		: 'application/json'
+						},
+						data 	: {
+							"tipo" 		: "cliente",
+							"mail" 		: email,
+							"password" 	: pass
+						}
+					};
 			var response = this.makeRequest('api/login', req);
-
-			//console.log(response);
 
 			/*
 				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
 			*/
-			
-			// if(token){
 			localStorage.setItem('token', response.token);
 			localStorage.setItem('mail', response.mail);
 			localStorage.setItem('userId', response.userId);
-
-
-			//this.token = response.token;
 
 			var userId 	= localStorage.getItem('userId');
 			var mail 	= localStorage.getItem('mail');
 			var token 	= localStorage.getItem('token');
 
-			console.log('TOKEN RESPONSE ' + token);
-			// }
-			//console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + this.token);
+			console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + this.token);
 
-			/*
-				REGRESA LA RESPUESTA DEL SERVIDOR CON EL USER ID, MAIL Y TOKEN
-			*/
-
-			//console.log(token);
+			if(!token){
+				return false;
+			}
+			return this.token;
 
 			if(token){
 				var req = {
@@ -383,8 +379,6 @@ function requestHandlerAPI(){
 
 		};
 
-
-
 		this.changePayment = function(token){
 			var req = {
 				method : 'POST',
@@ -454,6 +448,13 @@ function requestHandlerAPI(){
 			console.log(response);  //llega aqui con la respuesta del servidor
 
 			return (response) ? response : false;
+		};
+
+		this.getInfoUser = function(){
+			
+			var response = this.getRequest('tables/coach?_id=' + localStorage.getItem('userId'), null);
+			this.save_user_data_clientside(JSON.stringify(response));
+			return (response) ? true : false;
 		};
 
 		this.updateUserSetting = function(data){

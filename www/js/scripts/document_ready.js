@@ -36,29 +36,41 @@ window.initializeEvents = function(){
 
 			$('#login_form').validate({
 				rules:{
-					mail:{
-						required:true,
-						email:true
+					mail :{
+						required : true,
+						email : true
 					},
-					pass:"required"
+					pass :"required"
 				},
 				messages:{
-					mail:{
-						required:"Debes proporcionar un correo",
-						email:"Proporciona un correo válido"
+					mail : {
+						required: "Debes proporcionar un correo",
+						email: "Proporciona un correo válido"
 					},
-					pass:"Este campo es requerido para acceder a tu cuenta"
+					pass : "Este campo es requerido para ingresar"
 				},
-				submitHandler:function(){
-
-					var data_login	= app.getFormData("#login_form");
-					data_login.pass = $('#pass').val();
-					var responsedata = apiRH.loginNative(data_login);
-
-					 if(responsedata){
+				submitHandler:function( form, event ){
+					event.preventDefault();
+					var data_login		= app.getFormData(form);
+					var login_response 	= apiRH.loginNative(data_login);
+					
+					if(login_response){
+						apiRH.headers['X-ZUMO-AUTH'] = login_response;
+						var coachInfo = apiRH.getInfoUser();
+						if(coachInfo){
+							var coachInfo 	= JSON.parse( localStorage.getItem('user') );
+							window._coach = (coachInfo) ? coachInfo : null;
+							return app.render_home();
+						}
 						
-						app.ls.setItem( 'user', JSON.stringify(responsedata) );
-						var user = JSON.parse( localStorage.getItem('user') );
+					}else{
+						app.toast("Ocurrió un error, por favor revisa que tus datos sean correctos.")
+					}
+
+					if(login_response){
+						
+						app.ls.setItem( 'user', JSON.stringify( login_response ) );
+						var user 	 = JSON.parse( localStorage.getItem('user') );
 						var verified = app.ls.getItem( 'email_verification' );
 
 						if(user.customerId !== undefined){
@@ -70,8 +82,7 @@ window.initializeEvents = function(){
 					 		return app.render_code();
 					 	}else{
 					 		window.location.assign('record.html');
-					 	}
-					 	
+					 	} 	
 					 	return;
 					}else{
 						app.toast('Tu usuario o contraseña son incorrectos, por favor intenta de nuevo.');

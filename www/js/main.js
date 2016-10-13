@@ -19,6 +19,8 @@
 			var is_client = localStorage.getItem('customerId');
 			var is_current = localStorage.getItem('valido');
 
+			window.cordova_full_path = "";
+
 			/* IMPORTANT to set requests to be syncronous */
 			/* TODO test all requests without the following code 'cause of deprecation */
 			$.ajaxSetup({
@@ -136,7 +138,9 @@
 		// deviceready Event Handler
 		onDeviceReady: function() {
 			app.receivedEvent('deviceready');
-
+			window.cordova_full_path = (typeof(cordova) != 'undefined') 
+									 ? cordova.file.applicationDirectory+"www/"
+									 : '';
 			/*   ___    _         _   _     
 			*  / _ \  / \  _   _| |_| |__  
 			* | | | |/ _ \| | | | __| '_ \ 
@@ -175,9 +179,9 @@
 		},
 		gatherEnvironment: function(optional_data, history_title) {
 			/* Gather environment information */
-			var meInfo 	= apiRH.ls.getItem('me');
-			var logged 	= apiRH.ls.getItem('me.logged');
-			var parsed 	= {me: JSON.parse(meInfo), logged_user: JSON.parse(logged)};
+			var meInfo 	= apiRH.ls.getItem('user');
+			// var logged 	= apiRH.ls.getItem('me.logged');
+			var parsed 	= {me: JSON.parse(meInfo)};
 			
 			if(optional_data){
 				parsed['data'] = optional_data;
@@ -185,6 +189,8 @@
 			}
 			if(history_title)
 				parsed['header_title'] = history_title;
+			if( typeof(cordova_full_path) != 'undefined' && cordova_full_path != '' )
+				parsed['cordova_full_path'] = cordova_full_path;
 			return parsed;
 
 		},

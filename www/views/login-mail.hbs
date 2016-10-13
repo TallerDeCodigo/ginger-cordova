@@ -2,14 +2,14 @@
 	<header class="htrans">
 		<div class="toolbar">
 			<a data-resource="entermode" href="ingreso.html" class="back hook back_with_logout" style="display:block">
-				<img src="images/back.svg">
+				<img src="{{cordova_full_path}}images/back.svg">
 			</a>
 		</div>
 	</header>
 	<div>
-		<img class="logo" src="images/logo.svg">
+		<img class="logo" src="{{cordova_full_path}}images/logo.svg">
 		<h4>INICIAR SESIÓN</h4>
-		<form id="login_form" name="login_form" method="POST" >
+		<form id="login_form">
 			<input id="mail" type="email" name="mail" placeholder="Correo electrónico">
 			<input id="pass" type="password" name="pass" placeholder="Contraseña">
 			<input id="enviar_login" class="send_login" type="submit"  value="">
