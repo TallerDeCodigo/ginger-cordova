@@ -1405,10 +1405,7 @@ function requestHandlerAPI(){
 		 */
 		this.prepareChatFileTransfer = function(fileURL, source){
 									app.showLoader();
-									// var myFSO 		= new ActiveXObject("Scripting.FileSystemObject");
-									// var thefile 	= myFSO.getFile(fileUrl);
-									// var size 		= thefile.size;
-									// console.log("size ::: "+size);
+									
 									var xhr = new XMLHttpRequest();
 									xhr.open('GET', fileUrl, true);
 									xhr.onreadystatechange = function(){

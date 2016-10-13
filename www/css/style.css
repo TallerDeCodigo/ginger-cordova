@@ -654,17 +654,18 @@ a.mail { background:#2eab7e url('../images/mail_btn.png') no-repeat;background-s
 
 #espacio_comentario::-webkit-input-placeholder {text-align:center;color:#43c2a7;font-weight:700;font-size:110%;display:block;padding:35px 15%;}
 .coach-cambio textarea{border:1px solid #43c2a7!important;}
+
 /* iOS - 20px MÁS */
+	body.iosm header {height:70px;}
+	body.iosm header .toolbar {top:20px;}
+	body.dieta.iosm #scroller {top:183px;height:calc(100% - 265px);}
+	body.iosm #container {padding-top:70px;}
+	body.iosm .month {top:70px;}
+	body.iosm .week {top:107px;}
 
-body.iosm header {height:70px;}
-body.iosm header .toolbar {top:20px;}
-body.dieta.iosm #scroller {top:183px;height:calc(100% - 265px);}
-body.iosm #container {padding-top:70px;}
-body.iosm .month {top:70px;}
-body.iosm .week {top:107px;}
-
-body.iosm div.boxx-top {height:70px;}
-body.iosm div.boxx-top div {top:20px;}
+	body.iosm div.boxx-top {height:70px;}
+	body.iosm div.boxx-top div {top:20px;}
+	body.iosm *{-webkit-tap-highlight-color: rgba(0,0,0,0);}
 
 /*
 	ABOUT
