@@ -815,15 +815,14 @@ function requestHandlerAPI(){
 					'X-ZUMO-AUTH': localStorage.getItem('token'),
 					'Content-Type': 'application/json'
 				},
-				data : 
-					data
-				
-			}
+				data :  data
+			};
+			
 			console.log(req);
 		
 			$.ajax({
 			  type: 'POST',
-			  headers: req.headers,
+			  headers: apiRH.headers,
 			  url: req.url,
 			  data: JSON.stringify(req.data),
 			  dataType: 'json',

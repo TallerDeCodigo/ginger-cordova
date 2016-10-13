@@ -3412,40 +3412,41 @@ $(window).load(function(){
 		});
 
 		$('.send_cmt').click(function() {
+			
 			$('.comment_pop').removeClass('active');
-			setTimeout(function() {$('.comment_pop').hide();}, 500);
-			$('.the-comment').html($('#comentar').val());  		/*ESTE ELIMINA EL COMENTARIO ANTERIOR AL HACER CLICK EN EL BOTON ENVIAR COMENTARIO*/
-			$('.the-comment').show();
+			setTimeout( function() {
+				$('.comment_pop').hide(); 
+			}, 500);
+			
+			$('.the-comment').html( $('#comentar').val() )
+							  .show();
+
 			$('li.comentario').show();
-			// $('.little-comment').hide();
-			/*
-				localStorage COMENTARIO
-			*/
-			localStorage.setItem('comentario', $('#comentar').val()) /*AQUI SE GUARDA EL COMENTARIO EN LOCALSTORAGE*/
+			
+			localStorage.setItem('comentario', $('#comentar').val())
 			
 			var _cmt = localStorage.getItem('comentario');
 
 			$('.comment_pop textarea').focus();
 		
 			var json = {
-				"plato" : $('.comment_pop').attr('idplatillo'), 
-				"fecha" : $('.comment_pop').attr('cosumoFecha'),
-				"comida"  : $('.comment_pop').attr('comida'),
-				"platillo": $('.comment_pop').attr('nPlatillo'),
-				"comment" : _cmt
-			};
-			
+						"plato" 	: $('.comment_pop').attr('idplatillo'), 
+						"fecha" 	: $('.comment_pop').attr('cosumoFecha'),
+						"comida"  	: $('.comment_pop').attr('comida'),
+						"platillo"	: $('.comment_pop').attr('nPlatillo'),
+						"comment" 	: _cmt
+					};
+			console.log('json');
+			console.log(json);
 			var result = apiRH.makeCosume(json);
 
-			if(result){
-				//getConsumed();
-				app.toast("Has agregado un comentario");
-			}
+			if(result)
+				app.toast("Tu comentario se ha agregado");
 
-			if(_cmt != ""){
+			if( _cmt != "" ){
 				$('#finish4').attr('src', 'images/enter.svg');
 				$('#finish4').css('margin-left', '-25px');
-			}else{
+			} else{
 				$('#finish4').attr('src', 'images/saltar.svg');
 				$('#finish4').css('margin-left', '-65px');
 			}
@@ -3453,7 +3454,7 @@ $(window).load(function(){
 
 		$('.izquii').click(function() {
 			$('.comment_pop').removeClass('active');
-			setTimeout(function() {$('.comment_pop').hide();}, 500);
+			setTimeout( function() {$('.comment_pop').hide();}, 500);
 			$('.siono').removeClass('active');
 			$('.siono.not').addClass('active');
 		});

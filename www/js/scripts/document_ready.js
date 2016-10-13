@@ -56,8 +56,8 @@ window.initializeEvents = function(){
 					
 					if(login_response){
 						apiRH.headers['X-ZUMO-AUTH'] = login_response;
-						var coachInfo = apiRH.getInfoUser();
-						if(coachInfo){
+						var userInfo = apiRH.getInfoUser();
+						if(userInfo){
 							var coachInfo 	= JSON.parse( localStorage.getItem('user') );
 							window._coach = (coachInfo) ? coachInfo : null;
 							return app.render_home();
