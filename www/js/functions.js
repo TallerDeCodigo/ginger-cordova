@@ -1984,28 +1984,33 @@ $(window).load(function(){
 			});
 		}
 
-		/*EDAD*/
+	/* RECORD AGE */
 	minval_age = 15; 
 	var maxval_age = 90;
 	var rango_age = maxval_age-minval_age;
+
+	$('#age').draggable( 
+						{ 
+							containment:"parent",
+							axis:"x",
+							grid:[gridag,gridag],
+							drag: function(){
+								var percent = $('.age .drag-parent').width()-30;
+								var donde = Math.round(((($('#age').position().left)*rango_age)/percent)+minval_age);
+								$("#age-filler").css("width",$('#age').position().left+20);
+								$('#age-dato').html(donde);
+								$('#edad_value').attr("value", donde);
+								return true;
+							}
+	});
+
 	if ($('.pagina').hasClass('aboutyou')) {
 		gridag = ((anchot*0.7)-30)/rango_age;
 	} else {
 		gridag = ($('.age .drag-parent').width()-30)/rango_age;
 	}
 
-	$('#age').draggable(
-	{ 
-	containment:"parent",axis:"x",grid:[gridag,gridag],drag:function(){
-		var percent = $('.age .drag-parent').width()-30;
-		var donde = Math.round(((($('#age').position().left)*rango_age)/percent)+minval_age);
-		$("#age-filler").css("width",$('#age').position().left+20);
-		$('#age-dato').html(donde);
-		$('#edad_value').attr("value", donde);
-		}
-	});
-
-	/*DPW*/
+	/* RECORD DPW */
 	minval_eje = 0; 
 	var maxval_eje = 7;
 	var rango_eje = maxval_eje-minval_eje;
@@ -2014,18 +2019,21 @@ $(window).load(function(){
 	} else {
 		gridej = ($('.exercise .drag-parent').width()-30)/rango_eje;
 	}
-	$('#ejercicio').draggable(
-		{ 
-			containment:"parent",axis:"x",grid:[gridej,gridej],drag:function()
-		{
-				var percent = $('.exercise .drag-parent').width()-30;
-				var donde = Math.round(((($('#ejercicio').position().left)*rango_eje)/percent)+minval_eje);
-				$("#ejercicio-filler").css("width",$('#ejercicio').position().left+20);
-				$('#ejercicio-dato').html(donde);
-				$('#days_per_week').attr("value", donde);
-				console.log(donde);
-			}
-		});
+	$('#ejercicio').draggable( 
+							{ 
+								containment:"parent",
+								axis:"x",
+								grid:[gridej,gridej],
+								drag: function(){
+									var percent = $('.exercise .drag-parent').width()-30;
+									var donde = Math.round(((($('#ejercicio').position().left)*rango_eje)/percent)+minval_eje);
+									$("#ejercicio-filler").css("width",$('#ejercicio').position().left+20);
+									$('#ejercicio-dato').html(donde);
+									$('#days_per_week').attr("value", donde);
+									console.log(donde);
+									return true;
+								}
+	});
 
 
 	/*MEDIDAS*/

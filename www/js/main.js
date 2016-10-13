@@ -275,6 +275,24 @@
 			data.is_scrollable = false;
 			return this.switchView('code', data, '.view', url, 'login');
 		},
+		render_modal : function(modalName, data, appendTarget){
+
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering Modal: "+modalName);
+			var data = this.gatherEnvironment(data, "");
+			data.is_scrollable = false;
+			var modalTemplate = Handlebars.templates[newTemplate];
+			$(appendTarget).css("opacity", 0).append( modalTemplate(data) );
+
+			$(appendTarget).html( modalTemplate(data) ).css("display", "block")
+														 .animate(	{
+															opacity: 1
+														}, 360);
+		},
+		render_dialog : function(title, message, options){
+			return app.showLoader();
+		},
 		render_settings : function(){
 			return app.showLoader();
 		},
@@ -369,31 +387,45 @@
 		    }
 		  });
 		},
-		switchView: function(newTemplate, data, targetSelector, recordUrl, targetClass, keepLoader){
+		switchView: function(newTemplate, data, targetSelector, recordUrl, targetClass, keepLoader, leNiceTransition){
+			
 			/* Push to history if url is supplied */
 			if(recordUrl) window.history.pushState(newTemplate, newTemplate, '/'+recordUrl);
 			
+			leNiceTransition = (typeof(leNiceTransition) != 'undefined') ? leNiceTransition : true;
 			var template = Handlebars.templates[newTemplate];
 			if(!template){
 				console.log("Template doesn't exist");
 				return false;
 			}
-			$(targetSelector).fadeOut('fast', function(){
+			$(targetSelector).fadeOut(360, function(){
 
 				if(targetClass) $(targetSelector).attr('class','view').addClass(targetClass);
-				$(targetSelector).html( template(data) ).css("opacity", 1)
-												 .css("display", "block")
-												 .css("margin-left", "20px")
-												 .animate(	{
-																'margin-left': "0",
+
+				if(!leNiceTransition){
+
+					$(targetSelector).html( template(data) ).css("opacity", 1)
+															 .css("display", "block")
+															 .animate(	{
 																opacity: 1
-															}, 240);
+															}, 360);
+				}else{
+
+					$(targetSelector).html( template(data) ).css("opacity", 1)
+															 .css("display", "block")
+															 .css("margin-left", "20px")
+															 .animate(	{
+																			'margin-left': "0",
+																			opacity: 1
+																		}, 360);
+				}
+				
 			});
 
 			if(!keepLoader)
 				return setTimeout(function(){
 					if(window.firstTime)
-						window.firstTime = false;
+						window.firstTime = false;				
 					app.hideLoader();
 					initializeEvents();
 				}, 2000);
