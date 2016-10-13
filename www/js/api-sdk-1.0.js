@@ -654,14 +654,16 @@ function requestHandlerAPI(){
 		 * @return JSON encoded response
 		 */
 		this.makeRequest = function(endpoint, data){
-			app.showLoader();
 			console.log(' ::: MAKE REQUEST ::: ');
+			setTimeout(function(){
+				app.showLoader();
+			}, 400);
 			console.log(data);
 			var result = {};
 
 			$.ajax({
 			  type: 'POST',
-			  headers: data.headers,
+			  headers: apiRH.headers,
 			  url: window.api_base_url+endpoint,
 			  data: JSON.stringify(data.data),
 			  dataType: 'json',
@@ -679,8 +681,7 @@ function requestHandlerAPI(){
 				console.log(e);
 				return false;
 			});
-			console.log('>->->->-result->->->->');
-			console.log( result);
+			console.log('Result ::: '+JSON.stringify(result));
 			return result;
 		};
 
