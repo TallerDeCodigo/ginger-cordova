@@ -3423,30 +3423,17 @@ $(window).load(function(){
 
 			$('li.comentario').show();
 			
-			localStorage.setItem('comentario', $('#comentar').val())
-			
-			var _cmt = localStorage.getItem('comentario');
+			var _cmt = $('#comentar').val();
+			app.ls.setItem( 'comentario', _cmt );
 
 			$('.comment_pop textarea').focus();
 		
-			var json = {
-						"plato" 	: $('.comment_pop').attr('idplatillo'), 
-						"fecha" 	: $('.comment_pop').attr('cosumoFecha'),
-						"comida"  	: $('.comment_pop').attr('comida'),
-						"platillo"	: $('.comment_pop').attr('nPlatillo'),
-						"comment" 	: _cmt
-					};
-			console.log('json');
-			console.log(json);
-			var result = apiRH.makeCosume(json);
-
-			if(result)
-				app.toast("Tu comentario se ha agregado");
-
 			if( _cmt != "" ){
+				app.toast("Tu comentario se ha agregado");
 				$('#finish4').attr('src', 'images/enter.svg');
 				$('#finish4').css('margin-left', '-25px');
 			} else{
+				app.toast("Comentario vacío");
 				$('#finish4').attr('src', 'images/saltar.svg');
 				$('#finish4').css('margin-left', '-65px');
 			}
