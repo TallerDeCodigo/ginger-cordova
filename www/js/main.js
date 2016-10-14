@@ -231,7 +231,7 @@
 			console.log("Rendering Enter mode");
 			var data = this.gatherEnvironment();
 			data.is_scrollable = false;
-			return this.switchView('entermode', data, '.view', url, 'inicio');
+			return this.switchView('entermode', data, '.view', url, 'inicio', false, false);
 		},
 		render_login : function(url){
 			app.showLoader();
@@ -410,11 +410,10 @@
 
 				if(!leNiceTransition){
 
-					$(targetSelector).html( template(data) ).css("opacity", 1)
-															 .css("display", "block")
+					$(targetSelector).html( template(data) ).css({ "opacity": 0, "display": "block"})
 															 .animate(	{
 																opacity: 1
-															}, 360);
+															}, 640);
 				}else{
 
 					$(targetSelector).html( template(data) ).css("opacity", 1)

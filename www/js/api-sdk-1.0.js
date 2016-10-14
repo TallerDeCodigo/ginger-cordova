@@ -654,6 +654,7 @@ function requestHandlerAPI(){
 		 * @return JSON encoded response
 		 */
 		this.makeRequest = function(endpoint, data){
+
 			console.log(' ::: MAKE REQUEST ::: ');
 			setTimeout(function(){
 				app.showLoader();
@@ -669,15 +670,15 @@ function requestHandlerAPI(){
 			  dataType: 'json',
 			  async: false
 			})
-			 .always(function(response){
+			 .always( function(response){
 				setTimeout(function(){
 					app.hideLoader();
 				}, 2000);
 			})
-			 .done(function(response){
+			 .done( function(response){
 				result = response;
 			})
-			 .fail(function(e){
+			 .fail( function(e){
 				console.log(e);
 				return false;
 			});
