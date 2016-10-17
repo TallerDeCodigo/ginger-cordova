@@ -57,20 +57,12 @@ function requestHandlerAPI(){
 
 			var email = data_login.mail;
 			var pass = data_login.pass;
-			var req = {
-						method 	: 'post',
-						url 	: api_base_url + 'api/login',
-						headers	: {
-							'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-							'Content-Type'		: 'application/json'
-						},
-						data 	: {
+			var data = {
 							"tipo" 		: "cliente",
 							"mail" 		: email,
 							"password" 	: pass
-						}
-					};
-			var response = this.makeRequest('api/login', req);
+						};
+			var response = this.makeRequest('api/login', data, true);
 
 			/*
 				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
@@ -189,23 +181,14 @@ function requestHandlerAPI(){
 			var pass = data_login.pass;
 			var cPass = data_login.cpass;
 
-			var req = {
-					method : 'post',
-					url : api_base_url + 'api/signup',
-					headers: {
-						'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-						'X-ZUMO-AUTH': '',
-						'Content-Type': 'application/json'
-					},
-					data : {
+			var data = {
 						"nombre" : name,
 						"apellido" :last_name,
 						"mail" : email,
 						"password" : pass
-					}
-				}
+					};
 
-			var response = this.makeRequest('api/signup', req);
+			var response = this.makeRequest('api/signup', data);
 
 			console.log(response);  //llega aqui con la respuesta del servidor
 
@@ -244,20 +227,12 @@ function requestHandlerAPI(){
 		};
 
 		this.validateRegistrationCode = function(code, email){
-			var req = {
-				method : 'post',
-				url : api_base_url + 'api/validatecode/',
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': localStorage.getItem('token'),
-					'Content-Type': 'application/json'
-				},
-				data : {
+			var data = {
 					'code': code, 
 					'mail': email
-				}
-			}
-			return this.makeRequest('api/validatecode/', req);
+				};
+
+			return this.makeRequest('api/validatecode/', data);
 		};
 
 		/**
@@ -352,22 +327,13 @@ function requestHandlerAPI(){
 
 		this.makePayment = function(token)
 		{
-			var req = {
-				method : 'POST',
-				url : api_base_url + 'api/history/',	//definitr tabla
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': localStorage.getItem('token'),
-					'Content-Type': 'application/json'
-				},
-				data : {
+			var data = {
 					'cliente' : localStorage.getItem('userId'),
 					'card_token' : token
-				}
-			}
-			console.log(req);
+				};
 
-			var response = this.makeRequest('api/history', req);
+
+			var response = this.makeRequest('api/history', data);
 
 			console.log("Request Data Cliente");
 
@@ -379,22 +345,13 @@ function requestHandlerAPI(){
 		};
 
 		this.changePayment = function(token){
-			var req = {
-				method : 'POST',
-				url : api_base_url + 'api/change_payment/',	//definitr tabla
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': localStorage.getItem('token'),
-					'Content-Type': 'application/json'
-				},
-				data : {
+			var data = {
 					'cliente' : localStorage.getItem('userId'),
 					'tokenId' : token
-				}
-			}
+				};
 			console.log(req);
 
-			var response = this.makeRequest('api/change_payment', req);
+			var response = this.makeRequest('api/change_payment', data);
 
 			if(response)
 				return true;
@@ -429,20 +386,9 @@ function requestHandlerAPI(){
 		 * @return response
 		 */	
 		this.registerUpTake = function(data){
-			var req = {
-				method : 'post',
-				url : api_base_url + 'tables/medicion/',	//definitr tabla
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': this.token,
-					'Content-Type': 'application/json'
-				},
-				data : {
-					
-				}
-			}
+			var data = {};
 
-			var response = this.makeRequest('tables/consumos', req);
+			var response = this.makeRequest('tables/consumos', data);
 
 			console.log(response);  //llega aqui con la respuesta del servidor
 
@@ -457,20 +403,9 @@ function requestHandlerAPI(){
 		};
 
 		this.updateUserSetting = function(data){
-			var req = {
-				method : 'patch',
-				url : api_base_url + 'tables/cliente/' + data._id,	//definitr tabla
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': this.token,
-					'Content-Type': 'application/json'
-				},
-				data : {
-					
-				}
-			}
+			var _data = {};
 
-			var response = this.makeRequest('tables/cliente/' + data._id, req);
+			var response = this.makeRequest('tables/cliente/' + data._id, _data);
 
 			console.log(response);  //llega aqui con la respuesta del servidor
 
@@ -481,20 +416,9 @@ function requestHandlerAPI(){
 		// GET PAYMENTS FOR USER
 		
 		this.getPaymentAccount = function(data){
-			var req = {
-				method : 'patch',
-				url : api_base_url + 'api/history/' + data._id,	//definitr tabla
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': this.token,
-					'Content-Type': 'application/json'
-				},
-				data : {
-					
-				}
-			}
+			var _data = {};
 
-			var response = this.makeRequest('api/history/' + data._id, req);
+			var response = this.makeRequest('api/history/' + data._id, _data);
 
 			console.log(response);  //llega aqui con la respuesta del servidor
 
@@ -521,23 +445,14 @@ function requestHandlerAPI(){
 
 		this.makeResena = function(data){
 
-			var req = {
-				method : 'POST',
-				url : api_base_url + 'api/rating/',	//definitr tabla
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': localStorage.getItem('token'),
-					'Content-Type': 'application/json'
-				},
-				data : {
+			var _data = {
 					"calificacion": data.calificacion,
 					"comment": data.comentarios,
 					"coach": data.coach,
 					"dieta": data.dieta 
-				}
-			};
+				};
 
-			var response = this.makeRequest('tables/rating/', req);
+			var response = this.makeRequest('tables/rating/', _data);
 
 			console.log(response);  //llega aqui con la respuesta del servidor
 
@@ -650,33 +565,39 @@ function requestHandlerAPI(){
 		 * Executes a POST call
 		 * @param endpoint API endpoint to make the call to
 		 * @param data url encoded data
+		 * @param noHeaders Boolean defaults to false
 		 * @return JSON encoded response
 		 */
-		this.makeRequest = function(endpoint, data){
+		this.makeRequest = function( endpoint, data, noHeaders ){
 
 			console.log(' ::: MAKE REQUEST ::: ');
 			setTimeout(function(){
 				app.showLoader();
-			}, 400);
+			}, 420);
 			console.log(data);
 			var result = {};
+			var myHeaders = (!noHeaders || typeof(noHeaders) == 'undefined') ? apiRH.headers : null;
+			var options = 	{
+								type 		: 'POST',
+								url			: window.api_base_url+endpoint,
+								data 		: data,
+								dataType 	: 'json',
+								async 		: false
+							};
+			if(myHeaders)
+				options.headers = myHeaders;
 
-			$.ajax({
-			  type: 'POST',
-			  headers: apiRH.headers,
-			  url: window.api_base_url+endpoint,
-			  data: JSON.stringify(data.data),
-			  dataType: 'json',
-			  async: false
-			})
+			console.log(options);
+			
+			$.ajax(options)
 			 .always( function(response){
 				setTimeout(function(){
 					app.hideLoader();
 				}, 2000);
-			})
+			 })
 			 .done( function(response){
 				result = response;
-			})
+			 })
 			 .fail( function(e){
 				console.log(e);
 				return false;
@@ -694,7 +615,7 @@ function requestHandlerAPI(){
 
 			$.ajax({
 			  type: 'PATCH',
-			  headers: data.headers,
+			  headers: apiRH.headers,
 			  url: window.api_base_url+endpoint,
 			  data: JSON.stringify(data.data),
 			  dataType: 'json',
@@ -720,13 +641,14 @@ function requestHandlerAPI(){
 		 */
 		this.getRequest = function(endpoint, data){
 			sdk_app_context.showLoader();
+			var myData = (!data) ? "" : JSON.stringify(data);
 			var result = {};
 		
 			$.ajax({
 			  type: 'GET',
-			  headers: data.headers,
+			  headers: apiRH.headers,
 			  url: window.api_base_url+endpoint,
-			  data: JSON.stringify(data.data),
+			  data: myData,
 			  dataType: 'json',
 			  async: false
 			})
@@ -1544,7 +1466,7 @@ function requestHandlerAPI(){
 					}
 				}
 
-				var user = this.getRequest('tables/cliente/' + userId, req);
+				var user = this.getRequest('tables/cliente/' + userId, null);
 
 				localStorage.setItem('user', JSON.stringify(user));
 				// console.log(JSON.stringify(user));

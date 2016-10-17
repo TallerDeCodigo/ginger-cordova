@@ -2659,7 +2659,7 @@ $(window).load(function(){
 				$('.insert_stars').append('<div class="nombre_resena"><div class="rate-stars2">'+html_stars+'</div></div><div class="resena_cont">'+html_comment+'</div>');
 			});
 		});//END BT-REVIEW
-		console.log("Lorem from the functions");
+
 		$('#aceptar').click(function(){
 			$('#container').toggleClass('blurred');
 			/*

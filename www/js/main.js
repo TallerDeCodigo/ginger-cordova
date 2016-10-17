@@ -89,7 +89,7 @@
 
 			window.plugins.OneSignal
 									.startInit("6e792a4f-bf04-4f96-9d1e-98052526fafc")
-									.handleNotificationOpened(notificationOpenedCallback)
+									.handleNotificationOpened(notificationOpenedCallback())
 									.endInit();
 		},
 		registerHelpers : function() {
