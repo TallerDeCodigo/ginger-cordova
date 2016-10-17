@@ -45,6 +45,9 @@
         },
         "cordova-plugin-ios-longpress-fix": {
             "PACKAGE_NAME": "org.ginger.app"
+        },
+        "onesignal-cordova-plugin": {
+            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
         }
     },
     "dependent_plugins": {

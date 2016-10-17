@@ -81,6 +81,17 @@
 			}
 
 		},
+		initPushNotifications: function() {
+			console.log("Initilizing push notifications service");
+			var notificationOpenedCallback = function(jsonData) {
+				console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+			};
+
+			window.plugins.OneSignal
+									.startInit("6e792a4f-bf04-4f96-9d1e-98052526fafc", "")
+									.handleNotificationOpened(notificationOpenedCallback)
+									.endInit();
+		},
 		registerHelpers : function() {
 			Handlebars.registerHelper('if_eq', function(a, b, opts) {
 				if (a == b) {
@@ -155,6 +166,14 @@
 				app.toast("Oauth error ocurred");
 				console.log('OAuth initialize error: ' + err);
 			}
+
+			try{
+				app.initPushNotifications();
+			}
+			catch(err){
+				app.toast("Push notifications error: "+JSON.stringify(err));
+			}
+			
 			var backButtonElement = document.getElementById("backBtn");
 			if(backButtonElement)
 				backButtonElement.addEventListener("click", app.onBackButton, false);
