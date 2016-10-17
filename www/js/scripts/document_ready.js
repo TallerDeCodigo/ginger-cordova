@@ -58,9 +58,10 @@ window.initializeEvents = function(){
 						apiRH.headers['X-ZUMO-AUTH'] = login_response;
 						var userInfo = apiRH.getInfoUser();
 						if(userInfo){
-							var coachInfo 	= JSON.parse( localStorage.getItem('user') );
+							var coachInfo 	= JSON.parse( app.ls.getItem('user') );
 							window._coach = (coachInfo) ? coachInfo : null;
-							return app.render_home();
+							return window.location.assign('record.html');
+							// return app.render_home();
 						}
 						
 					}else{
@@ -140,15 +141,15 @@ window.initializeEvents = function(){
 					var responsedata 	= apiRH.registerNative(data_login);  
 					console.log(responsedata);
 
-					if(responsedata) {						
+					// if(responsedata) {						
 
-						apiRH.save_user_data_clientside(responsedata);
-						app.render_validate_code();
-						app.hideLoader();
-						return;
-					}else{
-						return app.toast('Lo sentimos, el email o usuario ya existe.');
-					}
+					// 	apiRH.save_user_data_clientside(responsedata);
+					// 	app.render_validate_code();
+					// 	app.hideLoader();
+					// 	return;
+					// }else{
+					// 	return app.toast('Lo sentimos, el email o usuario ya existe.');
+					// }
 				}
 			});
 		// END create_account

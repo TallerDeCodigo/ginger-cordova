@@ -300,6 +300,14 @@
 			data.is_scrollable = false;
 			return this.switchView('code', data, '.view', url, 'login');
 		},
+		render_myPlan : function( url ){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering My Plan");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('my-plan', data, '.view', url, 'my-plan');
+		},
 		render_modal : function(modalName, data, appendTarget){
 
 			app.showLoader();

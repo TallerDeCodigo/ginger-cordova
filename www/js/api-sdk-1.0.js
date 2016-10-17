@@ -71,79 +71,16 @@ function requestHandlerAPI(){
 			localStorage.setItem('mail', response.mail);
 			localStorage.setItem('userId', response.userId);
 
+			this.token = response.token;
+
 			var userId 	= localStorage.getItem('userId');
 			var mail 	= localStorage.getItem('mail');
 			var token 	= localStorage.getItem('token');
 
-			console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + this.token);
-
-			if(!token){
+			if(!token)
 				return false;
-			}
+
 			return this.token;
-
-			if(token){
-				var req = {
-					method : 'post',
-					url : api_base_url + 'tables/cliente/',
-					headers: {
-						'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-						'X-ZUMO-AUTH': token,
-						'Content-Type': 'application/json'
-					},
-					data : {
-						"tipo" : "cliente",
-						"mail" : email,
-						"password" : pass
-					}
-				}
-
-				var user = this.getRequest('tables/cliente/' + userId, req);
-
-				console.log(JSON.stringify(user));
-				console.log(user);
-
-				if(user){
-					localStorage.setItem('coach_type', user.perfil.personalidad);
-					localStorage.setItem('user_name', user.nombre);
-					localStorage.setItem('user_last_name', user.apellido);
-					localStorage.setItem('genero', user.perfil.sexo);
-
-					if(user.perfil.edad !== undefined)
-						localStorage.setItem('edad', user.perfil.edad.real);
-					else
-						localStorage.setItem('edad', 0);
-						localStorage.setItem('zipcode', user.cp);
-						localStorage.setItem('estatura', user.perfil.estatura);
-						localStorage.setItem('peso', user.perfil.peso);
-						localStorage.setItem('peso_ideal', user.pesoDeseado);
-						localStorage.setItem('dpw', user.perfil.ejercicio);
-						localStorage.setItem('restricciones', user.restricciones);
-						localStorage.setItem('comentarios', user.comentarios);
-						localStorage.setItem('customerId', user.customerId);
-						localStorage.setItem('chatId', user.chatId);
-					if(user.dieta !== undefined)
-						localStorage.setItem('dietaId', user.dieta._id);
-					else
-						localStorage.setItem('dietaId', 0);
-					if(user.dieta !== undefined)
-						localStorage.setItem('dietaName', user.dieta.nombre);
-					else
-						localStorage.setItem('dietaName', '');
-					
-					if(user.coach !== undefined){
-						localStorage.setItem('nombre_coach', user.coach.nombre);
-						localStorage.setItem('apellido_coach', user.coach.apellido);
-						localStorage.setItem('coach_rate', user.coach.rating);
-						localStorage.setItem('chatPassword', user.coach.chatPassword);
-					}
-					return (userId) ? user : false;
-				}
-				return false;
-				
-			}
-
-			return false;
 		};
 
 		/**
@@ -397,9 +334,10 @@ function requestHandlerAPI(){
 
 		this.getInfoUser = function(){
 			
-			var response = this.getRequest('tables/coach?_id=' + localStorage.getItem('userId'), null);
-			this.save_user_data_clientside(JSON.stringify(response));
-			return (response) ? true : false;
+			var user = this.getRequest('tables/cliente?_id=' + localStorage.getItem('userId'), null);
+			console.log(user);
+			this.save_user_data_clientside(user);
+			return (user) ? true : false;
 		};
 
 		this.updateUserSetting = function(data){
@@ -479,15 +417,44 @@ function requestHandlerAPI(){
 		 * @return null
 		 * @see this.create_internal_user
 		 */
-		this.save_user_data_clientside = function(data){
+		this.save_user_data_clientside = function(user){
 
-			this.ls.setItem('', JSON.stringify({
-								user_login: 	data.user_login,
-								username: 		data.user_login,
-								user_id: 		data.user_id,
-								user_role: 		data.role,
-								user_profile: 	data.profile_url,
-							}));
+			if(user){
+				app.ls.setItem('coach_type', user.perfil.personalidad);
+				app.ls.setItem('user_name', user.nombre);
+				app.ls.setItem('user_last_name', user.apellido);
+				app.ls.setItem('genero', user.perfil.sexo);
+
+				if(user.perfil.edad !== undefined)
+					app.ls.setItem('edad', user.perfil.edad.real);
+				else
+					app.ls.setItem('edad', 0);
+					app.ls.setItem('zipcode', user.cp);
+					app.ls.setItem('estatura', user.perfil.estatura);
+					app.ls.setItem('peso', user.perfil.peso);
+					app.ls.setItem('peso_ideal', user.pesoDeseado);
+					app.ls.setItem('dpw', user.perfil.ejercicio);
+					app.ls.setItem('restricciones', user.restricciones);
+					app.ls.setItem('comentarios', user.comentarios);
+					app.ls.setItem('customerId', user.customerId);
+					app.ls.setItem('chatId', user.chatId);
+				if(user.dieta !== undefined)
+					app.ls.setItem('dietaId', user.dieta._id);
+				else
+					app.ls.setItem('dietaId', 0);
+				if(user.dieta !== undefined)
+					app.ls.setItem('dietaName', user.dieta.nombre);
+				else
+					app.ls.setItem('dietaName', '');
+				
+				if(user.coach !== undefined){
+					app.ls.setItem('nombre_coach', user.coach.nombre);
+					app.ls.setItem('apellido_coach', user.coach.apellido);
+					app.ls.setItem('coach_rate', user.coach.rating);
+					app.ls.setItem('chatPassword', user.coach.chatPassword);
+				}
+				return;
+			}
 		};
 		/* 
 		 * Request new passive token from the API 
