@@ -26,7 +26,6 @@ function requestHandlerAPI(){
 						'X-ZUMO-AUTH': window.localStorage.getItem('token'),
 						'Content-Type': 'application/json'
 					};
-					console.log(this.headers);
 
 	var context = this;
 	window.sdk_app_context = null;

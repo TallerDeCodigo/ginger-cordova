@@ -88,7 +88,7 @@
 			};
 
 			window.plugins.OneSignal
-									.startInit("6e792a4f-bf04-4f96-9d1e-98052526fafc", "")
+									.startInit("6e792a4f-bf04-4f96-9d1e-98052526fafc")
 									.handleNotificationOpened(notificationOpenedCallback)
 									.endInit();
 		},
@@ -173,7 +173,7 @@
 			catch(err){
 				app.toast("Push notifications error: "+JSON.stringify(err));
 			}
-			
+
 			var backButtonElement = document.getElementById("backBtn");
 			if(backButtonElement)
 				backButtonElement.addEventListener("click", app.onBackButton, false);
