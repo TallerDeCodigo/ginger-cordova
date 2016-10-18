@@ -6,12 +6,22 @@ window.initializeRecordEvents = function(){
 		console.log("Initializing Initial Record events");
 
 		window.init_scripts.push("initial_record");
+		// Globals
+		var minval_age;
+		var grid_exercise;
+		var minval_eje;
+		var maxval_eje;
+		var rango_eje;
+		var anchot = document.documentElement.clientWidth;
+
+
 		/* MEASUREMENT CONTROLS */
 		var timeout;
 		var estatura;
 		var timeoutFlag = null;
 		var timer 		= 200;
 		var clickTimer 	= null;
+		var gridag;
 
 		$(".genre-bt").click(function(){
 			$(this).parent().find("a").removeClass('active');
@@ -464,7 +474,7 @@ window.initializeRecordEvents = function(){
 			console.log("coachType> "+ coach_type);
 
 			setTimeout(function() {
-				
+
 				$(".pagina").hide();
 				$(".exercise").show();
 				$(".exercise").css("left","40px");
@@ -472,6 +482,33 @@ window.initializeRecordEvents = function(){
 				$("#container").resize();
 			}, 250);
 		});
+
+		/* RECORD EXERCISE FREQUENCY */
+		minval_eje 	= 0; 
+		maxval_eje 	= 7;
+		rango_eje 	= maxval_eje-minval_eje;
+
+		grid_exercise = Math.floor( ($('.exercise .drag-parent').width()-30)/rango_eje );
+		
+		if ($('.pagina').hasClass('aboutyou'))
+			grid_exercise =  Math.floor( ( (anchot*0.7)-30 )/rango_eje );
+
+		$('#ejercicio').draggable({ 
+									containment	:"parent",
+									axis		:"x",
+									grid 		:[ grid_exercise, grid_exercise ],
+									revert		: false,
+									drag 		: function(){
+													var percent = $('.exercise .drag-parent').width()-30;
+													var donde 	= Math.round(((($('#ejercicio').position().left)*rango_eje)/percent)+minval_eje);
+													console.log(donde);
+													$("#ejercicio-filler").css("width",$('#ejercicio').position().left+20);
+													$('#ejercicio-dato').html(donde);
+													$('#days_per_week').attr("value", donde);
+													return true;
+												}
+								 });
+
 
 		/*** Back behaviour ***/
 		$('.back').click( function(){

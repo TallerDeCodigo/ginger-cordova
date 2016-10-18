@@ -1644,33 +1644,6 @@ $(window).load(function(){
 			});
 		}
 
-	
-
-	/* RECORD DPW */
-	minval_eje = 0; 
-	var maxval_eje = 7;
-	var rango_eje = maxval_eje-minval_eje;
-	if ($('.pagina').hasClass('aboutyou')) {
-		gridej = ((anchot*0.7)-30)/rango_eje;
-	} else {
-		gridej = ($('.exercise .drag-parent').width()-30)/rango_eje;
-	}
-	$('#ejercicio').draggable( 
-							{ 
-								containment:"parent",
-								axis:"x",
-								grid:[gridej,gridej],
-								drag: function(){
-									var percent = $('.exercise .drag-parent').width()-30;
-									var donde = Math.round(((($('#ejercicio').position().left)*rango_eje)/percent)+minval_eje);
-									$("#ejercicio-filler").css("width",$('#ejercicio').position().left+20);
-									$('#ejercicio-dato').html(donde);
-									$('#days_per_week').attr("value", donde);
-									console.log(donde);
-									return true;
-								}
-	});
-
 
 	/*MEDIDAS*/
 	var minval_med = 20; 
