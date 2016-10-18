@@ -2364,44 +2364,6 @@ $(window).load(function(){
 			labelID = 'label[for="'+$(this).attr('name')+'"]';
 			$(labelID).addClass('focused');
 		});
-
-
-		
-
-
-		$('.co-option img:not(.question)').click(function() {
-			var valor = $(this).parent().find('.type').attr('value');
-			$('#coach_type').attr('value', valor);
-
-			$('.co-option').each(function() {
-				if ($(this).find('img:not(.question)').attr('src').substr(-5, 1)=="2") {
-				  $(this).find('img:not(.question)').attr("src",$(this).find('img:not(.question)').attr('src').slice(0, -5)+".png");
-				  $(this).removeClass('active');
-				  $(this).attr("value", "");
-				}
-			}); 
-			$(this).attr("src",$(this).attr('src').slice(0, -4)+"2.png");
-			$(this).parent().addClass('active');
-			$(this).parent().attr("value", valor);
-
-
-			switch ( $('#coach_type').val() ) {
-				case 'estricto' : 
-					$('#coach_type').attr("value", "0");
-					break;
-				case 'innovador' :
-					$('#coach_type').attr("value", "1");
-					break;
-				case 'animador' :
-					$('#coach_type').attr("value", "2");
-					break;
-				case 'tradicional' :
-					$('#coach_type').attr("value", "3");
-					break;	
-			}
-
-		});
-
 		
 		
 		
@@ -2915,12 +2877,6 @@ $(window).load(function(){
 			setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
 		});
 
-		$('img.question').click(function() {
-			$('.overscreen2').show();
-			$('.overscreen2 h5').html($(this).attr("title"));
-			$('.overscreen2 .dialog p').html($(this).attr("data"));
-			setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
-		});
 
 		$('.com2send').click(function() {
 			$('.comment_pop').show();

@@ -146,17 +146,17 @@ window.initializeRecordEvents = function(){
 		$("#estatura-up").bind('mousedown', function(e){
 			// e.preventDefault();
 			if (clickTimer == null) {
-	        	clickTimer = setTimeout(function () {
-		            clickTimer = null;
-		        }, 320)
-		    } else {
-		        clearTimeout(clickTimer);
-		        clickTimer = null;
-		        e.preventDefault();
-		        e.stopPropagation();
-		        console.log("double");
-		        return false;
-		    }
+				clickTimer = setTimeout(function () {
+					clickTimer = null;
+				}, 320)
+			} else {
+				clearTimeout(clickTimer);
+				clickTimer = null;
+				e.preventDefault();
+				e.stopPropagation();
+				console.log("double");
+				return false;
+			}
 			timeout = setInterval(function(){
 				estatura = Number($("#estatura-up").parent().parent().find('input').val());
 				estatura = estatura+0.01;
@@ -173,17 +173,17 @@ window.initializeRecordEvents = function(){
 		$("#estatura-dw").bind('mousedown', function(e){
 			e.preventDefault();
 			if (clickTimer == null) {
-	        	clickTimer = setTimeout(function () {
-		            clickTimer = null;
-		        }, 320)
-		    } else {
-		        clearTimeout(clickTimer);
-		        clickTimer = null;
-		        e.preventDefault();
-		        e.stopPropagation();
-		        console.log("double");
-		        return false;
-		    }
+				clickTimer = setTimeout(function () {
+					clickTimer = null;
+				}, 320)
+			} else {
+				clearTimeout(clickTimer);
+				clickTimer = null;
+				e.preventDefault();
+				e.stopPropagation();
+				console.log("double");
+				return false;
+			}
 			timeout = setInterval(function(){
 				estatura = Number($("#estatura-dw").parent().parent().find('input').val());
 				estatura=estatura-0.01;
@@ -201,17 +201,17 @@ window.initializeRecordEvents = function(){
 		$("#peso-up").bind('mousedown', function(e){
 			e.preventDefault();
 			if (clickTimer == null) {
-	        	clickTimer = setTimeout(function () {
-		            clickTimer = null;
-		        }, 320)
-		    } else {
-		        clearTimeout(clickTimer);
-		        clickTimer = null;
-		        e.preventDefault();
-		        e.stopPropagation();
-		        console.log("double");
-		        return false;
-		    }
+				clickTimer = setTimeout(function () {
+					clickTimer = null;
+				}, 320)
+			} else {
+				clearTimeout(clickTimer);
+				clickTimer = null;
+				e.preventDefault();
+				e.stopPropagation();
+				console.log("double");
+				return false;
+			}
 			timeout = setInterval(function(){
 				peso = Number($("#peso-up").parent().parent().find('input').val());
 				if (peso<99) {
@@ -231,17 +231,17 @@ window.initializeRecordEvents = function(){
 		$("#peso-dw").bind('mousedown', function(e){
 			e.preventDefault();
 			if (clickTimer == null) {
-	        	clickTimer = setTimeout(function () {
-		            clickTimer = null;
-		        }, 320)
-		    } else {
-		        clearTimeout(clickTimer);
-		        clickTimer = null;
-		        e.preventDefault();
-		        e.stopPropagation();
-		        console.log("double");
-		        return false;
-		    }
+				clickTimer = setTimeout(function () {
+					clickTimer = null;
+				}, 320)
+			} else {
+				clearTimeout(clickTimer);
+				clickTimer = null;
+				e.preventDefault();
+				e.stopPropagation();
+				console.log("double");
+				return false;
+			}
 			timeout = setInterval(function(){
 				peso = Number($("#peso-dw").parent().parent().find('input').val());
 				if (peso<100.1) {
@@ -262,17 +262,17 @@ window.initializeRecordEvents = function(){
 		$("#ideal-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
 		$("#ideal-up").bind('mousedown', function(e){
 			if (clickTimer == null) {
-	        	clickTimer = setTimeout(function () {
-		            clickTimer = null;
-		        }, 320)
-		    } else {
-		        clearTimeout(clickTimer);
-		        clickTimer = null;
-		        e.preventDefault();
-		        e.stopPropagation();
-		        console.log("double");
-		        return false;
-		    }
+				clickTimer = setTimeout(function () {
+					clickTimer = null;
+				}, 320)
+			} else {
+				clearTimeout(clickTimer);
+				clickTimer = null;
+				e.preventDefault();
+				e.stopPropagation();
+				console.log("double");
+				return false;
+			}
 			timeout = setInterval(function(){
 				ideal = Number($("#ideal-up").parent().parent().find('input').val());
 				if (ideal<99) {
@@ -291,17 +291,17 @@ window.initializeRecordEvents = function(){
 		$("#ideal-dw").bind('touchstart touchend', apiRH.stickyTouchHandler);
 		$("#ideal-dw").bind('mousedown', function(e){
 			if (clickTimer == null) {
-	        	clickTimer = setTimeout(function () {
-		            clickTimer = null;
-		        }, 320)
-		    } else {
-		        clearTimeout(clickTimer);
-		        clickTimer = null;
-		        e.preventDefault();
-		        e.stopPropagation();
-		        console.log("double");
-		        return false;
-		    }
+				clickTimer = setTimeout(function () {
+					clickTimer = null;
+				}, 320)
+			} else {
+				clearTimeout(clickTimer);
+				clickTimer = null;
+				e.preventDefault();
+				e.stopPropagation();
+				console.log("double");
+				return false;
+			}
 			timeout = setInterval(function(){
 				ideal = Number($("#ideal-dw").parent().parent().find('input').val());
 				if (ideal<100.1) {
@@ -359,11 +359,11 @@ window.initializeRecordEvents = function(){
 			var _peso_ideal = app.keeper.getItem('peso_ideal');
 
 			setTimeout(function() {
-				$(".pagina").hide();
-				$(".objetive").show();
-				$(".objetive").css("left","40px");
-				$(".objetive").animate({opacity:"1",left:"0px"}, 200);
-				$("#container").resize();
+				$('.pagina').hide();
+				$('.objetive').show();
+				$('.objetive').css('left','40px');
+				$('.objetive').animate({opacity:'1',left:'0px'}, 200);
+				$('#container').resize();
 			}, 250);
 
 			$(".back").show();
@@ -378,32 +378,80 @@ window.initializeRecordEvents = function(){
 
 			$('.pl-option').each(function() {
 				if ($(this).find('img').attr('src').substr(-5, 1) == "2") {
-					$(this).find('img').attr("src", $(this).find('img').attr('src').slice( 0, -5 )+".png");
+					$(this).find('img').attr('src', $(this).find('img').attr('src').slice( 0, -5 )+'.png');
 					$(this).removeClass('active');
-					$(this).attr("value", "");
+					$(this).attr( 'value', '' );
 				}
 			});
 
-			$(this).find('img').attr("src", $(this).find('img').attr('src').slice(0, -4)+"2.png");
+			$(this).find('img').attr('src', $(this).find('img').attr('src').slice(0, -4)+'2.png');
 			$(this).addClass('active');
-			$(this).attr("value", valor);
+			$(this).attr('value', valor);
 
 			switch ( $('#plan').val() ) {
 				case 'adelgazar' :
-					$('#plan').attr("value", "0");
+					$('#plan').attr('value', '0');
 					break;
 				case 'detox':
-					$('#plan').attr("value", "1");
+					$('#plan').attr('value', '1');
 					break;
 				case 'rendimiento' :
-					$('#plan').attr("value", "2");
+					$('#plan').attr('value', '2');
 					break;
 				case 'bienestar' :
-					$('#plan').attr("value", "3");
+					$('#plan').attr('value', '3');
 					break;
 			}
 		});
 
+		/*** SELECT COACH ***/
+		$('.co-option img:not(.question)').click(function() {
+			var valor = $(this).parent().find('.type').attr('value');
+			$('#coach_type').attr('value', valor);
+
+			$('.co-option').each(function() {
+				if ($(this).find('img:not(.question)').attr('src').substr(-5, 1)=="2") {
+				  $(this).find('img:not(.question)').attr("src",$(this).find('img:not(.question)').attr('src').slice(0, -5)+".png");
+				  $(this).removeClass('active');
+				  $(this).attr("value", "");
+				}
+			}); 
+			$(this).attr("src",$(this).attr('src').slice(0, -4)+"2.png");
+			$(this).parent().addClass('active');
+			$(this).parent().attr("value", valor);
+
+
+			switch ( $('#coach_type').val() ) {
+				case 'estricto' : 
+					$('#coach_type').attr("value", "0");
+					break;
+				case 'innovador' :
+					$('#coach_type').attr("value", "1");
+					break;
+				case 'animador' :
+					$('#coach_type').attr("value", "2");
+					break;
+				case 'tradicional' :
+					$('#coach_type').attr("value", "3");
+					break;	
+			}
+
+		});
+		/*** WHO IS THIS COACH ***/
+		$('.question').click(function() {
+			$('.overscreen2 h5').html($(this).attr("title"));
+			$('.overscreen2 .dialog p').html($(this).attr("data"));
+			$('.overscreen2').show();
+
+			setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
+		});
+
+		/** Close one option modal (Ok modal) **/
+		$('body').on('click', '.modal_ok', function(e){
+			e.preventDefault();
+			console.log("Clicked ok");
+			$(this).closest('.modal').hide().removeClass('active');
+		});
 	});
 
 }
