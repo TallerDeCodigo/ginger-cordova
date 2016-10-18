@@ -4,7 +4,7 @@ window.initializeRecordEvents = function(){
 	jQuery(document).ready(function($) {
 
 		console.log("Initializing Initial Record events");
-		
+
 		window.init_scripts.push("initial_record");
 		/* MEASUREMENT CONTROLS */
 		var timeout;
@@ -319,7 +319,7 @@ window.initializeRecordEvents = function(){
 
 		/* Next step 1 */
 		$('#next_step_one').click(function(){
-			console.log("Clickity");
+
 			if($('#zipInput').val() == ''){
 				$('.overscreenzip').show();
 				$('.accept.zipcode').click(function(){
@@ -341,37 +341,68 @@ window.initializeRecordEvents = function(){
 			if($('input[name="zipcode"]').val() == '' || $('input[name="zipcode"]').val() == undefined){
 				return;
 			}
-			localStorage.setItem('zipcode', $('input[name="zipcode"]').val() );
-			var _zipcode = localStorage.getItem('zipcode');
-			console.log("zip>"+_zipcode);
+			app.keeper.setItem('zipcode', $('input[name="zipcode"]').val() );
+			var _zipcode = app.keeper.getItem('zipcode');
 
-			localStorage.setItem('genero', $('#genre_value').val() );//hacerlo una condicional
-			var _genero = localStorage.getItem('genero');
-			console.log("genero>"+_genero);
+			app.keeper.setItem('genero', $('#genre_value').val() );//hacerlo una condicional
+			var _genero = app.keeper.getItem('genero');
 
-			localStorage.setItem('estatura', $('input[name="estatura"]').val() );
-			var _estatura = localStorage.getItem('estatura');
-			console.log("height>"+_estatura);
+			app.keeper.setItem('estatura', $('input[name="estatura"]').val() );
+			var _estatura = app.keeper.getItem('estatura');
 
-			localStorage.setItem('peso', $('input[name="peso"]').val() );
-			var _peso = localStorage.getItem('peso');
-			console.log("weight>"+_peso);
-
+			app.keeper.setItem('peso', $('input[name="peso"]').val() );
+			var _peso = app.keeper.getItem('peso');
 			
-			localStorage.setItem('edad', $('#edad_value').val() );
+			app.keeper.setItem('edad', $('#edad_value').val() );
 			
-			localStorage.setItem('peso_ideal', $('input[name="ideal"]').val() );
-			var _peso_ideal = localStorage.getItem('peso_ideal');
-			console.log("ideal>"+_peso_ideal);
+			app.keeper.setItem('peso_ideal', $('input[name="ideal"]').val() );
+			var _peso_ideal = app.keeper.getItem('peso_ideal');
 
 			setTimeout(function() {
 				$(".pagina").hide();
 				$(".objetive").show();
 				$(".objetive").css("left","40px");
 				$(".objetive").animate({opacity:"1",left:"0px"}, 200);
+				$("#container").resize();
 			}, 250);
+
 			$(".back").show();
-		});//END FINISH1 REGISTRO APP
+
+		});//END Next step 1
+
+		/*** SELECT OBJECTIVE ***/
+		$('.pl-option').click(function() {
+
+			var valor = $(this).find('.type').attr('value');
+			$('#plan').attr('value', valor);
+
+			$('.pl-option').each(function() {
+				if ($(this).find('img').attr('src').substr(-5, 1) == "2") {
+					$(this).find('img').attr("src", $(this).find('img').attr('src').slice( 0, -5 )+".png");
+					$(this).removeClass('active');
+					$(this).attr("value", "");
+				}
+			});
+
+			$(this).find('img').attr("src", $(this).find('img').attr('src').slice(0, -4)+"2.png");
+			$(this).addClass('active');
+			$(this).attr("value", valor);
+
+			switch ( $('#plan').val() ) {
+				case 'adelgazar' :
+					$('#plan').attr("value", "0");
+					break;
+				case 'detox':
+					$('#plan').attr("value", "1");
+					break;
+				case 'rendimiento' :
+					$('#plan').attr("value", "2");
+					break;
+				case 'bienestar' :
+					$('#plan').attr("value", "3");
+					break;
+			}
+		});
 
 	});
 

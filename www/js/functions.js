@@ -17,7 +17,6 @@ $( function() {
 	}
 
 	$('.add_picture').click(function (e){
-		
 		app.get_file_from_device('profile', 'camera');
 	});
 
@@ -379,23 +378,23 @@ $(window).on("load resize",function(){
 			$('.tipo_coach .co-option:nth-of-type('+suma+')').addClass('active');
 
 			switch(coach_type){
-					case 0: 
-						$('#coach_type_perfil').html("Estricto");
-						$('.co-option.active img:not(.question)').attr("src",'images/coach/estricto2.png');
-						break;
-					case 1:
-						$('#coach_type_perfil').html("Innovador");
-						$('.co-option.active img:not(.question)').attr("src",'images/coach/innovador2.png');
-						break;
-					case 2:
-						$('#coach_type_perfil').html("Animador");
-						$('.co-option.active img:not(.question)').attr("src",'images/coach/animador2.png');
-						break;
-					case 3:
-						$('#coach_type_perfil').html("Tradicional");
-						$('.co-option.active img:not(.question)').attr("src",'images/coach/tradicional2.png');
-						break;
-				}
+				case 0: 
+					$('#coach_type_perfil').html("Estricto");
+					$('.co-option.active img:not(.question)').attr("src",'images/coach/estricto2.png');
+					break;
+				case 1:
+					$('#coach_type_perfil').html("Innovador");
+					$('.co-option.active img:not(.question)').attr("src",'images/coach/innovador2.png');
+					break;
+				case 2:
+					$('#coach_type_perfil').html("Animador");
+					$('.co-option.active img:not(.question)').attr("src",'images/coach/animador2.png');
+					break;
+				case 3:
+					$('#coach_type_perfil').html("Tradicional");
+					$('.co-option.active img:not(.question)').attr("src",'images/coach/tradicional2.png');
+					break;
+			}
 
 				$('#frecuencia_perfil').html(frecuencia +" días por semana");
 				$('#ejercicio-dato').html(frecuencia);
@@ -420,22 +419,18 @@ $(window).on("load resize",function(){
 					case 0:
 						$('#plan_perfil').html("Bajar de peso");
 						$('.pl-option.active img:not(.question)').attr("src",'images/plan/perderpeso2.png');
-						//console.log('adelgazar');
 						break;
 					case 1:
 						$('#plan_perfil').html("Detox");
 						$('.pl-option.active img:not(.question)').attr("src",'images/plan/detox2.png');
-						//console.log('detox');
 						break;
 					case 2:
 						$('#plan_perfil').html("Rendimiento físico");
 						$('.pl-option.active img:not(.question)').attr("src",'images/plan/rendimientofisico2.png');
-						//console.log('bienestar');
 						break;
 					case 3:
 						$('#plan_perfil').html("Sentirse mejor");
 						$('.pl-option.active img:not(.question)').attr("src",'images/plan/sentirsemejor2.png');
-						//console.log('rendimiento');
 						break;
 					default:
 						$('#plan_perfil').html("No tiene plan");
@@ -2370,41 +2365,10 @@ $(window).load(function(){
 			$(labelID).addClass('focused');
 		});
 
-		$('.pl-option').click(function() {
 
-			var valor = $(this).find('.type').attr('value');
-			console.log(valor)
-			$('#plan').attr('value', valor);
+		
 
-			$('.pl-option').each(function() {
-				if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
-					console.log( $(this).find('img').attr('src').substr(-5, 1) );
-					$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
-					$(this).removeClass('active');
-					$(this).attr("value", "");
-				}
-			});
 
-			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
-
-			$(this).addClass('active');
-			$(this).attr("value", valor);
-
-			switch ( $('#plan').val() ) {
-				case 'adelgazar' :
-					$('#plan').attr("value", "0");
-					break;
-				case 'detox':
-					$('#plan').attr("value", "1");
-					break;
-				case 'rendimiento' :
-					$('#plan').attr("value", "2");
-					break;
-				case 'bienestar' :
-					$('#plan').attr("value", "3");
-					break;
-			}
-		});
 		$('.co-option img:not(.question)').click(function() {
 			var valor = $(this).parent().find('.type').attr('value');
 			$('#coach_type').attr('value', valor);
@@ -2992,7 +2956,7 @@ $(window).load(function(){
 			$('li.comentario').show();
 			
 			var _cmt = $('#comentar').val();
-			app.ls.setItem( 'comentario', _cmt );
+			app.keeper.setItem( 'comentario', _cmt );
 
 			$('.comment_pop textarea').focus();
 		

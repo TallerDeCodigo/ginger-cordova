@@ -58,7 +58,7 @@ window.initializeEvents = function(){
 						apiRH.headers['X-ZUMO-AUTH'] = login_response;
 						var userInfo = apiRH.getInfoUser();
 						if(userInfo){
-							var coachInfo 	= JSON.parse( app.ls.getItem('user') );
+							var coachInfo 	= JSON.parse( app.keeper.getItem('user') );
 							window._coach = (coachInfo) ? coachInfo : null;
 							return window.location.assign('record.html');
 							// return app.render_home();
@@ -70,13 +70,13 @@ window.initializeEvents = function(){
 
 					if(login_response){
 						
-						app.ls.setItem( 'user', JSON.stringify( login_response ) );
+						app.keeper.setItem( 'user', JSON.stringify( login_response ) );
 						var user 	 = JSON.parse( localStorage.getItem('user') );
-						var verified = app.ls.getItem( 'email_verification' );
+						var verified = app.keeper.getItem( 'email_verification' );
 
 						if(user.customerId !== undefined){
 							// TODO: Load interface via switch method
-							app.ls.setItem( 'email_verification', true );
+							app.keeper.setItem( 'email_verification', true );
 					 		window.location.assign('dieta.html');
 						} else if(!verified){
 							// TODO: Load interface via switch method
@@ -132,9 +132,9 @@ window.initializeEvents = function(){
 					var data_login  	= app.getFormData(form);
 
 					/* stores user name */
-					app.ls.setItem('email_verification', false);
-					app.ls.setItem('user_name', data_login.user);
-					app.ls.setItem('user_last_name', data_login.last_name);
+					app.keeper.setItem('email_verification', false);
+					app.keeper.setItem('user_name', data_login.user);
+					app.keeper.setItem('user_last_name', data_login.last_name);
 					
 					var login_response 	= apiRH.registerNative(data_login);
 
@@ -143,7 +143,7 @@ window.initializeEvents = function(){
 						var userInfo = apiRH.getInfoUser();
 						console.log(userInfo);
 						if(userInfo){
-							var coachInfo 	= JSON.parse( app.ls.getItem('user') );
+							var coachInfo 	= JSON.parse( app.keeper.getItem('user') );
 							window._coach = (coachInfo) ? coachInfo : null;
 							return app.render_validate_code();
 						}
@@ -177,7 +177,7 @@ window.initializeEvents = function(){
 					var res 		= apiRH.validateRegistrationCode(form_data.code, localStorage.mail);
 					if( res.length ){
 						app.toast("Tu código ha sido validado correctamente!");
-						app.ls.setItem('email_verification', true);
+						app.keeper.setItem('email_verification', true);
 						return app.render_initial_record();
 					} else {
 

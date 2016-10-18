@@ -8,8 +8,9 @@
 
 	var app = {
 		app_context: this,
-			// Application Constructor
+		// Application Constructor
 		initialize: function() {
+
 			this.bindEvents();
 			/* Initialize API request handler */
 			window.apiRH = new requestHandlerAPI().construct(app);
@@ -29,9 +30,9 @@
 
 			this.registerCompiledPartials();
 
-			window.loggedIn = false;
+			window.loggedIn 	= false;
 			window.init_scripts = [];
-			this.ls 		= window.localStorage;
+			this.keeper 		= window.localStorage;
 				
 			if(is_login){
 				
@@ -41,16 +42,19 @@
 				var is_access 	= window.is_access;
 				var is_feed 	= window.is_feed;
 				
+				/*** Check referer ***/
 				if(is_access){
 
 					if(is_client == 'not_set'){
 						/*** Still haven't paid ***/
-						if( app.ls.getItem('email_verification') == 'false' ){
+						if( app.keeper.getItem('email_verification') == 'false' ){
 							/*** Haven't validated email code ***/
 							return app.render_validate_code();
 						}
-						/*** Still haven't paid ***/
-						/*** Render Initial questions ***/
+						/*! 
+						 * Render Initial questions 
+						 * TODO: Render chunk depending on information already provided
+						 */
 						return app.render_initial_record();
 					}
 					return;
@@ -66,7 +70,7 @@
 
 					// }else{
 					// 	console.log('Es cliente ? ::: ' + is_client);
-					// 	if(!app.ls.getItem('email_verification')){
+					// 	if(!app.keeper.getItem('email_verification')){
 					// 		console.log("Validate some codes");
 					// 		// return app.render_validate_code();
 					// 		return;

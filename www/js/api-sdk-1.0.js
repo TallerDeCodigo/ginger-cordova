@@ -131,16 +131,16 @@ function requestHandlerAPI(){
 			console.log("It's alive! ::: "+JSON.stringify(created_response));
 
 			/* GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE  */
-			app.ls.setItem('token', 	created_response.token);
-			app.ls.setItem('mail', 	created_response.mail);
-			app.ls.setItem('chatId', 	created_response.jid);
-			app.ls.setItem('userId', 	created_response._id);
+			app.keeper.setItem('token', 	created_response.token);
+			app.keeper.setItem('mail', 	created_response.mail);
+			app.keeper.setItem('chatId', 	created_response.jid);
+			app.keeper.setItem('userId', 	created_response._id);
 
-			this.token = app.ls.getItem('token');
+			this.token = app.keeper.getItem('token');
 
-			var userId 	= app.ls.getItem('userId');
-			var mail 	= app.ls.getItem('mail');
-			var token 	= app.ls.getItem('token');
+			var userId 	= app.keeper.getItem('userId');
+			var mail 	= app.keeper.getItem('mail');
+			var token 	= app.keeper.getItem('token');
 
 			return (created_response.nuevo) ? token : false;
 		};
@@ -409,38 +409,38 @@ function requestHandlerAPI(){
 		this.save_user_data_clientside = function(user){
 
 			if(user){
-				app.ls.setItem('coach_type', user.perfil.personalidad);
-				app.ls.setItem('user_name', user.nombre);
-				app.ls.setItem('user_last_name', user.apellido);
-				app.ls.setItem('genero', user.perfil.sexo);
+				app.keeper.setItem('coach_type', user.perfil.personalidad);
+				app.keeper.setItem('user_name', user.nombre);
+				app.keeper.setItem('user_last_name', user.apellido);
+				app.keeper.setItem('genero', user.perfil.sexo);
 
 				if(user.perfil.edad !== undefined)
-					app.ls.setItem('edad', user.perfil.edad.real);
+					app.keeper.setItem('edad', user.perfil.edad.real);
 				else
-					app.ls.setItem('edad', 0);
-					app.ls.setItem('zipcode', user.cp);
-					app.ls.setItem('estatura', user.perfil.estatura);
-					app.ls.setItem('peso', user.perfil.peso);
-					app.ls.setItem('peso_ideal', user.pesoDeseado);
-					app.ls.setItem('dpw', user.perfil.ejercicio);
-					app.ls.setItem('restricciones', user.restricciones);
-					app.ls.setItem('comentarios', user.comentarios);
-					app.ls.setItem('customerId', user.customerId);
-					app.ls.setItem('chatId', user.chatId);
+					app.keeper.setItem('edad', 0);
+					app.keeper.setItem('zipcode', user.cp);
+					app.keeper.setItem('estatura', user.perfil.estatura);
+					app.keeper.setItem('peso', user.perfil.peso);
+					app.keeper.setItem('peso_ideal', user.pesoDeseado);
+					app.keeper.setItem('dpw', user.perfil.ejercicio);
+					app.keeper.setItem('restricciones', user.restricciones);
+					app.keeper.setItem('comentarios', user.comentarios);
+					app.keeper.setItem('customerId', user.customerId);
+					app.keeper.setItem('chatId', user.chatId);
 				if(user.dieta !== undefined)
-					app.ls.setItem('dietaId', user.dieta._id);
+					app.keeper.setItem('dietaId', user.dieta._id);
 				else
-					app.ls.setItem('dietaId', 0);
+					app.keeper.setItem('dietaId', 0);
 				if(user.dieta !== undefined)
-					app.ls.setItem('dietaName', user.dieta.nombre);
+					app.keeper.setItem('dietaName', user.dieta.nombre);
 				else
-					app.ls.setItem('dietaName', '');
+					app.keeper.setItem('dietaName', '');
 				
 				if(user.coach !== undefined){
-					app.ls.setItem('nombre_coach', user.coach.nombre);
-					app.ls.setItem('apellido_coach', user.coach.apellido);
-					app.ls.setItem('coach_rate', user.coach.rating);
-					app.ls.setItem('chatPassword', user.coach.chatPassword);
+					app.keeper.setItem('nombre_coach', user.coach.nombre);
+					app.keeper.setItem('apellido_coach', user.coach.apellido);
+					app.keeper.setItem('coach_rate', user.coach.rating);
+					app.keeper.setItem('chatPassword', user.coach.chatPassword);
 				}
 				return;
 			}
