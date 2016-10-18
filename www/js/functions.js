@@ -1881,33 +1881,6 @@ $(window).load(function(){
 
 		}
 	
-		
-
-		$('#finish2').click(function(){
-			$('.objetive').animate({opacity:"0",left:"-40px"}, 200);
-			$('.bgre').removeClass('active');
-			$('.bred').addClass('active');
-				/*
-					localStorage PLAN / COACH_TYPE
-				*/
-			//plan
-			localStorage.setItem('plan', $('#plan').val() );
-			//coach_type
-			localStorage.setItem('coach_type', $('#coach_type').val() );
-
-			var plan 		= localStorage.getItem('plan' );
-			var coach_type = localStorage.getItem('coach_type' );
-
-			console.log(" plan> "+ plan);
-			console.log("coachType> "+ coach_type);
-
-			setTimeout(function() {
-				$(".pagina").hide();
-				$(".exercise").show();
-				$(".exercise").css("left","40px");
-				$(".exercise").animate({opacity:"1",left:"0px"}, 200);
-			}, 250);
-		});//END FINISH2 REGISTRO APP
 
 		$('#finish3').click(function(){
 			$('.exercise').animate({opacity:"0",left:"-40px"}, 200);
@@ -2284,73 +2257,6 @@ $(window).load(function(){
 				$(".conekta").css("left","40px");
 				$(".conekta").animate({opacity:"1",left:"0px"}, 200);
 			}, 250);
-		});
-
-		$('.back').click(function(){
-			if( $('.aboutyou').is(':visible') ){
-				// TODO: Use render methods not hard loading
-				window.location.assign('inicio.html');
-			} 
-			if($('.objetive').is(':visible')){
-				$('.objetive').animate({opacity:"0",left:"40px"}, 200);
-				$('.bgre').removeClass('active');
-				$('.bpur').addClass('active');
-				setTimeout(function() {
-					$(".pagina").hide();
-					$(".aboutyou").show();
-					$(".aboutyou").animate({opacity:"1",left:"0px"}, 200);
-				}, 250);
-				//$(".back").hide();
-			} else if($('.exercise').is(':visible')){
-				$('.exercise').animate({opacity:"0",left:"40px"}, 200);
-				$('.bred').removeClass('active');
-				$('.bgre').addClass('active');
-				setTimeout(function() {
-					$(".pagina").hide();
-					$(".objetive").show();
-					$(".objetive").animate({opacity:"1",left:"0px"}, 200);
-				}, 250);
-			} else if($('.restric').is(':visible')){
-				$('.restric').animate({opacity:"0",left:"40px"}, 200);
-				$('.borg').removeClass('active');
-				$('.bred').addClass('active');
-				setTimeout(function() {
-					$(".pagina").hide();
-					$(".exercise").show();
-					$(".exercise").animate({opacity:"1",left:"0px"}, 200);
-				}, 250);
-			} else if($('.pcoach1').is(':visible')){
-				$('.pcoach1').animate({opacity:"0",left:"40px"}, 200);
-				$('.byel').removeClass('active');
-				$('.borg').addClass('active');
-				setTimeout(function() {
-					$(".pagina").hide();
-					$(".restric").show();
-					$(".restric").animate({opacity:"1",left:"0px"}, 200);
-				}, 250);
-			} else if($('.resena').is(':visible')){
-				$('.resena').animate({opacity:"0",left:"40px"}, 200);
-				setTimeout(function() {
-					$(".pagina").hide();
-					$(".pcoach1").show();
-					$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
-				}, 250);
-			} else if($('.discount').is(':visible')){
-				$('.discount').animate({opacity:"0",left:"40px"}, 200);
-				$('.byel').addClass('active');
-				setTimeout(function() {
-					$(".pagina").hide();
-					$(".pcoach1").show();
-					$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
-				}, 250);
-			} else if($('.conekta').is(':visible')){
-				$('.conekta').animate({opacity:"0",left:"40px"}, 200);
-				setTimeout(function() {
-					$(".pagina").hide();
-					$(".discount").show();
-					$(".discount").animate({opacity:"1",left:"0px"}, 200);
-				}, 250);
-			}
 		});
 
 		var labelID;
