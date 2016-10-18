@@ -8,17 +8,16 @@ var anchot = document.documentElement.clientWidth;
 $( function() {
 
 	window.fbAsyncInit = function() {
-	FB.init({
-		appId      : '239633319765955',
-		cookie     : true,  // enable cookies to allow the server to access 
-						  // the session
-		xfbml      : true,  // parse social plugins on this page
-		version    : 'v2.7' // use graph api version 2.5
-		});
+		FB.init({
+					appId      : '239633319765955',
+					cookie     : true,
+					xfbml      : true,
+					version    : 'v2.7'
+				});
 	}
 
-	$('.add_picture').click(function (e) 
-	{
+	$('.add_picture').click(function (e){
+		
 		app.get_file_from_device('profile', 'camera');
 	});
 

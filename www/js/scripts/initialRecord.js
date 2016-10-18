@@ -4,6 +4,8 @@ window.initializeRecordEvents = function(){
 	jQuery(document).ready(function($) {
 
 		console.log("Initializing Initial Record events");
+		
+		window.init_scripts.push("initial_record");
 		/* MEASUREMENT CONTROLS */
 		var timeout;
 		var estatura;

@@ -33,7 +33,7 @@ window.initializeEvents = function(){
 		});
 
 		if($('#login_form').length){
-
+			window.init_scripts.push("login_validate");
 			$('#login_form').validate({
 				rules:{
 					mail :{
@@ -96,7 +96,8 @@ window.initializeEvents = function(){
 
 
 		/*  Create a new account the Goog ol' fashion way  */
-		if($('#create_account').length)
+		if($('#create_account').length){
+			window.init_scripts.push("register_validate");
 			$('#create_account').validate({
 				rules: {
 					user: "required",
@@ -153,10 +154,11 @@ window.initializeEvents = function(){
 
 				}
 			});
-		// END create_account
+		} // END create_account
 
 		/*  Email code validation  */
-		if($('#code_form').length)
+		if($('#code_form').length){
+			window.init_scripts.push("code_validate");
 			$('#code_form').validate({
 				rules:{
 					code:"required"
@@ -191,19 +193,16 @@ window.initializeEvents = function(){
 						return;
 					}
 
-
-
 				}
 			});
+		}
+			
 
 		/***************************/
 		/*  Initial Record events  */
 		/***************************/
-		if( $('.view').hasClass('initialRecord') ){
-	
-			initializeRecordEvents();
-	
-		} // END initialRecord
+		if( $('.view').hasClass('initialRecord') && $.inArray( 'initial_record', window.init_scripts ) == -1 )
+			return initializeRecordEvents();
 		
 
 	});

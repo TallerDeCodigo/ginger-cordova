@@ -30,6 +30,7 @@
 			this.registerCompiledPartials();
 
 			window.loggedIn = false;
+			window.init_scripts = [];
 			this.ls 		= window.localStorage;
 				
 			if(is_login){
