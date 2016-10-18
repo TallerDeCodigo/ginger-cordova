@@ -125,31 +125,32 @@ window.initializeEvents = function(){
 					},
 					cpass: "Las contraseñas que proporcionaste no coinciden"
 				},
-				submitHandler: function(){
+				submitHandler: function(form, event){
+					event.preventDefault();
 					app.showLoader();
-					console.log('Creating native user');
-					var data_login  	= app.getFormData('#create_account');
-					console.log(data_login);
+					var data_login  	= app.getFormData(form);
 
 					/* stores user name */
-					localStorage.setItem('email_verification', false);
-					localStorage.setItem('user_name', data_login.user);
-					localStorage.setItem('user_last_name', data_login.last_name);
-
-					data_login.pass 	= $('#pass').val();
+					app.ls.setItem('email_verification', false);
+					app.ls.setItem('user_name', data_login.user);
+					app.ls.setItem('user_last_name', data_login.last_name);
 					
-					var responsedata 	= apiRH.registerNative(data_login);  
-					console.log(responsedata);
+					var login_response 	= apiRH.registerNative(data_login);
 
-					// if(responsedata) {						
+					if( login_response ){
+						apiRH.headers['X-ZUMO-AUTH'] = login_response;
+						var userInfo = apiRH.getInfoUser();
+						console.log(userInfo);
+						if(userInfo){
+							var coachInfo 	= JSON.parse( app.ls.getItem('user') );
+							window._coach = (coachInfo) ? coachInfo : null;
+							return app.render_validate_code();
+						}
+						
+					}else{
+						app.toast("Lo sentimos, el email o usuario ya existe.")
+					}
 
-					// 	apiRH.save_user_data_clientside(responsedata);
-					// 	app.render_validate_code();
-					// 	app.hideLoader();
-					// 	return;
-					// }else{
-					// 	return app.toast('Lo sentimos, el email o usuario ya existe.');
-					// }
 				}
 			});
 		// END create_account

@@ -45,29 +45,31 @@
 					console.log(is_client);
 					if(is_client == 'not_set'){
 						// TODO: Use render methods not hard loading
-						window.location.assign('record.html');
+						// window.location.assign('record.html');
 					}else
 						return;
 				}else{
 					
 					if(is_feed){
-						if(is_client == null)
-							window.location.assign('record.html');
-						else	
+						if(is_client == null){
+							// window.location.assign('record.html');
+						} else{
 							return;
+						}
 
 					}else{
-						console.log('Es cliente?' + is_client);
+						console.log('Es cliente ? ::: ' + is_client);
 						if(!app.ls.getItem('email_verification')){
 							console.log("Validate some codes");
-							return app.render_validate_code();
+							// return app.render_validate_code();
+							return;
 						}
 						if(is_client == null){
 							// TODO: Use render methods not hard loading
-							window.location.assign('record.html');
+							// window.location.assign('record.html');
 						}else{
 							// TODO: Use render methods not hard loading
-							window.location.assign('dieta.html');
+							// window.location.assign('dieta.html');
 						}	
 
 					}

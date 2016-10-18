@@ -55,8 +55,9 @@ function requestHandlerAPI(){
 		 
 		this.loginNative =  function(data_login){
 
-			var email = data_login.mail;
-			var pass = data_login.pass;
+			var email 	= data_login.mail;
+			var pass 	= data_login.pass;
+			
 			var data = {
 							"tipo" 		: "cliente",
 							"mail" 		: email,
@@ -125,42 +126,23 @@ function requestHandlerAPI(){
 						"password" : pass
 					};
 
-			var response = this.makeRequest('api/signup', data);
+			var created_response = this.makeRequest('api/signup', data, true);
 
-			console.log(response);  //llega aqui con la respuesta del servidor
+			console.log("It's alive! ::: "+JSON.stringify(created_response));
 
+			/* GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE  */
+			app.ls.setItem('token', 	created_response.token);
+			app.ls.setItem('mail', 	created_response.mail);
+			app.ls.setItem('chatId', 	created_response.jid);
+			app.ls.setItem('userId', 	created_response._id);
 
-			/*
-				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
-			*/
+			this.token = app.ls.getItem('token');
 
-			localStorage.setItem('token', response.token);
-			localStorage.setItem('mail', response.mail);
-			localStorage.setItem('chatId', response.jid);
-			localStorage.setItem('userId', response._id);
+			var userId 	= app.ls.getItem('userId');
+			var mail 	= app.ls.getItem('mail');
+			var token 	= app.ls.getItem('token');
 
-			this.token = localStorage.getItem('token');
-
-			console.log('TOKEN: ' + this.token );
-			console.log(JSON.stringify(response));
-
-			var userId 	= localStorage.getItem('userId');
-			var mail 	= localStorage.getItem('mail');
-			var token 	= localStorage.getItem('token');
-
-			console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
-
-
-			// Function 
-			console.log(req);
-			//var user = this.getRequest('api/cliente', req);
-
-			//console.log(user);
-
-			//localStorage.setItem('users', JSON.stringify(user));
-
-			return (response.nuevo) ? response : false;
-			console.log(response);
+			return (created_response.nuevo) ? token : false;
 		};
 
 		this.validateRegistrationCode = function(code, email){
@@ -317,7 +299,7 @@ function requestHandlerAPI(){
 
 		};
 
-		/*
+		/**
 		 * registerUpTake Registrer event from diet of user
 		 * @param data {}
 		 * @return response
@@ -332,14 +314,21 @@ function requestHandlerAPI(){
 			return (response) ? response : false;
 		};
 
+		/**
+		 * Fetch user information from api
+		 * @return JSON encoded object or false if api responds badly
+		 */
 		this.getInfoUser = function(){
 			
 			var user = this.getRequest('tables/cliente?_id=' + localStorage.getItem('userId'), null);
-			console.log(user);
 			this.save_user_data_clientside(user);
-			return (user) ? true : false;
+			return (typeof(user) != 'undefined') ? user : false;
 		};
 
+		/**
+		 * Update user settings
+		 * @return Boolean response
+		 */
 		this.updateUserSetting = function(data){
 			var _data = {};
 
@@ -541,9 +530,8 @@ function requestHandlerAPI(){
 			setTimeout(function(){
 				app.showLoader();
 			}, 420);
-			console.log(data);
 			var result = {};
-			var myHeaders = (!noHeaders || typeof(noHeaders) == 'undefined') ? apiRH.headers : null;
+
 			var options = 	{
 								type 		: 'POST',
 								url			: window.api_base_url+endpoint,
@@ -551,10 +539,9 @@ function requestHandlerAPI(){
 								dataType 	: 'json',
 								async 		: false
 							};
+			var myHeaders = (!noHeaders || typeof(noHeaders) == 'undefined') ? apiRH.headers : null;
 			if(myHeaders)
 				options.headers = myHeaders;
-
-			console.log(options);
 			
 			$.ajax(options)
 			 .always( function(response){
@@ -569,7 +556,6 @@ function requestHandlerAPI(){
 				console.log(e);
 				return false;
 			});
-			console.log('Result ::: '+JSON.stringify(result));
 			return result;
 		};
 
@@ -1446,10 +1432,11 @@ function requestHandlerAPI(){
 					localStorage.setItem('genero', user.perfil.sexo);
 					localStorage.setItem('customerId', user.customerId);
 
-					if(user.perfil.edad !== undefined)
+					if(user.perfil.edad !== undefined){
 						localStorage.setItem('edad', user.perfil.edad.real);
-					else
+					} else {
 						localStorage.setItem('edad', 0);
+					}
 					localStorage.setItem('zipcode', user.cp);
 					localStorage.setItem('estatura', user.perfil.estatura);
 					localStorage.setItem('peso', user.perfil.peso);
@@ -1459,14 +1446,16 @@ function requestHandlerAPI(){
 					localStorage.setItem('comentarios', user.comentarios);
 					localStorage.setItem('customerId', user.customerId);
 					localStorage.setItem('chatId', user.chatId);
-					if(user.dieta !== undefined)
+					if(user.dieta !== undefined){
 						localStorage.setItem('dietaId', user.dieta._id);
-					else
+					} else {
 						localStorage.setItem('dietaId', 0);
-					if(user.dieta !== undefined)
+					}
+					if(user.dieta !== undefined){
 						localStorage.setItem('dietaName', user.dieta.nombre);
-					else
+					} else {
 						localStorage.setItem('dietaName', '');
+					}
 					
 					if(user.coach !== undefined){
 						localStorage.setItem('nombre_coach', user.coach.nombre);
