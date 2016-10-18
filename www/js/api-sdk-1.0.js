@@ -147,8 +147,8 @@ function requestHandlerAPI(){
 
 		this.validateRegistrationCode = function(code, email){
 			var data = {
-					'code': code, 
-					'mail': email
+					'code'	: code, 
+					'mail'	: email
 				};
 			console.log(data);
 			return this.makeRequest('api/validatecode/', data);
@@ -535,7 +535,7 @@ function requestHandlerAPI(){
 			var options = 	{
 								type 		: 'POST',
 								url			: window.api_base_url+endpoint,
-								data 		: data,
+								data 		: JSON.stringify(data),
 								dataType 	: 'json',
 								async 		: false
 							};
