@@ -253,7 +253,7 @@ $(window).on("load resize",function(){
 				setTimeout(function() {$('.alert_chCoach').hide();}, 800);
 			}
 
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 		}else{
 			console.log(msg);
 			localStorage.setItem('msg_ch_coach', msg);
@@ -268,11 +268,11 @@ $(window).on("load resize",function(){
 				setTimeout(function() {$('.alert_chCoach2').hide();}, 800);
 			}
 
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 			
 			$('#accept_chCoach2').click(function(){
 				 $('.alert_chCoach2').hide();
-				 $('#container').toggleClass('blurred');
+				 $('#blur').toggleClass('blurred');
 				 // TODO: Use render methods not hard loading
 				 window.location.assign('userdata.html');
 			});
@@ -281,7 +281,7 @@ $(window).on("load resize",function(){
 		
 		$('#accept_chCoach').click(function(){
 			$('.alert_chCoach').hide();
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 
 		});
 
@@ -565,7 +565,7 @@ $(window).on("load resize",function(){
 						$('.overscreen7').removeClass('active');
 						setTimeout(function() {$('.overscreen7').hide();}, 800);
 					}
-					$('#container').toggleClass('blurred');
+					$('#blur').toggleClass('blurred');
 				});//end click add updated profile
 
 
@@ -644,7 +644,7 @@ $(window).on("load resize",function(){
 
 				$('#_cancel_chCoach').click(function(){
 					$('.overscreen7').hide();
-					$('#container').toggleClass('blurred');
+					$('#blur').toggleClass('blurred');
 				});
 
 				app.hideLoader();
@@ -1636,7 +1636,7 @@ $(window).load(function(){
 				$('.alert_tracking').removeClass('active');
 				setTimeout(function() {$('.alert_tracking').hide();}, 800);
 			}
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 
 		});
 
@@ -1664,7 +1664,7 @@ $(window).load(function(){
 				app.toast("Se ha guardado correctamente tu progreso");
 
 			$('.alert_tracking').hide();
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 		});
 
 		$('.cancel').click(function(){
@@ -1672,7 +1672,7 @@ $(window).load(function(){
 			$('input[name="litros"]').val(agua_local);
 			$('.vaso p span').text(agua_local);
 			$('.alert_tracking').hide();
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 		});
 
 
@@ -1767,7 +1767,7 @@ $(window).load(function(){
 					$('.alert_tracking').removeClass('active');
 					setTimeout(function() {$('.alert_tracking').hide();}, 800);
 				}
-				$('#container').toggleClass('blurred');
+				$('#blur').toggleClass('blurred');
 				//$('a.centro img').toggleClass('onn');
 			});
 
@@ -1791,12 +1791,12 @@ $(window).load(function(){
 					app.toast('El peso debe de ser mayor a 40');
 				}
 				$('.alert_tracking').hide();
-				$('#container').toggleClass('blurred');
+				$('#blur').toggleClass('blurred');
 			});
 
 			$('.cancel').click(function(){
 				$('.alert_tracking').hide();
-				$('#container').toggleClass('blurred');
+				$('#blur').toggleClass('blurred');
 			});
 		}//END IF BODY HAS CLASS WEIGHT
 		
@@ -1962,7 +1962,7 @@ $(window).load(function(){
 					$('.alert_tracking').removeClass('active');
 					setTimeout(function() {$('.alert_tracking').hide();}, 800);
 				}
-				$('#container').toggleClass('blurred');
+				$('#blur').toggleClass('blurred');
 			});
 
 			$('#add_tracking').click(function(){
@@ -2132,7 +2132,7 @@ $(window).load(function(){
 				$('.alert_tracking').removeClass('active');
 				setTimeout(function() {$('.alert_tracking').hide();}, 800);
 			}
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 			//$('a.centro img').toggleClass('onn');
 		});
 			$('#add_tracking').click(function(){
@@ -2146,11 +2146,11 @@ $(window).load(function(){
 					//window.location.assign('dieta.html');
 				}
 				$('.alert_tracking').hide();
-				$('#container').toggleClass('blurred');
+				$('#blur').toggleClass('blurred');
 			});
 			$('#add_cancelar').click(function(){
 				$('.alert_tracking').hide();
-				$('#container').toggleClass('blurred');
+				$('#blur').toggleClass('blurred');
 			});
 	}//end if body has class measures
 
@@ -2603,7 +2603,7 @@ $(window).load(function(){
 				$('.overscreen4').removeClass('active');
 				setTimeout(function() {$('.overscreen4').hide();}, 800);
 			}
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 		});
 
 		$('.bt-review').click(function(){
@@ -2661,7 +2661,7 @@ $(window).load(function(){
 		});//END BT-REVIEW
 
 		$('#aceptar').click(function(){
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 			/*
 				JSON COACH SELECTED	*
 			*/
@@ -2690,7 +2690,7 @@ $(window).load(function(){
 		});
 
 		$('#cancelar').click(function(){
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 			$('.overscreen4').hide();
 			$('.alert_tracking').hide();
 
@@ -2704,11 +2704,11 @@ $(window).load(function(){
 				$('.overscreen5').removeClass('active');
 				setTimeout(function() {$('.overscreen5').hide();}, 800);
 			}
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 		});
 
 		$('#info_pay').click(function(){
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 			$('.overscreen5').hide();
 		})
 
@@ -2979,7 +2979,7 @@ $(window).load(function(){
 							$('.alert_tracking').removeClass('active');
 							setTimeout(function() {$('.alert_tracking').hide();}, 800);
 						}
-						$('#container').toggleClass('blurred');
+						$('#blur').toggleClass('blurred');
 					});
 
 						$('#add_tracking').click(function(){
@@ -2997,7 +2997,7 @@ $(window).load(function(){
 								alert('error al insertar datos ');
 							}
 							$('.alert_tracking').hide();
-							$('#container').toggleClass('blurred');
+							$('#blur').toggleClass('blurred');
 						});
 		}//endif 
 		
@@ -3010,7 +3010,7 @@ $(window).load(function(){
 				$('.overscreen').removeClass('active');
 				setTimeout(function() {$('.overscreen').hide();}, 800);
 			}
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 			$('a.centro img').toggleClass('onn');
 		});
 
@@ -3459,7 +3459,7 @@ $(window).load(function(){
 				$('.cancel_subscription').removeClass('active');
 				setTimeout(function() {$('.cancel_subscription').hide();}, 800);
 			}
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 
 		var customer_id = localStorage.getItem('customer_id');
 		
@@ -3467,7 +3467,7 @@ $(window).load(function(){
 
 		$('#accept_cancel').click(function(){
 			$('.cancel_subscription').hide();
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 
 			if(!$('.cancel_subscription2').is(':visible') ){
 				$('.cancel_subscription2').show();
@@ -3476,7 +3476,7 @@ $(window).load(function(){
 					$('.cancel_subscription2').removeClass('active');
 					setTimeout(function() {$('.cancel_subscription2').hide();}, 800);
 				}
-				$('#container').toggleClass('blurred');
+				$('#blur').toggleClass('blurred');
 
 				$('#accept_ccomment').click(function(){
 					console.log('ventana para comentario');
@@ -3505,7 +3505,7 @@ $(window).load(function(){
 							$('#accept_comment3').click(function(){
 								console.log('click');
 								$('.cancel_subscription3').hide();
-								$('#container').toggleClass('blurred');
+								$('#blur').toggleClass('blurred');
 
 								if(response){
 									localStorage.clear();
@@ -3516,18 +3516,18 @@ $(window).load(function(){
 
 
 						// $('.cancel_subscription2').hide();
-						// $('#container').toggleClass('blurred');
+						// $('#blur').toggleClass('blurred');
 					});
 				});
 
 				$('#cancelar2').click(function(){
 					$('.cancel_subscription2').hide();
-					$('#container').toggleClass('blurred');
+					$('#blur').toggleClass('blurred');
 				});
 
 				$('.cancel.comment').click(function(){
 					$('.comment_pop').hide();
-					$('#container').toggleClass('blurred');
+					$('#blur').toggleClass('blurred');
 					app.toast("Membresía no afectada");
 				});
 			/*Llamar hasta estar segurisomo de querer cancelar la subscripccion*/

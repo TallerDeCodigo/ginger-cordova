@@ -155,6 +155,45 @@ window.initializeEvents = function(){
 			});
 		// END create_account
 
+		/*  Email code validation  */
+		if($('#code_form').length)
+			$('#code_form').validate({
+				rules:{
+					code:"required"
+				},
+				messages:{
+					code:"Proporciona tu código de activación"
+				},
+				submitHandler:function(form, event){
+					event.preventDefault();
+					setTimeout(function(){
+						app.showLoader();
+					}, 420);
+
+					var form_data 	= app.getFormData(form);
+					var res 		= apiRH.validateRegistrationCode(form_data.code, localStorage.mail);
+					console.log("Result ::: ");
+					console.log(res);
+					if( res.length ){
+						app.toast("Tu código ha sido validado correctamente!");
+						app.ls.setItem('email_verification', true);
+						return app.render_initial_record();
+						;
+					}else{
+						$('.overscreen7').show().addClass('active');
+						$('#blur').toggleClass('blurred');
+						$('#_alert_validate').on('click', function(){
+							$('.overscreen7').hide().removeClass('active');
+							$('#blur').toggleClass('blurred');
+						});
+						return;
+					}
+
+
+
+				}
+			});
+
 
 
 	});

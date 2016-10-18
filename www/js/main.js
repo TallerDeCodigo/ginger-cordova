@@ -31,48 +31,56 @@
 
 			window.loggedIn = false;
 			this.ls 		= window.localStorage;
-			if(is_login)
-				loggedIn = true;
 				
 			if(is_login){
 				
 				console.log('You okay, now you can start making calls');
 				/* Take the user to it's timeline */
-				var is_home = window.is_home;
-				var is_feed = window.is_feed;
+				loggedIn = true;
+				var is_access 	= window.is_access;
+				var is_feed 	= window.is_feed;
 				
-				if(is_home){
-					console.log(is_client);
+				if(is_access){
+
 					if(is_client == 'not_set'){
-						// TODO: Use render methods not hard loading
-						// window.location.assign('record.html');
-					}else
-						return;
+						/*** Still haven't paid ***/
+						if( app.ls.getItem('email_verification') == 'false' ){
+							/*** Haven't validated email code ***/
+							return app.render_validate_code();
+						}
+						/*** Still haven't paid ***/
+						/*** Render Initial questions ***/
+						return app.render_initial_record();
+					}
+					return;
+
 				}else{
 					
-					if(is_feed){
-						if(is_client == null){
-							// window.location.assign('record.html');
-						} else{
-							return;
-						}
+					// if(is_feed){
+					// 	if(is_client == null){
+					// 		// window.location.assign('record.html');
+					// 	} else{
+					// 		return;
+					// 	}
 
-					}else{
-						console.log('Es cliente ? ::: ' + is_client);
-						if(!app.ls.getItem('email_verification')){
-							console.log("Validate some codes");
-							// return app.render_validate_code();
-							return;
-						}
-						if(is_client == null){
-							// TODO: Use render methods not hard loading
-							// window.location.assign('record.html');
-						}else{
-							// TODO: Use render methods not hard loading
-							// window.location.assign('dieta.html');
-						}	
+					// }else{
+					// 	console.log('Es cliente ? ::: ' + is_client);
+					// 	if(!app.ls.getItem('email_verification')){
+					// 		console.log("Validate some codes");
+					// 		// return app.render_validate_code();
+					// 		return;
+					// 	}
+					// 	if(is_client == null){
+					// 		// TODO: Use render methods not hard loading
+					// 		// window.location.assign('record.html');
+					// 	}else{
+					// 		// TODO: Use render methods not hard loading
+					// 		// window.location.assign('dieta.html');
+					// 	}	
 
-					}
+					// }
+					console.log("Really?");
+					return;
 				}	
 				return;
 			}else{
@@ -81,6 +89,7 @@
 				// return;
 
 			}
+			return app.render_entermode();
 
 		},
 		initPushNotifications: function() {
@@ -300,7 +309,7 @@
 			console.log("Rendering Initial Questions");
 			var data = this.gatherEnvironment();
 			data.is_scrollable = false;
-			return this.switchView('code', data, '.view', url, 'login');
+			return this.switchView('record', data, '.view', url, 'main');
 		},
 		render_myPlan : function( url ){
 			app.showLoader();
@@ -660,7 +669,7 @@
 					$('.overscreen2').removeClass('active');
 					setTimeout(function() {$('.overscreen2').hide();}, 800);
 				}
-				$('#container').toggleClass('blurred');
+				$('#blur').toggleClass('blurred');
 					//app.toast('Has cerrado la sesión, hasta pronto');
 					//localStorage.clear();
 					//window.location.assign('index.html');
@@ -677,7 +686,7 @@
 		});
 		$('.logout_cancel').click(function(){
 			$('.overscreen2').hide();
-			$('#container').toggleClass('blurred');
+			$('#blur').toggleClass('blurred');
 			return;
 		});
 
@@ -748,50 +757,6 @@
 
 		//-----------------------------
 		//
-		// Validate verification code
-		//
-		//-----------------------------
-		if($('#code_form').length)
-			$('#code_form').validate({
-				rules:{
-					code:"required"
-				},
-				messages:{
-					code:"Proporciona tu código de activación"
-				},
-				submitHandler:function(){
-					
-					setTimeout(function(){
-						app.showLoader();
-					}, 800);
-
-					var form_data = app.getFormData("#code_form");
-					var res = apiRH.validateRegistrationCode(form_data.code, localStorage.mail);
-					console.log(res);
-					if( res.length ){
-						app.toast("Tu código ha sido validado correctamente!");
-						// TODO: Use render methods not hard loading
-						window.location.assign('record.html');
-						return;
-					}else{
-						$('.overscreen7').show().addClass('active');
-						$('#container').toggleClass('blurred');
-						$('#_alert_validate').on('click', function(){
-							$('.overscreen7').hide().removeClass('active');
-							$('#container').toggleClass('blurred');
-						});
-						return;
-					}
-
-
-
-				}
-			});
-
-
-
-		//-----------------------------
-		//
 		// Login Facebook
 		//
 		//-----------------------------
@@ -849,11 +814,11 @@
 		   						$('.overscreen6').removeClass('active');
 		   						setTimeout(function() {$('.overscreen6').hide();}, 800);
 		   					}
-		   					$('#container').toggleClass('blurred');
+		   					$('#blur').toggleClass('blurred');
 
 		   					$('#go_next').click(function(){
 		   						$('.overscreen6').hide();
-		   						$('#container').toggleClass('blurred');
+		   						$('#blur').toggleClass('blurred');
 		   						window.location.assign('dieta.html');
 		   					});
 

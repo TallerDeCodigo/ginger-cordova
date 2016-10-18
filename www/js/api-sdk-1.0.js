@@ -150,7 +150,7 @@ function requestHandlerAPI(){
 					'code': code, 
 					'mail': email
 				};
-
+			console.log(data);
 			return this.makeRequest('api/validatecode/', data);
 		};
 
@@ -542,7 +542,8 @@ function requestHandlerAPI(){
 			var myHeaders = (!noHeaders || typeof(noHeaders) == 'undefined') ? apiRH.headers : null;
 			if(myHeaders)
 				options.headers = myHeaders;
-			
+			console.log(options);
+
 			$.ajax(options)
 			 .always( function(response){
 				setTimeout(function(){
@@ -550,6 +551,7 @@ function requestHandlerAPI(){
 				}, 2000);
 			 })
 			 .done( function(response){
+			 	console.log(response);
 				result = response;
 			 })
 			 .fail( function(e){
