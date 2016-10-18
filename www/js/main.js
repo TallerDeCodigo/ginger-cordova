@@ -309,7 +309,7 @@
 			console.log("Rendering Initial Questions");
 			var data = this.gatherEnvironment();
 			data.is_scrollable = false;
-			return this.switchView('record', data, '.view', url, 'main');
+			return this.switchView('record', data, '.view', url, 'initialRecord');
 		},
 		render_myPlan : function( url ){
 			app.showLoader();

@@ -196,7 +196,15 @@ window.initializeEvents = function(){
 				}
 			});
 
-
+		/***************************/
+		/*  Initial Record events  */
+		/***************************/
+		if( $('.view').hasClass('initialRecord') ){
+	
+			initializeRecordEvents();
+	
+		} // END initialRecord
+		
 
 	});
 
