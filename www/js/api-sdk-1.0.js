@@ -188,22 +188,10 @@ function requestHandlerAPI(){
 
 		this.updatePerfil = function(data){
 			var req = {
-				method : 'PATCH',
-				url : api_base_url + 'tables/cliente/' + localStorage.getItem('userId') ,
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': localStorage.getItem('token'),
-					'Content-Type': 'application/json'
-				},
 				data : data
-			}
+			};
 
-			console.log(JSON.stringify(req));
-
-			var response = this.makePatchRequest('tables/cliente/' + localStorage.getItem('userId'), req);
-
-			console.log("Request Path Data Cliente");
-
+			var response = this.patchRequest( api_base_url + 'tables/cliente/' + app.keeper.getItem('userId'), req);
 			console.log(response);  //llega aqui con la respuesta del servidor
 
 			return (response) ? response : false;
@@ -460,14 +448,14 @@ function requestHandlerAPI(){
 								return this;
 							};
 
-		/* 
+		/*! 
 		 * Set token user
 		 * @return the token
 		 */
 		this.set_user_token = function(){
 								
 							};
-		/* 
+		/*! 
 		 * Wrapper for the getRequest, makeRequest methods 
 		 * @param type Request type (POST, GET, PUT, DELETE)
 		 * @param endpoint String The API endpoint (See Documentation)
@@ -480,7 +468,7 @@ function requestHandlerAPI(){
 						if(type === 'GET')  return this.getRequest(endpoint, data);
 						if(type === 'PUT')  return this.putRequest(endpoint, data);
 					};
-		/* 
+		/*! 
 		 * Check if the Request object has a token
 		 * @return stored token, false if no token is stored
 		 * @see localStorage
@@ -488,7 +476,8 @@ function requestHandlerAPI(){
 		this.has_token = function(){
 			return (typeof this.token != 'undefined' || this.token !== '') ? localStorage.getItem('token') : false;
 		};
-		/* 
+
+		/*! 
 		 * Check if the Request object has a valid token
 		 * @return stored token, false if no token is stored
 		 */
@@ -510,14 +499,14 @@ function requestHandlerAPI(){
 							}
 							return var_return;
 						};
-		/* 
+		/*! 
 		 * Request token getter
 		 * @return stored token, null if no token is stored
 		 */
 		this.get_request_token = function(){
 									return this.token;
 								};
-		/* 
+		/*! 
 		 * Executes a POST call
 		 * @param endpoint API endpoint to make the call to
 		 * @param data url encoded data
@@ -561,12 +550,16 @@ function requestHandlerAPI(){
 			return result;
 		};
 
-		this.makePatchRequest = function(endpoint, data){
+		/*! 
+		 * Executes a PATCH request
+		 * @param endpoint API endpoint to make the call to
+		 * @param data JSON encoded data 
+		 * @return JSON encoded response
+		 */
+		this.patchRequest = function(endpoint, data){
 			
 			sdk_app_context.showLoader();
 			var result = {};
-
-			console.log('datos' + data.data);
 
 			$.ajax({
 			  type: 'PATCH',
@@ -586,7 +579,8 @@ function requestHandlerAPI(){
 			});
 			return result;
 		};
-		/* 
+		
+		/*! 
 		 * Executes a GET call
 		 * @param endpoint API endpoint to make the call to
 		 * @param data JSON encoded data 
@@ -622,7 +616,7 @@ function requestHandlerAPI(){
 			return result;
 		};
 
-		/* 
+		/*! 
 		 * Executes a PUT call
 		 * @param endpoint API endpoint to make the call to
 		 * @param data JSON encoded data 
@@ -652,35 +646,7 @@ function requestHandlerAPI(){
 							 return result;
 						};
 
-		/**
-		 * Executes a PATCH update
-		 * @param endpoint API endpoint to make the call to
-		 * @param data JSON encoded data 
-		 * *****(SEND data = NULL for closed endpoints)*****
-		 * @return JSON success or JSON encoded data
-		 * @see API documentation
-		 * @todo Actually make the request via PATCH method
-		 */
-		this.patchRequest = function(endpoint, data){
-							sdk_app_context.showLoader();
-							var userInfo = {};
-
-							var xhr = new XMLHttpRequest();
-							xhr.open('POST', window.api_base_url+endpoint);
-							xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-							xhr.onload = function() {
-								console.log(xhr.status);
-								if (xhr.status === 200) {
-									var userInfo = JSON.parse(xhr.responseText);
-									console.log(userInfo);
-									sdk_app_context.hideLoader();
-								}
-							};
-							xhr.send(data);
-							/* ContentType is important to parse the data server side since PUT doesn't handle multipart form data */
-							 return userInfo;
-						};
-
+		
 		this.makeCosume = function(data){
 			sdk_app_context.showLoader();
 			var result = {};

@@ -204,6 +204,7 @@ window.initializeEvents = function(){
 		if( $('.view').hasClass('initialRecord') && $.inArray( 'initial_record', window.init_scripts ) == -1 )
 			return initializeRecordEvents();
 		
+		
 
 	});
 

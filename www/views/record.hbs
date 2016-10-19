@@ -147,7 +147,8 @@
 				    		</div>
 				    		<img id="next_step_two" class="enter next_step step_2" src="images/enter.svg">
 				    	</div>
-				    	
+
+						<!-- Pag 3: Frecuencia de ejercicio -->
 				    	<div class="pagina exercise" style="display:none">
 				    		<h2>¿Con qué frecuencia<br>haces ejercicio?</h2>
 				    		<div class="page-holder">
@@ -164,9 +165,11 @@
 				    			</div>
 				    		</div>
 			    			<p>Días por semana</p>
-				    		<img id="finish3" class="enter" src="images/enter.svg">
+				    		<img id="next_step_three" class="enter next_step step_3" src="images/enter.svg">
 				    		<input id="days_per_week" type="hidden" value="0">
 				    	</div>
+
+						<!-- Pag 4: Restricciones alimenticias -->
 				    	<div class="restric pagina" style="display:none">
 				    		<h2>¿Tienes alguna<br>restricción alimenticia?</h2>
 				    		<span class="little-comment">Puedes seleccionar más de una opción</span>
@@ -204,7 +207,7 @@
 		    				<div id="si" class="siono yes">Sí</div>
 		    				<div id="no" class="siono not active">No</div>
 				    		<span class="the-comment" style="display:none"></span>
-				    		<img id="finish4" class="saltar" src="images/saltar.svg">
+				    		<img id="next_step_four" class="saltar next_step step_4" src="images/saltar.svg">
 
 				    	</div>
 
@@ -232,7 +235,7 @@
 				    				
 				    			</div>
 				    		</div>
-				    		<img id="finish5" class="enter" src="images/elegir.svg" >
+				    		<img id="next_step_five" class="enter next_step step_5" src="images/elegir.svg" >
 				    	</div>
 
 				    		<!--Pantalla eliminada-->
@@ -368,13 +371,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="comment_pop" style="display:none">
+			<div class="comment_pop modal_ok_cancel modal" style="display:none">
 				<div class="ov-filler2"></div>
 				<div class="dialog">
 					<h5>Cuéntanos más de ti</h5>
 					<textarea id="comentar" placeholder=""></textarea>
 					<div class="di-options">
-						<a class="accept send_cmt">Aceptar</a>
+						<a id="send_register_cmt" class="accept">Aceptar</a>
 						<a class="cancel comment">Cancelar</a>
 					</div>
 				</div>

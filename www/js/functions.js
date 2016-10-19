@@ -645,91 +645,7 @@ $(window).on("load resize",function(){
 				$('#change_coach').text(text);
 				$('#change_coach').attr('href', href);
 
-		}//end if has class
-
-
-
-
-			var restricciones = [];
-				 restricciones =  localStorage.getItem('restricciones');
-				 // console.log('restricciones> '+restricciones);
-				 if(restricciones == null || restricciones === 'undefined'){
-					restricciones = [];
-					// console.log("es vacio> " +typeof restricciones );
-				 }else{
-					restricciones = JSON.parse("["+restricciones+"]");
-					console.log(restricciones.length);
-					console.log(restricciones);
-				 }
-
-			$('.re-option').click(function() {
-
-				if(restricciones === 'undefined' ){
-					restricciones = [];
-				}
-				else if(restricciones.length > 0){
-					console.log(restricciones);
-					console.log(restricciones.length);
-				}
-
-			var valor = $(this).find('.type').attr('value');
-				console.log(valor);
-			if (!$(this).hasClass('active')) {
-				
-				console.log("ADDED");
-
-				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
-				$(this).addClass('active');
-				$(this).attr("value", valor);
-				$('.restricciones').attr('value', valor);
-				
-				restricciones.push(valor);
-				console.log(restricciones.length);
-				console.log(restricciones);
-				localStorage.setItem('restricciones', JSON.stringify(restricciones) );
-
-			} else {
-
-				console.log('DELETED');
-
-				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
-				$(this).removeClass('active');
-				$(this).attr("value", "");
-				$('.restricciones').attr('value',"");
-				for(var i=0; i<restricciones.length; i++){
-					
-					if( restricciones[i] == valor ){
-						console.log('entro al loop');
-						var index = restricciones.indexOf(valor);
-						console.log(valor);
-						console.log(restricciones.length);
-						console.log(restricciones);
-
-						restricciones.splice(i, 1);
-						
-
-						localStorage.setItem('restricciones', JSON.stringify(restricciones));
-
-					}//end IF
-
-				}//end FOR				
-						console.log(restricciones.length);
-						console.log(restricciones);
-				
-			}// end ELSE
-
-			if(restricciones.length == 0 ){
-				$('#finish4').attr('src', 'images/saltar.svg');
-				$('#finish4').css('margin-left', '-65px');
-			}else{
-				$('#finish4').attr('src', 'images/enter.svg');
-				$('#finish4').css('margin-left', '-25px');
-
-			}
-			console.log(restricciones);
-
-		});//end click re-option
-
+		}
 
 
 		if ($('body').hasClass('update_data')) {
@@ -1853,243 +1769,6 @@ $(window).load(function(){
 			}
 
 		}
-	
-
-		$('#finish3').click(function(){
-			$('.exercise').animate({opacity:"0",left:"-40px"}, 200);
-			$('.bred').removeClass('active');
-			$('.borg').addClass('active');
-
-			/*
-				localStorage FRECUENCIA DE EJERCICIO
-			*/
-			localStorage.setItem('dpw', $('#days_per_week').val() );
-			var _dpw = localStorage.getItem('dpw');
-
-			// var dpw = localStorage.getItem('dpw');
-			// console.log(" dias por semana> > > "+dpw);
-
-			setTimeout(function() {
-				$(".pagina").hide();
-				$(".restric").show();
-				$(".restric").css("left","40px");
-				$(".restric").animate({opacity:"1",left:"0px"}, 200);
-			}, 250);
-		});//END FINISH3 REGISTRO APP
-
-		$('#finish4').click(function(){ 
-
-			$('.restric').animate({opacity:"0",left:"-40px"}, 200);
-			$('.borg').removeClass('active');
-			$('.byel').addClass('active');
-
-			var restricciones_ls2   = [];
-			var genero 		  		= localStorage.getItem('genero');
-			var peso 		  		= localStorage.getItem('peso');
-			var estatura 	  		= localStorage.getItem('estatura');
-			var edad 		  		= localStorage.getItem('edad');
-			var peso_ideal 	  		= localStorage.getItem('peso_ideal');
-			var zipcode 	  		= localStorage.getItem('zipcode');
-			var plan 		  		= localStorage.getItem('plan', $('#plan').val() );
-			var coach_type 	  		= localStorage.getItem('coach_type', $('#coach_type').val() );
-			if (localStorage.getItem('restricciones') == null) {
-				console.log('viene null');
-				restricciones_ls2 = "";
-			}else{
-				restricciones_ls2 	= localStorage.getItem('restricciones');
-				console.log(restricciones_ls2);
-			}
-			var dpw 		  		= localStorage.getItem('dpw');
-			console.log("Saving dpw "+dpw);
-			var comentario 	  		= localStorage.getItem('comentario');
-
-			console.log("genero> " + genero +"peso > "+ peso+"estatura > "+estatura+" edad > "+edad+" ideal > "+peso_ideal+" zip > "+zipcode+" plan > "+plan+" coach > "+coach_type+" restricciones > "+restricciones_ls2+" dpw > "+dpw+" comentario > "+comentario );
-
-			console.log(restricciones_ls2);
-			if(restricciones_ls2 === 'undefined'){
-				console.log(restricciones_ls2);
-			}
-			//console.log( JSON.parse(restricciones_ls2) );
-			var ageyears = new Date();
-			var _year =ageyears.getFullYear();
-			var _mes = ageyears.getMonth() +1;
-			var _dia = ageyears.getDate();
-			var _yob = _year - edad;
-			
-			var fecha_born = _yob+"/"+ _mes +"/"+_dia;
-			console.log(typeof fecha_born);
-			// fecha_born.toString();
-
-			var born = new Date(fecha_born);
-			//console.log(edad);
-			console.log(born);
-			/*
-				JSON STRUCTURE 	*
-			*/
-			var json = {
-				"sexo" : genero,
-				"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
-				"perfil":{
-					"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
-					"sexo" : genero,
-					"peso" : peso,
-					"estatura" : estatura,
-					"ejercicio" : dpw,
-					"objetivo" : plan,
-					"restricciones" : (restricciones_ls2 === 'undefined')?null:JSON.parse(restricciones_ls2),
-					"personalidad" : coach_type
-				},
-				"cp": zipcode,
-				"pesoDeseado": peso_ideal,
-				"comentarios": comentario
-			}//end json
-
-			//Request update data
-
-			var responsedata = apiRH.updatePerfil(json);
-
-			//console.log(responsedata);
-
-			
-			
-			if(responsedata){
-
-				/* REQUEST COACHES */	
-				
-				var listCoach = apiRH.getCoachList();
-
-				console.log(listCoach[0].coach);
-
-				if(listCoach){
-
-					var i = 1;
-					var Name;
-					var LastN;
-					var short_description;
-					var biografia;
-					var rate_stars;
-					var item = $('.initial').html();
-					var coaches = [];
-
-					$.each( listCoach, function( key, value ) {
-						
-						console.log(listCoach);
-						
-						// $('.initial').remove();
-						// $(".wrap-cslide").append('<div class="csilder">'+item+'</div>');
-						// console.log( key + ": " + value );
-
-						// console.log('Lista de Coaches ' + listCoach);
-
-						
-						$.each( value, function( key, value ) {
-							console.log( key + " :: " + value );
-							if (key=='_id') {
-								// console.log('DIETA ID' + value);
-								// $('.slide-coach').attr('dieta', value);
-								localStorage.setItem('dietaId', value);
-							}
-							if(key == 'coach'){	
-								$.each( value, function( key, value ) {
-									
-									console.log( key + " ::: " + value );
-									
-									if (key=='_id') {
-										var noexiste = true;
-										for (var j = 0; j < coaches.length; j++) {
-											// console.log('entra al for');
-
-											if (coaches[j]==value){
-												// console.log('sdfsdfsdfsdfregdfgdfgfgdfg');
-												noexiste = false;
-											}
-										}
-										if (noexiste) {
-											coaches.push(value);
-											// console.log(listCoach);
-											$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
-											$(".resena .img-frame:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
-											// console.log('ID DE COACH: ' + value);
-											localStorage.setItem('coach_id', value);
-											$('.slide-coach:nth-of-type('+i+')').attr('coach', localStorage.getItem("coach_id"));
-											$('.slide-coach:nth-of-type('+i+')').attr('dieta_id', localStorage.getItem("dietaId"));
-										}
-									}
-									if (key=='nombre') {
-										Name = value;
-										console.log(Name);
-									}
-									if (key=='apellido') {
-										LastN = value;
-										var coach_name = Name +" "+LastN;
-										$('.slide-coach:nth-of-type('+i+') .name.coach_name').html(coach_name);
-										$('.slide-coach:nth-of-type('+i+')').attr("data-name",coach_name);
-									}
-									if (key=='frase') {
-										$(".slide-coach:nth-of-type("+i+") p.short-descrip b").html(value);
-									}
-									if (key=='bio') {
-										$(".slide-coach:nth-of-type("+i+") textarea.short-descrip").html(value);
-									}
-									if(key == 'rating'){
-										rate_stars = value;
-										rate_stars = Math.round(rate_stars);
-										$(".slide-coach:nth-of-type("+i+")").attr("data-rate",rate_stars);
-										for (var j = 1; j <= rate_stars; j++) {
-											$(".slide-coach:nth-of-type("+i+") .rate-stars img:nth-of-type("+j+")").attr("src","images/starh.svg");
-										}
-									}
-									if (key == 'calificaciones') {
-										// console.log("calificaciones :::: "+value);
-										if (value == "1") {
-											$(".slide-coach:nth-of-type("+i+") div.no-review").html(value+" valoración");
-										} else {
-											$(".slide-coach:nth-of-type("+i+") div.no-review").html(value+" valoraciones");
-										}
-									}
-
-								});																
-							}
-						});
-
-						i++;
-
-					});
-
-					$('.slide-coach').each(function() {
-						if ($(this).attr('coach') === undefined) {
-						  $(this).remove();
-						}
-					});
-
-					$(window).resize();
-								
-					// var count = 5;
-					// $('.rate-stars').html();
-					// for (var i = 0; i < rate_stars; i++) {
-					// 	$('.rate-stars').append('<img src="images/starh.svg">');
-					// 	console.log(i);
-					// };
-					
-					// for (var x = 0; x < count - rate_stars; x++) {
-					// 	console.log('-' + x);
-					// 	$('.rate-stars').append('<img src="images/star.svg">');
-					// 	console.log(i);
-					// };
-
-
-					setTimeout(function() {
-						$(".pagina").hide();
-						$(".pcoach1").show();
-						$(".pcoach1").css("left","40px");
-						$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
-					}, 250);
-					
-				}
-			}else{
-				alert('Error en la actualización de datos');
-			}
-		});//end FINISH 4
 
 
 
@@ -2756,56 +2435,15 @@ $(window).load(function(){
 			setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
 		});
 
-
+		// Cambiar coach
 		$('.com2send').click(function() {
 			$('.comment_pop').show();
 			setTimeout(function() {$('.comment_pop').addClass('active');}, 200);
 			$('.comment_pop textarea').focus();
 		});
 
-		$('.siono').click(function() {
-			$('.siono').removeClass('active');
-			$(this).addClass('active');
-			if ($(this).hasClass('yes')) {
-				$('.comment_pop').show();
-				setTimeout(function() {$('.comment_pop').addClass('active');}, 200);
-				$('#comentar').focus();
-			} else {
-				$('.the-comment').html("");
-				$('.the-comment').hide();
-				$('.little-comment').show();
-			}
-
-		});
-
-		$('.send_cmt').click(function() {
-			
-			$('.comment_pop').removeClass('active');
-			setTimeout( function() {
-				$('.comment_pop').hide(); 
-			}, 500);
-			
-			$('.the-comment').html( $('#comentar').val() )
-							  .show();
-
-			$('li.comentario').show();
-			
-			var _cmt = $('#comentar').val();
-			app.keeper.setItem( 'comentario', _cmt );
-
-			$('.comment_pop textarea').focus();
 		
-			if( _cmt != "" ){
-				app.toast("Tu comentario se ha agregado");
-				$('#finish4').attr('src', 'images/enter.svg');
-				$('#finish4').css('margin-left', '-25px');
-			} else{
-				app.toast("Comentario vacío");
-				$('#finish4').attr('src', 'images/saltar.svg');
-				$('#finish4').css('margin-left', '-65px');
-			}
-		});
-
+		// Edit user
 		$('.izquii').click(function() {
 			$('.comment_pop').removeClass('active');
 			setTimeout( function() {$('.comment_pop').hide();}, 500);
@@ -2814,7 +2452,7 @@ $(window).load(function(){
 		});
 
 
-
+	// Cancelar subscripcion
 	$('.btn_cancelar').click(function (e) {
 
 		// alert('CANCELAR SUSCRIPTCION');
@@ -2892,11 +2530,7 @@ $(window).load(function(){
 					$('#blur').toggleClass('blurred');
 				});
 
-				$('.cancel.comment').click(function(){
-					$('.comment_pop').hide();
-					$('#blur').toggleClass('blurred');
-					app.toast("Membresía no afectada");
-				});
+				
 			/*Llamar hasta estar segurisomo de querer cancelar la subscripccion*/
 			// if(response){
 			// window.location.assign('index.html');
