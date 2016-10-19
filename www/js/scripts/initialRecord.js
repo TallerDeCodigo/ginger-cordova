@@ -671,7 +671,7 @@ window.initializeRecordEvents = function(){
 
 					$.each( listCoach, function( key, value ) {
 						
-
+						console.log(this);
 						$.each( value, function( key, value ) {
 							console.log( key + " :: " + value );
 							if (key=='_id') {

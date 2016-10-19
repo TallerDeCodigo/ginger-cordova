@@ -198,36 +198,9 @@ function requestHandlerAPI(){
 		};
 
 		this.getCoachList = function(data){
-			var req = {
-				method : 'GET',
-				url : api_base_url + 'tables/dieta?opciones=1',	//definitr tabla
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': localStorage.getItem('token'),
-					'Content-Type': 'application/json'
-				},
-				data : data
-			}
-			console.log(req);
-
-			$.ajax({
-			  type: 'GET',
-			  headers: req.headers,
-			  url:  req.url,
-			  dataType: 'json',
-			  async: false
-			})
-			 .done(function(response){
-				result = response;
-				sdk_app_context.hideLoader(response);
-			})
-			 .fail(function(e){
-				result = false;
-				console.log(JSON.stringify(e));
-			});
-
-			console.log(result);
-			return result;
+			var response = apiRH.getRequest('tables/dieta?opciones=1', data);
+			console.log(response);
+			return response;
 		};
 
 		//Conekta
