@@ -383,7 +383,7 @@ window.initializeRecordEvents = function(){
 		/*** SELECT OBJECTIVE ***/
 		$('.pl-option').click(function() {
 
-			var valor = $(this).find('.type').attr('value');
+			var valor = $(this).find('.type').data('index');
 			$('#plan').attr('value', valor);
 
 			$('.pl-option').each(function() {
@@ -398,20 +398,6 @@ window.initializeRecordEvents = function(){
 			$(this).addClass('active');
 			$(this).attr('value', valor);
 
-			switch ( $('#plan').val() ) {
-				case 'adelgazar' :
-					$('#plan').attr('value', '0');
-					break;
-				case 'detox':
-					$('#plan').attr('value', '1');
-					break;
-				case 'rendimiento' :
-					$('#plan').attr('value', '2');
-					break;
-				case 'bienestar' :
-					$('#plan').attr('value', '3');
-					break;
-			}
 		});
 
 		/*** SELECT COACH ***/
@@ -597,7 +583,7 @@ window.initializeRecordEvents = function(){
 		});
 
 		$('#next_step_four').click(function(){ 
-
+			app.showLoader();
 			$('.restric').animate({opacity:"0",left:"-40px"}, 200);
 			$('.borg').removeClass('active');
 			$('.byel').addClass('active');
@@ -653,10 +639,11 @@ window.initializeRecordEvents = function(){
 			console.log("PROFILE UPDATED! ::: "+JSON.stringify(responsedata));
 			
 			if(responsedata){
-
+				app.toast("¡Estamos encontrando a tu Coach ideal!");
 				/* REQUEST COACH OPTIONS */	
 				var listCoach = apiRH.getCoachList();
 				console.log( 'Lista de Coaches ' + JSON.stringify(listCoach) );
+				app.hideLoader();
 
 				if(listCoach){
 

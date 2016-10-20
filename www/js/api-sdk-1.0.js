@@ -191,8 +191,8 @@ function requestHandlerAPI(){
 				data : data
 			};
 
-			var response = this.patchRequest( api_base_url + 'tables/cliente/' + app.keeper.getItem('userId'), req);
-			console.log(response);  //llega aqui con la respuesta del servidor
+			var response = this.patchRequest( 'tables/cliente/' + app.keeper.getItem('userId'), req);
+			console.log(response);
 
 			return (response) ? response : false;
 		};
