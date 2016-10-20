@@ -582,8 +582,9 @@ window.initializeRecordEvents = function(){
 			console.log(restricciones);
 		});
 
-		$('#next_step_four').click(function(){ 
+		$('#next_step_four').click(function(){
 			app.showLoader();
+			console.log("Post show loader");
 			$('.restric').animate({opacity:"0",left:"-40px"}, 200);
 			$('.borg').removeClass('active');
 			$('.byel').addClass('active');
@@ -661,7 +662,7 @@ window.initializeRecordEvents = function(){
 						console.log(this);
 						$.each( value, function( key, value ) {
 							console.log( key + " :: " + value );
-							if (key=='_id') {
+							if (key == '_id') {
 								// console.log('DIETA ID' + value);
 								// $('.slide-coach').attr('dieta', value);
 								app.keeper.setItem('dietaId', value);
