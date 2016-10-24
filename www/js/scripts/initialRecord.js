@@ -16,13 +16,6 @@ window.initializeRecordEvents = function(){
 
 
 		/* MEASUREMENT CONTROLS */
-		var timeout;
-		var estatura;
-		var timeoutFlag = null;
-		var timer 		= 200;
-		var clickTimer 	= null;
-		var gridag;
-
 		$(".genre-bt").click(function(){
 			$(this).parent().find("a").removeClass('active');
 			$(this).addClass('active');
@@ -151,17 +144,19 @@ window.initializeRecordEvents = function(){
 		});
 
 		/** BINDING STICKY EVENTS **/
+		var estatura;
+
 		$("#estatura-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
 
 		$("#estatura-up").bind('mousedown', function(e){
 			// e.preventDefault();
-			if (clickTimer == null) {
-				clickTimer = setTimeout(function () {
-					clickTimer = null;
+			if (apiRH.clickTimer == null) {
+				apiRH.clickTimer = setTimeout(function () {
+					apiRH.clickTimer = null;
 				}, 320)
 			} else {
-				clearTimeout(clickTimer);
-				clickTimer = null;
+				clearTimeout(apiRH.clickTimer);
+				apiRH.clickTimer = null;
 				e.preventDefault();
 				e.stopPropagation();
 				console.log("double");
@@ -172,8 +167,8 @@ window.initializeRecordEvents = function(){
 				estatura = estatura+0.01;
 				$("#estatura-up").parent().parent().find('input').val(estatura.toFixed(2));
 				$('input[name="estatura"]').attr( "value", estatura );
-				timeoutFlag = true;
-			}, timer);
+				apiRH.timeoutFlag = true;
+			}, apiRH.timer);
 			return false;
 		})
 		 .bind('mouseup', apiRH.clearTimeoutLogic);
@@ -182,13 +177,13 @@ window.initializeRecordEvents = function(){
 
 		$("#estatura-dw").bind('mousedown', function(e){
 			e.preventDefault();
-			if (clickTimer == null) {
-				clickTimer = setTimeout(function () {
-					clickTimer = null;
+			if (apiRH.clickTimer == null) {
+				apiRH.clickTimer = setTimeout(function () {
+					apiRH.clickTimer = null;
 				}, 320)
 			} else {
-				clearTimeout(clickTimer);
-				clickTimer = null;
+				clearTimeout(apiRH.clickTimer);
+				apiRH.clickTimer = null;
 				e.preventDefault();
 				e.stopPropagation();
 				console.log("double");
@@ -200,7 +195,7 @@ window.initializeRecordEvents = function(){
 				$("#estatura-dw").parent().parent().find('input').val(estatura.toFixed(2));
 				$('input[name="estatura"]').attr("value", estatura);
 				// return false;
-			}, timer);
+			}, apiRH.timer);
 			return false;
 		})
 		 .bind('mouseup', apiRH.clearTimeoutLogic);
@@ -210,13 +205,13 @@ window.initializeRecordEvents = function(){
 		$("#peso-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
 		$("#peso-up").bind('mousedown', function(e){
 			e.preventDefault();
-			if (clickTimer == null) {
-				clickTimer = setTimeout(function () {
-					clickTimer = null;
+			if (apiRH.clickTimer == null) {
+				apiRH.clickTimer = setTimeout(function () {
+					apiRH.clickTimer = null;
 				}, 320)
 			} else {
-				clearTimeout(clickTimer);
-				clickTimer = null;
+				clearTimeout(apiRH.clickTimer);
+				apiRH.clickTimer = null;
 				e.preventDefault();
 				e.stopPropagation();
 				console.log("double");
@@ -232,7 +227,7 @@ window.initializeRecordEvents = function(){
 					peso=peso+1;
 					$("#peso-up").parent().parent().find('input').val(peso.toFixed(0));
 				}
-			}, timer);
+			}, apiRH.timer);
 			return false;
 		})
 		 .bind('mouseup', apiRH.clearTimeoutLogic);
@@ -240,13 +235,13 @@ window.initializeRecordEvents = function(){
 		$("#peso-dw").bind('touchstart touchend', apiRH.stickyTouchHandler);
 		$("#peso-dw").bind('mousedown', function(e){
 			e.preventDefault();
-			if (clickTimer == null) {
-				clickTimer = setTimeout(function () {
-					clickTimer = null;
+			if (apiRH.clickTimer == null) {
+				apiRH.clickTimer = setTimeout(function () {
+					apiRH.clickTimer = null;
 				}, 320)
 			} else {
-				clearTimeout(clickTimer);
-				clickTimer = null;
+				clearTimeout(apiRH.clickTimer);
+				apiRH.clickTimer = null;
 				e.preventDefault();
 				e.stopPropagation();
 				console.log("double");
@@ -262,7 +257,7 @@ window.initializeRecordEvents = function(){
 					peso=peso-1;
 					$("#peso-dw").parent().parent().find('input').val(peso.toFixed(0));
 				}
-			}, timer);
+			}, apiRH.timer);
 			return false;
 		})
 		 .bind('mouseup', apiRH.clearTimeoutLogic);
@@ -271,13 +266,13 @@ window.initializeRecordEvents = function(){
 
 		$("#ideal-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
 		$("#ideal-up").bind('mousedown', function(e){
-			if (clickTimer == null) {
-				clickTimer = setTimeout(function () {
-					clickTimer = null;
+			if (apiRH.clickTimer == null) {
+				apiRH.clickTimer = setTimeout(function () {
+					apiRH.clickTimer = null;
 				}, 320)
 			} else {
-				clearTimeout(clickTimer);
-				clickTimer = null;
+				clearTimeout(apiRH.clickTimer);
+				apiRH.clickTimer = null;
 				e.preventDefault();
 				e.stopPropagation();
 				console.log("double");
@@ -293,20 +288,20 @@ window.initializeRecordEvents = function(){
 					ideal=ideal+1;
 					$("#ideal-up").parent().parent().find('input').val(ideal.toFixed(0));
 				} 
-			}, timer);
+			}, apiRH.timer);
 			return false;
 		})
 		 .bind('mouseup', apiRH.clearTimeoutLogic);
 
 		$("#ideal-dw").bind('touchstart touchend', apiRH.stickyTouchHandler);
 		$("#ideal-dw").bind('mousedown', function(e){
-			if (clickTimer == null) {
-				clickTimer = setTimeout(function () {
-					clickTimer = null;
+			if (apiRH.clickTimer == null) {
+				apiRH.clickTimer = setTimeout(function () {
+					apiRH.clickTimer = null;
 				}, 320)
 			} else {
-				clearTimeout(clickTimer);
-				clickTimer = null;
+				clearTimeout(apiRH.clickTimer);
+				apiRH.clickTimer = null;
 				e.preventDefault();
 				e.stopPropagation();
 				console.log("double");
@@ -322,7 +317,7 @@ window.initializeRecordEvents = function(){
 					ideal=ideal-1;
 					$("#ideal-dw").parent().parent().find('input').val(ideal.toFixed(0));
 				}
-			}, timer);
+			}, apiRH.timer);
 			return false;
 		})
 		 .bind('mouseup', apiRH.clearTimeoutLogic);
@@ -583,8 +578,10 @@ window.initializeRecordEvents = function(){
 		});
 
 		$('#next_step_four').click(function(){
-			app.showLoader();
-			console.log("Post show loader");
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+
 			$('.restric').animate({opacity:"0",left:"-40px"}, 200);
 			$('.borg').removeClass('active');
 			$('.byel').addClass('active');

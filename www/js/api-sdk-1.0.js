@@ -120,10 +120,10 @@ function requestHandlerAPI(){
 			var cPass = data_login.cpass;
 
 			var data = {
-						"nombre" : name,
-						"apellido" :last_name,
-						"mail" : email,
-						"password" : pass
+						"nombre" 	: name,
+						"apellido" 	:last_name,
+						"mail" 		: email,
+						"password" 	: pass
 					};
 
 			var created_response = this.makeRequest('api/signup', data, true);
@@ -131,10 +131,10 @@ function requestHandlerAPI(){
 			console.log("It's alive! ::: "+JSON.stringify(created_response));
 
 			/* GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE  */
-			app.keeper.setItem('token', 	created_response.token);
-			app.keeper.setItem('mail', 	created_response.mail);
-			app.keeper.setItem('chatId', 	created_response.jid);
-			app.keeper.setItem('userId', 	created_response._id);
+			app.keeper.setItem('token',  created_response.token);
+			app.keeper.setItem('mail', 	 created_response.mail);
+			app.keeper.setItem('chatId', created_response.jid);
+			app.keeper.setItem('userId', created_response._id);
 
 			this.token = app.keeper.getItem('token');
 
@@ -142,7 +142,7 @@ function requestHandlerAPI(){
 			var mail 	= app.keeper.getItem('mail');
 			var token 	= app.keeper.getItem('token');
 
-			return (created_response.nuevo) ? token : false;
+			return (typeof(created_response.nuevo) != 'undefined') ? token : false;
 		};
 
 		this.validateRegistrationCode = function(code, email){
@@ -497,11 +497,11 @@ function requestHandlerAPI(){
 			var options = 	{
 								type 		: 'POST',
 								url			: window.api_base_url+endpoint,
-								data 		: JSON.stringify(data),
+								data 		: data,
 								dataType 	: 'json',
 								async 		: false
 							};
-			var myHeaders = (!noHeaders || typeof(noHeaders) == 'undefined') ? apiRH.headers : null;
+			var myHeaders = (!noHeaders || typeof(noHeaders) == 'undefined') ? apiRH.headers : {'X-ZUMO-APPLICATION': apiRH.headers['X-ZUMO-APPLICATION']};
 			if(myHeaders)
 				options.headers = myHeaders;
 			console.log(options);
@@ -1414,11 +1414,10 @@ function requestHandlerAPI(){
 		};
 
 		/* MEASUREMENT CONTROLS */
-		var timeout;
-		var estatura;
-		var timeoutFlag = null;
-		var timer 		= 200;
-		var clickTimer 	= null;
+		this.timeout;
+		this.timeoutFlag 	= null;
+		this.timer 		= 200;
+		this.clickTimer 	= null;
 
 		this.stickyTouchHandler = function(event) {
 
@@ -1455,16 +1454,16 @@ function requestHandlerAPI(){
 
 		this.clearTimeoutLogic = function(){
 			console.log("Clear timeout logic");
-			if(timeoutFlag){
-				clearInterval(timeout);
+			if(apiRH.timeoutFlag){
+				clearInterval(apiRH.timeout);
 		 	}else{
 		 		setTimeout(function(){
-		 			clearInterval(timeout);
-		 			timeoutFlag = false;
+		 			clearInterval(apiRH.timeout);
+		 			apiRH.timeoutFlag = false;
 		 			return true;
-		 		}, timer);
+		 		}, apiRH.timer);
 		 	}
-			timeoutFlag = false;
+			apiRH.timeoutFlag = false;
 			return false;
 		}
 		
