@@ -113,17 +113,17 @@ function requestHandlerAPI(){
 		 */
 		this.registerNative = function(data_login){
 
-			var name = data_login.user;
-			var last_name = data_login.last_name;
-			var email = data_login.mail;
-			var pass = data_login.pass;
-			var cPass = data_login.cpass;
+			var name 		= data_login.user;
+			var last_name 	= data_login.last_name;
+			var email 		= data_login.mail;
+			var pass 		= data_login.pass;
+			var cPass		= data_login.cpass;
 
 			var data = {
-						"nombre" 	: name,
-						"apellido" 	:last_name,
-						"mail" 		: email,
-						"password" 	: pass
+						'nombre' 	: name,
+						'apellido' 	: last_name,
+						'mail' 		: email,
+						'password' 	: pass
 					};
 
 			var created_response = this.makeRequest('api/signup', data, true);
@@ -497,7 +497,7 @@ function requestHandlerAPI(){
 			var options = 	{
 								type 		: 'POST',
 								url			: window.api_base_url+endpoint,
-								data 		: data,
+								data 		: JSON.stringify(data),
 								dataType 	: 'json',
 								async 		: false
 							};
@@ -1415,9 +1415,9 @@ function requestHandlerAPI(){
 
 		/* MEASUREMENT CONTROLS */
 		this.timeout;
-		this.timeoutFlag 	= null;
-		this.timer 		= 200;
-		this.clickTimer 	= null;
+		this.timeoutFlag = null;
+		this.timer 		 = 200;
+		this.clickTimer  = null;
 
 		this.stickyTouchHandler = function(event) {
 

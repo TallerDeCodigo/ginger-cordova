@@ -149,7 +149,7 @@ window.initializeRecordEvents = function(){
 		$("#estatura-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
 
 		$("#estatura-up").bind('mousedown', function(e){
-			// e.preventDefault();
+			e.preventDefault();
 			if (apiRH.clickTimer == null) {
 				apiRH.clickTimer = setTimeout(function () {
 					apiRH.clickTimer = null;
@@ -162,7 +162,7 @@ window.initializeRecordEvents = function(){
 				console.log("double");
 				return false;
 			}
-			timeout = setInterval(function(){
+			apiRH.timeout = setInterval(function(){
 				estatura = Number($("#estatura-up").parent().parent().find('input').val());
 				estatura = estatura+0.01;
 				$("#estatura-up").parent().parent().find('input').val(estatura.toFixed(2));
@@ -189,7 +189,7 @@ window.initializeRecordEvents = function(){
 				console.log("double");
 				return false;
 			}
-			timeout = setInterval(function(){
+			apiRH.timeout = setInterval(function(){
 				estatura = Number($("#estatura-dw").parent().parent().find('input').val());
 				estatura=estatura-0.01;
 				$("#estatura-dw").parent().parent().find('input').val(estatura.toFixed(2));
@@ -217,7 +217,7 @@ window.initializeRecordEvents = function(){
 				console.log("double");
 				return false;
 			}
-			timeout = setInterval(function(){
+			apiRH.timeout = setInterval(function(){
 				peso = Number($("#peso-up").parent().parent().find('input').val());
 				if (peso<99) {
 					peso=peso+0.5;
@@ -247,7 +247,7 @@ window.initializeRecordEvents = function(){
 				console.log("double");
 				return false;
 			}
-			timeout = setInterval(function(){
+			apiRH.timeout = setInterval(function(){
 				peso = Number($("#peso-dw").parent().parent().find('input').val());
 				if (peso<100.1) {
 					peso=peso-0.5;
@@ -278,7 +278,7 @@ window.initializeRecordEvents = function(){
 				console.log("double");
 				return false;
 			}
-			timeout = setInterval(function(){
+			apiRH.timeout = setInterval(function(){
 				ideal = Number($("#ideal-up").parent().parent().find('input').val());
 				if (ideal<99) {
 					ideal=ideal+0.5;
@@ -307,7 +307,7 @@ window.initializeRecordEvents = function(){
 				console.log("double");
 				return false;
 			}
-			timeout = setInterval(function(){
+			apiRH.timeout = setInterval(function(){
 				ideal = Number($("#ideal-dw").parent().parent().find('input').val());
 				if (ideal<100.1) {
 					ideal=ideal-0.5;
