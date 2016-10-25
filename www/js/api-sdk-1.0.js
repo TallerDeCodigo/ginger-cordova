@@ -20,6 +20,8 @@ function requestHandlerAPI(){
 							version: this.device_platform_version
 						};
 
+	this.keeper = window.localStorage;
+	
 	/*** Request headers ***/
 	this.headers = 	{
 						'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
@@ -32,12 +34,11 @@ function requestHandlerAPI(){
 
 	/*  Production API URL  */
 	window.api_base_url = "https://gingerservice.azure-mobile.net/";
-	
-	this.ls = window.localStorage;
+
 	/* Constructor */
 	this.construct = function(app_context){
 					console.log('Initialized Ginger api-sdk1.0');
-					if(this.ls.getItem('request_token')) this.token = this.ls.getItem('request_token');
+					if(this.keeper.getItem('request_token')) this.token = this.keeper.getItem('request_token');
 					sdk_app_context = app_context;
 					/* For chaining purposes ::) */
 					return this;
@@ -415,7 +416,7 @@ function requestHandlerAPI(){
 								/* Verify we got a nice token */
 								if( response_data.success !== false){
 									this.token = response_data.data.request_token;
-									this.ls.setItem('request_token', response_data.data.request_token);
+									this.keeper.setItem('request_token', response_data.data.request_token);
 									return this;
 								}
 								return this;
@@ -447,31 +448,10 @@ function requestHandlerAPI(){
 		 * @see localStorage
 		 */
 		this.has_token = function(){
-			return (typeof this.token != 'undefined' || this.token !== '') ? localStorage.getItem('token') : false;
+			return (typeof this.token != 'undefined' || this.token !== '') ? apiRH.keeper.getItem('token') : false;
 		};
 
-		/*! 
-		 * Check if the Request object has a valid token
-		 * @return stored token, false if no token is stored
-		 */
-		this.has_valid_token = function(){
-							if(this.token !== undefined || this.token !== ''){
-
-								console.log("Looks like you already have a token, let's check if it is valid");
-								var dedalo_log_info = (typeof this.ls.getItem('dedalo_log_info') != undefined) ? JSON.parse(this.ls.getItem('dedalo_log_info')) : null;
-								if(!dedalo_log_info) return false;
-
-									var user 		= dedalo_log_info.user_id;
-									var data_object =   {
-															user_id : user, 
-															request_token : apiRH.get_request_token(),
-															device_info: this.device_info
-														};
-									var response 	= this.makeRequest('auth/user/checkToken/', data_object);
-									var var_return 	= (response.success) ? true : false;
-							}
-							return var_return;
-						};
+		
 		/*! 
 		 * Request token getter
 		 * @return stored token, null if no token is stored

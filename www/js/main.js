@@ -11,6 +11,7 @@
 		// Application Constructor
 		initialize: function() {
 
+			console.log("Hello ??");
 			this.bindEvents();
 			/* Initialize API request handler */
 			window.apiRH = new requestHandlerAPI().construct(app);
