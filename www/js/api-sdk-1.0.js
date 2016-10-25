@@ -423,13 +423,6 @@ function requestHandlerAPI(){
 							};
 
 		/*! 
-		 * Set token user
-		 * @return the token
-		 */
-		this.set_user_token = function(){
-								
-							};
-		/*! 
 		 * Wrapper for the getRequest, makeRequest methods 
 		 * @param type Request type (POST, GET, PUT, DELETE)
 		 * @param endpoint String The API endpoint (See Documentation)
