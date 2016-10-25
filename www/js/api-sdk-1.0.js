@@ -25,7 +25,7 @@ function requestHandlerAPI(){
 	/*** Request headers ***/
 	this.headers = 	{
 						'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-						'X-ZUMO-AUTH': window.localStorage.getItem('token'),
+						'X-ZUMO-AUTH': this.keeper.getItem('token'),
 						'Content-Type': 'application/json'
 					};
 
@@ -69,15 +69,15 @@ function requestHandlerAPI(){
 			/*
 				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
 			*/
-			localStorage.setItem('token', response.token);
-			localStorage.setItem('mail', response.mail);
-			localStorage.setItem('userId', response.userId);
+			apiRH.keeper.setItem('token', response.token);
+			apiRH.keeper.setItem('mail', response.mail);
+			apiRH.keeper.setItem('userId', response.userId);
 
 			this.token = response.token;
 
-			var userId 	= localStorage.getItem('userId');
-			var mail 	= localStorage.getItem('mail');
-			var token 	= localStorage.getItem('token');
+			var userId 	= apiRH.keeper.getItem('userId');
+			var mail 	= apiRH.keeper.getItem('mail');
+			var token 	= apiRH.keeper.getItem('token');
 
 			if(!token)
 				return false;
@@ -166,14 +166,14 @@ function requestHandlerAPI(){
 				url : api_base_url + 'tables/medicion/',	//definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'X-ZUMO-AUTH': apiRH.keeper.getItem('token'),
 					'Content-Type': 'application/json'
 				},
 				data : {
 					'tipo' : tipo,
 					'magnitud' : magnitud,
-					'cliente' : localStorage.getItem('userId'),
-					'coach' : localStorage.getItem('coachId')
+					'cliente' : apiRH.keeper.getItem('userId'),
+					'coach' : apiRH.keeper.getItem('coachId')
 				}
 			}
 			console.log(req);
@@ -209,7 +209,7 @@ function requestHandlerAPI(){
 		this.makePayment = function(token)
 		{
 			var data = {
-					'cliente' : localStorage.getItem('userId'),
+					'cliente' : apiRH.keeper.getItem('userId'),
 					'card_token' : token
 				};
 
@@ -227,7 +227,7 @@ function requestHandlerAPI(){
 
 		this.changePayment = function(token){
 			var data = {
-					'cliente' : localStorage.getItem('userId'),
+					'cliente' : apiRH.keeper.getItem('userId'),
 					'tokenId' : token
 				};
 			console.log(req);
@@ -242,16 +242,16 @@ function requestHandlerAPI(){
 		this.getTransactions = function(){
 			var req = {
 				method : 'GET',
-				url : api_base_url + 'tables/transaction/?cliente=' + localStorage.getItem('userId'),	//definitr tabla
+				url : api_base_url + 'tables/transaction/?cliente=' + apiRH.keeper.getItem('userId'),	//definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'X-ZUMO-AUTH': apiRH.keeper.getItem('token'),
 					'Content-Type': 'application/json'
 				}
 			}
 			console.log(req);
 
-			var response = this.getRequest('tables/transaction/?cliente=' + localStorage.getItem('userId'), req);
+			var response = this.getRequest('tables/transaction/?cliente=' + apiRH.keeper.getItem('userId'), req);
 
 			console.log("Request Data Cliente Transaction");
 
@@ -282,7 +282,7 @@ function requestHandlerAPI(){
 		 */
 		this.getInfoUser = function(){
 			
-			var user = this.getRequest('tables/cliente?_id=' + localStorage.getItem('userId'), null);
+			var user = this.getRequest('tables/cliente?_id=' + apiRH.keeper.getItem('userId'), null);
 			this.save_user_data_clientside(user);
 			return (typeof(user) != 'undefined') ? user : false;
 		};
@@ -320,7 +320,7 @@ function requestHandlerAPI(){
 				url : api_base_url + 'api/rating/?coach=' + idCoach,	//definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'X-ZUMO-AUTH': apiRH.keeper.getItem('token'),
 					'Content-Type': 'application/json'
 				}
 			};
@@ -360,7 +360,7 @@ function requestHandlerAPI(){
 		 * @see save_user_data_clientside()
 		 */
 		this.create_internal_user = function(data){
-			localStorage.setItem('user', data);										
+			apiRH.keeper.setItem('user', data);										
 		};
 
 		/* 
@@ -423,6 +423,23 @@ function requestHandlerAPI(){
 							};
 
 		/*! 
+		 * Check if the Request object has a token
+		 * @return stored token, false if no token is stored
+		 * @see apiRH.keeper
+		 */
+		this.has_token = function(){
+			return ( !this.token || typeof(this.token) == 'undefined' || this.token == '') ? false : apiRH.keeper.getItem('token');
+		};
+		
+		/*! 
+		 * Request token getter
+		 * @return stored token, null if no token is stored
+		 */
+		this.get_request_token = function(){
+									return this.token;
+								};
+
+		/*! 
 		 * Wrapper for the getRequest, makeRequest methods 
 		 * @param type Request type (POST, GET, PUT, DELETE)
 		 * @param endpoint String The API endpoint (See Documentation)
@@ -435,165 +452,150 @@ function requestHandlerAPI(){
 						if(type === 'GET')  return this.getRequest(endpoint, data);
 						if(type === 'PUT')  return this.putRequest(endpoint, data);
 					};
-		/*! 
-		 * Check if the Request object has a token
-		 * @return stored token, false if no token is stored
-		 * @see localStorage
-		 */
-		this.has_token = function(){
-			return (typeof this.token != 'undefined' || this.token !== '') ? apiRH.keeper.getItem('token') : false;
-		};
 
-		
-		/*! 
-		 * Request token getter
-		 * @return stored token, null if no token is stored
-		 */
-		this.get_request_token = function(){
-									return this.token;
-								};
-		/*! 
-		 * Executes a POST call
-		 * @param endpoint API endpoint to make the call to
-		 * @param data url encoded data
-		 * @param noHeaders Boolean defaults to false
-		 * @return JSON encoded response
-		 */
-		this.makeRequest = function( endpoint, data, noHeaders, stringify ){
-			console.log(data);
-			if( typeof(stringify) == 'undefined' || stringify == true )
-				data = JSON.stringify(data);
-			console.log(data);
-			console.log(' ::: MAKE REQUEST ::: ');
-			setTimeout(function(){
-				app.showLoader();
-			}, 420);
-			var result = {};
 
-			var options = 	{
-								type 		: 'POST',
-								url			: window.api_base_url+endpoint,
-								data 		: data,
-								dataType 	: 'json',
-								async 		: false
-							};
-			var myHeaders = (!noHeaders || typeof(noHeaders) == 'undefined') ? apiRH.headers : {'X-ZUMO-APPLICATION': apiRH.headers['X-ZUMO-APPLICATION']};
-			if(myHeaders)
-				options.headers = myHeaders;
-			console.log(options);
-
-			$.ajax(options)
-			 .always( function(response){
+			/*! 
+			 * Executes a POST call
+			 * @param endpoint API endpoint to make the call to
+			 * @param data url encoded data
+			 * @param noHeaders Boolean defaults to false
+			 * @return JSON encoded response
+			 */
+			this.makeRequest = function( endpoint, data, noHeaders, stringify ){
+				console.log(data);
+				if( typeof(stringify) == 'undefined' || stringify == true )
+					data = JSON.stringify(data);
+				console.log(data);
+				console.log(' ::: MAKE REQUEST ::: ');
 				setTimeout(function(){
-					app.hideLoader();
-				}, 2000);
-			 })
-			 .done( function(response){
-			 	console.log(response);
-				result = response;
-			 })
-			 .fail( function(e){
-				console.log(e);
-				return false;
-			});
-			return result;
-		};
+					app.showLoader();
+				}, 420);
+				var result = {};
 
-		/*! 
-		 * Executes a PATCH request
-		 * @param endpoint API endpoint to make the call to
-		 * @param data JSON encoded data 
-		 * @return JSON encoded response
-		 */
-		this.patchRequest = function(endpoint, data){
+				var options = 	{
+									type 		: 'POST',
+									url			: window.api_base_url+endpoint,
+									data 		: data,
+									dataType 	: 'json',
+									async 		: false
+								};
+				var myHeaders = (!noHeaders || typeof(noHeaders) == 'undefined') ? apiRH.headers : {'X-ZUMO-APPLICATION': apiRH.headers['X-ZUMO-APPLICATION']};
+				if(myHeaders)
+					options.headers = myHeaders;
+				console.log(options);
+
+				$.ajax(options)
+				 .always( function(response){
+					setTimeout(function(){
+						app.hideLoader();
+					}, 2000);
+				 })
+				 .done( function(response){
+				 	console.log(response);
+					result = response;
+				 })
+				 .fail( function(e){
+					console.log(e);
+					return false;
+				});
+				return result;
+			};
+
+			/*! 
+			 * Executes a PATCH request
+			 * @param endpoint API endpoint to make the call to
+			 * @param data JSON encoded data 
+			 * @return JSON encoded response
+			 */
+			this.patchRequest = function(endpoint, data){
+				
+				sdk_app_context.showLoader();
+				var result = {};
+
+				$.ajax({
+				  type: 'PATCH',
+				  headers: apiRH.headers,
+				  url: window.api_base_url+endpoint,
+				  data: JSON.stringify(data.data),
+				  dataType: 'json',
+				  async: false
+				})
+				 .done(function(response){
+					result = response;
+					sdk_app_context.hideLoader(response);
+				})
+				 .fail(function(e){
+					result = false;
+					console.log(JSON.stringify(e));
+				});
+				return result;
+			};
 			
-			sdk_app_context.showLoader();
-			var result = {};
+			/*! 
+			 * Executes a GET call
+			 * @param endpoint API endpoint to make the call to
+			 * @param data JSON encoded data 
+			 * *****(SEND data = NULL for closed endpoints)*****
+			 * @return JSON encoded response
+			 * @see API documentation about jsonp encoding
+			 */
+			this.getRequest = function(endpoint, data){
+				sdk_app_context.showLoader();
+				var myData = (!data) ? "" : JSON.stringify(data);
+				var result = {};
+			
+				$.ajax({
+				  type: 'GET',
+				  headers: apiRH.headers,
+				  url: window.api_base_url+endpoint,
+				  data: myData,
+				  dataType: 'json',
+				  async: false
+				})
+				 .done(function(response){
+					// console.log('done');
+					result = response;
+					sdk_app_context.hideLoader(response);
+				})
+				 .fail(function(e){
+					console.log('fail');
+					result = false;
+					console.log(JSON.stringify(e));
+					app.hideLoader();
+				});
 
-			$.ajax({
-			  type: 'PATCH',
-			  headers: apiRH.headers,
-			  url: window.api_base_url+endpoint,
-			  data: JSON.stringify(data.data),
-			  dataType: 'json',
-			  async: false
-			})
-			 .done(function(response){
-				result = response;
-				sdk_app_context.hideLoader(response);
-			})
-			 .fail(function(e){
-				result = false;
-				console.log(JSON.stringify(e));
-			});
-			return result;
-		};
-		
-		/*! 
-		 * Executes a GET call
-		 * @param endpoint API endpoint to make the call to
-		 * @param data JSON encoded data 
-		 * *****(SEND data = NULL for closed endpoints)*****
-		 * @return JSON encoded response
-		 * @see API documentation about jsonp encoding
-		 */
-		this.getRequest = function(endpoint, data){
-			sdk_app_context.showLoader();
-			var myData = (!data) ? "" : JSON.stringify(data);
-			var result = {};
-		
-			$.ajax({
-			  type: 'GET',
-			  headers: apiRH.headers,
-			  url: window.api_base_url+endpoint,
-			  data: myData,
-			  dataType: 'json',
-			  async: false
-			})
-			 .done(function(response){
-				// console.log('done');
-				result = response;
-				sdk_app_context.hideLoader(response);
-			})
-			 .fail(function(e){
-				console.log('fail');
-				result = false;
-				console.log(JSON.stringify(e));
-				app.hideLoader();
-			});
+				return result;
+			};
 
-			return result;
-		};
-
-		/*! 
-		 * Executes a PUT call
-		 * @param endpoint API endpoint to make the call to
-		 * @param data JSON encoded data 
-		 * *****(SEND data = NULL for closed endpoints)*****
-		 * @return JSON success
-		 * @see API documentation
-		 */
-		this.putRequest = function(endpoint, data){
-							
-							sdk_app_context.showLoader();
-							var result = {};
-							/* ContentType is important to parse the data server side since PUT doesn't handle multipart form data */
-							$.ajax({
-								type: 	'PUT',
-								data: 	$.param(data),
-								contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-								url: 	window.api_base_url+endpoint,
-							})
-							 .done(function(response){
-								result = response;
-								sdk_app_context.hideLoader();
-							 })
-							 .fail(function(e){
-								result = false;
-								console.log(e);
-							 });
-							 return result;
-						};
+			/*! 
+			 * Executes a PUT call
+			 * @param endpoint API endpoint to make the call to
+			 * @param data JSON encoded data 
+			 * *****(SEND data = NULL for closed endpoints)*****
+			 * @return JSON success
+			 * @see API documentation
+			 */
+			this.putRequest = function(endpoint, data){
+								
+								sdk_app_context.showLoader();
+								var result = {};
+								/* ContentType is important to parse the data server side since PUT doesn't handle multipart form data */
+								$.ajax({
+									type: 	'PUT',
+									data: 	$.param(data),
+									contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+									url: 	window.api_base_url+endpoint,
+								})
+								 .done(function(response){
+									result = response;
+									sdk_app_context.hideLoader();
+								 })
+								 .fail(function(e){
+									result = false;
+									console.log(e);
+								 });
+								 return result;
+							};
 
 		
 		this.makeCosume = function(data){
@@ -605,7 +607,7 @@ function requestHandlerAPI(){
 				url : api_base_url + 'tables/consumo/',	//definitr tabla
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'X-ZUMO-AUTH': apiRH.keeper.getItem('token'),
 					'Content-Type': 'application/json'
 				},
 				data :  data
@@ -643,19 +645,19 @@ function requestHandlerAPI(){
 				method : 'GET',
 				headers: {
 					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': localStorage.getItem('token'),
+					'X-ZUMO-AUTH': apiRH.keeper.getItem('token'),
 					'Content-Type': 'application/json'
 				}
 			}
 
-			var user = JSON.parse(localStorage.getItem('user'));
+			var user = JSON.parse(apiRH.keeper.getItem('user'));
 
 			var idCoach = user.coach._id;
 
 			$.ajax({
 			  type: 'GET',
 			  headers: req.headers,
-			  url: 'https://gingerservice.azure-mobile.net/tables/consumo?coach=' + idCoach + '&dieta=' + localStorage.getItem('dietaId') + '&inicio=' + FechaIni + '&fin='+FechaFin,
+			  url: 'https://gingerservice.azure-mobile.net/tables/consumo?coach=' + idCoach + '&dieta=' + apiRH.keeper.getItem('dietaId') + '&inicio=' + FechaIni + '&fin='+FechaFin,
 			  dataType: 'json',
 			  async: false
 			})
@@ -718,7 +720,7 @@ function requestHandlerAPI(){
 
 					 console.log(data);
 
-					 localStorage.setItem("avatar", fb_avatar);
+					 apiRH.keeper.setItem("avatar", fb_avatar);
 
 					 var req = {
 						method : 'post',
@@ -786,13 +788,13 @@ function requestHandlerAPI(){
 									
 									console.log(req);
 
-									localStorage.setItem('token', response.token);
-									localStorage.setItem('mail', response.mail);
-									localStorage.setItem('userId', response.userId);
+									apiRH.keeper.setItem('token', response.token);
+									apiRH.keeper.setItem('mail', response.mail);
+									apiRH.keeper.setItem('userId', response.userId);
 
-									var userId 	= localStorage.getItem('userId');
-									var mail 	= localStorage.getItem('mail');
-									var token 	= localStorage.getItem('token');
+									var userId 	= apiRH.keeper.getItem('userId');
+									var mail 	= apiRH.keeper.getItem('mail');
+									var token 	= apiRH.keeper.getItem('token');
 
 									console.log('TOKEN RESPONSE ' + token);
 
@@ -820,41 +822,41 @@ function requestHandlerAPI(){
 											console.log(user);
 
 											if(user){
-												localStorage.setItem('coach_type', user.perfil.personalidad);
-												localStorage.setItem('user_name', user.nombre);
-												localStorage.setItem('user_last_name', user.apellido);
-												localStorage.setItem('genero', user.perfil.sexo);
+												apiRH.keeper.setItem('coach_type', user.perfil.personalidad);
+												apiRH.keeper.setItem('user_name', user.nombre);
+												apiRH.keeper.setItem('user_last_name', user.apellido);
+												apiRH.keeper.setItem('genero', user.perfil.sexo);
 
 												if(user.perfil.edad !== 'undefined')
-													localStorage.setItem('edad', user.perfil.edad.real);
+													apiRH.keeper.setItem('edad', user.perfil.edad.real);
 												else{
 
-													localStorage.setItem('edad', 0);
-													localStorage.setItem('zipcode', user.cp);
-													localStorage.setItem('estatura', user.perfil.estatura);
-													localStorage.setItem('peso', user.perfil.peso);
-													localStorage.setItem('peso_ideal', user.pesoDeseado);
-													localStorage.setItem('dpw', user.perfil.ejercicio);
-													localStorage.setItem('restricciones', user.restricciones);
-													localStorage.setItem('comentarios', user.comentarios);
-													localStorage.setItem('customerId', user.customerId);
-													localStorage.setItem('chatId', user.chatId);
+													apiRH.keeper.setItem('edad', 0);
+													apiRH.keeper.setItem('zipcode', user.cp);
+													apiRH.keeper.setItem('estatura', user.perfil.estatura);
+													apiRH.keeper.setItem('peso', user.perfil.peso);
+													apiRH.keeper.setItem('peso_ideal', user.pesoDeseado);
+													apiRH.keeper.setItem('dpw', user.perfil.ejercicio);
+													apiRH.keeper.setItem('restricciones', user.restricciones);
+													apiRH.keeper.setItem('comentarios', user.comentarios);
+													apiRH.keeper.setItem('customerId', user.customerId);
+													apiRH.keeper.setItem('chatId', user.chatId);
 												}
 												if(user.dieta !== 'undefined'){
-													localStorage.setItem('dietaId', user.dieta._id);
+													apiRH.keeper.setItem('dietaId', user.dieta._id);
 												}else{
-													localStorage.setItem('dietaId', 0);
+													apiRH.keeper.setItem('dietaId', 0);
 												}
 												if(user.dieta !== 'undefined'){
-													localStorage.setItem('dietaName', user.dieta.nombre);
+													apiRH.keeper.setItem('dietaName', user.dieta.nombre);
 												}else{
-													localStorage.setItem('dietaName', '');
+													apiRH.keeper.setItem('dietaName', '');
 												}
 												if(user.coach !== 'undefined'){
-													localStorage.setItem('nombre_coach', user.coach.nombre);
-													localStorage.setItem('apellido_coach', user.coach.apellido);
-													localStorage.setItem('coach_rate', user.coach.rating);
-													localStorage.setItem('chatPassword', user.coach.chatPassword);
+													apiRH.keeper.setItem('nombre_coach', user.coach.nombre);
+													apiRH.keeper.setItem('apellido_coach', user.coach.apellido);
+													apiRH.keeper.setItem('coach_rate', user.coach.rating);
+													apiRH.keeper.setItem('chatPassword', user.coach.chatPassword);
 												}	
 												if(user.customerId !== 'undefined'){
 													// TODO: Use render methods not hard loading
@@ -880,15 +882,15 @@ function requestHandlerAPI(){
 							  return;
 						}
 
-						localStorage.setItem('token', 	response.token);
-						localStorage.setItem('mail', 	response.mail);
-						localStorage.setItem('userId', 	response._id);
+						apiRH.keeper.setItem('token', 	response.token);
+						apiRH.keeper.setItem('mail', 	response.mail);
+						apiRH.keeper.setItem('userId', 	response._id);
 						
 						sdk_app_context.hideLoader(response);
 
-						var userId 	= localStorage.getItem('user_id');
-						var mail 	= localStorage.getItem('mail');
-						var token 	= localStorage.getItem('token');
+						var userId 	= apiRH.keeper.getItem('user_id');
+						var mail 	= apiRH.keeper.getItem('mail');
+						var token 	= apiRH.keeper.getItem('token');
 
 						console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
 
@@ -899,7 +901,7 @@ function requestHandlerAPI(){
 							url : api_base_url + 'api/signup',
 							headers: {
 								'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-								'X-ZUMO-AUTH': localStorage.getItem('token'),
+								'X-ZUMO-AUTH': apiRH.keeper.getItem('token'),
 								'Content-Type': 'application/json'
 							}
 						 }
@@ -927,9 +929,9 @@ function requestHandlerAPI(){
 
 						console.log(JSON.stringify(result));
 
-						localStorage.setItem('users', JSON.stringify(result));
+						apiRH.keeper.setItem('users', JSON.stringify(result));
 
-						var u = JSON.parse(localStorage.getItem('users'));
+						var u = JSON.parse(apiRH.keeper.getItem('users'));
 
 						if(u.customerId == 'no_set'){
 							// TODO: Use render methods not hard loading
@@ -985,13 +987,13 @@ function requestHandlerAPI(){
 									
 									console.log(req);
 
-									localStorage.setItem('token', response.token);
-									localStorage.setItem('mail', response.mail);
-									localStorage.setItem('userId', response.userId);
+									apiRH.keeper.setItem('token', response.token);
+									apiRH.keeper.setItem('mail', response.mail);
+									apiRH.keeper.setItem('userId', response.userId);
 
-									var userId 	= localStorage.getItem('userId');
-									var mail 	= localStorage.getItem('mail');
-									var token 	= localStorage.getItem('token');
+									var userId 	= apiRH.keeper.getItem('userId');
+									var mail 	= apiRH.keeper.getItem('mail');
+									var token 	= apiRH.keeper.getItem('token');
 
 									console.log('TOKEN RESPONSE ' + token);
 
@@ -1019,38 +1021,38 @@ function requestHandlerAPI(){
 											console.log(user);
 
 											if(user){
-												localStorage.setItem('coach_type', user.perfil.personalidad);
-												localStorage.setItem('user_name', user.nombre);
-												localStorage.setItem('user_last_name', user.apellido);
-												localStorage.setItem('genero', user.perfil.sexo);
+												apiRH.keeper.setItem('coach_type', user.perfil.personalidad);
+												apiRH.keeper.setItem('user_name', user.nombre);
+												apiRH.keeper.setItem('user_last_name', user.apellido);
+												apiRH.keeper.setItem('genero', user.perfil.sexo);
 
 												if(user.perfil.edad !== undefined)
-													localStorage.setItem('edad', user.perfil.edad.real);
+													apiRH.keeper.setItem('edad', user.perfil.edad.real);
 												else
-													localStorage.setItem('edad', 0);
-												localStorage.setItem('zipcode', user.cp);
-												localStorage.setItem('estatura', user.perfil.estatura);
-												localStorage.setItem('peso', user.perfil.peso);
-												localStorage.setItem('peso_ideal', user.pesoDeseado);
-												localStorage.setItem('dpw', user.perfil.ejercicio);
-												localStorage.setItem('restricciones', user.restricciones);
-												localStorage.setItem('comentarios', user.comentarios);
-												localStorage.setItem('customerId', user.customerId);
-												localStorage.setItem('chatId', user.chatId);
+													apiRH.keeper.setItem('edad', 0);
+												apiRH.keeper.setItem('zipcode', user.cp);
+												apiRH.keeper.setItem('estatura', user.perfil.estatura);
+												apiRH.keeper.setItem('peso', user.perfil.peso);
+												apiRH.keeper.setItem('peso_ideal', user.pesoDeseado);
+												apiRH.keeper.setItem('dpw', user.perfil.ejercicio);
+												apiRH.keeper.setItem('restricciones', user.restricciones);
+												apiRH.keeper.setItem('comentarios', user.comentarios);
+												apiRH.keeper.setItem('customerId', user.customerId);
+												apiRH.keeper.setItem('chatId', user.chatId);
 												if(user.dieta !== undefined)
-													localStorage.setItem('dietaId', user.dieta._id);
+													apiRH.keeper.setItem('dietaId', user.dieta._id);
 												else
-													localStorage.setItem('dietaId', 0);
+													apiRH.keeper.setItem('dietaId', 0);
 												if(user.dieta !== undefined)
-													localStorage.setItem('dietaName', user.dieta.nombre);
+													apiRH.keeper.setItem('dietaName', user.dieta.nombre);
 												else
-													localStorage.setItem('dietaName', '');
+													apiRH.keeper.setItem('dietaName', '');
 												
 												if(user.coach !== undefined){
-													localStorage.setItem('nombre_coach', user.coach.nombre);
-													localStorage.setItem('apellido_coach', user.coach.apellido);
-													localStorage.setItem('coach_rate', user.coach.rating);
-													localStorage.setItem('chatPassword', user.coach.chatPassword);
+													apiRH.keeper.setItem('nombre_coach', user.coach.nombre);
+													apiRH.keeper.setItem('apellido_coach', user.coach.apellido);
+													apiRH.keeper.setItem('coach_rate', user.coach.rating);
+													apiRH.keeper.setItem('chatPassword', user.coach.chatPassword);
 												}	
 												return (userId) ? user : false;
 											}
@@ -1098,7 +1100,7 @@ function requestHandlerAPI(){
 				console.log(response);
 				// var email = response.email;
 				// var username = response.lastname+"_"+response.id;
-				// var found = apiRH.create_internal_user(username, email, {fbId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
+				// var found = apiRH.create_internal_user(username, email, {fbId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, apiRH.keeper.getItem('request_token'));
 				/* End handshake with server by validating token and getting 'me' data */
 				// context.endHandshake(username);
 				// console.log(email +"  "+ username);
@@ -1169,7 +1171,7 @@ function requestHandlerAPI(){
 			this.transfer_options.params = params;
 			this.upload_ready = true;
 			console.log("prepareProfileTransfer");
-			localStorage.setItem('avatar-admin', fileName);
+			apiRH.keeper.setItem('avatar-admin', fileName);
 			apiRH.initializeProfileFileTransfer();
 			app.hideLoader();
 		};
@@ -1322,8 +1324,8 @@ function requestHandlerAPI(){
 		};
 
 		this.getProfile = function(){
-			var token 	= localStorage.getItem('token');
-			var userId 	= localStorage.getItem('userId');
+			var token 	= apiRH.keeper.getItem('token');
+			var userId 	= apiRH.keeper.getItem('userId');
 
 			if(token && userId){
 				var req = {
@@ -1338,47 +1340,47 @@ function requestHandlerAPI(){
 
 				var user = this.getRequest('tables/cliente/' + userId, null);
 
-				localStorage.setItem('user', JSON.stringify(user));
+				apiRH.keeper.setItem('user', JSON.stringify(user));
 				// console.log(JSON.stringify(user));
 				// console.log(user);
 
 				if(user){
-					localStorage.setItem('coach_type', user.perfil.personalidad);
-					localStorage.setItem('user_name', user.nombre);
-					localStorage.setItem('user_last_name', user.apellido);
-					localStorage.setItem('genero', user.perfil.sexo);
-					localStorage.setItem('customerId', user.customerId);
+					apiRH.keeper.setItem('coach_type', user.perfil.personalidad);
+					apiRH.keeper.setItem('user_name', user.nombre);
+					apiRH.keeper.setItem('user_last_name', user.apellido);
+					apiRH.keeper.setItem('genero', user.perfil.sexo);
+					apiRH.keeper.setItem('customerId', user.customerId);
 
 					if(user.perfil.edad !== undefined){
-						localStorage.setItem('edad', user.perfil.edad.real);
+						apiRH.keeper.setItem('edad', user.perfil.edad.real);
 					} else {
-						localStorage.setItem('edad', 0);
+						apiRH.keeper.setItem('edad', 0);
 					}
-					localStorage.setItem('zipcode', user.cp);
-					localStorage.setItem('estatura', user.perfil.estatura);
-					localStorage.setItem('peso', user.perfil.peso);
-					localStorage.setItem('peso_ideal', user.pesoDeseado);
-					localStorage.setItem('dpw', user.perfil.ejercicio);
-					localStorage.setItem('restricciones', user.restricciones);
-					localStorage.setItem('comentarios', user.comentarios);
-					localStorage.setItem('customerId', user.customerId);
-					localStorage.setItem('chatId', user.chatId);
+					apiRH.keeper.setItem('zipcode', user.cp);
+					apiRH.keeper.setItem('estatura', user.perfil.estatura);
+					apiRH.keeper.setItem('peso', user.perfil.peso);
+					apiRH.keeper.setItem('peso_ideal', user.pesoDeseado);
+					apiRH.keeper.setItem('dpw', user.perfil.ejercicio);
+					apiRH.keeper.setItem('restricciones', user.restricciones);
+					apiRH.keeper.setItem('comentarios', user.comentarios);
+					apiRH.keeper.setItem('customerId', user.customerId);
+					apiRH.keeper.setItem('chatId', user.chatId);
 					if(user.dieta !== undefined){
-						localStorage.setItem('dietaId', user.dieta._id);
+						apiRH.keeper.setItem('dietaId', user.dieta._id);
 					} else {
-						localStorage.setItem('dietaId', 0);
+						apiRH.keeper.setItem('dietaId', 0);
 					}
 					if(user.dieta !== undefined){
-						localStorage.setItem('dietaName', user.dieta.nombre);
+						apiRH.keeper.setItem('dietaName', user.dieta.nombre);
 					} else {
-						localStorage.setItem('dietaName', '');
+						apiRH.keeper.setItem('dietaName', '');
 					}
 					
 					if(user.coach !== undefined){
-						localStorage.setItem('nombre_coach', user.coach.nombre);
-						localStorage.setItem('apellido_coach', user.coach.apellido);
-						localStorage.setItem('coach_rate', user.coach.rating);
-						localStorage.setItem('chatPassword', user.coach.chatPassword);
+						apiRH.keeper.setItem('nombre_coach', user.coach.nombre);
+						apiRH.keeper.setItem('apellido_coach', user.coach.apellido);
+						apiRH.keeper.setItem('coach_rate', user.coach.rating);
+						apiRH.keeper.setItem('chatPassword', user.coach.chatPassword);
 					}	
 					
 					return (userId) ? user : false;

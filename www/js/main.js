@@ -215,8 +215,7 @@
 		},
 		gatherEnvironment: function(optional_data, history_title) {
 			/* Gather environment information */
-			var meInfo 	= apiRH.ls.getItem('user');
-			// var logged 	= apiRH.ls.getItem('me.logged');
+			var meInfo 	= app.keeper.getItem('user');
 			var parsed 	= {me: JSON.parse(meInfo)};
 			
 			if(optional_data){
