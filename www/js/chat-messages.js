@@ -170,10 +170,9 @@ function retrieveChatMessages(dialog, beforeDateSent){
 // sending messages after confirmation
 function clickSendMessage() {
   var currentText = $('#mensaje-chat').val().trim();
-
-  if (currentText.length === 0){
+  console.log("current text :: "+currentText);
+  if (currentText.length === 0)
     return;
-  }
 
   $('#mensaje-chat').val('').focus();
 

@@ -126,7 +126,7 @@ function requestHandlerAPI(){
 						'password' 	: pass
 					};
 
-			var created_response = this.makeRequest('api/signup', data, true);
+			var created_response = this.makeRequest('api/signup', data, true, false);
 
 			console.log("It's alive! ::: "+JSON.stringify(created_response));
 
@@ -486,8 +486,11 @@ function requestHandlerAPI(){
 		 * @param noHeaders Boolean defaults to false
 		 * @return JSON encoded response
 		 */
-		this.makeRequest = function( endpoint, data, noHeaders ){
-
+		this.makeRequest = function( endpoint, data, noHeaders, stringify ){
+			console.log(data);
+			if( typeof(stringify) == 'undefined' || stringify == true )
+				data = JSON.stringify(data);
+			console.log(data);
 			console.log(' ::: MAKE REQUEST ::: ');
 			setTimeout(function(){
 				app.showLoader();
@@ -497,7 +500,7 @@ function requestHandlerAPI(){
 			var options = 	{
 								type 		: 'POST',
 								url			: window.api_base_url+endpoint,
-								data 		: JSON.stringify(data),
+								data 		: data,
 								dataType 	: 'json',
 								async 		: false
 							};

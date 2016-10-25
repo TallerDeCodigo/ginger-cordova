@@ -16,49 +16,49 @@ window.initializeRecordEvents = function(){
 
 
 		/* MEASUREMENT CONTROLS */
-		$(".genre-bt").click(function(){
-			$(this).parent().find("a").removeClass('active');
+		$('.genre-bt').click(function(){
+			$(this).parent().find('a').removeClass('active');
 			$(this).addClass('active');
-			$(".sector-1").animate({opacity:"0"}, 200);
+			$('.sector-1').animate({opacity:'0'}, 200);
 			setTimeout(function() {
-				$(".sector-1").hide();
-				$(".genre").show();
-				$(".genre").animate({opacity:"1"}, 200);
+				$('.sector-1').hide();
+				$('.genre').show();
+				$('.genre').animate({opacity:'1'}, 200);
 			}, 210);
 		});
 
-		$(".age-bt").click(function(){
+		$('.age-bt').click(function(){
 			console.log('click');
-			$(this).parent().find("a").removeClass('active');
+			$(this).parent().find('a').removeClass('active');
 			$(this).addClass('active');
-			$(".sector-1").animate({opacity:"0"}, 200);
+			$('.sector-1').animate({opacity:'0'}, 200);
 			setTimeout(function() {
-				$(".sector-1").hide();
-				$(".age").show();
-				$(".age").animate({opacity:"1"}, 200);
+				$('.sector-1').hide();
+				$('.age').show();
+				$('.age').animate({opacity:'1'}, 200);
 			}, 210);
 		});
 
-		$(".zip-bt").click(function(){
-			$(this).parent().find("a").removeClass('active');
+		$('.zip-bt').click(function(){
+			$(this).parent().find('a').removeClass('active');
 			$(this).addClass('active');
-			$(".sector-1").animate({opacity:"0"}, 200);
+			$('.sector-1').animate({opacity:'0'}, 200);
 			setTimeout(function() {
-				$(".sector-1").hide();
-				$(".zip").show();
-				$(".zip").animate({opacity:"1"}, 200);
-				$(".zip input").focus();
+				$('.sector-1').hide();
+				$('.zip').show();
+				$('.zip').animate({opacity:'1'}, 200);
+				$('.zip input').focus();
 			}, 210);
 		});
 
-		$(".mido-bt").click(function(){
-			$(this).parent().find("a").removeClass('active');
+		$('.mido-bt').click(function(){
+			$(this).parent().find('a').removeClass('active');
 			$(this).addClass('active');
-			$(".sector-2").animate({opacity:"0"}, 200);
+			$('.sector-2').animate({opacity:'0'}, 200);
 			setTimeout(function() {
-				$(".sector-2").hide();
-				$(".mido").show();
-				$(".mido").animate({opacity:"1"}, 200);
+				$('.sector-2').hide();
+				$('.mido').show();
+				$('.mido').animate({opacity:'1'}, 200);
 			}, 210);
 		});
 
@@ -568,11 +568,11 @@ window.initializeRecordEvents = function(){
 			}
 
 			if(restricciones.length == 0 ){
-				$('#finish4').attr('src', 'images/saltar.svg');
-				$('#finish4').css('margin-left', '-65px');
+				$('#next_step_four').attr('src', 'images/saltar.svg');
+				$('#next_step_four').css('margin-left', '-65px');
 			}else{
-				$('#finish4').attr('src', 'images/enter.svg');
-				$('#finish4').css('margin-left', '-25px');
+				$('#next_step_four').attr('src', 'images/enter.svg');
+				$('#next_step_four').css('margin-left', '-25px');
 			}
 			console.log(restricciones);
 		});
@@ -640,7 +640,6 @@ window.initializeRecordEvents = function(){
 				app.toast("¡Estamos encontrando a tu Coach ideal!");
 				/* REQUEST COACH OPTIONS */	
 				var listCoach = apiRH.getCoachList();
-				console.log( 'Lista de Coaches ' + JSON.stringify(listCoach) );
 				app.hideLoader();
 
 				if(listCoach){
@@ -656,43 +655,39 @@ window.initializeRecordEvents = function(){
 
 					$.each( listCoach, function( key, value ) {
 						
-						console.log(this);
 						$.each( value, function( key, value ) {
+							
+							var dietaKeep = null;
+							var coachKeep = null;
 							console.log( key + " :: " + value );
-							if (key == '_id') {
-								// console.log('DIETA ID' + value);
-								// $('.slide-coach').attr('dieta', value);
-								app.keeper.setItem('dietaId', value);
-							}
+							
+							if (key == '_id')
+								dietaKeep = value;
+
 							if(key == 'coach'){	
 								$.each( value, function( key, value ) {
 									
 									console.log( key + " ::: " + value );
 									
-									if (key=='_id') {
-										var noexiste = true;
-										for (var j = 0; j < coaches.length; j++) {
-											// console.log('entra al for');
+									if (key == '_id') {
+										
+										var exists = false;
 
-											if (coaches[j]==value){
-												// console.log('sdfsdfsdfsdfregdfgdfgfgdfg');
-												noexiste = false;
-											}
-										}
-										if (noexiste) {
+										for (var j = 0; j < coaches.length; j++)
+											if (coaches[j] == value)
+												exists = true;
+											
+										if (!exists) {
+											coachKeep = value;
 											coaches.push(value);
-											// console.log(listCoach);
 											$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
 											$(".resena .img-frame:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
-											// console.log('ID DE COACH: ' + value);
-											app.keeper.setItem('coach_id', value);
-											$('.slide-coach:nth-of-type('+i+')').attr('coach', app.keeper.getItem("coach_id"));
-											$('.slide-coach:nth-of-type('+i+')').attr('dieta_id', app.keeper.getItem("dietaId"));
+											$('.slide-coach:nth-of-type('+i+')').attr('coach', coachKeep);
+											$('.slide-coach:nth-of-type('+i+')').attr('dieta_id', dietaKeep);
 										}
 									}
 									if (key=='nombre') {
 										Name = value;
-										console.log(Name);
 									}
 									if (key=='apellido') {
 										LastN = value;
@@ -700,13 +695,14 @@ window.initializeRecordEvents = function(){
 										$('.slide-coach:nth-of-type('+i+') .name.coach_name').html(coach_name);
 										$('.slide-coach:nth-of-type('+i+')').attr("data-name",coach_name);
 									}
-									if (key=='frase') {
+									if (key=='frase')
 										$(".slide-coach:nth-of-type("+i+") p.short-descrip b").html(value);
-									}
-									if (key=='bio') {
+
+									if (key=='bio')
 										$(".slide-coach:nth-of-type("+i+") textarea.short-descrip").html(value);
-									}
+
 									if(key == 'rating'){
+
 										rate_stars = value;
 										rate_stars = Math.round(rate_stars);
 										$(".slide-coach:nth-of-type("+i+")").attr("data-rate",rate_stars);
@@ -714,8 +710,9 @@ window.initializeRecordEvents = function(){
 											$(".slide-coach:nth-of-type("+i+") .rate-stars img:nth-of-type("+j+")").attr("src","images/starh.svg");
 										}
 									}
+
 									if (key == 'calificaciones') {
-										// console.log("calificaciones :::: "+value);
+
 										if (value == "1") {
 											$(".slide-coach:nth-of-type("+i+") div.no-review").html(value+" valoración");
 										} else {
@@ -726,10 +723,10 @@ window.initializeRecordEvents = function(){
 								});																
 							}
 						});
-
 						i++;
-
 					});
+
+					app.hideLoader();
 
 					$('.slide-coach').each(function() {
 						if ($(this).attr('coach') === undefined) {
@@ -752,7 +749,6 @@ window.initializeRecordEvents = function(){
 			}
 		});
 
-
 		/*** Back behaviour ***/
 		$('.back').click( function(){
 
@@ -768,7 +764,7 @@ window.initializeRecordEvents = function(){
 					$(".aboutyou").show();
 					$(".aboutyou").animate({opacity:"1",left:"0px"}, 200);
 				}, 250);
-				//$(".back").hide();
+
 			} else if($('.exercise').is(':visible')){
 				$('.exercise').animate({opacity:"0",left:"40px"}, 200);
 				$('.bred').removeClass('active');
@@ -855,12 +851,12 @@ window.initializeRecordEvents = function(){
 		
 			if( _cmt != "" ){
 				app.toast("Tu comentario se ha agregado");
-				$('#finish4').attr('src', 'images/enter.svg');
-				$('#finish4').css('margin-left', '-25px');
+				$('#next_step_four').attr('src', 'images/enter.svg');
+				$('#next_step_four').css('margin-left', '-25px');
 			} else{
 				app.toast("Comentario vacío");
-				$('#finish4').attr('src', 'images/saltar.svg');
-				$('#finish4').css('margin-left', '-65px');
+				$('#next_step_four').attr('src', 'images/saltar.svg');
+				$('#next_step_four').css('margin-left', '-65px');
 			}
 		});
 
@@ -876,6 +872,280 @@ window.initializeRecordEvents = function(){
 			e.preventDefault();
 			console.log("Clicked cancel");
 			$(this).closest('.modal').hide().removeClass('active');
+		});
+
+		$('#next_step_five').click(function(){
+			console.log('click step five');
+			if(!$('.overscreen4').is(':visible')){
+				$('.overscreen4').show();
+				setTimeout(function() {$('.overscreen4').addClass('active');}, 200);
+			} else {
+				$('.overscreen4').removeClass('active');
+				setTimeout(function() {$('.overscreen4').hide();}, 800);
+			}
+			$('#blur').toggleClass('blurred');
+		});
+
+		$('.bt-review').click(function(){
+
+			$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
+			setTimeout(function() {
+				$(".pagina").hide();
+				$(".resena").show();
+				$(".resena").css("left","40px");
+				$(".resena").animate({opacity:"1",left:"0px"}, 200);
+			}, 250);
+
+			// if( $('div').hasClass('resena') ){
+				var _aidi = $(this).parent().parent().attr('coach');
+				var _co_name = $(this).parent().parent().attr('data-name');
+				var _co_rate = $(this).parent().parent().attr('data-rate');
+				var _co_rate = Math.round(_co_rate);
+				$("img.la_foto_resena").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+_aidi+".png");
+				$('.name_on').html(_co_name);
+
+				for (var j = 1; j <= _co_rate; j++) {
+					$(".rate-stars_inner img:nth-of-type("+j+")").attr("src","images/starh.svg");
+				}
+			// }
+
+			var resenas = apiRH.getResenas(_aidi);
+
+			console.log(resenas);
+			
+			$('.insert_stars').empty();
+			var count = resenas.length;
+			if(count){
+				var verb = (count == 1) ? " valoración" : " valoraciones";
+				$('.resena.pagina .no-review').html(count+verb);
+			}else{
+				$('.resena.pagina .no-review').html("sin valoraciones");
+			}
+			$.each(resenas, function(key, value){
+				// console.log(key + ' :::: ' + JSON.stringify(value));
+				var html_comment 	= "";
+				var html_stars 		= "";
+				$.each(value, function(inner_key, inner_value){
+					// console.log(inner_key + ' ::--:: ' + JSON.stringify(inner_value));
+					// TODO: Replace with template		
+					if(inner_key == 'comment')
+						html_comment = inner_value;
+
+					if(inner_key == 'calificacion'){
+						for (var i = 0; i < inner_value; i++)
+							html_stars += '<img src="images/star.svg">';				
+					}
+				});
+				$('.insert_stars').append('<div class="nombre_resena"><div class="rate-stars2">'+html_stars+'</div></div><div class="resena_cont">'+html_comment+'</div>');
+			});
+		});//END BT-REVIEW
+
+		$('#aceptar').click(function(){
+
+			$('#blur').toggleClass('blurred');
+			
+			/* JSON COACH SELECTED	**/
+			console.log('Select coach');
+
+			var coach = $('#next_step_five').attr('coach');
+			var dieta = $('#next_step_five').attr('dieta_id');
+
+			var json = {"coach" : coach,"dieta" : dieta};
+
+			console.log(json);
+			//Request update data
+			var responsedata = apiRH.updatePerfil(json);
+			console.log(responsedata);
+
+			$('.bio').animate({opacity:"0",left:"-40px"}, 200);
+			$('.byel').removeClass('active');
+			setTimeout(function() {
+				$(".pagina").hide();
+				$(".discount").show();
+				$(".discount").css("left","40px");
+				$(".discount").animate({opacity:"1",left:"0px"}, 200);
+			}, 250);
+			$('.overscreen4').hide();
+		});
+
+		$('#cancelar').click(function(){
+			$('#blur').toggleClass('blurred');
+			$('.overscreen4').hide();
+			$('.alert_tracking').hide();
+
+		});
+
+		$('.la_img').click(function(){
+			if(!$('.overscreen5').is(':visible') ){
+				$('.overscreen5').show();
+			setTimeout(function() {$('.overscreen5').addClass('active');}, 200);
+			} else {
+				$('.overscreen5').removeClass('active');
+				setTimeout(function() {$('.overscreen5').hide();}, 800);
+			}
+			$('#blur').toggleClass('blurred');
+		});
+
+		$('#info_pay').click(function(){
+			$('#blur').toggleClass('blurred');
+			$('.overscreen5').hide();
+		})
+
+
+		$('.btn-pago').click(function(){
+			$('.discount').animate({opacity:"0",left:"-40px"}, 200);
+			setTimeout(function() {
+				$(".pagina").hide();
+				$(".conekta").show();
+				$(".conekta").css("left","40px");
+				$(".conekta").animate({opacity:"1",left:"0px"}, 200);
+			}, 250);
+		});
+
+		/* SWIPE COACH */	
+		var IMG_WIDTH = ancho*0.8125;
+		var currentImg = 0;
+		var maxImages = tamano;
+		var speed = 500;
+
+		var imgs;
+
+		var swipeOptions = { triggerOnTouchEnd: true, swipeStatus: swipeStatus, allowPageScroll: "vertical", threshold: 75 };
+
+		$(function createSwipe () {
+
+			imgs = $(".cslider");
+			imgs.swipe(swipeOptions);
+		});//END createSwipe
+
+		function swipeStatus(event, phase, direction, distance) {
+			if (phase == "move" && (direction == "left" || direction == "right")) {
+				
+				var duration = 0;
+				if (direction == "left") {
+					scrollImages((IMG_WIDTH * currentImg) + distance, duration);
+					
+				} else if (direction == "right") {
+					scrollImages((IMG_WIDTH * currentImg) - distance, duration);
+				}
+
+			} else if (phase == "cancel") {
+				scrollImages(IMG_WIDTH * currentImg, speed);
+			} else if (phase == "end") {
+				if (direction == "right") {
+					previousImage();
+					$('#next_step_five').attr('coach', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('coach'));
+					$('#next_step_five').attr('dieta_id', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('dieta_id'));
+				} else if (direction == "left") {
+					nextImage();
+					$('#next_step_five').attr('coach', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('coach'));
+					$('#next_step_five').attr('dieta_id', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('dieta_id'));
+				}
+			}
+		} //end swipeStatus
+
+		function previousImage() {
+			currentImg = Math.max(currentImg - 1, 0);
+			scrollImages(IMG_WIDTH * currentImg, speed);
+		}//end previousImage
+
+		function nextImage() {
+			currentImg = Math.min(currentImg + 1, maxImages - 1);
+			scrollImages(IMG_WIDTH * currentImg, speed);
+		}//end nextImage
+
+		function scrollImages(distance, duration) {
+			imgs.css("transition-duration", (duration / 1000).toFixed(1) + "s");
+			var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
+			imgs.css("transform", "translate(" + value + "px,0)");
+		}//end scrollImages
+
+		$('#next_step_five').attr('coach', $('.slide-coach:nth-of-type(1)').attr('coach'));
+		$('#next_step_five').attr('dieta_id', $('.slide-coach:nth-of-type(1)').attr('dieta_id'));
+		
+
+		var labelID;
+
+		$('label').click(function() {
+		   labelID = 'input[name="'+$(this).attr('for')+'"]';
+		   $(labelID).focus();
+		});
+
+		$("input").focus(function() {
+			labelID = 'label[for="'+$(this).attr('name')+'"]';
+			$(labelID).addClass('focused');
+		});
+		
+		
+		
+		// $('.me-option').click(function() {
+		// 	var valor = $(this).find('.type').attr('value');
+		// 	$('.me-option').each(function() {
+		// 		if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
+		// 		  $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
+		// 		  $(this).removeClass('active');
+		// 		  $('#measured_area').attr('value', "");
+		// 		}
+		// 	}); 
+		// 	$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
+		// 	$(this).addClass('active');
+		// 	$('#measured_area').attr('value', valor);
+
+		// 	switch($('#measured_area').val() ){
+		// 		case 'brazo' :
+		// 			$('#measured_area').attr("value", '2');
+		// 			break;
+		// 		case 'pierna' :
+		// 			$('#measured_area').attr("value", '3');
+		// 			break;
+		// 		case 'cintura' :
+		// 			$('#measured_area').attr("value", '4');
+		// 			break;
+		// 		case 'cadera' :
+		// 			$('#measured_area').attr("value", '5');
+		// 			break;
+		// 	}
+
+		// });
+
+		$(window).on("load resize",function(){ 
+			console.log("Cuantos");
+			var alto = document.documentElement.clientHeight;
+			var ancho = document.documentElement.clientWidth;
+			var mediad = 300+(ancho*0.64);
+
+			$('textarea.short-descrip').css('height',alto-mediad);
+
+			$('#scroller > ul > li').css("height",alto-245);
+			$('.iosm #scroller > ul > li').css("height",alto-265);
+
+			var cuantos = $('.co-option').length;
+			cuantos = cuantos*105;
+			$(".tipo_coach").css("width",cuantos);
+
+			var cuantos1 = $('.pl-option').length;
+			cuantos1 = cuantos1*105;
+			$(".tipo_plan").css("width",cuantos1);
+
+			var cuantos2 = $('.re-option').length;
+			cuantos2 = cuantos2*105;
+			$(".tipo_restric").css("width",cuantos2);
+
+			var cuantos3 = $('.ej-option').length;
+			cuantos3 = cuantos3*105.25;
+			$(".tipo_ejer").css("width",cuantos3);
+
+			var cuantos4 = $('.me-option').length;
+			cuantos4 = cuantos4*105;
+			$(".tipo_med").css("width",cuantos4);
+
+			var ancho = document.documentElement.clientWidth;
+			var tamano = $('.slide-coach').length;
+			var csld = (tamano*ancho*0.8125)+(ancho*0.09375);
+			$(".slide-coach").css("width",ancho*0.8125);
+			$(".slide-coach:first-of-type").css("margin-left",ancho*0.09375);
+			$(".cslider").css("width",csld);
+
 		});
 
 	});

@@ -486,7 +486,7 @@ a.mail { background:#2eab7e url('../images/mail_btn.png') no-repeat;background-s
 
 /* PERFIL */
 
-.perfil, .perfil #container, .perfil2 {background:#f4f1f0; color:#3f3f3f;}
+.perfil, .perfil #container, .perfil2 { background: #f4f1f0; color: #3f3f3f; }
 .profile.circle-frame {width:32px;height:32px;position:relative!important;display:inline-block;margin-top:20px;width:140px;height:140px;background-size:auto;}
 .perfil h2, .perfil2 h2 {font-weight:800;}
 .perfil h2{height:30px;}

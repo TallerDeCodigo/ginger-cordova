@@ -140,53 +140,26 @@ $( function() {
 
 	if($('body').hasClass('has-chat')){
 		
-		var mail = localStorage.getItem('mail');
-		var chatPassword = localStorage.getItem('chatPassword');
-
-		console.log(mail);
-		console.log(chatPassword);
-
-
-		var userLog = JSON.parse(localStorage.getItem('user'));
-		console.log(userLog.chatPassword);
-
-		var uChatCoach = userLog.coach.jid;
+		var mail 		 = app.keeper.getItem('mail');
+		var chatPassword = app.keeper.getItem('chatPassword');
+		var userLog 	 = JSON.parse(app.keeper.getItem('user'));
+		var uChatCoach 	 = userLog.coach.jid;
 		
-		/*nombre del coach en el header*/
-		$('h2.titulo').html(userLog.coach.nombre + " " + userLog.coach.apellido);
-
-		console.log('COACH ID: ' + uChatCoach);
-
 		uChatCoach = uChatCoach.split('-');
-
-		console.log('ID USER COACH ' + uChatCoach[0]);
-
-		localStorage.setItem('cCoachID', uChatCoach[0]);
-
+		app.keeper.setItem('cCoachID', uChatCoach[0]);
 		var user = { login : userLog.mail, pass : userLog.chatPassword};
+
+		$('h2.titulo').html(userLog.coach.nombre + " " + userLog.coach.apellido);
 		
-
-		//Login to chat
-
 		connectToChat(user);
 		
-		//triggerDialog('57c4dca3a28f9a8288000008');
-
 		createNewDialog();
 
-		// $('#mensaje-chat').on('focus', function(e) {
-		// 	console.log('si esta aqui');
-		//     e.preventDefault(); e.stopPropagation();
-		//     window.scrollTo(0,100); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px. 
-		// });
-
-	}//end has class has chat
-
-
+	} // END has class has chat
 	
 	$( ".accordion" ).accordion({collapsible:true,active:false,animate:300,heightStyle:"content"});
 
-});//end function
+}); // END function
 
 
 
@@ -652,67 +625,7 @@ $(window).on("load resize",function(){
 			
 		} //END IF BODY HAS CLASS UPDATE DATA
 
-		/* SWIPE COACH */	
-
-		var IMG_WIDTH = ancho*0.8125;
-		var currentImg = 0;
-		var maxImages = tamano;
-		var speed = 500;
-
-		var imgs;
-
-		var swipeOptions = { triggerOnTouchEnd: true, swipeStatus: swipeStatus, allowPageScroll: "vertical", threshold: 75 };
-
-		$(function createSwipe () {
-			imgs = $(".cslider");
-			imgs.swipe(swipeOptions);
-		}); //end createSwipe
-
-		function swipeStatus(event, phase, direction, distance) {
-			if (phase == "move" && (direction == "left" || direction == "right")) {
-				var duration = 0;
-
-
-				if (direction == "left") {
-					scrollImages((IMG_WIDTH * currentImg) + distance, duration);
-					
-				} else if (direction == "right") {
-					scrollImages((IMG_WIDTH * currentImg) - distance, duration);
-				}
-
-			} else if (phase == "cancel") {
-				scrollImages(IMG_WIDTH * currentImg, speed);
-			} else if (phase == "end") {
-				if (direction == "right") {
-					previousImage();
-					$('#finish5').attr('coach', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('coach'));
-					$('#finish5').attr('dieta_id', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('dieta_id'));
-				} else if (direction == "left") {
-					nextImage();
-					$('#finish5').attr('coach', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('coach'));
-					$('#finish5').attr('dieta_id', $('.slide-coach:nth-of-type('+(currentImg+1)+')').attr('dieta_id'));
-				}
-			}
-		} //end swipeStatus
-
-		function previousImage() {
-			currentImg = Math.max(currentImg - 1, 0);
-			scrollImages(IMG_WIDTH * currentImg, speed);
-		}//end previousImage
-
-		function nextImage() {
-			currentImg = Math.min(currentImg + 1, maxImages - 1);
-			scrollImages(IMG_WIDTH * currentImg, speed);
-		}//end nextImage
-
-		function scrollImages(distance, duration) {
-			imgs.css("transition-duration", (duration / 1000).toFixed(1) + "s");
-			var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
-			imgs.css("transform", "translate(" + value + "px,0)");
-		}//end scrollImages
-
-		$('#finish5').attr('coach', $('.slide-coach:nth-of-type(1)').attr('coach'));
-		$('#finish5').attr('dieta_id', $('.slide-coach:nth-of-type(1)').attr('dieta_id'));
+		
 });// end Window on Load Resize swipe / dietas 
 
 $(window).load(function(){
@@ -1771,189 +1684,6 @@ $(window).load(function(){
 		}
 
 
-
-		// 		$('.coach.img-frame').click(function(){
-		// 		$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
-		// 		setTimeout(function() {
-		//  	$(".pagina").hide();
-		//  	$(".bio").show();
-		//  	$(".bio").css("left","40px");
-		//  	$(".bio").animate({opacity:"1",left:"0px"}, 200);
-		//  }, 250);
-		// });
-
-		$('#finish5').click(function(){
-			console.log('click');
-			if(!$('.overscreen4').is(':visible')){
-				$('.overscreen4').show();
-				setTimeout(function() {$('.overscreen4').addClass('active');}, 200);
-			} else {
-				$('.overscreen4').removeClass('active');
-				setTimeout(function() {$('.overscreen4').hide();}, 800);
-			}
-			$('#blur').toggleClass('blurred');
-		});
-
-		$('.bt-review').click(function(){
-
-			$('.pcoach1').animate({opacity:"0",left:"-40px"}, 200);
-			setTimeout(function() {
-				$(".pagina").hide();
-				$(".resena").show();
-				$(".resena").css("left","40px");
-				$(".resena").animate({opacity:"1",left:"0px"}, 200);
-			}, 250);
-
-			// if( $('div').hasClass('resena') ){
-				var _aidi = $(this).parent().parent().attr('coach');
-				var _co_name = $(this).parent().parent().attr('data-name');
-				var _co_rate = $(this).parent().parent().attr('data-rate');
-				var _co_rate = Math.round(_co_rate);
-				$("img.la_foto_resena").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+_aidi+".png");
-				$('.name_on').html(_co_name);
-
-				for (var j = 1; j <= _co_rate; j++) {
-					$(".rate-stars_inner img:nth-of-type("+j+")").attr("src","images/starh.svg");
-				}
-			// }
-
-			var resenas = apiRH.getResenas(_aidi);
-
-			console.log(resenas);
-			
-			$('.insert_stars').empty();
-			var count = resenas.length;
-			if(count){
-				var verb = (count == 1) ? " valoración" : " valoraciones";
-				$('.resena.pagina .no-review').html(count+verb);
-			}else{
-				$('.resena.pagina .no-review').html("sin valoraciones");
-			}
-			$.each(resenas, function(key, value){
-				// console.log(key + ' :::: ' + JSON.stringify(value));
-				var html_comment 	= "";
-				var html_stars 		= "";
-				$.each(value, function(inner_key, inner_value){
-					// console.log(inner_key + ' ::--:: ' + JSON.stringify(inner_value));
-					// TODO: Replace with template		
-					if(inner_key == 'comment')
-						html_comment = inner_value;
-
-					if(inner_key == 'calificacion'){
-						for (var i = 0; i < inner_value; i++)
-							html_stars += '<img src="images/star.svg">';				
-					}
-				});
-				$('.insert_stars').append('<div class="nombre_resena"><div class="rate-stars2">'+html_stars+'</div></div><div class="resena_cont">'+html_comment+'</div>');
-			});
-		});//END BT-REVIEW
-
-		$('#aceptar').click(function(){
-			$('#blur').toggleClass('blurred');
-			/*
-				JSON COACH SELECTED	*
-			*/
-
-			console.log('aquiiiiiiii');
-
-			var coach = $('#finish5').attr('coach');
-			var dieta = $('#finish5').attr('dieta_id');
-
-			var json = {"coach" : coach,"dieta" : dieta};
-
-			console.log(json);
-			//Request update data
-			var responsedata = apiRH.updatePerfil(json);
-			console.log(responsedata);
-
-			$('.bio').animate({opacity:"0",left:"-40px"}, 200);
-			$('.byel').removeClass('active');
-			setTimeout(function() {
-				$(".pagina").hide();
-				$(".discount").show();
-				$(".discount").css("left","40px");
-				$(".discount").animate({opacity:"1",left:"0px"}, 200);
-			}, 250);
-			$('.overscreen4').hide();
-		});
-
-		$('#cancelar').click(function(){
-			$('#blur').toggleClass('blurred');
-			$('.overscreen4').hide();
-			$('.alert_tracking').hide();
-
-		});
-
-		$('.la_img').click(function(){
-			if(!$('.overscreen5').is(':visible') ){
-				$('.overscreen5').show();
-			setTimeout(function() {$('.overscreen5').addClass('active');}, 200);
-			} else {
-				$('.overscreen5').removeClass('active');
-				setTimeout(function() {$('.overscreen5').hide();}, 800);
-			}
-			$('#blur').toggleClass('blurred');
-		});
-
-		$('#info_pay').click(function(){
-			$('#blur').toggleClass('blurred');
-			$('.overscreen5').hide();
-		})
-
-
-		$('.btn-pago').click(function(){
-			$('.discount').animate({opacity:"0",left:"-40px"}, 200);
-			setTimeout(function() {
-				$(".pagina").hide();
-				$(".conekta").show();
-				$(".conekta").css("left","40px");
-				$(".conekta").animate({opacity:"1",left:"0px"}, 200);
-			}, 250);
-		});
-
-		var labelID;
-
-		$('label').click(function() {
-		   labelID = 'input[name="'+$(this).attr('for')+'"]';
-		   $(labelID).focus();
-		});
-
-		$("input").focus(function() {
-			labelID = 'label[for="'+$(this).attr('name')+'"]';
-			$(labelID).addClass('focused');
-		});
-		
-		
-		
-		$('.me-option').click(function() {
-			var valor = $(this).find('.type').attr('value');
-			$('.me-option').each(function() {
-				if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
-				  $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
-				  $(this).removeClass('active');
-				  $('#measured_area').attr('value', "");
-				}
-			}); 
-			$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
-			$(this).addClass('active');
-			$('#measured_area').attr('value', valor);
-
-			switch($('#measured_area').val() ){
-				case 'brazo' :
-					$('#measured_area').attr("value", '2');
-					break;
-				case 'pierna' :
-					$('#measured_area').attr("value", '3');
-					break;
-				case 'cintura' :
-					$('#measured_area').attr("value", '4');
-					break;
-				case 'cadera' :
-					$('#measured_area').attr("value", '5');
-					break;
-			}
-
-		});
 
 		if( $('body').hasClass('excercise') ){
 
