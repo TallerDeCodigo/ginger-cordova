@@ -161,7 +161,8 @@ $(window).on("load resize",function(){
 
 	var alto = document.documentElement.clientHeight;
 	var ancho = document.documentElement.clientWidth;
-
+	var tamano = $('.slide-coach').length;
+	var csld = (tamano*ancho*0.8125)+(ancho*0.09375);
 	var mediad = 300+(ancho*0.64);
 
 	$('textarea.short-descrip').css('height',alto-mediad);
@@ -189,9 +190,6 @@ $(window).on("load resize",function(){
 	cuantos4 = cuantos4*105;
 	$(".tipo_med").css("width",cuantos4);
 
-	var ancho = document.documentElement.clientWidth;
-	var tamano = $('.slide-coach').length;
-	var csld = (tamano*ancho*0.8125)+(ancho*0.09375);
 	$(".slide-coach").css("width",ancho*0.8125);
 	$(".slide-coach:first-of-type").css("margin-left",ancho*0.09375);
 	$(".cslider").css("width",csld);

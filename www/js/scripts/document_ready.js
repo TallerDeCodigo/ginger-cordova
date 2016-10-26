@@ -58,42 +58,30 @@ window.initializeEvents = function(){
 					event.preventDefault();
 					var data_login		= app.getFormData(form);
 					var login_response 	= apiRH.loginNative(data_login);
-					
+
 					if(login_response){
+
 						apiRH.headers['X-ZUMO-AUTH'] = login_response;
 						var userInfo = apiRH.getInfoUser();
 						if(userInfo){
-							var coachInfo 	= JSON.parse( app.keeper.getItem('user') );
-							window._coach = (coachInfo) ? coachInfo : null;
-							return window.location.assign('record.html');
-							// return app.render_home();
+							window._user = (userInfo) ? userInfo : null;
+							var verified = app.keeper.getItem( 'email_verification' );
+
+							if(userInfo.customerId !== undefined){
+								// TODO: Load interface via switch method
+								app.keeper.setItem( 'email_verification', true );
+						 		return app.render_myPlan('dieta.html');
+							} else if(!verified){
+						 		return app.render_code('code.html');
+						 	}else{
+						 		return app.render_initial_record('record.html');
+						 	} 	
 						}
-						
+
 					}else{
 						app.toast("Ocurrió un error, por favor revisa que tus datos sean correctos.")
 					}
-
-					if(login_response){
-						
-						app.keeper.setItem( 'user', JSON.stringify( login_response ) );
-						var user 	 = JSON.parse( localStorage.getItem('user') );
-						var verified = app.keeper.getItem( 'email_verification' );
-
-						if(user.customerId !== undefined){
-							// TODO: Load interface via switch method
-							app.keeper.setItem( 'email_verification', true );
-					 		window.location.assign('dieta.html');
-						} else if(!verified){
-							// TODO: Load interface via switch method
-					 		return app.render_code();
-					 	}else{
-					 		window.location.assign('record.html');
-					 	} 	
-					 	return;
-					}else{
-						app.toast('Tu usuario o contraseña son incorrectos, por favor intenta de nuevo.');
-					}
-					app.hideLoader();
+					return app.hideLoader();
 				}
 			});
 
@@ -144,13 +132,22 @@ window.initializeEvents = function(){
 					var login_response 	= apiRH.registerNative(data_login);
 
 					if( login_response ){
+						
 						apiRH.headers['X-ZUMO-AUTH'] = login_response;
 						var userInfo = apiRH.getInfoUser();
-						console.log(userInfo);
 						if(userInfo){
-							var coachInfo 	= JSON.parse( app.keeper.getItem('user') );
-							window._coach = (coachInfo) ? coachInfo : null;
-							return app.render_validate_code();
+							window._user = (userInfo) ? userInfo : null;
+							var verified = app.keeper.getItem( 'email_verification' );
+
+							if(userInfo.customerId !== undefined){
+								// TODO: Load interface via switch method
+								app.keeper.setItem( 'email_verification', true );
+						 		return app.render_myPlan('dieta.html');
+							} else if(!verified){
+						 		return app.render_code('code.html');
+						 	}else{
+						 		return app.render_initial_record('record.html');
+						 	} 	
 						}
 						
 					}else{

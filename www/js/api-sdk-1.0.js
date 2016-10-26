@@ -68,6 +68,7 @@ function requestHandlerAPI(){
 			apiRH.keeper.setItem( 'token', 	response.token);
 			apiRH.keeper.setItem( 'mail', 	response.mail);
 			apiRH.keeper.setItem( 'userId', response.userId);
+			apiRH.keeper.setItem( 'email_verification', true);
 
 			if(!this.token)
 				return false;
@@ -271,10 +272,10 @@ function requestHandlerAPI(){
 		 * @return JSON encoded object or false if api responds badly
 		 */
 		this.getInfoUser = function(){
-			
-			var user = this.getRequest('tables/cliente?_id=' + apiRH.keeper.getItem('userId'), null);
+			var thing = apiRH.keeper.getItem('userId');
+			var user = this.getRequest('tables/cliente?_id=' + thing, null);
 			this.save_user_data_clientside(user);
-			return (typeof(user) != 'undefined') ? user : false;
+			return ( user && typeof(user) != 'undefined') ? user : false;
 		};
 
 		/**
