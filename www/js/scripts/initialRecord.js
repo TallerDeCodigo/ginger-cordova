@@ -4,6 +4,48 @@ window.initializeRecordEvents = function(){
 	jQuery(document).ready(function($) {
 
 		console.log("Initializing Initial Record events");
+		var alto = document.documentElement.clientHeight;
+		var ancho = document.documentElement.clientWidth;
+		var tamano = $('.slide-coach').length;
+		var csld = (tamano*ancho*0.8125)+(ancho*0.09375);
+		var mediad = 300+(ancho*0.64);
+		
+		$(window).on("load resize",function(){ 
+
+			var mediad = 300+(ancho*0.64);
+			$('textarea.short-descrip').css('height',alto-mediad);
+
+			$('#scroller > ul > li').css("height",alto-245);
+			$('.iosm #scroller > ul > li').css("height",alto-265);
+
+			var cuantos = $('.co-option').length;
+			cuantos = cuantos*105;
+			$(".tipo_coach").css("width",cuantos);
+
+			var cuantos1 = $('.pl-option').length;
+			cuantos1 = cuantos1*105;
+			$(".tipo_plan").css("width",cuantos1);
+
+			var cuantos2 = $('.re-option').length;
+			cuantos2 = cuantos2*105;
+			$(".tipo_restric").css("width",cuantos2);
+
+			var cuantos3 = $('.ej-option').length;
+			cuantos3 = cuantos3*105.25;
+			$(".tipo_ejer").css("width",cuantos3);
+
+			var cuantos4 = $('.me-option').length;
+			cuantos4 = cuantos4*105;
+			$(".tipo_med").css("width",cuantos4);
+
+			var ancho = document.documentElement.clientWidth;
+			var tamano = $('.slide-coach').length;
+			var csld = (tamano*ancho*0.8125)+(ancho*0.09375);
+			$(".slide-coach").css("width",ancho*0.8125);
+			$(".slide-coach:first-of-type").css("margin-left",ancho*0.09375);
+			$(".cslider").css("width",csld);
+
+		});
 
 		window.init_scripts.push("initial_record");
 		// Globals
@@ -1075,78 +1117,7 @@ window.initializeRecordEvents = function(){
 			labelID = 'label[for="'+$(this).attr('name')+'"]';
 			$(labelID).addClass('focused');
 		});
-		
-		
-		
-		// $('.me-option').click(function() {
-		// 	var valor = $(this).find('.type').attr('value');
-		// 	$('.me-option').each(function() {
-		// 		if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
-		// 		  $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
-		// 		  $(this).removeClass('active');
-		// 		  $('#measured_area').attr('value', "");
-		// 		}
-		// 	}); 
-		// 	$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
-		// 	$(this).addClass('active');
-		// 	$('#measured_area').attr('value', valor);
 
-		// 	switch($('#measured_area').val() ){
-		// 		case 'brazo' :
-		// 			$('#measured_area').attr("value", '2');
-		// 			break;
-		// 		case 'pierna' :
-		// 			$('#measured_area').attr("value", '3');
-		// 			break;
-		// 		case 'cintura' :
-		// 			$('#measured_area').attr("value", '4');
-		// 			break;
-		// 		case 'cadera' :
-		// 			$('#measured_area').attr("value", '5');
-		// 			break;
-		// 	}
-
-		// });
-
-		$(window).on("load resize",function(){ 
-			console.log("Cuantos");
-			var alto = document.documentElement.clientHeight;
-			var ancho = document.documentElement.clientWidth;
-			var mediad = 300+(ancho*0.64);
-
-			$('textarea.short-descrip').css('height',alto-mediad);
-
-			$('#scroller > ul > li').css("height",alto-245);
-			$('.iosm #scroller > ul > li').css("height",alto-265);
-
-			var cuantos = $('.co-option').length;
-			cuantos = cuantos*105;
-			$(".tipo_coach").css("width",cuantos);
-
-			var cuantos1 = $('.pl-option').length;
-			cuantos1 = cuantos1*105;
-			$(".tipo_plan").css("width",cuantos1);
-
-			var cuantos2 = $('.re-option').length;
-			cuantos2 = cuantos2*105;
-			$(".tipo_restric").css("width",cuantos2);
-
-			var cuantos3 = $('.ej-option').length;
-			cuantos3 = cuantos3*105.25;
-			$(".tipo_ejer").css("width",cuantos3);
-
-			var cuantos4 = $('.me-option').length;
-			cuantos4 = cuantos4*105;
-			$(".tipo_med").css("width",cuantos4);
-
-			var ancho = document.documentElement.clientWidth;
-			var tamano = $('.slide-coach').length;
-			var csld = (tamano*ancho*0.8125)+(ancho*0.09375);
-			$(".slide-coach").css("width",ancho*0.8125);
-			$(".slide-coach:first-of-type").css("margin-left",ancho*0.09375);
-			$(".cslider").css("width",csld);
-
-		});
 
 	});
 
