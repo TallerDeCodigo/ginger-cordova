@@ -418,7 +418,7 @@ function requestHandlerAPI(){
 		 * @see apiRH.keeper
 		 */
 		this.has_token = function(){
-			return ( !this.token || typeof(this.token) == 'undefined' || this.token == '') ? false : apiRH.keeper.getItem('token');
+			return ( !this.token && typeof(this.token) == 'undefined' && this.token == '') ? false : apiRH.keeper.getItem('token');
 		};
 		
 		/*! 

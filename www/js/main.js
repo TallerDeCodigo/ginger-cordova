@@ -11,20 +11,19 @@
 		// Application Constructor
 		initialize: function() {
 
-			console.log("Hello ??");
 			this.bindEvents();
 			/* Initialize API request handler */
 			window.apiRH = new requestHandlerAPI().construct(app);
 			window.firstTime = true;
 			
-			var is_login = apiRH.has_token();
-			var is_client = localStorage.getItem('customerId');
-			var is_current = localStorage.getItem('valido');
+			var is_login 	= apiRH.has_token();
+			var is_client 	= localStorage.getItem('customerId');
+			var is_current 	= localStorage.getItem('valido');
 
 			window.cordova_full_path = "";
 
 			/* IMPORTANT to set requests to be syncronous */
-			/* TODO test all requests without the following code 'cause of deprecation */
+			/* TODO: test all requests without the following code 'cause of deprecation */
 			$.ajaxSetup({
 				 async: false
 			});
@@ -34,7 +33,8 @@
 			window.loggedIn 	= false;
 			window.init_scripts = [];
 			this.keeper 		= window.localStorage;
-				
+
+			/*----------------------- Routing user accordingly ---------------------------*/
 			if(is_login){
 				
 				console.log('You okay, now you can start making calls');
@@ -52,51 +52,21 @@
 							/*** Haven't validated email code ***/
 							return app.render_validate_code();
 						}
+						
 						/*! 
 						 * Render Initial questions 
 						 * TODO: Render chunk depending on information already provided
 						 */
 						return app.render_initial_record();
 					}
-					return;
+					return app.render_myPlan();
 
-				}else{
-					
-					// if(is_feed){
-					// 	if(is_client == null){
-					// 		// window.location.assign('record.html');
-					// 	} else{
-					// 		return;
-					// 	}
-
-					// }else{
-					// 	console.log('Es cliente ? ::: ' + is_client);
-					// 	if(!app.keeper.getItem('email_verification')){
-					// 		console.log("Validate some codes");
-					// 		// return app.render_validate_code();
-					// 		return;
-					// 	}
-					// 	if(is_client == null){
-					// 		// TODO: Use render methods not hard loading
-					// 		// window.location.assign('record.html');
-					// 	}else{
-					// 		// TODO: Use render methods not hard loading
-					// 		// window.location.assign('dieta.html');
-					// 	}	
-
-					// }
-					console.log("Really?");
-					return;
-				}	
-				return;
-			}else{
-				
-				// window.location.assign('record.html');
-				// return;
-
+				}
+				/* Render Home (myPlan) */
+				return app.render_myPlan();
 			}
 			return app.render_entermode();
-
+			/*-------------------- Code below this line won't run ------------------------*/
 		},
 		initPushNotifications: function() {
 			console.log("Initilizing push notifications service");
