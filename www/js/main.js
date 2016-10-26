@@ -35,7 +35,6 @@
 			this.keeper 		= window.localStorage;
 
 			/*----------------------- Routing user accordingly ---------------------------*/
-			console.log("is_login :: "+is_login);
 			if(is_login){
 				console.log('You okay, now you can start making calls');
 				/* Take the user to it's timeline */
@@ -44,10 +43,8 @@
 				var is_feed 	= window.is_feed;
 				
 				/*** Check referer ***/
-				console.log("is_access :: "+is_access);
 				if(is_access){
 
-					console.log("is_client :: "+is_client);
 					if(is_client == 'not_set'){
 						/*** Still haven't paid ***/
 						if( app.keeper.getItem('email_verification') == 'false' ){
@@ -59,17 +56,14 @@
 						 * Render Initial questions 
 						 * TODO: Render chunk depending on information already provided
 						 */
-						 console.log("a");
 						return app.render_initial_record();
 					}
 					return app.render_myPlan();
 
 				}
 				/* Render Home (myPlan) */
-						 console.log("b");
 				return app.render_myPlan();
 			}
-						 console.log("c");
 			return app.render_entermode();
 			/*-------------------- Code below this line won't run ------------------------*/
 		},
