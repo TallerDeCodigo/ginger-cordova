@@ -65,7 +65,7 @@ window.initializeEvents = function(){
 						var userInfo = apiRH.getInfoUser();
 						if(userInfo){
 							window._user = (userInfo) ? userInfo : null;
-							app.keeper.setItem( 'user', _user );
+							app.keeper.setItem( 'user', JSON.stringify(_user) );
 							var verified = app.keeper.getItem( 'email_verification' );
 
 							if(userInfo.customerId !== undefined){
@@ -138,7 +138,7 @@ window.initializeEvents = function(){
 						var userInfo = apiRH.getInfoUser();
 						if(userInfo){
 							window._user = (userInfo) ? userInfo : null;
-							app.keeper.setItem( 'user', _user );
+							app.keeper.setItem( 'user', JSON.stringify(_user) );
 							var verified = app.keeper.getItem( 'email_verification' );
 
 							if(userInfo.customerId !== undefined){

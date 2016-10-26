@@ -42,7 +42,9 @@
 
 			window.loggedIn 	= false;
 			window.init_scripts = [];
+			window._user 		= [];
 			this.keeper 		= window.localStorage;
+			
 
 			/*----------------------- Routing user accordingly ---------------------------*/
 			if(is_login){
@@ -51,7 +53,7 @@
 				loggedIn = true;
 				var is_access 	= window.is_access;
 				var is_feed 	= window.is_feed;
-				
+				_user 			= JSON.parse( app.keeper.getItem('user'));
 				/*** Check referer ***/
 				if(is_access){
 
@@ -68,6 +70,7 @@
 						 */
 						return app.render_initial_record();
 					}
+					_user = app.keeper.getItem('user');
 					return app.render_myPlan();
 
 				}
