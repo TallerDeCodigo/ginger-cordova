@@ -290,7 +290,7 @@
 			app.showLoader();
 			app.check_or_renderContainer();
 			console.log("Rendering My Plan");
-			var data = this.gatherEnvironment();
+			var data = this.gatherEnvironment(null, "Mi Plan");
 			data.is_scrollable = false;
 			return this.switchView('my-plan', data, '.view', url, 'my-plan');
 		},
@@ -318,65 +318,11 @@
 		render_chat : function(){
 			return app.showLoader();
 		},
-		render_myPlan : function(){
-			return app.showLoader();
-		},
 		render_menu : function(){
 			return app.showLoader();
 		},
 		render_create_account : function(){
 			return app.showLoader();
-		},
-		render_search_results : function(search_term){
-			$.getJSON(api_base_url+'content/search/'+search_term)
-			 .done(function(response){
-				console.log(response);
-				var data 	 = app.gatherEnvironment(response);
-					data.search_active = true;
-					data.search_term = search_term;
-					console.log(data);
-				var template = Handlebars.templates['search_results'];
-				$('.main').html( template(data) );
-			})
-			 .fail(function(error){
-				console.log(error);
-			 });
-		},
-		render_map : function(){
-			
-			var data = {explore_active: true};
-			var map_template = Handlebars.templates['map'];
-			$('.main').html( map_template(data) );
-			app.showLoader();
-			app.initMakersMap();
-		},
-		render_post : function(post_id){
-
-			/* Send header_title for it renders history_header */
-			$.getJSON(api_base_url+'content/'+post_id)
-			 .done(function(response){
-				var data = app.gatherEnvironment(response, "Now reading");
-
-				var template = Handlebars.templates['post'];
-				$('.main').html( template(data) );
-				setTimeout(function(){
-					app.hideLoader();
-				}, 2000);
-			})
-			 .fail(function(error){
-				console.log(error);
-			 });
-		},
-		render_create_user : function(){
-
-			/* Send header_title for it renders history_header */
-			var data = app.gatherEnvironment(null, "Create account");
-			var template = Handlebars.templates['create_account'];
-
-			$('.main').html( template(data) );
-			setTimeout(function(){
-				app.hideLoader();
-			}, 2000);
 		},
 		back_with_logout : function(event){
 			var link = $(event.target).attr('href');
@@ -533,8 +479,7 @@
 			});
 
 		},//END UPDATE PERFIL
-		feed_user_defaults: function(firstName,lastName,email,customerId,password,token,userId,chatId,chatPassword,coachId,coachQuickblox,dietId,user,exerciseValue,picture)
-		{
+		feed_user_defaults: function(firstName,lastName,email,customerId,password,token,userId,chatId,chatPassword,coachId,coachQuickblox,dietId,user,exerciseValue,picture){
 			var req = {
 				method : 'post',
 				url : api_base_url + 'tables/medicion/',	//definitr tabla
@@ -565,7 +510,6 @@
 				console.log(response);	
 			});
 		}, //END feed_user_default
-
 		update_platillo: function(plato, fecha, comida, platillo){
 			var req = {
 				method: 'post',
@@ -630,8 +574,6 @@
  */
 	jQuery(document).ready(function($) {
 		
-		
-
 		/* Log Out from the API */
 		$('#logout').on('click', function(e){
 			/* Requesting logout from server */
