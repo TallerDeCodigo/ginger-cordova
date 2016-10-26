@@ -29,6 +29,11 @@ window.initializeEvents = function(){
 				if( $(this).data('resource') == "login-mail" )
 					return app.render_login_email( $(this).attr('href') );
 
+			if( $(this).data('resource') == "my-plan" )
+				return app.render_myPlan( $(this).attr('href') );
+			if( $(this).data('resource') == "main-menu" )
+				return app.render_mainmenu( $(this).attr('href') );
+
 			e.stopPropagation();
 		});
 

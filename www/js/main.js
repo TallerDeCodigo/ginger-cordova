@@ -109,7 +109,7 @@
 		},
 		registerCompiledPartials: function() {
 			/* Add files to be loaded here */
-			var filenames = ['header', 'loader'];
+			var filenames = ['header', 'loader', 'footer_menu', 'footer_activities'];
 			filenames.forEach(function (filename) {
 					Handlebars.registerPartial(filename, Handlebars.templates[filename]);
 			});
@@ -293,6 +293,14 @@
 			var data = this.gatherEnvironment(null, "Mi Plan");
 			data.is_scrollable = false;
 			return this.switchView('my-plan', data, '.view', url, 'my-plan');
+		},
+		render_mainmenu : function( url ){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering Main menu");
+			var data = this.gatherEnvironment(null, "Menu principal");
+			data.is_scrollable = false;
+			return this.switchView('main-menu', data, '.view', url, 'main-menu');
 		},
 		render_modal : function(modalName, data, appendTarget){
 
