@@ -59,27 +59,22 @@ function requestHandlerAPI(){
 			var email 	= data_login.mail;
 			var pass 	= data_login.pass;
 			
-			var data = {
+			var data =  {
 							"tipo" 		: "cliente",
 							"mail" 		: email,
 							"password" 	: pass
 						};
-			var response = this.makeRequest('api/login', data, true);
+			var response = this.makeRequest( 'api/login', data, true, false );
 
-			/*
-				GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE 
-			*/
 			apiRH.keeper.setItem('token', response.token);
 			apiRH.keeper.setItem('mail', response.mail);
 			apiRH.keeper.setItem('userId', response.userId);
 
-			this.token = response.token;
-
-			var userId 	= apiRH.keeper.getItem('userId');
-			var mail 	= apiRH.keeper.getItem('mail');
-			var token 	= apiRH.keeper.getItem('token');
-
-			if(!token)
+			this.token = response.token; 
+			// var userId 	= apiRH.keeper.getItem('userId');
+			// var mail 	= apiRH.keeper.getItem('mail');
+			// var token 	= apiRH.keeper.getItem('token');
+			if(!this.token)
 				return false;
 
 			return this.token;

@@ -36,7 +36,6 @@ $( function() {
 						console.log(key + ' :::: ' + value);
 
 						// INSERTAR HTML
-
 						if(key == 'created_at'){
 							var d = new Date(value * 1000);
 							$('.miembro').append(d.getDate()+'-'+(d.getMonth()+1) +'-' + d.getFullYear());
@@ -46,14 +45,8 @@ $( function() {
 							var d = new Date(value * 1000);
 							$('.suscripcion').append(d.getDate()+'-'+(d.getMonth()+1) +'-' + d.getFullYear());
 						}
-
-						
 				
 						if(key == 'amount'){
-							// $('.monto').html("$ "+value/100 + ".00");
-
-							//$('.pagos').append(' Monto: ' + value / 100 );
-
 							myString += '<tr><td>$'+ value/100 +'.00</td>';	
 						}
 
