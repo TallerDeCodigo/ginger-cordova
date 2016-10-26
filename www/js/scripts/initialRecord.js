@@ -1117,40 +1117,7 @@ window.initializeRecordEvents = function(){
 			labelID = 'label[for="'+$(this).attr('name')+'"]';
 			$(labelID).addClass('focused');
 		});
-		
-		
-		
-		// $('.me-option').click(function() {
-		// 	var valor = $(this).find('.type').attr('value');
-		// 	$('.me-option').each(function() {
-		// 		if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
-		// 		  $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
-		// 		  $(this).removeClass('active');
-		// 		  $('#measured_area').attr('value', "");
-		// 		}
-		// 	}); 
-		// 	$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
-		// 	$(this).addClass('active');
-		// 	$('#measured_area').attr('value', valor);
 
-		// 	switch($('#measured_area').val() ){
-		// 		case 'brazo' :
-		// 			$('#measured_area').attr("value", '2');
-		// 			break;
-		// 		case 'pierna' :
-		// 			$('#measured_area').attr("value", '3');
-		// 			break;
-		// 		case 'cintura' :
-		// 			$('#measured_area').attr("value", '4');
-		// 			break;
-		// 		case 'cadera' :
-		// 			$('#measured_area').attr("value", '5');
-		// 			break;
-		// 	}
-
-		// });
-
-		
 
 	});
 

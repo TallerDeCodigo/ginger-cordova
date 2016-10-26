@@ -22,6 +22,16 @@
 
 			window.cordova_full_path = "";
 
+			/*** TODO: Get this shit into a catalogue ***/
+			window.catalogues 						= [];
+			window.catalogues.months 				= [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ];
+			window.catalogues.coach_type 			= [ 'Estricto', 'Innovador', 'Animador', 'Tradicional'];
+			window.catalogues.restricciones 		= [ 'Huevo', 'Pollo', 'Pescado', 'Mariscos', 'Lacteos', 'Carne' ];
+			window.catalogues.objetivo 				= [ 'adelgazar','detox','bienestar','rendimiento' ];
+			window.catalogues.sex 					= [ 'Hombre', 'Mujer'];
+			window.catalogues.tipo_de_ingredientes 	= [ 'granosycereales', 'verduras', 'grasas', 'lacteos', 'proteinaanimal', 'leguminosas', 'nuecesysemillas', 'frutas', 'endulzantes', 'aderezosycondimentos', 'superfoods', 'liquidos'];
+
+
 			/* IMPORTANT to set requests to be syncronous */
 			/* TODO: test all requests without the following code 'cause of deprecation */
 			$.ajaxSetup({
@@ -185,11 +195,10 @@
 		gatherEnvironment: function(optional_data, history_title) {
 			/* Gather environment information */
 			var meInfo 	= app.keeper.getItem('user');
-			var parsed 	= {me: JSON.parse(meInfo)};
+			var parsed 	= {me: meInfo};
 			
 			if(optional_data){
 				parsed['data'] = optional_data;
-				//return parsed;
 			}
 			if(history_title)
 				parsed['header_title'] = history_title;
@@ -289,9 +298,9 @@
 			app.showLoader();
 			app.check_or_renderContainer();
 			console.log("Rendering My Plan");
-			var data = this.gatherEnvironment([], "Mi Plan");
+			var data = this.gatherEnvironment(null, "Mi Plan");
 			data.is_scrollable = false;
-			return this.switchView('my-plan', data, '.view', url, 'my-plan');
+			return this.switchView('my-plan', data, '.view', url, 'dieta');
 		},
 		render_mainmenu : function( url ){
 			app.showLoader();
@@ -539,37 +548,9 @@
 			});
 		},
 		get_diet: function(dietId){
-			var req = {
-				method : 'GET',
-				url : api_base_url + 'tables/dieta/' + dietId,  //definitr tabla
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': localStorage.getItem('token'),
-					'Content-Type': 'application/json'
-				}
-			}
-
-			$.ajax({
-			  type: 'GET',
-			  headers: req.headers,
-			  url:  req.url,
-			  dataType: 'json',
-			  async: false
-			})
-			 .done(function(response){
-			 	console.log(JSON.stringify(response));
-				result = response;
-				localStorage.setItem('dieta', response);
-				sdk_app_context.hideLoader(response);
-			})
-			 .fail(function(e){
-				result = false;
-				console.log(JSON.stringify(e));
-			});
-
-			//console.log(result);
-			return result;
-		}//END GET DIET
+			
+			return apiRH.getRequest('tables/dieta?_id=' + dietId, null)			
+		}
 	};
 
 /*      _                                       _                        _       
