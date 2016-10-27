@@ -213,7 +213,6 @@ window.initializeEvents = function(){
 			
 			var response = apiRH.getConsumed('2016-09-01', '2016-09-30');
 
-			// console.log(JSON.stringify(response));
 			console.log("length ::: "+JSON.stringify(response));
 			if(!response){
 				app.hideLoader();
@@ -411,6 +410,8 @@ window.initializeEvents = function(){
 		/********************************/
 		if( $('.view').hasClass('dieta') ){
 			
+			app.showLoader();
+
 			initializeCalendar();
 			var dietId = app.keeper.getItem('dietaId');
 			console.log("Diet Id ::: "+dietId);
@@ -433,40 +434,39 @@ window.initializeEvents = function(){
 			var nombre_receta;
 			var ingredientes;
 			var losplatos = [];
-			var i=0;
 
-			console.log(' --- estructura de la dieta ---');
-			console.log(dieta);
+			console.log(' --- Setting up diet and dishes ---');
+
+			var i = 0;
 			$.each( dieta.platillos, function( key, value ) {
-				console.log(dieta.platillos[i]);
+
 				losplatos[i] = [];
 				$.each( value, function( key, value ) {
-					console.log(key+":::"+value);
-					if (key=="_id") {
+
+					if (key=="_id")
 						losplatos[i][0]=value;
-					}
-					if (key=="descripcion") {
+
+					if (key=="descripcion")
 						losplatos[i][1]=value;
-					}
-					if (key=="receta") {
+
+					if (key=="receta")
 						losplatos[i][2]=value;
-					}
+
+					/** Add ingredients if any **/
 					if (key=="ingredientes") {
-						console.log(' --- ingredientes --- ' + key + ' vlue ' + value);	 	
+
 						var ing = '';
 						if(value.length > 0){
 
 							$.each(value, function(key, value){
-								if(value._id != null){
-
+								
+								if(value._id != null)
 									ing = ing + value._id.nombre;
-								}	
 							});
 						}else{
-							console.log('sin ingredientes');
+							// console.log('sin ingredientes');
 						}
 						losplatos[i][3] = ing;
-						console.log(losplatos[i][3]);
 					}
 				});
 				i++;
@@ -477,8 +477,7 @@ window.initializeEvents = function(){
 			var j=0;
 
 			$.each( dieta.comentarios, function( key, value ) {
-				loscomentarios[i]=[];
-				//console.log(loscomentarios);
+				loscomentarios[i] = [];
 				j=0;
 				$.each( value, function( key, value ) {
 					loscomentarios[i][j]=value;
@@ -487,7 +486,8 @@ window.initializeEvents = function(){
 				i++;
 			});
 
-			for (var i=0; i<losplatos.length; i++) {
+			for (var i = 0; i < losplatos.length; i++) {
+
 				losplatos[i][4]="";
 				for (var j = 0; j < loscomentarios.length; j++) {
 					if (losplatos[i][0]==loscomentarios[j][2]&&losplatos[i][4]=="") {
@@ -499,57 +499,60 @@ window.initializeEvents = function(){
 			var dieta_array = [];
 			var dia_prueba=0;
 			var dias = [];
-
-			$.each( dieta.estructura, function( key, value ) {
-				// los dias de la semana
+			var _restricciones = _user.perfil.restricciones;
+			console.log("restricciones ::: "+_restricciones);
+			$.each( dieta.estructura, function( day_key, day_structure ) {
 				
-				if(key=="domingo"){dia_prueba=1;} else if (key=="lunes") {dia_prueba=2;} else if (key=="martes") {dia_prueba=3;} else if (key=="miercoles") {dia_prueba=4;} else if (key=="jueves") {dia_prueba=5;} else if (key=="viernes") {dia_prueba=6;} else if (key=="sabado") {dia_prueba=7;}
+				if(day_key=="domingo"){dia_prueba=1;} else if (day_key=="lunes") {dia_prueba=2;} else if (day_key=="martes") {dia_prueba=3;} else if (day_key=="miercoles") {dia_prueba=4;} else if (day_key=="jueves") {dia_prueba=5;} else if (day_key=="viernes") {dia_prueba=6;} else if (day_key=="sabado") {dia_prueba=7;}
 				var estoyen = '#toda_la_dieta li:nth-of-type('+dia_prueba+') ';
-
-				$.each( value, function( key, value ) {
+				
+				$.each( day_structure, function( key, value ) {
 					// desayuno, snack, comida,...
 					var dentrode = estoyen+'.acc-content.'+key+' ';
-					var i=1;
+					var i = 1;
 					$.each( value, function( key, value ) {
 						// tiempos (1,2,3..)
 						var masadentro = dentrode+'div.platillo:nth-of-type('+i+')';
 						i++;	
 						$.each( value, function( key, value ) {
-							// opciones (a,b)
-							if ( key=="b" && app.keeper.getItem("restricciones") ) {
-								// b
+							
+							if ( key == "b" && _restricciones && _restricciones != '' ) {
+								console.log("Vegan option");
+								/***** Vegan option (Restrictions applied) *****/
 								$.each( value, function( key, value ) {
-									// id_platillo, id_comentario
-									if (key=="platillo") {				
+
+									if (key == "platillo") {
+
 										for (var i = 0; i < losplatos.length; i++) {
-											if (value==losplatos[i][0]) {
+											
+											if (value == losplatos[i][0]) {
+												
 												$(masadentro).attr("data", losplatos[i][0]);
 												$(masadentro).attr("platillo", i);
 												$(masadentro+' h5').html(losplatos[i][1]);
+												
 												//Receta
-												if (losplatos[i][2]!="") {
+												if (losplatos[i][2] != "") {
 													$(masadentro+' p.receta').html(losplatos[i][2]);
 												} else {
 													$(masadentro+' p.receta').hide();
 												}
+												
 												//Comentarios
-												if (losplatos[i][4]!="") {
+												if (losplatos[i][4] != "") {
+
 													$(masadentro+' p.comentario').html(losplatos[i][4]);
 													//Comentarios del usuario
-													$('.plat-comentario').html(	'');
-
-
+													$('.plat-comentario').html('');
 												} else {
 													$(masadentro+' p.comentario').hide();
 												}
 
-												if (losplatos[i][3]!="ingredientes") {
+												if (losplatos[i][3] != "ingredientes") {
 													
 													$.each(losplatos[i][3], function(key, value){
 
-														console.log('Ingredientes: ' + $(masadentro+' p.ingredientes').html(value));	
 														$(masadentro+' p.ingredientes').html(value)
-
 													});
 													
 												}else{
@@ -560,22 +563,23 @@ window.initializeEvents = function(){
 									}
 								});
 							} else {
-								// a
+
+								/***** Non vegan option *****/
 								$.each( value, function( key, value ) {
-									// id_platillo, id_comentario
-									if (key=="platillo") {
+
+									if ( key == "platillo" ) {
 										for (var i = 0; i < losplatos.length; i++) {
 											if (value==losplatos[i][0]) {
-												// console.log(losplatos[i][1]+"<"+losplatos[i][2]+"<"+losplatos[i][4]);
+												console.log($(masadentro));
 												$(masadentro).attr("data", losplatos[i][0]);
 												$(masadentro).attr("platillo", i);
 												$(masadentro+' h5').html(losplatos[i][1]);
-												if (losplatos[i][2]!="") {
+												if (losplatos[i][2] != "") {
 													$(masadentro+' p.receta').html(losplatos[i][2]);
 												} else {
 													$(masadentro+'p.receta').hide();
 												}
-												if (losplatos[i][4]!="") {
+												if (losplatos[i][4] != "") {
 													$(masadentro+' p.comentario').html(losplatos[i][4]);
 												} else {
 													$(masadentro+' p.comentario').hide();
@@ -588,8 +592,7 @@ window.initializeEvents = function(){
 						});
 					});
 				});
-				
-				setTimeout(markConsumed, 2000);
+				// setTimeout(markConsumed, 2000);
 
 			}); // END DIETA ESTRUCTURA
 			
@@ -597,7 +600,76 @@ window.initializeEvents = function(){
 				$('.comment_pop').hide();
 			});
 
+
+			// Include this chunk on every page with footer menu
+				$('.centro').click(function() {
+					if(!$('.overscreen').is(':visible')){
+						$('.overscreen').show();
+						setTimeout(function() {$('.overscreen').addClass('active');}, 200);
+					} else {
+						$('.overscreen').removeClass('active');
+						setTimeout(function() {$('.overscreen').hide();}, 800);
+					}
+					$('#blur').toggleClass('blurred');
+					$('a.centro img').toggleClass('onn');
+				});
+
+				$('.ov-filler').click(function() {
+					$('.overscreen').removeClass('active');
+					setTimeout(function() {$('.overscreen').hide();}, 800);
+					$('#container').removeClass('blurred');
+					$('a.centro img').removeClass('onn');
+				});
+
+			// Open more drawer (comments and ingredients)
+			$('.open_more_drawer').click(function() {
+				$(this).parent().find('.extra-info').toggle();
+				$(this).toggleClass('presionado');
+			});
+
+			return app.hideLoader();
+			
 		} /*** END BODY CLASS DIETA ***/
+
+		/*** Window load and resize ***/
+		$(window).on("load resize",function(){ 
+
+			var alto = document.documentElement.clientHeight;
+			var ancho = document.documentElement.clientWidth;
+			var tamano = $('.slide-coach').length;
+			var csld = (tamano*ancho*0.8125)+(ancho*0.09375);
+			var mediad = 300+(ancho*0.64);
+
+			$('textarea.short-descrip').css('height',alto-mediad);
+
+			$('#scroller > ul > li').css("height",alto-245);
+			$('.iosm #scroller > ul > li').css("height",alto-265);
+
+			var cuantos = $('.co-option').length;
+			cuantos = cuantos*105;
+			$(".tipo_coach").css("width",cuantos);
+
+			var cuantos1 = $('.pl-option').length;
+			cuantos1 = cuantos1*105;
+			$(".tipo_plan").css("width",cuantos1);
+
+			var cuantos2 = $('.re-option').length;
+			cuantos2 = cuantos2*105;
+			$(".tipo_restric").css("width",cuantos2);
+
+			var cuantos3 = $('.ej-option').length;
+			cuantos3 = cuantos3*105.25;
+			$(".tipo_ejer").css("width",cuantos3);
+
+			var cuantos4 = $('.me-option').length;
+			cuantos4 = cuantos4*105;
+			$(".tipo_med").css("width",cuantos4);
+
+			$(".slide-coach").css("width",ancho*0.8125);
+			$(".slide-coach:first-of-type").css("margin-left",ancho*0.09375);
+			$(".cslider").css("width",csld);
+
+		});/*** END load and resize ***/
 
 	});
 
