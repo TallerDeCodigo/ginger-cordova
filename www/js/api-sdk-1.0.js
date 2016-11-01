@@ -453,11 +453,11 @@ function requestHandlerAPI(){
 			 * @return JSON encoded response
 			 */
 			this.makeRequest = function( endpoint, data, noHeaders, stringify ){
-				console.log(data);
+
+				console.log(' ::: MAKE REQUEST ::: ');
 				if( typeof(stringify) == 'undefined' || stringify == true )
 					data = JSON.stringify(data);
-				console.log(data);
-				console.log(' ::: MAKE REQUEST ::: ');
+
 				setTimeout(function(){
 					app.showLoader();
 				}, 420);

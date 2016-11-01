@@ -13,29 +13,92 @@ window.initializeEvents = function(){
 		console.log("Initializing DocReady v0.1");
 		$('body').removeClass("preventEvents");
 		
-		/* Hook soft links */
-		$('.hook').on('click', function(e){
-			e.preventDefault();
-			app.showLoader();
-			if( $(this).data('resource') == "entermode" )
-				return app.render_entermode( $(this).attr('href') );
-			if( $(this).data('resource') == "register" )
-				return app.render_register( $(this).attr('href') );
-				if( $(this).data('resource') == "register-mail" )
-					return app.render_register_mail( $(this).attr('href') );
+		window.initHooks = function(){
+			console.log("Initializing hooks");
+			/* Hook soft links */
+			$('.hook').on('click', function(e){
+				e.preventDefault();
+				app.showLoader();
+				if( $(this).data('resource') == "entermode" )
+					return app.render_entermode( $(this).attr('href') );
+				if( $(this).data('resource') == "register" )
+					return app.render_register( $(this).attr('href') );
+					if( $(this).data('resource') == "register-mail" )
+						return app.render_register_mail( $(this).attr('href') );
+				
+				if( $(this).data('resource') == "login" )
+					return app.render_login( $(this).attr('href') );
+					if( $(this).data('resource') == "login-mail" )
+						return app.render_login_email( $(this).attr('href') );
+
+				if( $(this).data('resource') == "my-plan" )
+					return app.render_myPlan( $(this).attr('href') );
+				if( $(this).data('resource') == "main-menu" )
+					return app.render_mainmenu( $(this).attr('href') );
+
+				e.stopPropagation();
+			});
+		};
+		initHooks();
+
+		//-----------------------------
+		//
+		// Keyboard events for iOS
+		//
+		//-----------------------------
+		console.log("Initializing keyboard events");
+		var initialViewHeight = document.documentElement.clientHeight;
+		var calculate = null;
+
+		/*** Fix keyboard defaults ***/
+		if(typeof Keyboard != 'undefined'){
+			console.log("Keyboard not undefined");
+			Keyboard.disableScrollingInShrinkView(false);
+			Keyboard.shrinkView(false);
+		}
+
+		if($('#container').hasClass("chat")){
+			/*** Fix keyboard chat specifics ***/
+			if(typeof Keyboard != 'undefined'){
+				Keyboard.disableScrollingInShrinkView(true);
+				Keyboard.shrinkView(true);
+			}
+		}
+
+		var fixWithKeyboard = function(){
+			$('body').addClass("openkeyboard");
+			if($('#container').hasClass("chat")){
+
+				calculate = (!calculate) ? document.documentElement.clientHeight : calculate;			
+				$('#container').animate({ height: calculate+"px"}, 240, 'swing', function(){
+					$('.escribir').slideToggle('fast');
+				});
+				return;
+			}
+
+		}
+
+		window.openKeyboard = false;
+
+		/* Keyboard shown event */
+		window.addEventListener('keyboardDidShow', function () {
 			
-			if( $(this).data('resource') == "login" )
-				return app.render_login( $(this).attr('href') );
-				if( $(this).data('resource') == "login-mail" )
-					return app.render_login_email( $(this).attr('href') );
-
-			if( $(this).data('resource') == "my-plan" )
-				return app.render_myPlan( $(this).attr('href') );
-			if( $(this).data('resource') == "main-menu" )
-				return app.render_mainmenu( $(this).attr('href') );
-
-			e.stopPropagation();
+			$('.escribir').hide();
+			window.openKeyboard = true;
+			return fixWithKeyboard();
 		});
+
+		/* Keyboard hidden event */
+		window.addEventListener('keyboardDidHide', function () {
+			window.openKeyboard = false;
+			$('body').removeClass("openkeyboard");
+			$('body').scrollTop($('#messages-list').prop('scrollHeight'));
+			$('.escribir').css('bottom', 0);
+		});
+
+		/*** Initializing chat api if not already did ***/
+		if(!chatCore.isInitialized && loggedIn)
+			chatCore.init(_user);
 
 		if($('#login_form').length){
 			window.init_scripts.push("login_validate");
@@ -570,7 +633,7 @@ window.initializeEvents = function(){
 									if ( key == "platillo" ) {
 										for (var i = 0; i < losplatos.length; i++) {
 											if (value==losplatos[i][0]) {
-												console.log($(masadentro));
+												// console.log($(masadentro));
 												$(masadentro).attr("data", losplatos[i][0]);
 												$(masadentro).attr("platillo", i);
 												$(masadentro+' h5').html(losplatos[i][1]);

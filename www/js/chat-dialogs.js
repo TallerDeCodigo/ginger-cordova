@@ -19,11 +19,7 @@ function onSystemMessageListener(message) {
 }
 
 
-/*
-	RETRIEVE CHAT DIALOGS
-*/
-
-
+/* RETRIEVE CHAT DIALOGS */
 function retrieveChatDialogs() {
 	// get the chat dialogs list
 
@@ -247,8 +243,7 @@ function createNewDialog() {
 
 	// //$("#add_new_dialog").modal("hide");
 	// $('#add_new_dialog .progress').show();
-	usersIds[0] = localStorage.getItem('cCoachID');
-	// usersIds[1] = localStorage.getItem('cCoachID');
+	usersIds[0] = app.keeper.getItem('cCoachID');
 	console.log(usersIds);
 	var dialogName;
 	var dialogOccupants;

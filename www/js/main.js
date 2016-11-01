@@ -43,9 +43,9 @@
 			window.loggedIn 	= false;
 			window.init_scripts = [];
 			window._user 		= [];
-			this.keeper 		= window.localStorage;
+			app.keeper 		= window.localStorage;
 			
-
+			console.log("Hello???");
 			/*----------------------- Routing user accordingly ---------------------------*/
 			if(is_login){
 				console.log('You okay, now you can start making calls');
@@ -311,7 +311,7 @@
 			console.log("Rendering Main menu");
 			var data = this.gatherEnvironment(null, "Menu principal");
 			data.is_scrollable = false;
-			return this.switchView('main-menu', data, '.view', url, 'main-menu');
+			return this.switchView('main-menu', data, '.view', url, 'perfil');
 		},
 		render_modal : function(modalName, data, appendTarget){
 
@@ -335,9 +335,6 @@
 			return app.showLoader();
 		},
 		render_chat : function(){
-			return app.showLoader();
-		},
-		render_menu : function(){
 			return app.showLoader();
 		},
 		render_create_account : function(){
@@ -607,61 +604,7 @@
 
 
 
-		//-----------------------------
-		//
-		// Keyboard events for iOS
-		//
-		//-----------------------------
-		console.log("Initializing keyboard events");
-		var initialViewHeight = document.documentElement.clientHeight;
-		var calculate = null;
-
-		/*** Fix keyboard defaults ***/
-		if(typeof Keyboard != 'undefined'){
-			console.log("Keyboard not undefined");
-			Keyboard.disableScrollingInShrinkView(false);
-			Keyboard.shrinkView(false);
-		}
-
-		if($('#container').hasClass("chat")){
-			/*** Fix keyboard chat specifics ***/
-			if(typeof Keyboard != 'undefined'){
-				Keyboard.disableScrollingInShrinkView(true);
-				Keyboard.shrinkView(true);
-			}
-		}
-
-		var fixWithKeyboard = function(){
-			$('body').addClass("openkeyboard");
-			if($('#container').hasClass("chat")){
-
-				calculate = (!calculate) ? document.documentElement.clientHeight : calculate;			
-				$('#container').animate({ height: calculate+"px"}, 240, 'swing', function(){
-					$('.escribir').slideToggle('fast');
-				});
-				return;
-			}
-
-		}
-
-		window.openKeyboard = false;
-
-		/* Keyboard shown event */
-		window.addEventListener('keyboardDidShow', function () {
-			
-			$('.escribir').hide();
-			window.openKeyboard = true;
-			return fixWithKeyboard();
-		});
-
-		/* Keyboard hidden event */
-		window.addEventListener('keyboardDidHide', function () {
-			window.openKeyboard = false;
-			$('body').removeClass("openkeyboard");
-			$('body').scrollTop($('#messages-list').prop('scrollHeight'));
-			$('.escribir').css('bottom', 0);
-		});
-
+		
 
 		//-----------------------------
 		//
