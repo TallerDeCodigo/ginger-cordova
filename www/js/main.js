@@ -149,8 +149,9 @@
 		onDeviceReady: function() {
 			app.receivedEvent('deviceready');
 			window.cordova_full_path = (typeof(cordova) != 'undefined') 
-									 ? cordova.file.applicationDirectory+"www/"
-									 : '';
+									 	? cordova.file.applicationDirectory+"www/"
+									 	: '';
+									 	
 			/*   ___    _         _   _     
 			*  / _ \  / \  _   _| |_| |__  
 			* | | | |/ _ \| | | | __| '_ \ 
