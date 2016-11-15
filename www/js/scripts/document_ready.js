@@ -765,7 +765,7 @@ window.initializeEvents = function(){
 				$('.ov-filler').click(function() {
 					$('.overscreen').removeClass('active');
 					setTimeout(function() {$('.overscreen').hide();}, 800);
-					$('#container').removeClass('blurred');
+					$('#blur').removeClass('blurred');
 					$('a.centro img').removeClass('onn');
 				});
 
