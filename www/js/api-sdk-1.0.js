@@ -204,16 +204,9 @@ function requestHandlerAPI(){
 					'cliente' : apiRH.keeper.getItem('userId'),
 					'card_token' : token
 				};
-
-
 			var response = this.makeRequest('api/history', data);
 
-			console.log("Request Data Cliente");
-
-			console.log(response.responseText);
-			console.log(response.statusText);
-
-			return (response.responseText == "active_subscription") ? true : false;
+			return (response.code == "active_subscription") ? true : false;
 
 		};
 
@@ -488,7 +481,6 @@ function requestHandlerAPI(){
 				 })
 				 .fail( function(e){
 					console.log(e);
-					return false;
 				});
 				return result;
 			};
