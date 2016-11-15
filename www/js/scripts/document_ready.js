@@ -689,7 +689,8 @@ window.initializeEvents = function(){
 						});
 					});
 				});
-				// setTimeout(markConsumed, 2000);
+				setTimeout(markConsumed, 2000);
+				$( ".accordion" ).accordion({collapsible:true,active:false,animate:300,heightStyle:"content"});
 
 			}); // END DIETA ESTRUCTURA
 			
@@ -727,6 +728,12 @@ window.initializeEvents = function(){
 			return app.hideLoader();
 			
 		} /*** END BODY CLASS DIETA ***/
+
+		$('.add_picture').click(function (e){
+			app.get_file_from_device('profile', 'camera');
+		});
+
+
 
 		/*** Window load and resize ***/
 		$(window).on("load resize",function(){ 

@@ -16,9 +16,7 @@ $( function() {
 				});
 	}
 
-	$('.add_picture').click(function (e){
-		app.get_file_from_device('profile', 'camera');
-	});
+	
 
 	if($('body').hasClass('has-finanzas')){
 
@@ -149,8 +147,7 @@ $( function() {
 		createNewDialog();
 
 	} // END has class has chat
-	
-	$( ".accordion" ).accordion({collapsible:true,active:false,animate:300,heightStyle:"content"});
+
 
 }); // END function
 
