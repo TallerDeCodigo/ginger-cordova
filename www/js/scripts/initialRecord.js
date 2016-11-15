@@ -694,17 +694,18 @@ window.initializeRecordEvents = function(){
 					var rate_stars;
 					var item = $('.initial').html();
 					var coaches = [];
+					var dietaKeep = null;
+					var coachKeep = null;
 
 					$.each( listCoach, function( key, value ) {
 						
 						$.each( value, function( key, value ) {
 							
-							var dietaKeep = null;
-							var coachKeep = null;
 							console.log( key + " :: " + value );
 							
 							if (key == '_id')
-								dietaKeep = value;
+								dietaKeep = (!dietaKeep || dietaKeep != value) ? value : dietaKeep;
+							console.log("dietaKeep :: "+dietaKeep);
 
 							if(key == 'coach'){	
 								$.each( value, function( key, value ) {
@@ -720,7 +721,7 @@ window.initializeRecordEvents = function(){
 												exists = true;
 											
 										if (!exists) {
-											coachKeep = value;
+											coachKeep = (!coachKeep || coachKeep != value) ? value : coachKeep;
 											coaches.push(value);
 											$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
 											$(".resena .img-frame:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
@@ -768,7 +769,6 @@ window.initializeRecordEvents = function(){
 						i++;
 					});
 
-					app.hideLoader();
 
 					$('.slide-coach').each(function() {
 						if ($(this).attr('coach') === undefined) {
@@ -783,11 +783,13 @@ window.initializeRecordEvents = function(){
 						$(".pcoach1").show();
 						$(".pcoach1").css("left","40px");
 						$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
+						app.hideLoader();
 					}, 250);
 					
 				}
 			}else{
 				alert('Error: No se pudieron guardar los datos');
+				app.hideLoader();
 			}
 		});
 

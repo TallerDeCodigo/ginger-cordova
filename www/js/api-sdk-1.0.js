@@ -68,7 +68,6 @@ function requestHandlerAPI(){
 			apiRH.keeper.setItem( 'token', 	response.token);
 			apiRH.keeper.setItem( 'mail', 	response.mail);
 			apiRH.keeper.setItem( 'userId', response.userId);
-			apiRH.keeper.setItem( 'email_verification', true);
 
 			if(!this.token)
 				return false;
@@ -119,7 +118,6 @@ function requestHandlerAPI(){
 					};
 
 			var created_response = this.makeRequest('api/signup', data, true, false);
-
 			console.log("It's alive! ::: "+JSON.stringify(created_response));
 
 			/* GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE  */
@@ -127,14 +125,9 @@ function requestHandlerAPI(){
 			app.keeper.setItem('mail', 	 created_response.mail);
 			app.keeper.setItem('chatId', created_response.jid);
 			app.keeper.setItem('userId', created_response._id);
-
 			this.token = app.keeper.getItem('token');
 
-			var userId 	= app.keeper.getItem('userId');
-			var mail 	= app.keeper.getItem('mail');
-			var token 	= app.keeper.getItem('token');
-
-			return (typeof(created_response.nuevo) != 'undefined') ? token : false;
+			return (typeof(created_response.nuevo) != 'undefined') ? this.token : false;
 		};
 
 		this.validateRegistrationCode = function(code, email){
@@ -170,7 +163,7 @@ function requestHandlerAPI(){
 			console.log(req);
 			var response = this.makeRequest('tables/medicion', req);
 			console.log("Request Data Cliente");
-			console.log(response);  //llega aqui con la respuesta del servidor
+			console.log(response);
 			return (response) ? response : false;
 		};
 
@@ -182,21 +175,29 @@ function requestHandlerAPI(){
 			var req = {
 				data : data
 			};
-
 			var response = this.patchRequest( 'tables/cliente/' + app.keeper.getItem('userId'), req);
-			console.log(response);
-
 			return (response) ? response : false;
 		};
 
 		this.getCoachList = function(data){
 			var response = apiRH.getRequest('tables/dieta?opciones=1', data);
-			console.log(response);
-			return response;
+			var coaches = [];
+			var flag = null;
+			response.forEach( function( item ) {
+				flag = false;
+				if(!item.coach) return;
+			    var myCoach = item;
+			    if(!coaches.length) coaches.push(myCoach);
+				coaches.forEach(function( itemCoach ){
+					if( itemCoach.coach._id == item.coach._id ) flag = true;
+				});
+				if(!flag)
+			    	coaches.push(myCoach);
+			});
+			return coaches;
 		};
 
 		//Conekta
-
 		this.makePayment = function(token)
 		{
 			var data = {

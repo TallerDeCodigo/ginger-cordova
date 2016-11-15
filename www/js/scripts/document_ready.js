@@ -126,20 +126,25 @@ window.initializeEvents = function(){
 
 						apiRH.headers['X-ZUMO-AUTH'] = login_response;
 						var userInfo = apiRH.getInfoUser();
+
 						if(userInfo){
 							window._user = (userInfo) ? userInfo : null;
 							app.keeper.setItem( 'user', JSON.stringify(_user) );
 							var verified = app.keeper.getItem( 'email_verification' );
-
-							if(userInfo.customerId !== undefined){
+							console.log(verified);
+							console.log(_user.customerId);
+							if( typeof _user.customerId !== undefined && _user.customerId !== 'not_set' ){
 								// TODO: Load interface via switch method
 								app.keeper.setItem( 'email_verification', true );
-						 		return app.render_myPlan('dieta.html');
+								console.log("render plan");
+								return app.render_myPlan('dieta.html');
 							} else if(!verified){
-						 		return app.render_code('code.html');
-						 	}else{
-						 		return app.render_initial_record('record.html');
-						 	} 	
+								console.log("render validation code");
+								return app.render_validate_code('code.html');
+							}else{
+								console.log("render initial record");
+								return app.render_initial_record('record.html');
+							} 	
 						}
 
 					}else{
@@ -151,6 +156,36 @@ window.initializeEvents = function(){
 
 		} // END login_form
 
+		/* Log Out from the API */
+		$('#logout').on('click', function(e){
+			console.log("lorem???");
+			/* Requesting logout from server */
+			// if(!$('.overscreen2').is(':visible') ){
+			// 	$('.overscreen2').show();
+			// setTimeout(function() { $('.overscreen2').addClass('active'); }, 200);
+			// } else {
+			// 	$('.overscreen2').removeClass('active');
+			// 	setTimeout(function() { $('.overscreen2').hide(); }, 800);
+			// }
+			// $('#blur').toggleClass('blurred');
+			// return;
+		});
+
+		// $('.logout').click(function(){
+		// 	localStorage.clear();
+		// 	window.location.assign('index.html');
+		// 	return;
+		// });
+
+		// $('.logout_cancel').click(function(){
+		// 	$('.overscreen2').hide();
+		// 	$('#blur').toggleClass('blurred');
+		// 	return;
+		// });
+
+		// $('.back_with_logout').click(function(e){
+		// 	return back_with_logout(e);
+		// });
 
 		/*  Create a new account the Goog ol' fashion way  */
 		if($('#create_account').length){
@@ -192,7 +227,6 @@ window.initializeEvents = function(){
 					app.keeper.setItem('email_verification', false);
 					app.keeper.setItem('user_name', data_login.user);
 					app.keeper.setItem('user_last_name', data_login.last_name);
-					
 					var login_response 	= apiRH.registerNative(data_login);
 
 					if( login_response ){
@@ -201,18 +235,23 @@ window.initializeEvents = function(){
 						var userInfo = apiRH.getInfoUser();
 						if(userInfo){
 							window._user = (userInfo) ? userInfo : null;
+							console.log("_user");
+							console.log(_user);
 							app.keeper.setItem( 'user', JSON.stringify(_user) );
 							var verified = app.keeper.getItem( 'email_verification' );
-
-							if(userInfo.customerId !== undefined){
+							console.log("verified :: "+ verified);
+							if( typeof _user.customerId !== undefined && _user.customerId !== 'not_set' ){
 								// TODO: Load interface via switch method
 								app.keeper.setItem( 'email_verification', true );
-						 		return app.render_myPlan('dieta.html');
+								console.log("render plan");
+								return app.render_myPlan('dieta.html');
 							} else if(!verified){
-						 		return app.render_code('code.html');
-						 	}else{
-						 		return app.render_initial_record('record.html');
-						 	} 	
+								console.log("render validation code");
+								return app.render_code('code.html');
+							}else{
+								console.log("render initial record");
+								return app.render_initial_record('record.html');
+							} 	
 						}
 						
 					}else{
@@ -263,6 +302,70 @@ window.initializeEvents = function(){
 				}
 			});
 		}
+
+		/* PAGO CON TARJETA DE CREDITO*/
+		$('#send_fPago').on('click', function(){
+
+				var  t_nombre   = $('input[name="nombre"]').val(); 
+				var  t_card 	= $('input[name="card"]').val(); 
+				var  t_mes  	= $('input[name="mes"]').val(); 
+				var  t_ano 		= $('input[name="year"]').val(); 
+				var  t_cvc 		= $('input[name="cvc"]').val(); 
+				var  t_mail 	= $('input[name="mail"]').val(); 
+				var  t_cupon 	= $('input[name="cupon"]').val(); 
+				var  t_terms 	= $('input[name="terms"]').val(); 
+
+				Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
+				
+				var errorResponseHandler, successResponseHandler, tokenParams;
+
+				tokenParams = {
+					"card": {
+						"number"	: t_card,
+						"name"		: t_nombre,
+						"exp_year"	: t_ano,
+						"exp_month"	: t_mes,
+						"cvc"		: t_cvc
+					  }
+				};
+
+				successResponseHandler = function(token){
+
+					var response = apiRH.makePayment(token.id);
+					// Funcion de mensaje de bienvenida
+					if(response){
+					
+						if(!$('.overscreen6').is(':visible') ){
+							$('.overscreen6').show();
+						setTimeout(function() {$('.overscreen6').addClass('active');}, 200);
+						} else {
+							$('.overscreen6').removeClass('active');
+							setTimeout(function() {$('.overscreen6').hide();}, 800);
+						}
+						$('#blur').toggleClass('blurred');
+
+						$('#go_next').click(function(){
+							$('.overscreen6').hide();
+							$('#blur').toggleClass('blurred');
+							window.location.assign('dieta.html');
+						});
+					
+					}else{
+						app.toast("Error al procesar tu pago");
+					}
+					return;
+				};
+
+				/* Después de recibir un error */
+
+				errorResponseHandler = function(error) {
+					return console.log(error.message);  //error de conectividad
+					app.toast('Error al procesar tu pago, ' + error.message);
+				};
+
+				/* Tokenizar una tarjeta en Conekta */
+				Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
+		});
 			
 
 		/***************************/

@@ -45,7 +45,6 @@
 			window._user 		= [];
 			app.keeper 		= window.localStorage;
 			
-			console.log("Hello???");
 			/*----------------------- Routing user accordingly ---------------------------*/
 			if(is_login){
 				console.log('You okay, now you can start making calls');
@@ -59,7 +58,9 @@
 
 					if(is_client == 'not_set'){
 						/*** Still haven't paid ***/
+						console.log("Not set");
 						if( app.keeper.getItem('email_verification') == 'false' ){
+							console.log("No email verification");
 							/*** Haven't validated email code ***/
 							return app.render_validate_code();
 						}
@@ -68,6 +69,7 @@
 						 * Render Initial questions 
 						 * TODO: Render chunk depending on information already provided
 						 */
+						 console.log("Initial record");
 						return app.render_initial_record();
 					}
 					_user = JSON.parse( app.keeper.getItem('user') );
@@ -151,7 +153,7 @@
 			window.cordova_full_path = (typeof(cordova) != 'undefined') 
 									 	? cordova.file.applicationDirectory+"www/"
 									 	: '';
-									 	
+
 			/*   ___    _         _   _     
 			*  / _ \  / \  _   _| |_| |__  
 			* | | | |/ _ \| | | | __| '_ \ 
@@ -563,42 +565,7 @@
  */
 	jQuery(document).ready(function($) {
 		
-		/* Log Out from the API */
-		$('#logout').on('click', function(e){
-			/* Requesting logout from server */
-			//var response = apiRH.logOut({user_login : user, request_token : apiRH.get_request_token() });
-			//if(response.success){
-				if(!$('.overscreen2').is(':visible') ){
-					$('.overscreen2').show();
-				setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
-				} else {
-					$('.overscreen2').removeClass('active');
-					setTimeout(function() {$('.overscreen2').hide();}, 800);
-				}
-				$('#blur').toggleClass('blurred');
-					//app.toast('Has cerrado la sesión, hasta pronto');
-					//localStorage.clear();
-					//window.location.assign('index.html');
-				return;
-			//}
-			app.toast('No ha sido posible crear tu cuenta, inténtalo de nuevo por favor.');
-			return;
-		});
-
-		$('.logout').click(function(){
-			localStorage.clear();
-			window.location.assign('index.html');
-			return;
-		});
-		$('.logout_cancel').click(function(){
-			$('.overscreen2').hide();
-			$('#blur').toggleClass('blurred');
-			return;
-		});
-
-		$('.back_with_logout').click(function(e){
-			return back_with_logout(e);
-		});
+		
 
 
 // ----------------------------------------------------------------------
@@ -620,81 +587,6 @@
 			apiRH.loginOauth('facebook');
 			
 		});
-
-
-
-		/*TARJETA DE CREDITO*/
-		$('#send_fPago').on('click', function(){
-
-		   		console.log("click to next");
-
-		   		var  t_nombre   = $('input[name="nombre"]').val(); 
-		   		var  t_card 	= $('input[name="card"]').val(); 
-		   		var  t_mes  	= $('input[name="mes"]').val(); 
-		   		var  t_ano 		= $('input[name="year"]').val(); 
-		   		var  t_cvc 		= $('input[name="cvc"]').val(); 
-		   		var  t_mail 	= $('input[name="mail"]').val(); 
-		   		var  t_cupon 	= $('input[name="cupon"]').val(); 
-		   		var  t_terms 	= $('input[name="terms"]').val(); 
-
-		   		Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
-		   		
-		   		var errorResponseHandler, successResponseHandler, tokenParams;
-
-		   		tokenParams = {
-		   		  "card": {
-			   		    "number"	: t_card,
-			   		    "name"		: t_nombre,
-			   		    "exp_year"	: t_ano,
-			   		    "exp_month"	: t_mes,
-			   		    "cvc"		: t_cvc
-			   		  }
-		   		};
-
-		   		successResponseHandler = function(token) 
-		   		{
-		   			var response = apiRH.makePayment(token.id);
-		   			// Funcion de mensaje de bienvenida
-		   			if(response){
-		   				
-		   				if(response){
-
-		   					if(!$('.overscreen6').is(':visible') ){
-		   						$('.overscreen6').show();
-		   					setTimeout(function() {$('.overscreen6').addClass('active');}, 200);
-		   					} else {
-		   						$('.overscreen6').removeClass('active');
-		   						setTimeout(function() {$('.overscreen6').hide();}, 800);
-		   					}
-		   					$('#blur').toggleClass('blurred');
-
-		   					$('#go_next').click(function(){
-		   						$('.overscreen6').hide();
-		   						$('#blur').toggleClass('blurred');
-		   						window.location.assign('dieta.html');
-		   					});
-
-		   				}
-		   				else
-		   					app.toast("Error al actualizar datos");
-		   			}else{
-		   				app.toast("Error al procesar tu pago");
-		   			}
-		   			return;
-		   		};
-
-		   		/* Después de recibir un error */
-
-		   		errorResponseHandler = function(error) {
-		   		  return console.log(error.message);  //error de conectividad
-		   		  app.toast('Error al procesar tu pago, ' + error.message);
-		   		};
-
-		   		/* Tokenizar una tarjeta en Conekta */
-
-		   		Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
-		});//endCLICK
-
 
 		
 	});

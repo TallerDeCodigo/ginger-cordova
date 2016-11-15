@@ -1478,12 +1478,7 @@ $(window).load(function(){
 			setTimeout(function() {$('.overscreen2').hide();}, 500);
 		});
 
-		$('a.logout').click(function() {
-			console.log('click_logout');
-			localStorage.clear();
-			$('.overscreen2').show();
-			setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
-		});
+		
 
 		// Cambiar coach
 		$('.com2send').click(function() {
