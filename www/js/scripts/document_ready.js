@@ -131,18 +131,13 @@ window.initializeEvents = function(){
 							window._user = (userInfo) ? userInfo : null;
 							app.keeper.setItem( 'user', JSON.stringify(_user) );
 							var verified = app.keeper.getItem( 'email_verification' );
-							console.log(verified);
-							console.log(_user.customerId);
 							if( typeof _user.customerId !== undefined && _user.customerId !== 'not_set' ){
 								// TODO: Load interface via switch method
 								app.keeper.setItem( 'email_verification', true );
-								console.log("render plan");
 								return app.render_myPlan('dieta.html');
 							} else if(!verified){
-								console.log("render validation code");
 								return app.render_validate_code('code.html');
 							}else{
-								console.log("render initial record");
 								return app.render_initial_record('record.html');
 							} 	
 						}

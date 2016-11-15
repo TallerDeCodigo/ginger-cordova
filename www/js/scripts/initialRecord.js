@@ -1147,7 +1147,7 @@ window.initializeRecordEvents = function(){
 						"cvc"		: t_cvc
 					  }
 				};
-				
+
 				successResponseHandler = function(token){
 
 					var response = apiRH.makePayment(token.id);
@@ -1166,7 +1166,7 @@ window.initializeRecordEvents = function(){
 						$('#go_next').click(function(){
 							$('.overscreen6').hide();
 							$('#blur').toggleClass('blurred');
-							window.location.assign('dieta.html');
+							app.render_myPlan('dieta.html');
 						});
 					
 					}else{
@@ -1185,7 +1185,7 @@ window.initializeRecordEvents = function(){
 				/* Tokenizar una tarjeta en Conekta */
 				Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
 		});
-		
+
 
 	});
 

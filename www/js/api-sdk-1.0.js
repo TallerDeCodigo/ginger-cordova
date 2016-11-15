@@ -198,8 +198,8 @@ function requestHandlerAPI(){
 		};
 
 		//Conekta
-		this.makePayment = function(token)
-		{
+		this.makePayment = function(token){
+			
 			var data = {
 					'cliente' : apiRH.keeper.getItem('userId'),
 					'card_token' : token

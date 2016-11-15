@@ -6,6 +6,9 @@ window.initializeCalendar = function(){
 	
 	jQuery(document).ready(function($) {
 
+		window._slider = new Swipe( document.getElementById('scroller') );
+		console.log(_slider);
+
 		// TODO: WTF!!
 		$('.platillo').each(function() {
 			if ($(this).attr('data') === undefined) {
@@ -196,7 +199,6 @@ window.initializeCalendar = function(){
 					$('#toda_la_dieta li:nth-of-type('+masuno+')').attr('data', dataf.getFullYear()+ '-'+mes+'-'+dia);
 				}
 			});
-
 
 	});
 
