@@ -35,6 +35,8 @@ window.initializeEvents = function(){
 					return app.render_myPlan( $(this).attr('href') );
 				if( $(this).data('resource') == "main-menu" )
 					return app.render_mainmenu( $(this).attr('href') );
+				if( $(this).data('resource') == "coming-soon" )
+					return app.render_coming_soon( $(this).attr('href') );
 
 				e.stopPropagation();
 			});

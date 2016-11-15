@@ -340,6 +340,14 @@
 		render_chat : function(){
 			return app.showLoader();
 		},
+		render_coming_soon : function(url){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering Coming Soon");
+			var data = this.gatherEnvironment(null, "Próximamente");
+			data.is_scrollable = false;
+			return this.switchView('coming-soon', data, '.view', url, 'coming_soon');
+		},
 		render_create_account : function(){
 			return app.showLoader();
 		},
