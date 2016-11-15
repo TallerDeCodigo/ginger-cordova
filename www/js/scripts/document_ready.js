@@ -100,6 +100,52 @@ window.initializeEvents = function(){
 		if(!chatCore.isInitialized && loggedIn)
 			chatCore.init(_user);
 
+
+
+		/*** Window load and resize ***/
+		$(window).on("load resize",function(){ 
+
+			var alto = document.documentElement.clientHeight;
+			var ancho = document.documentElement.clientWidth;
+			var tamano = $('.slide-coach').length;
+			var csld = (tamano*ancho*0.8125)+(ancho*0.09375);
+			var mediad = 300+(ancho*0.64);
+
+			$('textarea.short-descrip').css('height',alto-mediad);
+
+			$('#scroller > ul > li').css("height",alto-245);
+			$('.iosm #scroller > ul > li').css("height",alto-265);
+
+			var cuantos = $('.co-option').length;
+			cuantos = cuantos*105;
+			$(".tipo_coach").css("width",cuantos);
+
+			var cuantos1 = $('.pl-option').length;
+			cuantos1 = cuantos1*105;
+			$(".tipo_plan").css("width",cuantos1);
+
+			var cuantos2 = $('.re-option').length;
+			cuantos2 = cuantos2*105;
+			$(".tipo_restric").css("width",cuantos2);
+
+			var cuantos3 = $('.ej-option').length;
+			cuantos3 = cuantos3*105.25;
+			$(".tipo_ejer").css("width",cuantos3);
+
+			var cuantos4 = $('.me-option').length;
+			cuantos4 = cuantos4*105;
+			$(".tipo_med").css("width",cuantos4);
+
+			$(".slide-coach").css("width",ancho*0.8125);
+			$(".slide-coach:first-of-type").css("margin-left",ancho*0.09375);
+			$(".cslider").css("width",csld);
+
+			// app.hideLoader();
+		});/*** END load and resize ***/
+
+
+
+
 		if($('#login_form').length){
 			window.init_scripts.push("login_validate");
 			$('#login_form').validate({
@@ -306,8 +352,13 @@ window.initializeEvents = function(){
 		
 		
 		function markConsumed(){
-			
-			var response = apiRH.getConsumed('2016-09-01', '2016-09-30');
+			var date 		= new Date();
+			var firstDay 	= new Date(date.getFullYear(), date.getMonth(), 1);
+			var lastDay 	= new Date(date.getFullYear(), date.getMonth() + 1, 0);
+			console.log(firstDay.getFullYear()+'-'+firstDay.getMonth()+'-'+firstDay.getDate());
+			console.log(lastDay.getFullYear()+'-'+lastDay.getMonth()+'-'+lastDay.getDate());
+			var response 	= apiRH.getConsumed( firstDay.getFullYear()+'-'+firstDay.getMonth()+'-'+firstDay.getDate(), 
+												 lastDay.getFullYear()+'-'+lastDay.getMonth()+'-'+lastDay.getDate() );
 
 			console.log("length ::: "+JSON.stringify(response));
 			if(!response){
@@ -688,9 +739,9 @@ window.initializeEvents = function(){
 						});
 					});
 				});
-				setTimeout(markConsumed, 2000);
+				setTimeout(markConsumed, 1400);
 				$( ".accordion" ).accordion({collapsible:true,active:false,animate:300,heightStyle:"content"});
-
+				$(window).resize();
 			}); // END DIETA ESTRUCTURA
 			
 			$('.cancel').on('click', function(){
@@ -731,48 +782,6 @@ window.initializeEvents = function(){
 		$('.add_picture').click(function (e){
 			app.get_file_from_device('profile', 'camera');
 		});
-
-
-
-		/*** Window load and resize ***/
-		$(window).on("load resize",function(){ 
-
-			var alto = document.documentElement.clientHeight;
-			var ancho = document.documentElement.clientWidth;
-			var tamano = $('.slide-coach').length;
-			var csld = (tamano*ancho*0.8125)+(ancho*0.09375);
-			var mediad = 300+(ancho*0.64);
-
-			$('textarea.short-descrip').css('height',alto-mediad);
-
-			$('#scroller > ul > li').css("height",alto-245);
-			$('.iosm #scroller > ul > li').css("height",alto-265);
-
-			var cuantos = $('.co-option').length;
-			cuantos = cuantos*105;
-			$(".tipo_coach").css("width",cuantos);
-
-			var cuantos1 = $('.pl-option').length;
-			cuantos1 = cuantos1*105;
-			$(".tipo_plan").css("width",cuantos1);
-
-			var cuantos2 = $('.re-option').length;
-			cuantos2 = cuantos2*105;
-			$(".tipo_restric").css("width",cuantos2);
-
-			var cuantos3 = $('.ej-option').length;
-			cuantos3 = cuantos3*105.25;
-			$(".tipo_ejer").css("width",cuantos3);
-
-			var cuantos4 = $('.me-option').length;
-			cuantos4 = cuantos4*105;
-			$(".tipo_med").css("width",cuantos4);
-
-			$(".slide-coach").css("width",ancho*0.8125);
-			$(".slide-coach:first-of-type").css("margin-left",ancho*0.09375);
-			$(".cslider").css("width",csld);
-
-		});/*** END load and resize ***/
 
 	});
 

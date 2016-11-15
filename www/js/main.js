@@ -306,7 +306,7 @@
 			console.log("Rendering My Plan");
 			var data = this.gatherEnvironment(null, "Mi Plan");
 			data.is_scrollable = false;
-			return this.switchView('my-plan', data, '.view', url, 'dieta');
+			return this.switchView('my-plan', data, '.view', url, 'dieta', true);
 		},
 		render_mainmenu : function( url ){
 			app.showLoader();

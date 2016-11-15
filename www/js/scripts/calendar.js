@@ -7,7 +7,6 @@ window.initializeCalendar = function(){
 	jQuery(document).ready(function($) {
 
 		window._slider = new Swipe( document.getElementById('scroller') );
-		console.log(_slider);
 
 		// TODO: WTF!!
 		$('.platillo').each(function() {
