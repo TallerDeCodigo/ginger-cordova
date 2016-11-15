@@ -153,34 +153,33 @@ window.initializeEvents = function(){
 
 		/* Log Out from the API */
 		$('#logout').on('click', function(e){
-			console.log("lorem???");
 			/* Requesting logout from server */
-			// if(!$('.overscreen2').is(':visible') ){
-			// 	$('.overscreen2').show();
-			// setTimeout(function() { $('.overscreen2').addClass('active'); }, 200);
-			// } else {
-			// 	$('.overscreen2').removeClass('active');
-			// 	setTimeout(function() { $('.overscreen2').hide(); }, 800);
-			// }
-			// $('#blur').toggleClass('blurred');
-			// return;
+			if(!$('.overscreen2').is(':visible') ){
+				$('.overscreen2').show();
+			setTimeout(function() { $('.overscreen2').addClass('active'); }, 200);
+			} else {
+				$('.overscreen2').removeClass('active');
+				setTimeout(function() { $('.overscreen2').hide(); }, 800);
+			}
+			$('#blur').toggleClass('blurred');
+			return;
 		});
 
-		// $('.logout').click(function(){
-		// 	localStorage.clear();
-		// 	window.location.assign('index.html');
-		// 	return;
-		// });
+		$('.logout').click(function(){
+			localStorage.clear();
+			window.location.assign('index.html');
+			return;
+		});
 
-		// $('.logout_cancel').click(function(){
-		// 	$('.overscreen2').hide();
-		// 	$('#blur').toggleClass('blurred');
-		// 	return;
-		// });
+		$('.logout_cancel').click(function(){
+			$('.overscreen2').hide();
+			$('#blur').toggleClass('blurred');
+			return;
+		});
 
-		// $('.back_with_logout').click(function(e){
-		// 	return back_with_logout(e);
-		// });
+		$('.back_with_logout').click(function(e){
+			return back_with_logout(e);
+		});
 
 		/*  Create a new account the Goog ol' fashion way  */
 		if($('#create_account').length){

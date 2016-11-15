@@ -1494,119 +1494,98 @@ $(window).load(function(){
 		});
 
 
-	// Cancelar subscripcion
-	$('.btn_cancelar').click(function (e) {
+		// Cancelar subscripcion
+		$('.btn_cancelar').click(function (e) {
 
-		// alert('CANCELAR SUSCRIPTCION');
+			// alert('CANCELAR SUSCRIPTCION');
 
-		if(!$('.cancel_subscription').is(':visible') ){
-			$('.cancel_subscription').show();
-			setTimeout(function() {$('.cancel_subscription').addClass('active');}, 200);
-			} else {
-				$('.cancel_subscription').removeClass('active');
-				setTimeout(function() {$('.cancel_subscription').hide();}, 800);
-			}
-			$('#blur').toggleClass('blurred');
-
-		var customer_id = localStorage.getItem('customer_id');
-		
-		var response = apiRH.cancelarSuscripcion(customer_id);
-
-		$('#accept_cancel').click(function(){
-			$('.cancel_subscription').hide();
-			$('#blur').toggleClass('blurred');
-
-			if(!$('.cancel_subscription2').is(':visible') ){
-				$('.cancel_subscription2').show();
-				setTimeout(function() {$('.cancel_subscription2').addClass('active');}, 200);
+			if(!$('.cancel_subscription').is(':visible') ){
+				$('.cancel_subscription').show();
+				setTimeout(function() {$('.cancel_subscription').addClass('active');}, 200);
 				} else {
-					$('.cancel_subscription2').removeClass('active');
-					setTimeout(function() {$('.cancel_subscription2').hide();}, 800);
+					$('.cancel_subscription').removeClass('active');
+					setTimeout(function() {$('.cancel_subscription').hide();}, 800);
 				}
 				$('#blur').toggleClass('blurred');
 
-				$('#accept_ccomment').click(function(){
-					console.log('ventana para comentario');
-					$('.cancel_subscription2').hide();
-					if(!$('.comment_pop').is(':visible') ){
-						$('.comment_pop').show();
-						setTimeout(function() {$('.comment_pop').addClass('active');}, 200);
+			var customer_id = localStorage.getItem('customer_id');
+			
+			var response = apiRH.cancelarSuscripcion(customer_id);
+
+			$('#accept_cancel').click(function(){
+				$('.cancel_subscription').hide();
+				$('#blur').toggleClass('blurred');
+
+				if(!$('.cancel_subscription2').is(':visible') ){
+					$('.cancel_subscription2').show();
+					setTimeout(function() {$('.cancel_subscription2').addClass('active');}, 200);
 					} else {
-						$('.comment_pop').removeClass('active');
-						setTimeout(function() {$('.comment_pop').hide();}, 800);
+						$('.cancel_subscription2').removeClass('active');
+						setTimeout(function() {$('.cancel_subscription2').hide();}, 800);
 					}
-
-					$('#write_ch_coach').click(function(){
-
-						localStorage.setItem('cancel_subscription_cmt', $('#msg_ch_coach').val() );
-
-						if(!$('.cancel_subscription3').is(':visible') ){
-							$('.cancel_subscription3').show();
-							$('.cancel_subscription2').hide();
-							setTimeout(function() {$('.cancel_subscription3').addClass('active');}, 200);
-							} else {
-								$('.cancel_subscription3').removeClass('active');
-								setTimeout(function() {$('.cancel_subscription3').hide();}, 800);
-							}
-
-							$('#accept_comment3').click(function(){
-								console.log('click');
-								$('.cancel_subscription3').hide();
-								$('#blur').toggleClass('blurred');
-
-								if(response){
-									localStorage.clear();
-									// TODO: Use render methods not hard loading
-									window.location.assign('index.html');
-								}	
-							});
-
-
-						// $('.cancel_subscription2').hide();
-						// $('#blur').toggleClass('blurred');
-					});
-				});
-
-				$('#cancelar2').click(function(){
-					$('.cancel_subscription2').hide();
 					$('#blur').toggleClass('blurred');
-				});
 
-				
-			/*Llamar hasta estar segurisomo de querer cancelar la subscripccion*/
-			// if(response){
-			// window.location.assign('index.html');
-			// localStorage.clear();
-			// }	
+					$('#accept_ccomment').click(function(){
+						console.log('ventana para comentario');
+						$('.cancel_subscription2').hide();
+						if(!$('.comment_pop').is(':visible') ){
+							$('.comment_pop').show();
+							setTimeout(function() {$('.comment_pop').addClass('active');}, 200);
+						} else {
+							$('.comment_pop').removeClass('active');
+							setTimeout(function() {$('.comment_pop').hide();}, 800);
+						}
+
+						$('#write_ch_coach').click(function(){
+
+							localStorage.setItem('cancel_subscription_cmt', $('#msg_ch_coach').val() );
+
+							if(!$('.cancel_subscription3').is(':visible') ){
+								$('.cancel_subscription3').show();
+								$('.cancel_subscription2').hide();
+								setTimeout(function() {$('.cancel_subscription3').addClass('active');}, 200);
+								} else {
+									$('.cancel_subscription3').removeClass('active');
+									setTimeout(function() {$('.cancel_subscription3').hide();}, 800);
+								}
+
+								$('#accept_comment3').click(function(){
+									console.log('click');
+									$('.cancel_subscription3').hide();
+									$('#blur').toggleClass('blurred');
+
+									if(response){
+										localStorage.clear();
+										// TODO: Use render methods not hard loading
+										window.location.assign('index.html');
+									}	
+								});
+
+
+							// $('.cancel_subscription2').hide();
+							// $('#blur').toggleClass('blurred');
+						});
+					});
+
+					$('#cancelar2').click(function(){
+						$('.cancel_subscription2').hide();
+						$('#blur').toggleClass('blurred');
+					});
+
+					
+				/*Llamar hasta estar segurisomo de querer cancelar la subscripccion*/
+				// if(response){
+				// window.location.assign('index.html');
+				// localStorage.clear();
+				// }	
+			});
+
+			$('#cancelar').click(function(){
+				$('.cancel_subscription').hide();
+			});
+
 		});
 
-		$('#cancelar').click(function(){
-			$('.cancel_subscription').hide();
-		});
-
-	});
-
-
-	/*
-
-		WEB VIEW BLOG
-		
-	*/
-	// $('#blog').on('click',function(){
-	// 	console.log("click");
-	// 	cordova.InAppBrowser.open('https://gingerapp.mx/', '_blank', 'location=yes');
-	// })
-
-	// $('#terms_cond').on('click',function(){
-	// 		console.log("click");
-	// 		cordova.InAppBrowser.open('https://gingerapp.mx/', '_blank', 'location=yes');
-	// 	})
-
-
-	// $('#pol_priv').on('click',function(){
-	// 		console.log("click");
-	// 		cordova.InAppBrowser.open('https://gingerapp.mx/', '_blank', 'location=yes');
-	// 	})
 
 	}); //END WINDOW LOAD clicks
 
@@ -1654,40 +1633,3 @@ $(window).load(function(){
 		elem.src = imgUri;
 	}
 	
-
-
-
-	  
-
-(function($){
-
-	"use strict";
-
-	$(function(){
-
-		/**
-		 * Validación de emails
-		 */
-		window.validateEmail = function (email) {
-			var regExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-			return regExp.test(email);
-		};
-
-		/**
-		 * Regresa todos los valores de un formulario como un associative array 
-		 */
-		window.getFormData = function (selector) {
-			var result = [],
-				data   = $(selector).serializeArray();
-
-			$.map(data, function (attr) {
-				result[attr.name] = attr.value;
-			});
-			return result;
-		}
-
-	});
-
-
-
-})(jQuery);
