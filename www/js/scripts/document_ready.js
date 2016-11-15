@@ -100,8 +100,9 @@ window.initializeEvents = function(){
 
 		/*** Initializing chat api if not already did ***/
 		if(!chatCore.isInitialized && loggedIn)
-			chatCore.init(_user);
-
+			setTimeout(function(){
+				chatCore.init(_user);
+			}, 420);
 
 
 		/*** Window load and resize ***/
@@ -778,6 +779,26 @@ window.initializeEvents = function(){
 			return app.hideLoader();
 			
 		} /*** END BODY CLASS DIETA ***/
+
+
+		if($('body').hasClass('has-chat')){
+		
+			var mail 		 = app.keeper.getItem('mail');
+			var chatPassword = app.keeper.getItem('chatPassword');
+			var userLog 	 = JSON.parse(app.keeper.getItem('user'));
+			var uChatCoach 	 = userLog.coach.jid;
+			
+			uChatCoach = uChatCoach.split('-');
+			app.keeper.setItem('cCoachID', uChatCoach[0]);
+			var user = { login : userLog.mail, pass : userLog.chatPassword};
+
+			$('h2.titulo').html(userLog.coach.nombre + " " + userLog.coach.apellido);
+			
+			connectToChat(user);
+			
+			createNewDialog();
+
+		} /*** END BODY CLASS CHAT ***/
 
 		$('.add_picture').click(function (e){
 			app.get_file_from_device('profile', 'camera');
