@@ -434,8 +434,9 @@ input.send {position:absolute;border-style:none; outline:none;background:none;ri
 	.plat-comentario span:after {content:'”';}
 
 	.menu-bar {position:fixed;background:#fff;width:100%;height:44px;bottom:0px;left:0px;}
-	.menu-bar a {position:relative;display:inline-block;width:12.5%;height:44px;vertical-align:top;margin:0px 2.6%;line-height:12px;color:#8f8f8f;}
-	.menu-bar a.active {color:#00b8a6;}
+	.menu-bar a {position: relative; display: inline-block; width: 12.5%; height: 44px; vertical-align: top; margin: 0px 2.6%; line-height: 12px; color: #8f8f8f; opacity: 0.65;}
+	.menu-bar a.active {color:#00b8a6; opacity: 1;}
+	.menu-bar a.centro { opacity: 1;}
 	.menu-bar a img {margin-top:4px;}
 	.menu-bar a.centro img {margin-top:0px;height:44px;width:auto;-webkit-transform:rotate(0deg);-webkit-transition:.35s ease-in-out;transition:.35s ease-in-out;}
 	.menu-bar a.centro img.onn {-webkit-transform:rotate(135deg);}
