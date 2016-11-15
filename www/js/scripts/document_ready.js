@@ -355,13 +355,11 @@ window.initializeEvents = function(){
 			var date 		= new Date();
 			var firstDay 	= new Date(date.getFullYear(), date.getMonth(), 1);
 			var lastDay 	= new Date(date.getFullYear(), date.getMonth() + 1, 0);
-			console.log(firstDay.getFullYear()+'-'+firstDay.getMonth()+'-'+firstDay.getDate());
-			console.log(lastDay.getFullYear()+'-'+lastDay.getMonth()+'-'+lastDay.getDate());
 			var response 	= apiRH.getConsumed( firstDay.getFullYear()+'-'+firstDay.getMonth()+'-'+firstDay.getDate(), 
 												 lastDay.getFullYear()+'-'+lastDay.getMonth()+'-'+lastDay.getDate() );
 
-			console.log("length ::: "+JSON.stringify(response));
-			if(!response){
+			console.log("consumidos length ::: "+response.length);
+			if(!response.length){
 				app.hideLoader();
 			}else{
 				$.each(response, function(key, value){

@@ -199,7 +199,7 @@ function requestHandlerAPI(){
 
 		//Conekta
 		this.makePayment = function(token){
-			
+
 			var data = {
 					'cliente' : apiRH.keeper.getItem('userId'),
 					'card_token' : token
@@ -621,39 +621,12 @@ function requestHandlerAPI(){
 
 		};
 
-		this.getConsumed = function(FechaIni, FechaFin){
-			sdk_app_context.showLoader();
+		this.getConsumed = function(DateStart, DateEnd){
+			// sdk_app_context.showLoader();
 			var result = {};
-
-			var req = {
-				method : 'GET',
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': apiRH.keeper.getItem('token'),
-					'Content-Type': 'application/json'
-				}
-			}
-
-			var user = JSON.parse(apiRH.keeper.getItem('user'));
-
+			var user = window._user;
 			var idCoach = user.coach._id;
-
-			$.ajax({
-			  type: 'GET',
-			  headers: req.headers,
-			  url: 'https://gingerservice.azure-mobile.net/tables/consumo?coach=' + idCoach + '&dieta=' + apiRH.keeper.getItem('dietaId') + '&inicio=' + FechaIni + '&fin='+FechaFin,
-			  dataType: 'json',
-			  async: false
-			})
-			 .done(function(response){
-				result = response;
-				sdk_app_context.hideLoader(response);
-			})
-			 .fail(function(e){
-				result = false;
-				console.log(JSON.stringify(e));
-			});
-
+			result = this.getRequest('tables/consumo?coach='+idCoach+'&dieta='+user.dieta._id+'&inicio='+DateStart+'&fin='+DateEnd, null);
 			return result;
 		};
 
