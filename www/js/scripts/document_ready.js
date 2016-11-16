@@ -405,17 +405,14 @@ window.initializeEvents = function(){
 
 											if(key == 'comment'){
 												commentFlag = true;
-												// console.log('comentario: ' +value);
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 											}
 
 										});
-										// console.log("commentFlag");
-										// console.log(commentFlag);
+
 										if(!commentFlag){
-											// console.log("removing");
-											// console.log($('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]'));
-											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('div').find('comment_sub').hide();
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('div').find('h6:nth-of-type(2)').remove();
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('div').find('.plat-comentario').remove();
 										}
 										commentFlag = false;
 									});
@@ -444,15 +441,16 @@ window.initializeEvents = function(){
 
 											if(key == 'comment'){
 												commentFlag = true;
-												// console.log('comentario: ' +value);
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 											}
-											if(!commentFlag){
-												// console.log("comment Flag not");
-												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('div').find('comment_sub').hide();
-											}
-											commentFlag = false;
+											
 										});
+
+										if(!commentFlag){
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('div').find('h6:nth-of-type(2)').remove();
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('div').find('.plat-comentario').remove();
+										}
+										commentFlag = false;
 									});
 								}
 
@@ -478,10 +476,15 @@ window.initializeEvents = function(){
 											}
 
 											if(key == 'comment'){
-												// console.log('comentario: ' +value);
+												commentFlag = true;
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.comida [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 											}
 										});
+										if(!commentFlag){
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.comida [data="'+platillo+'"]').find('div').find('h6:nth-of-type(2)').remove();
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.comida [data="'+platillo+'"]').find('div').find('.plat-comentario').remove();
+										}
+										commentFlag = false;
 									});
 								}
 
@@ -507,11 +510,15 @@ window.initializeEvents = function(){
 											}
 
 											if(key == 'comment'){
-												// console.log('comentario: ' +value);
+												commentFlag = true;
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack2 [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 											}
-
 										});
+										if(!commentFlag){
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack2 [data="'+platillo+'"]').find('div').find('h6:nth-of-type(2)').remove();
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack2 [data="'+platillo+'"]').find('div').find('.plat-comentario').remove();
+										}
+										commentFlag = false;
 									});
 								}
 
@@ -537,12 +544,14 @@ window.initializeEvents = function(){
 											}
 
 											if(key == 'comment'){
-												// console.log('comentario: ' +value);
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.cena [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 											}
-
-
 										});
+										if(!commentFlag){
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.cena [data="'+platillo+'"]').find('div').find('h6:nth-of-type(2)').remove();
+											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.cena [data="'+platillo+'"]').find('div').find('.plat-comentario').remove();
+										}
+										commentFlag = false;
 									});
 								}
 
@@ -880,17 +889,16 @@ window.initializeEvents = function(){
 			});
 
 			$('#send_dish_comment').click(function() {
-
+				console.log("Send dish comments");
 				$('.comment_pop').removeClass('active');
 				setTimeout(function() {$('.comment_pop').hide();}, 500);
-				$('.comment_pop textarea').focus();
-			
+				// $('.comment_pop textarea').focus();
 				var consumed_params = {
 					"plato" 	: $('.comment_pop').attr('idplatillo'), 
 					"fecha" 	: $('.comment_pop').attr('cosumoFecha'),
 					"comida"  	: $('.comment_pop').attr('comida'),
 					"platillo"	: $('.comment_pop').attr('nPlatillo'),
-					"comment" 	: _cmt
+					"comment" 	: $('#comentar').val()
 				};
 				
 				var result = apiRH.makeCosume(consumed_params);

@@ -548,7 +548,7 @@ a.mail { background:#2eab7e url('../images/mail_btn.png') no-repeat;background-s
 .active .ov-filler2 {opacity:1;}
 
 .dialog {background:rgba(255,255,255,0.9);box-shadow:0px 0px 2px #666;border-radius:4px;overflow:hidden;padding:11px 0px 0px 0px;color:#3f3f3f;width:70%;height:auto;position:relative;left:15%;top:55%;transform:translateY(-50%);-webkit-transform:translateY(-50%);opacity:0;-webkit-transition:.2s ease-in-out;transition:.2s ease-in-out;}
-.active  .dialog {top:50%;opacity:1;}
+.active  .dialog { top:50%; opacity:1; background: rgba(255,255,255,.95);}
 .dialog h5 {font-size:120%;margin-bottom:7px;width:94%;position:relative;display:inline-block;}
 .dialog p {margin-bottom:17px;position:relative;display:inline-block;width:94%;font-size:95%;}
 .di-options {width:100%;border-top:1px solid #afafaf;}
