@@ -969,8 +969,8 @@ window.initializeEvents = function(){
 
 			var date = new Date();
 			var date_today = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
-			var agua_local = parseFloat(localStorage.getItem('agua'));
-			var agua_lastSaved = localStorage.getItem('agua_lastSaved');
+			var agua_local = parseFloat(app.keeper.getItem('agua'));
+			var agua_lastSaved = app.keeper.getItem('agua_lastSaved');
 			var agua = (agua_lastSaved != date_today ) ? 0 : agua_local;
 
 			/*** Setting initial value if progress ***/
@@ -1032,7 +1032,7 @@ window.initializeEvents = function(){
 
 
 			/*
-				localStorage AGUA
+				app.keeper AGUA
 			*/
 			$('#add_agua').on('click', function(){
 
@@ -1054,14 +1054,14 @@ window.initializeEvents = function(){
 			//----------------------------
 
 			$('#add_tracking').click(function(){
-				agua_local = parseFloat(localStorage.getItem('agua'));
-				agua_lastSaved = localStorage.getItem('agua_lastSaved');
+				agua_local = parseFloat(app.keeper.getItem('agua'));
+				agua_lastSaved = app.keeper.getItem('agua_lastSaved');
 				agua = parseFloat($('input[name="litros"]').val());
 
-				localStorage.setItem('agua_lastSaved', date_today );
-				localStorage.setItem('agua', agua );
+				app.keeper.setItem('agua_lastSaved', date_today );
+				app.keeper.setItem('agua', agua );
 
-				var agua = localStorage.getItem('agua');
+				var agua = app.keeper.getItem('agua');
 				console.log(agua);
 
 				/*TODO: Get from catalogue and use same method 7 Agua*/
@@ -1268,7 +1268,7 @@ window.initializeEvents = function(){
 			});
 
 			$(window).resize();
-			
+
 		} /*** END mood ***/
 
 
@@ -1333,13 +1333,13 @@ window.initializeEvents = function(){
 			});
 
 			/*
-				localStorage EJERCICIO / DURACION / INTENSIDAD
+				app.keeper EJERCICIO / DURACION / INTENSIDAD
 			 */
 			$('#add_ejercicio').on('click', function(){
 
-				localStorage.setItem('track_ejercicio_type', 		$('#ejercicio_type').val() );
-				localStorage.setItem('track_ejercicio_duration',	$('#duracion').val() );
-				localStorage.setItem('track_ejercicio_intensidad', 	$('#intensidad').val() );
+				app.keeper.setItem('track_ejercicio_type', 		$('#ejercicio_type').val() );
+				app.keeper.setItem('track_ejercicio_duration',	$('#duracion').val() );
+				app.keeper.setItem('track_ejercicio_intensidad', $('#intensidad').val() );
 
 				//console.log(responsedata);
 				if(!$('.alert_tracking').is(':visible')){
@@ -1354,25 +1354,147 @@ window.initializeEvents = function(){
 
 			$('#add_tracking').click(function(){
 				
-				var intensidad  = localStorage.getItem('track_ejercicio_intensidad');
-				var type 		= localStorage.getItem('track_ejercicio_type');
-				var duracion	= localStorage.getItem('track_ejercicio_duration');
+				var intensidad  = app.keeper.getItem('track_ejercicio_intensidad');
+				var type 		= app.keeper.getItem('track_ejercicio_type');
+				var duracion	= app.keeper.getItem('track_ejercicio_duration');
 				
 				var responsedata = apiRH.tracking(type, duracion);
 
 				if(responsedata){
 					app.toast("Se ha guardado tu progreso correctamente")
-					//window.location.assign('dieta.html');
+					return app.render_myPlan('dieta.html');
 				}else{
-					alert('error al insertar datos ');
+					app.toast('error al insertar datos ');
 				}
 				$('.alert_tracking').hide();
 				$('#blur').toggleClass('blurred');
 			});
 
 			$(window).resize();
+			app.hideLoader();
 
 		} /*** END exercise ***/
+
+		if( $('body').hasClass('weight') ){
+
+			var r_peso;
+			var usr_peso;
+			var response = app.keeper.getItem('user');
+			response = JSON.parse(response);
+			usr_peso = response.perfil.peso;
+			$('.r_peso input[name="peso_metric"]').attr("value",usr_peso );
+
+			$("#r_peso-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
+			$("#r_peso-up").bind('mousedown', function(e){
+				if (clickTimer == null) {
+		        	clickTimer = setTimeout(function () {
+			            clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(clickTimer);
+			        clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        console.log("double");
+			        return false;
+			    }
+				timeout = setInterval(function(){
+					r_peso = Number($('.r_peso input[name="peso_metric"]').val() );
+
+					if (r_peso<99) {
+						r_peso=r_peso+0.5;
+						$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(1));
+						$('input[name="track_peso"]').attr('value', r_peso);
+					} else {
+						r_peso=r_peso+1;
+						$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(0));
+						$('input[name="track_peso"]').attr('value', r_peso);
+					}
+				}, timer);
+				return false;
+			})
+			 .bind('mouseup', apiRH.clearTimeoutLogic);
+
+			$("#r_peso-dw").bind('touchstart touchend', apiRH.stickyTouchHandler);
+			$("#r_peso-dw").bind('mousedown', function(e){
+				if (clickTimer == null) {
+		        	clickTimer = setTimeout(function () {
+			            clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(clickTimer);
+			        clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        console.log("double");
+			        return false;
+			    }
+				timeout = setInterval(function(){
+					r_peso = Number($('.r_peso input[name="peso_metric"]').val());
+					if (r_peso>0.4) {
+						if (r_peso<100.1) {
+							r_peso=r_peso-0.5;
+							$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(1));
+							$('input[name="track_peso"]').attr('value', r_peso);
+						} else {
+							r_peso=r_peso-1;
+							$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(0));
+							$('input[name="track_peso"]').attr('value', r_peso);
+						}
+					}
+				}, timer);
+				return false;
+			})
+			 .bind('mouseup', apiRH.clearTimeoutLogic);
+
+
+			$('#add_peso').on('click', function(){
+				app.keeper.setItem('track_peso', $('input[name="track_peso"]').val() );
+				
+				var track_peso = app.keeper.getItem('track_peso');
+				
+				console.log(track_peso);
+				
+				if(!$('.alert_tracking').is(':visible')){
+					$('.alert_tracking').show();
+					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+				} else {
+					$('.alert_tracking').removeClass('active');
+					setTimeout(function() {$('.alert_tracking').hide();}, 800);
+				}
+				$('#blur').toggleClass('blurred');
+				//$('a.centro img').toggleClass('onn');
+			});
+
+			$('#add_tracking').click(function(){	
+				
+				track_peso = $('input[name="track_peso"]').val();
+
+
+				if(track_peso >= 30){
+
+					console.log('Peso <<<');
+
+					var responsedata = apiRH.tracking(0, track_peso);
+					
+					if(responsedata){
+						app.toast("Se ha guardado correctamente tu peso")
+					}else{
+						app.toast('Error al registrar peso');
+					}
+				}else{
+					app.toast('El peso debe de ser mayor a 40');
+				}
+				$('.alert_tracking').hide();
+				$('#blur').toggleClass('blurred');
+			});
+
+			$('.cancel').click(function(){
+				$('.alert_tracking').hide();
+				$('#blur').toggleClass('blurred');
+			});
+
+		}/*** END weight ***/
 
 	});
 
