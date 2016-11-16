@@ -216,7 +216,8 @@ window.initializeEvents = function(){
 
 		$('.logout').click(function(){
 			app.keeper.clear();
-			return render_entermode('inicio.html');
+			$('#blur').toggleClass('blurred');
+			return app.render_entermode('inicio.html');
 		});
 
 		$('.logout_cancel').click(function(){
