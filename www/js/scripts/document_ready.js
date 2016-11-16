@@ -905,25 +905,31 @@ window.initializeEvents = function(){
 			});
 
 
-			// Include this chunk on every page with footer menu
-				$('.centro').click(function() {
-					if(!$('.overscreen').is(':visible')){
-						$('.overscreen').show();
-						setTimeout(function() {$('.overscreen').addClass('active');}, 200);
-					} else {
-						$('.overscreen').removeClass('active');
-						setTimeout(function() {$('.overscreen').hide();}, 800);
-					}
-					$('#blur').toggleClass('blurred');
-					$('a.centro img').toggleClass('onn');
-				});
+			
+			return app.hideLoader();
+			
+		} /*** END BODY CLASS DIETA ***/
 
-				$('.ov-filler').click(function() {
+		if( $('.menu-bar').length ){
+			// Include this chunk on every page with footer menu
+			$('.centro').click(function() {
+				if(!$('.overscreen').is(':visible')){
+					$('.overscreen').show();
+					setTimeout(function() {$('.overscreen').addClass('active');}, 200);
+				} else {
 					$('.overscreen').removeClass('active');
 					setTimeout(function() {$('.overscreen').hide();}, 800);
-					$('#blur').removeClass('blurred');
-					$('a.centro img').removeClass('onn');
-				});
+				}
+				$('#blur').toggleClass('blurred');
+				$('a.centro img').toggleClass('onn');
+			});
+
+			$('.ov-filler').click(function() {
+				$('.overscreen').removeClass('active');
+				setTimeout(function() {$('.overscreen').hide();}, 800);
+				$('#blur').removeClass('blurred');
+				$('a.centro img').removeClass('onn');
+			});
 
 			// Open more drawer (comments and ingredients)
 			$('.open_more_drawer').click(function() {
@@ -931,9 +937,7 @@ window.initializeEvents = function(){
 				$(this).toggleClass('presionado');
 			});
 
-			return app.hideLoader();
-			
-		} /*** END BODY CLASS DIETA ***/
+		} /*** END CLASS MENU BAR ***/
 
 
 		if($('body').hasClass('has-chat')){
@@ -1080,6 +1084,295 @@ window.initializeEvents = function(){
 
 
 		} /*** END water ***/
+
+
+		if( $('body').hasClass('mood') ){
+
+			var valor = 0;
+			var animo = [ 'increible', 'feliz', 'bien', 'regular', 'triste', 'cansado', 'hambriento', 'frustrado', 'motivado' ];
+
+			$("#animo-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
+			$("#animo-up").bind('mousedown', function(e){
+				if (apiRH.clickTimer == null) {
+		        	apiRH.clickTimer = setTimeout(function () {
+			            apiRH.clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(apiRH.clickTimer);
+			        apiRH.clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        return false;
+			    }
+				apiRH.timeout = setInterval(function(){
+					if (valor < 8) {
+						valor++;
+					} else {
+						valor = 0;
+					}
+					
+					
+					$('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
+					if (animo[valor]=="increible") {
+						$('.carita h4').html("increíble");
+					} else {
+						$('.carita h4').html(animo[valor]);
+					}
+					
+
+					$('#track_animo').attr("value", animo[valor]);
+
+					switch ($('#track_animo').val() ) {
+						case 'increible' :
+							$('#track_animo').attr("value", "0");
+							break;
+						case 'feliz' :
+							$('#track_animo').attr("value", "1");
+							break;
+						case 'bien' :
+							$('#track_animo').attr("value", "2");
+							break;
+						case 'regular' :
+							$('#track_animo').attr("value", "3");
+							break;
+						case 'triste' :
+							$('#track_animo').attr("value", "4");
+							break;    
+						case 'cansado' :
+							$('#track_animo').attr("value", "5");
+							break;   
+						case 'hambriento' :
+							$('#track_animo').attr("value", "6");
+							break;     
+						case 'frustrado' :
+							$('#track_animo').attr("value", "7");
+							break; 
+						case 'motivado' :
+							$('#track_animo').attr("value", "8");
+							break;
+					}
+
+				}, apiRH.timer);
+				return false;
+			})
+			 .bind('mouseup', apiRH.clearTimeoutLogic);
+
+			$("#animo-dw").bind('touchstart touchend', apiRH.stickyTouchHandler);
+			$("#animo-dw").bind('mousedown', function(e){
+				if (apiRH.clickTimer == null) {
+		        	apiRH.clickTimer = setTimeout(function () {
+			            apiRH.clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(apiRH.clickTimer);
+			        apiRH.clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        return false;
+			    }
+				apiRH.timeout = setInterval(function(){
+					if (valor > 0) {
+						valor--;
+					} else {
+						valor = 8;
+					}
+					$('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
+					if (animo[valor]=="increible") {
+						$('.carita h4').html("increíble");
+					} else {
+						$('.carita h4').html(animo[valor]);
+					}
+
+					$('#track_animo').attr("value", animo[valor]);
+
+					switch ($('#track_animo').val() ) {
+						case 'increible' :
+							$('#track_animo').attr("value", "0");
+							break;
+						case 'feliz' :
+							$('#track_animo').attr("value", "1");
+							break;
+						case 'bien' :
+							$('#track_animo').attr("value", "2");
+							break;
+						case 'regular' :
+							$('#track_animo').attr("value", "3");
+							break;
+						case 'triste' :
+							$('#track_animo').attr("value", "4");
+							break;    
+						case 'cansado' :
+							$('#track_animo').attr("value", "5");
+							break;   
+						case 'hambriento' :
+							$('#track_animo').attr("value", "6");
+							break;     
+						case 'frustrado' :
+							$('#track_animo').attr("value", "7");
+							break; 
+						case 'motivado' :
+							$('#track_animo').attr("value", "8");
+							break;
+					}
+
+				}, apiRH.timer);
+				return false;
+			})
+			 .bind('mouseup', apiRH.clearTimeoutLogic);
+
+			
+			//--------------------------------------------
+			//
+			// onClick: add_animo Registro de estado de
+			// animo.
+			//
+			//--------------------------------------------
+
+			$('#add_animo').on('click', function(){
+
+				app.keeper.setItem('track_animo', $('#track_animo').val() );
+
+				var track_animo = app.keeper.getItem('track_animo');
+					console.log(track_animo);
+
+				if(app.keeper.getItem('track_animo') == ''){
+					track_animo = 0;
+				}
+
+				if(!$('.alert_tracking').is(':visible')){
+					$('.alert_tracking').show();
+					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+				} else {
+					$('.alert_tracking').removeClass('active');
+					setTimeout(function() {$('.alert_tracking').hide();}, 800);
+				}
+				$('#blur').toggleClass('blurred');
+			});
+
+			$('#add_tracking').click(function(){
+				//------------------------------
+				//  @param tracking 1 - Ánimo
+				//  @param value of image selected
+				//-------------------------------
+				if(app.keeper.getItem('track_animo') >= 0){
+					var responsedata = apiRH.tracking(1, track_animo);
+					if(responsedata){
+						app.toast("Se ha guardado tu ánimo");
+						return;
+					}else{
+						alert('Error al registrar ánimo');
+					}
+				}else{
+					alert('Error al registrar el estado de ánimo');
+				}
+			});
+
+			$(window).resize();
+			
+		} /*** END mood ***/
+
+
+
+		if( $('body').hasClass('excercise') ){
+
+			$('.ej-option').click(function() {
+				var valor = $(this).find('.type').attr('value');
+				$('.ej-option').each(function() {
+					if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
+					  $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
+					  $(this).removeClass('active');
+					  $(this).attr('value', "");
+					}
+				}); 
+
+				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
+				$(this).addClass('active');
+				$("#ejercicio_type").attr('value', valor);
+
+					//'caminar', 'correr', 'pesas', 'cross', 'bici', 'estacionaria', 'eliptica', 'cardio', 'yoga', 'pilates', 'tenis', 'otro'
+
+				switch($("#ejercicio_type").val() ){
+					case 'caminar' :
+					$('#ejercicio_type').attr('value','10');
+					break;
+					case 'correr' :
+					$('#ejercicio_type').attr('value','11');
+					break;
+					case 'pesas' :
+					$('#ejercicio_type').attr('value','12');
+					break;
+					case 'cross' :
+					$('#ejercicio_type').attr('value','13');
+					break;
+					case 'bici' :
+					$('#ejercicio_type').attr('value','14');
+					break;
+					case 'estacionaria' :
+					$('#ejercicio_type').attr('value','15');
+					break;
+					case 'eliptica' :
+					$('#ejercicio_type').attr('value','16');
+					break;
+					case 'cardio' :
+					$('#ejercicio_type').attr('value','17');
+					break;
+					case 'yoga' :
+					$('#ejercicio_type').attr('value','18');
+					break;
+					case 'pilates' :
+					$('#ejercicio_type').attr('value','19');
+					break;
+					case 'tenis' :
+					$('#ejercicio_type').attr('value','20');
+					break;
+					case 'otro	' :
+					$('#ejercicio_type').attr('value','21');
+					break;
+				}
+
+			});
+
+			/*
+				localStorage EJERCICIO / DURACION / INTENSIDAD
+			 */
+			$('#add_ejercicio').on('click', function(){
+
+				localStorage.setItem('track_ejercicio_type', 		$('#ejercicio_type').val() );
+				localStorage.setItem('track_ejercicio_duration',	$('#duracion').val() );
+				localStorage.setItem('track_ejercicio_intensidad', 	$('#intensidad').val() );
+
+				//console.log(responsedata);
+				if(!$('.alert_tracking').is(':visible')){
+					$('.alert_tracking').show();
+					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+				} else {
+					$('.alert_tracking').removeClass('active');
+					setTimeout(function() {$('.alert_tracking').hide();}, 800);
+				}
+				$('#blur').toggleClass('blurred');
+			});
+
+			$('#add_tracking').click(function(){
+				
+				var intensidad  = localStorage.getItem('track_ejercicio_intensidad');
+				var type 		= localStorage.getItem('track_ejercicio_type');
+				var duracion	= localStorage.getItem('track_ejercicio_duration');
+				
+				var responsedata = apiRH.tracking(type, duracion);
+
+				if(responsedata){
+					app.toast("Se ha guardado tu progreso correctamente")
+					//window.location.assign('dieta.html');
+				}else{
+					alert('error al insertar datos ');
+				}
+				$('.alert_tracking').hide();
+				$('#blur').toggleClass('blurred');
+			});
+
+			$(window).resize();
+
+		} /*** END exercise ***/
 
 	});
 
