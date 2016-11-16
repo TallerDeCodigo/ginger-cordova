@@ -215,9 +215,8 @@ window.initializeEvents = function(){
 		});
 
 		$('.logout').click(function(){
-			localStorage.clear();
-			window.location.assign('index.html');
-			return;
+			app.keeper.clear();
+			return render_entermode('inicio.html');
 		});
 
 		$('.logout_cancel').click(function(){
