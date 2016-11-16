@@ -626,6 +626,7 @@ function requestHandlerAPI(){
 			var result = {};
 			var user = window._user;
 			var idCoach = user.coach._id;
+			// console.log('tables/consumo?coach='+idCoach+'&dieta='+user.dieta._id+'&inicio='+DateStart+'&fin='+DateEnd);
 			result = this.getRequest('tables/consumo?coach='+idCoach+'&dieta='+user.dieta._id+'&inicio='+DateStart+'&fin='+DateEnd, null);
 			return result;
 		};

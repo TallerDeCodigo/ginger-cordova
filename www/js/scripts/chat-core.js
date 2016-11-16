@@ -7,7 +7,6 @@
 
 	chatCore.init = function(elUser){
 		console.log("Initilizing instant messaging api");
-		console.log(QB);
 		QB.createSession( { 	
 							email: elUser.mail, 
 							password: elUser.chatPassword

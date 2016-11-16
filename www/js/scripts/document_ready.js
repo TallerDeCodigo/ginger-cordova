@@ -356,13 +356,13 @@ window.initializeEvents = function(){
 		
 		function markConsumed(){
 			var date 		= new Date();
-			var firstDay 	= new Date(date.getFullYear(), date.getMonth(), 1);
-			var lastDay 	= new Date(date.getFullYear(), date.getMonth() + 1, 0);
+			var firstDay 	= new Date(date.getFullYear(), date.getMonth()+1, 1);
+			var lastDay 	= new Date(date.getFullYear(), date.getMonth()+2, 0);
 			var response 	= apiRH.getConsumed( firstDay.getFullYear()+'-'+firstDay.getMonth()+'-'+firstDay.getDate(), 
 												 lastDay.getFullYear()+'-'+lastDay.getMonth()+'-'+lastDay.getDate() );
-
+			console.log(response);
 			console.log("consumidos length ::: "+response.length);
-			if(!response.length){
+			if(!response.consumos){
 				app.hideLoader();
 			}else{
 				$.each(response, function(key, value){
@@ -744,6 +744,161 @@ window.initializeEvents = function(){
 				$( ".accordion" ).accordion({collapsible:true,active:false,animate:300,heightStyle:"content"});
 				$(window).resize();
 			}); // END DIETA ESTRUCTURA
+
+
+			$('svg.consume').click(function() {
+				$(this).parent().parent().addClass('consumido');
+				var cosumo = false;
+				console.log($(this).parent().parent().attr('data'));
+				console.log($(this).parent().parent().parent().parent().parent().parent().attr('data'));
+
+				var idPlatillo = $(this).parent().parent().attr('data');
+				var nPlatillo = $(this).parent().parent().attr('platillo');
+				var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
+				var comida = -1;
+
+				if($(this).parent().parent().parent().hasClass('desayuno'))
+					comida = 0;
+				if($(this).parent().parent().parent().hasClass('snack1'))
+					comida = 1;
+				if($(this).parent().parent().parent().hasClass('comida'))
+					comida = 2;
+				if($(this).parent().parent().parent().hasClass('snack2'))
+					comida = 3;
+				if($(this).parent().parent().parent().hasClass('cena'))
+					comida = 4;
+				
+				if($(this).parent().find('svg.consume').find('use').attr('xlink:href') == '#consume2'){
+					$(this).html('<use xlink:href="#consume"></use>');	
+					$(this).parent().find('svg.noconsu').find('use').attr('xlink:href', '#noconsu2');
+					cosumo = false;	
+						
+				}else{
+					$(this).html('<use xlink:href="#consume2"></use>');
+					$(this).parent().find('svg.noconsu').find('use').attr('xlink:href', '#noconsu');
+					cosumo = true;
+					//$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');
+				}
+				
+				var json = {
+					"plato" : idPlatillo, 
+					"fecha" : cosumoFecha,
+					"comida"  : comida,
+					"platillo": nPlatillo,
+					"consumido": cosumo
+				};
+
+				if(comida == -1)
+					return;
+				
+				var result = apiRH.makeCosume(json);
+
+				if(result){
+					console.log(result);
+					//Llamar a consumidos
+					//window.getConsumed();
+				}
+
+
+			});
+
+			$('svg.noconsu').click(function() {
+
+				$(this).parent().parent().addClass('cancelado');
+
+				var idPlatillo = $(this).parent().parent().attr('data');
+				var nPlatillo = $(this).parent().parent().attr('platillo');
+				var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
+				var comida = -1;
+				var consumo = false;
+				
+				if($(this).parent().parent().parent().hasClass('desayuno'))
+					comida = 0;
+				if($(this).parent().parent().parent().hasClass('snack1'))
+					comida = 1;
+				if($(this).parent().parent().parent().hasClass('comida'))
+					comida = 2;
+				if($(this).parent().parent().parent().hasClass('snack2'))
+					comida = 3;
+				if($(this).parent().parent().parent().hasClass('cena'))
+					comida = 4;
+				
+				if($(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume2')){
+					$(this).html('<use xlink:href="#noconsu2"></use>');		
+					$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');
+					var consumo = true;		
+				}else{
+					$(this).html('<use xlink:href="#noconsu"></use>');	
+					$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');
+					var consumo = false;
+				}
+				
+				var json = {
+					"plato" : idPlatillo, 
+					"fecha" : cosumoFecha,
+					"comida"  : comida,
+					"platillo": nPlatillo,
+					"consumido": false
+				};
+				
+				var result = apiRH.makeCosume(json);
+
+				if(result){
+					console.log(result);
+					//Llamar a consumidos
+					//window.getConsumed();
+				}
+
+			});
+
+			$('svg.commenn').click(function() {
+				console.log('click');
+				$('#comentar').val(''); /*AQUI SE ELIMINA EL COMENTARIO DEL TEXTAREA CUANDO SE HACE CLICK EN EL ICONO QUE LO ABRE*/
+				$('.comment_pop').show();
+
+				var idPlatillo 	= $(this).parent().parent().attr('data');
+				var nPlatillo 	= $(this).parent().parent().attr('platillo');
+				var cosumoFecha = $(this).parent().parent().parent().parent().parent().parent().attr('data');
+				var comida = -1;
+				
+				if($(this).parent().parent().parent().hasClass('desayuno'))
+					comida = 0;
+				if($(this).parent().parent().parent().hasClass('snack1'))
+					comida = 1;
+				if($(this).parent().parent().parent().hasClass('comida'))
+					comida = 2;
+				if($(this).parent().parent().parent().hasClass('snack2'))
+					comida = 3;
+				if($(this).parent().parent().parent().hasClass('cena'))
+					comida = 4;
+
+				$('.comment_pop').attr('idPlatillo', idPlatillo);
+				$('.comment_pop').attr('nPlatillo', nPlatillo);
+				$('.comment_pop').attr('cosumoFecha', cosumoFecha);
+				$('.comment_pop').attr('comida', comida);
+
+				setTimeout(function() {$('.comment_pop').addClass('active');}, 200);
+
+				
+			});
+
+			var texto = 'Mostrar Completados';
+
+			$('.toggle-complete').click(function() {
+				
+			});
+
+
+			$('.di-options a').click(function() {
+				$('.overscreen2').removeClass('active');
+				setTimeout(function() {$('.overscreen2').hide();}, 500);
+			});
+
+			$('.ov-filler2').click(function() {
+				$('.overscreen2').removeClass('active');
+				setTimeout(function() {$('.overscreen2').hide();}, 500);
+			});
+
 			
 			$('.cancel').on('click', function(){
 				$('.comment_pop').hide();
