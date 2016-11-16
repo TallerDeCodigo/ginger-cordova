@@ -959,6 +959,128 @@ window.initializeEvents = function(){
 			app.get_file_from_device('profile', 'camera');
 		});
 
+
+		/*** Add water module ***/
+		if($('body').hasClass('water') ){
+
+			var date = new Date();
+			var date_today = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
+			var agua_local = parseFloat(localStorage.getItem('agua'));
+			var agua_lastSaved = localStorage.getItem('agua_lastSaved');
+			var agua = (agua_lastSaved != date_today ) ? 0 : agua_local;
+
+			/*** Setting initial value if progress ***/
+			$('input[name="litros"]').val(agua);
+			$('.vaso p span').text(agua);
+
+			$("#agua-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
+			$("#agua-up").bind('mousedown', function(e){
+				if (apiRH.clickTimer == null) {
+		        	apiRH.clickTimer = setTimeout(function () {
+			            apiRH.clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(apiRH.clickTimer);
+			        apiRH.clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        return false;
+			    }
+				apiRH.timeout = setInterval(function(){
+					agua = Number($('.vaso p span').html());
+					agua = agua+0.25;
+
+					if(agua == 10.00)
+						agua = 10.00;	
+
+					$('.vaso p span').html(agua.toFixed(2));
+					$('input[name="litros"]').attr("value", agua);
+					return false;
+				}, apiRH.timer);
+				return false;
+			})
+			 .bind('mouseup', apiRH.clearTimeoutLogic);
+
+			$("#agua-dw").bind('touchstart touchend', apiRH.stickyTouchHandler);
+			$("#agua-dw").bind('mousedown', function(e){
+				if (apiRH.clickTimer == null) {
+		        	apiRH.clickTimer = setTimeout(function () {
+			            apiRH.clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(apiRH.clickTimer);
+			        apiRH.clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        return false;
+			    }
+				apiRH.timeout = setInterval(function(){
+					agua = Number($('.vaso p span').html());
+					if (agua>0) {
+						agua = agua - 0.25;
+						$('.vaso p span').html(agua.toFixed(2));
+						$('input[name="litros"]').attr("value", agua);
+					}
+				}, apiRH.timer);
+				return false;
+			})
+			 .bind('mouseup', apiRH.clearTimeoutLogic);
+
+
+			/*
+				localStorage AGUA
+			*/
+			$('#add_agua').on('click', function(){
+
+				if(!$('.alert_tracking').is(':visible')){
+					$('.alert_tracking').show();
+					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+				} else {
+					$('.alert_tracking').removeClass('active');
+					setTimeout(function() {$('.alert_tracking').hide();}, 800);
+				}
+				$('#blur').toggleClass('blurred');
+
+			});
+
+			//----------------------------
+			//
+			// Tracking Water
+			//
+			//----------------------------
+
+			$('#add_tracking').click(function(){
+				agua_local = parseFloat(localStorage.getItem('agua'));
+				agua_lastSaved = localStorage.getItem('agua_lastSaved');
+				agua = parseFloat($('input[name="litros"]').val());
+
+				localStorage.setItem('agua_lastSaved', date_today );
+				localStorage.setItem('agua', agua );
+
+				var agua = localStorage.getItem('agua');
+				console.log(agua);
+
+				/*TODO: Get from catalogue and use same method 7 Agua*/
+				var responsedata = apiRH.tracking(7, agua);
+
+				if(responsedata)
+					app.toast("Se ha guardado correctamente tu progreso");
+
+				$('.alert_tracking').hide();
+				$('#blur').toggleClass('blurred');
+			});
+
+			$('.cancel').click(function(){
+				console.log("Agua: "+agua_local);
+				$('input[name="litros"]').val(agua_local);
+				$('.vaso p span').text(agua_local);
+				$('.alert_tracking').hide();
+				$('#blur').toggleClass('blurred');
+			});
+
+
+		} /*** END water ***/
+
 	});
 
 }

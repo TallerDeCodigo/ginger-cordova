@@ -1,109 +1,142 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
 	<head>
 		<meta charset="utf-8">
 		<title>Ginger Cliente</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1, height=device-height">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1">
 		<meta http-equiv="cleartype" content="on">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		
-	    <script type="text/javascript" src="cordova.js"></script>
-		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.runtime.min.js"></script>
-	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.min.js"></script>
+		<script type="text/javascript" src="https://conektaapi.s3.amazonaws.com/v0.3.2/js/conekta.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.1.2/quickblox.min.js"></script>
+	    <script src="js/jquery-1.12.2.min.js"></script>
+	    <script src="js/jquery-ui.min.js"></script>
 	    <script src="js/jquery-touch.min.js"></script>
-	    <script type="text/javascript" src="js/functions.js"></script>
-	    <script type="text/javascript" src="js/api-sdk-1.0.js"></script>
-		<script type="text/javascript" src="js/oauth.js"></script>
-		<script src="js/main.js"></script>
 	</head>
+	
 	<body class="water iosm"><!--class="iosm"-->
-	<div id="container" class="tracks">
-		<header class="hwhite2">
-			<div class="toolbar">
-				<a class="back" href="dieta.html"><img src="images/back.svg"></a>
-				<h2 class="titulo">Agua</h2>
-				<a class="menu" href="menu.html"><img src="images/menu.svg"></a>
+		<div id="container" class="tracks">
+			<header class="hwhite2">
+				<div class="toolbar">
+					<a class="back" href="dieta.html"><img src="images/back.svg"></a>
+					<h2 class="titulo">Agua</h2>
+					<a class="menu" href="menu.html"><img src="images/menu.svg"></a>
+				</div>
+			</header>
+			<h2 class="mainline">¿Cuánta agua has bebido?</h2>
+			<div class="agua">
+				<div class="vaso">
+					<img src="images/agua.svg">
+					<p><span>0</span><br>litros</p>
+				<input id="#litros" name="litros" value="" type="hidden">
+				</div>
+				<div class="arrows-vertical">
+					<img id="agua-up" src="images/leftarrow.png"><br><br>
+					<img id="agua-dw" src="images/rightarrow.png">
+				</div>
 			</div>
-		</header>
-		<h2 class="mainline">¿Cuánta agua has bebido?</h2>
-		<div class="agua">
-			<div class="vaso">
-				<img src="images/agua.svg">
-				<p><span>0</span><br>litros</p>
-			<input id="#litros" name="litros" value="" type="hidden">
-			</div>
-			<div class="arrows-vertical">
-				<img id="agua-up" src="images/leftarrow.png"><br><br>
-				<img id="agua-dw" src="images/rightarrow.png">
+			<a id="add_agua" class="btn-gre" href="#">Agregar</a>
+		</div>
+		<footer class="menu-bar">
+			<a href="dieta.html">
+				<img src="images/menu/plan.svg">
+				<span>mi plan</span>
+			</a>
+			<a href="chat.html">
+				<img src="images/menu/chat.svg">
+				<span>chat</span>
+			</a>
+			<a class="centro">
+				<img src="images/menu/mas.svg">
+			</a>
+			<a href="proximamente.html">
+				<img src="images/menu/progreso.svg">
+				<span>progreso</span>
+			</a>
+			<a href="proximamente.html">
+				<img src="images/menu/shop.svg">
+				<span>list</span>
+			</a>
+		</footer>
+		<div class="overscreen" style="display:none;">
+			<div class="ov-filler"></div>
+			<a class="ruedas rueda-1" href="ejercicio.html">
+				<img src="images/menu/ejercicio.svg">
+				<span>EJERCICIO</span>
+			</a>
+			<a class="ruedas rueda-2" href="agua.html">
+				<img src="images/menu/agua.svg">
+				<span>AGUA</span>
+			</a>
+			<a class="ruedas rueda-3" href="peso.html">
+				<img src="images/menu/peso.svg">
+				<span>PESO</span>
+			</a>
+			<a class="ruedas rueda-4" href="medidas.html">
+				<img src="images/menu/medidas.svg">
+				<span>MEDIDAS</span>
+			</a>
+			<a class="ruedas rueda-5" href="animo.html">
+				<img src="images/menu/animo.svg">
+				<span>ÁNIMO</span>
+			</a>
+		</div>
+		<div class="alert_tracking" style="display:none">
+			<div class="ov-filler2"></div>
+			<div class="dialog">
+				<h5>Agua</h5>
+				<p>¿Deseas guardar los datos?</p>
+				<div class="di-options">
+					<a id="add_tracking" class="accept">Aceptar</a>
+					<a class="cancel">Cancelar</a>
+				</div>
 			</div>
 		</div>
-		<a id="add_agua" class="btn-gre" href="#">Agregar</a>
-	</div>
-	<footer class="menu-bar">
-		<a href="dieta.html">
-			<img src="images/menu/plan.svg">
-			<span>mi plan</span>
-		</a>
-		<a href="chat.html">
-			<img src="images/menu/chat.svg">
-			<span>chat</span>
-		</a>
-		<a class="centro">
-			<img src="images/menu/mas.svg">
-		</a>
-		<a href="proximamente.html">
-			<img src="images/menu/progreso.svg">
-			<span>progreso</span>
-		</a>
-		<a href="proximamente.html">
-			<img src="images/menu/shop.svg">
-			<span>list</span>
-		</a>
-	</footer>
-	<div class="overscreen" style="display:none;">
-		<div class="ov-filler"></div>
-		<a class="ruedas rueda-1" href="ejercicio.html">
-			<img src="images/menu/ejercicio.svg">
-			<span>EJERCICIO</span>
-		</a>
-		<a class="ruedas rueda-2" href="agua.html">
-			<img src="images/menu/agua.svg">
-			<span>AGUA</span>
-		</a>
-		<a class="ruedas rueda-3" href="peso.html">
-			<img src="images/menu/peso.svg">
-			<span>PESO</span>
-		</a>
-		<a class="ruedas rueda-4" href="medidas.html">
-			<img src="images/menu/medidas.svg">
-			<span>MEDIDAS</span>
-		</a>
-		<a class="ruedas rueda-5" href="animo.html">
-			<img src="images/menu/animo.svg">
-			<span>ÁNIMO</span>
-		</a>
-	</div>
-	<div class="alert_tracking" style="display:none">
-		<div class="ov-filler2"></div>
-		<div class="dialog">
-			<h5>Agua</h5>
-			<p>¿Deseas guardar los datos?</p>
-			<div class="di-options">
-				<a id="add_tracking" class="accept">Aceptar</a>
-				<a class="cancel">Cancelar</a>
-			</div>
-		</div>
-	</div>
-	<script type='text/javascript' src='js/plugins.js'></script>
+		<script type='text/javascript' src='js/plugins.js'></script>
+		<script type="text/javascript">
+			/* Initialize app object and perform initial login check */
+			window.is_feed = true;
+			app.initialize();
+			//app.render_feed(0, 'all');
+			//app.showLoader();
+		</script>
+	</body>
+
+    <script type="text/javascript" src="views/compiled/container.js"></script>
+    <script type="text/javascript" src="views/compiled/entermode.js"></script>
+    <script type="text/javascript" src="views/compiled/login.js"></script>
+    <script type="text/javascript" src="views/compiled/login-mail.js"></script>
+	<script type="text/javascript" src="views/compiled/code.js"></script>
+    <script type="text/javascript" src="views/compiled/record.js"></script>
+    <script type="text/javascript" src="views/compiled/my-plan.js"></script>
+	<script type="text/javascript" src="views/compiled/main-menu.js"></script>
+	<script type="text/javascript" src="views/compiled/partials/footer_menu.js"></script>
+	<script type="text/javascript" src="views/compiled/partials/footer_activities.js"></script>
+    <script type="text/javascript" src="views/compiled/register.js"></script>
+    <script type="text/javascript" src="views/compiled/register-mail.js"></script>
+    <script type="text/javascript" src="views/compiled/partials/header.js"></script>
+    <script type="text/javascript" src="views/compiled/partials/loader.js"></script>
+    <script type="text/javascript" src="views/compiled/coming-soon.js"></script>
+    <script type="text/javascript" src="js/api-sdk-1.0.js"></script>
+	<script type="text/javascript" src="js/plugins.js"></script>
+	<script src="js/chat-config.js"></script>
+	<script src="js/chat-connection.js"></script>
+	<script src="js/chat-messages.js"></script>
+	<script src="js/chat-ui-helpers.js"></script>
+	<script src="js/chat-dialogs.js"></script>
+	<script src="js/chat-users.js"></script>
+	<script type="text/javascript" src="js/scripts/chat-core.js"></script>
+	<script type="text/javascript" src="js/oauth.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript">
 		/* Initialize app object and perform initial login check */
-		window.is_feed = true;
+		window.is_access = true;
 		app.initialize();
-		//app.render_feed(0, 'all');
-		//app.showLoader();
 	</script>
-	</body>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/scripts/document_ready.js"></script>
+    <script type="text/javascript" src="js/scripts/initialRecord.js"></script>
+    <script type="text/javascript" src="js/scripts/calendar.js"></script>
 </html>
 
