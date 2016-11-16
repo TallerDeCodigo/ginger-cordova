@@ -198,13 +198,13 @@ $(window).on("load resize",function(){
 		*/
 
 
-		if($('body').hasClass('load_data') || $('body').hasClass('update_data'))
-		{
-			var user 			= JSON.parse(localStorage.getItem('user'));
-			var nombre_coach	= localStorage.getItem('nombre_coach');
-			var apellido_coach	= localStorage.getItem('apellido_coach');
-			var nombre 			= localStorage.getItem('user_name');
-			var apellido 		= localStorage.getItem('user_last_name');
+		if( $('body').hasClass('load_data') || $('body').hasClass('update_data') ) {
+
+			var user 			= JSON.parse(app.keeper.getItem('user'));
+			var nombre_coach	= app.keeper.getItem('nombre_coach');
+			var apellido_coach	= app.keeper.getItem('apellido_coach');
+			var nombre 			= app.keeper.getItem('user_name');
+			var apellido 		= app.keeper.getItem('user_last_name');
 			var sexo 			= user.perfil.sexo;
 			var edad 			= user.perfil.fechaNacimiento;
 			var cp 	 			= user.cp;
@@ -215,11 +215,11 @@ $(window).on("load resize",function(){
 			var frecuencia 		= user.perfil.ejercicio;
 			var restricciones 	= user.perfil.restricciones;
 			var plan 			= user.perfil.objetivo;
-			var comentario 		= localStorage.getItem('comentario');
-			var coach_rate		= localStorage.getItem('coach_rate');
-			var coach_status	= localStorage.getItem('coach_status');
-			var msg_ch_coach	= localStorage.getItem('msg_ch_coach');
-			localStorage.setItem('restricciones', user.perfil.restricciones);
+			var comentario 		= app.keeper.getItem('comentario');
+			var coach_rate		= app.keeper.getItem('coach_rate');
+			var coach_status	= app.keeper.getItem('coach_status');
+			var msg_ch_coach	= app.keeper.getItem('msg_ch_coach');
+			app.keeper.setItem('restricciones', user.perfil.restricciones);
 
 			$('#comentario_perfil i').html(comentario);
 			//console.log(edad.substring(0, 4) );
@@ -244,7 +244,7 @@ $(window).on("load resize",function(){
 				$('.comentario').hide();
 			}	
 			
-			$('.profile.circle-frame').find('img').attr('src', localStorage.getItem('avatar') + '?type=large');
+			$('.profile.circle-frame').find('img').attr('src', app.keeper.getItem('avatar') + '?type=large');
 
 			$('.cpur').html(nombre +" "+ apellido);
 			$('.edit-profile span').html(nombre +" "+ apellido);

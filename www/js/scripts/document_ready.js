@@ -870,13 +870,33 @@ window.initializeEvents = function(){
 				if($(this).parent().parent().parent().hasClass('cena'))
 					comida = 4;
 
-				$('.comment_pop').attr('idPlatillo', idPlatillo);
-				$('.comment_pop').attr('nPlatillo', nPlatillo);
-				$('.comment_pop').attr('cosumoFecha', cosumoFecha);
-				$('.comment_pop').attr('comida', comida);
+				$('.comment_pop').attr('idPlatillo', 	idPlatillo)
+								 .attr('nPlatillo', 	nPlatillo)
+								 .attr('cosumoFecha', 	cosumoFecha)
+								 .attr('comida', 		comida);
 
-				setTimeout(function() {$('.comment_pop').addClass('active');}, 200);
+				setTimeout(function() { $('.comment_pop').addClass('active'); }, 200);
 				
+			});
+
+			$('#send_dish_comment').click(function() {
+
+				$('.comment_pop').removeClass('active');
+				setTimeout(function() {$('.comment_pop').hide();}, 500);
+				$('.comment_pop textarea').focus();
+			
+				var consumed_params = {
+					"plato" 	: $('.comment_pop').attr('idplatillo'), 
+					"fecha" 	: $('.comment_pop').attr('cosumoFecha'),
+					"comida"  	: $('.comment_pop').attr('comida'),
+					"platillo"	: $('.comment_pop').attr('nPlatillo'),
+					"comment" 	: _cmt
+				};
+				
+				var result = apiRH.makeCosume(consumed_params);
+				if(result)
+					return app.toast("Tu comentario se ha agregado correctamente");
+				return app.toast("Hubo un error insertando tu comentario, intenta nuevamente.");
 			});
 
 
@@ -904,14 +924,14 @@ window.initializeEvents = function(){
 					$('.overscreen').removeClass('active');
 					setTimeout(function() {$('.overscreen').hide();}, 800);
 				}
-				$('#blur').toggleClass('blurred');
+				// $('#blur').toggleClass('blurred');
 				$('a.centro img').toggleClass('onn');
 			});
 
 			$('.ov-filler').click(function() {
 				$('.overscreen').removeClass('active');
 				setTimeout(function() {$('.overscreen').hide();}, 800);
-				$('#blur').removeClass('blurred');
+				// $('#blur').removeClass('blurred');
 				$('a.centro img').removeClass('onn');
 			});
 
@@ -924,11 +944,6 @@ window.initializeEvents = function(){
 			return app.hideLoader();
 			
 		} /*** END BODY CLASS DIETA ***/
-
-		if( true ){
-			
-
-		} /*** END CLASS MENU BAR ***/
 
 
 		if($('body').hasClass('has-chat')){
