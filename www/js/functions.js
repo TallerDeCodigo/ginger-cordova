@@ -796,15 +796,6 @@ $(window).load(function(){
 			$('.comment_pop textarea').focus();
 		});
 
-		
-		// Edit user
-		$('.izquii').click(function() {
-			$('.comment_pop').removeClass('active');
-			setTimeout( function() {$('.comment_pop').hide();}, 500);
-			$('.siono').removeClass('active');
-			$('.siono.not').addClass('active');
-		});
-
 
 		// Cancelar subscripcion
 		$('.btn_cancelar').click(function (e) {

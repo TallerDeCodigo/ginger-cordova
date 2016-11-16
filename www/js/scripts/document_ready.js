@@ -360,40 +360,39 @@ window.initializeEvents = function(){
 			var lastDay 	= new Date(date.getFullYear(), date.getMonth()+2, 0);
 			var response 	= apiRH.getConsumed( firstDay.getFullYear()+'-'+firstDay.getMonth()+'-'+firstDay.getDate(), 
 												 lastDay.getFullYear()+'-'+lastDay.getMonth()+'-'+lastDay.getDate() );
-			console.log(response);
-			console.log("consumidos length ::: "+response.length);
+
 			if(!response.consumos){
 				app.hideLoader();
 			}else{
 				$.each(response, function(key, value){
 					
-					console.log(key + '::::' + value);
+					// console.log(key + '::::' + value);
 
 					if(key == 'consumos')
 
 						$.each(value, function(key, value){
 							//Fechas
-							console.log(key + ':::::::.' + value);
+							// console.log(key + ':::::::.' + value);
 
 							var fecha =	key;
 							var commentFlag = false;
 
 							$.each(value, function(key, value){
-								console.log(key + ':::::::::::' + value);
+								// console.log(key + ':::::::::::' + value);
 
 								if(key == 'desayuno'){
 
 									$.each(value, function(key, value){
 										var platillo = '';
 										$.each(value, function(key, value){
-											console.log(key + '------' + value );	
+											// console.log(key + '------' + value );	
 
 											if(key == 'plato'){
 												platillo = value;
 											}
 											
 											if(key == 'consumido'){
-												console.log('consumido::: ' + value);
+												// console.log('consumido::: ' + value);
 												if(value){
 													$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').addClass('consumido');
 													$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('nav').find('svg.consume').find('use').attr('xlink:href', '#consume2');
@@ -406,16 +405,16 @@ window.initializeEvents = function(){
 
 											if(key == 'comment'){
 												commentFlag = true;
-												console.log('comentario: ' +value);
+												// console.log('comentario: ' +value);
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 											}
 
 										});
-										console.log("commentFlag");
-										console.log(commentFlag);
+										// console.log("commentFlag");
+										// console.log(commentFlag);
 										if(!commentFlag){
-											console.log("removing");
-											console.log($('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]'));
+											// console.log("removing");
+											// console.log($('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]'));
 											$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('div').find('comment_sub').hide();
 										}
 										commentFlag = false;
@@ -423,12 +422,12 @@ window.initializeEvents = function(){
 								}
 
 								if(key == 'snack1'){
-									console.log('snack1');
+									// console.log('snack1');
 									$.each(value, function(key, value){
 										var platillo = '';
 										var commentFlag = false;
 										$.each(value, function(key, value){
-											console.log(key + '------' + value );	
+											// console.log(key + '------' + value );	
 
 											if(key == 'plato'){
 												platillo = value;
@@ -445,11 +444,11 @@ window.initializeEvents = function(){
 
 											if(key == 'comment'){
 												commentFlag = true;
-												console.log('comentario: ' +value);
+												// console.log('comentario: ' +value);
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 											}
 											if(!commentFlag){
-												console.log("comment Flag not");
+												// console.log("comment Flag not");
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').find('div').find('comment_sub').hide();
 											}
 											commentFlag = false;
@@ -458,12 +457,12 @@ window.initializeEvents = function(){
 								}
 
 								if(key == 'comida'){
-									console.log('comida');
+									// console.log('comida');
 									$.each(value, function(key, value){
 
 										var platillo = '';
 										$.each(value, function(key, value){
-											console.log(key + '------' + value );	
+											// console.log(key + '------' + value );	
 
 											if(key == 'plato'){
 												platillo = value;
@@ -479,7 +478,7 @@ window.initializeEvents = function(){
 											}
 
 											if(key == 'comment'){
-												console.log('comentario: ' +value);
+												// console.log('comentario: ' +value);
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.comida [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 											}
 										});
@@ -487,12 +486,12 @@ window.initializeEvents = function(){
 								}
 
 								if(key == 'snack2'){
-									console.log('snack2');
+									// console.log('snack2');
 									$.each(value, function(key, value){
 
 										var platillo = '';
 										$.each(value, function(key, value){
-											console.log(key + '------' + value );	
+											// console.log(key + '------' + value );	
 
 											if(key == 'plato'){
 												platillo = value;
@@ -508,7 +507,7 @@ window.initializeEvents = function(){
 											}
 
 											if(key == 'comment'){
-												console.log('comentario: ' +value);
+												// console.log('comentario: ' +value);
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack2 [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 											}
 
@@ -517,12 +516,12 @@ window.initializeEvents = function(){
 								}
 
 								if(key == 'cena'){
-									console.log('cena');
+									// console.log('cena');
 									$.each(value, function(key, value){
 
 										var platillo = '';
 										$.each(value, function(key, value){
-											console.log(key + '------' + value );	
+											// console.log(key + '------' + value );	
 
 											if(key == 'plato'){
 												platillo = value;
@@ -538,7 +537,7 @@ window.initializeEvents = function(){
 											}
 
 											if(key == 'comment'){
-												console.log('comentario: ' +value);
+												// console.log('comentario: ' +value);
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.cena [data="'+platillo+'"]').find('div').find('p.plat-comentario').html(value);
 											}
 
@@ -688,7 +687,6 @@ window.initializeEvents = function(){
 												
 												//Comentarios
 												if (losplatos[i][4] != "") {
-
 													$(masadentro+' p.comentario').html(losplatos[i][4]);
 													//Comentarios del usuario
 													$('.plat-comentario').html('');
@@ -853,7 +851,7 @@ window.initializeEvents = function(){
 
 			$('svg.commenn').click(function() {
 				console.log('click');
-				$('#comentar').val(''); /*AQUI SE ELIMINA EL COMENTARIO DEL TEXTAREA CUANDO SE HACE CLICK EN EL ICONO QUE LO ABRE*/
+				$('#comentar').val('');
 				$('.comment_pop').show();
 
 				var idPlatillo 	= $(this).parent().parent().attr('data');
@@ -878,13 +876,6 @@ window.initializeEvents = function(){
 				$('.comment_pop').attr('comida', comida);
 
 				setTimeout(function() {$('.comment_pop').addClass('active');}, 200);
-
-				
-			});
-
-			var texto = 'Mostrar Completados';
-
-			$('.toggle-complete').click(function() {
 				
 			});
 
@@ -904,13 +895,6 @@ window.initializeEvents = function(){
 				$('.comment_pop').hide();
 			});
 
-
-			
-			return app.hideLoader();
-			
-		} /*** END BODY CLASS DIETA ***/
-
-		if( $('.menu-bar').length ){
 			// Include this chunk on every page with footer menu
 			$('.centro').click(function() {
 				if(!$('.overscreen').is(':visible')){
@@ -936,6 +920,13 @@ window.initializeEvents = function(){
 				$(this).parent().find('.extra-info').toggle();
 				$(this).toggleClass('presionado');
 			});
+			
+			return app.hideLoader();
+			
+		} /*** END BODY CLASS DIETA ***/
+
+		if( true ){
+			
 
 		} /*** END CLASS MENU BAR ***/
 
