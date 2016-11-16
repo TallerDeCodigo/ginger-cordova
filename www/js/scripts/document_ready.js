@@ -35,6 +35,10 @@ window.initializeEvents = function(){
 					return app.render_myPlan( $(this).attr('href') );
 				if( $(this).data('resource') == "main-menu" )
 					return app.render_mainmenu( $(this).attr('href') );
+				if( $(this).data('resource') == "user-profile" )
+					return app.render_settings( $(this).attr('href') );
+				if( $(this).data('resource') == "change-coach" )
+					return app.render_change_coach( $(this).attr('href') );
 				if( $(this).data('resource') == "coming-soon" )
 					return app.render_coming_soon( $(this).attr('href') );
 
@@ -1509,6 +1513,345 @@ window.initializeEvents = function(){
 			});
 
 		}/*** END weight ***/
+
+
+		if( $('.view').hasClass('user-profile-update') ) {
+
+			var info_profile =  {
+									nombre_coach 	: app.keeper.getItem('nombre_coach'),
+									apellido_coach 	: app.keeper.getItem('apellido_coach'),
+									nombre_coach 	: app.keeper.getItem('nombre_coach'),
+									sexo 			: _user.perfil.sexo,
+									edad 			: _user.perfil.edad,
+									cp 				: _user.perfil.cp,
+								};
+			var nombre_coach	= app.keeper.getItem('nombre_coach');
+			var apellido_coach	= app.keeper.getItem('apellido_coach');
+			var sexo 			= _user.perfil.sexo;
+			var edad 			= _user.perfil.fechaNacimiento;
+			var cp 	 			= _user.cp;
+			var estatura 		= _user.perfil.estatura;
+			var peso 			= _user.perfil.peso;
+			var ideal 			= _user.pesoDeseado;
+			var coach_type 		= _user.perfil.personalidad;
+			var frecuencia 		= _user.perfil.ejercicio;
+			var restricciones 	= _user.perfil.restricciones;
+			var plan 			= _user.perfil.objetivo;
+			var comentario 		= _user.comentarios;
+			var coach_rate		= app.keeper.getItem('coach_rate');
+			var coach_status	= app.keeper.getItem('coach_status');
+			var msg_ch_coach	= app.keeper.getItem('msg_ch_coach');
+			app.keeper.setItem('restricciones', _user.perfil.restricciones);
+
+			$('#comentario_perfil i').html(comentario);
+			//console.log(edad.substring(0, 4) );
+			var date_hoy =  new Date();
+			date_hoy = date_hoy.getFullYear();
+			var _edad_calc = date_hoy - Number( edad.substring(0, 4));
+			//console.log(_edad_calc);
+			//console.log('HUEVOS: ' + restricciones.length);
+			$('#coach_type').attr("value", coach_type);
+			$('#plan').attr("value", plan);
+			$('#days_per_week').attr("value", frecuencia);
+			$('#update_sexo').attr("value", sexo);
+
+			if( $('.the-comment').html() != " " ){
+				console.log(comentario);
+				$('.comentario').show();
+				$('.the-comment').html(comentario);
+				$('.yes').addClass('active');
+				$('.not').removeClass('active');
+
+			}else{
+				$('.comentario').hide();
+			}	
+			
+			$('.profile.circle-frame').find('img').attr('src', app.keeper.getItem('avatar') + '?type=large');
+
+			// $('.cpur').html(nombre +" "+ apellido);
+			$('.edit-profile span').html(nombre +" "+ apellido);
+
+			$('#anos_perfil').html(_edad_calc + " años");
+			$('#age-dato').html(_edad_calc);
+			$('#edad_value').val(_edad_calc);
+
+			$('#cp_perfil').html(cp);
+			$('input[name="zipcode"]').attr("value",cp);
+
+
+			$('#estatura_perfil').html(estatura + " m.");
+
+			$('input[name="estatura"]').attr("value", estatura);
+
+
+			$('#peso_perfil').html(peso + " kg.");
+			$('input[name="peso"]').attr("value", peso);
+
+			$('#ideal_perfil').html(ideal + " kg.");
+			$('input[name="ideal"]').attr("value", ideal);
+
+			var suma = parseInt(coach_type)+1;
+
+			$('.tipo_coach .co-option:nth-of-type('+suma+')').addClass('active');
+
+			switch(coach_type){
+				case 0: 
+					$('#coach_type_perfil').html("Estricto");
+					$('.co-option.active img:not(.question)').attr("src",'images/coach/estricto2.png');
+					break;
+				case 1:
+					$('#coach_type_perfil').html("Innovador");
+					$('.co-option.active img:not(.question)').attr("src",'images/coach/innovador2.png');
+					break;
+				case 2:
+					$('#coach_type_perfil').html("Animador");
+					$('.co-option.active img:not(.question)').attr("src",'images/coach/animador2.png');
+					break;
+				case 3:
+					$('#coach_type_perfil').html("Tradicional");
+					$('.co-option.active img:not(.question)').attr("src",'images/coach/tradicional2.png');
+					break;
+			}
+
+				$('#frecuencia_perfil').html(frecuencia +" días por semana");
+				$('#ejercicio-dato').html(frecuencia);
+
+
+				/*
+					COMENTA
+				*/
+				console.log('Comentario ' + comentario);
+				if(comentario === 'undefined' || comentario == null){
+					$('.comentario').html(comentario);
+					$('.the-comment').html(comentario);
+				}else{
+					$('.the-comment').html(comentario);
+				}
+
+
+				var suma = parseInt(plan) + 1;
+				$('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
+
+				switch(plan){
+					case 0:
+						$('#plan_perfil').html("Bajar de peso");
+						$('.pl-option.active img:not(.question)').attr("src",'images/plan/perderpeso2.png');
+						break;
+					case 1:
+						$('#plan_perfil').html("Detox");
+						$('.pl-option.active img:not(.question)').attr("src",'images/plan/detox2.png');
+						break;
+					case 2:
+						$('#plan_perfil').html("Rendimiento físico");
+						$('.pl-option.active img:not(.question)').attr("src",'images/plan/rendimientofisico2.png');
+						break;
+					case 3:
+						$('#plan_perfil').html("Sentirse mejor");
+						$('.pl-option.active img:not(.question)').attr("src",'images/plan/sentirsemejor2.png');
+						break;
+					default:
+						$('#plan_perfil').html("No tiene plan");
+				}
+				
+				//COMPRUEBA SI LAS RESTRICCIONES ESTAN DEFINIDAS
+
+				if(restricciones === 'undefined' || restricciones == "" || restricciones == null){
+					$('#restricciones_perfil').html("Ninguna");
+				}else{
+
+					var restricciones_cat = window.catalogues.restricciones;					
+					$('#restricciones_perfil').text("");
+					if(restricciones){
+						for ( var i = 0; i < restricciones.length; i++ ) {
+							var separator = ", ";
+							if(i == restricciones.length - 1)
+								separator = "";
+
+							$('#restricciones_perfil').append(restricciones_cat[restricciones[i]] + separator);
+						};
+					}else{
+						$('#restricciones_perfil').html("Ninguna");
+					}
+				}
+
+
+				$('#age').css('left', gridag*(_edad_calc-minval_age));
+				$('#age-filler').css('width', (gridag*(_edad_calc-minval_age))+20);
+
+				$('#ejercicio').css('left', gridej*(frecuencia-minval_eje));
+				$('#ejercicio-filler').css('width', (gridej*(frecuencia-minval_eje))+20);
+				
+				console.log(restricciones);
+
+				if(restricciones === undefined || restricciones == null || restricciones == ""){
+					console.log('esta indefinido');
+				}else{
+					//var arreg = JSON.parse(restricciones);
+					// console.log('Restricciones: ' + arreg);
+					 var uRes = JSON.parse(localStorage.getItem('user'));
+					 console.log(uRes);
+
+					 console.log('aqui');
+
+					for (var i = 0; i < uRes.perfil.restricciones.length; i++) {
+						
+						switch(uRes.perfil.restricciones[i]){
+							case 0: 
+								$('.tipo_restric .re-option:nth-of-type(1) img').attr("src",'images/restric/huevo2.png');
+
+								break;
+							case 1:
+								$('.tipo_restric .re-option:nth-of-type(2) img').attr("src",'images/restric/pollo2.png');
+
+								break;
+							case 2:
+								$('.tipo_restric .re-option:nth-of-type(3) img').attr("src",'images/restric/pescado2.png');
+
+								break;
+							case 3:
+								$('.tipo_restric .re-option:nth-of-type(4) img').attr("src",'images/restric/camaron2.png');
+
+								break;
+							case 4:
+								$('.tipo_restric .re-option:nth-of-type(5) img').attr("src",'images/restric/lacteos2.png');
+
+								break;
+							case 5:
+								$('.tipo_restric .re-option:nth-of-type(6) img').attr("src",'images/restric/carne2.png');
+
+								break;
+						}
+						uRes.perfil.restricciones[i]++;
+						$('.tipo_restric .re-option:nth-of-type('+uRes.perfil.restricciones[i]+')').addClass('active');
+					}
+				}//end if restricciones
+
+				/*
+					NOMBRE DEL COACH
+				*/
+
+				$('#coach_name').html(nombre_coach + " " + apellido_coach);
+
+				// console.log(nombre_coach);
+				// console.log(apellido_coach);
+				// console.log(user);
+
+				var star = Math.round(user.coach.rating);
+
+				//console.log(Math.round(star));
+
+				var count = 5;
+
+				for (var i = 0; i < star; i++) {
+					$('.rate-stars').append('<img src="images/starh.svg">');
+					//console.log(i);
+					
+				};
+				
+				for (var x = 0; x < count - star; x++) {
+					//console.log('-' + x);
+					$('.rate-stars').append('<img src="images/star.svg">');
+				};
+
+
+				var restricciones_arr = new Array();
+				$('#add_updated_profile').on('click', function(){
+					if(!$('.overscreen7').is(':visible')){
+						$('.overscreen7').show();
+						setTimeout(function() {$('.overscreen7').addClass('active');}, 200);
+					} else {
+						$('.overscreen7').removeClass('active');
+						setTimeout(function() {$('.overscreen7').hide();}, 800);
+					}
+					$('#blur').toggleClass('blurred');
+				});//end click add updated profile
+
+
+				$('#_alert_chCoach').click(function(){
+					console.log('CLICK EN ALERT CH-COACH');
+
+						
+					// console.log("ZIP>"+ $('input[name="zipocode"]').val());
+						var genero 				= $('#update_sexo').val();
+
+						localStorage.setItem('edad', $('#edad_value').val() );
+						var edad 				= $('#edad_value').val();
+						var zipcode 			= $('input[name="zipcode"]').val();
+						var estatura 			= $('input[name="estatura"]').val();
+						var peso 				= $('input[name="peso"]').val();
+						var peso_ideal 			= $('input[name="ideal"]').val();
+						var coach_type 			= $('#coach_type').val();
+						var dpw 				= $('#days_per_week').val();
+						var comentario 			= $('.the-comment').html();
+						var plan 				= $('#plan').val();
+						var restricciones 		= localStorage.getItem('restricciones');
+						var postal 				= $('input[name="zipcode"]').val();
+						
+						// console.log("POSTAL > > > > "+postal);
+						// console.log("comentario>>>> "+comentario);
+						console.log(restricciones);
+						//restricciones = restricciones.split(",")
+
+						
+						/*calcula fecha de naciemiento a partr de la edad del cliente*/
+						var ageyears = new Date();
+						var _year =ageyears.getFullYear();
+						var _mes = ageyears.getMonth() +1;
+						var _dia = ageyears.getDate();
+						var _yob = _year - edad;
+						var fecha_born = _yob+"/"+ _mes +"/"+_dia;
+						var born = new Date(fecha_born);
+						var manda_restricciones;
+
+						console.log(restricciones.length );
+
+						if (restricciones.length < 0) {
+							restricciones = [];
+							console.log('restricciones null');
+						} else {
+							restricciones = restricciones;
+						}
+
+						var json = {
+						"sexo" : genero,
+						"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
+						"perfil":{
+							"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
+							"sexo" : genero,
+							"peso" : peso,
+							"estatura" : estatura,
+							"ejercicio" : dpw,
+							"objetivo" : plan,
+							"restricciones" :(restricciones.length>0||restricciones!="")?JSON.parse(restricciones):null,
+							"personalidad" : coach_type
+						},
+						"cp": zipcode,
+						"pesoDeseado": peso_ideal,
+						"comentario": comentario
+					}
+
+					console.log(json);
+
+					var response = apiRH.updatePerfil(json);
+
+					if(response){
+						// TODO: Use render methods not hard loading
+						window.location.assign('userdata.html');
+					}
+				});	// end click _alert_chCoach
+
+				$('#_cancel_chCoach').click(function(){
+					$('.overscreen7').hide();
+					$('#blur').toggleClass('blurred');
+				});
+
+				app.hideLoader();
+				var text = (coach_status != 'pending_change') ? "Cambiar Coach" : "En revisión";
+				var href = (coach_status != 'pending_change') ? "cambiocoach.html" : "";
+				$('#change_coach').text(text);
+				$('#change_coach').attr('href', href);
+
+		}
 
 	});
 

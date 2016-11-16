@@ -27,8 +27,9 @@
 			window.catalogues.months 				= [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ];
 			window.catalogues.coach_type 			= [ 'Estricto', 'Innovador', 'Animador', 'Tradicional'];
 			window.catalogues.restricciones 		= [ 'Huevo', 'Pollo', 'Pescado', 'Mariscos', 'Lacteos', 'Carne' ];
-			window.catalogues.objetivo 				= [ 'adelgazar','detox','bienestar','rendimiento' ];
+			window.catalogues.objetivo 				= [ 'Adelgazar','Detox','Bienestar','Rendimiento' ];
 			window.catalogues.sex 					= [ 'Hombre', 'Mujer'];
+			window.catalogues.age 					= [ '15-24', '25-34', '35-44', '45-54', '55 o más' ];
 			window.catalogues.tipo_de_ingredientes 	= [ 'granosycereales', 'verduras', 'grasas', 'lacteos', 'proteinaanimal', 'leguminosas', 'nuecesysemillas', 'frutas', 'endulzantes', 'aderezosycondimentos', 'superfoods', 'liquidos'];
 
 
@@ -200,7 +201,7 @@
 		},
 		gatherEnvironment: function(optional_data, history_title) {
 			/* Gather environment information */
-			var meInfo 	= app.keeper.getItem('user');
+			var meInfo 	= window._user;
 			var parsed 	= {me: meInfo};
 			
 			if(optional_data){
@@ -334,8 +335,15 @@
 		render_dialog : function(title, message, options){
 			return app.showLoader();
 		},
-		render_settings : function(){
-			return app.showLoader();
+		render_settings : function(url){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering User Profile");
+			var extra_data = app.fetch_profile_data();
+			var data = this.gatherEnvironment(extra_data, "Mi Perfil");
+			console.log(data);
+			data.is_scrollable = true;
+			return this.switchView('user-profile', data, '.view', url, 'user-profile perfil');
 		},
 		render_chat : function(){
 			return app.showLoader();
@@ -347,6 +355,14 @@
 			var data = this.gatherEnvironment(null, "Próximamente");
 			data.is_scrollable = false;
 			return this.switchView('coming-soon', data, '.view', url, 'coming_soon');
+		},
+		render_change_coach : function(url){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering Change coach");
+			var data = this.gatherEnvironment(null, "Cambiar de Coach");
+			data.is_scrollable = false;
+			return this.switchView('change-coach', data, '.view', url, 'cambio-coach');
 		},
 		render_create_account : function(){
 			return app.showLoader();
@@ -560,42 +576,73 @@
 		},
 		get_diet: function(dietId){
 			
-			return apiRH.getRequest('tables/dieta?_id=' + dietId, null)			
+			return apiRH.getRequest('tables/dieta?_id=' + dietId, null);		
+		},
+		fetch_profile_data: function(userId){
+
+			var starMax 		= 5;
+			var user_sexo 		= "Mujer";
+			var age_range 		= catalogues.age[_user.perfil.edad.enum];
+			var coach_type 		= catalogues.coach_type[_user.coach.especialidad[0]];
+			var coach_status	= app.keeper.getItem('coach_status');
+			var msg_ch_coach	= app.keeper.getItem('msg_ch_coach');
+			var rating_object 	= { "stars": { "active": [], "inactive": [] }  };
+			var star 			= Math.round(_user.coach.rating);
+			var change_copy 	= (coach_status != 'pending_change') ? "Cambiar Coach" : "En revisión";
+			var changed_status 	= (coach_status == 'pending_change') ? 1 : 0;
+
+			if ( _user.perfil.sexo == 1 ) {
+				user_sexo = "Hombre";
+				$('#hombre').attr('src', 'images/hombre.svg');
+				$('#mujer').attr('src', 'images/mujere.svg');
+			} else {
+				$('#hombre').attr('src', 'images/hombreh.svg');
+				$('#mujer').attr('src', 'images/mujere.svg');
+			}
+
+			if(_user.perfil.restricciones === 'undefined' || _user.perfil.restricciones == "" || _user.perfil.restricciones == null){
+				restricciones_concat = "Ninguna";
+			}else{
+				var restricciones_cat = window.catalogues.restricciones;					
+				var restricciones_concat = "";					
+				if(_user.perfil.restricciones){
+					for ( var i = 0; i < _user.perfil.restricciones.length; i++ ) {
+						var separator = ", ";
+						if(i == _user.perfil.restricciones.length - 1)
+							separator = "";
+
+						restricciones_concat = restricciones_cat[_user.perfil.restricciones[i]] + separator;
+					};
+				}else{
+					restricciones_concat = "Ninguna";
+				}
+			}
+
+			
+
+			for (var i = 0; i < star; i++)
+				rating_object.stars.active.push(1);
+				
+			for (var x = 0; x < starMax - star; x++)
+				rating_object.stars.inactive.push(1);
+			
+			var info_profile =  {
+									nombre_coach 	: app.keeper.getItem('nombre_coach'),
+									coach_last 		: app.keeper.getItem('apellido_coach'),
+									coach_name 		: app.keeper.getItem('nombre_coach'),
+									coach_type 		: coach_type,
+									coach_rating 	: rating_object,
+									changed_status 	: changed_status,
+									sexo 			: user_sexo,
+									edad 			: _user.perfil.edad,
+									cp 				: _user.cp,
+									height 			: _user.perfil.estatura,
+									objective 		: catalogues.objetivo[_user.perfil.objetivo],
+									exercise_freq 	: _user.perfil.ejercicio,
+									age_range 		: age_range,
+									change_btn_copy : change_copy,
+									restricciones_concat : restricciones_concat
+								};
+			return info_profile;
 		}
 	};
-
-/*      _                                       _                        _       
- *   __| | ___   ___ _   _ _ __ ___   ___ _ __ | |_   _ __ ___  __ _  __| |_   _ 
- *  / _` |/ _ \ / __| | | | '_ ` _ \ / _ \ '_ \| __| | '__/ _ \/ _` |/ _` | | | |
- * | (_| | (_) | (__| |_| | | | | | |  __/ | | | |_  | | |  __/ (_| | (_| | |_| |
- *  \__,_|\___/ \___|\__,_|_| |_| |_|\___|_| |_|\__| |_|  \___|\__,_|\__,_|\__, |
- *                                                                         |___/ 
- */
-	jQuery(document).ready(function($) {
-		
-		
-
-
-// ----------------------------------------------------------------------
-
-
-
-		
-
-		//-----------------------------
-		//
-		// Login Facebook
-		//
-		//-----------------------------
-
-		$('.face').click(function () {
-			
-			console.log('CLICK FACEBOOK LOGIN');
-			
-			apiRH.loginOauth('facebook');
-			
-		});
-
-		
-	});
-
