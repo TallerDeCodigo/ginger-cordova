@@ -135,82 +135,9 @@ $( function() {
 }); // END function
 
 
-
-/*INICIA ON LOAD RESIZE*/
-$(window).on("load resize",function(){ 
-
-
-	/*
-		ENVIA MENSAJE AL ADMIN PARA AUTORIZAR CAMBIO DE COACH
-	*/
-	var msg;
-	var msg_return;
-	$('#send_ch_coach').on('click', function(){
-		msg = $('textarea#espacio_comentario').val();
-
-		if(!msg){
-			console.log('mensaje vacio');
-
-			if(!$('.alert_chCoach').is(':visible')){
-				$('.alert_chCoach').show();
-				setTimeout(function() {$('.alert_chCoach').addClass('active');}, 200);
-			} else {
-				$('.alert_chCoach').removeClass('active');
-				setTimeout(function() {$('.alert_chCoach').hide();}, 800);
-			}
-
-			$('#blur').toggleClass('blurred');
-		}else{
-			console.log(msg);
-			localStorage.setItem('msg_ch_coach', msg);
-			localStorage.setItem('coach_status', "pending_change");
-
-			/*Agregar otro alert con la leyenda: Tu mensaje ha sido enviado para revision, nos pondremos en contacto contigo*/
-			if(!$('.alert_chCoach2').is(':visible')){
-				$('.alert_chCoach2').show();
-				setTimeout(function() {$('.alert_chCoach2').addClass('active');}, 200);
-			} else {
-				$('.alert_chCoach2').removeClass('active');
-				setTimeout(function() {$('.alert_chCoach2').hide();}, 800);
-			}
-
-			$('#blur').toggleClass('blurred');
-			
-			$('#accept_chCoach2').click(function(){
-				 $('.alert_chCoach2').hide();
-				 $('#blur').toggleClass('blurred');
-				 // TODO: Use render methods not hard loading
-				 window.location.assign('userdata.html');
-			});
-
-		}
-		
-		$('#accept_chCoach').click(function(){
-			$('.alert_chCoach').hide();
-			$('#blur').toggleClass('blurred');
-
-		});
-
-	});
-
-
-
-		if ($('body').hasClass('update_data')) {
-			
-		} //END IF BODY HAS CLASS UPDATE DATA
-
-		
-});// end Window on Load Resize swipe / dietas 
-
 $(window).load(function(){
 
  	
-
-		
-		
-		
-
-
 	/*MEDIDAS*/
 	var minval_med = 20; 
 	var maxval_med = 250;

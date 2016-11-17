@@ -317,6 +317,46 @@
 			data.is_scrollable = false;
 			return this.switchView('main-menu', data, '.view', url, 'perfil');
 		},
+		render_settings : function(url){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering User Profile");
+			var extra_data = app.fetch_profile_data();
+			var data = this.gatherEnvironment(extra_data, "Mi Perfil");
+			console.log(data);
+			data.is_scrollable = true;
+			return this.switchView('user-profile', data, '.view', url, 'user-profile perfil');
+		},
+		render_edit_settings : function(url){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering User Profile");
+			var extra_data = app.fetch_profile_data();
+			var data = this.gatherEnvironment(extra_data, "Mi Perfil");
+			console.log(data);
+			data.is_scrollable = true;
+			return this.switchView('user-profile', data, '.view', url, 'user-profile perfil');
+		},
+		render_change_coach : function(url){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering Change coach");
+			// var extra_data = app.fetch_profile_data();
+			var data = this.gatherEnvironment(null, "Cambiar de Coach");
+			data.is_scrollable = false;
+			return this.switchView('change-coach', data, '.view', url, 'cambio-coach');
+		},
+		render_coming_soon : function(url){
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering Coming Soon");
+			var data = this.gatherEnvironment(null, "Próximamente");
+			data.is_scrollable = false;
+			return this.switchView('coming-soon', data, '.view', url, 'coming_soon');
+		},
+		render_chat : function(){
+			return app.showLoader();
+		},
 		render_modal : function(modalName, data, appendTarget){
 
 			app.showLoader();
@@ -333,38 +373,6 @@
 														}, 360);
 		},
 		render_dialog : function(title, message, options){
-			return app.showLoader();
-		},
-		render_settings : function(url){
-			app.showLoader();
-			app.check_or_renderContainer();
-			console.log("Rendering User Profile");
-			var extra_data = app.fetch_profile_data();
-			var data = this.gatherEnvironment(extra_data, "Mi Perfil");
-			console.log(data);
-			data.is_scrollable = true;
-			return this.switchView('user-profile', data, '.view', url, 'user-profile perfil');
-		},
-		render_chat : function(){
-			return app.showLoader();
-		},
-		render_coming_soon : function(url){
-			app.showLoader();
-			app.check_or_renderContainer();
-			console.log("Rendering Coming Soon");
-			var data = this.gatherEnvironment(null, "Próximamente");
-			data.is_scrollable = false;
-			return this.switchView('coming-soon', data, '.view', url, 'coming_soon');
-		},
-		render_change_coach : function(url){
-			app.showLoader();
-			app.check_or_renderContainer();
-			console.log("Rendering Change coach");
-			var data = this.gatherEnvironment(null, "Cambiar de Coach");
-			data.is_scrollable = false;
-			return this.switchView('change-coach', data, '.view', url, 'cambio-coach');
-		},
-		render_create_account : function(){
 			return app.showLoader();
 		},
 		back_with_logout : function(event){
@@ -589,7 +597,7 @@
 			var rating_object 	= { "stars": { "active": [], "inactive": [] }  };
 			var star 			= Math.round(_user.coach.rating);
 			var change_copy 	= (coach_status != 'pending_change') ? "Cambiar Coach" : "En revisión";
-			var changed_status 	= (coach_status == 'pending_change') ? 1 : 0;
+			var changed_status 	= (coach_status == 'pending_change') ? true : false;
 
 			if ( _user.perfil.sexo == 1 ) {
 				user_sexo = "Hombre";
@@ -643,6 +651,7 @@
 									change_btn_copy : change_copy,
 									restricciones_concat : restricciones_concat
 								};
+								console.log(info_profile);
 			return info_profile;
 		}
 	};
