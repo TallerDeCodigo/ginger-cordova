@@ -650,7 +650,7 @@ a.mail { background:#2eab7e url('../images/mail_btn.png') no-repeat;background-s
 .alert_chCoach2{opacity:1;padding-top:0px;}
 
 
-#espacio_comentario::-webkit-input-placeholder {text-align:center;color:#43c2a7;font-weight:700;font-size:110%;display:block;padding:35px 15%;}
+#espacio_comentario::-webkit-input-placeholder { text-align:center; color:#43c2a7; font-weight: 500; font-size:100%; display:block; padding:15px 15%;}
 .cambio-coach textarea{border:1px solid #43c2a7!important;}
 
 /* iOS - 20px MÁS */
