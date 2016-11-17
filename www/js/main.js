@@ -590,7 +590,7 @@
 			var starMax 		= 5;
 			var user_sexo 		= "Mujer";
 			var age_range 		= catalogues.age[_user.perfil.edad.enum];
-			var coach_type 		= catalogues.coach_type[_user.coach.especialidad[0]];
+			var coach_type 		= catalogues.coach_type[_user.perfil.personalidad];
 			var coach_status	= app.keeper.getItem('coach_status');
 			var msg_ch_coach	= app.keeper.getItem('msg_ch_coach');
 			var rating_object 	= { "stars": { "active": [], "inactive": [] }  };

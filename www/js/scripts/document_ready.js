@@ -1519,14 +1519,19 @@ window.initializeEvents = function(){
 
 		if( $('.view').hasClass('edit-profile') ) {
 
-			var info_profile =  {
-									nombre_coach 	: app.keeper.getItem('nombre_coach'),
-									apellido_coach 	: app.keeper.getItem('apellido_coach'),
-									nombre_coach 	: app.keeper.getItem('nombre_coach'),
-									sexo 			: _user.perfil.sexo,
-									edad 			: _user.perfil.edad,
-									cp 				: _user.perfil.cp,
-								};
+			var grid_age;
+			var minval_age = 15;
+			var maxval_age 	= 90;
+			var range_age 	= maxval_age - minval_age;
+
+			var grid_exercise;
+			var minval_eje = 0;
+			var maxval_eje = 7;
+			var range_eje = maxval_eje-minval_eje;
+			
+			var anchot = document.documentElement.clientWidth;
+			
+
 			var nombre_coach	= app.keeper.getItem('nombre_coach');
 			var apellido_coach	= app.keeper.getItem('apellido_coach');
 			var sexo 			= _user.perfil.sexo;
@@ -1543,75 +1548,77 @@ window.initializeEvents = function(){
 			var coach_rate		= app.keeper.getItem('coach_rate');
 			var coach_status	= app.keeper.getItem('coach_status');
 			var msg_ch_coach	= app.keeper.getItem('msg_ch_coach');
+			
 			app.keeper.setItem('restricciones', _user.perfil.restricciones);
 
-			$('#comentario_perfil i').html(comentario);
+			grid_age = ((anchot*0.7)-30)/range_age;
+			grid_exercise =  Math.floor( ( (anchot*0.7)-30 )/range_eje );
+			
+			// $('#comentario_perfil i').html(comentario);
 			//console.log(edad.substring(0, 4) );
 			var date_hoy =  new Date();
 			date_hoy = date_hoy.getFullYear();
 			var _edad_calc = date_hoy - Number( edad.substring(0, 4));
 			//console.log(_edad_calc);
 			//console.log('HUEVOS: ' + restricciones.length);
-			$('#coach_type').attr("value", coach_type);
-			$('#plan').attr("value", plan);
-			$('#days_per_week').attr("value", frecuencia);
-			$('#update_sexo').attr("value", sexo);
+			// $('#coach_type').attr("value", coach_type);
+			// $('#plan').attr("value", plan);
+			// $('#days_per_week').attr("value", frecuencia);
+			// $('#update_sexo').attr("value", sexo);
 
-			if( $('.the-comment').html() != " " ){
-				console.log(comentario);
-				$('.comentario').show();
-				$('.the-comment').html(comentario);
-				$('.yes').addClass('active');
-				$('.not').removeClass('active');
+			// if( $('.the-comment').html() != " " ){
+			// 	console.log(comentario);
+			// 	$('.comentario').show();
+			// 	$('.the-comment').html(comentario);
+			// 	$('.yes').addClass('active');
+			// 	$('.not').removeClass('active');
 
-			}else{
-				$('.comentario').hide();
-			}	
+			// }else{
+			// 	$('.comentario').hide();
+			// }	
 			
-			$('.profile.circle-frame').find('img').attr('src', app.keeper.getItem('avatar') + '?type=large');
+			// $('.profile.circle-frame').find('img').attr('src', app.keeper.getItem('avatar') + '?type=large');
 
 			// $('.cpur').html(nombre +" "+ apellido);
-			$('.edit-profile span').html(nombre +" "+ apellido);
+			// $('.edit-profile span').html(nombre +" "+ apellido);
 
-			$('#anos_perfil').html(_edad_calc + " años");
-			$('#age-dato').html(_edad_calc);
-			$('#edad_value').val(_edad_calc);
+			// $('#anos_perfil').html(_edad_calc + " años");
+			// $('#age-dato').html(_edad_calc);
+			// $('#edad_value').val(_edad_calc);
 
-			$('#cp_perfil').html(cp);
-			$('input[name="zipcode"]').attr("value",cp);
+			// $('#cp_perfil').html(cp);
+			// $('input[name="zipcode"]').attr("value",cp);
+
+			// $('#estatura_perfil').html(estatura + " m.");
+
+			// $('input[name="estatura"]').attr("value", estatura);
 
 
-			$('#estatura_perfil').html(estatura + " m.");
+			// $('#peso_perfil').html(peso + " kg.");
+			// $('input[name="peso"]').attr("value", peso);
 
-			$('input[name="estatura"]').attr("value", estatura);
-
-
-			$('#peso_perfil').html(peso + " kg.");
-			$('input[name="peso"]').attr("value", peso);
-
-			$('#ideal_perfil').html(ideal + " kg.");
-			$('input[name="ideal"]').attr("value", ideal);
+			// $('#ideal_perfil').html(ideal + " kg.");
+			// $('input[name="ideal"]').attr("value", ideal);
 
 			var suma = parseInt(coach_type)+1;
-
 			$('.tipo_coach .co-option:nth-of-type('+suma+')').addClass('active');
 
 			switch(coach_type){
 				case 0: 
 					$('#coach_type_perfil').html("Estricto");
-					$('.co-option.active img:not(.question)').attr("src",'images/coach/estricto2.png');
+					$('.co-option.active img:not(.question)').attr("src",cordova_full_path+'images/coach/estricto2.png');
 					break;
 				case 1:
 					$('#coach_type_perfil').html("Innovador");
-					$('.co-option.active img:not(.question)').attr("src",'images/coach/innovador2.png');
+					$('.co-option.active img:not(.question)').attr("src",cordova_full_path+'images/coach/innovador2.png');
 					break;
 				case 2:
 					$('#coach_type_perfil').html("Animador");
-					$('.co-option.active img:not(.question)').attr("src",'images/coach/animador2.png');
+					$('.co-option.active img:not(.question)').attr("src",cordova_full_path+'images/coach/animador2.png');
 					break;
 				case 3:
 					$('#coach_type_perfil').html("Tradicional");
-					$('.co-option.active img:not(.question)').attr("src",'images/coach/tradicional2.png');
+					$('.co-option.active img:not(.question)').attr("src",cordova_full_path+'images/coach/tradicional2.png');
 					break;
 			}
 
@@ -1637,54 +1644,30 @@ window.initializeEvents = function(){
 			switch(plan){
 				case 0:
 					$('#plan_perfil').html("Bajar de peso");
-					$('.pl-option.active img:not(.question)').attr("src",'images/plan/perderpeso2.png');
+					$('.pl-option.active img:not(.question)').attr("src",cordova_full_path+'images/plan/perderpeso2.png');
 					break;
 				case 1:
 					$('#plan_perfil').html("Detox");
-					$('.pl-option.active img:not(.question)').attr("src",'images/plan/detox2.png');
+					$('.pl-option.active img:not(.question)').attr("src",cordova_full_path+'images/plan/detox2.png');
 					break;
 				case 2:
 					$('#plan_perfil').html("Rendimiento físico");
-					$('.pl-option.active img:not(.question)').attr("src",'images/plan/rendimientofisico2.png');
+					$('.pl-option.active img:not(.question)').attr("src",cordova_full_path+'images/plan/rendimientofisico2.png');
 					break;
 				case 3:
 					$('#plan_perfil').html("Sentirse mejor");
-					$('.pl-option.active img:not(.question)').attr("src",'images/plan/sentirsemejor2.png');
+					$('.pl-option.active img:not(.question)').attr("src",cordova_full_path+'images/plan/sentirsemejor2.png');
 					break;
 				default:
 					$('#plan_perfil').html("No tiene plan");
 			}
-				
-			//COMPRUEBA SI LAS RESTRICCIONES ESTAN DEFINIDAS
 
-			if(restricciones === 'undefined' || restricciones == "" || restricciones == null){
-				$('#restricciones_perfil').html("Ninguna");
-			}else{
+			$('#age').css('left', grid_age*(_edad_calc-minval_age));
+			$('#age-filler').css('width', (grid_age*(_edad_calc-minval_age))+20);
 
-				var restricciones_cat = window.catalogues.restricciones;					
-				$('#restricciones_perfil').text("");
-				if(restricciones){
-					for ( var i = 0; i < restricciones.length; i++ ) {
-						var separator = ", ";
-						if(i == restricciones.length - 1)
-							separator = "";
-
-						$('#restricciones_perfil').append(restricciones_cat[restricciones[i]] + separator);
-					};
-				}else{
-					$('#restricciones_perfil').html("Ninguna");
-				}
-			}
-
-
-			$('#age').css('left', gridag*(_edad_calc-minval_age));
-			$('#age-filler').css('width', (gridag*(_edad_calc-minval_age))+20);
-
-			$('#ejercicio').css('left', gridej*(frecuencia-minval_eje));
-			$('#ejercicio-filler').css('width', (gridej*(frecuencia-minval_eje))+20);
-			
+			$('#ejercicio').css('left', grid_exercise*(frecuencia-minval_eje));
+			$('#ejercicio-filler').css('width', (grid_exercise*(frecuencia-minval_eje))+20);
 			console.log(restricciones);
-
 			if(restricciones === undefined || restricciones == null || restricciones == ""){
 				console.log('está Indefinido');
 			}else{
@@ -1693,27 +1676,27 @@ window.initializeEvents = function(){
 					
 					switch(_user.perfil.restricciones[i]){
 						case 0: 
-							$('.tipo_restric .re-option:nth-of-type(1) img').attr("src",'images/restric/huevo2.png');
+							$('.tipo_restric .re-option:nth-of-type(1) img').attr("src",cordova_full_path+'images/restric/huevo2.png');
 
 							break;
 						case 1:
-							$('.tipo_restric .re-option:nth-of-type(2) img').attr("src",'images/restric/pollo2.png');
+							$('.tipo_restric .re-option:nth-of-type(2) img').attr("src",cordova_full_path+'images/restric/pollo2.png');
 
 							break;
 						case 2:
-							$('.tipo_restric .re-option:nth-of-type(3) img').attr("src",'images/restric/pescado2.png');
+							$('.tipo_restric .re-option:nth-of-type(3) img').attr("src",cordova_full_path+'images/restric/pescado2.png');
 
 							break;
 						case 3:
-							$('.tipo_restric .re-option:nth-of-type(4) img').attr("src",'images/restric/camaron2.png');
+							$('.tipo_restric .re-option:nth-of-type(4) img').attr("src",cordova_full_path+'images/restric/camaron2.png');
 
 							break;
 						case 4:
-							$('.tipo_restric .re-option:nth-of-type(5) img').attr("src",'images/restric/lacteos2.png');
+							$('.tipo_restric .re-option:nth-of-type(5) img').attr("src",cordova_full_path+'images/restric/lacteos2.png');
 
 							break;
 						case 5:
-							$('.tipo_restric .re-option:nth-of-type(6) img').attr("src",'images/restric/carne2.png');
+							$('.tipo_restric .re-option:nth-of-type(6) img').attr("src",cordova_full_path+'images/restric/carne2.png');
 
 							break;
 					}
@@ -1727,28 +1710,28 @@ window.initializeEvents = function(){
 				NOMBRE DEL COACH
 			*/
 
-			$('#coach_name').html(nombre_coach + " " + apellido_coach);
+			// $('#coach_name').html(nombre_coach + " " + apellido_coach);
 
-			// console.log(nombre_coach);
-			// console.log(apellido_coach);
-			// console.log(user);
+			// // console.log(nombre_coach);
+			// // console.log(apellido_coach);
+			// // console.log(user);
 
-			var star = Math.round(user.coach.rating);
+			// var star = Math.round(user.coach.rating);
 
-			//console.log(Math.round(star));
+			// //console.log(Math.round(star));
 
-			var count = 5;
+			// var count = 5;
 
-			for (var i = 0; i < star; i++) {
-				$('.rate-stars').append('<img src="images/starh.svg">');
-				//console.log(i);
+			// for (var i = 0; i < star; i++) {
+			// 	$('.rate-stars').append('<img src="images/starh.svg">');
+			// 	//console.log(i);
 				
-			};
+			// };
 			
-			for (var x = 0; x < count - star; x++) {
-				//console.log('-' + x);
-				$('.rate-stars').append('<img src="images/star.svg">');
-			};
+			// for (var x = 0; x < count - star; x++) {
+			// 	//console.log('-' + x);
+			// 	$('.rate-stars').append('<img src="images/star.svg">');
+			// };
 
 
 			var restricciones_arr = new Array();
@@ -1764,7 +1747,7 @@ window.initializeEvents = function(){
 			});//end click add updated profile
 
 
-			$('#confirm_coach_change').click(function(){
+			$('#accept_SaveProfile').click(function(){
 					
 					var genero 				= $('#update_sexo').val();
 					app.keeper.setItem( 'edad', $('#edad_value').val() );
@@ -1819,13 +1802,13 @@ window.initializeEvents = function(){
 				if(updated_response)
 					return app.render_settings('userdata.html');
 
-			});	// end click _alert_chCoach
+			});	// END accept_SaveProfile
 
 			// $('#_cancel_chCoach').click(function(){
 			// 	$('.overscreen7').hide();
 			// 	$('#blur').toggleClass('blurred');
 			// });
-
+			$(window).resize();
 			app.hideLoader();
 
 		} /*** END edit-profile ***/

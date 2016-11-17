@@ -12,17 +12,13 @@
 	</div>
 	<h2 class="cpur">{{me.nombre}} {{me.apellido}}</h2>
 	<div class="profile-data edition">
-		<a class="edit-profile">
-			<img src="{{cordova_full_path}}images/profile/pencil.svg">
-			Datos de <span>{{me.nombre}} {{me.apellido}}</span>
-		</a>
 		<ul>
 			<li><span>Sexo:</span></li>
 		</ul>
 		<div class="page genre">
 			<img class="edition" id="hombre" src="{{cordova_full_path}}images/hombreh.svg">
 			<img class="edition" id="mujer" src="{{cordova_full_path}}images/mujere.svg">
-			<input id="update_sexo" type="hidden" value="">
+			<input id="update_sexo" type="hidden" value="{{me.perfil.sexo}}">
 		</div>
 		<ul>
 			<li><span>Edad:</span></li>
@@ -33,18 +29,18 @@
 				<div class="slider-bar"></div>
 				<div id="age-filler" class="slider-filler"></div>
 				<div id="age" class="slider-point">
-					<div class="position"><span id="age-dato">15</span><br>años</div>
+					<div class="position"><span id="age-dato">{{me.perfil.edad.real}}</span><br>años</div>
 				</div>
 			</div>
 			<img class="img-izquierda" src="{{cordova_full_path}}images/adulto.png">
-			<input id="edad_value" value="" type="hidden">
+			<input id="edad_value" value="{{me.perfil.edad.real}}" type="hidden">
 		</div>
 		<ul>
 			<li><span>Código Postal:</span></li>
 		</ul>
 		<div class="page zip">
 			<div class="box-input-1">
-				<input type="text" style="height:50px!important;" name="zipcode" maxlength="5" value="03820">
+				<input type="text" style="height:50px!important;" name="zipcode" maxlength="5" value="{{data.cp}}">
 			</div>
 		</div>
 		<ul>
@@ -57,7 +53,7 @@
 			</div>
 			<img class="type-def" src="{{cordova_full_path}}images/hombreh.svg">
 			<div class="box-input-2">
-				<input type="text" style="height:50px!important;" name="estatura" value="1.50" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
+				<input type="text" style="height:50px!important;" name="estatura" value="{{me.perfil.estatura}}" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
 				<span>m</span>
 			</div>
 		</div>
@@ -70,7 +66,7 @@
 				<img id="peso-dw" src="{{cordova_full_path}}images/rightarrow.png">
 			</div>
 			<div class="box-input-2">
-				<input type="text" style="height:50px!important;" name="peso" value="50.0" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
+				<input type="text" style="height:50px!important;" name="peso" value="{{me.perfil.peso}}" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
 				<span>kg</span>
 			</div>
 		</div>
@@ -83,7 +79,7 @@
 				<img id="ideal-dw" src="{{cordova_full_path}}images/rightarrow.png">
 			</div>
 			<div class="box-input-2">
-				<input type="text" style="height:50px!important;" name="ideal" value="50.0" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
+				<input type="text" style="height:50px!important;" name="ideal" value="{{me.pesoDeseado}}" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
 				<span>kg</span>
 			</div>
 		</div>
@@ -124,11 +120,11 @@
 				<div class="slider-bar"></div>
 				<div id="ejercicio-filler" class="slider-filler"></div>
 				<div id="ejercicio" class="slider-point">
-					<div class="position"><span id="ejercicio-dato">0</span><br>días</div>
+					<div class="position"><span id="ejercicio-dato">{{data.exercise_freq}}</span><br>días</div>
 				</div>
 			</div>
 			<img class="img-izquierda" src="{{cordova_full_path}}images/run.svg">
-			<input id="days_per_week" type="hidden" value="">
+			<input id="days_per_week" type="hidden" value="{{data.exercise_freq}}">
 		</div>
 		<ul>
 			<li><span>Restricciones Alimenticias:</span></li>
@@ -165,12 +161,16 @@
 			<li>
 				<span>¿Tienes algo más que contarnos?</span>
 			</li>
-			<li class="comentario" style="display:none"><span><i class="the-comment">Sufro de hipertensión y odio comer lentejas porque me provocan malestar estomacal, también soy intolerante a los hongos</i></span></li>
+			<div class="alt-page">
+				<div class="siono yes{{# me.comentarios}} active {{/ me.comentarios}}">Sí</div>
+				<div class="siono not{{^ me.comentarios}} active {{/ me.comentarios}}">No</div>
+			</div>
+			{{# me.comentarios}}
+				<li class="comentario">
+					<span><i class="the-comment">{{.}}</i></span>
+				</li>
+			{{/ me.comentarios}}
 		</ul>
-		<div class="alt-page">
-			<div class="siono yes">Sí</div>
-				<div class="siono not active">No</div>
-		</div>
 		<ul>
 			<li><span>Objetivo:</span></li>
 		</ul>
@@ -195,25 +195,27 @@
 				<input id="plan" type="hidden" value="">
 			</div>
 		</div>
-		<ul>
-			<li class="savech">
-				<a id="add_updated_profile" class="btn-org" >Guardar</a>	
-			</li>
+
+		<a id="add_updated_profile" class="btn-org" >Guardar</a>	
+
 		</ul>
 		<div class="profile-bottom">
 			<ul>
 				<li>
-					<span>Coach: <strong id="coach_name">María Medina</strong></span>
+					<span>
+						Coach: <strong id="coach_name">{{data.coach_name}} {{data.coach_last}}</strong>
+					</span>
 					<div class="rate-stars">
-						<!-- <img src="{{cordova_full_path}}images/starh.svg">
-						<img src="{{cordova_full_path}}images/starh.svg">
-						<img src="{{cordova_full_path}}images/starh.svg">
-						<img src="{{cordova_full_path}}images/star.svg">
-						<img src="{{cordova_full_path}}images/star.svg"> -->
+						{{# data.coach_rating.stars.active}}
+							<img src="{{../cordova_full_path}}images/starh.svg">
+						{{/ data.coach_rating.stars.active}}
+						{{# data.coach_rating.stars.inactive}}
+							<img src="{{../cordova_full_path}}images/star.svg">
+						{{/ data.coach_rating.stars.inactive}}
 					</div>
 				</li>
 				<li>
-					<a class="btn-org" href="cambiocoach.html">Cambiar Coach</a>
+					<a id="change_coach" class="btn-org {{^ data.changed_status}}hook{{/ data.changed_status}} " {{^ data.changed_status}} data-resource="change-coach" {{/ data.changed_status}} href="{{^ data.changed_status}} cambiocoach.html {{/ data.changed_status}}">{{data.change_btn_copy}}</a>
 				</li>
 			</ul>
 		</div>
@@ -228,15 +230,15 @@
 		</div>
 		<textarea id="comentar" placeholder="Escribe tu comentario aquí..."></textarea>
 	</div>
-	<div class="overscreen7" style="display:none">
+	<div class="overscreen7 modal_ok_cancel modal" style="display:none">
 		<div class="ov-filler2"></div>
 		<div class="dialog">
 			<h5>Atención</h5>
 			<p>Tu perfil se ha guardado correctamente.</p>
 			<p class="extra">Algunos de los campos que editaste requiere que cambiemos tu coach, nuestro equipo se pondrá en contacto contigo.</p>
 			<div class="di-options">
-				<a id="_alert_chCoach" class="accept">Aceptar</a>
-				<a id="_cancel_chCoach" class="accept">Cancelar</a>
+				<a id="accept_SaveProfile" class="accept">Aceptar</a>
+				<a class="cancel">Cancelar</a>
 			</div>
 		</div>
 	</div>
