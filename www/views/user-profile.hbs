@@ -5,46 +5,80 @@
 	</div>
 	<h2 class="cpur">{{me.nombre}} {{me.apellido}}</h2>
 	<div class="profile-data">
-	<a class="edit-profile" href="edituser.html"><img src="images/profile/pencil.svg">Datos de <span>{{me.nombre}} {{me.apellido}}</span></a>
+	<a class="edit-profile" href="edituser.html"><img src="{{cordova_full_path}}images/profile/pencil.svg">Datos de <span>{{me.nombre}} {{me.apellido}}</span></a>
 		<ul>
 			<li>
-				<span>Objetivo:						<strong id="plan_perfil">{{data.objective}}</strong></span>
+				<span>
+					Objetivo:					
+					<strong id="plan_perfil">{{data.objective}}</strong>
+				</span>
 			</li>
 			<li>
-				<span>Sexo: 						<strong id="sexo_perfil">{{data.sexo}}</strong></span>
+				<span>
+					Sexo: 					
+					<strong id="sexo_perfil">{{data.sexo}}</strong>
+				</span>
 			</li>
 			<li>
-				<span>Edad: 						<strong id="anos_perfil">{{data.age_range}} años</strong></span>
+				<span>
+					Edad: 					
+					<strong id="anos_perfil">{{data.age_range}} años</strong>
+				</span>
 			</li>
 			<li>
-				<span>Código Postal: 				<strong id="cp_perfil">{{data.cp}}</strong></span>
+				<span>
+					Código Postal: 			
+					<strong id="cp_perfil">{{data.cp}}</strong>
+				</span>
 			</li>
 			<li>
-				<span>Estatura: 					<strong id="estatura_perfil">{{me.perfil.estatura}} m</strong></span>
+				<span>
+					Estatura: 				
+					<strong id="estatura_perfil">{{me.perfil.estatura}} m</strong>
+				</span>
 			</li>
 			<li>
-				<span>Peso: 						<strong id="peso_perfil">{{me.perfil.peso}} kg</strong></span>
+				<span>
+					Peso: 					
+					<strong id="peso_perfil">{{me.perfil.peso}} kg</strong>
+				</span>
 			</li>
 			<li>
-				<span>Peso Ideal: 					<strong id="ideal_perfil">{{me.pesoDeseado}} kg</strong></span>
+				<span>
+					Peso Ideal: 				
+					<strong id="ideal_perfil">{{me.pesoDeseado}} kg</strong>
+				</span>
 			</li>
 			<li>
-				<span>Tipo de Coach: 				<strong id="coach_type_perfil">{{data.coach_type}}</strong></span>
+				<span>
+					Tipo de Coach: 			
+					<strong id="coach_type_perfil">{{data.coach_type}}</strong>
+				</span>
 			</li>
 			<li>
-				<span>Frecuencia de Ejercicio: 		<strong id="frecuencia_perfil">{{data.exercise_freq}} días por semana</strong></span>
+				<span>
+					Frecuencia de Ejercicio: 	
+					<strong id="frecuencia_perfil">{{data.exercise_freq}} días por semana</strong>
+				</span>
 			</li>
 			<li>
-				<span>Restricciones Alimenticias: 	<strong id="restricciones_perfil">{{data.restricciones_concat}}</strong></span>
+				<span>
+					Restricciones Alimenticias: 
+					<strong id="restricciones_perfil">{{data.restricciones_concat}}</strong>
+				</span>
 			</li>
 			<li class="comentario">
-				<span id="comentario_perfil">Otros comentarios:	<i>{{me.comentarios}}</i></span>
+				<span id="comentario_perfil">
+					Otros comentarios:	<i>{{me.comentarios}}</i>
+				</span>
 			</li>
 		</ul>
 		<div class="profile-bottom">
 			<ul>
 				<li>
-					<span>Coach: <strong id="coach_name">{{data.coach_name}} {{data.coach_last}}</strong></span>
+					<span>
+						Coach: <strong id="coach_name">{{data.coach_name}} {{data.coach_last}}</strong>
+					</span>
 					<div class="rate-stars">
 						{{# data.coach_rating.stars.active}}
 							<img src="{{cordova_full_path}}images/starh.svg">
