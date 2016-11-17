@@ -1,15 +1,20 @@
 	<header class="hwhite2">
 		<div class="toolbar">
-			<a class="back hook" data-resource="user-profile" href="userdata.html"><img src="images/back.svg"></a>
+			<a class="back hook" data-resource="my-plan" href="userdata.html">
+				<img src="{{cordova_full_path}}images/back.svg">
+			</a>
 		</div>
 	</header>
 	
 	<div class="profile circle-frame">
-		<img src="{{profile_pic_url}}">
+		<img src="{{data.profile_pic_url}}">
 	</div>
 	<h2 class="cpur">{{me.nombre}} {{me.apellido}}</h2>
 	<div class="profile-data">
-	<a class="edit-profile" href="edituser.html"><img src="{{cordova_full_path}}images/profile/pencil.svg">Datos de <span>{{me.nombre}} {{me.apellido}}</span></a>
+		<a class="edit-profile hook" data-resource="edit-profile" href="edituser.html">
+			<img src="{{cordova_full_path}}images/profile/pencil.svg">
+			Datos de <span>{{me.nombre}} {{me.apellido}}</span>
+		</a>
 		<ul>
 			<li>
 				<span>
@@ -84,13 +89,11 @@
 						Coach: <strong id="coach_name">{{data.coach_name}} {{data.coach_last}}</strong>
 					</span>
 					<div class="rate-stars">
-						Full path {{cordova_full_path}}
 						{{# data.coach_rating.stars.active}}
-							FP{{cordova_full_path}}
-							<img src="{{cordova_full_path}}images/starh.svg">
+							<img src="{{../cordova_full_path}}images/starh.svg">
 						{{/ data.coach_rating.stars.active}}
 						{{# data.coach_rating.stars.inactive}}
-							<img src="{{cordova_full_path}}images/star.svg">
+							<img src="{{../cordova_full_path}}images/star.svg">
 						{{/ data.coach_rating.stars.inactive}}
 					</div>
 				</li>

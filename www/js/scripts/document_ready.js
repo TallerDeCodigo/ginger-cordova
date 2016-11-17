@@ -37,6 +37,8 @@ window.initializeEvents = function(){
 					return app.render_mainmenu( $(this).attr('href') );
 				if( $(this).data('resource') == "user-profile" )
 					return app.render_settings( $(this).attr('href') );
+				if( $(this).data('resource') == "edit-profile" )
+					return app.render_edit_settings( $(this).attr('href') );
 				if( $(this).data('resource') == "change-coach" )
 					return app.render_change_coach( $(this).attr('href') );
 				if( $(this).data('resource') == "coming-soon" )
@@ -1515,7 +1517,7 @@ window.initializeEvents = function(){
 		}/*** END weight ***/
 
 
-		if( $('.view').hasClass('user-profile-update') ) {
+		if( $('.view').hasClass('edit-profile') ) {
 
 			var info_profile =  {
 									nombre_coach 	: app.keeper.getItem('nombre_coach'),
@@ -1826,7 +1828,7 @@ window.initializeEvents = function(){
 
 			app.hideLoader();
 
-		} /*** END user-profile-update ***/
+		} /*** END edit-profile ***/
 
 		
 		/* Change my Coach */

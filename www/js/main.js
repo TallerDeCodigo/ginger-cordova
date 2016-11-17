@@ -332,10 +332,10 @@
 			app.check_or_renderContainer();
 			console.log("Rendering User Profile (Editable)");
 			var extra_data = app.fetch_profile_data();
-			var data = this.gatherEnvironment(extra_data, "Mi Perfil");
+			var data = this.gatherEnvironment(extra_data, "Editar Perfil");
 			console.log(data);
 			data.is_scrollable = true;
-			return this.switchView('user-profile', data, '.view', url, 'user-profile perfil');
+			return this.switchView('edit-profile', data, '.view', url, 'edit-profile perfil2');
 		},
 		render_change_coach : function(url){
 			app.showLoader();
@@ -436,7 +436,7 @@
 				}
 				
 			});
-
+			$(window).resize();
 			if(!keepLoader)
 				return setTimeout(function(){
 					if(window.firstTime)
@@ -498,7 +498,6 @@
 				console.log(response);	
 			});
 		},  //END REGISTER ACTIVITY
-
 		update_perfil: function(sexo,peso,pesoDeseado,personalidad,objetivo,ejercicio,edad,fechaNaciemiento,codigoPostal,comentarios,nombre,restricciones,estatura){
 			var req = {
 				method : 'post',
@@ -651,7 +650,6 @@
 									change_btn_copy : change_copy,
 									restricciones_concat : restricciones_concat
 								};
-								console.log(info_profile);
 			return info_profile;
 		}
 	};

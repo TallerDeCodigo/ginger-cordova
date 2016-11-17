@@ -1,0 +1,243 @@
+	<header class="hwhite2">
+		<div class="toolbar">
+			<a class="back hook" data-resource="user-profile" href="userdata.html">
+				<img src="{{cordova_full_path}}images/back.svg">
+			</a>
+		</div>
+	</header>
+	<div class="add_picture">
+		<div class="profile circle-frame edition">
+			{{# data.profile_pic_url}}<img src="{{.}}">{{/ data.profile_pic_url}}
+		</div>
+	</div>
+	<h2 class="cpur">{{me.nombre}} {{me.apellido}}</h2>
+	<div class="profile-data edition">
+		<a class="edit-profile">
+			<img src="{{cordova_full_path}}images/profile/pencil.svg">
+			Datos de <span>{{me.nombre}} {{me.apellido}}</span>
+		</a>
+		<ul>
+			<li><span>Sexo:</span></li>
+		</ul>
+		<div class="page genre">
+			<img class="edition" id="hombre" src="{{cordova_full_path}}images/hombreh.svg">
+			<img class="edition" id="mujer" src="{{cordova_full_path}}images/mujere.svg">
+			<input id="update_sexo" type="hidden" value="">
+		</div>
+		<ul>
+			<li><span>Edad:</span></li>
+		</ul>
+		<div class="page age">
+			<img class="img-derecha" src="{{cordova_full_path}}images/bebe.png">
+			<div class="drag-parent">
+				<div class="slider-bar"></div>
+				<div id="age-filler" class="slider-filler"></div>
+				<div id="age" class="slider-point">
+					<div class="position"><span id="age-dato">15</span><br>años</div>
+				</div>
+			</div>
+			<img class="img-izquierda" src="{{cordova_full_path}}images/adulto.png">
+			<input id="edad_value" value="" type="hidden">
+		</div>
+		<ul>
+			<li><span>Código Postal:</span></li>
+		</ul>
+		<div class="page zip">
+			<div class="box-input-1">
+				<input type="text" style="height:50px!important;" name="zipcode" maxlength="5" value="03820">
+			</div>
+		</div>
+		<ul>
+			<li><span>Estatura:</span></li>
+		</ul>
+		<div class="page mido">
+			<div class="arrows-vertical">
+				<img id="estatura-up" src="{{cordova_full_path}}images/leftarrow.png">
+				<img id="estatura-dw" src="{{cordova_full_path}}images/rightarrow.png">
+			</div>
+			<img class="type-def" src="{{cordova_full_path}}images/hombreh.svg">
+			<div class="box-input-2">
+				<input type="text" style="height:50px!important;" name="estatura" value="1.50" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
+				<span>m</span>
+			</div>
+		</div>
+		<ul>
+			<li><span>Peso:</span></li>
+		</ul>
+		<div class="page peso">
+			<div class="arrows-vertical">
+				<img id="peso-up" src="{{cordova_full_path}}images/leftarrow.png">
+				<img id="peso-dw" src="{{cordova_full_path}}images/rightarrow.png">
+			</div>
+			<div class="box-input-2">
+				<input type="text" style="height:50px!important;" name="peso" value="50.0" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
+				<span>kg</span>
+			</div>
+		</div>
+		<ul>
+			<li><span>Peso Ideal:</span></li>
+		</ul>
+		<div class="page ideal">
+			<div class="arrows-vertical">
+				<img id="ideal-up" src="{{cordova_full_path}}images/leftarrow.png">
+				<img id="ideal-dw" src="{{cordova_full_path}}images/rightarrow.png">
+			</div>
+			<div class="box-input-2">
+				<input type="text" style="height:50px!important;" name="ideal" value="50.0" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
+				<span>kg</span>
+			</div>
+		</div>
+		<ul>
+			<li><span>Tipo de Coach:</span></li>
+		</ul>
+		<div class="sld-wrapper">
+			<div class="mover planes tipo_coach">
+				<div class="plan co-option">
+					<img  src="{{cordova_full_path}}images/coach/estricto.png">
+					<span class="type" value="estricto">Estricto</span><br>
+					<img class="question" src="{{cordova_full_path}}images/question.svg" title="Estricto" data="Coach que busca que se cumplan sus dietas y recomendaciones al pie de la letra y que estará al pendiente de todos tus movieminteos para que cumplas tus objetivos">
+				</div>
+				<div class="plan co-option">
+					<img src="{{cordova_full_path}}images/coach/innovador.png">
+					<span class="type" value="innovador">Innovador</span><br>
+					<img class="question" src="{{cordova_full_path}}images/question.svg" title="Innovador" data="Coach que integra en sus dietas superalimentos así como recetas gourmet, healthy, o en general más elaboradas">
+				</div>
+				<div class="plan co-option">
+					<img src="{{cordova_full_path}}images/coach/animador.png">
+					<span class="type" value="animador">Animador</span><br>
+					<img class="question" src="{{cordova_full_path}}images/question.svg" title="Animador" data="Coach que busca que te motives y que tengas ganas de obtener los mejores resultados posibles, fáciles de conseguir y de preparar">
+				</div>
+				<div class="plan co-option">
+					<img src="{{cordova_full_path}}images/coach/tradicional.png">
+					<span class="type" value="tradicional">Tradicional</span><br>
+					<img class="question" src="{{cordova_full_path}}images/question.svg" title="Tradicional" data="Coach que se basa en alimentos sencillos y tradicionales, fáciles de conseguir y de preparar">
+				</div>
+				<input id="coach_type" type="hidden" value="">
+			</div>
+		</div>
+		<ul>
+			<li><span>Frecuencia de Ejercicio:</span></li>
+		</ul>
+		<div class="page exercise">
+			<img class="img-derecha" src="{{cordova_full_path}}images/norun.svg">
+			<div class="drag-parent">
+				<div class="slider-bar"></div>
+				<div id="ejercicio-filler" class="slider-filler"></div>
+				<div id="ejercicio" class="slider-point">
+					<div class="position"><span id="ejercicio-dato">0</span><br>días</div>
+				</div>
+			</div>
+			<img class="img-izquierda" src="{{cordova_full_path}}images/run.svg">
+			<input id="days_per_week" type="hidden" value="">
+		</div>
+		<ul>
+			<li><span>Restricciones Alimenticias:</span></li>
+		</ul>
+		<div class="sld-wrapper">
+			<div class="mover planes tipo_restric">
+				<div class="plan re-option">
+					<img src="{{cordova_full_path}}images/restric/huevo.png">
+					<span class="type" value="0">Huevo</span>
+				</div>
+				<div class="plan re-option">
+					<img src="{{cordova_full_path}}images/restric/pollo.png">
+					<span class="type" value="1">Pollo</span>
+				</div>
+				<div class="plan re-option">
+					<img src="{{cordova_full_path}}images/restric/pescado.png">
+					<span class="type" value="2">Pescado</span>
+				</div>
+				<div class="plan re-option">
+					<img src="{{cordova_full_path}}images/restric/camaron.png">
+					<span class="type" value="3">Mariscos</span>
+				</div>
+				<div class="plan re-option">
+					<img src="{{cordova_full_path}}images/restric/lacteos.png">
+					<span class="type" value="4">Lácteos</span>
+				</div>
+				<div class="plan re-option">
+					<img src="{{cordova_full_path}}images/restric/carne.png">
+					<span class="type" value="5">Carne</span>
+				</div>
+			</div>
+		</div>
+		<ul>
+			<li>
+				<span>¿Tienes algo más que contarnos?</span>
+			</li>
+			<li class="comentario" style="display:none"><span><i class="the-comment">Sufro de hipertensión y odio comer lentejas porque me provocan malestar estomacal, también soy intolerante a los hongos</i></span></li>
+		</ul>
+		<div class="alt-page">
+			<div class="siono yes">Sí</div>
+				<div class="siono not active">No</div>
+		</div>
+		<ul>
+			<li><span>Objetivo:</span></li>
+		</ul>
+		<div class="sld-wrapper">
+			<div class="mover planes tipo_plan">
+				<div class="plan pl-option">
+					<img src="{{cordova_full_path}}images/plan/perderpeso.png">
+					<span value="adelgazar" class="type">Bajar de peso</span>
+				</div>
+				<div class="plan pl-option">
+					<img src="{{cordova_full_path}}images/plan/detox.png" value="">
+					<span value="detox" class="type">Detox</span>
+				</div>
+				<div class="plan pl-option">
+					<img src="{{cordova_full_path}}images/plan/rendimientofisico.png" value="">
+					<span value="rendimiento" class="type">Rendimiento físico</span>
+				</div>
+				<div class="plan pl-option">
+					<img src="{{cordova_full_path}}images/plan/sentirsemejor.png" value="">
+					<span value="bienestar" class="type">Sentirse mejor</span>
+				</div>
+				<input id="plan" type="hidden" value="">
+			</div>
+		</div>
+		<ul>
+			<li class="savech">
+				<a id="add_updated_profile" class="btn-org" >Guardar</a>	
+			</li>
+		</ul>
+		<div class="profile-bottom">
+			<ul>
+				<li>
+					<span>Coach: <strong id="coach_name">María Medina</strong></span>
+					<div class="rate-stars">
+						<!-- <img src="{{cordova_full_path}}images/starh.svg">
+						<img src="{{cordova_full_path}}images/starh.svg">
+						<img src="{{cordova_full_path}}images/starh.svg">
+						<img src="{{cordova_full_path}}images/star.svg">
+						<img src="{{cordova_full_path}}images/star.svg"> -->
+					</div>
+				</li>
+				<li>
+					<a class="btn-org" href="cambiocoach.html">Cambiar Coach</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="overscreen3" style="display:none">
+		<div class="boxx-top">
+			<div>
+				<a class="izquii">Cancelar</a>
+				<a class="add send_cmt">Enviar</a>
+			</div>
+		</div>
+		<textarea id="comentar" placeholder="Escribe tu comentario aquí..."></textarea>
+	</div>
+	<div class="overscreen7" style="display:none">
+		<div class="ov-filler2"></div>
+		<div class="dialog">
+			<h5>Atención</h5>
+			<p>Tu perfil se ha guardado correctamente.</p>
+			<p class="extra">Algunos de los campos que editaste requiere que cambiemos tu coach, nuestro equipo se pondrá en contacto contigo.</p>
+			<div class="di-options">
+				<a id="_alert_chCoach" class="accept">Aceptar</a>
+				<a id="_cancel_chCoach" class="accept">Cancelar</a>
+			</div>
+		</div>
+	</div>
+	
