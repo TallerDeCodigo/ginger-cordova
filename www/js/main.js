@@ -330,7 +330,7 @@
 		render_edit_settings : function(url){
 			app.showLoader();
 			app.check_or_renderContainer();
-			console.log("Rendering User Profile");
+			console.log("Rendering User Profile (Editable)");
 			var extra_data = app.fetch_profile_data();
 			var data = this.gatherEnvironment(extra_data, "Mi Perfil");
 			console.log(data);
