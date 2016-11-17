@@ -80,7 +80,9 @@
 						Coach: <strong id="coach_name">{{data.coach_name}} {{data.coach_last}}</strong>
 					</span>
 					<div class="rate-stars">
+						Full path {{cordova_full_path}}
 						{{# data.coach_rating.stars.active}}
+							FP{{cordova_full_path}}
 							<img src="{{cordova_full_path}}images/starh.svg">
 						{{/ data.coach_rating.stars.active}}
 						{{# data.coach_rating.stars.inactive}}
