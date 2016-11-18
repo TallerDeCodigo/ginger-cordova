@@ -68,31 +68,29 @@ $( function() {
 
 	if($('body').hasClass('has-change-payment')){
 
-
-
 		$('.enter').click(function () {
 
-			var  t_nombre   = $('input[name="nombre"]').val(); 
-			var  t_card 	= $('input[name="card"]').val(); 
-			var  t_mes  	= $('input[name="mes"]').val(); 
-			var  t_ano 		= $('input[name="year"]').val(); 
-			var  t_cvc 		= $('input[name="cvc"]').val(); 
-			var  t_mail 	= $('input[name="mail"]').val(); 
-			var  t_cupon 	= $('input[name="cupon"]').val(); 
-			var  t_terms 	= $('input[name="terms"]').val(); 
+			var  t_nombre   = $('input[name="nombre"]').val();
+			var  t_card 	= $('input[name="card"]').val();
+			var  t_mes  	= $('input[name="mes"]').val();
+			var  t_ano 		= $('input[name="year"]').val();
+			var  t_cvc 		= $('input[name="cvc"]').val();
+			var  t_mail 	= $('input[name="mail"]').val();
+			var  t_cupon 	= $('input[name="cupon"]').val();
+			var  t_terms 	= $('input[name="terms"]').val();
 
 			Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
 			
 			var errorResponseHandler, successResponseHandler, tokenParams;
 
 			tokenParams = {
-			  "card": {
-				"number": t_card,
-				"name": t_nombre,
-				"exp_year": t_ano,
-				"exp_month": t_mes,
-				"cvc": t_cvc
-			  }
+				"card": {
+					"number"	: t_card,
+					"name"		: t_nombre,
+					"exp_year"	: t_ano,
+					"exp_month"	: t_mes,
+					"cvc"		: t_cvc
+				}
 			};
 
 			successResponseHandler = function(token) 
