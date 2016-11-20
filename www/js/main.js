@@ -16,6 +16,7 @@
 			window.apiRH = new requestHandlerAPI().construct(app);
 			window.firstTime = true;
 			
+			var is_home 	= window.is_home;
 			var is_login 	= apiRH.has_token();
 			var is_client 	= localStorage.getItem('customerId');
 			var is_current 	= localStorage.getItem('valido');
@@ -31,7 +32,6 @@
 			window.catalogues.sex 					= [ 'Hombre', 'Mujer'];
 			window.catalogues.age 					= [ '15-24', '25-34', '35-44', '45-54', '55 o más' ];
 			window.catalogues.tipo_de_ingredientes 	= [ 'granosycereales', 'verduras', 'grasas', 'lacteos', 'proteinaanimal', 'leguminosas', 'nuecesysemillas', 'frutas', 'endulzantes', 'aderezosycondimentos', 'superfoods', 'liquidos'];
-
 
 			/* IMPORTANT to set requests to be syncronous */
 			/* TODO: test all requests without the following code 'cause of deprecation */
@@ -74,11 +74,14 @@
 						return app.render_initial_record();
 					}
 					_user = JSON.parse( app.keeper.getItem('user') );
-					return app.render_myPlan();
-
+					if(is_home)
+						return app.render_myPlan();
+					return;
 				}
 				/* Render Home (myPlan) */
-				return app.render_myPlan();
+				if(is_home)
+					return app.render_myPlan();
+				return;
 			}
 			return app.render_entermode();
 			/*-------------------- Code below this line won't run ------------------------*/
@@ -345,6 +348,35 @@
 			var data = this.gatherEnvironment(null, "Cambiar de Coach");
 			data.is_scrollable = false;
 			return this.switchView('change-coach', data, '.view', url, 'cambio-coach');
+		},
+		render_new_record : function(url, type){
+			window.is_home = false;
+			app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering New Record");
+			var name = "";
+			var date = new Date();
+			var date_today = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
+			var water_val = app.keeper.getItem('agua_lastSaved');
+			var agua_local = parseFloat(app.keeper.getItem('agua'));
+			var agua_lastSaved = app.keeper.getItem('agua_lastSaved');
+			var water_val = (agua_lastSaved != date_today ) ? 0 : agua_local;
+
+			switch(type){
+				case 'water':
+					name = "Agua";
+					break;
+				default:
+					break;
+			};
+			var data = this.gatherEnvironment(null, name);
+			data.is_scrollable = false;
+			data.water_val = water_val;
+			console.log(data);
+			return this.switchView('record-'+type, data, '.view', url, 'record-info '+type);
 		},
 		render_coming_soon : function(url){
 			app.showLoader();

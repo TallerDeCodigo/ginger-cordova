@@ -1,0 +1,78 @@
+
+	<div id="container" class="tracks">
+		<header class="hwhite2">
+			<div class="toolbar">
+				<a class="back" href="dieta.html"><img src="images/back.svg"></a>
+				<h2 class="titulo">{{header_title}}</h2>
+				<a class="menu" href="menu.html"><img src="images/menu.svg"></a>
+			</div>
+		</header>
+		<h2 class="mainline">¿Cuánta agua has bebido?</h2>
+		<div class="agua">
+			<div class="vaso">
+				<img src="images/agua.svg">
+				<p><span>{{water_val}}</span><br>litros</p>
+			<input id="#litros" name="litros" value="{{water_val}}" type="hidden">
+			</div>
+			<div class="arrows-vertical">
+				<img id="agua-up" src="images/leftarrow.png"><br><br>
+				<img id="agua-dw" src="images/rightarrow.png">
+			</div>
+		</div>
+		<a id="add_agua" class="btn-gre" href="#">Agregar</a>
+	</div>
+	<footer class="menu-bar">
+		<a href="dieta.html">
+			<img src="images/menu/plan.svg">
+			<span>mi plan</span>
+		</a>
+		<a href="chat.html">
+			<img src="images/menu/chat.svg">
+			<span>chat</span>
+		</a>
+		<a class="centro">
+			<img src="images/menu/mas.svg">
+		</a>
+		<a href="proximamente.html">
+			<img src="images/menu/progreso.svg">
+			<span>progreso</span>
+		</a>
+		<a href="proximamente.html">
+			<img src="images/menu/shop.svg">
+			<span>list</span>
+		</a>
+	</footer>
+	<div class="overscreen" style="display:none;">
+		<div class="ov-filler"></div>
+		<a class="ruedas rueda-1" href="ejercicio.html">
+			<img src="images/menu/ejercicio.svg">
+			<span>EJERCICIO</span>
+		</a>
+		<a class="ruedas rueda-2" href="agua.html">
+			<img src="images/menu/agua.svg">
+			<span>AGUA</span>
+		</a>
+		<a class="ruedas rueda-3" href="peso.html">
+			<img src="images/menu/peso.svg">
+			<span>PESO</span>
+		</a>
+		<a class="ruedas rueda-4" href="medidas.html">
+			<img src="images/menu/medidas.svg">
+			<span>MEDIDAS</span>
+		</a>
+		<a class="ruedas rueda-5" href="animo.html">
+			<img src="images/menu/animo.svg">
+			<span>ÁNIMO</span>
+		</a>
+	</div>
+	<div class="alert_tracking" style="display:none">
+		<div class="ov-filler2"></div>
+		<div class="dialog">
+			<h5>Agua</h5>
+			<p>¿Deseas guardar los datos?</p>
+			<div class="di-options">
+				<a id="add_tracking" class="accept">Aceptar</a>
+				<a class="cancel">Cancelar</a>
+			</div>
+		</div>
+	</div>

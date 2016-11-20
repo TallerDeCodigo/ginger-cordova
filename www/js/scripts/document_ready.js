@@ -985,17 +985,13 @@ window.initializeEvents = function(){
 
 
 		/*** Add water module ***/
-		if($('body').hasClass('water') ){
-
+		if( $('.view').hasClass('water') ){
+			console.log("Hello watter");
 			var date = new Date();
 			var date_today = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
 			var agua_local = parseFloat(app.keeper.getItem('agua'));
 			var agua_lastSaved = app.keeper.getItem('agua_lastSaved');
 			var agua = (agua_lastSaved != date_today ) ? 0 : agua_local;
-
-			/*** Setting initial value if progress ***/
-			$('input[name="litros"]').val(agua);
-			$('.vaso p span').text(agua);
 
 			$("#agua-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
 			$("#agua-up").bind('mousedown', function(e){
