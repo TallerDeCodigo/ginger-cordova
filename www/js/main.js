@@ -22,6 +22,7 @@
 			var is_current 	= localStorage.getItem('valido');
 
 			window.cordova_full_path = "";
+			window.is_home = (window.is_access) ? true : false;
 
 			/*** TODO: Get this shit into a catalogue ***/
 			window.catalogues 						= [];
@@ -74,12 +75,12 @@
 						return app.render_initial_record();
 					}
 					_user = JSON.parse( app.keeper.getItem('user') );
-					if(is_home)
+					if(window.is_home)
 						return app.render_myPlan();
 					return;
 				}
 				/* Render Home (myPlan) */
-				if(is_home)
+				if(window.is_home)
 					return app.render_myPlan();
 				return;
 			}
@@ -305,6 +306,7 @@
 			return this.switchView('record', data, '.view', url, 'initialRecord');
 		},
 		render_myPlan : function( url ){
+			window.is_home = true;
 			app.showLoader();
 			app.check_or_renderContainer();
 			console.log("Rendering My Plan");
