@@ -49,6 +49,34 @@ window.initializeEvents = function(){
 		};
 		initHooks();
 
+		var initCentroActions = function(){
+
+			$('.centro').click(function() {
+				if(!$('.overscreen').is(':visible')){
+					$('.overscreen').show();
+					setTimeout(function() {$('.overscreen').addClass('active');}, 200);
+				} else {
+					$('.overscreen').removeClass('active');
+					setTimeout(function() {$('.overscreen').hide();}, 800);
+				}
+				// $('#blur').toggleClass('blurred');
+				$('a.centro img').toggleClass('onn');
+			});
+
+			$('.ov-filler').click(function() {
+				$('.overscreen').removeClass('active');
+				setTimeout(function() {$('.overscreen').hide();}, 800);
+				// $('#blur').removeClass('blurred');
+				$('a.centro img').removeClass('onn');
+			});
+
+			// Open more drawer (comments and ingredients)
+			$('.open_more_drawer').click(function() {
+				$(this).parent().find('.extra-info').toggle();
+				$(this).toggleClass('presionado');
+			});
+		};
+
 		//-----------------------------
 		//
 		// Keyboard events for iOS
@@ -929,31 +957,7 @@ window.initializeEvents = function(){
 				$('.comment_pop').hide();
 			});
 
-			// Include this chunk on every page with footer menu
-			$('.centro').click(function() {
-				if(!$('.overscreen').is(':visible')){
-					$('.overscreen').show();
-					setTimeout(function() {$('.overscreen').addClass('active');}, 200);
-				} else {
-					$('.overscreen').removeClass('active');
-					setTimeout(function() {$('.overscreen').hide();}, 800);
-				}
-				// $('#blur').toggleClass('blurred');
-				$('a.centro img').toggleClass('onn');
-			});
-
-			$('.ov-filler').click(function() {
-				$('.overscreen').removeClass('active');
-				setTimeout(function() {$('.overscreen').hide();}, 800);
-				// $('#blur').removeClass('blurred');
-				$('a.centro img').removeClass('onn');
-			});
-
-			// Open more drawer (comments and ingredients)
-			$('.open_more_drawer').click(function() {
-				$(this).parent().find('.extra-info').toggle();
-				$(this).toggleClass('presionado');
-			});
+			initCentroActions();
 			
 			return app.hideLoader();
 			
@@ -1047,9 +1051,6 @@ window.initializeEvents = function(){
 			 .bind('mouseup', apiRH.clearTimeoutLogic);
 
 
-			/*
-				app.keeper AGUA
-			*/
 			$('#add_agua').on('click', function(){
 
 				if(!$('.alert_tracking').is(':visible')){
@@ -1062,12 +1063,6 @@ window.initializeEvents = function(){
 				$('#blur').toggleClass('blurred');
 
 			});
-
-			//----------------------------
-			//
-			// Tracking Water
-			//
-			//----------------------------
 
 			$('#add_tracking').click(function(){
 				agua_local = parseFloat(app.keeper.getItem('agua'));
@@ -1098,6 +1093,7 @@ window.initializeEvents = function(){
 				$('#blur').toggleClass('blurred');
 			});
 
+			initCentroActions();
 
 		} /*** END water ***/
 
