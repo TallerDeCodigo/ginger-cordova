@@ -45,7 +45,7 @@
 			window.loggedIn 	= false;
 			window.init_scripts = [];
 			window._user 		= [];
-			app.keeper 		= window.localStorage;
+			app.keeper 			= window.localStorage;
 			
 			/*----------------------- Routing user accordingly ---------------------------*/
 			if(is_login){
