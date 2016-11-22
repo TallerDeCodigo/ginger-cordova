@@ -8,6 +8,7 @@
 
 	var app = {
 		app_context: this,
+		initialized: false,
 		// Application Constructor
 		initialize: function() {
 
@@ -15,7 +16,7 @@
 			/* Initialize API request handler */
 			window.apiRH = new requestHandlerAPI().construct(app);
 			window.firstTime = true;
-			
+			app.initialized = true;
 			var is_home 	= window.is_home;
 			var is_login 	= apiRH.has_token();
 			var is_client 	= localStorage.getItem('customerId');
@@ -354,7 +355,7 @@
 		render_new_record : function(url, type){
 			
 			window.is_home = false;
-			app.initialize();
+			if(!app.initialized) app.initialize();
 			setTimeout(function(){
 				app.showLoader();
 			}, 420);
@@ -369,15 +370,27 @@
 			var water_val = (agua_lastSaved != date_today ) ? 0 : agua_local;
 
 			switch(type){
+				case 'exercise':
+					name = "Ejercicio";
+					break;
 				case 'water':
 					name = "Agua";
+					break;
+				case 'weight':
+					name = "Peso";
 					break;
 				case 'measures':
 					name = "Medidas";
 					break;
+				case 'mood':
+					name = "Ánimo";
+					break;
 				default:
+					name = "";
 					break;
 			};
+			console.log(type);
+			console.log(name);
 			var data = this.gatherEnvironment(null, name);
 			data.is_scrollable = false;
 			data.water_val = water_val;
@@ -474,19 +487,21 @@
 				}
 				
 			});
-			$(window).resize();
+			
 			if(!keepLoader)
 				return setTimeout(function(){
 					if(window.firstTime)
 						window.firstTime = false;				
 					app.hideLoader();
 					initializeEvents();
+					$(window).resize();
 				}, 2000);
 				
 			return setTimeout(function(){
 					if(window.firstTime)
 						window.firstTime = false;				
 					initializeEvents();
+					$(window).resize();
 				}, 2000);
 		},
 		showLoader: function(){

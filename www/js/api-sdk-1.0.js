@@ -130,39 +130,36 @@ function requestHandlerAPI(){
 			return (typeof(created_response.nuevo) != 'undefined') ? this.token : false;
 		};
 
+		/**
+		 * Validate registration code
+		 * @param String code
+		 * @param String email
+		 * 
+		 */
 		this.validateRegistrationCode = function(code, email){
-			var data = {
-					'code'	: code, 
-					'mail'	: email
-				};
+			var data = 	{
+							'code'	: code, 
+							'mail'	: email
+						};
 			console.log(data);
 			return this.makeRequest('api/validatecode/', data);
 		};
 
 		/**
-		  * Resgistro de tracking 
-		  **/
-
-		this.tracking = function(tipo, magnitud){
+		 * Record new tracking activity
+		 * @param Integer type
+		 * @param Float amount
+		 * @return Object /Boolean
+		 */
+		this.tracking = function(type, amount){
 			
-			var req = {
-				method : 'post',
-				url : api_base_url + 'tables/medicion/',	//definitr tabla
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': apiRH.keeper.getItem('token'),
-					'Content-Type': 'application/json'
-				},
-				data : {
-					'tipo' : tipo,
-					'magnitud' : magnitud,
-					'cliente' : apiRH.keeper.getItem('userId'),
-					'coach' : apiRH.keeper.getItem('coachId')
-				}
-			}
-			console.log(req);
-			var response = this.makeRequest('tables/medicion', req);
-			console.log("Request Data Cliente");
+			var data = {
+							'tipo' 		: type,
+							'magnitud' 	: amount,
+							'cliente' 	: app.keeper.getItem('userId'),
+							'coach' 	: app.keeper.getItem('coachId')
+						};
+			var response = this.makeRequest('tables/medicion', data);
 			console.log(response);
 			return (response) ? response : false;
 		};

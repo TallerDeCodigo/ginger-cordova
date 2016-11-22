@@ -1,0 +1,40 @@
+	<div id="container" class="tracks">
+		<header class="hwhite2">
+			<div class="toolbar">
+				<a class="back hook" data-resource="my-plan" href="dieta.html"><img src="{{cordova_full_path}}images/back.svg"></a>
+				<h2 class="titulo">{{header_title}}</h2>
+				<a class="menu hook" data-resource="main-menu" href="menu.html"><img src="{{cordova_full_path}}images/menu.svg"></a>
+			</div>
+		</header>
+		<h2 class="mainline">Agrega tu peso en kg</h2>
+		<div class="r_peso">
+			<div class="rojo">
+				<img src="{{cordova_full_path}}images/peso.svg">
+				<!-- <p>67.</p> -->
+				<input name="peso_metric" value="67.5" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
+			</div>
+			<div class="arrows-vertical">
+				<img id="r_peso-up" src="{{cordova_full_path}}images/leftarrow.png"><br><br>
+				<img id="r_peso-dw" src="{{cordova_full_path}}images/rightarrow.png">
+			</div>
+			<input id="track_peso" name="track_peso" value="" type="hidden" >
+		</div>
+		<a id="add_weight" class="btn-gre" href="#">Agregar</a>
+	</div>
+
+	{{> footer_menu}}
+
+	{{> footer_activities}}
+
+	<div class="alert_tracking" style="display:none">
+		<div class="ov-filler2"></div>
+		<div class="dialog">
+			<h5>Peso</h5>
+			<p>¿Deseas guardar los datos?</p>
+			<div class="di-options">
+				<a id="add_tracking" class="accept">Aceptar</a>
+				<a class="cancel">Cancelar</a>
+			</div>
+		</div>
+	</div>
+		

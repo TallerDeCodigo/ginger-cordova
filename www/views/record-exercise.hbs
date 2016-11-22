@@ -1,0 +1,104 @@
+	<div id="container" class="tracks">
+		<header class="hwhite2">
+			<div class="toolbar">
+				<a class="back hook" data-resource="my-plan" href="dieta.html"><img src="{{cordova_full_path}}images/back.svg"></a>
+				<h2 class="titulo">{{header_title}}</h2>
+				<a class="menu hook" data-resource="main-menu" href="menu.html"><img src="{{cordova_full_path}}images/menu.svg"></a>
+			</div>
+		</header>
+		<h2 class="mainline">Agrega el tiempo que has<br>hecho ejercicio en horas</h2>
+		<div class="r_ejercicio">
+			<div class="sld-wrapper">
+				<div class="mover planes tipo_ejer">
+					<div class="plan ej-option active">
+						<img src="{{cordova_full_path}}images/ejercicio/caminar2.png">
+						<span class="type" value="caminar">Caminar</span>
+					</div>
+					<div class="plan ej-option">
+						<img src="{{cordova_full_path}}images/ejercicio/bicicleta.png">
+						<span class="type" value="correr">Bicicleta</span>
+					</div>
+					<div class="plan ej-option">
+						<img src="{{cordova_full_path}}images/ejercicio/correr.png">
+						<span class="type" value="pesas">Correr</span>
+					</div>
+					<div class="plan ej-option">
+						<img src="{{cordova_full_path}}images/ejercicio/pesas.png">
+						<span class="type" value="yoga">Pesas</span>
+					</div>
+					<div class="plan ej-option">
+						<img src="{{cordova_full_path}}images/ejercicio/cross.png">
+						<span class="type" value="correr">Cross training</span>
+					</div>
+					<div class="plan ej-option">
+						<img src="{{cordova_full_path}}images/ejercicio/cardio.png">
+						<span class="type" value="pesas">Cardio</span>
+					</div>
+					<div class="plan ej-option">
+						<img src="{{cordova_full_path}}images/ejercicio/eliptica.png">
+						<span class="type" value="yoga">Elíptica</span>
+					</div>
+					<div class="plan ej-option">
+						<img src="{{cordova_full_path}}images/ejercicio/estacionaria.png">
+						<span class="type" value="correr">Estacionaria</span>
+					</div>
+					<div class="plan ej-option">
+						<img src="{{cordova_full_path}}images/ejercicio/pilates.png">
+						<span class="type" value="pesas">Pilates</span>
+					</div>
+					<div class="plan ej-option">
+						<img src="{{cordova_full_path}}images/ejercicio/tennis.png">
+						<span class="type" value="yoga">Tennis</span>
+					</div>
+					<div class="plan ej-option">
+						<img src="{{cordova_full_path}}images/ejercicio/yoga.png">
+						<span class="type" value="correr">Yoga</span>
+					</div>
+					<div class="plan ej-option">
+						<img src="{{cordova_full_path}}images/ejercicio/otro.png">
+						<span class="type" value="pesas">Otro</span>
+					</div>
+					<input id="ejercicio_type" type="hidden" value="" >
+				</div>
+			</div>
+			<div class="page horaeje">
+				<div class="drag-parent">
+					<div class="slider-bar"></div>
+					<div id="horaeje-filler" class="slider-filler"></div>
+					<div id="horaeje" class="slider-point">
+						<div class="position"><span id="horaeje-dato">0:00</span></div>
+					</div>
+					<input id="duracion" type="hidden" value="">
+				</div>
+			</div>
+			<h2 class="mainline">Agrega la intensidad</h2>
+			<div class="page inteje">
+				<div class="drag-parent">
+					<div class="slider-bar"></div>
+					<div id="inteje-filler" class="slider-filler"></div>
+					<div id="inteje" class="slider-point">
+						<div class="position"><span id="inteje-dato">baja</span></div>
+					</div>
+					<input id="intensidad" type="hidden" value="">
+				</div>
+			</div>
+		</div>
+		<a id="add_ejercicio" class="btn-gre" href="#">Agregar</a>
+	</div>
+	
+	{{> footer_menu}}
+
+	{{> footer_activities}}
+
+	<div class="alert_tracking" style="display:none">
+		<div class="ov-filler2"></div>
+		<div class="dialog">
+			<h5>Ejercicio</h5>
+			<p>¿Deseas guardar los datos?</p>
+			<div class="di-options">
+				<a id="add_tracking" class="accept">Aceptar</a>
+				<a id="cancelar" class="cancel">Cancelar</a>
+			</div>
+		</div>
+	</div>
+	

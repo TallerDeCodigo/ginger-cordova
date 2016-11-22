@@ -44,10 +44,16 @@ window.initializeEvents = function(){
 				if( $(this).data('resource') == "coming-soon" )
 					return app.render_coming_soon( $(this).attr('href') );
 
-				if( $(this).data('resource') == "render-water" )
+				if( $(this).data('resource') == "add-exercise" )
+					return app.render_new_record( $(this).attr('href'), 'exercise' );
+				if( $(this).data('resource') == "add-water" )
 					return app.render_new_record( $(this).attr('href'), 'water' );
-				if( $(this).data('resource') == "render-measures" )
+				if( $(this).data('resource') == "add-weight" )
+					return app.render_new_record( $(this).attr('href'), 'weight' );
+				if( $(this).data('resource') == "add-measures" )
 					return app.render_new_record( $(this).attr('href'), 'measures' );
+				if( $(this).data('resource') == "add-mood" )
+					return app.render_new_record( $(this).attr('href'), 'mood' );
 
 
 				e.stopPropagation();
@@ -994,6 +1000,184 @@ window.initializeEvents = function(){
 		});
 
 
+		/*** Add exercise module ***/
+		if( $('.view').hasClass('exercise') ){
+
+
+			/*HORAS MINUTOS*/
+			var minval_hora = 0; 
+			var maxval_hora = 16;
+			var rango_hora = maxval_hora-minval_hora;
+			var gridhr = ($('.horaeje .drag-parent').width()-30)/rango_hora;
+			$('#horaeje').draggable({ containment:"parent",axis:"x",grid:[gridhr,gridhr],drag:function(){
+				var percent = $('.horaeje .drag-parent').width()-30;
+				var donde = Math.round(((($('#horaeje').position().left)*rango_hora)/percent)+minval_hora);
+				$("#horaeje-filler").css("width",$('#horaeje').position().left+20);
+				var hora = (donde/4);
+				hora = hora.toString().substr(0,1);
+				var minutos = (donde/4)*60;
+				if (minutos>179) {
+					minutos = minutos-180;
+				} else if (minutos>119) {
+					minutos = minutos-120;
+				} else if (minutos>59) {
+					minutos = minutos-60;
+				}
+				if (minutos==0 || minutos==60) {
+					minutos="00";
+				}
+				$('#horaeje-dato').html(hora+":"+minutos);
+				$('#duracion').attr("value", hora+":"+minutos);
+			  }
+			});
+
+			var minval_int = 0; 
+			var maxval_int = 3;
+			var rango_int = maxval_int-minval_int;
+			var gridin = ($('.inteje .drag-parent').width()-30)/rango_int;
+			$('#inteje').draggable({ containment:"parent",axis:"x",grid:[gridin,gridin],drag:function(){
+				var percent = $('.inteje .drag-parent').width()-30;
+				var donde = Math.round(((($('#inteje').position().left)*rango_int)/percent)+minval_int);
+				$("#inteje-filler").css("width",$('#inteje').position().left+20);
+				var text_int;
+				switch (donde) {
+					case 0:
+						text_int = "baja";
+						break;
+					case 1:
+						text_int = "moderada";
+						break;
+					case 2:
+						text_int = "alta";
+						break;
+					case 3:
+						text_int = "extrema";
+						break;
+				}
+
+				$('#intensidad').attr('value',text_int);
+
+				switch ($('#intensidad').val() ) {
+					case 'baja':
+						$('#intensidad').attr('value','0');
+						break;
+					case 'moderada':
+						$('#intensidad').attr('value','1');;
+						break;
+					case 'alta' :
+						$('#intensidad').attr('value','2');
+						break;
+					case 'extrema' :
+						$('#intensidad').attr('value','3');
+						break;
+				}
+				$('#inteje-dato').html(text_int);
+			  }
+			});
+
+			$('.ej-option').click(function() {
+				var valor = $(this).find('.type').attr('value');
+				$('.ej-option').each(function() {
+					if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
+					  $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
+					  $(this).removeClass('active');
+					  $(this).attr('value', "");
+					}
+				}); 
+
+				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
+				$(this).addClass('active');
+				$("#ejercicio_type").attr('value', valor);
+
+					//'caminar', 'correr', 'pesas', 'cross', 'bici', 'estacionaria', 'eliptica', 'cardio', 'yoga', 'pilates', 'tenis', 'otro'
+
+				switch($("#ejercicio_type").val() ){
+					case 'caminar' :
+					$('#ejercicio_type').attr('value','10');
+					break;
+					case 'correr' :
+					$('#ejercicio_type').attr('value','11');
+					break;
+					case 'pesas' :
+					$('#ejercicio_type').attr('value','12');
+					break;
+					case 'cross' :
+					$('#ejercicio_type').attr('value','13');
+					break;
+					case 'bici' :
+					$('#ejercicio_type').attr('value','14');
+					break;
+					case 'estacionaria' :
+					$('#ejercicio_type').attr('value','15');
+					break;
+					case 'eliptica' :
+					$('#ejercicio_type').attr('value','16');
+					break;
+					case 'cardio' :
+					$('#ejercicio_type').attr('value','17');
+					break;
+					case 'yoga' :
+					$('#ejercicio_type').attr('value','18');
+					break;
+					case 'pilates' :
+					$('#ejercicio_type').attr('value','19');
+					break;
+					case 'tenis' :
+					$('#ejercicio_type').attr('value','20');
+					break;
+					case 'otro	' :
+					$('#ejercicio_type').attr('value','21');
+					break;
+				}
+
+			});
+
+
+			/*
+				app.keeper EJERCICIO / DURACION / INTENSIDAD
+			 */
+			$('#add_ejercicio').on('click', function(){
+
+				app.keeper.setItem('track_ejercicio_type', 		$('#ejercicio_type').val() );
+				app.keeper.setItem('track_ejercicio_duration',	$('#duracion').val() );
+				app.keeper.setItem('track_ejercicio_intensidad', $('#intensidad').val() );
+
+				//console.log(responsedata);
+				if(!$('.alert_tracking').is(':visible')){
+					$('.alert_tracking').show();
+					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+				} else {
+					$('.alert_tracking').removeClass('active');
+					setTimeout(function() {$('.alert_tracking').hide();}, 800);
+				}
+				$('#blur').toggleClass('blurred');
+			});
+
+			$('#add_tracking').click(function(){
+				
+				var intensidad  = app.keeper.getItem('track_ejercicio_intensidad');
+				var type 		= app.keeper.getItem('track_ejercicio_type');
+				var duracion	= app.keeper.getItem('track_ejercicio_duration');
+				
+				var responsedata = apiRH.tracking(type, duracion);
+
+				if(responsedata){
+					app.toast("Se ha guardado tu progreso correctamente")
+					return app.render_myPlan('dieta.html');
+				}else{
+					app.toast('error al insertar datos ');
+				}
+				$('.alert_tracking').hide();
+				$('#blur').toggleClass('blurred');
+			});
+
+			$(window).resize();
+			initCentroActions();
+			
+			app.hideLoader();
+
+		} /*** END exercise ***/
+
 		/*** Add water module ***/
 		if( $('.view').hasClass('water') ){
 			console.log("Hello watter");
@@ -1104,7 +1288,240 @@ window.initializeEvents = function(){
 		} /*** END water ***/
 
 
-		if( $('body').hasClass('mood') ){
+		if( $('body').hasClass('weight') ){
+
+			var r_peso;
+			var usr_peso;
+			var response = app.keeper.getItem('user');
+			response = JSON.parse(response);
+			usr_peso = response.perfil.peso;
+			$('.r_peso input[name="peso_metric"]').attr("value",usr_peso );
+
+			$("#r_peso-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
+			$("#r_peso-up").bind('mousedown', function(e){
+				if (clickTimer == null) {
+		        	clickTimer = setTimeout(function () {
+			            clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(clickTimer);
+			        clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        console.log("double");
+			        return false;
+			    }
+				timeout = setInterval(function(){
+					r_peso = Number($('.r_peso input[name="peso_metric"]').val() );
+
+					if (r_peso<99) {
+						r_peso=r_peso+0.5;
+						$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(1));
+						$('input[name="track_peso"]').attr('value', r_peso);
+					} else {
+						r_peso=r_peso+1;
+						$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(0));
+						$('input[name="track_peso"]').attr('value', r_peso);
+					}
+				}, timer);
+				return false;
+			})
+			 .bind('mouseup', apiRH.clearTimeoutLogic);
+
+			$("#r_peso-dw").bind('touchstart touchend', apiRH.stickyTouchHandler);
+			$("#r_peso-dw").bind('mousedown', function(e){
+				if (clickTimer == null) {
+		        	clickTimer = setTimeout(function () {
+			            clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(clickTimer);
+			        clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        console.log("double");
+			        return false;
+			    }
+				timeout = setInterval(function(){
+					r_peso = Number($('.r_peso input[name="peso_metric"]').val());
+					if (r_peso>0.4) {
+						if (r_peso<100.1) {
+							r_peso=r_peso-0.5;
+							$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(1));
+							$('input[name="track_peso"]').attr('value', r_peso);
+						} else {
+							r_peso=r_peso-1;
+							$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(0));
+							$('input[name="track_peso"]').attr('value', r_peso);
+						}
+					}
+				}, timer);
+				return false;
+			})
+			 .bind('mouseup', apiRH.clearTimeoutLogic);
+
+
+			$('#add_weight').on('click', function(){
+				app.keeper.setItem('track_peso', $('input[name="track_peso"]').val() );
+				
+				var track_peso = app.keeper.getItem('track_peso');
+				
+				console.log(track_peso);
+				
+				if(!$('.alert_tracking').is(':visible')){
+					$('.alert_tracking').show();
+					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+				} else {
+					$('.alert_tracking').removeClass('active');
+					setTimeout(function() {$('.alert_tracking').hide();}, 800);
+				}
+				$('#blur').toggleClass('blurred');
+				//$('a.centro img').toggleClass('onn');
+			});
+
+			$('#add_tracking').click(function(){	
+				
+				track_peso = $('input[name="track_peso"]').val();
+
+
+				if(track_peso >= 30){
+
+					console.log('Peso <<<');
+
+					var responsedata = apiRH.tracking(0, track_peso);
+					
+					if(responsedata){
+						app.toast("Se ha guardado correctamente tu peso")
+					}else{
+						app.toast('Error al registrar peso');
+					}
+				}else{
+					app.toast('El peso debe de ser mayor a 40');
+				}
+				$('.alert_tracking').hide();
+				$('#blur').toggleClass('blurred');
+			});
+
+			$('.cancel').click(function(){
+				$('.alert_tracking').hide();
+				$('#blur').toggleClass('blurred');
+			});
+
+			initCentroActions();
+
+		}/*** END weight ***/
+
+
+		if( $('.view').hasClass('measures') ){
+
+			var minval_med = 20; 
+			var maxval_med = 250;
+			var rango_med = maxval_med-minval_med;
+			var gridme = ($('.medida .drag-parent').width()-30)/rango_med;
+			var medida;
+			
+			$("#medida-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
+			$("#medida-up").bind('mousedown', function(e){
+				e.preventDefault();
+				if (clickTimer == null) {
+		        	clickTimer = setTimeout(function () {
+			            clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(clickTimer);
+			        clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        console.log("double");
+			        return false;
+			    }
+				timeout = setInterval(function(){
+					medida = Number($("#medida-up").parent().parent().find('input').val());
+					if (medida<99) {
+						medida=medida+0.1;
+						$("#medida-up").parent().parent().find('input').val(medida.toFixed(1));
+						$('input[name="medida"]').attr("value", medida);
+					} else {
+						medida=medida+1;
+						$("#medida-up").parent().parent().find('input').val(medida.toFixed(0));
+					}
+				}, timer);
+				return false;
+			})
+			 .bind('mouseup', apiRH.clearTimeoutLogic);
+
+			$("#medida-dw").bind('touchstart touchend', apiRH.stickyTouchHandler);
+			$("#medida-dw").bind('mousedown', function(e){
+				e.preventDefault();
+				if (clickTimer == null) {
+		        	clickTimer = setTimeout(function () {
+			            clickTimer = null;
+			        }, 320)
+			    } else {
+			        clearTimeout(clickTimer);
+			        clickTimer = null;
+			        e.preventDefault();
+			        e.stopPropagation();
+			        console.log("double");
+			        return false;
+			    }
+				timeout = setInterval(function(){
+					medida = Number($("#medida-dw").parent().parent().find('input').val());
+					if (medida<100.1) {
+						medida=medida-0.1;
+						$("#medida-dw").parent().parent().find('input').val(medida.toFixed(1));
+						$('input[name="medida"]').attr("value", medida);
+					} else {
+						medida=medida-1;
+						$("#medida-dw").parent().parent().find('input').val(medida.toFixed(0));
+					}
+				}, timer);
+				return false;
+			})
+			 .bind('mouseup', apiRH.clearTimeoutLogic)
+			 .dblclick(function(){
+				console.log("Double click");
+			});
+
+			$('#add_medidas').on('click', function(){
+				/* localStorage MEDIDAS / MEASURED AREA */
+				
+				localStorage.setItem( 'medidas', $('#medida-dato').val() );
+				localStorage.setItem( 'measured_area', $('#measured_area').val() )
+
+				if(!$('.alert_tracking').is(':visible')){
+					$('.alert_tracking').show();
+					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
+				} else {
+					$('.alert_tracking').removeClass('active');
+					setTimeout(function() {$('.alert_tracking').hide();}, 800);
+				}
+				$('#blur').toggleClass('blurred');
+				//$('a.centro img').toggleClass('onn');
+			});
+				$('#add_tracking').click(function(){
+
+					var medidas = localStorage.getItem('medidas');
+					var area = localStorage.getItem('measured_area');
+					var responsedata = apiRH.tracking(area, medidas);
+					if(responsedata){
+						console.log(area+" "+medidas);
+						app.toast("Se han agregado tus medidas");
+						//window.location.assign('dieta.html');
+					}
+					$('.alert_tracking').hide();
+					$('#blur').toggleClass('blurred');
+				});
+				$('#add_cancelar').click(function(){
+					$('.alert_tracking').hide();
+					$('#blur').toggleClass('blurred');
+				});
+
+			initCentroActions();
+		}/*** END measures ***/
+
+
+		if( $('.view').hasClass('mood') ){
 
 			var valor = 0;
 			var animo = [ 'increible', 'feliz', 'bien', 'regular', 'triste', 'cansado', 'hambriento', 'frustrado', 'motivado' ];
@@ -1238,13 +1655,6 @@ window.initializeEvents = function(){
 			})
 			 .bind('mouseup', apiRH.clearTimeoutLogic);
 
-			
-			//--------------------------------------------
-			//
-			// onClick: add_animo Registro de estado de
-			// animo.
-			//
-			//--------------------------------------------
 
 			$('#add_animo').on('click', function(){
 
@@ -1286,233 +1696,9 @@ window.initializeEvents = function(){
 			});
 
 			$(window).resize();
+			initCentroActions();
 
 		} /*** END mood ***/
-
-
-
-		if( $('body').hasClass('excercise') ){
-
-			$('.ej-option').click(function() {
-				var valor = $(this).find('.type').attr('value');
-				$('.ej-option').each(function() {
-					if ($(this).find('img').attr('src').substr(-5, 1)=="2") {
-					  $(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -5)+".png");
-					  $(this).removeClass('active');
-					  $(this).attr('value', "");
-					}
-				}); 
-
-				$(this).find('img').attr("src",$(this).find('img').attr('src').slice(0, -4)+"2.png");
-				$(this).addClass('active');
-				$("#ejercicio_type").attr('value', valor);
-
-					//'caminar', 'correr', 'pesas', 'cross', 'bici', 'estacionaria', 'eliptica', 'cardio', 'yoga', 'pilates', 'tenis', 'otro'
-
-				switch($("#ejercicio_type").val() ){
-					case 'caminar' :
-					$('#ejercicio_type').attr('value','10');
-					break;
-					case 'correr' :
-					$('#ejercicio_type').attr('value','11');
-					break;
-					case 'pesas' :
-					$('#ejercicio_type').attr('value','12');
-					break;
-					case 'cross' :
-					$('#ejercicio_type').attr('value','13');
-					break;
-					case 'bici' :
-					$('#ejercicio_type').attr('value','14');
-					break;
-					case 'estacionaria' :
-					$('#ejercicio_type').attr('value','15');
-					break;
-					case 'eliptica' :
-					$('#ejercicio_type').attr('value','16');
-					break;
-					case 'cardio' :
-					$('#ejercicio_type').attr('value','17');
-					break;
-					case 'yoga' :
-					$('#ejercicio_type').attr('value','18');
-					break;
-					case 'pilates' :
-					$('#ejercicio_type').attr('value','19');
-					break;
-					case 'tenis' :
-					$('#ejercicio_type').attr('value','20');
-					break;
-					case 'otro	' :
-					$('#ejercicio_type').attr('value','21');
-					break;
-				}
-
-			});
-
-			/*
-				app.keeper EJERCICIO / DURACION / INTENSIDAD
-			 */
-			$('#add_ejercicio').on('click', function(){
-
-				app.keeper.setItem('track_ejercicio_type', 		$('#ejercicio_type').val() );
-				app.keeper.setItem('track_ejercicio_duration',	$('#duracion').val() );
-				app.keeper.setItem('track_ejercicio_intensidad', $('#intensidad').val() );
-
-				//console.log(responsedata);
-				if(!$('.alert_tracking').is(':visible')){
-					$('.alert_tracking').show();
-					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
-				} else {
-					$('.alert_tracking').removeClass('active');
-					setTimeout(function() {$('.alert_tracking').hide();}, 800);
-				}
-				$('#blur').toggleClass('blurred');
-			});
-
-			$('#add_tracking').click(function(){
-				
-				var intensidad  = app.keeper.getItem('track_ejercicio_intensidad');
-				var type 		= app.keeper.getItem('track_ejercicio_type');
-				var duracion	= app.keeper.getItem('track_ejercicio_duration');
-				
-				var responsedata = apiRH.tracking(type, duracion);
-
-				if(responsedata){
-					app.toast("Se ha guardado tu progreso correctamente")
-					return app.render_myPlan('dieta.html');
-				}else{
-					app.toast('error al insertar datos ');
-				}
-				$('.alert_tracking').hide();
-				$('#blur').toggleClass('blurred');
-			});
-
-			$(window).resize();
-			app.hideLoader();
-
-		} /*** END exercise ***/
-
-		if( $('body').hasClass('weight') ){
-
-			var r_peso;
-			var usr_peso;
-			var response = app.keeper.getItem('user');
-			response = JSON.parse(response);
-			usr_peso = response.perfil.peso;
-			$('.r_peso input[name="peso_metric"]').attr("value",usr_peso );
-
-			$("#r_peso-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
-			$("#r_peso-up").bind('mousedown', function(e){
-				if (clickTimer == null) {
-		        	clickTimer = setTimeout(function () {
-			            clickTimer = null;
-			        }, 320)
-			    } else {
-			        clearTimeout(clickTimer);
-			        clickTimer = null;
-			        e.preventDefault();
-			        e.stopPropagation();
-			        console.log("double");
-			        return false;
-			    }
-				timeout = setInterval(function(){
-					r_peso = Number($('.r_peso input[name="peso_metric"]').val() );
-
-					if (r_peso<99) {
-						r_peso=r_peso+0.5;
-						$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(1));
-						$('input[name="track_peso"]').attr('value', r_peso);
-					} else {
-						r_peso=r_peso+1;
-						$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(0));
-						$('input[name="track_peso"]').attr('value', r_peso);
-					}
-				}, timer);
-				return false;
-			})
-			 .bind('mouseup', apiRH.clearTimeoutLogic);
-
-			$("#r_peso-dw").bind('touchstart touchend', apiRH.stickyTouchHandler);
-			$("#r_peso-dw").bind('mousedown', function(e){
-				if (clickTimer == null) {
-		        	clickTimer = setTimeout(function () {
-			            clickTimer = null;
-			        }, 320)
-			    } else {
-			        clearTimeout(clickTimer);
-			        clickTimer = null;
-			        e.preventDefault();
-			        e.stopPropagation();
-			        console.log("double");
-			        return false;
-			    }
-				timeout = setInterval(function(){
-					r_peso = Number($('.r_peso input[name="peso_metric"]').val());
-					if (r_peso>0.4) {
-						if (r_peso<100.1) {
-							r_peso=r_peso-0.5;
-							$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(1));
-							$('input[name="track_peso"]').attr('value', r_peso);
-						} else {
-							r_peso=r_peso-1;
-							$('.r_peso input[name="peso_metric"]').attr("value",r_peso.toFixed(0));
-							$('input[name="track_peso"]').attr('value', r_peso);
-						}
-					}
-				}, timer);
-				return false;
-			})
-			 .bind('mouseup', apiRH.clearTimeoutLogic);
-
-
-			$('#add_peso').on('click', function(){
-				app.keeper.setItem('track_peso', $('input[name="track_peso"]').val() );
-				
-				var track_peso = app.keeper.getItem('track_peso');
-				
-				console.log(track_peso);
-				
-				if(!$('.alert_tracking').is(':visible')){
-					$('.alert_tracking').show();
-					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
-				} else {
-					$('.alert_tracking').removeClass('active');
-					setTimeout(function() {$('.alert_tracking').hide();}, 800);
-				}
-				$('#blur').toggleClass('blurred');
-				//$('a.centro img').toggleClass('onn');
-			});
-
-			$('#add_tracking').click(function(){	
-				
-				track_peso = $('input[name="track_peso"]').val();
-
-
-				if(track_peso >= 30){
-
-					console.log('Peso <<<');
-
-					var responsedata = apiRH.tracking(0, track_peso);
-					
-					if(responsedata){
-						app.toast("Se ha guardado correctamente tu peso")
-					}else{
-						app.toast('Error al registrar peso');
-					}
-				}else{
-					app.toast('El peso debe de ser mayor a 40');
-				}
-				$('.alert_tracking').hide();
-				$('#blur').toggleClass('blurred');
-			});
-
-			$('.cancel').click(function(){
-				$('.alert_tracking').hide();
-				$('#blur').toggleClass('blurred');
-			});
-
-		}/*** END weight ***/
 
 
 		if( $('.view').hasClass('edit-profile') ) {

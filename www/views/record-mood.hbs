@@ -1,0 +1,39 @@
+	<div id="container" class="tracks">
+		<header class="hwhite2">
+			<div class="toolbar">
+				<a class="back hook" data-resource="my-plan" href="dieta.html"><img src="{{cordova_full_path}}images/back.svg"></a>
+				<h2 class="titulo">{{header_title}}</h2>
+				<a class="menu hook" data-resource="main-manu" href="menu.html"><img src="{{cordova_full_path}}images/menu.svg"></a>
+			</div>
+		</header>
+		<h2 class="mainline">¿Cómo te sientes?</h2>
+		<div class="animo">
+			<div class="carita">
+				<img src="{{cordova_full_path}}images/caras/increible.svg">
+				<h4>INCREÍBLE</h4>
+			</div>
+			<div class="arrows-vertical">
+				<img id="animo-up" src="{{cordova_full_path}}images/leftarrow.png"><br><br>
+				<img id="animo-dw" src="{{cordova_full_path}}images/rightarrow.png">
+			</div>
+			<input id="track_animo" name="track_animo" value="" type="hidden">
+		</div>
+		<a id="add_animo" class="btn-gre" href="#">Agregar</a>
+	</div>
+
+	{{> footer_menu}}
+
+	{{> footer_activities}}
+	
+	<div class="alert_tracking" style="display:none">
+		<div class="ov-filler2"></div>
+		<div class="dialog">
+			<h5>Ánimo</h5>
+			<p>¿Deseas guardar los datos?</p>
+			<div class="di-options">
+				<a id="add_tracking" class="accept">Aceptar</a>
+				<a id="cancelar" class="cancel">Cancelar</a>
+			</div>
+		</div>
+	</div>
+	

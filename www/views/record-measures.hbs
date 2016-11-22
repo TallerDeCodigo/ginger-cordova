@@ -1,9 +1,9 @@
 	<div id="container" class="tracks">
 		<header class="hwhite2">
 			<div class="toolbar">
-				<a class="back" href="dieta.html"><img src="{{cordova_full_path}}images/back.svg"></a>
+				<a class="back hook" data-resource="my-plan" href="dieta.html"><img src="{{cordova_full_path}}images/back.svg"></a>
 				<h2 class="titulo">{{header_title}}</h2>
-				<a class="menu" href="menu.html"><img src="{{cordova_full_path}}images/menu.svg"></a>
+				<a class="menu hook" data-resource="main-menu" href="menu.html"><img src="{{cordova_full_path}}images/menu.svg"></a>
 			</div>
 		</header>
 		<h2 class="mainline">Agrega tus medidas en cm</h2>
@@ -46,60 +46,15 @@
 					<img id="medida-up" src="{{cordova_full_path}}images/leftarrow.png"><br><br>
 					<img id="medida-dw" src="{{cordova_full_path}}images/rightarrow.png">
 				</div>
-				<!-- <div class="drag-parent">
-					<div class="slider-bar"></div>
-					<div id="medida-filler" class="slider-filler"></div>
-					<div id="medida" class="slider-point">
-					</div>
-				</div> -->
 			</div>
 		</div>
 		<a id="add_medidas" class="btn-gre" href="#">Agregar</a>
 	</div>
-	<footer class="menu-bar">
-		<a href="dieta.html">
-			<img src="{{cordova_full_path}}images/menu/plan.svg">
-			<span>mi plan</span>
-		</a>
-		<a href="chat.html">
-			<img src="{{cordova_full_path}}images/menu/chat.svg">
-			<span>chat</span>
-		</a>
-		<a class="centro">
-			<img src="{{cordova_full_path}}images/menu/mas.svg">
-		</a>
-		<a href="progreso.html">
-			<img src="{{cordova_full_path}}images/menu/progreso.svg">
-			<span>progreso</span>
-		</a>
-		<a href="lista.html">
-			<img src="{{cordova_full_path}}images/menu/shop.svg">
-			<span>list</span>
-		</a>
-	</footer>
-	<div class="overscreen" style="display:none;">
-		<div class="ov-filler"></div>
-		<a class="ruedas rueda-1" href="ejercicio.html">
-			<img src="{{cordova_full_path}}images/menu/ejercicio.svg">
-			<span>EJERCICIO</span>
-		</a>
-		<a class="ruedas rueda-2" href="agua.html">
-			<img src="{{cordova_full_path}}images/menu/agua.svg">
-			<span>AGUA</span>
-		</a>
-		<a class="ruedas rueda-3" href="peso.html">
-			<img src="{{cordova_full_path}}images/menu/peso.svg">
-			<span>PESO</span>
-		</a>
-		<a class="ruedas rueda-4" href="medidas.html">
-			<img src="{{cordova_full_path}}images/menu/medidas.svg">
-			<span>MEDIDAS</span>
-		</a>
-		<a class="ruedas rueda-5" href="animo.html">
-			<img src="{{cordova_full_path}}images/menu/animo.svg">
-			<span>ÁNIMO</span>
-		</a>
-	</div>
+
+	{{> footer_menu}}
+
+	{{> footer_activities}}
+
 	<div class="alert_tracking" style="display:none">
 		<div class="ov-filler2"></div>
 		<div class="dialog">

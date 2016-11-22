@@ -14,86 +14,10 @@
 	    <script src="js/jquery-touch.min.js"></script>
 	</head>
 	
-	<body class="iosm weight">
-		<div id="container" class="tracks">
-			<header class="hwhite2">
-				<div class="toolbar">
-					<a class="back" href="dieta.html"><img src="images/back.svg"></a>
-					<h2 class="titulo">Peso</h2>
-					<a class="menu" href="menu.html"><img src="images/menu.svg"></a>
-				</div>
-			</header>
-			<h2 class="mainline">Agrega tu peso en kg</h2>
-			<div class="r_peso">
-				<div class="rojo">
-					<img src="images/peso.svg">
-					<!-- <p>67.</p> -->
-					<input name="peso_metric" value="67.5" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
-				</div>
-				<div class="arrows-vertical">
-					<img id="r_peso-up" src="images/leftarrow.png"><br><br>
-					<img id="r_peso-dw" src="images/rightarrow.png">
-				</div>
-				<input id="track_peso" name="track_peso" value="" type="hidden" >
-			</div>
-			<a id="add_peso" class="btn-gre" href="#">Agregar</a>
+	<body class="iosm preventEvents">
+		<div id="container" class="rootContainer">
+			
 		</div>
-		<footer class="menu-bar">
-			<a href="dieta.html">
-				<img src="images/menu/plan.svg">
-				<span>mi plan</span>
-			</a>
-			<a href="chat.html">
-				<img src="images/menu/chat.svg">
-				<span>chat</span>
-			</a>
-			<a class="centro">
-				<img src="images/menu/mas.svg">
-			</a>
-			<a href="proximamente.html">
-				<img src="images/menu/progreso.svg">
-				<span>progreso</span>
-			</a>
-			<a href="proximamente.html">
-				<img src="images/menu/shop.svg">
-				<span>list</span>
-			</a>
-		</footer>
-		<div class="overscreen" style="display:none;">
-			<div class="ov-filler"></div>
-			<a class="ruedas rueda-1" href="ejercicio.html">
-				<img src="images/menu/ejercicio.svg">
-				<span>EJERCICIO</span>
-			</a>
-			<a class="ruedas rueda-2" href="agua.html">
-				<img src="images/menu/agua.svg">
-				<span>AGUA</span>
-			</a>
-			<a class="ruedas rueda-3" href="peso.html">
-				<img src="images/menu/peso.svg">
-				<span>PESO</span>
-			</a>
-			<a class="ruedas rueda-4" href="medidas.html">
-				<img src="images/menu/medidas.svg">
-				<span>MEDIDAS</span>
-			</a>
-			<a class="ruedas rueda-5" href="animo.html">
-				<img src="images/menu/animo.svg">
-				<span>ÁNIMO</span>
-			</a>
-		</div>
-		<div class="alert_tracking" style="display:none">
-			<div class="ov-filler2"></div>
-			<div class="dialog">
-				<h5>Peso</h5>
-				<p>¿Deseas guardar los datos?</p>
-				<div class="di-options">
-					<a id="add_tracking" class="accept">Aceptar</a>
-					<a class="cancel">Cancelar</a>
-				</div>
-			</div>
-		</div>
-		
 	</body>
 
     <script type="text/javascript" src="views/compiled/container.js"></script>
@@ -111,6 +35,14 @@
     <script type="text/javascript" src="views/compiled/partials/header.js"></script>
     <script type="text/javascript" src="views/compiled/partials/loader.js"></script>
     <script type="text/javascript" src="views/compiled/coming-soon.js"></script>
+    <script type="text/javascript" src="views/compiled/user-profile.js"></script>
+    <script type="text/javascript" src="views/compiled/edit-profile.js"></script>
+    <script type="text/javascript" src="views/compiled/change-coach.js"></script>
+    <script type="text/javascript" src="views/compiled/record-exercise.js"></script>
+    <script type="text/javascript" src="views/compiled/record-water.js"></script>
+    <script type="text/javascript" src="views/compiled/record-weight.js"></script>
+    <script type="text/javascript" src="views/compiled/record-measures.js"></script>
+    <script type="text/javascript" src="views/compiled/record-mood.js"></script>
     <script type="text/javascript" src="js/api-sdk-1.0.js"></script>
 	<script type="text/javascript" src="js/plugins.js"></script>
 	<script src="js/chat-config.js"></script>
@@ -124,14 +56,10 @@
     <script type="text/javascript" src="cordova.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript">
-		/* Initialize app object and perform initial login check */
-		window.is_access = true;
-		app.initialize();
-		app.showLoader();
+		app.render_new_record(null, 'weight');
 	</script>
     <script type="text/javascript" src="js/functions.js"></script>
-    <script type="text/javascript" src="js/scripts/document_ready.js"></script>
     <script type="text/javascript" src="js/scripts/initialRecord.js"></script>
     <script type="text/javascript" src="js/scripts/calendar.js"></script>
+    <script type="text/javascript" src="js/scripts/document_ready.js"></script>
 </html>
-
