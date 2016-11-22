@@ -149,7 +149,7 @@ function requestHandlerAPI(){
 		 * Record new tracking activity
 		 * @param Integer type
 		 * @param Float amount
-		 * @return Object /Boolean
+		 * @return Object / Boolean
 		 */
 		this.tracking = function(type, amount){
 			
@@ -159,15 +159,16 @@ function requestHandlerAPI(){
 							'cliente' 	: app.keeper.getItem('userId'),
 							'coach' 	: app.keeper.getItem('coachId')
 						};
-			var response = this.makeRequest('tables/medicion', data);
+			var response = this.makeRequest( 'tables/medicion', data );
 			console.log(response);
 			return (response) ? response : false;
 		};
 
 		/**
-		  * update perfil
-		  **/
-
+		 * Update user profile
+		 * @param Object data
+		 * @return Object / Boolean
+		 */
 		this.updatePerfil = function(data){
 			var req = {
 				data : data
@@ -175,7 +176,11 @@ function requestHandlerAPI(){
 			var response = this.patchRequest( 'tables/cliente/' + app.keeper.getItem('userId'), req);
 			return (response) ? response : false;
 		};
-
+		/**
+		 * Update user profile
+		 * @param Object data
+		 * @return Object / Boolean
+		 */
 		this.getCoachList = function(data){
 			var response = apiRH.getRequest('tables/dieta?opciones=1', data);
 			var coaches = [];

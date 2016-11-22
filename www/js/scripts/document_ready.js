@@ -612,8 +612,6 @@ window.initializeEvents = function(){
 		/********************************/
 		if( $('.view').hasClass('dieta') ){
 			
-			app.showLoader();
-
 			initializeCalendar();
 			var dietId = app.keeper.getItem('dietaId');
 			console.log("Diet Id ::: "+dietId);
@@ -971,7 +969,9 @@ window.initializeEvents = function(){
 
 			initCentroActions();
 			
-			return app.hideLoader();
+			setTimeout( function(){
+				app.hideLoader();
+			}, 0)
 			
 		} /*** END BODY CLASS DIETA ***/
 
@@ -1288,30 +1288,27 @@ window.initializeEvents = function(){
 		} /*** END water ***/
 
 
-		if( $('body').hasClass('weight') ){
+		if( $('.view').hasClass('weight') ){
 
 			var r_peso;
-			var usr_peso;
-			var response = app.keeper.getItem('user');
-			response = JSON.parse(response);
-			usr_peso = response.perfil.peso;
-			$('.r_peso input[name="peso_metric"]').attr("value",usr_peso );
+
+			$('.r_peso input[name="peso_metric"]').attr("value", _user.perfil.peso );
 
 			$("#r_peso-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
 			$("#r_peso-up").bind('mousedown', function(e){
-				if (clickTimer == null) {
-		        	clickTimer = setTimeout(function () {
-			            clickTimer = null;
+				if (apiRH.clickTimer == null) {
+		        	apiRH.clickTimer = setTimeout(function () {
+			            apiRH.clickTimer = null;
 			        }, 320)
 			    } else {
-			        clearTimeout(clickTimer);
-			        clickTimer = null;
+			        clearTimeout(apiRH.clickTimer);
+			        apiRH.clickTimer = null;
 			        e.preventDefault();
 			        e.stopPropagation();
 			        console.log("double");
 			        return false;
 			    }
-				timeout = setInterval(function(){
+				apiRH.timeout = setInterval(function(){
 					r_peso = Number($('.r_peso input[name="peso_metric"]').val() );
 
 					if (r_peso<99) {
@@ -1323,26 +1320,26 @@ window.initializeEvents = function(){
 						$('.r_peso input[name="peso_metric"]').attr("value", r_peso.toFixed(0));
 						$('input[name="track_peso"]').attr('value', r_peso);
 					}
-				}, timer);
+				}, apiRH.timer);
 				return false;
 			})
 			 .bind('mouseup', apiRH.clearTimeoutLogic);
 
 			$("#r_peso-dw").bind('touchstart touchend', apiRH.stickyTouchHandler);
 			$("#r_peso-dw").bind('mousedown', function(e){
-				if (clickTimer == null) {
-		        	clickTimer = setTimeout(function () {
-			            clickTimer = null;
+				if (apiRH.clickTimer == null) {
+		        	apiRH.clickTimer = setTimeout(function () {
+			            apiRH.clickTimer = null;
 			        }, 320)
 			    } else {
-			        clearTimeout(clickTimer);
-			        clickTimer = null;
+			        clearTimeout(apiRH.clickTimer);
+			        apiRH.clickTimer = null;
 			        e.preventDefault();
 			        e.stopPropagation();
 			        console.log("double");
 			        return false;
 			    }
-				timeout = setInterval(function(){
+				apiRH.timeout = setInterval(function(){
 					r_peso = Number($('.r_peso input[name="peso_metric"]').val());
 					if (r_peso>0.4) {
 						if (r_peso<100.1) {
@@ -1355,7 +1352,7 @@ window.initializeEvents = function(){
 							$('input[name="track_peso"]').attr('value', r_peso);
 						}
 					}
-				}, timer);
+				}, apiRH.timer);
 				return false;
 			})
 			 .bind('mouseup', apiRH.clearTimeoutLogic);
@@ -1423,19 +1420,19 @@ window.initializeEvents = function(){
 			$("#medida-up").bind('touchstart touchend', apiRH.stickyTouchHandler);
 			$("#medida-up").bind('mousedown', function(e){
 				e.preventDefault();
-				if (clickTimer == null) {
-		        	clickTimer = setTimeout(function () {
-			            clickTimer = null;
+				if (apiRH.clickTimer == null) {
+		        	apiRH.clickTimer = setTimeout(function () {
+			            apiRH.clickTimer = null;
 			        }, 320)
 			    } else {
-			        clearTimeout(clickTimer);
-			        clickTimer = null;
+			        clearTimeout(apiRH.clickTimer);
+			        apiRH.clickTimer = null;
 			        e.preventDefault();
 			        e.stopPropagation();
 			        console.log("double");
 			        return false;
 			    }
-				timeout = setInterval(function(){
+				apiRH.timeout = setInterval(function(){
 					medida = Number($("#medida-up").parent().parent().find('input').val());
 					if (medida<99) {
 						medida=medida+0.1;
@@ -1445,7 +1442,7 @@ window.initializeEvents = function(){
 						medida=medida+1;
 						$("#medida-up").parent().parent().find('input').val(medida.toFixed(0));
 					}
-				}, timer);
+				}, apiRH.timer);
 				return false;
 			})
 			 .bind('mouseup', apiRH.clearTimeoutLogic);
@@ -1453,19 +1450,19 @@ window.initializeEvents = function(){
 			$("#medida-dw").bind('touchstart touchend', apiRH.stickyTouchHandler);
 			$("#medida-dw").bind('mousedown', function(e){
 				e.preventDefault();
-				if (clickTimer == null) {
-		        	clickTimer = setTimeout(function () {
-			            clickTimer = null;
+				if (apiRH.clickTimer == null) {
+		        	apiRH.clickTimer = setTimeout(function () {
+			            apiRH.clickTimer = null;
 			        }, 320)
 			    } else {
-			        clearTimeout(clickTimer);
-			        clickTimer = null;
+			        clearTimeout(apiRH.clickTimer);
+			        apiRH.clickTimer = null;
 			        e.preventDefault();
 			        e.stopPropagation();
 			        console.log("double");
 			        return false;
 			    }
-				timeout = setInterval(function(){
+				apiRH.timeout = setInterval(function(){
 					medida = Number($("#medida-dw").parent().parent().find('input').val());
 					if (medida<100.1) {
 						medida=medida-0.1;
@@ -1475,7 +1472,7 @@ window.initializeEvents = function(){
 						medida=medida-1;
 						$("#medida-dw").parent().parent().find('input').val(medida.toFixed(0));
 					}
-				}, timer);
+				}, apiRH.timer);
 				return false;
 			})
 			 .bind('mouseup', apiRH.clearTimeoutLogic)

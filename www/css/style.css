@@ -235,7 +235,8 @@ img.saltar {position:absolute;bottom:2.5%;left:50%;margin-left:-65px;display:blo
 .sld-wrapper {position:relative;text-align:left;overflow-y:hidden;overflow-x:scroll;width:100%;margin:3.5% 0px 7%;}
 .mover {position:relative;}
 
-.tipo_med.mover{}
+.tipo_ejer.mover{max-height: 140px!important;}
+.tipo_med.mover{max-height: 140px!important;}
 .plan {width:85px;text-align:center;font-size:95%;font-weight:700;color:#888;margin:8px;position:relative;display:inline-block;vertical-align:top;}
 .plan.active {color:#8041b7;}
 .plan img:first-of-type {width:100%;margin-bottom:5px;}
