@@ -44,6 +44,12 @@ window.initializeEvents = function(){
 				if( $(this).data('resource') == "coming-soon" )
 					return app.render_coming_soon( $(this).attr('href') );
 
+				if( $(this).data('resource') == "render-water" )
+					return app.render_new_record( $(this).attr('href'), 'water' );
+				if( $(this).data('resource') == "render-measures" )
+					return app.render_new_record( $(this).attr('href'), 'measures' );
+
+
 				e.stopPropagation();
 			});
 		};

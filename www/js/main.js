@@ -352,6 +352,7 @@
 			return this.switchView('change-coach', data, '.view', url, 'cambio-coach');
 		},
 		render_new_record : function(url, type){
+			
 			window.is_home = false;
 			app.initialize();
 			setTimeout(function(){
@@ -370,6 +371,9 @@
 			switch(type){
 				case 'water':
 					name = "Agua";
+					break;
+				case 'measures':
+					name = "Medidas";
 					break;
 				default:
 					break;
