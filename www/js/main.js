@@ -251,7 +251,12 @@
 			}
 		},
 		render_entermode : function(url){
-			app.showLoader();
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
 			app.check_or_renderContainer();
 			console.log("Rendering Enter mode");
 			var data = this.gatherEnvironment();
@@ -259,7 +264,12 @@
 			return this.switchView('entermode', data, '.view', url, 'inicio', false, false);
 		},
 		render_login : function(url){
-			app.showLoader();
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
 			app.check_or_renderContainer();
 			console.log("Rendering Login");
 			var data = this.gatherEnvironment();
@@ -267,7 +277,12 @@
 			return this.switchView('login', data, '.view', url, 'login');
 		},
 		render_login_email : function(url){
-			app.showLoader();
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
 			app.check_or_renderContainer();
 			console.log("Rendering Login email");
 			var data = this.gatherEnvironment();
@@ -275,7 +290,12 @@
 			return this.switchView('login-mail', data, '.view', url, 'login');
 		},
 		render_register : function( url ){
-			app.showLoader();
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
 			app.check_or_renderContainer();
 			console.log("Rendering Register landing");
 			var data = this.gatherEnvironment();
@@ -283,7 +303,12 @@
 			return this.switchView('register', data, '.view', url, 'segundo');
 		},
 		render_register_mail : function( url ){
-			app.showLoader();
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
 			app.check_or_renderContainer();
 			console.log("Rendering Register by Email");
 			var data = this.gatherEnvironment();
@@ -291,7 +316,12 @@
 			return this.switchView('register-mail', data, '.view', url, 'segundo');
 		},
 		render_validate_code : function( url ){
-			app.showLoader();
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
 			app.check_or_renderContainer();
 			console.log("Rendering Validation Code");
 			var data = this.gatherEnvironment();
@@ -299,7 +329,12 @@
 			return this.switchView('code', data, '.view', url, 'login');
 		},
 		render_initial_record : function( url ){
-			app.showLoader();
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
 			app.check_or_renderContainer();
 			console.log("Rendering Initial Questions");
 			var data = this.gatherEnvironment();
@@ -307,6 +342,7 @@
 			return this.switchView('record', data, '.view', url, 'initialRecord');
 		},
 		render_myPlan : function( url ){
+			
 			window.is_home = true;
 			if(!app.initialized) app.initialize();
 			setTimeout(function(){
@@ -318,7 +354,12 @@
 			return this.switchView('my-plan', data, '.view', url, 'dieta', true);
 		},
 		render_mainmenu : function( url ){
-			app.showLoader();
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
 			app.check_or_renderContainer();
 			console.log("Rendering Main menu");
 			var data = this.gatherEnvironment(null, "Menu principal");
@@ -326,7 +367,12 @@
 			return this.switchView('main-menu', data, '.view', url, 'perfil');
 		},
 		render_settings : function(url){
-			app.showLoader();
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
 			app.check_or_renderContainer();
 			console.log("Rendering User Profile");
 			var extra_data = app.fetch_profile_data();
@@ -336,7 +382,12 @@
 			return this.switchView('user-profile', data, '.view', url, 'user-profile perfil');
 		},
 		render_edit_settings : function(url){
-			app.showLoader();
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
 			app.check_or_renderContainer();
 			console.log("Rendering User Profile (Editable)");
 			var extra_data = app.fetch_profile_data();
@@ -346,7 +397,12 @@
 			return this.switchView('edit-profile', data, '.view', url, 'edit-profile perfil2');
 		},
 		render_change_coach : function(url){
-			app.showLoader();
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
 			app.check_or_renderContainer();
 			console.log("Rendering Change coach");
 			// var extra_data = app.fetch_profile_data();
@@ -400,7 +456,12 @@
 			return this.switchView('record-'+type, data, '.view', url, 'record-info '+type);
 		},
 		render_coming_soon : function(url){
-			app.showLoader();
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
 			app.check_or_renderContainer();
 			console.log("Rendering Coming Soon");
 			var data = this.gatherEnvironment(null, "Próximamente");

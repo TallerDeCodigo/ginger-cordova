@@ -916,6 +916,8 @@ window.initializeRecordEvents = function(){
 			e.preventDefault();
 			console.log("Clicked cancel");
 			$(this).closest('.modal').hide().removeClass('active');
+			app.hideLoader();
+			$('#blur').removeClass('blurred');
 		});
 
 		$('#next_step_five').click(function(){

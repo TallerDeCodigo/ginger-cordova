@@ -1,7 +1,10 @@
 	<header class="hwhite2">
 		<div class="toolbar">
 			<a class="back hook" data-resource="my-plan" href="userdata.html">
-				<img src="{{cordova_full_path}}images/back.svg">
+				<a class="back hook" data-resource="my-plan" href="dieta.html">
+					<img src="{{cordova_full_path}}images/back.svg">
+				</a>
+				<h2 class="titulo">{{header_title}}</h2>
 			</a>
 		</div>
 	</header>
@@ -12,8 +15,8 @@
 	<h2 class="cpur">{{me.nombre}} {{me.apellido}}</h2>
 	<div class="profile-data">
 		<a class="edit-profile hook" data-resource="edit-profile" href="edituser.html">
-			<img src="{{cordova_full_path}}images/profile/pencil.svg">
-			Datos de <span>{{me.nombre}} {{me.apellido}}</span>
+			<img class="edit_icon" src="{{cordova_full_path}}images/profile/pencil.svg">
+			Editar perfil
 		</a>
 		<ul>
 			<li>

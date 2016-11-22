@@ -505,6 +505,7 @@ a.mail { background:#2eab7e url('../images/mail_btn.png') no-repeat;background-s
 .profile-data li span i {color:#afafaf;}
 
 .edit-profile {color: #43c2a7; width: 100%; display: block; height: auto; position: relative; padding-left: 0; line-height: 36px;}
+.edit_icon{ margin: 1.5rem 0 0 1.5rem; width: 25px;}
 .profile-pic.editable img {position: absolute; left: 0px; top: 5px; height:24px; width: auto; left: 7px;}
 
 .profile-data li.comentario {list-style: none; font-weight: 100;}
@@ -515,7 +516,7 @@ a.mail { background:#2eab7e url('../images/mail_btn.png') no-repeat;background-s
 .profile-bottom .rate-stars img {margin:0px -1px;}
 
 .btn-org {position:relative;display:inline-block;border-radius:2px;text-align:center;color:#FFF;font-weight:800;background:#ff873e;letter-spacing:0.035em;width:150px;}
-.profile-data .btn-org, .savech a {font-size:75%;padding:6px 13px;margin:5px 0px 0px;}
+.edit-profile .btn-org, .savech a {font-size:75%;padding:6px 13px;margin:5px 0px 0px;}
 
 #restricciones_perfil{text-transform: capitalize;}
 
@@ -523,24 +524,24 @@ a.mail { background:#2eab7e url('../images/mail_btn.png') no-repeat;background-s
 
 #add_picture_profile{width:100%;height:100%;border-style: none;box-shadow: none;}
 .profile.edition:after {content:"";position:absolute;width:100%;height:100%;background:rgba(0,0,0,0.35) url('../images/profile/pencil2.svg') no-repeat center;background-size:40% auto;left:0px;top:0px;opacity:0.8;}
-.profile-data.edition ul li {margin-top:10px;}
-.profile-data .page {position:relative;text-align:center;height:105px;width:90%;left:5%;margin:-10px 0px -5px;}
+.edit-profile.edition ul li {margin-top:10px;}
+.edit-profile .page {position:relative;text-align:center;height:105px;width:90%;left:5%;margin:-10px 0px -5px;}
 
-.profile-data .type-def {margin:0px 7px;}
-.profile-data .slider-bar {background:#e3dfdf;}
-.profile-data .page.zip {height:80px;top:-10px;}
-.profile-data .page.peso, .profile-data .page.ideal {margin-bottom:-30px;}
-.profile-data .arrows-vertical img {margin-top:8px;}
-.profile-data .ideal .arrows-vertical {-webkit-transform:rotate(90deg);top:-12px;margin-right:39px;}
-.profile-data .peso .arrows-vertical {-webkit-transform:rotate(90deg);top:-12px;margin-right:39px;}
+.edit-profile .type-def {margin:0px 7px;}
+.edit-profile .slider-bar {background:#e3dfdf;}
+.edit-profile .page.zip {height:80px;top:-10px;}
+.edit-profile .page.peso, .edit-profile .page.ideal {margin-bottom:-30px;}
+.edit-profile .arrows-vertical img {margin-top:8px;}
+.edit-profile .ideal .arrows-vertical {-webkit-transform:rotate(90deg);top:-12px;margin-right:39px;}
+.edit-profile .peso .arrows-vertical {-webkit-transform:rotate(90deg);top:-12px;margin-right:39px;}
 
-.profile-data .sld-wrapper {margin-bottom:-5px;}
-.profile-data .alt-page {text-align:center;width:90%;left:5%;position:relative;}
+.edit-profile .sld-wrapper {margin-bottom:-5px;}
+.edit-profile .alt-page {text-align:center;width:90%;left:5%;position:relative;}
+
+.edit-profile .btn-org.save-data { margin: 2rem auto; display: block; padding: 1rem; line-height: 1.5rem; font-size: 1.45rem; letter-spacing: 1.2px;}
 
 .savech {list-style:none;}
 .savech a {margin-bottom:8px;}
-
-
 
 /* DIALOG */
 
@@ -551,7 +552,7 @@ a.mail { background:#2eab7e url('../images/mail_btn.png') no-repeat;background-s
 .dialog {background:rgba(255,255,255,0.9);box-shadow:0px 0px 2px #666;border-radius:4px;overflow:hidden;padding:11px 0px 0px 0px;color:#3f3f3f;width:70%;height:auto;position:relative;left:15%;top:55%;transform:translateY(-50%);-webkit-transform:translateY(-50%);opacity:0;-webkit-transition:.2s ease-in-out;transition:.2s ease-in-out;}
 .active  .dialog { top:50%; opacity:1; background: rgba(255,255,255,.95);}
 .dialog h5 {font-size:120%;margin-bottom:7px;width:94%;position:relative;display:inline-block;}
-.dialog p {margin-bottom:17px;position:relative;display:inline-block;width:94%;font-size:95%;}
+.dialog p { margin-bottom: 17px; position: relative; display: inline-block; width: 94%; font-size: 95%; line-height: 2rem;}
 .di-options {width:100%;border-top:1px solid #afafaf;}
 
 .di-options a {display:inline-block;height:32px;line-height:32px;color:#43c2a7;font-size:110%;}

@@ -1170,7 +1170,7 @@ window.initializeEvents = function(){
 					app.toast('error al insertar datos ');
 				}
 				$('.alert_tracking').hide();
-				$('#blur').toggleClass('blurred');
+				$('#blur').removeClass('blurred');
 			});
 
 			$(window).resize();
@@ -1274,7 +1274,7 @@ window.initializeEvents = function(){
 					app.toast("Se ha guardado correctamente tu progreso");
 
 				$('.alert_tracking').hide();
-				$('#blur').toggleClass('blurred');
+				$('#blur').removeClass('blurred');
 			});
 
 			$('.cancel').click(function(){
@@ -1395,12 +1395,12 @@ window.initializeEvents = function(){
 					app.toast('El peso debe de ser mayor a 40');
 				}
 				$('.alert_tracking').hide();
-				$('#blur').toggleClass('blurred');
+				$('#blur').removeClass('blurred');
 			});
 
 			$('.cancel').click(function(){
 				$('.alert_tracking').hide();
-				$('#blur').toggleClass('blurred');
+				$('#blur').removeClass('blurred');
 			});
 
 			initCentroActions();
@@ -1506,11 +1506,11 @@ window.initializeEvents = function(){
 						//window.location.assign('dieta.html');
 					}
 					$('.alert_tracking').hide();
-					$('#blur').toggleClass('blurred');
+					$('#blur').removeClass('blurred');
 				});
 				$('#add_cancelar').click(function(){
 					$('.alert_tracking').hide();
-					$('#blur').toggleClass('blurred');
+					$('#blur').removeClass('blurred');
 				});
 
 			initCentroActions();
@@ -1674,21 +1674,27 @@ window.initializeEvents = function(){
 			});
 
 			$('#add_tracking').click(function(){
-				//------------------------------
-				//  @param tracking 1 - Ánimo
-				//  @param value of image selected
-				//-------------------------------
-				if(app.keeper.getItem('track_animo') >= 0){
+				
+				if( app.keeper.getItem('track_animo') >= 0){
 					var responsedata = apiRH.tracking(1, track_animo);
 					if(responsedata){
 						app.toast("Se ha guardado tu ánimo");
+						$('.alert_tracking').hide();
+						$('#blur').removeClass('blurred');
 						return;
 					}else{
-						alert('Error al registrar ánimo');
+						app.toast('Error al registrar ánimo');
+						$('.alert_tracking').hide();
+						$('#blur').removeClass('blurred');
+						return;
 					}
-				}else{
-					alert('Error al registrar el estado de ánimo');
 				}
+
+			});
+
+			$('.cancel').click(function(){
+				$('.alert_tracking').hide();
+				$('#blur').removeClass('blurred');
 			});
 
 			$(window).resize();
@@ -1806,10 +1812,7 @@ window.initializeEvents = function(){
 			$('#ejercicio-dato').html(frecuencia);
 
 
-			/*
-				COMENTA
-			*/
-			console.log('Comentario ' + comentario);
+			/*** COMENTARIO ***/
 			if(comentario === 'undefined' || comentario == null){
 				$('.comentario').html(comentario);
 				$('.the-comment').html(comentario);
@@ -1847,7 +1850,7 @@ window.initializeEvents = function(){
 
 			$('#ejercicio').css('left', grid_exercise*(frecuencia-minval_eje));
 			$('#ejercicio-filler').css('width', (grid_exercise*(frecuencia-minval_eje))+20);
-			console.log(restricciones);
+
 			if(restricciones === undefined || restricciones == null || restricciones == ""){
 				console.log('está Indefinido');
 			}else{
@@ -1883,6 +1886,7 @@ window.initializeEvents = function(){
 					_user.perfil.restricciones[i]++;
 					$('.tipo_restric .re-option:nth-of-type('+_user.perfil.restricciones[i]+')').addClass('active');
 				}
+
 
 			}//end if restricciones
 
@@ -1976,11 +1980,11 @@ window.initializeEvents = function(){
 											"pesoDeseado"		: peso_ideal,
 											"comentario"		: comentario
 										};
+					console.log(user_updated);
+				// var updated_response = apiRH.updatePerfil(user_updated);
 
-				var updated_response = apiRH.updatePerfil(user_updated);
-
-				if(updated_response)
-					return app.render_settings('userdata.html');
+				// if(updated_response)
+				// 	return app.render_settings('userdata.html');
 
 			});	// END accept_SaveProfile
 
@@ -1988,6 +1992,7 @@ window.initializeEvents = function(){
 			// 	$('.overscreen7').hide();
 			// 	$('#blur').toggleClass('blurred');
 			// });
+			initializeRecordEvents();
 			$(window).resize();
 			app.hideLoader();
 
