@@ -1138,9 +1138,9 @@ window.initializeEvents = function(){
 			 */
 			$('#add_ejercicio').on('click', function(){
 
-				app.keeper.setItem('track_ejercicio_type', 		$('#ejercicio_type').val() );
-				app.keeper.setItem('track_ejercicio_duration',	$('#duracion').val() );
-				app.keeper.setItem('track_ejercicio_intensidad', $('#intensidad').val() );
+				app.keeper.setItem('track_ejercicio_type', 			$('#ejercicio_type').val() );
+				app.keeper.setItem('track_ejercicio_duration',		$('#duracion').val() );
+				app.keeper.setItem('track_ejercicio_intensidad', 	$('#intensidad').val() );
 
 				//console.log(responsedata);
 				if(!$('.alert_tracking').is(':visible')){
@@ -1159,6 +1159,8 @@ window.initializeEvents = function(){
 				var type 		= app.keeper.getItem('track_ejercicio_type');
 				var duracion	= app.keeper.getItem('track_ejercicio_duration');
 				
+				duracion = duracion.split(":");
+				duracion = parseInt(duracion[0])*60+parseInt(duracion[1])
 				var responsedata = apiRH.tracking(type, duracion);
 
 				if(responsedata){
@@ -1362,9 +1364,7 @@ window.initializeEvents = function(){
 				app.keeper.setItem('track_peso', $('input[name="track_peso"]').val() );
 				
 				var track_peso = app.keeper.getItem('track_peso');
-				
-				console.log(track_peso);
-				
+								
 				if(!$('.alert_tracking').is(':visible')){
 					$('.alert_tracking').show();
 					setTimeout(function() {$('.alert_tracking').addClass('active');}, 200);
@@ -1373,13 +1373,12 @@ window.initializeEvents = function(){
 					setTimeout(function() {$('.alert_tracking').hide();}, 800);
 				}
 				$('#blur').toggleClass('blurred');
-				//$('a.centro img').toggleClass('onn');
+
 			});
 
 			$('#add_tracking').click(function(){	
 				
 				track_peso = $('input[name="track_peso"]').val();
-
 
 				if(track_peso >= 30){
 
