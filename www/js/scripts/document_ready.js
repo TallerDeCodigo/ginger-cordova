@@ -282,6 +282,7 @@ window.initializeEvents = function(){
 
 		/*  Create a new account the Goog ol' fashion way  */
 		if($('#create_account').length){
+
 			window.init_scripts.push("register_validate");
 			$('#create_account').validate({
 				rules: {
@@ -312,6 +313,7 @@ window.initializeEvents = function(){
 					cpass: "Las contraseñas que proporcionaste no coinciden"
 				},
 				submitHandler: function(form, event){
+
 					event.preventDefault();
 					app.showLoader();
 					var data_login  	= app.getFormData(form);
@@ -328,14 +330,12 @@ window.initializeEvents = function(){
 						var userInfo = apiRH.getInfoUser();
 						if(userInfo){
 							window._user = (userInfo) ? userInfo : null;
-							console.log("_user");
 							console.log(_user);
 							app.keeper.setItem( 'user', JSON.stringify(_user) );
-							var verified = app.keeper.getItem( 'email_verification' );
-							console.log("verified :: "+ verified);
+							var verified = JSON.parse(app.keeper.getItem( 'email_verification' ));
 							if(!verified){
 								console.log("render validation code");
-								return app.render_code('code.html');
+								return app.render_validate_code('code.html');
 							}else if( typeof _user.customerId !== undefined && _user.customerId !== 'not_set' ){
 								// TODO: Load interface via switch method
 								app.keeper.setItem( 'email_verification', true );
@@ -357,6 +357,7 @@ window.initializeEvents = function(){
 
 		/*  Email code validation  */
 		if($('#code_form').length){
+
 			window.init_scripts.push("code_validate");
 			$('#code_form').validate({
 				rules:{
@@ -402,7 +403,6 @@ window.initializeEvents = function(){
 		/***************************/
 		if( $('.view').hasClass('initialRecord') && $.inArray( 'initial_record', window.init_scripts ) == -1 )
 			return initializeRecordEvents();
-		
 		
 		function markConsumed(){
 			var date 		= new Date();
