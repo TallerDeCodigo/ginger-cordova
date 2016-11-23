@@ -1532,7 +1532,7 @@ window.initializeEvents = function(){
 					}
 					
 					
-					$('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
+					$('.carita img').attr("src", cordova_full_path+"images/caras/"+animo[valor]+".svg");
 					if (animo[valor]=="increible") {
 						$('.carita h4').html("increíble");
 					} else {
@@ -1596,7 +1596,7 @@ window.initializeEvents = function(){
 					} else {
 						valor = 8;
 					}
-					$('.carita img').attr("src", "images/caras/"+animo[valor]+".svg");
+					$('.carita img').attr("src", cordova_full_path+"images/caras/"+animo[valor]+".svg");
 					if (animo[valor]=="increible") {
 						$('.carita h4').html("increíble");
 					} else {

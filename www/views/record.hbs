@@ -2,11 +2,11 @@
 
 			<div>
 				<div class="fondo">
-					<img  src="images/bkg1.png">
+					<img  src="{{cordova_full_path}}images/bkg1.png">
 				</div>
 				<header class="htrans">
 					<div class="toolbar">
-						<a class="back" style="display:block"><img src="images/back.svg"></a>
+						<a class="back" style="display:block"><img src="{{cordova_full_path}}images/back.svg"></a>
 					</div>
 				</header>
 
@@ -21,14 +21,14 @@
 				    		</nav>
 				    		<div class="page-holder">
 				    			<div class="page genre sector-1">
-				    				<img id="hombre" src="images/hombreh.svg" alt="1">
-				    				<img id="mujer" src="images/mujer.svg" alt="">
+				    				<img id="hombre" src="{{cordova_full_path}}images/hombreh.svg" alt="1">
+				    				<img id="mujer" src="{{cordova_full_path}}images/mujer.svg" alt="">
 				    			</div>
 
 				    			<input id="genre_value" type="hidden" value="">
 
 				    			<div class="page age sector-1" style="display:none">
-				    				<img class="img-derecha" src="images/bebe.png">
+				    				<img class="img-derecha" src="{{cordova_full_path}}images/bebe.png">
 				    				<div class="drag-parent">
 				    					<div class="slider-bar"></div>
 				    					<div id="age-filler" class="slider-filler"></div>
@@ -41,7 +41,7 @@
 				    						</div>
 				    					</div>
 				    				</div>
-				    				<img class="img-izquierda" src="images/adulto.png">
+				    				<img class="img-izquierda" src="{{cordova_full_path}}images/adulto.png">
 				    			</div>
 				    			<div class="page zip sector-1" style="display:none">
 				    				<div class="box-input-1">
@@ -58,11 +58,11 @@
 				    			<div class="page mido sector-2">
 
 				    				<div class="arrows-vertical">
-				    					<img id="estatura-up" src="images/leftarrow.png">
-				    					<img id="estatura-dw" src="images/rightarrow.png">
+				    					<img id="estatura-up" src="{{cordova_full_path}}images/leftarrow.png">
+				    					<img id="estatura-dw" src="{{cordova_full_path}}images/rightarrow.png">
 				    				</div>
 				    				
-				    				<img class="type-def" src="images/hombreh.svg">
+				    				<img class="type-def" src="{{cordova_full_path}}images/hombreh.svg">
 				    				
 				    				<div class="box-input-2">
 				    					<input type="number" style="height:50px!important;" name="estatura" value="1.50" maxlength="4"  onkeypress='return event.charCode >= 46 && event.charCode <= 57'>
@@ -72,10 +72,10 @@
 				    			</div>
 				    			<div class="page peso sector-2" style="display:none">
 				    				<div class="arrows-vertical">
-				    					<img id="peso-up" src="images/leftarrow.png">
-				    					<img id="peso-dw" src="images/rightarrow.png">
+				    					<img id="peso-up" src="{{cordova_full_path}}images/leftarrow.png">
+				    					<img id="peso-dw" src="{{cordova_full_path}}images/rightarrow.png">
 				    				</div>
-				    				<img class="type-def" src="images/hombreh.svg">
+				    				<img class="type-def" src="{{cordova_full_path}}images/hombreh.svg">
 				    				<div class="box-input-2">
 				    					<input type="number" style="height:50px!important;" name="peso" value="50.0" maxlength="4" onkeypress='return event.charCode >= 46 && event.charCode <= 57'>
 				    					<span>kg</span>
@@ -83,17 +83,17 @@
 				    			</div>
 				    			<div class="page ideal sector-2" style="display:none">
 				    				<div class="arrows-vertical">
-				    					<img id="ideal-up" src="images/leftarrow.png">
-				    					<img id="ideal-dw" src="images/rightarrow.png">
+				    					<img id="ideal-up" src="{{cordova_full_path}}images/leftarrow.png">
+				    					<img id="ideal-dw" src="{{cordova_full_path}}images/rightarrow.png">
 				    				</div>
-				    				<img class="type-def" src="images/hombreh.svg">
+				    				<img class="type-def" src="{{cordova_full_path}}images/hombreh.svg">
 				    				<div class="box-input-2">
 				    					<input type="number" style="height:50px!important;" name="ideal" value="50.0" maxlength="4" onkeypress='return event.charCode >= 46 && event.charCode <= 57'>
 				    					<span>kg</span>
 				    				</div>
 				    			</div>
 				    		</div>
-				    		<img id="next_step_one" class="enter next_step step_1" src="images/enter.svg">
+				    		<img id="next_step_one" class="enter next_step step_1" src="{{cordova_full_path}}images/enter.svg">
 				    	</div>
 
 				    	<div class="objetive pagina" style="display:none">
@@ -101,19 +101,19 @@
 				    		<div class="sld-wrapper">
 				    			<div class="mover planes tipo_plan">
 				    				<div class="plan pl-option active">
-				    					<img src="images/plan/perderpeso2.png">
+				    					<img src="{{cordova_full_path}}images/plan/perderpeso2.png">
 				    					<span value="adelgazar" data-index="0" class="type">Bajar de peso</span>
 				    				</div>
 				    				<div class="plan pl-option">
-				    					<img src="images/plan/detox.png" value="">
+				    					<img src="{{cordova_full_path}}images/plan/detox.png" value="">
 				    					<span value="detox" data-index="1" class="type">Detox</span>
 				    				</div>
 				    				<div class="plan pl-option">
-				    					<img src="images/plan/rendimientofisico.png" value="">
+				    					<img src="{{cordova_full_path}}images/plan/rendimientofisico.png" value="">
 				    					<span value="rendimiento" data-index="3" class="type">Rendimiento físico</span>
 				    				</div>
 				    				<div class="plan pl-option">
-				    					<img src="images/plan/sentirsemejor.png" value="">
+				    					<img src="{{cordova_full_path}}images/plan/sentirsemejor.png" value="">
 				    					<span value="bienestar" data-index="2" class="type">Bienestar</span>
 				    				</div>
 				    			</div>
@@ -123,29 +123,29 @@
 				    		<div class="sld-wrapper">
 				    			<div class="mover planes tipo_coach">
 				    				<div class="plan co-option active">
-				    					<img src="images/coach/estricto2.png">
+				    					<img src="{{cordova_full_path}}images/coach/estricto2.png">
 				    					<span class="type" value="estricto"> Estricto</span><br>
-				    					<img class="question" src="images/question.svg" title="Estricto" data="Coach que busca que se cumplan sus dietas y recomendaciones al pie de la letra y que estará al pendiente de todos tus movieminteos para que cumplas tus objetivos">
+				    					<img class="question" src="{{cordova_full_path}}images/question.svg" title="Estricto" data="Coach que busca que se cumplan sus dietas y recomendaciones al pie de la letra y que estará al pendiente de todos tus movieminteos para que cumplas tus objetivos">
 				    				</div>
 				    				<div class="plan co-option">
-				    					<img src="images/coach/innovador.png">
+				    					<img src="{{cordova_full_path}}images/coach/innovador.png">
 				    					<span class="type" value="innovador">Innovador</span><br>
-				    					<img class="question" src="images/question.svg" title="Innovador" data="Coach que integra en sus dietas superalimentos así como recetas gourmet, healthy, o en general más elaboradas">
+				    					<img class="question" src="{{cordova_full_path}}images/question.svg" title="Innovador" data="Coach que integra en sus dietas superalimentos así como recetas gourmet, healthy, o en general más elaboradas">
 				    				</div>
 				    				<div class="plan co-option">
-				    					<img src="images/coach/animador.png">
+				    					<img src="{{cordova_full_path}}images/coach/animador.png">
 				    					<span class="type" value="animador">Animador</span><br>
-				    					<img class="question" src="images/question.svg" title="Animador" data="Coach que busca que te motives y que tengas ganas de obtener los mejores resultados posibles, fáciles de conseguir y de preparar">
+				    					<img class="question" src="{{cordova_full_path}}images/question.svg" title="Animador" data="Coach que busca que te motives y que tengas ganas de obtener los mejores resultados posibles, fáciles de conseguir y de preparar">
 				    				</div>
 				    				<div class="plan co-option">
-				    					<img src="images/coach/tradicional.png">
+				    					<img src="{{cordova_full_path}}images/coach/tradicional.png">
 				    					<span class="type" value="tradicional">Tradicional</span><br>
-				    					<img class="question" src="images/question.svg" title="Tradicional" data="Coach que se basa en alimentos sencillos y tradicionales, fáciles de conseguir y de preparar">
+				    					<img class="question" src="{{cordova_full_path}}images/question.svg" title="Tradicional" data="Coach que se basa en alimentos sencillos y tradicionales, fáciles de conseguir y de preparar">
 				    				</div>
 				    			</div>
 				    			<input id="coach_type" type="hidden" value="0">	
 				    		</div>
-				    		<img id="next_step_two" class="enter next_step step_2" src="images/enter.svg">
+				    		<img id="next_step_two" class="enter next_step step_2" src="{{cordova_full_path}}images/enter.svg">
 				    	</div>
 
 						<!-- Pag 3: Frecuencia de ejercicio -->
@@ -153,7 +153,7 @@
 				    		<h2>¿Con qué frecuencia<br>haces ejercicio?</h2>
 				    		<div class="page-holder">
 				    			<div class="page">
-				    				<img class="img-derecha" src="images/norun.svg">
+				    				<img class="img-derecha" src="{{cordova_full_path}}images/norun.svg">
 				    				<div class="drag-parent">
 				    					<div class="slider-bar"></div>
 				    					<div id="ejercicio-filler" class="slider-filler"></div>
@@ -161,11 +161,11 @@
 				    						<div class="position"><span id="ejercicio-dato">0</span><br>días</div>
 				    					</div>
 				    				</div>
-				    				<img class="img-izquierda" src="images/run.svg">
+				    				<img class="img-izquierda" src="{{cordova_full_path}}images/run.svg">
 				    			</div>
 				    		</div>
 			    			<p>Días por semana</p>
-				    		<img id="next_step_three" class="enter next_step step_3" src="images/enter.svg">
+				    		<img id="next_step_three" class="enter next_step step_3" src="{{cordova_full_path}}images/enter.svg">
 				    		<input id="days_per_week" type="hidden" value="0">
 				    	</div>
 
@@ -176,27 +176,27 @@
 				    		<div class="sld-wrapper">
 				    			<div class="mover planes tipo_restric">
 				    				<div class="plan re-option">
-				    					<img src="images/restric/camaron.png">
+				    					<img src="{{cordova_full_path}}images/restric/camaron.png">
 				    					<span class="type" value="3">Mariscos</span>
 				    				</div>
 				    				<div class="plan re-option">
-				    					<img src="images/restric/carne.png">
+				    					<img src="{{cordova_full_path}}images/restric/carne.png">
 				    					<span class="type" value="5">Carne</span>
 				    				</div>
 				    				<div class="plan re-option">
-				    					<img src="images/restric/huevo.png">
+				    					<img src="{{cordova_full_path}}images/restric/huevo.png">
 				    					<span class="type" value="0">Huevo</span>
 				    				</div>
 				    				<div class="plan re-option">
-				    					<img src="images/restric/lacteos.png">
+				    					<img src="{{cordova_full_path}}images/restric/lacteos.png">
 				    					<span class="type" value="4">Lácteos</span>
 				    				</div>
 				    				<div class="plan re-option">
-				    					<img src="images/restric/pescado.png">
+				    					<img src="{{cordova_full_path}}images/restric/pescado.png">
 				    					<span class="type" value="2">Pescado</span>
 				    				</div>
 				    				<div class="plan re-option">
-				    					<img src="images/restric/pollo.png">
+				    					<img src="{{cordova_full_path}}images/restric/pollo.png">
 				    					<span class="type" value="1">Pollo</span>
 				    				</div>
 				    			</div>
@@ -207,7 +207,7 @@
 		    				<div id="si" class="siono yes">Sí</div>
 		    				<div id="no" class="siono not active">No</div>
 				    		<span class="the-comment" style="display:none"></span>
-				    		<img id="next_step_four" class="saltar next_step step_4" src="images/saltar.svg">
+				    		<img id="next_step_four" class="saltar next_step step_4" src="{{cordova_full_path}}images/saltar.svg">
 
 				    	</div>
 
@@ -217,15 +217,15 @@
 				    			<div class="cslider">
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -234,15 +234,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -251,15 +251,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -268,15 +268,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -285,15 +285,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -302,15 +302,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -319,15 +319,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -336,15 +336,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -353,15 +353,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -370,15 +370,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -387,15 +387,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -404,15 +404,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -421,15 +421,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -438,15 +438,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -455,15 +455,15 @@
 				    				</div>
 				    				<div class="slide-coach">
 				    					<div class="coach img-frame">
-				    						<img class="la_foto" src="images/noimg.svg">
+				    						<img class="la_foto" src="{{cordova_full_path}}images/noimg.svg">
 				    					</div>
 				    					<h5 class="coach_name name">María Medina</h5>
 				    					<div class="rate-stars">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
-				    						<img src="images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
+				    						<img src="{{cordova_full_path}}images/star.svg">
 				    						<div class="bt-review">VER RESEÑAS</div>
 				    						<div class="no-review">sin valoraciones</div>
 				    					</div>
@@ -473,21 +473,21 @@
 				    				
 				    			</div>
 				    		</div>
-				    		<img id="next_step_five" class="enter next_step step_5" src="images/elegir.svg" >
+				    		<img id="next_step_five" class="enter next_step step_5" src="{{cordova_full_path}}images/elegir.svg" >
 				    	</div>
 
 				    	<div class="resena pagina" style="display:none">
 				    		<h2>Valoraciones y reseñas</h2>
 				    		<div class="bio img-frame">
-				    			<img class="la_foto_resena" src="images/muestra.png">
+				    			<img class="la_foto_resena" src="{{cordova_full_path}}images/muestra.png">
 				    		</div>
 				    		<h5 class="coach_name name name_on">María Medina</h5>
 				    		<div class="rate-stars_inner">
-				    			<img src="images/star.svg"> 
-				    			<img src="images/star.svg"> 
-				    			<img src="images/star.svg">
-				    			<img src="images/star.svg"> 
-				    			<img src="images/star.svg"> 
+				    			<img src="{{cordova_full_path}}images/star.svg"> 
+				    			<img src="{{cordova_full_path}}images/star.svg"> 
+				    			<img src="{{cordova_full_path}}images/star.svg">
+				    			<img src="{{cordova_full_path}}images/star.svg"> 
+				    			<img src="{{cordova_full_path}}images/star.svg"> 
 				    			<div class="no-review">2 valoraciones</div>
 				    		</div>
 				    		<div class="insert_stars">
@@ -497,7 +497,7 @@
 
 
 				    	<div class="discount pagina" style="display:none">
-				    		<img class="la_img" src="images/discount.png">
+				    		<img class="la_img" src="{{cordova_full_path}}images/discount.png">
 				    		<p class="semana">Prueba una semana gratis. Después sólo<br>paga $350.00 al mes y puedes cancelar<br>en cualquier momento*</p>
 				    		<p class="satis corg">¡SATISFACCIÓN 100% GARANTIZADA<br>O TE DEVOLVEMOS TU DINERO!</p>
 				    		<div class="btn-iniciar">Iniciar prueba GRATIS</div>
@@ -549,14 +549,14 @@
 				    			<span>Acepto <a href="http://www.gingerapp.mx/terminosycondiciones/">Términos y Condiciones</a></span>
 				    			<div>
 				    				<br>
-				    				<img style="width:30px; height:auto; float:left;" src="images/candado-08-08.png">
+				    				<img style="width:30px; height:auto; float:left;" src="{{cordova_full_path}}images/candado-08-08.png">
 				    				<p style="margin-left:45px; margin-top:10px";> <strong>Pago Seguro</strong></p>
 				    				<p style="margin-top:15px;">Todos tus datos son cifrados y nunca Ginger ni terceros tienen acceso a ellos.</p>
 				    			</div>
 				    			</div>
 				    		</form>
 				    		<input id="send_fPago" name="send_fPago" type="submit" value="">
-				    		<!-- <img class="enter" src="images/aceptar.svg"> -->
+				    		<!-- <img class="enter" src="{{cordova_full_path}}images/aceptar.svg"> -->
 				    	</div>
 			    	</div>
 			    </div>
@@ -568,7 +568,7 @@
 			    	<div class="bola byel"></div>
 			    	<div class="bola bgry always">
 			    		<div class="circle-frame">
-			    			<img src="images/muestra.png">
+			    			<img src="{{cordova_full_path}}images/muestra.png">
 			    		</div>
 			    	</div>
 			    </div>

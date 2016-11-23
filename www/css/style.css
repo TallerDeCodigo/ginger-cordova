@@ -580,7 +580,7 @@ a.mail { background:#2eab7e url('../images/mail_btn.png') no-repeat;background-s
 /* TRACKS */
 .tracks {background:#f4f1f0;}
 .tracks h2.mainline {margin-top:25px;}
-.carita {width:70%;margin-left:5%;display:inline-block;position:relative;}
+.carita {width: 65%; margin-left: 5%; display:inline-block;position:relative;}
 .carita img {width:100%;}
 .animo {margin-top:14%;margin-bottom:7.5%;}
 .animo h4 {margin-top:20px;text-transform:uppercase;}
