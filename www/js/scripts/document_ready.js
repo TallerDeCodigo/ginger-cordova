@@ -43,6 +43,10 @@ window.initializeEvents = function(){
 					return app.render_change_coach( $(this).attr('href') );
 				if( $(this).data('resource') == "coming-soon" )
 					return app.render_coming_soon( $(this).attr('href') );
+				if( $(this).data('resource') == "about" )
+					return app.render_about( $(this).attr('href') );
+				if( $(this).data('resource') == "support" )
+					return app.render_support( $(this).attr('href') );
 
 				if( $(this).data('resource') == "add-exercise" )
 					return app.render_new_record( $(this).attr('href'), 'exercise' );
@@ -418,27 +422,22 @@ window.initializeEvents = function(){
 
 						$.each(value, function(key, value){
 							//Fechas
-							// console.log(key + ':::::::.' + value);
-
 							var fecha =	key;
 							var commentFlag = false;
 
 							$.each(value, function(key, value){
-								// console.log(key + ':::::::::::' + value);
 
 								if(key == 'desayuno'){
 
 									$.each(value, function(key, value){
 										var platillo = '';
 										$.each(value, function(key, value){
-											// console.log(key + '------' + value );	
 
-											if(key == 'plato'){
+											if(key == 'plato')
 												platillo = value;
-											}
 											
 											if(key == 'consumido'){
-												// console.log('consumido::: ' + value);
+
 												if(value){
 													$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').addClass('consumido');
 													$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.desayuno [data="'+platillo+'"]').find('nav').find('svg.consume').find('use').attr('xlink:href', '#consume2');
@@ -472,9 +471,8 @@ window.initializeEvents = function(){
 										$.each(value, function(key, value){
 											// console.log(key + '------' + value );	
 
-											if(key == 'plato'){
+											if(key == 'plato')
 												platillo = value;
-											}
 
 											if(key == 'consumido' && value){
 												$('ul#toda_la_dieta').find('*[data="' + fecha+ '"]').find('div').find('div.snack1 [data="'+platillo+'"]').addClass('consumido');
@@ -607,9 +605,7 @@ window.initializeEvents = function(){
 			}
 		}
 
-		/********************************/
 		/*  Initialize calendar/diet    */
-		/********************************/
 		if( $('.view').hasClass('dieta') ){
 			
 			initializeCalendar();
@@ -643,17 +639,17 @@ window.initializeEvents = function(){
 				losplatos[i] = [];
 				$.each( value, function( key, value ) {
 
-					if (key=="_id")
-						losplatos[i][0]=value;
+					if (key == "_id")
+						losplatos[i][0] = value;
 
-					if (key=="descripcion")
-						losplatos[i][1]=value;
+					if (key == "descripcion")
+						losplatos[i][1] = value;
 
-					if (key=="receta")
-						losplatos[i][2]=value;
+					if (key == "receta")
+						losplatos[i][2] = value;
 
 					/** Add ingredients if any **/
-					if (key=="ingredientes") {
+					if (key == "ingredientes"){
 
 						var ing = '';
 						if(value.length > 0){
@@ -831,25 +827,21 @@ window.initializeEvents = function(){
 					//$(this).parent().find('svg.consume').find('use').attr('xlink:href', '#consume');
 				}
 				
-				var json = {
-					"plato" : idPlatillo, 
-					"fecha" : cosumoFecha,
-					"comida"  : comida,
-					"platillo": nPlatillo,
-					"consumido": cosumo
-				};
+				var json = 	{
+								"plato" 	: idPlatillo, 
+								"fecha" 	: cosumoFecha,
+								"comida"  	: comida,
+								"platillo"	: nPlatillo,
+								"consumido"	: cosumo
+							};
 
 				if(comida == -1)
 					return;
 				
 				var result = apiRH.makeCosume(json);
 
-				if(result){
+				if(result)
 					console.log(result);
-					//Llamar a consumidos
-					//window.getConsumed();
-				}
-
 
 			});
 
@@ -884,21 +876,18 @@ window.initializeEvents = function(){
 					var consumo = false;
 				}
 				
-				var json = {
-					"plato" : idPlatillo, 
-					"fecha" : cosumoFecha,
-					"comida"  : comida,
-					"platillo": nPlatillo,
-					"consumido": false
-				};
+				var json = 	{
+								"plato" : idPlatillo, 
+								"fecha" : cosumoFecha,
+								"comida"  : comida,
+								"platillo": nPlatillo,
+								"consumido": false
+							};
 				
 				var result = apiRH.makeCosume(json);
 
-				if(result){
+				if(result)
 					console.log(result);
-					//Llamar a consumidos
-					//window.getConsumed();
-				}
 
 			});
 
@@ -1705,6 +1694,8 @@ window.initializeEvents = function(){
 
 		if( $('.view').hasClass('edit-profile') ) {
 
+			var anchot = document.documentElement.clientWidth;
+
 			var grid_age;
 			var minval_age = 15;
 			var maxval_age 	= 90;
@@ -1715,9 +1706,6 @@ window.initializeEvents = function(){
 			var maxval_eje = 7;
 			var range_eje = maxval_eje-minval_eje;
 			
-			var anchot = document.documentElement.clientWidth;
-			
-
 			var nombre_coach	= app.keeper.getItem('nombre_coach');
 			var apellido_coach	= app.keeper.getItem('apellido_coach');
 			var sexo 			= _user.perfil.sexo;
@@ -1735,58 +1723,16 @@ window.initializeEvents = function(){
 			var coach_status	= app.keeper.getItem('coach_status');
 			var msg_ch_coach	= app.keeper.getItem('msg_ch_coach');
 			
-			app.keeper.setItem('restricciones', _user.perfil.restricciones);
+			app.keeper.setItem('restricciones', JSON.stringify(restricciones));
 
 			grid_age = ((anchot*0.7)-30)/range_age;
 			grid_exercise =  Math.floor( ( (anchot*0.7)-30 )/range_eje );
 			
-			// $('#comentario_perfil i').html(comentario);
-			//console.log(edad.substring(0, 4) );
 			var date_hoy =  new Date();
 			date_hoy = date_hoy.getFullYear();
 			var _edad_calc = date_hoy - Number( edad.substring(0, 4));
-			//console.log(_edad_calc);
-			//console.log('HUEVOS: ' + restricciones.length);
-			// $('#coach_type').attr("value", coach_type);
-			// $('#plan').attr("value", plan);
-			// $('#days_per_week').attr("value", frecuencia);
-			// $('#update_sexo').attr("value", sexo);
-
-			// if( $('.the-comment').html() != " " ){
-			// 	console.log(comentario);
-			// 	$('.comentario').show();
-			// 	$('.the-comment').html(comentario);
-			// 	$('.yes').addClass('active');
-			// 	$('.not').removeClass('active');
-
-			// }else{
-			// 	$('.comentario').hide();
-			// }	
-			
-			// $('.profile.circle-frame').find('img').attr('src', app.keeper.getItem('avatar') + '?type=large');
-
-			// $('.cpur').html(nombre +" "+ apellido);
-			// $('.edit-profile span').html(nombre +" "+ apellido);
-
-			// $('#anos_perfil').html(_edad_calc + " años");
-			// $('#age-dato').html(_edad_calc);
-			// $('#edad_value').val(_edad_calc);
-
-			// $('#cp_perfil').html(cp);
-			// $('input[name="zipcode"]').attr("value",cp);
-
-			// $('#estatura_perfil').html(estatura + " m.");
-
-			// $('input[name="estatura"]').attr("value", estatura);
-
-
-			// $('#peso_perfil').html(peso + " kg.");
-			// $('input[name="peso"]').attr("value", peso);
-
-			// $('#ideal_perfil').html(ideal + " kg.");
-			// $('input[name="ideal"]').attr("value", ideal);
-
 			var suma = parseInt(coach_type)+1;
+
 			$('.tipo_coach .co-option:nth-of-type('+suma+')').addClass('active');
 
 			switch(coach_type){
@@ -1811,7 +1757,6 @@ window.initializeEvents = function(){
 			$('#frecuencia_perfil').html(frecuencia +" días por semana");
 			$('#ejercicio-dato').html(frecuencia);
 
-
 			/*** COMENTARIO ***/
 			if(comentario === 'undefined' || comentario == null){
 				$('.comentario').html(comentario);
@@ -1819,7 +1764,6 @@ window.initializeEvents = function(){
 			}else{
 				$('.the-comment').html(comentario);
 			}
-
 
 			var suma = parseInt(plan) + 1;
 			$('.tipo_plan .pl-option:nth-of-type('+suma+')').addClass('active');
@@ -1890,34 +1834,6 @@ window.initializeEvents = function(){
 
 			}//end if restricciones
 
-			/*
-				NOMBRE DEL COACH
-			*/
-
-			// $('#coach_name').html(nombre_coach + " " + apellido_coach);
-
-			// // console.log(nombre_coach);
-			// // console.log(apellido_coach);
-			// // console.log(user);
-
-			// var star = Math.round(user.coach.rating);
-
-			// //console.log(Math.round(star));
-
-			// var count = 5;
-
-			// for (var i = 0; i < star; i++) {
-			// 	$('.rate-stars').append('<img src="images/starh.svg">');
-			// 	//console.log(i);
-				
-			// };
-			
-			// for (var x = 0; x < count - star; x++) {
-			// 	//console.log('-' + x);
-			// 	$('.rate-stars').append('<img src="images/star.svg">');
-			// };
-
-
 			var restricciones_arr = new Array();
 			$('#add_updated_profile').on('click', function(){
 				if(!$('.overscreen7').is(':visible')){
@@ -1957,12 +1873,12 @@ window.initializeEvents = function(){
 					var born = new Date(fecha_born);
 					var manda_restricciones;
 
-					if (restricciones.length < 0) {
+					if (!restricciones && restricciones.length < 0) {
 						restricciones = [];
 					} else {
 						restricciones = restricciones;
 					}
-
+					console.log(restricciones);
 					var user_updated = {
 											"sexo" 				: genero,
 											"fechaNacimiento" 	: _yob+"-"+ _mes +"-"+_dia,

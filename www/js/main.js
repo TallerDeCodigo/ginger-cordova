@@ -468,6 +468,32 @@
 			data.is_scrollable = false;
 			return this.switchView('coming-soon', data, '.view', url, 'coming_soon');
 		},
+		render_about : function(url){
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering About");
+			var data = this.gatherEnvironment(null, "Acerca de");
+			data.is_scrollable = false;
+			return this.switchView('about', data, '.view', url, 'about');
+		},
+		render_support : function(url){
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Support");
+			var data = this.gatherEnvironment(null, "Soporte");
+			data.is_scrollable = false;
+			return this.switchView( 'support', data, '.view', url, 'about' );
+		},
 		render_chat : function(){
 			return app.showLoader();
 		},

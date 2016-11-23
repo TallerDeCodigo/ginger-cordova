@@ -554,7 +554,7 @@ window.initializeRecordEvents = function(){
 		var restricciones 	= [];
 		restricciones 		= app.keeper.getItem('restricciones');
 
-		if(restricciones == null || restricciones === 'undefined'){
+		if( !restricciones || restricciones === 'undefined' ){
 			restricciones = [];
 		}else{
 			restricciones = JSON.parse("["+restricciones+"]");
@@ -628,21 +628,21 @@ window.initializeRecordEvents = function(){
 			$('.borg').removeClass('active');
 			$('.byel').addClass('active');
 
-			var restricciones_ls2   = [];
-			var genero 		  		= app.keeper.getItem('genero');
-			var peso 		  		= app.keeper.getItem('peso');
-			var estatura 	  		= app.keeper.getItem('estatura');
-			var edad 		  		= app.keeper.getItem('edad');
-			var peso_ideal 	  		= app.keeper.getItem('peso_ideal');
-			var zipcode 	  		= app.keeper.getItem('zipcode');
-			var plan 		  		= app.keeper.getItem('plan');
-			var coach_type 	  		= app.keeper.getItem('coach_type');
+			var restricciones_ls2   	= [];
+			var restricciones_memory	= app.keeper.getItem('restricciones');
+			var genero 		  			= app.keeper.getItem('genero');
+			var peso 		  			= app.keeper.getItem('peso');
+			var estatura 	  			= app.keeper.getItem('estatura');
+			var edad 		  			= app.keeper.getItem('edad');
+			var peso_ideal 	  			= app.keeper.getItem('peso_ideal');
+			var zipcode 	  			= app.keeper.getItem('zipcode');
+			var plan 		  			= app.keeper.getItem('plan');
+			var coach_type 	  			= app.keeper.getItem('coach_type');
 
-			if (app.keeper.getItem('restricciones') == null) {
-				console.log('Restricciones viene null');
+			if (!restricciones_memory) {
 				restricciones_ls2 = "";
 			}else{
-				restricciones_ls2 	= app.keeper.getItem('restricciones');
+				restricciones_ls2 	= restricciones_memory;
 			}
 			var dpw 		  		= app.keeper.getItem('dpw');
 			var comentario 	  		= app.keeper.getItem('comentario');
@@ -667,7 +667,7 @@ window.initializeRecordEvents = function(){
 								"estatura" : estatura,
 								"ejercicio" : dpw,
 								"objetivo" : plan,
-								"restricciones" : (restricciones_ls2 === 'undefined')?null:JSON.parse(restricciones_ls2),
+								"restricciones" : (restricciones_ls2 === 'undefined') ? null : JSON.parse(restricciones_ls2),
 								"personalidad" : coach_type
 							},
 							"cp": zipcode,

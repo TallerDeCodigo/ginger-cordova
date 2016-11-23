@@ -372,7 +372,7 @@ function requestHandlerAPI(){
 					app.keeper.setItem('peso', user.perfil.peso);
 					app.keeper.setItem('peso_ideal', user.pesoDeseado);
 					app.keeper.setItem('dpw', user.perfil.ejercicio);
-					app.keeper.setItem('restricciones', user.restricciones);
+					app.keeper.setItem('restricciones', user.perfil.restricciones);
 					app.keeper.setItem('comentarios', user.comentarios);
 					app.keeper.setItem('customerId', user.customerId);
 					app.keeper.setItem('chatId', user.chatId);
@@ -797,7 +797,7 @@ function requestHandlerAPI(){
 													apiRH.keeper.setItem('peso', user.perfil.peso);
 													apiRH.keeper.setItem('peso_ideal', user.pesoDeseado);
 													apiRH.keeper.setItem('dpw', user.perfil.ejercicio);
-													apiRH.keeper.setItem('restricciones', user.restricciones);
+													apiRH.keeper.setItem('restricciones', user.perfil.restricciones);
 													apiRH.keeper.setItem('comentarios', user.comentarios);
 													apiRH.keeper.setItem('customerId', user.customerId);
 													apiRH.keeper.setItem('chatId', user.chatId);
@@ -820,7 +820,7 @@ function requestHandlerAPI(){
 												}	
 												if(user.customerId !== 'undefined'){
 													// TODO: Use render methods not hard loading
-													window.location.assign('dieta.html');
+													app.render_myPlan('dieta.html');
 												}else{
 													// TODO: Use render methods not hard loading
 													window.location.assign('record.html');
@@ -894,28 +894,20 @@ function requestHandlerAPI(){
 						var u = JSON.parse(apiRH.keeper.getItem('users'));
 
 						if(u.customerId == 'no_set'){
-							// TODO: Use render methods not hard loading
-							window.location.assign('record.html');	
+							app.render_initial_record('record.html');	
 						}else{
-							// TODO: Use render methods not hard loading
-							window.location.assign('dieta.html');	
+							app.render_myPlan('dieta.html');	
 						}
 
 					 })
 					.fail(function(e){
+
 						result = e;
 						console.log(result.responseText);
 						console.log('Result: ' + result.responseText);
 						console.log(JSON.parse(result.responseText));
 						
 						var m = JSON.parse(result.responseText);
-
-						//----------------------------
-						//
-						//	Login si ya existe
-						//
-						//----------------------------
-
 
 						if(m.code == 422){
 							console.log('Error usuario registrado');
