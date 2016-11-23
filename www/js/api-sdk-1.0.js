@@ -450,6 +450,10 @@ function requestHandlerAPI(){
 			 */
 			this.makeRequest = function( endpoint, data, noHeaders, stringify ){
 
+				$( document ).ajaxStart(function() {
+					console.log("Ajax start");
+					app.showLoader();
+				});
 				console.log(' ::: MAKE REQUEST ::: ');
 				if( typeof(stringify) == 'undefined' || stringify == true )
 					data = JSON.stringify(data);

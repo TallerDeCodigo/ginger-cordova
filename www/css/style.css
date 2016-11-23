@@ -140,7 +140,6 @@ h4 {margin:10px 0px 12px;font-weight:700;font-size:130%;color:#333;}
 	.preventEvents *{ pointer-events: none!important;}
 
 /* COLORS */ 
-
 .bpur, .desayuno {background:#8041b7;}
 .bgre, .snack1 {background:#33cc99;}
 .bred, .comida {background:#e2376c;}
@@ -156,7 +155,6 @@ h4 {margin:10px 0px 12px;font-weight:700;font-size:130%;color:#333;}
 .cgry {color:#767676;}
 
 /* HEADER */
-
 header {position:fixed;left:0px;top:0px;width:100%;height:50px;overflow:hidden;z-index:99999999;}
 header.hwhite {background:#FFF;}
 header.hwhite2 {background:#f5f1f0;}
@@ -319,6 +317,11 @@ input[type=checkbox]:not(old):checked + span {background-position: 0 -29px;}
 .login input[type="submit"]{height:50px;}
 
 .login .send_login{background: url(../images/enter.svg);background-position: center;background-repeat: no-repeat;}
+
+/*** VALIDATE CODE ***/
+.code_form{ padding: 0 2rem; }
+.code_form p{}
+.code_form input{}
 
 /*CREAR CUENTA*/
 	#enviar{background: url(../images/enter.svg);background-position: center;background-repeat: no-repeat;}

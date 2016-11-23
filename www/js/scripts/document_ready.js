@@ -315,7 +315,10 @@ window.initializeEvents = function(){
 				submitHandler: function(form, event){
 
 					event.preventDefault();
-					app.showLoader();
+					$('#enviar').css('pointer-events', 'none');
+					setTimeout(function(){
+						app.showLoader();
+					}, 420);
 					var data_login  	= app.getFormData(form);
 
 					/* stores user name */
@@ -348,7 +351,7 @@ window.initializeEvents = function(){
 						}
 						
 					}else{
-						app.toast("Lo sentimos, el email o usuario ya existe.")
+						app.toast("Lo sentimos, el email o usuario ya existe.");
 					}
 
 				}
@@ -367,12 +370,8 @@ window.initializeEvents = function(){
 					code:"Proporciona tu código de activación"
 				},
 				submitHandler:function(form, event){
-
-					setTimeout(function(){
-						app.showLoader();
-					}, 420);
+					
 					event.preventDefault();
-
 					var form_data 	= app.getFormData(form);
 					var res 		= apiRH.validateRegistrationCode(form_data.code, app.keeper.mail);
 					if( res.length ){
@@ -396,7 +395,7 @@ window.initializeEvents = function(){
 				}
 			});
 		}
-			
+
 
 		/***************************/
 		/*  Initial Record events  */
