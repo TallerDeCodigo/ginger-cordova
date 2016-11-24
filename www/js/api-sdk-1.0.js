@@ -64,10 +64,10 @@ function requestHandlerAPI(){
 						};
 			var response = this.makeRequest( 'api/login', data, true, false );
 
-			this.token = response.token; 
-			apiRH.keeper.setItem( 'token', 	response.token);
-			apiRH.keeper.setItem( 'mail', 	response.mail);
-			apiRH.keeper.setItem( 'userId', response.userId);
+			this.token = response.token;
+			apiRH.keeper.setItem( 'token'	, response.token);
+			apiRH.keeper.setItem( 'mail'	, response.mail);
+			apiRH.keeper.setItem( 'userId'	, response.userId);
 
 			if(!this.token)
 				return false;
@@ -450,17 +450,11 @@ function requestHandlerAPI(){
 			 */
 			this.makeRequest = function( endpoint, data, noHeaders, stringify ){
 
-				$( document ).ajaxStart(function() {
-					console.log("Ajax start");
-					app.showLoader();
-				});
+				app.showLoader();
 				console.log(' ::: MAKE REQUEST ::: ');
 				if( typeof(stringify) == 'undefined' || stringify == true )
 					data = JSON.stringify(data);
 
-				setTimeout(function(){
-					app.showLoader();
-				}, 420);
 				var result = {};
 
 				var options = 	{
@@ -475,20 +469,24 @@ function requestHandlerAPI(){
 					options.headers = myHeaders;
 				console.log(options);
 
-				$.ajax(options)
-				 .always( function(response){
-					setTimeout(function(){
-						app.hideLoader();
-					}, 2000);
-				 })
-				 .done( function(response){
-				 	console.log(response);
-					result = response;
-				 })
-				 .fail( function(e){
-					console.log(e);
-				});
-				return result;
+				setTimeout(function(){
+					console.log("ajaxxxxx : : : : : ");
+					$.ajax(options)
+					 .always( function(response){
+						setTimeout(function(){
+							app.hideLoader();
+						}, 2000);
+					 })
+					 .done( function(response){
+					 	console.log(response);
+						result = response;
+					 })
+					 .fail( function(e){
+						console.log(e);
+					});
+					return result;
+				}, 200);
+				
 			};
 
 			/*! 
