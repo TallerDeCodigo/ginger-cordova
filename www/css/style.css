@@ -130,7 +130,7 @@ pre {font-family:'Kohi';font-weight:300;}
 
 .openkeyboard .overscreen3.active{position: absolute;}
 
-.view{width: 100%; min-height: 100vh; height: 100%; margin-top: -9.5vh; padding-top: 70px;}
+.view{ width: 100%; min-height: 100vh; height: 100%; margin-top: -70px; padding-top: 70px;}
 .view.inicio{ height: 100vh; margin-top: -9.5vh;}
 
 h2 {margin:10px 0px 0px;font-weight:100;font-size:140%;}

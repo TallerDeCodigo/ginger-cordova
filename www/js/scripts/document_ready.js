@@ -31,6 +31,8 @@ window.initializeEvents = function(){
 					if( $(this).data('resource') == "login-mail" )
 						return app.render_login_email( $(this).attr('href') );
 
+				if( $(this).data('resource') == "chat" )
+					return app.render_chat( $(this).attr('href') );
 				if( $(this).data('resource') == "my-plan" )
 					return app.render_myPlan( $(this).attr('href') );
 				if( $(this).data('resource') == "main-menu" )
@@ -964,7 +966,7 @@ window.initializeEvents = function(){
 		} /*** END BODY CLASS DIETA ***/
 
 
-		if($('body').hasClass('has-chat')){
+		if($('.view').hasClass('chat-dialog')){
 		
 			var mail 		 = app.keeper.getItem('mail');
 			var chatPassword = app.keeper.getItem('chatPassword');
@@ -975,7 +977,7 @@ window.initializeEvents = function(){
 			app.keeper.setItem('cCoachID', uChatCoach[0]);
 			var user = { login : userLog.mail, pass : userLog.chatPassword};
 
-			$('h2.titulo').html(userLog.coach.nombre + " " + userLog.coach.apellido);
+			// $('h2.titulo').html(userLog.coach.nombre + " " + userLog.coach.apellido);
 			
 			connectToChat(user);
 			

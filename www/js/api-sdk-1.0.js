@@ -469,23 +469,20 @@ function requestHandlerAPI(){
 					options.headers = myHeaders;
 				console.log(options);
 
-				setTimeout(function(){
-					console.log("ajaxxxxx : : : : : ");
-					$.ajax(options)
-					 .always( function(response){
-						setTimeout(function(){
-							app.hideLoader();
-						}, 2000);
-					 })
-					 .done( function(response){
-					 	console.log(response);
-						result = response;
-					 })
-					 .fail( function(e){
-						console.log(e);
-					});
-					return result;
-				}, 200);
+				$.ajax(options)
+				 .always( function(response){
+					setTimeout(function(){
+						app.hideLoader();
+					}, 2000);
+				 })
+				 .done( function(response){
+				 	console.log(response);
+					result = response;
+				 })
+				 .fail( function(e){
+					console.log(e);
+				});
+				return result;
 				
 			};
 

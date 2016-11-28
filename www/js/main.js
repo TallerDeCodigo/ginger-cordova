@@ -457,7 +457,7 @@
 		},
 		render_coming_soon : function(url){
 			
-			window.is_home = true;
+			window.is_home = false;
 			if(!app.initialized) app.initialize();
 			setTimeout(function(){
 				app.showLoader();
@@ -470,7 +470,7 @@
 		},
 		render_about : function(url){
 			
-			window.is_home = true;
+			window.is_home = false;
 			if(!app.initialized) app.initialize();
 			setTimeout(function(){
 				app.showLoader();
@@ -483,7 +483,7 @@
 		},
 		render_support : function(url){
 			
-			window.is_home = true;
+			window.is_home = false;
 			if(!app.initialized) app.initialize();
 			setTimeout(function(){
 				app.showLoader();
@@ -494,8 +494,18 @@
 			data.is_scrollable = false;
 			return this.switchView( 'support', data, '.view', url, 'about' );
 		},
-		render_chat : function(){
-			return app.showLoader();
+		render_chat : function(url){
+
+			window.is_home = false;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Chat Dialog");
+			var data = this.gatherEnvironment(null, _user.coach.nombre+' '+_user.coach.apellido);
+			data.is_scrollable = true;
+			return this.switchView( 'chat-dialog', data, '.view', url, 'chat-dialog' );
 		},
 		render_modal : function(modalName, data, appendTarget){
 

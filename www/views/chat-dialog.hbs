@@ -1,0 +1,29 @@
+		<header class="hwhite2">
+			<div class="toolbar">
+				<a data-resource="my-plan" href="dieta.html" class="hook back">
+					<img src="{{cordova_full_path}}images/back.svg">
+				</a>
+				<h2 class="titulo">{{header_title}}</h2>
+			</div>
+		</header>
+		<div class="chat chat_container">
+
+			<footer class="foot-chat escribir">
+				<!-- <div class="ghost_writer visible"></div> -->
+				<form class="form-inline" role="form" method="POST" action="" onsubmit="return submit_handler(this)">
+					<input type="file" capture="camera" accept="image/*" name="galeria" id="load-img" style="z-index:-1; position:absolute; ">
+					<a href="#" class="attach" onclick="$('#load-img').click();">
+						<img src="{{cordova_full_path}}images/attach.svg" >
+					</a>
+					<textarea id="mensaje-chat" rows="1" placeholder="Mensaje"></textarea>
+					<input type="submit" class="send cpur" value="Enviar" onclick="clickSendMessage()">
+				</form>
+				<section id="image_stage" class="chat_stage"><div id="progress" class="upload_progress"></div></section>
+			</footer>
+			<div class="content list-group pre-scrollable nice-scroll" id="messages-list">
+				<!-- list of chat messages will be here -->
+			</div>
+			
+			
+		</div>
+		
