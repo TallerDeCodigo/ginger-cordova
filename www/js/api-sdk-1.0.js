@@ -118,7 +118,6 @@ function requestHandlerAPI(){
 					};
 
 			var created_response = this.makeRequest('api/signup', data, true, false);
-			console.log("It's alive! ::: "+JSON.stringify(created_response));
 
 			/* GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE  */
 			app.keeper.setItem('token',  created_response.token);
