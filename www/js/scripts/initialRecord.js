@@ -129,29 +129,29 @@ window.initializeRecordEvents = function(){
 		/** SELECT GENDER **/
 		$("#hombre").click(function(){
 			if ($(this).hasClass('edition')) {
-				$('#mujer').attr("src","images/mujere.svg");
+				$('#mujer').attr("src",cordova_full_path+"images/mujere.svg");
 				$('#update_sexo').attr("value", '0');
 
 			} else {
-				$('#mujer').attr("src","images/mujer.svg");
+				$('#mujer').attr("src",cordova_full_path+"images/mujer.svg");
 				$('#mujer').attr("alt","");
 			}
-			$(this).attr({src: "images/hombreh.svg", alt: "1"});
-			$('.type-def').attr("src","images/hombreh.svg");
+			$(this).attr({src: cordova_full_path+"images/hombreh.svg", alt: "1"});
+			$('.type-def').attr("src",cordova_full_path+"images/hombreh.svg");
 			$('#update_sexo').attr("value", '1');
 		});
 
  
 		$("#mujer").click(function(){
 			if ($(this).hasClass('edition')) {
-				$('#hombre').attr("src","images/hombree.svg");
+				$('#hombre').attr("src",cordova_full_path+"images/hombree.svg");
 				$('#update_sexo').attr("value", '1');
 			} else {
-				$('#hombre').attr("src","images/hombre.svg");
+				$('#hombre').attr("src",cordova_full_path+"images/hombre.svg");
 				$('#hombre').attr("alt","");
 			}
-			$(this).attr({src: "images/mujerh.svg", alt: "0"});
-			$('.type-def').attr("src","images/mujerh.svg");
+			$(this).attr({src: cordova_full_path+"images/mujerh.svg", alt: "0"});
+			$('.type-def').attr("src",cordova_full_path+"images/mujerh.svg");
 			$('#update_sexo').attr("value", '0');
 		});
 
@@ -610,10 +610,10 @@ window.initializeRecordEvents = function(){
 			}
 
 			if(restricciones.length == 0 ){
-				$('#next_step_four').attr('src', 'images/saltar.svg');
+				$('#next_step_four').attr('src', cordova_full_path+'images/saltar.svg');
 				$('#next_step_four').css('margin-left', '-65px');
 			}else{
-				$('#next_step_four').attr('src', 'images/enter.svg');
+				$('#next_step_four').attr('src', cordova_full_path+'images/enter.svg');
 				$('#next_step_four').css('margin-left', '-25px');
 			}
 			console.log(restricciones);
@@ -750,7 +750,7 @@ window.initializeRecordEvents = function(){
 										rate_stars = Math.round(rate_stars);
 										$(".slide-coach:nth-of-type("+i+")").attr("data-rate",rate_stars);
 										for (var j = 1; j <= rate_stars; j++) {
-											$(".slide-coach:nth-of-type("+i+") .rate-stars img:nth-of-type("+j+")").attr("src","images/starh.svg");
+											$(".slide-coach:nth-of-type("+i+") .rate-stars img:nth-of-type("+j+")").attr("src",cordova_full_path+"images/starh.svg");
 										}
 									}
 
@@ -895,24 +895,24 @@ window.initializeRecordEvents = function(){
 		
 			if( _cmt != "" ){
 				app.toast("Tu comentario se ha agregado");
-				$('#next_step_four').attr('src', 'images/enter.svg');
+				$('#next_step_four').attr('src', cordova_full_path+'images/enter.svg');
 				$('#next_step_four').css('margin-left', '-25px');
 			} else{
 				app.toast("Comentario vacío");
-				$('#next_step_four').attr('src', 'images/saltar.svg');
+				$('#next_step_four').attr('src', cordova_full_path+'images/saltar.svg');
 				$('#next_step_four').css('margin-left', '-65px');
 			}
 		});
 
 		/** Close one option modal (Ok modal) **/
-		$('body').on('click', '.modal_ok', function(e){
+		$('.modal_ok').click( function(e){
 			e.preventDefault();
 			console.log("Clicked ok");
 			$(this).closest('.modal').hide().removeClass('active');
 		});
 
 		/** Close one option modal (Ok modal) **/
-		$('body').on('click', '.modal_ok_cancel .cancel', function(e){
+		$('.modal_ok_cancel .cancel').click( function(e){
 			e.preventDefault();
 			console.log("Clicked cancel");
 			$(this).closest('.modal').hide().removeClass('active');
@@ -951,7 +951,7 @@ window.initializeRecordEvents = function(){
 				$('.name_on').html(_co_name);
 
 				for (var j = 1; j <= _co_rate; j++) {
-					$(".rate-stars_inner img:nth-of-type("+j+")").attr("src","images/starh.svg");
+					$(".rate-stars_inner img:nth-of-type("+j+")").attr("src",cordova_full_path+"images/starh.svg");
 				}
 			// }
 
@@ -979,7 +979,7 @@ window.initializeRecordEvents = function(){
 
 					if(inner_key == 'calificacion'){
 						for (var i = 0; i < inner_value; i++)
-							html_stars += '<img src="images/star.svg">';				
+							html_stars += '<img src="'+cordova_full_path+'"images/star.svg">';				
 					}
 				});
 				$('.insert_stars').append('<div class="nombre_resena"><div class="rate-stars2">'+html_stars+'</div></div><div class="resena_cont">'+html_comment+'</div>');

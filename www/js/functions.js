@@ -175,7 +175,7 @@ $(window).load(function(){
 				}
 				$('#blur').toggleClass('blurred');
 
-			var customer_id = localStorage.getItem('customer_id');
+			var customer_id = app.keeper.getItem('customer_id');
 			
 			var response = apiRH.cancelarSuscripcion(customer_id);
 
@@ -205,7 +205,7 @@ $(window).load(function(){
 
 						$('#write_ch_coach').click(function(){
 
-							localStorage.setItem('cancel_subscription_cmt', $('#msg_ch_coach').val() );
+							app.keeper.setItem('cancel_subscription_cmt', $('#msg_ch_coach').val() );
 
 							if(!$('.cancel_subscription3').is(':visible') ){
 								$('.cancel_subscription3').show();
@@ -222,7 +222,7 @@ $(window).load(function(){
 									$('#blur').toggleClass('blurred');
 
 									if(response){
-										localStorage.clear();
+										app.keeper.clear();
 										// TODO: Use render methods not hard loading
 										window.location.assign('index.html');
 									}	
