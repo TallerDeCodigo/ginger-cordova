@@ -72,7 +72,8 @@
 						 * Render Initial questions 
 						 * TODO: Render chunk depending on information already provided
 						 */
-						 console.log("Initial record");
+						console.log("Initial record");
+						app.keeper.clear();
 						return app.render_initial_record();
 					}
 					_user = JSON.parse( app.keeper.getItem('user') );

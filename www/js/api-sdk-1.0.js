@@ -181,7 +181,7 @@ function requestHandlerAPI(){
 		 * @return Object / Boolean
 		 */
 		this.getCoachList = function(data){
-			var response = apiRH.getRequest('tables/dieta?opciones=1', data);
+			var response = apiRH.getRequest('tables/dieta?opciones=1&age='+_user.perfil.edad.enum, data);
 			var coaches = [];
 			var flag = null;
 			response.forEach( function( item ) {

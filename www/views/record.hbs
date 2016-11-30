@@ -207,7 +207,7 @@
 		    				<div id="si" class="siono yes">Sí</div>
 		    				<div id="no" class="siono not active">No</div>
 				    		<span class="the-comment" style="display:none"></span>
-				    		<img id="next_step_four" class="saltar next_step step_4" src="{{cordova_full_path}}images/saltar.svg">
+				    		<img id="next_step_four" class="saltar next_step step_4" onclick="app.showLoader();" src="{{cordova_full_path}}images/saltar.svg">
 
 				    	</div>
 
@@ -538,7 +538,7 @@
 					    			<label for="mail">Correo electrónico</label>
 				    			</div>
 				    			<div class="form-label-2">
-				    				<input type="text" name="cupon" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+				    				<input type="text" name="cupon" onkeypress="return event.charCode >= 48 && event.charCode <= 57" disabled>
 					    			<label for="cupon">Cupón</label>
 				    			</div>
 				    			<div class="form-label-2">
@@ -551,7 +551,9 @@
 				    				<br>
 				    				<img style="width:30px; height:auto; float:left;" src="{{cordova_full_path}}images/candado-08-08.png">
 				    				<p style="margin-left:45px; margin-top:10px";> <strong>Pago Seguro</strong></p>
-				    				<p style="margin-top:15px;">Todos tus datos son cifrados y nunca Ginger ni terceros tienen acceso a ellos.</p>
+				    				<p style="margin-top:15px;">Ginger no tiene acceso directo a tu información de pago, todos tus datos son cifrados y no se comparten con terceros. </br> 
+				    					<a href="http://www.gingerapp.mx/avisodeprivacidad/"> Lee nuestro aviso de privacidad</a>
+				    				</p>
 				    			</div>
 				    			</div>
 				    		</form>

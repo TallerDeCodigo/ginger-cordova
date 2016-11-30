@@ -622,7 +622,7 @@ window.initializeRecordEvents = function(){
 		$('#next_step_four').click(function(){
 			setTimeout(function(){
 				app.showLoader();
-			}, 420);
+			}, 0);
 
 			$('.restric').animate({opacity:"0",left:"-40px"}, 200);
 			$('.borg').removeClass('active');
@@ -674,123 +674,127 @@ window.initializeRecordEvents = function(){
 							"pesoDeseado": peso_ideal,
 							"comentarios": comentario
 						};
+			setTimeout(function(){
+				
+				var responsedata = apiRH.updatePerfil(json);
+				console.log("PROFILE UPDATED! ::: "+JSON.stringify(responsedata));
+				
+				if(responsedata){
+					app.toast("¡Estamos encontrando a tu Coach ideal!");
+					/* REQUEST COACH OPTIONS */	
+					var listCoach = apiRH.getCoachList();
+					app.hideLoader();
 
-			var responsedata = apiRH.updatePerfil(json);
-			console.log("PROFILE UPDATED! ::: "+JSON.stringify(responsedata));
-			
-			if(responsedata){
-				app.toast("¡Estamos encontrando a tu Coach ideal!");
-				/* REQUEST COACH OPTIONS */	
-				var listCoach = apiRH.getCoachList();
-				app.hideLoader();
+					if(listCoach){
 
-				if(listCoach){
+						var i = 1;
+						var Name;
+						var LastN;
+						var short_description;
+						var biografia;
+						var rate_stars;
+						var item = $('.initial').html();
+						var coaches = [];
+						var dietaKeep = null;
+						var coachKeep = null;
 
-					var i = 1;
-					var Name;
-					var LastN;
-					var short_description;
-					var biografia;
-					var rate_stars;
-					var item = $('.initial').html();
-					var coaches = [];
-					var dietaKeep = null;
-					var coachKeep = null;
-
-					$.each( listCoach, function( key, value ) {
-						
-						$.each( value, function( key, value ) {
+						$.each( listCoach, function( key, value ) {
 							
-							console.log( key + " :: " + value );
-							
-							if (key == '_id')
-								dietaKeep = (!dietaKeep || dietaKeep != value) ? value : dietaKeep;
-							console.log("dietaKeep :: "+dietaKeep);
+							$.each( value, function( key, value ) {
+								
+								console.log( key + " :: " + value );
+								
+								if(key == '_id')
+									dietaKeep = (!dietaKeep || dietaKeep != value) ? value : dietaKeep;
+								console.log("dietaKeep :: "+dietaKeep);
 
-							if(key == 'coach'){	
-								$.each( value, function( key, value ) {
-									
-									console.log( key + " ::: " + value );
-									
-									if (key == '_id') {
+								if(key == 'coach'){	
+									$.each( value, function( key, value ) {
 										
-										var exists = false;
-
-										for (var j = 0; j < coaches.length; j++)
-											if (coaches[j] == value)
-												exists = true;
+										console.log( key + " ::: " + value );
+										
+										if (key == '_id') {
 											
-										if (!exists) {
-											coachKeep = (!coachKeep || coachKeep != value) ? value : coachKeep;
-											coaches.push(value);
-											$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
-											$(".resena .img-frame:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
-											$('.slide-coach:nth-of-type('+i+')').attr('coach', coachKeep);
-											$('.slide-coach:nth-of-type('+i+')').attr('dieta_id', dietaKeep);
+											var exists = false;
+
+											for (var j = 0; j < coaches.length; j++)
+												if (coaches[j] == value)
+													exists = true;
+												
+											if (!exists) {
+												coachKeep = (!coachKeep || coachKeep != value) ? value : coachKeep;
+												coaches.push(value);
+												$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
+												$(".resena .img-frame:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
+												$('.slide-coach:nth-of-type('+i+')').attr('coach', coachKeep);
+												$('.slide-coach:nth-of-type('+i+')').attr('dieta_id', dietaKeep);
+											}
 										}
-									}
-									if (key=='nombre') {
-										Name = value;
-									}
-									if (key=='apellido') {
-										LastN = value;
-										var coach_name = Name +" "+LastN;
-										$('.slide-coach:nth-of-type('+i+') .name.coach_name').html(coach_name);
-										$('.slide-coach:nth-of-type('+i+')').attr("data-name",coach_name);
-									}
-									if (key=='frase')
-										$(".slide-coach:nth-of-type("+i+") p.short-descrip b").html(value);
-
-									if (key=='bio')
-										$(".slide-coach:nth-of-type("+i+") textarea.short-descrip").html(value);
-
-									if(key == 'rating'){
-
-										rate_stars = value;
-										rate_stars = Math.round(rate_stars);
-										$(".slide-coach:nth-of-type("+i+")").attr("data-rate",rate_stars);
-										for (var j = 1; j <= rate_stars; j++) {
-											$(".slide-coach:nth-of-type("+i+") .rate-stars img:nth-of-type("+j+")").attr("src",cordova_full_path+"images/starh.svg");
+										if (key=='nombre') {
+											Name = value;
 										}
-									}
-
-									if (key == 'calificaciones') {
-
-										if (value == "1") {
-											$(".slide-coach:nth-of-type("+i+") div.no-review").html(value+" valoración");
-										} else {
-											$(".slide-coach:nth-of-type("+i+") div.no-review").html(value+" valoraciones");
+										if (key=='apellido') {
+											LastN = value;
+											var coach_name = Name +" "+LastN;
+											$('.slide-coach:nth-of-type('+i+') .name.coach_name').html(coach_name);
+											$('.slide-coach:nth-of-type('+i+')').attr("data-name",coach_name);
 										}
-									}
+										if (key=='frase')
+											$(".slide-coach:nth-of-type("+i+") p.short-descrip b").html(value);
 
-								});																
+										if (key=='bio')
+											$(".slide-coach:nth-of-type("+i+") textarea.short-descrip").html(value);
+
+										if(key == 'rating'){
+
+											rate_stars = value;
+											rate_stars = Math.round(rate_stars);
+											$(".slide-coach:nth-of-type("+i+")").attr("data-rate",rate_stars);
+											for (var j = 1; j <= rate_stars; j++) {
+												$(".slide-coach:nth-of-type("+i+") .rate-stars img:nth-of-type("+j+")").attr("src",cordova_full_path+"images/starh.svg");
+											}
+										}
+
+										if (key == 'calificaciones') {
+
+											if (value == "1") {
+												$(".slide-coach:nth-of-type("+i+") div.no-review").html(value+" valoración");
+											} else {
+												$(".slide-coach:nth-of-type("+i+") div.no-review").html(value+" valoraciones");
+											}
+										}
+
+									});																
+								}
+							});
+							i++;
+						});
+
+
+						$('.slide-coach').each(function() {
+							if ($(this).attr('coach') === undefined) {
+							  $(this).remove();
 							}
 						});
-						i++;
-					});
 
+						$(window).resize();
 
-					$('.slide-coach').each(function() {
-						if ($(this).attr('coach') === undefined) {
-						  $(this).remove();
-						}
-					});
-
-					$(window).resize();
-
-					setTimeout(function() {
-						$(".pagina").hide();
-						$(".pcoach1").show();
-						$(".pcoach1").css("left","40px");
-						$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
-						app.hideLoader();
-					}, 250);
-					
+						setTimeout(function() {
+							$(".pagina").hide();
+							$(".pcoach1").show();
+							$(".pcoach1").css("left","40px");
+							$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
+							app.hideLoader();
+						}, 250);
+						
+					}
+				}else{
+					alert('Error: No se pudieron guardar los datos');
+					app.hideLoader();
 				}
-			}else{
-				alert('Error: No se pudieron guardar los datos');
-				app.hideLoader();
-			}
+
+			}, 0); // END setTimeout
+
 		});
 
 		/*** Back behaviour ***/

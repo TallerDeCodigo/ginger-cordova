@@ -119,6 +119,15 @@ window.initializeEvents = function(){
 			}
 		}
 
+		/*** Fix keyboard NO-SHRINK specifics ***/
+		if($('.view').hasClass("login")){
+			console.log("Init login keyboard events");
+			if(typeof Keyboard != 'undefined'){
+				Keyboard.disableScrollingInShrinkView(true);
+				Keyboard.shrinkView(false);
+			}
+		}
+
 		var fixWithKeyboard = function(){
 			$('body').addClass("openkeyboard");
 			if($('#container').hasClass("chat")){
