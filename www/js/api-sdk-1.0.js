@@ -656,9 +656,8 @@ function requestHandlerAPI(){
 		 * @see loginCallbackTW, loginCallbackFB, loginCallbackGP
 		 */
 		this.loginOauth   =  function(provider){
-			OAuth.initialize('a6JLuBGGgfFNhFvcQ2V0tCbdmWI');
 			console.log('LOGIN OAUTH');
-			sdk_app_context.showLoader();
+			app.showLoader();
 			var fb_name;
 			var fb_lastname;
 			var fb_email;

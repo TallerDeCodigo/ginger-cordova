@@ -970,7 +970,7 @@ window.initializeEvents = function(){
 			
 			setTimeout( function(){
 				app.hideLoader();
-			}, 0)
+			}, 800);
 			
 		} /*** END BODY CLASS DIETA ***/
 
