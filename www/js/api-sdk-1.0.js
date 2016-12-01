@@ -110,16 +110,15 @@ function requestHandlerAPI(){
 			var pass 		= data_login.pass;
 			var cPass		= data_login.cpass;
 
-			var data = {
-						'nombre' 	: name,
-						'apellido' 	: last_name,
-						'mail' 		: email,
-						'password' 	: pass
-					};
+			var data =  {
+							'nombre' 	: name,
+							'apellido' 	: last_name,
+							'mail' 		: email,
+							'password' 	: pass
+						};
 
 			var created_response = this.makeRequest('api/signup', data, true, false);
 
-			/* GUARDA LOS DATOS DEL USUARIO EN LOCAL STORAGE  */
 			app.keeper.setItem('token',  created_response.token);
 			app.keeper.setItem('mail', 	 created_response.mail);
 			app.keeper.setItem('chatId', created_response.jid);
@@ -181,12 +180,14 @@ function requestHandlerAPI(){
 		 * @return Object / Boolean
 		 */
 		this.getCoachList = function(data){
-			var response = apiRH.getRequest('tables/dieta?opciones=1&age='+_user.perfil.edad.enum, data);
-			var coaches = [];
-			var flag = null;
+
+			var response 	= apiRH.getRequest('tables/dieta?opciones=1&age='+_user.perfil.edad.enum, data);
+			var coaches 	= [];
+			var flag 		= null;
 			response.forEach( function( item ) {
 				flag = false;
-				if(!item.coach) return;
+				if(!item.coach) 
+					return;
 			    var myCoach = item;
 			    if(!coaches.length) coaches.push(myCoach);
 				coaches.forEach(function( itemCoach ){
@@ -616,7 +617,6 @@ function requestHandlerAPI(){
 				result = false;
 				console.log(JSON.stringify(e));
 			});
-
 			return result;
 
 		};
@@ -653,387 +653,22 @@ function requestHandlerAPI(){
 		 * @param provider String Values: 'facebook', 'twitter', 'google_plus'
 		 * @param callback function The callback function depending on the provider
 		 * @return null
-		 * @see loginCallbackTW, loginCallbackFB, loginCallbackGP
+		 * @see loginCallbackFB
 		 */
 		this.loginOauth   =  function(provider){
-			console.log('LOGIN OAUTH');
+
 			app.showLoader();
-			var fb_name;
-			var fb_lastname;
-			var fb_email;
-			var fb_avatar;
-			var fb_Id;
-			
 			OAuth.popup(provider)
 				.done(function(result){
-					console.log(result);
-					result.me().done(function(data){
-
-					 fb_name 		= data.firstname;
-					 fb_lastname 	= data.lastname;
-					 fb_email 		= data.email;
-					 fb_avatar 		= data.avatar;
-					 fb_Id 			= data.id;
-
-					 console.log(data);
-
-					 apiRH.keeper.setItem("avatar", fb_avatar);
-
-					 var req = {
-						method : 'post',
-						url : api_base_url + 'api/signup',
-						headers: {
-							'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-							'X-ZUMO-AUTH': '',
-							'Content-Type': 'application/json'
-						},
-						data : {
-							"nombre" : fb_name,
-							"apellido" :fb_lastname,
-							"mail" : fb_email,
-							"password" : fb_Id
-						}
-					 }
-
-					 /*
-						MAKE REQUEST
-					 */
-					 sdk_app_context.showLoader();
-					 var result = {};
-
-					 $.ajax({
-					   type: 'POST',
-					   headers: req.headers,
-					   url: window.api_base_url+'api/signup',
-					   data: JSON.stringify(req.data),
-					   dataType: 'json',
-					   async: false
-					 })
-					  .done(function(response){
-						result = response;
-						console.log(response);
-
-						if(response.Status == "ERROR")
-						{
-							alert("El usuario ya se encuentra registrado, favor de hacer login");
-							console.log('Error usuario registrado');
-
-							var req = {
-								method : 'post',
-								url : api_base_url + 'api/login',
-								headers: {
-									'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-									'Content-Type': 'application/json'
-								},
-								data : {
-									"tipo" : "cliente",
-									"mail" : fb_email,
-									"password" : fb_Id
-								}
-							}
-
-							console.log(req.data);
-							//REQUEST TO LOGIN
-							$.ajax({
-							   type: 'POST',
-							   headers: req.headers,
-							   url: window.api_base_url+'api/login',
-							   data: JSON.stringify(req.data),
-							   dataType: 'json',
-							   async: false })
-							  .done(function(response){
-									
-									console.log(req);
-
-									apiRH.keeper.setItem('token', response.token);
-									apiRH.keeper.setItem('mail', response.mail);
-									apiRH.keeper.setItem('userId', response.userId);
-
-									var userId 	= apiRH.keeper.getItem('userId');
-									var mail 	= apiRH.keeper.getItem('mail');
-									var token 	= apiRH.keeper.getItem('token');
-
-									console.log('TOKEN RESPONSE ' + token);
-
-									if(token){
-										var req = {
-											method : 'post',
-											url : api_base_url + 'tables/cliente/',
-											headers: {
-												'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-												'X-ZUMO-AUTH': token,
-												'Content-Type': 'application/json'
-											}
-										}
-
-										$.ajax({
-										   type: 'GET',
-										   headers: req.headers,
-										   url: window.api_base_url+'tables/cliente/'+ userId,
-										   data: JSON.stringify(req.data),
-										   dataType: 'json',
-										   async: false })
-										  .done(function(user){
-
-											console.log(JSON.stringify(user));
-											console.log(user);
-
-											if(user){
-												apiRH.keeper.setItem('coach_type', user.perfil.personalidad);
-												apiRH.keeper.setItem('user_name', user.nombre);
-												apiRH.keeper.setItem('user_last_name', user.apellido);
-												apiRH.keeper.setItem('genero', user.perfil.sexo);
-
-												if(user.perfil.edad !== 'undefined')
-													apiRH.keeper.setItem('edad', user.perfil.edad.real);
-												else{
-
-													apiRH.keeper.setItem('edad', 0);
-													apiRH.keeper.setItem('zipcode', user.cp);
-													apiRH.keeper.setItem('estatura', user.perfil.estatura);
-													apiRH.keeper.setItem('peso', user.perfil.peso);
-													apiRH.keeper.setItem('peso_ideal', user.pesoDeseado);
-													apiRH.keeper.setItem('dpw', user.perfil.ejercicio);
-													apiRH.keeper.setItem('restricciones', user.perfil.restricciones);
-													apiRH.keeper.setItem('comentarios', user.comentarios);
-													apiRH.keeper.setItem('customerId', user.customerId);
-													apiRH.keeper.setItem('chatId', user.chatId);
-												}
-												if(user.dieta !== 'undefined'){
-													apiRH.keeper.setItem('dietaId', user.dieta._id);
-												}else{
-													apiRH.keeper.setItem('dietaId', 0);
-												}
-												if(user.dieta !== 'undefined'){
-													apiRH.keeper.setItem('dietaName', user.dieta.nombre);
-												}else{
-													apiRH.keeper.setItem('dietaName', '');
-												}
-												if(user.coach !== 'undefined'){
-													apiRH.keeper.setItem('nombre_coach', user.coach.nombre);
-													apiRH.keeper.setItem('apellido_coach', user.coach.apellido);
-													apiRH.keeper.setItem('coach_rate', user.coach.rating);
-													apiRH.keeper.setItem('chatPassword', user.coach.chatPassword);
-												}	
-												if(user.customerId !== 'undefined'){
-													// TODO: Use render methods not hard loading
-													app.render_myPlan('dieta.html');
-												}else{
-													// TODO: Use render methods not hard loading
-													window.location.assign('record.html');
-												}
-											}
-											return ;
-
-										  })
-										  .fail(function(e){
-												console.log('Error');	
-										  });
-									}
-									return ;
-
-							  })
-							  .fail(function(e){
-									console.log('-- -- -- Error -- -- --');
-							  });
-							  return;
-						}
-
-						apiRH.keeper.setItem('token', 	response.token);
-						apiRH.keeper.setItem('mail', 	response.mail);
-						apiRH.keeper.setItem('userId', 	response._id);
-						
-						sdk_app_context.hideLoader(response);
-
-						var userId 	= apiRH.keeper.getItem('user_id');
-						var mail 	= apiRH.keeper.getItem('mail');
-						var token 	= apiRH.keeper.getItem('token');
-
-						console.log(" ID > > "+userId + " MAIL > > " + mail + " TOKEN > > " + token);
-
-						sdk_app_context.showLoader();
-
-						var req = {
-							method : 'post',
-							url : api_base_url + 'api/signup',
-							headers: {
-								'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-								'X-ZUMO-AUTH': apiRH.keeper.getItem('token'),
-								'Content-Type': 'application/json'
-							}
-						 }
-						var result = {};
-						
-						$.ajax({
-						  type: 'GET',
-						  headers: req.headers,
-						  url: window.api_base_url+'tables/cliente/'+userId,
-						  dataType: 'json',
-						  async: false
-						})
-						 .done(function(response){
-							console.log('done');
-							result = response;
-							sdk_app_context.hideLoader(response);
-						})
-						 .fail(function(e){
-							console.log('fail');
-							result = false;
-							console.log(JSON.stringify(e));
-							alert(JSON.stringify(e));
-							return;
-						});
-
-						console.log(JSON.stringify(result));
-
-						apiRH.keeper.setItem('users', JSON.stringify(result));
-
-						var u = JSON.parse(apiRH.keeper.getItem('users'));
-
-						if(u.customerId == 'no_set'){
-							app.render_initial_record('record.html');	
-						}else{
-							app.render_myPlan('dieta.html');	
-						}
-
-					 })
-					.fail(function(e){
-
-						result = e;
-						console.log(result.responseText);
-						console.log('Result: ' + result.responseText);
-						console.log(JSON.parse(result.responseText));
-						
-						var m = JSON.parse(result.responseText);
-
-						if(m.code == 422){
-							console.log('Error usuario registrado');
-
-							var req = {
-								method : 'post',
-								url : api_base_url + 'api/login',
-								headers: {
-									'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-									'Content-Type': 'application/json'
-								},
-								data : {
-									"tipo" : "cliente",
-									"mail" : fb_email,
-									"password" : fb_Id
-								}
-							}
-
-							console.log(req.data);
-							//REQUEST TO LOGIN
-							$.ajax({
-							   type: 'POST',
-							   headers: req.headers,
-							   url: window.api_base_url+'api/login',
-							   data: JSON.stringify(req.data),
-							   dataType: 'json',
-							   async: false })
-							  .done(function(response){
-									
-									console.log(req);
-
-									apiRH.keeper.setItem('token', response.token);
-									apiRH.keeper.setItem('mail', response.mail);
-									apiRH.keeper.setItem('userId', response.userId);
-
-									var userId 	= apiRH.keeper.getItem('userId');
-									var mail 	= apiRH.keeper.getItem('mail');
-									var token 	= apiRH.keeper.getItem('token');
-
-									console.log('TOKEN RESPONSE ' + token);
-
-									if(token){
-										var req = {
-											method : 'post',
-											url : api_base_url + 'tables/cliente/',
-											headers: {
-												'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-												'X-ZUMO-AUTH': token,
-												'Content-Type': 'application/json'
-											}
-										}
-
-										$.ajax({
-										   type: 'POST',
-										   headers: req.headers,
-										   url: window.api_base_url+'tables/cliente/'+ userId,
-										   data: JSON.stringify(req.data),
-										   dataType: 'json',
-										   async: false })
-										  .done(function(user){
-
-											console.log(JSON.stringify(user));
-											console.log(user);
-
-											if(user){
-												apiRH.keeper.setItem('coach_type', user.perfil.personalidad);
-												apiRH.keeper.setItem('user_name', user.nombre);
-												apiRH.keeper.setItem('user_last_name', user.apellido);
-												apiRH.keeper.setItem('genero', user.perfil.sexo);
-
-												if(user.perfil.edad !== undefined)
-													apiRH.keeper.setItem('edad', user.perfil.edad.real);
-												else
-													apiRH.keeper.setItem('edad', 0);
-												apiRH.keeper.setItem('zipcode', user.cp);
-												apiRH.keeper.setItem('estatura', user.perfil.estatura);
-												apiRH.keeper.setItem('peso', user.perfil.peso);
-												apiRH.keeper.setItem('peso_ideal', user.pesoDeseado);
-												apiRH.keeper.setItem('dpw', user.perfil.ejercicio);
-												apiRH.keeper.setItem('restricciones', user.restricciones);
-												apiRH.keeper.setItem('comentarios', user.comentarios);
-												apiRH.keeper.setItem('customerId', user.customerId);
-												apiRH.keeper.setItem('chatId', user.chatId);
-												if(user.dieta !== undefined)
-													apiRH.keeper.setItem('dietaId', user.dieta._id);
-												else
-													apiRH.keeper.setItem('dietaId', 0);
-												if(user.dieta !== undefined)
-													apiRH.keeper.setItem('dietaName', user.dieta.nombre);
-												else
-													apiRH.keeper.setItem('dietaName', '');
-												
-												if(user.coach !== undefined){
-													apiRH.keeper.setItem('nombre_coach', user.coach.nombre);
-													apiRH.keeper.setItem('apellido_coach', user.coach.apellido);
-													apiRH.keeper.setItem('coach_rate', user.coach.rating);
-													apiRH.keeper.setItem('chatPassword', user.coach.chatPassword);
-												}	
-												return (userId) ? user : false;
-											}
-											return ;
-
-										  })
-										  .fail(function(e){
-												console.log('Error');	
-										  });
-									}
-									return ;
-
-							  })
-							  .fail(function(e){
-									console.log('-- -- -- Error -- -- --');
-							  });
-						}else{
-							alert('Error al hacer el registro de usuario');
-						}
-						return;
-					});
-
-					});
-					
-				}).fail(function(error){
-					alert('*** Error ***');
+					apiRH.loginCallbackFB(result);
+				})
+				.fail(function(error){
 					console.log(error);
+					app.toast("Error al recibir información de Facebook");
+					app.hideLoader();
 				});
 
-			return;
 		};
-
 
 		/* 
 		 * Log in callback for Facebook provider
@@ -1042,32 +677,82 @@ function requestHandlerAPI(){
 		 * @see API Documentation
 		 */
 		this.loginCallbackFB = function(response){
-			console.log('LOGIN CALLBACK FB');
+			var data_login = {};
 			response.me()
 			 .done(function(response){
-				console.log("en loginCallback FB");
-				console.log(response);
-				// var email = response.email;
-				// var username = response.lastname+"_"+response.id;
-				// var found = apiRH.create_internal_user(username, email, {fbId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, apiRH.keeper.getItem('request_token'));
-				/* End handshake with server by validating token and getting 'me' data */
-				// context.endHandshake(username);
-				// console.log(email +"  "+ username);
+
+				data_login = 	{
+									user 		: response.firstname,
+									last_name 	: response.lastname,
+									mail 		: response.email,
+									pass 		: response.id,
+									cPass 		: response.id
+								};
+
+				console.log("Inside loginCallback FB");
+				var register_response 	= apiRH.registerNative(data_login);
+				if( register_response ){
+					
+					apiRH.headers['X-ZUMO-AUTH'] = register_response;
+					var userInfo = apiRH.getInfoUser();
+					if(userInfo){
+
+						window._user = (userInfo) ? userInfo : null;
+						console.log(_user);
+						app.keeper.setItem( 'user', JSON.stringify(_user) );
+						app.keeper.setItem( 'email_verification', true );
+						
+						if( typeof _user.customerId !== undefined && _user.customerId !== 'not_set' ){
+							return app.render_myPlan('dieta.html');
+						}else{
+							return app.render_initial_record('record.html');
+						} 	
+					}
+					
+				}else{
+
+					/** Login if user already exists ***/
+					var login_response 	= apiRH.loginNative(data_login);
+					if( login_response ){
+
+						apiRH.headers['X-ZUMO-AUTH'] = login_response;
+						var userInfo = apiRH.getInfoUser();
+						console.log(userInfo);
+						if(userInfo){
+
+							window._user = (userInfo) ? userInfo : null;
+							app.keeper.setItem( 'user', JSON.stringify(_user) );
+							app.keeper.setItem( 'email_verification', true );
+
+							if( typeof _user.customerId !== 'undefined' && _user.customerId !== 'not_set' ){
+								return app.render_myPlan('dieta.html');
+							}else{
+								return app.render_initial_record('record.html');
+							} 	
+						}
+
+					}else{
+						app.toast("Ocurrió un error, por favor revisa que tus datos sean correctos.")
+					}
+					app.toast("El email asociado con tu cuenta ya ha sido registrado. Iniciando sesión");
+
+				}
+				
 			})
 			 .fail(function(error){
-				console.log(error);
+				return app.toast("Error de conexión con Facebook.");
 			});
+
 		};
 
 		this.transfer_win = function (r) {
-									app.toast("Se ha publicado una imagen");
-									window.location.reload(true);
-								};
+								app.toast("Se ha publicado una imagen");
+								window.location.reload(true);
+							};
 		this.profile_transfer_win = function (r) {
-									 app.toast("Imagen de perfil modificada");
-									// window.location.reload(true);
-									return true;
-								};
+										app.toast("Imagen de perfil modificada");
+										return true;
+									};
 		/*
 		 * Advanced search success callback
 		 * @param 

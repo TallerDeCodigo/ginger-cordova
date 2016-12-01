@@ -640,8 +640,8 @@ window.initializeRecordEvents = function(){
 			var plan 		  			= app.keeper.getItem('plan');
 			var coach_type 	  			= app.keeper.getItem('coach_type');
 
-			if (!restricciones_memory) {
-				restricciones_ls2 = "";
+			if (!restricciones_memory || restricciones_memory == "") {
+				restricciones_ls2 	= null;
 			}else{
 				restricciones_ls2 	= restricciones_memory;
 			}
@@ -662,14 +662,14 @@ window.initializeRecordEvents = function(){
 							"sexo" : genero,
 							"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
 							"perfil":{
-								"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
-								"sexo" : genero,
-								"peso" : peso,
-								"estatura" : estatura,
-								"ejercicio" : dpw,
-								"objetivo" : plan,
-								"restricciones" : (restricciones_ls2 === 'undefined') ? null : JSON.parse(restricciones_ls2),
-								"personalidad" : coach_type
+										"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
+										"sexo" : genero,
+										"peso" : peso,
+										"estatura" : estatura,
+										"ejercicio" : dpw,
+										"objetivo" : plan,
+										"restricciones" : (!restricciones_ls2) ? null : JSON.parse(restricciones_ls2),
+										"personalidad" : coach_type
 							},
 							"cp": zipcode,
 							"pesoDeseado": peso_ideal,
@@ -695,9 +695,9 @@ window.initializeRecordEvents = function(){
 						var biografia;
 						var rate_stars;
 						var item = $('.initial').html();
-						var coaches = [];
-						var dietaKeep = null;
-						var coachKeep = null;
+						var coaches 	= [];
+						var dietaKeep 	= null;
+						var coachKeep 	= null;
 
 						$.each( listCoach, function( key, value ) {
 							
@@ -705,7 +705,7 @@ window.initializeRecordEvents = function(){
 								
 								console.log( key + " :: " + value );
 								
-								if(key == '_id')
+								if( key == '_id' )
 									dietaKeep = (!dietaKeep || dietaKeep != value) ? value : dietaKeep;
 								console.log("dietaKeep :: "+dietaKeep);
 
@@ -722,7 +722,7 @@ window.initializeRecordEvents = function(){
 												if (coaches[j] == value)
 													exists = true;
 												
-											if (!exists) {
+											if ( !exists ) {
 												coachKeep = (!coachKeep || coachKeep != value) ? value : coachKeep;
 												coaches.push(value);
 												$(".cslider .slide-coach:nth-of-type("+i+") img.la_foto").attr("src","https://gingerfiles.blob.core.windows.net/coaches/"+value+".png");
@@ -731,19 +731,19 @@ window.initializeRecordEvents = function(){
 												$('.slide-coach:nth-of-type('+i+')').attr('dieta_id', dietaKeep);
 											}
 										}
-										if (key=='nombre') {
+										if (key == 'nombre') {
 											Name = value;
 										}
-										if (key=='apellido') {
+										if (key == 'apellido') {
 											LastN = value;
 											var coach_name = Name +" "+LastN;
 											$('.slide-coach:nth-of-type('+i+') .name.coach_name').html(coach_name);
 											$('.slide-coach:nth-of-type('+i+')').attr("data-name",coach_name);
 										}
-										if (key=='frase')
+										if (key == 'frase')
 											$(".slide-coach:nth-of-type("+i+") p.short-descrip b").html(value);
 
-										if (key=='bio')
+										if (key == 'bio')
 											$(".slide-coach:nth-of-type("+i+") textarea.short-descrip").html(value);
 
 										if(key == 'rating'){

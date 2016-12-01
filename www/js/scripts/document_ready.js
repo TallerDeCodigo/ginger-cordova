@@ -165,6 +165,10 @@ window.initializeEvents = function(){
 				chatCore.init(_user);
 			}, 420);
 
+		$('.face').click(function () {			
+			apiRH.loginOauth('facebook');
+		});
+
 
 		/*** Window load and resize ***/
 		$(window).on("load resize",function(){ 
