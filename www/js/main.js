@@ -8,93 +8,96 @@
 
 	var app = {
 		app_context: this,
-			// Application Constructor
+		initialized: false,
+		// Application Constructor
 		initialize: function() {
+
 			this.bindEvents();
 			/* Initialize API request handler */
 			window.apiRH = new requestHandlerAPI().construct(app);
+			window.firstTime = true;
+			app.initialized = true;
+			var is_home 	= window.is_home;
+			var is_login 	= apiRH.has_token();
+			var is_client 	= localStorage.getItem('customerId');
+			var is_current 	= localStorage.getItem('valido');
 
-			console.log('token');
-			
-			var is_login = apiRH.has_token();
+			window.cordova_full_path = "";
+			window.is_home = (window.is_access) ? true : false;
 
-			var data_user = apiRH.getProfile();
-
-			var is_client = localStorage.getItem('customerId');
-
-			var is_current = localStorage.getItem('valido');
-
-			console.log(is_login);
+			/*** TODO: Get this shit into a catalogue ***/
+			window.catalogues 						= [];
+			window.catalogues.months 				= [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ];
+			window.catalogues.coach_type 			= [ 'Estricto', 'Innovador', 'Animador', 'Tradicional'];
+			window.catalogues.restricciones 		= [ 'Huevo', 'Pollo', 'Pescado', 'Mariscos', 'Lacteos', 'Carne' ];
+			window.catalogues.objetivo 				= [ 'Adelgazar','Detox','Bienestar','Rendimiento' ];
+			window.catalogues.sex 					= [ 'Hombre', 'Mujer'];
+			window.catalogues.age 					= [ '15-24', '25-34', '35-44', '45-54', '55 o más' ];
+			window.catalogues.tipo_de_ingredientes 	= [ 'granosycereales', 'verduras', 'grasas', 'lacteos', 'proteinaanimal', 'leguminosas', 'nuecesysemillas', 'frutas', 'endulzantes', 'aderezosycondimentos', 'superfoods', 'liquidos'];
 
 			/* IMPORTANT to set requests to be syncronous */
-			/* TODO test all requests without the following code 'cause of deprecation */
+			/* TODO: test all requests without the following code 'cause of deprecation */
 			$.ajaxSetup({
 				 async: false
 			});
 
-			// var userLog = JSON.parse(localStorage.getItem('user'));
-		
-			// var user = { login : userLog.mail, pass : userLog.chatPassword};
-		
-			// connectToChat(user);
-		
+			this.registerCompiledPartials();
 
-
-			window.loggedIn = false;
-			this.ls 		= window.localStorage;
-			if(is_login)
-				loggedIn = true;
-	
-			/* Check if has a valid token */
-			//var response = apiRH.has_valid_token();
+			window.loggedIn 	= false;
+			window.init_scripts = [];
+			window._user 		= [];
+			app.keeper 			= window.localStorage;
 			
-			console.log('Es login? ' + is_login);	
-
+			/*----------------------- Routing user accordingly ---------------------------*/
 			if(is_login){
-				
 				console.log('You okay, now you can start making calls');
 				/* Take the user to it's timeline */
-				var is_home = window.is_home;
-				var is_feed = window.is_feed;
-				
-				if(is_home){
-					console.log(is_client);
+				loggedIn = true;
+				var is_access 	= window.is_access;
+				var is_feed 	= window.is_feed;
+				_user 			= JSON.parse( app.keeper.getItem('user') );
+				/*** Check referer ***/
+				if(is_access){
+
 					if(is_client == 'not_set'){
-						window.location.assign('feed.html');
-					}else
-						return;
-				}else{
-					
-					if(is_feed){
-						if(is_client == null)
-							window.location.assign('feed.html');
-						else	
-							return;
-
-					}else{
-						console.log('Es cliente?' + is_client);
-						if(is_client == null){
-							window.location.assign('feed.html');
-						}else{
-							window.location.assign('dieta.html?filter_feed=all');
-						}	
-
+						/*** Still haven't paid ***/
+						console.log("Not set");
+						if( app.keeper.getItem('email_verification') == 'false' ){
+							console.log("No email verification");
+							/*** Haven't validated email code ***/
+							return app.render_validate_code();
+						}
+						
+						/*! 
+						 * Render Initial questions 
+						 * TODO: Render chunk depending on information already provided
+						 */
+						console.log("Initial record");
+						return app.render_initial_record();
 					}
-				}	
+					_user = JSON.parse( app.keeper.getItem('user') );
+					if(window.is_home)
+						return app.render_myPlan();
+					return;
+				}
+				/* Render Home (myPlan) */
+				if(window.is_home)
+					return app.render_myPlan();
 				return;
-			}else{
-				
-				// window.location.assign('feed.html');
-				// return;
-
 			}
-			/* Copiado de ondeviceready ----- QUITAR ----- */
-			// var backButtonElement = document.getElementById("backBtn");
-			// if(backButtonElement)
-			// 	backButtonElement.addEventListener("click", app.onBackButton, false);
-			
-			/* Requesting passive token if no token is previously stored */
-			//console.log("Token::: "+apiRH.request_token().get_request_token());
+			return app.render_entermode();
+			/*-------------------- Code below this line won't run ------------------------*/
+		},
+		initPushNotifications: function() {
+			console.log("Initilizing push notifications service");
+			var notificationOpenedCallback = function(jsonData) {
+				console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+			};
+
+			window.plugins.OneSignal
+									.startInit("6e792a4f-bf04-4f96-9d1e-98052526fafc")
+									.handleNotificationOpened(notificationOpenedCallback())
+									.endInit();
 		},
 		registerHelpers : function() {
 			Handlebars.registerHelper('if_eq', function(a, b, opts) {
@@ -113,6 +116,24 @@
 			});
 			return;
 		},
+		registerTemplate : function(name) {
+			$.ajax({
+				url : 'views/' + name + '.hbs',
+				success : function(response) {
+						if (Handlebars.templates === undefined)
+							Handlebars.templates = {};
+					Handlebars.templates[name] = Handlebars.compile(response);
+				}
+			});
+			return;
+		},
+		registerCompiledPartials: function() {
+			/* Add files to be loaded here */
+			var filenames = ['header', 'loader', 'footer_menu', 'footer_activities'];
+			filenames.forEach(function (filename) {
+					Handlebars.registerPartial(filename, Handlebars.templates[filename]);
+			});
+		},
 		bindEvents: function() {
 			document.addEventListener('deviceready', app.onDeviceReady, false);
 			document.addEventListener('mobileinit', app.onDMobileInit, false);
@@ -129,25 +150,22 @@
 		        // EVERY OTHER DEVICE
 		        history.go(-1);
 		    }
-		    console.log("BAck");
+		    console.log("Back");
 		},
 
 		// deviceready Event Handler
 		onDeviceReady: function() {
 			app.receivedEvent('deviceready');
-
-
-
+			window.cordova_full_path = (typeof(cordova) != 'undefined') 
+									 	? cordova.file.applicationDirectory+"www/"
+									 	: '';
 
 			/*   ___    _         _   _     
 			*  / _ \  / \  _   _| |_| |__  
 			* | | | |/ _ \| | | | __| '_ \ 
 			* | |_| / ___ \ |_| | |_| | | |
 			*  \___/_/   \_\__,_|\__|_| |_|
-			*/                              
-
-			console.log('OAUTH');
-
+			*/
 			try{
 				OAuth.initialize('7-ipR3QS-__wrorRTpdedM8-_v8');
 				console.log("Initialized Oauth");
@@ -156,6 +174,14 @@
 				app.toast("Oauth error ocurred");
 				console.log('OAuth initialize error: ' + err);
 			}
+
+			try{
+				app.initPushNotifications();
+			}
+			catch(err){
+				app.toast("Push notifications error: "+JSON.stringify(err));
+			}
+
 			var backButtonElement = document.getElementById("backBtn");
 			if(backButtonElement)
 				backButtonElement.addEventListener("click", app.onBackButton, false);
@@ -163,7 +189,6 @@
 
 			console.log(navigator.camera);
 		},
-
 		// deviceready Event Handler
 		onMobileInit: function() {
 			app.receivedEvent('mobileinit');
@@ -181,16 +206,16 @@
 		},
 		gatherEnvironment: function(optional_data, history_title) {
 			/* Gather environment information */
-			var meInfo 	= apiRH.ls.getItem('me');
-			var logged 	= apiRH.ls.getItem('me.logged');
-			var parsed 	= {me: JSON.parse(meInfo), logged_user: JSON.parse(logged)};
+			var meInfo 	= window._user;
+			var parsed 	= {me: meInfo};
 			
 			if(optional_data){
 				parsed['data'] = optional_data;
-				//return parsed;
 			}
 			if(history_title)
 				parsed['header_title'] = history_title;
+			if( typeof(cordova_full_path) != 'undefined' && cordova_full_path != '' )
+				parsed['cordova_full_path'] = cordova_full_path;
 			return parsed;
 
 		},
@@ -215,107 +240,368 @@
 				for (var key in obj) 
 					if (hasOwnProperty.call(obj, key)) return false;
 				return true;
-		},								/*SE PUEDE BORRAR A PARTIR DE ESTE PUNTO*/
-		render_feed : function(offset, filter){
-			app.showLoader();
-			$.getJSON(api_base_url+'feed/'+offset+'/'+filter , function(response){
-			})
-			 .fail(function(err){
-				console.log(JSON.stringify(err));
-				app.hideLoader();
-				app.toast("Failed connecting to our servers, please check your Internet connection.")
-			})
-			 .done(function(response){
-				var data = app.gatherEnvironment(response);
-					data.home_active = true;
-				var feed_tpl = Handlebars.templates['feed'];
-				console.log(data);
-				var html 	 = feed_tpl(data);
-				$('.main').html( html );
-				setTimeout(function(){	
-					app.hideLoader();
-					if(!loggedIn)
-						$('#account1').trigger('click');
-				}, 2000);
-			});
+		},
+		check_or_renderContainer : function(){
+			/*** First time loading home ***/
+			if(window.firstTime){
+				console.log("Rendering first time");
+				var container_template = Handlebars.templates['container'];
+				var html 	 = container_template();
+				$('.rootContainer').html( html );
+			}
+		},
+		render_entermode : function(url){
 			
-		},
-		render_search_composite : function(){
-			user = (user) ? user : "not_logged";
-			$.getJSON(api_base_url+user+'/content/search-composite/')
-			 .done(function(response){
-				console.log(JSON.stringify(response));
-				response.search_active =  true;
-				var data 	 = app.gatherEnvironment(response);
-					data.search_active = true;
-				var template = Handlebars.templates['search'];
-				$('.main').html( template(data) );
-			})
-			 .fail(function(error){
-				console.log(JSON.stringify(error));
-			 });
-		},
-		render_search_results : function(search_term){
-			$.getJSON(api_base_url+'content/search/'+search_term)
-			 .done(function(response){
-				console.log(response);
-				var data 	 = app.gatherEnvironment(response);
-					data.search_active = true;
-					data.search_term = search_term;
-					console.log(data);
-				var template = Handlebars.templates['search_results'];
-				$('.main').html( template(data) );
-			})
-			 .fail(function(error){
-				console.log(error);
-			 });
-		},
-		render_map : function(){
-			
-			var data = {explore_active: true};
-			var map_template = Handlebars.templates['map'];
-			$('.main').html( map_template(data) );
-			app.showLoader();
-			app.initMakersMap();
-		},
-		render_post : function(post_id){
-
-			/* Send header_title for it renders history_header */
-			$.getJSON(api_base_url+'content/'+post_id)
-			 .done(function(response){
-				var data = app.gatherEnvironment(response, "Now reading");
-
-				var template = Handlebars.templates['post'];
-				$('.main').html( template(data) );
-				setTimeout(function(){
-					app.hideLoader();
-				}, 2000);
-			})
-			 .fail(function(error){
-				console.log(error);
-			 });
-		},
-		render_create_user : function(){
-
-			/* Send header_title for it renders history_header */
-			var data = app.gatherEnvironment(null, "Create account");
-			var template = Handlebars.templates['create_account'];
-
-			$('.main').html( template(data) );
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
 			setTimeout(function(){
-				app.hideLoader();
-			}, 2000);
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Enter mode");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('entermode', data, '.view', url, 'inicio', false, false);
+		},
+		render_login : function(url){
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Login");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('login', data, '.view', url, 'login');
+		},
+		render_login_email : function(url){
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Login email");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('login-mail', data, '.view', url, 'login');
+		},
+		render_register : function( url ){
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Register landing");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('register', data, '.view', url, 'segundo');
+		},
+		render_register_mail : function( url ){
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Register by Email");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('register-mail', data, '.view', url, 'segundo');
+		},
+		render_validate_code : function( url ){
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Validation Code");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('code', data, '.view', url, 'login');
+		},
+		render_initial_record : function( url ){
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Initial Questions");
+			var data = this.gatherEnvironment();
+			data.is_scrollable = false;
+			return this.switchView('record', data, '.view', url, 'initialRecord');
+		},
+		render_myPlan : function( url ){
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			var data = this.gatherEnvironment(null, "Mi Plan");
+			data.is_scrollable = false;
+			return this.switchView('my-plan', data, '.view', url, 'dieta', true);
+		},
+		render_mainmenu : function( url ){
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Main menu");
+			var data = this.gatherEnvironment(null, "Menu principal");
+			data.is_scrollable = false;
+			return this.switchView('main-menu', data, '.view', url, 'perfil');
+		},
+		render_settings : function(url){
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering User Profile");
+			var extra_data = app.fetch_profile_data();
+			var data = this.gatherEnvironment(extra_data, "Mi Perfil");
+			console.log(data);
+			data.is_scrollable = true;
+			return this.switchView('user-profile', data, '.view', url, 'user-profile perfil');
+		},
+		render_edit_settings : function(url){
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering User Profile (Editable)");
+			var extra_data = app.fetch_profile_data();
+			var data = this.gatherEnvironment(extra_data, "Editar Perfil");
+			console.log(data);
+			data.is_scrollable = true;
+			return this.switchView('edit-profile', data, '.view', url, 'edit-profile perfil2');
+		},
+		render_change_coach : function(url){
+			
+			window.is_home = true;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Change coach");
+			// var extra_data = app.fetch_profile_data();
+			var data = this.gatherEnvironment(null, "Cambiar de Coach");
+			data.is_scrollable = false;
+			return this.switchView('change-coach', data, '.view', url, 'cambio-coach');
+		},
+		render_new_record : function(url, type){
+			
+			window.is_home = false;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering New Record");
+			var name = "";
+			var date = new Date();
+			var date_today = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
+			var water_val = app.keeper.getItem('agua_lastSaved');
+			var agua_local = parseFloat(app.keeper.getItem('agua'));
+			var agua_lastSaved = app.keeper.getItem('agua_lastSaved');
+			var water_val = (agua_lastSaved != date_today ) ? 0 : agua_local;
+
+			switch(type){
+				case 'exercise':
+					name = "Ejercicio";
+					break;
+				case 'water':
+					name = "Agua";
+					break;
+				case 'weight':
+					name = "Peso";
+					break;
+				case 'measures':
+					name = "Medidas";
+					break;
+				case 'mood':
+					name = "Ánimo";
+					break;
+				default:
+					name = "";
+					break;
+			};
+			console.log(type);
+			console.log(name);
+			var data = this.gatherEnvironment(null, name);
+			data.is_scrollable = false;
+			data.water_val = water_val;
+			console.log(data);
+			return this.switchView('record-'+type, data, '.view', url, 'record-info '+type);
+		},
+		render_coming_soon : function(url){
+			
+			window.is_home = false;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Coming Soon");
+			var data = this.gatherEnvironment(null, "Próximamente");
+			data.is_scrollable = false;
+			return this.switchView('coming-soon', data, '.view', url, 'coming_soon');
+		},
+		render_about : function(url){
+			
+			window.is_home = false;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering About");
+			var data = this.gatherEnvironment(null, "Acerca de");
+			data.is_scrollable = false;
+			return this.switchView('about', data, '.view', url, 'about');
+		},
+		render_support : function(url){
+			
+			window.is_home = false;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Support");
+			var data = this.gatherEnvironment(null, "Soporte");
+			data.is_scrollable = false;
+			return this.switchView( 'support', data, '.view', url, 'about' );
+		},
+		render_chat : function(url){
+
+			window.is_home = false;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Chat Dialog");
+			var data = this.gatherEnvironment(null, _user.coach.nombre+' '+_user.coach.apellido);
+			data.is_scrollable = true;
+			return this.switchView( 'chat-dialog', data, '.view', url, 'chat-dialog' );
+		},
+		render_modal : function(modalName, data, appendTarget){
+
+			app.showLoader();
+			app.check_or_renderContainer();
+			console.log("Rendering Modal: "+modalName);
+			var data = this.gatherEnvironment(data, "");
+			data.is_scrollable = false;
+			var modalTemplate = Handlebars.templates[newTemplate];
+			$(appendTarget).css("opacity", 0).append( modalTemplate(data) );
+
+			$(appendTarget).html( modalTemplate(data) ).css("display", "block")
+														 .animate(	{
+															opacity: 1
+														}, 360);
+		},
+		render_dialog : function(title, message, options){
+			return app.showLoader();
 		},
 		back_with_logout : function(event){
-			var link = $(event.target).attr("href");
-			console.log(link);
+			var link = $(event.target).attr('href');
 			localStorage.clear();
 			window.location.assign(link);
 			return;
 		},
-		get_file_from_device: function(destination, source)
-		{
+		get_file_from_device: function(destination, source) {
 			apiRH.getFileFromDevice(destination, source);		
+		},
+		triggerSendAttachments: function(inputFile) {
+		  // upload image
+		  QB.content.createAndUpload({name: inputFile.name, file: inputFile, type:
+		        inputFile.type, size: inputFile.size, 'public': false}, function(err, response){
+		    if (err) {
+		      console.log(err);
+		    } else {
+		    	// $('#image_stage').addClass("visible").append("<img src='cdvfile://"+inputFile+"' class='chat-img' >");
+			    $("#progress").fadeOut(400, function() {
+			        $(".input-group-btn_change_load").removeClass("visibility_hidden");
+			    });
+		      	var uploadedFile = response;
+
+		      	sendMessage("[attachment]", uploadedFile.id);
+
+		      $("input[type=file]").val('');
+		    }
+		  });
+		},
+		switchView: function(newTemplate, data, targetSelector, recordUrl, targetClass, keepLoader, leNiceTransition){
+			
+			/* Push to history if url is supplied */
+			if(recordUrl) window.history.pushState(newTemplate, newTemplate, '/'+recordUrl);
+			
+			leNiceTransition = (typeof(leNiceTransition) != 'undefined') ? leNiceTransition : true;
+			var template = Handlebars.templates[newTemplate];
+			if(!template){
+				console.log("Template doesn't exist");
+				return false;
+			}
+			$(targetSelector).fadeOut(360, function(){
+
+				if(targetClass) $(targetSelector).attr('class','view').addClass(targetClass);
+
+				if(!leNiceTransition){
+
+					$(targetSelector).html( template(data) ).css({ "opacity": 0, "display": "block"})
+															 .animate(	{
+																opacity: 1
+															}, 640);
+				}else{
+
+					$(targetSelector).html( template(data) ).css("opacity", 1)
+															 .css("display", "block")
+															 .css("margin-left", "20px")
+															 .animate(	{
+																			'margin-left': "0",
+																			opacity: 1
+																		}, 360);
+				}
+				
+			});
+			
+			if(!keepLoader)
+				return setTimeout(function(){
+					if(window.firstTime)
+						window.firstTime = false;				
+					app.hideLoader();
+					initializeEvents();
+					$(window).resize();
+				}, 2000);
+				
+			return setTimeout(function(){
+					if(window.firstTime)
+						window.firstTime = false;				
+					initializeEvents();
+					$(window).resize();
+				}, 2000);
 		},
 		showLoader: function(){
 			$('#spinner').show();
@@ -364,7 +650,6 @@
 				console.log(response);	
 			});
 		},  //END REGISTER ACTIVITY
-
 		update_perfil: function(sexo,peso,pesoDeseado,personalidad,objetivo,ejercicio,edad,fechaNaciemiento,codigoPostal,comentarios,nombre,restricciones,estatura){
 			var req = {
 				method : 'post',
@@ -396,10 +681,7 @@
 			});
 
 		},//END UPDATE PERFIL
-
-
-		feed_user_defaults: function(firstName,lastName,email,customerId,password,token,userId,chatId,chatPassword,coachId,coachQuickblox,dietId,user,exerciseValue,picture)
-		{
+		feed_user_defaults: function(firstName,lastName,email,customerId,password,token,userId,chatId,chatPassword,coachId,coachQuickblox,dietId,user,exerciseValue,picture){
 			var req = {
 				method : 'post',
 				url : api_base_url + 'tables/medicion/',	//definitr tabla
@@ -430,7 +712,6 @@
 				console.log(response);	
 			});
 		}, //END feed_user_default
-
 		update_platillo: function(plato, fecha, comida, platillo){
 			var req = {
 				method: 'post',
@@ -452,389 +733,75 @@
 				console.log(response);	
 			});
 		},
+		get_diet: function(dietId){
+			
+			return apiRH.getRequest('tables/dieta?cliente=' + _user._id, null);		
+		},
+		fetch_profile_data: function(userId){
 
+			var starMax 		= 5;
+			var user_sexo 		= "Mujer";
+			var age_range 		= catalogues.age[_user.perfil.edad.enum];
+			var coach_type 		= catalogues.coach_type[_user.perfil.personalidad];
+			var coach_status	= app.keeper.getItem('coach_status');
+			var msg_ch_coach	= app.keeper.getItem('msg_ch_coach');
+			var rating_object 	= { "stars": { "active": [], "inactive": [] }  };
+			var star 			= Math.round(_user.coach.rating);
+			var change_copy 	= (coach_status != 'pending_change') ? "Cambiar Coach" : "En revisión";
+			var changed_status 	= (coach_status == 'pending_change') ? true : false;
 
-		// get_consumed:function(){
-		// 	var req = {
-		// 		method : 'GET',
-		// 		url : api_base_url + '/tables/consumo?coach='+localStorage.getItem('coach')+'&dieta='+ $localeStorage.getItem('dietaId')+'&inicio=&fin='),  //definitr tabla
-		// 		headers: {
-		// 			'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-		// 			'X-ZUMO-AUTH': localStorage.getItem('token'),
-		// 			'Content-Type': 'application/json'
-		// 		}
-		// 	}
-
-		// 	$.ajax({
-		// 	  type: 'GET',
-		// 	  headers: req.headers,
-		// 	  url:  req.url,
-		// 	  dataType: 'json',
-		// 	  async: false
-		// 	})
-		// 	 .done(function(response){
-		// 	 	console.log(response);
-		// 		result = response;
-		// 		localStorage.setItem('dieta', response);
-		// 		sdk_app_context.hideLoader(response);
-		// 	})
-		// 	 .fail(function(e){
-		// 		result = false;
-		// 		console.log(JSON.stringify(e));
-		// 	});
-
-		// 	//console.log(result);
-		// 	return result;
-		// },
-
-
-		get_diet: function(dietId)
-		{
-			var req = {
-				method : 'GET',
-				url : api_base_url + 'tables/dieta/' + dietId,  //definitr tabla
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': localStorage.getItem('token'),
-					'Content-Type': 'application/json'
-				}
+			if ( _user.perfil.sexo == 1 ) {
+				user_sexo = "Hombre";
+				$('#hombre').attr('src', 'images/hombre.svg');
+				$('#mujer').attr('src', 'images/mujere.svg');
+			} else {
+				$('#hombre').attr('src', 'images/hombreh.svg');
+				$('#mujer').attr('src', 'images/mujere.svg');
 			}
 
-			$.ajax({
-			  type: 'GET',
-			  headers: req.headers,
-			  url:  req.url,
-			  dataType: 'json',
-			  async: false
-			})
-			 .done(function(response){
-			 	console.log(response);
-				result = response;
-				localStorage.setItem('dieta', response);
-				sdk_app_context.hideLoader(response);
-			})
-			 .fail(function(e){
-				result = false;
-				console.log(JSON.stringify(e));
-			});
+			if(_user.perfil.restricciones === 'undefined' || _user.perfil.restricciones == "" || _user.perfil.restricciones == null){
+				restricciones_concat = "Ninguna";
+			}else{
+				var restricciones_cat = window.catalogues.restricciones;					
+				var restricciones_concat = "";					
+				if(_user.perfil.restricciones){
+					for ( var i = 0; i < _user.perfil.restricciones.length; i++ ) {
+						var separator = ", ";
+						if(i == _user.perfil.restricciones.length - 1)
+							separator = "";
 
-			//console.log(result);
-			return result;
-		}//END GET DIET
-	};
-
-/*      _                                       _                        _       
- *   __| | ___   ___ _   _ _ __ ___   ___ _ __ | |_   _ __ ___  __ _  __| |_   _ 
- *  / _` |/ _ \ / __| | | | '_ ` _ \ / _ \ '_ \| __| | '__/ _ \/ _` |/ _` | | | |
- * | (_| | (_) | (__| |_| | | | | | |  __/ | | | |_  | | |  __/ (_| | (_| | |_| |
- *  \__,_|\___/ \___|\__,_|_| |_| |_|\___|_| |_|\__| |_|  \___|\__,_|\__,_|\__, |
- *                                                                         |___/ 
- */
-	jQuery(document).ready(function($) {
-		/* 
-
-			Create a new account the old fashioned way 
-
-		*/
-	
-
-		if($('#create_account').length)
-			$('#create_account').validate({
-				rules: {
-					user: "required",
-					mail: {
-							required: true,
-							email: true
-						},
-					pass: {
-						required:true,
-						minlength:7
-					},
-					cpass: {
-						required:true,
-						equalTo:"#pass"
-					},
-				},
-				messages: {
-					user: "Debes proporcionar un nombre de usuario",
-					mail: {
-							required: "Debes proporcionar un correo",
-							email: "Por favor proporciona un correo válido"
-						},
-					pass: "La contraseña debe ser de por lo menos siete caracteres",
-					cpass: "Las contraseñas que proporcionaste no coinciden"
-				},
-				submitHandler: function(){
-
-					var data_login  	= app.getFormData('#create_account');
-
-					console.log(data_login);
-
-/*
-	stores user name
-*/
-					localStorage.setItem('user_name', data_login.user);
-					localStorage.setItem('user_last_name', data_login.last_name);
-
-					data_login.pass 	= $('#pass').val();
-					
-					var responsedata 	= apiRH.registerNative(data_login);  
-					
-					//console.log(responsedata);						//llega hasta aqui con un valor FALSE
-
-					if(responsedata) {
-						//console.log(responsedata);
-						
-						apiRH.save_user_data_clientside(responsedata);
-						
-						window.location.assign('code.html');
-
-						return;
-					}else{
-						app.toast('Lo sentimos, el nombre de usuario ya existe.'); //dispara el toast con el mensaje.
-						//e.preventDefault();
-					}
-				}
-			});
-
-		/* Log Out from the API */
-		$('#logout').on('click', function(e){
-			/* Requesting logout from server */
-			//var response = apiRH.logOut({user_login : user, request_token : apiRH.get_request_token() });
-			//if(response.success){
-				if(!$('.overscreen2').is(':visible') ){
-					$('.overscreen2').show();
-				setTimeout(function() {$('.overscreen2').addClass('active');}, 200);
-				} else {
-					$('.overscreen2').removeClass('active');
-					setTimeout(function() {$('.overscreen2').hide();}, 800);
-				}
-				$('#container').toggleClass('blurred');
-					//app.toast('Has cerrado la sesión, hasta pronto');
-					//localStorage.clear();
-					//window.location.assign('index.html');
-				return;
-			//}
-			app.toast('No ha sido posible crear tu cuenta, inténtalo de nuevo por favor.');
-			return;
-		});
-
-		$('.logout').click(function(){
-			localStorage.clear();
-			window.location.assign('index.html');
-			return;
-		});
-		$('.logout_cancel').click(function(){
-			$('.overscreen2').hide();
-			$('#container').toggleClass('blurred');
-			return;
-		});
-
-		$('.back_with_logout').on("click", function(e){
-			e.preventDefault();
-			return app.back_with_logout(e);
-		});
-
-// ----------------------------------------------------------------------
-
-/*
-	LOGIN WITHOUT FACEBOOK
-							*/
-
-	if($('#login_form').length)
-		$('#login_form').validate({
-			rules:{
-				mail:{
-					required:true,
-					email:true
-				},
-				pass:"required"
-			},
-			messages:{
-				mail:{
-					required:"Debes proporcionar un correo",
-					email:"Proporciona un correo válido"
-				},
-				pass:"Este campo es requerido para acceder a tu cuenta"
-			},
-			submitHandler:function(){
-				var data_login	= app.getFormData("#login_form");
-
-				console.log(data_login.mail);
-
-				data_login.pass = $('#pass').val();
-				var responsedata = apiRH.loginNative(data_login);
-			  	console.log("RESPUESTA: " + responsedata);
-
-				 if(responsedata){
-					
-					localStorage.setItem('user', JSON.stringify(responsedata));
-
-					var user = JSON.parse(localStorage.getItem('user'));
-
-					console.log('USER: ' + user.customerId);
-
-					if(user.customerId !== undefined)
-				 		window.location.assign('dieta.html');
-				 	else
-				 		window.location.assign('feed.html');
-				 	
-				 	return;
+						restricciones_concat = restricciones_cat[_user.perfil.restricciones[i]] + separator;
+					};
 				}else{
-					alert('Error en la combinación de usuario / contrase');
+					restricciones_concat = "Ninguna";
 				}
 			}
-	}); //END VALIDATE
 
+			
 
-	//-----------------------------
-	//
-	// Validate code
-	//
-	//-----------------------------
-
-	if($('#code_form').length)
-		$('#code_form').validate({
-			rules:{
-				code:"required"
-			},
-			messages:{
-				code:"Proporciona tu código de activación"
-			},
-			submitHandler:function(){
-				// SERVICIO PARA OBTENER EL CODIGO DE VALIDACION
+			for (var i = 0; i < star; i++)
+				rating_object.stars.active.push(1);
 				
-				window.location.assign('feed.html');
-
-
-			}
-	}); //END VALIDATE
-	
-
-
-	//-----------------------------
-	//
-	// Login Facebook
-	//
-	//-----------------------------
-
-	$('.face').click(function () {
-		
-		console.log('CLICK FACEBOOK LOGIN');
-		
-		apiRH.loginOauth('facebook');
-		
-	});
-
-
-
-/*TARJETA DE CREDITO*/
-
-	$('#send_fPago').on('click', function(){
-
-	   		console.log("click to next");
-
-	   		var  t_nombre   = $('input[name="nombre"]').val(); 
-	   		var  t_card 	= $('input[name="card"]').val(); 
-	   		var  t_mes  	= $('input[name="mes"]').val(); 
-	   		var  t_ano 		= $('input[name="year"]').val(); 
-	   		var  t_cvc 		= $('input[name="cvc"]').val(); 
-	   		var  t_mail 	= $('input[name="mail"]').val(); 
-	   		var  t_cupon 	= $('input[name="cupon"]').val(); 
-	   		var  t_terms 	= $('input[name="terms"]').val(); 
-
-	   		Conekta.setPublishableKey('key_C3MaVjaR7emXdiyRGTcbjFQ');
-	   		
-	   		var errorResponseHandler, successResponseHandler, tokenParams;
-
-	   		tokenParams = {
-	   		  "card": {
-	   		    "number": t_card,
-	   		    "name": t_nombre,
-	   		    "exp_year": t_ano,
-	   		    "exp_month": t_mes,
-	   		    "cvc": t_cvc
-	   		  }
-	   		};
-
-	   		successResponseHandler = function(token) 
-	   		{
-	   			var response = apiRH.makePayment(token.id);
-	   			// Funcion de mensaje de bienvenida
-	   			if(response){
-	   				
-	   				if(response){
-
-	   					if(!$('.overscreen6').is(':visible') ){
-	   						$('.overscreen6').show();
-	   					setTimeout(function() {$('.overscreen6').addClass('active');}, 200);
-	   					} else {
-	   						$('.overscreen6').removeClass('active');
-	   						setTimeout(function() {$('.overscreen6').hide();}, 800);
-	   					}
-	   					$('#container').toggleClass('blurred');
-
-	   					$('#go_next').click(function(){
-	   						$('.overscreen6').hide();
-	   						$('#container').toggleClass('blurred');
-	   						window.location.assign('dieta.html');
-	   					});
-
-	   				}
-	   				else
-	   					alert("Error al actualizar datos");
-	   			}else{
-	   				alert("Error al procesar tu pago");
-	   			}
-	   			return;
-	   		};
-
-	   		/* Después de recibir un error */
-
-	   		errorResponseHandler = function(error) {
-	   		  return console.log(error.message);  //error de conectividad
-	   		  alert('Error al procesar tu pago' + error.message);
-	   		};
-
-	   		/* Tokenizar una tarjeta en Conekta */
-
-	   		Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
-	});//endCLICK
-
-		//MARK NOTIFICATION AS READ
-		$('.main').on('tap', '.each_notification a', function(e){
-			e.preventDefault();
-			var redirect = $(this).attr('href');
-			var $context = $(this);
-			if($context.hasClass('read')) return false;
-			var context_id = $context.data('id');
+			for (var x = 0; x < starMax - star; x++)
+				rating_object.stars.inactive.push(1);
 			
-			var response = apiRH.makeRequest(user+'/notifications/read/'+context_id);
-			if(response){
-				$context.addClass('read');
-			}
-			//window.location.assign(redirect);
-			
-		});
-
-		/* Pagination Load more posts */
-		$(document).on('tap', '#load_more_posts', function(e){
-			e.preventDefault();
-			var offset = $(this).data('page');
-			app.get_user_timeline(offset);
-			e.stopPropagation();
-		});
-
-		/* Pagination Load more search results */
-		$(document).on('tap', '#load_more_results', function(e){
-			e.preventDefault();
-			var offset = $(this).data('page');
-			var GET = app.getUrlVars();
-
-			app.get_search_results(GET.searchbox, offset);
-			e.stopPropagation();
-		});
-
-
-	});
-
+			var info_profile =  {
+									nombre_coach 	: app.keeper.getItem('nombre_coach'),
+									coach_last 		: app.keeper.getItem('apellido_coach'),
+									coach_name 		: app.keeper.getItem('nombre_coach'),
+									coach_type 		: coach_type,
+									coach_rating 	: rating_object,
+									changed_status 	: changed_status,
+									sexo 			: user_sexo,
+									edad 			: _user.perfil.edad,
+									cp 				: _user.cp,
+									height 			: _user.perfil.estatura,
+									objective 		: catalogues.objetivo[_user.perfil.objetivo],
+									exercise_freq 	: _user.perfil.ejercicio,
+									age_range 		: age_range,
+									change_btn_copy : change_copy,
+									restricciones_concat : restricciones_concat
+								};
+			return info_profile;
+		}
+	};

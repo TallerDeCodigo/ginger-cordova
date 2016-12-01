@@ -1,0 +1,68 @@
+	<div id="container" class="tracks">
+		<header class="hwhite2">
+			<div class="toolbar">
+				<a class="back hook" data-resource="my-plan" href="dieta.html"><img src="{{cordova_full_path}}images/back.svg"></a>
+				<h2 class="titulo">{{header_title}}</h2>
+				<a class="menu hook" data-resource="main-menu" href="menu.html"><img src="{{cordova_full_path}}images/menu.svg"></a>
+			</div>
+		</header>
+		<h2 class="mainline">Agrega tus medidas en cm</h2>
+		<div class="medidas">
+			<div class="sld-wrapper">
+				<div class="mover planes tipo_med">
+					<div class="plan me-option active">
+						<img src="{{cordova_full_path}}images/medidas/brazo2.png">
+						<span class="type" value="2">Brazo</span>
+					</div>
+					<div class="plan me-option">
+						<img src="{{cordova_full_path}}images/medidas/pierna.png">
+						<span class="type" value="3">Pierna</span>
+					</div>
+					<div class="plan me-option">
+						<img src="{{cordova_full_path}}images/medidas/cadera.png">
+						<span class="type" value="5">Cadera</span>
+					</div>
+					<div class="plan me-option">
+						<img src="{{cordova_full_path}}images/medidas/cintura.png">
+						<span class="type" value="4">Cintura</span>
+					</div>
+					<div class="plan me-option">
+						<img src="{{cordova_full_path}}images/medidas/pecho.png">
+						<span class="type" value="6">Pecho</span>
+					</div>
+					<div class="plan me-option">
+						<img src="{{cordova_full_path}}images/medidas/gluteo.png">
+						<span class="type" value="7">Glúteo</span>
+					</div>
+					<input id="measured_area" type="hidden" value="">
+				</div>
+			</div>
+			<div class="page medida">
+				<div class="box-input-2">
+					<input id="medida-dato" type="text" name="medida" value="20">
+					<span>cm</span>
+				</div>
+				<div class="arrows-vertical">
+					<img id="medida-up" src="{{cordova_full_path}}images/leftarrow.png"><br><br>
+					<img id="medida-dw" src="{{cordova_full_path}}images/rightarrow.png">
+				</div>
+			</div>
+		</div>
+		<a id="add_medidas" class="btn-gre" href="#">Agregar</a>
+	</div>
+
+	{{> footer_menu}}
+
+	{{> footer_activities}}
+
+	<div class="alert_tracking" style="display:none">
+		<div class="ov-filler2"></div>
+		<div class="dialog">
+			<h5>Medidas</h5>
+			<p>¿Deseas guardar los datos?</p>
+			<div class="di-options">
+				<a id="add_tracking" class="accept">Aceptar</a>
+				<a id="add_cancelar" class="cancel">Cancelar</a>
+			</div>
+		</div>
+	</div>

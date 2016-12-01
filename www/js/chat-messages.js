@@ -9,7 +9,7 @@ function submit_handler(form) {
 }
 
 function setupMsgScrollHandler() {
-  var msgWindow = $('.col-md-8 .list-group.pre-scrollable');
+  var msgWindow = $('.list-group.pre-scrollable');
   var msgList = $('#messages-list');
 
   msgList.scroll(function() {
@@ -135,8 +135,8 @@ function retrieveChatMessages(dialog, beforeDateSent){
               messageAttachmentFileId = item.attachments[0].id;
             }
           }
-
-          var messageHtml = buildMessageHTML(messageText, messageSenderId, messageDateSent, messageAttachmentFileId, messageId);
+          console.log("Show_message ::: "+JSON.stringify(item));
+          var messageHtml = buildMessageHTML(messageText, messageSenderId, messageDateSent, messageAttachmentFileId, messageId, item.read);
 
           $('#messages-list').prepend(messageHtml);
 
@@ -153,6 +153,10 @@ function retrieveChatMessages(dialog, beforeDateSent){
           if (i > 5) {$('#messages-list').scrollTop($('#messages-list').prop('scrollHeight'));}
         });
       }
+      setTimeout(function(){
+        $('body').scrollTop($('#messages-list').prop('scrollHeight'));
+        app.hideLoader();
+      }, 2400);
     }else{
       console.log(err);
     }
@@ -166,10 +170,9 @@ function retrieveChatMessages(dialog, beforeDateSent){
 // sending messages after confirmation
 function clickSendMessage() {
   var currentText = $('#mensaje-chat').val().trim();
-  console.log(currentText);
-  if (currentText.length === 0){
+  console.log("current text :: "+currentText);
+  if (currentText.length === 0)
     return;
-  }
 
   $('#mensaje-chat').val('').focus();
 
@@ -177,26 +180,7 @@ function clickSendMessage() {
   window.scrollTo(0,document.body.scrollHeight);
 }
 
-function clickSendAttachments(inputFile) {
-  // upload image
-  QB.content.createAndUpload({name: inputFile.name, file: inputFile, type:
-        inputFile.type, size: inputFile.size, 'public': false}, function(err, response){
-    if (err) {
-      console.log(err);
-    } else {
 
-      $("#progress").fadeOut(400, function() {
-        $(".input-group-btn_change_load").removeClass("visibility_hidden");
-      });
-
-      var uploadedFile = response;
-
-      sendMessage("[attachment]", uploadedFile.id);
-
-      $("input[type=file]").val('');
-    }
-  });
-}
 
 // send text or attachment
 function sendMessage(text, attachmentFileId) {
@@ -212,7 +196,6 @@ function sendMessage(text, attachmentFileId) {
     markable: 1
   };
 
-  console.log(currentUser.id);
   if(attachmentFileId !== null){
     msg["extension"]["attachments"] = [{id: attachmentFileId, type: 'photo'}];
   }
@@ -243,7 +226,8 @@ function sendMessage(text, attachmentFileId) {
 function showMessage(userId, msg, attachmentFileId) {
   // add a message to list
   var userLogin = getUserLoginById(userId);
-  var messageHtml = buildMessageHTML(msg.body, userLogin, new Date(), attachmentFileId, msg.id);
+  console.log("Show_message ::: "+JSON.stringify(msg));
+  var messageHtml = buildMessageHTML(msg.body, userId, new Date(), attachmentFileId, msg.id);
 
   $('#messages-list').append(messageHtml);
 
@@ -264,7 +248,7 @@ function setupIsTypingHandler() {
   QB.chat.onMessageTypingListener = onMessageTyping;
 
   $("#message_text").focus().keyup(function(){
-
+    console.log("typing");
     if (typeof isTypingTimerId === 'undefined') {
 
       // send 'is typing' status

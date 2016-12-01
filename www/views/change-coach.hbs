@@ -1,0 +1,31 @@
+	<div >
+		<header class="hwhite2">
+			<div class="toolbar">
+				<a class="back hook" data-resource="user-profile" href="userdata.html"><img src="{{cordova_full_path}}images/back.svg"></a>
+			</div>
+		</header>
+		<img class="logo" src="{{cordova_full_path}}images/logo.svg">
+		<p>Tu solicitud para cambiar Coach se<br>enviará a un supervisor y éste se<br>pondrá en contacto contigo.</p>
+		<textarea id="espacio_comentario" type="text" placeholder="Cuéntanos la razón por la que deseas cambiar a tu Coach" ></textarea>
+		<a id="send_ch_coach" class="btn-gre" >Enviar</a>
+	</div>
+	<div class="alert_chCoach" style="display:none">
+		<div class="ov-filler2"></div>
+		<div class="dialog">
+			<h5>Cambio de Coach</h5>
+			<p>Para poder cambiar de coach es necesario que escribas un comentario</p>
+			<div class="di-options">
+				<a id="accept_chCoach" class="accept">Aceptar</a>
+			</div>
+		</div>
+	</div>
+	<div class="alert_chCoach2 modal" style="display:none">
+		<div class="ov-filler2"></div>
+		<div class="dialog">
+			<h5>Cambio de Coach</h5>
+			<p>Tu solicitud se encuentra en revisión, te notificaremos acerca de cualquier cambio.</p>
+			<div class="di-options">
+				<a id="confirm_coach_change" class="accept modal_ok">Aceptar</a>
+			</div>
+		</div>
+	</div>

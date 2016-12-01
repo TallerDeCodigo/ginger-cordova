@@ -1,0 +1,13 @@
+	{{> header}}
+	<div class="login ">
+		<img class="logo" src="{{cordova_full_path}}images/logo.svg">
+		<h4>CREAR UNA CUENTA</h4>
+		<form id="create_account">
+			<input id="user" type="text" name="user" placeholder="Nombre">
+			<input id="last_name" type="text" name="last_name" placeholder="Apellido">
+			<input id="mail" type="email" name="mail" placeholder="Correo electrónico">
+			<input id="pass" type="password" name="pass" placeholder="Contraseña">
+			<input id="c_pass" type="password" name="cpass" placeholder="Confirmar contraseña">
+			<input id="enviar" type="submit" onclick="app.showLoader();" value="">
+		</form>
+	</div>

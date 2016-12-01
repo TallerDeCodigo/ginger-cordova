@@ -2,53 +2,37 @@
 function buildMessageHTML(messageText, messageSenderId, messageDateSent, attachmentFileId, messageId, status){
 
   var messageAttach;
+  // var date = new Date(messageDateSent);
   if(attachmentFileId){
-      messageAttach = '<a href="http://api.quickblox.com/blobs/'+attachmentFileId+'/download.xml?token='+token+'"><img src="http://api.quickblox.com/blobs/'+attachmentFileId+'/download.xml?token='+token+'" alt="attachment" class="attachments img-responsive" /></a>';
+	  messageAttach = '<a href="http://api.quickblox.com/blobs/'+attachmentFileId+'/download.xml?token='+token+'"><img src="http://api.quickblox.com/blobs/'+attachmentFileId+'/download.xml?token='+token+'" alt="attachment" class="attachments img-responsive" /></a>';
   }
 
 	var isMessageSticker = ""; //stickerpipe.isSticker(messageText);
 
   var delivered = '<img class="icon-small" src="images/delivered.jpg" alt="" id="delivered_'+messageId+'">';
-  var read = '<img class="icon-small" src="images/read.jpg" alt="" id="read_'+messageId+'">';
+  // var read = '';
+  // if(status)
+  //   read = (messageDateSent && status) '<i class="material-icons">done</i>';
 
+  console.log("Statuss ::: "+status);
+  console.log("Statuss ::: "+messageDateSent);
 	var messageTextHtml = messageText;
 	if (messageAttach) {
 		messageTextHtml = messageAttach;
 	} else if (isMessageSticker) {
 		messageTextHtml = '<div class="message-sticker-container"></div>';
-
-		// stickerpipe.parseStickerFromText(messageText, function(sticker, isAsync) {
-		// 	if (isAsync) {
-		// 		$('#' + messageId + ' .message-sticker-container').html(sticker.html);
-		// 	} else {
-		// 		messageTextHtml = sticker.html;
-		// 	}
-		// });
 	}
 
-    // var messageHtml =
-		// 	'<div class="list-group-item" id="'+messageId+'" onclick="clickToAddMsg('+"'"+messageId+"'"+')">'+
-		// 		'<time datetime="'+messageDateSent+ '" class="pull-right">'
-		// 			+jQuery.timeago(messageDateSent)+
-		// 		'</time>'+
-
-		// 		'<h4 class="list-group-item-heading">'+messageSenderId+'</h4>'+
-		// 		'<p class="list-group-item-text">'+
-		// 			messageTextHtml +
-		// 		'</p>'
-		// 		+delivered+read+
-		// 	'</div>';
-
-
-  var sender = (localStorage.getItem('idSender') == messageSenderId)?'incoming':'outgoing';  
+  var sender = (localStorage.getItem('idSender') == messageSenderId) ? 'outgoing' : 'incoming';  
   console.log('Mensaje ID SENDER: ' + messageSenderId);
   console.log( localStorage.getItem('idSender') );
   console.log(sender);
   var messageHtml = '<div class="list-group-item" id="'+messageId+'" onclick="clickToAddMsg('+"'"+messageId+"'"+')">'+
-        '<div class="'+ sender +'">' +
-        '<p>' + messageTextHtml + '</p>'+
-        '</div>' + 
-        '</div>';
+						'<div class="'+ sender +'">' +
+						'<p>' + messageTextHtml + '</p>'+
+						'</div>' + 
+					'</div>'+
+					'<div class="clearfix"></div>';
   return messageHtml;
 }
 
@@ -72,11 +56,11 @@ function buildDialogHtml(dialogId, dialogUnreadMessagesCount, dialogIcon, dialog
 // build html for typing status
 function buildTypingUserHtml(userId, userLogin) {
   var typingUserHtml =
-      '<div id="'+userId+'_typing" class="list-group-item typing">'+
-        '<time class="pull-right">writing now</time>'+
-        '<h4 class="list-group-item-heading">'+ userLogin+'</h4>'+
-        '<p class="list-group-item-text"> . . . </p>'+
-      '</div>';
+	  '<div id="'+userId+'_typing" class="list-group-item typing">'+
+		'<time class="pull-right">writing now</time>'+
+		'<h4 class="list-group-item-heading">'+ userLogin+'</h4>'+
+		'<p class="list-group-item-text"> . . . </p>'+
+	  '</div>';
 
   return typingUserHtml;
 }
@@ -85,16 +69,16 @@ function buildTypingUserHtml(userId, userLogin) {
 function buildUserHtml(userLogin, userId, isNew) {
   var userHtml = "<a href='#' id='" + userId;
   if(isNew){
-    userHtml += "_new'";
+	userHtml += "_new'";
   }else{
-    userHtml += "'";
+	userHtml += "'";
   }
   userHtml += " class='col-md-12 col-sm-12 col-xs-12 users_form' onclick='";
   userHtml += "clickToAdd";
   userHtml += "(\"";
   userHtml += userId;
   if(isNew){
-    userHtml += "_new";
+	userHtml += "_new";
   }
   userHtml += "\")'>";
   userHtml += userLogin;
@@ -102,3 +86,9 @@ function buildUserHtml(userLogin, userId, isNew) {
 
   return userHtml;
 }
+
+/* Hide keyboard on scroll */
+$('#messages-list').scroll( function(){
+	console.log("scrollin keyboard:: "+window.openKeyboard);
+	if(window.openKeyboard) Keyboard.hide();
+});

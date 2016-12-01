@@ -1,280 +1,67 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
 	<head>
 		<meta charset="utf-8">
 		<title>Ginger Cliente</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1, height=device-height">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1">
 		<meta http-equiv="cleartype" content="on">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-
-	    <script type="text/javascript" src="cordova.js"></script>
-		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.runtime.min.js"></script>
-	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.min.js"></script>
+		<script type="text/javascript" src="https://conektaapi.s3.amazonaws.com/v0.3.2/js/conekta.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.1.2/quickblox.min.js"></script>
+	    <script src="js/jquery-1.12.2.min.js"></script>
+	    <script src="js/jquery-ui.min.js"></script>
 	    <script src="js/jquery-touch.min.js"></script>
-	    <script type="text/javascript" src="js/functions.js"></script>
-	    <script type="text/javascript" src="js/api-sdk-1.0.js"></script>
-		<script type='text/javascript' src='js/plugins.js'></script>
-		<script type="text/javascript" src="js/oauth.js"></script>
-		<script src="js/main.js"></script>
 	</head>
-	<body class="perfil2 update_data iosm">
-
-	<div id="container">
-		<header class="hwhite2">
-			<div class="toolbar">
-				<a class="back" href="userdata.html"><img src="images/back.svg"></a>
-			</div>
-		</header>
-		<div class="add_picture">
-			<div class="profile circle-frame edition">
-				<img src="">
-			</div>
+	
+	<body class="iosm preventEvents">
+		<div id="container" class="rootContainer">
+			
 		</div>
-		<h2 class="cpur">Abby Shabot</h2>
-		<div class="profile-data edition">
-			<a class="edit-profile"><img src="images/profile/pencil.svg">Datos de <span>Abby Shabot</span></a>
-			<ul>
-				<li><span>Sexo:</span></li>
-			</ul>
-			<div class="page genre">
-				<img class="edition" id="hombre" src="images/hombreh.svg">
-				<img class="edition" id="mujer" src="images/mujere.svg">
-				<input id="update_sexo" type="hidden" value="">
-			</div>
-			<ul>
-				<li><span>Edad:</span></li>
-			</ul>
-			<div class="page age">
-				<img class="img-derecha" src="images/bebe.png">
-				<div class="drag-parent">
-					<div class="slider-bar"></div>
-					<div id="age-filler" class="slider-filler"></div>
-					<div id="age" class="slider-point">
-						<div class="position"><span id="age-dato">15</span><br>años</div>
-					</div>
-				</div>
-				<img class="img-izquierda" src="images/adulto.png">
-				<input id="edad_value" value="" type="hidden">
-			</div>
-			<ul>
-				<li><span>Código Postal:</span></li>
-			</ul>
-			<div class="page zip">
-				<div class="box-input-1">
-					<input type="text" style="height:50px!important;" name="zipcode" maxlength="5" value="03820">
-				</div>
-			</div>
-			<ul>
-				<li><span>Estatura:</span></li>
-			</ul>
-			<div class="page mido">
-				<div class="arrows-vertical">
-					<img id="estatura-up" src="images/leftarrow.png">
-					<img id="estatura-dw" src="images/rightarrow.png">
-				</div>
-				<img class="type-def" src="images/hombreh.svg">
-				<div class="box-input-2">
-					<input type="text" style="height:50px!important;" name="estatura" value="1.50" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
-					<span>m</span>
-				</div>
-			</div>
-			<ul>
-				<li><span>Peso:</span></li>
-			</ul>
-			<div class="page peso">
-				<div class="arrows-vertical">
-					<img id="peso-up" src="images/leftarrow.png">
-					<img id="peso-dw" src="images/rightarrow.png">
-				</div>
-				<div class="box-input-2">
-					<input type="text" style="height:50px!important;" name="peso" value="50.0" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
-					<span>kg</span>
-				</div>
-			</div>
-			<ul>
-				<li><span>Peso Ideal:</span></li>
-			</ul>
-			<div class="page ideal">
-				<div class="arrows-vertical">
-					<img id="ideal-up" src="images/leftarrow.png">
-					<img id="ideal-dw" src="images/rightarrow.png">
-				</div>
-				<div class="box-input-2">
-					<input type="text" style="height:50px!important;" name="ideal" value="50.0" maxlength="4" onkeypress="return event.charCode >= 46 && event.charCode <= 57">
-					<span>kg</span>
-				</div>
-			</div>
-			<ul>
-				<li><span>Tipo de Coach:</span></li>
-			</ul>
-			<div class="sld-wrapper">
-				<div class="mover planes tipo_coach">
-					<div class="plan co-option">
-						<img  src="images/coach/estricto.png">
-						<span class="type" value="estricto">Estricto</span><br>
-						<img class="question" src="images/question.svg" title="Estricto" data="Coach que busca que se cumplan sus dietas y recomendaciones al pie de la letra y que estará al pendiente de todos tus movieminteos para que cumplas tus objetivos">
-					</div>
-					<div class="plan co-option">
-						<img src="images/coach/innovador.png">
-						<span class="type" value="innovador">Innovador</span><br>
-						<img class="question" src="images/question.svg" title="Innovador" data="Coach que integra en sus dietas superalimentos así como recetas gourmet, healthy, o en general más elaboradas">
-					</div>
-					<div class="plan co-option">
-						<img src="images/coach/animador.png">
-						<span class="type" value="animador">Animador</span><br>
-						<img class="question" src="images/question.svg" title="Animador" data="Coach que busca que te motives y que tengas ganas de obtener los mejores resultados posibles, fáciles de conseguir y de preparar">
-					</div>
-					<div class="plan co-option">
-						<img src="images/coach/tradicional.png">
-						<span class="type" value="tradicional">Tradicional</span><br>
-						<img class="question" src="images/question.svg" title="Tradicional" data="Coach que se basa en alimentos sencillos y tradicionales, fáciles de conseguir y de preparar">
-					</div>
-					<input id="coach_type" type="hidden" value="">
-				</div>
-			</div>
-			<ul>
-				<li><span>Frecuencia de Ejercicio:</span></li>
-			</ul>
-			<div class="page exercise">
-				<img class="img-derecha" src="images/norun.svg">
-				<div class="drag-parent">
-					<div class="slider-bar"></div>
-					<div id="ejercicio-filler" class="slider-filler"></div>
-					<div id="ejercicio" class="slider-point">
-						<div class="position"><span id="ejercicio-dato">0</span><br>días</div>
-					</div>
-				</div>
-				<img class="img-izquierda" src="images/run.svg">
-				<input id="days_per_week" type="hidden" value="">
-			</div>
-			<ul>
-				<li><span>Restricciones Alimenticias:</span></li>
-			</ul>
-			<div class="sld-wrapper">
-				<div class="mover planes tipo_restric">
-					<div class="plan re-option">
-						<img src="images/restric/huevo.png">
-						<span class="type" value="0">Huevo</span>
-					</div>
-					<div class="plan re-option">
-						<img src="images/restric/pollo.png">
-						<span class="type" value="1">Pollo</span>
-					</div>
-					<div class="plan re-option">
-						<img src="images/restric/pescado.png">
-						<span class="type" value="2">Pescado</span>
-					</div>
-					<div class="plan re-option">
-						<img src="images/restric/camaron.png">
-						<span class="type" value="3">Mariscos</span>
-					</div>
-					<div class="plan re-option">
-						<img src="images/restric/lacteos.png">
-						<span class="type" value="4">Lácteos</span>
-					</div>
-					<div class="plan re-option">
-						<img src="images/restric/carne.png">
-						<span class="type" value="5">Carne</span>
-					</div>
-				</div>
-			</div>
-			<ul>
-				<li>
-					<span>¿Tienes algo más que contarnos?</span>
-				</li>
-				<li class="comentario" style="display:none"><span><i class="the-comment">Sufro de hipertensión y odio comer lentejas porque me provocan malestar estomacal, también soy intolerante a los hongos</i></span></li>
-			</ul>
-			<div class="alt-page">
-				<div class="siono yes">Sí</div>
-					<div class="siono not active">No</div>
-			</div>
-			<ul>
-				<li><span>Objetivo:</span></li>
-			</ul>
-			<div class="sld-wrapper">
-				<div class="mover planes tipo_plan">
-					<div class="plan pl-option">
-						<img src="images/plan/perderpeso.png">
-						<span value="adelgazar" class="type">Bajar de peso</span>
-					</div>
-					<div class="plan pl-option">
-						<img src="images/plan/detox.png" value="">
-						<span value="detox" class="type">Detox</span>
-					</div>
-					<div class="plan pl-option">
-						<img src="images/plan/rendimientofisico.png" value="">
-						<span value="rendimiento" class="type">Rendimiento físico</span>
-					</div>
-					<div class="plan pl-option">
-						<img src="images/plan/sentirsemejor.png" value="">
-						<span value="bienestar" class="type">Sentirse mejor</span>
-					</div>
-					<input id="plan" type="hidden" value="">
-				</div>
-			</div>
-			<ul>
-				<li class="savech">
-					<a id="add_updated_profile" class="btn-org" >Guardar</a>	
-				</li>
-			</ul>
-			<div class="profile-bottom">
-				<ul>
-					<li>
-						<span>Coach: <strong id="coach_name">María Medina</strong></span>
-						<div class="rate-stars">
-							<!-- <img src="images/starh.svg">
-							<img src="images/starh.svg">
-							<img src="images/starh.svg">
-							<img src="images/star.svg">
-							<img src="images/star.svg"> -->
-						</div>
-					</li>
-					<li>
-						<a class="btn-org" href="cambiocoach.html">Cambiar Coach</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div class="overscreen2" style="display:none">
-		<div class="ov-filler2"></div>
-		<div class="dialog">
-			<h5>Estricto</h5>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut ipsum eget mauris euismod.</p>
-			<div class="di-options">
-				<a class="accept">Aceptar</a>
-			</div>
-		</div>
-	</div>
-	<div class="overscreen3" style="display:none">
-		<div class="boxx-top">
-			<div>
-				<a class="izquii">Cancelar</a>
-				<a class="add send_cmt">Enviar</a>
-			</div>
-		</div>
-		<textarea id="comentar" placeholder="Escribe tu comentario aquí..."></textarea>
-	</div>
-	<div class="overscreen7" style="display:none">
-		<div class="ov-filler2"></div>
-		<div class="dialog">
-			<h5>Atención</h5>
-			<p>Tus perfil ha cambiado. Se te asignará un nuevo coach</p>
-			<div class="di-options">
-				<a id="_alert_chCoach" class="accept">Aceptar</a>
-				<a id="_cancel_chCoach" class="accept">Cancelar</a>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript">
-		/* Initialize app object and perform initial login check */
-		window.is_feed = true;
-		app.initialize();
-		//app.render_feed(0, 'all');
-		//app.showLoader();
-	</script>
 	</body>
-</html>
 
+    <script type="text/javascript" src="views/compiled/container.js"></script>
+    <script type="text/javascript" src="views/compiled/entermode.js"></script>
+    <script type="text/javascript" src="views/compiled/login.js"></script>
+    <script type="text/javascript" src="views/compiled/login-mail.js"></script>
+	<script type="text/javascript" src="views/compiled/code.js"></script>
+    <script type="text/javascript" src="views/compiled/record.js"></script>
+    <script type="text/javascript" src="views/compiled/my-plan.js"></script>
+	<script type="text/javascript" src="views/compiled/main-menu.js"></script>
+	<script type="text/javascript" src="views/compiled/partials/footer_menu.js"></script>
+	<script type="text/javascript" src="views/compiled/partials/footer_activities.js"></script>
+    <script type="text/javascript" src="views/compiled/register.js"></script>
+    <script type="text/javascript" src="views/compiled/register-mail.js"></script>
+    <script type="text/javascript" src="views/compiled/partials/header.js"></script>
+    <script type="text/javascript" src="views/compiled/partials/loader.js"></script>
+    <script type="text/javascript" src="views/compiled/coming-soon.js"></script>
+    <script type="text/javascript" src="views/compiled/about.js"></script>
+    <script type="text/javascript" src="views/compiled/support.js"></script>
+    <script type="text/javascript" src="views/compiled/user-profile.js"></script>
+    <script type="text/javascript" src="views/compiled/edit-profile.js"></script>
+    <script type="text/javascript" src="views/compiled/change-coach.js"></script>
+    <script type="text/javascript" src="views/compiled/record-exercise.js"></script>
+    <script type="text/javascript" src="views/compiled/record-water.js"></script>
+    <script type="text/javascript" src="views/compiled/record-weight.js"></script>
+    <script type="text/javascript" src="views/compiled/record-measures.js"></script>
+    <script type="text/javascript" src="views/compiled/record-mood.js"></script>
+    <script type="text/javascript" src="js/api-sdk-1.0.js"></script>
+	<script type="text/javascript" src="js/plugins.js"></script>
+	<script src="js/chat-config.js"></script>
+	<script src="js/chat-connection.js"></script>
+	<script src="js/chat-messages.js"></script>
+	<script src="js/chat-ui-helpers.js"></script>
+	<script src="js/chat-dialogs.js"></script>
+	<script src="js/chat-users.js"></script>
+	<script type="text/javascript" src="js/scripts/chat-core.js"></script>
+	<script type="text/javascript" src="js/oauth.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript">
+		app.render_edit_settings();
+	</script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/scripts/document_ready.js"></script>
+    <script type="text/javascript" src="js/scripts/initialRecord.js"></script>
+    <script type="text/javascript" src="js/scripts/calendar.js"></script>
+</html>

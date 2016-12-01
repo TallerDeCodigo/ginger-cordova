@@ -1,0 +1,17 @@
+
+	<header class="htrans">
+		<div class="toolbar">
+			<a data-resource="login" href="ingreso.html" class="back hook back_with_logout" style="display:block">
+				<img src="{{cordova_full_path}}images/back.svg">
+			</a>
+		</div>
+	</header>
+	<div>
+		<img class="logo" src="{{cordova_full_path}}images/logo.svg">
+		<h4>INICIAR SESIÓN</h4>
+		<form id="login_form">
+			<input id="mail" type="email" name="mail" placeholder="Correo electrónico">
+			<input id="pass" type="password" name="pass" placeholder="Contraseña">
+			<input id="enviar_login" class="send_login" type="submit" onclick="app.showLoader();" value="">
+		</form>
+	</div>

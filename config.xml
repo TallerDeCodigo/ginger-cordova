@@ -8,11 +8,13 @@
         John Falcon for TDC
     </author>
     <content src="index.html" />
+    
     <plugin name="cordova-plugin-whitelist" spec="1" />
 
     <feature name="App">
         <param name="android-package" value="org.ginger.app" />
     </feature>
+
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -23,6 +25,8 @@
     <access origin="https://*.google.com" />
     <access origin="https://*.googleapis.com" />
     <access origin="https://*.gstatic.com" />
+    <access origin="http://ginger-admin.cloudapp.net" />
+    <access origin="http://api.quickblox.com/blobs/*" />
     
     <platform name="android">
         <allow-intent href="market:*" />    
@@ -35,11 +39,12 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <allow-intent href="https://gingerservice.azure-mobile.net/*" />
-        <allow-intent href="https://sketchfab.com/models/*" />
+        <allow-intent href="http://api.quickblox.com/blobs/*" />
         <access origin="https://sketchfab.com/models/*" />
         <allow-navigation href="https://sketchfab.com/models/*" />
         <allow-navigation href="https://gingerservice.azure-mobile.net/*" />
         <allow-navigation href="*://*.googleapis.com/*"/>
+        <allow-navigation href="http://api.quickblox.com/blobs/*" />
         
     </platform>
 
