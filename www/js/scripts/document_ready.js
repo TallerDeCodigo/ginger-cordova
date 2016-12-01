@@ -123,8 +123,8 @@ window.initializeEvents = function(){
 		if($('.view').hasClass("login")){
 			console.log("Init login keyboard events");
 			if(typeof Keyboard != 'undefined'){
-				Keyboard.disableScrollingInShrinkView(true);
-				Keyboard.shrinkView(false);
+				Keyboard.disableScrollingInShrinkView(false);
+				Keyboard.shrinkView(true);
 			}
 		}
 

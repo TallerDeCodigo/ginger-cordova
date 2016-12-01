@@ -73,7 +73,6 @@
 						 * TODO: Render chunk depending on information already provided
 						 */
 						console.log("Initial record");
-						app.keeper.clear();
 						return app.render_initial_record();
 					}
 					_user = JSON.parse( app.keeper.getItem('user') );
@@ -736,7 +735,7 @@
 		},
 		get_diet: function(dietId){
 			
-			return apiRH.getRequest('tables/dieta?_id=' + dietId, null);		
+			return apiRH.getRequest('tables/dieta?cliente=' + _user._id, null);		
 		},
 		fetch_profile_data: function(userId){
 

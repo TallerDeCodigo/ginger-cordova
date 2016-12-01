@@ -557,16 +557,16 @@ window.initializeRecordEvents = function(){
 		if( !restricciones || restricciones === 'undefined' ){
 			restricciones = [];
 		}else{
-			restricciones = JSON.parse("["+restricciones+"]");
+			restricciones = JSON.parse(restricciones);
 			console.log(restricciones.length);
 			console.log(restricciones);
 		}
 
 		$('.re-option').click(function() {
 
-			if(restricciones === 'undefined' ){
+			if(restricciones === 'undefined' )
 				restricciones = [];
-			}
+
 			else if(restricciones.length > 0){
 				console.log(restricciones);
 				console.log(restricciones.length);
@@ -582,7 +582,8 @@ window.initializeRecordEvents = function(){
 				$(this).addClass('active');
 				$(this).attr("value", valor);
 				$('.restricciones').attr('value', valor);
-				restricciones.push(valor);
+				if(restricciones.indexOf(valor) === -1)
+					restricciones.push(valor);
 				app.keeper.setItem('restricciones', JSON.stringify(restricciones) );
 
 			} else {
