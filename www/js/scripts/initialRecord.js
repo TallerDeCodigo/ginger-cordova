@@ -948,7 +948,7 @@ window.initializeRecordEvents = function(){
 			}, 250);
 
 			// if( $('div').hasClass('resena') ){
-				var _aidi = $(this).parent().parent().attr('coach');
+				var _aidi 	 = $(this).parent().parent().attr('coach');
 				var _co_name = $(this).parent().parent().attr('data-name');
 				var _co_rate = $(this).parent().parent().attr('data-rate');
 				var _co_rate = Math.round(_co_rate);
