@@ -623,6 +623,8 @@ function requestHandlerAPI(){
 
 		this.getConsumed = function(DateStart, DateEnd){
 			// sdk_app_context.showLoader();
+			console.log(DateStart);
+			console.log(DateEnd);
 			var result = {};
 			var user = window._user;
 			var idCoach = user.coach._id;

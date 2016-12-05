@@ -33,8 +33,10 @@ window.initializeEvents = function(){
 
 				if( $(this).data('resource') == "chat" )
 					return app.render_chat( $(this).attr('href') );
-				if( $(this).data('resource') == "my-plan" )
-					return app.render_myPlan( $(this).attr('href') );
+				if( $(this).data('resource') == "my-plan" ){
+					if(!$('.view').hasClass('my-plan'))
+						return app.render_myPlan( $(this).attr('href') );
+				}
 				if( $(this).data('resource') == "main-menu" )
 					return app.render_mainmenu( $(this).attr('href') );
 				if( $(this).data('resource') == "user-profile" )
@@ -419,11 +421,12 @@ window.initializeEvents = function(){
 			return initializeRecordEvents();
 		
 		function markConsumed(){
-			var date 		= new Date();
-			var firstDay 	= new Date(date.getFullYear(), date.getMonth()+1, 1);
-			var lastDay 	= new Date(date.getFullYear(), date.getMonth()+2, 0);
-			var response 	= apiRH.getConsumed( firstDay.getFullYear()+'-'+firstDay.getMonth()+'-'+firstDay.getDate(), 
-												 lastDay.getFullYear()+'-'+lastDay.getMonth()+'-'+lastDay.getDate() );
+			var todayDate   = new Date();
+			var thisMonth 	= todayDate.getMonth()+1;
+			var firstDay 	= new Date(todayDate.getFullYear(), thisMonth, 1);
+			var lastDay 	= new Date(todayDate.getFullYear(), thisMonth+1, 0);
+			var response 	= apiRH.getConsumed( todayDate.getFullYear()+'-'+thisMonth+'-'+firstDay.getDate(), 
+												 todayDate.getFullYear()+'-'+thisMonth+'-'+lastDay.getDate() );
 
 			if(!response.consumos){
 				app.hideLoader();
@@ -979,22 +982,20 @@ window.initializeEvents = function(){
 		} /*** END BODY CLASS DIETA ***/
 
 
-		if($('.view').hasClass('chat-dialog')){
+		if( $('.view').hasClass('chat-dialog') ){
 		
 			var mail 		 = app.keeper.getItem('mail');
 			var chatPassword = app.keeper.getItem('chatPassword');
-			var userLog 	 = JSON.parse(app.keeper.getItem('user'));
-			var uChatCoach 	 = userLog.coach.jid;
+			var uChatCoach 	 = _user.coach.jid;
 			
 			uChatCoach = uChatCoach.split('-');
 			app.keeper.setItem('cCoachID', uChatCoach[0]);
-			var user = { login : userLog.mail, pass : userLog.chatPassword};
-
-			// $('h2.titulo').html(userLog.coach.nombre + " " + userLog.coach.apellido);
+			var user = { login : _user.mail, pass : _user.chatPassword};
 			
 			connectToChat(user);
 			
 			createNewDialog();
+
 
 		} /*** END BODY CLASS CHAT ***/
 

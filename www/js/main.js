@@ -194,6 +194,15 @@
 			app.receivedEvent('mobileinit');
 			console.log("mobileinit");
 		},
+		// Method runs everytime sdk checks for a container loaded, basically every render of a view
+		onSoftInit: function() {
+
+			/*** Initializing chat api if not already did ***/
+			if(!chatCore.isInitialized && loggedIn)
+				setTimeout(function(){
+					chatCore.init(_user);
+				}, 800);
+		},
 		// Update DOM on a Received Event
 		receivedEvent: function(id) {
 			if(id == 'deviceready' && typeof navigator.splashscreen != 'undefined'){
@@ -249,6 +258,8 @@
 				var html 	 = container_template();
 				$('.rootContainer').html( html );
 			}
+			/*** Soft init method ***/
+			this.onSoftInit();
 		},
 		render_entermode : function(url){
 			
@@ -351,7 +362,7 @@
 			app.check_or_renderContainer();
 			var data = this.gatherEnvironment([], "Mi Plan");
 			data.is_scrollable = false;
-			return this.switchView('my-plan', data, '.view', url, 'dieta', true);
+			return this.switchView('my-plan', data, '.view', url, 'dieta my-plan', true);
 		},
 		render_mainmenu : function( url ){
 			
@@ -608,6 +619,43 @@
 		},
 		hideLoader: function(){
 			$('#spinner').hide();
+		},
+		// Cache Slot methods
+		push_cache_slot: function(slot_name, value){
+			
+			var local_tmp = app.keeper.getItem('temp-return');
+			var new_push  = {};
+				new_push[slot_name] =  {
+											'name' 	: slot_name,
+											'stamp' : new Date().getTime(),
+											'data' 	: value
+										};
+				
+			local_tmp = (local_tmp && local_tmp != '') 
+									? $.extend( JSON.parse( local_tmp ), new_push )
+									: new_push;
+
+			app.keeper.setItem('temp-return', JSON.stringify(local_tmp));
+			return;
+		},
+		pop_cache_slot: function(slot_name){
+
+			var local_tmp = app.keeper.getItem('temp-return');
+			local_tmp = (local_tmp && local_tmp != '') ? JSON.parse( local_tmp ) : null;
+			if( local_tmp && typeof local_tmp[slot_name] !== 'undefined' )
+				return local_tmp[slot_name];
+			return false;
+		},
+		clean_cache_slot: function(slot_name){
+			var local_tmp = app.keeper.getItem('temp-return');
+			local_tmp = (local_tmp && local_tmp != '') ? JSON.parse( local_tmp ) : null;
+				
+			if(typeof local_tmp[slot_name]){
+				delete local_tmp[slot_name];
+				app.keeper.setItem('temp-return', JSON.stringify(local_tmp));
+				return;
+			}
+			return false;
 		},
 		toast: function(message, bottom){
 			try{
