@@ -349,7 +349,7 @@
 				app.showLoader();
 			}, 420);
 			app.check_or_renderContainer();
-			var data = this.gatherEnvironment(null, "Mi Plan");
+			var data = this.gatherEnvironment([], "Mi Plan");
 			data.is_scrollable = false;
 			return this.switchView('my-plan', data, '.view', url, 'dieta', true);
 		},
@@ -505,7 +505,7 @@
 			console.log("Rendering Chat Dialog");
 			var data = this.gatherEnvironment(null, _user.coach.nombre+' '+_user.coach.apellido);
 			data.is_scrollable = true;
-			return this.switchView( 'chat-dialog', data, '.view', url, 'chat-dialog' );
+			return this.switchView( 'chat-dialog', data, '.view', url, 'chat-dialog', true );
 		},
 		render_modal : function(modalName, data, appendTarget){
 
