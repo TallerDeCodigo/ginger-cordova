@@ -1,0 +1,52 @@
+	<div id="container" class="money">
+		<header class="hwhite2">
+			<div class="toolbar">
+				<a class="back hook" data-resource="transactions" href="finanzas.html">
+					<img src="{{cordova_full_path}}images/back.svg">
+				</a>
+				<h2 class="titulo">{{header_title}}</h2>
+			</div>
+		</header>
+    	<div class="conekta pagina">
+    		<h4>Elegir forma de pago</h4>
+    		<div class="btn-pago1">TARJETA</div>
+    		<form>
+    			<div class="form-label">
+    				<input type="text" name="nombre">
+	    			<label for="nombre">Nombre (como aparece en tu tarjeta)</label>
+    			</div>
+    			<div class="form-label">
+    				<input type="text" name="card" maxlength="16">
+	    			<label for="card">Número de tarjeta</label>
+    			</div>
+    			<div class="form-label-2">
+    				<input type="text" name="mes" maxlength="2">
+	    			<label for="mes">MM</label>
+	    			<span>/</span>
+	    			<input type="text" name="year" maxlength="2">
+	    			<label for="year">YY</label>
+    			</div>
+    			<div class="form-label-2 segur">
+    				<input type="text" name="cvc" maxlength="3">
+	    			<label for="cvc">CVC</label>
+    			</div>
+    			<div class="form-label">
+    				<input type="text" name="mail">
+	    			<label for="mail">Correo electrónico</label>
+    			</div>
+    			<div class="form-label-2">
+    				<input type="text" name="cupon">
+	    			<label for="cupon">Cupón</label>
+    			</div>
+    			<div class="form-label-2">
+    				<div class="bt-review">VALIDAR CUPÓN</div>
+    			</div>
+    			<div class="form-label">
+    			<input type="checkbox" name="terms">
+    			<span>Acepto <a href="http://www.gingerapp.mx/terminosycondiciones/">Términos y Condiciones</a></span>
+    			</div>
+    			
+    		</form>
+    		<img class="enter" src="{{cordova_full_path}}images/aceptar.svg">
+    	</div>
+	</div>

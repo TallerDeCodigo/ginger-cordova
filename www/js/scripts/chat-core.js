@@ -8,6 +8,7 @@
 	chatCore.currentUser 	= null;
 	chatCore.opponentId 	= null;
 	chatCore.currentDialog 	= null;
+	chatCore.coachDialog 	= null;
 	chatCore.dialogs 		= [];
 	chatCore.occupantsIds 	= [];
 	chatCore.QBApp = {
@@ -26,7 +27,7 @@
 					}
 				};
 
-	chatCore.init = function(elCoach){
+	chatCore.init = function(elUser){
 
 		console.log("Initializing instant messaging api");
 		if(chatCore.isInitialized)
@@ -36,8 +37,8 @@
 		QB.init(chatCore.QBApp.appId, chatCore.QBApp.authKey, chatCore.QBApp.authSecret, chatCore.config);
 
 		chatCore.access = 	{ 	
-								email: 		elCoach.mail, 
-								password: 	elCoach.chatPassword
+								email: 		elUser.mail, 
+								password: 	elUser.chatPassword
 							};
 		QB.createSession( chatCore.access,  function(err, res) {
 								if(err)
@@ -48,19 +49,19 @@
 									chatCore.user_id 		= res.user_id;
 									chatCore.obj 			= res;
 									chatCore.isInitialized 	= true;
-									chatCore.currentUser 	= elCoach;
+									chatCore.currentUser 	= elUser;
 									app.keeper.setItem('idSender', res.user_id);
-									chatCore.connectToChat(elCoach);
+									chatCore.connectToChat(elUser);
 									return res;
 								}
 						} );
 		return this;
 	};
 
-	chatCore.connectToChat = function(elCoach) {
+	chatCore.connectToChat = function(elUser) {
 
 		console.log("Spin dialing...");
-		var params 	= {jid: elCoach.jid, password: elCoach.chatPassword};
+		var params 	= {jid: elUser.jid, password: elUser.chatPassword};
 		QB.chat.connect(params, 
 						 function(err, roster) {
 
@@ -159,7 +160,7 @@
 		setTimeout(function(){
 
 			if(chatCore.isInitialized){
-				// mergeUsers([{user: elCoach}]);
+				// mergeUsers([{user: elUser}]);
 				QB.chat.dialog.list( null, function(err, resDialogs) {
 					
 					if (err)
@@ -212,7 +213,6 @@
 
 		QB.chat.dialog.list( null, function(err, resDialogs) {
 			var i = 0;
-			var name = "Chat";
 			if (err){
 				app.hideLoader();
 				return app.toast("Error: no fue posible consultar los mensajes.");
@@ -220,74 +220,28 @@
 
 			if(resDialogs){
 
-				resDialogs.items.forEach(function(item, i, arr) {
-				
-					var dialogId = item._id;
-					chatCore.dialogs[dialogId] = item;
-
-					item.occupants_ids.map(function(userId) {
-						chatCore.occupantsIds.push(userId);
-					});
-					var date = new Date(item.updated_at);
-					// item.last_read 	= date.;
-				});
-				chatCore.occupantsIds 	= jQuery.unique(chatCore.occupantsIds);
-				resDialogs.header_title = name;
-				resDialogs.token 		= chatCore.token;
 				console.log(resDialogs);
-				app.render_template('chat-contacts', '.chat-container', resDialogs);
-				initializeEvents();
-				return chatCore.initContactListEvents();
+				chatCore.coachDialog = resDialogs.items[0];
 			}
-
-		});
-		return false;
-	};
-
-	/**
-	 * Initialize events for chat contact list
-	 */
-	chatCore.initContactListEvents = function(){
-
-		$('.btnDialogs').click(function () {
-			setTimeout(function(){
-				app.showLoader();
-			}, 420);
-			var qbox_id 	= $(this).data('qbox');
-			var gingerid 	= $(this).data('gingerid');
-			var dialogId 		= $(this).data('dialog');
-			app.keeper.setItem('idQBOX', qbox_id);
-			app.keeper.setItem('idGinger', gingerid);
-			chatCore.currentDialog = chatCore.dialogs[dialogId];
-			chatCore.retrieveChatMessages(chatCore.currentDialog);
-			$('#opponent_name').text(chatCore.currentDialog.name);
-			$('.view').addClass('chat-dialog-messages');
-			initializeEvents();
 			return;
 		});
-
-		chatCore.dialogsMessages = $('#dialogs-list');
-		console.log(chatCore);
 	};
 
-
+	
 // ___________________________________________________//
 
 	chatCore.retrieveChatMessages = function(dialog, beforeDateSent){
 
 		var dialogsMessages = [];
-		var data = {header_title: "Chat"};
-		app.render_template('chat-messages', '.chat-container', data, true);
-		
 		var params 	= 	{
-							chat_dialog_id: dialog._id,
-							sort_desc: 'date_sent',
-							limit: 25 // TODO: change to smaller limit as soon as we connect previous messages handler
+							chat_dialog_id 	: dialog._id,
+							sort_desc 		: 'date_sent',
+							limit 			: 25 // TODO: change to smaller limit as soon as we connect previous messages handler
 						};
 
-		/** if we would like to load the previous history **/
+		/** If we would like to load the previous history **/
 		if(beforeDateSent)
-			params.date_sent = {lt: beforeDateSent};
+			params.date_sent = { lt: beforeDateSent };
 		
 		QB.chat.message.list(params, function(err, response) {
 			

@@ -505,6 +505,17 @@
 			data.is_scrollable = false;
 			return this.switchView( 'support', data, '.view', url, 'about' );
 		},
+		render_chat_container : function(url){
+
+			window.is_home = false;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			var data 	= this.gatherEnvironment([], 'Chat');
+			return this.switchView('chat-container', data, '.view', url, 'chat-container', true);
+		},
 		render_chat : function(url){
 
 			window.is_home = false;
@@ -516,7 +527,33 @@
 			console.log("Rendering Chat Dialog");
 			var data = this.gatherEnvironment(null, _user.coach.nombre+' '+_user.coach.apellido);
 			data.is_scrollable = true;
-			return this.switchView( 'chat-dialog', data, '.view', url, 'chat-dialog', true );
+			return this.switchView( 'chat-dialog', data, '.view', url, 'chat-dialog dialog-messages', true );
+		},
+		render_transactions : function(url){
+
+			window.is_home = false;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Transactions");
+			var data = this.gatherEnvironment(null, "Transacciones");
+			data.is_scrollable = true;
+			return this.switchView( 'transactions', data, '.view', url, 'transactions finanzas profile-data', true );
+		},
+		render_change_payment : function(url){
+
+			window.is_home = false;
+			if(!app.initialized) app.initialize();
+			setTimeout(function(){
+				app.showLoader();
+			}, 420);
+			app.check_or_renderContainer();
+			console.log("Rendering Change Payment");
+			var data = this.gatherEnvironment(null, "Información de Pago");
+			data.is_scrollable = true;
+			return this.switchView( 'change-payment', data, '.view', url, 'change-payment money' );
 		},
 		render_modal : function(modalName, data, appendTarget){
 
@@ -613,6 +650,41 @@
 					initializeEvents();
 					$(window).resize();
 				}, 2000);
+		},
+		render_template : function(templateName, targetSelector, otherdata, keepLoader, append, leNiceTransition){
+			keepLoader = (typeof keepLoader == 'undefined' || !keepLoader) ? false : true;
+			append = (typeof append == 'undefined' || !append) ? false : true;
+			leNiceTransition = (typeof leNiceTransition == 'undefined') ? true : leNiceTransition;
+			window.is_home = false;
+			var template = Handlebars.templates[templateName];
+			if(!template){
+				console.log("Template doesn't exist");
+				return false;
+			}
+			var data = this.gatherEnvironment(otherdata);
+			data.is_scrollable = false;
+			if(!append)
+				$(targetSelector).html('');
+			if(!leNiceTransition){
+
+				$(targetSelector).append( template(data) ).css({ "opacity": 0, "display": "block"})
+														 .animate(	{
+															opacity: 1
+														}, 640);
+			}else{
+
+				$(targetSelector).append( template(data) ).css("opacity", 1)
+														 .css("display", "block")
+														 .css("margin-left", "12px")
+														 .animate(	{
+																		'margin-left': "0",
+																		opacity: 1
+																	}, 320);
+			}
+			if(!keepLoader)
+				setTimeout(function(){
+					app.hideLoader();
+				}, 420);
 		},
 		showLoader: function(){
 			$('#spinner').show();

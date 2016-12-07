@@ -573,7 +573,7 @@ a.mail { background:#2eab7e url('../images/mail_btn.png') no-repeat;background-s
 .profile-data.finanzas {width:100%;background:#FFF;padding:0px;margin-top:0;border:none;text-align:center;}
 .profile-data.finanzas ul li {text-align:left;margin-bottom:22px;}
 
-.finanzas .btn-org {width:240px;}
+.finanzas .btn-org {width: 240px; padding: 1rem; font-size: 1.5rem; display: block; margin: auto;}
 .sinpoint {list-style:none;}
 
 .finanzas table {width:100%;font-size:62.5%;border:none;position:relative;top:-10px;}

@@ -1,118 +1,66 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
 	<head>
 		<meta charset="utf-8">
 		<title>Ginger Cliente</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1, height=device-height">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1">
 		<meta http-equiv="cleartype" content="on">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-	    <script type="text/javascript" src="cordova.js"></script>
-	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/bower_components/handlebars/handlebars.min.js"></script>
+		<script type="text/javascript" src="https://conektaapi.s3.amazonaws.com/v0.3.2/js/conekta.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.1.2/quickblox.min.js"></script>
+	    <script src="js/jquery-1.12.2.min.js"></script>
+	    <script src="js/jquery-ui.min.js"></script>
 	    <script src="js/jquery-touch.min.js"></script>
-	    <script type="text/javascript" src="js/functions.js"></script>
-	    <script type="text/javascript" src="js/api-sdk-1.0.js"></script>
-		<script type='text/javascript' src='js/plugins.js'></script>
-		<script type="text/javascript" src="js/oauth.js"></script>
-		<script src="js/main.js"></script>
 	</head>
-	<body class="has-finanzas iosm">
-
-	<div id="container" class="profile-data finanzas">
-		<header class="hwhite2">
-			<div class="toolbar">
-				<a class="back" href="menu.html"><img src="images/back.svg"></a>
-				<h2 class="titulo">Transacciones</h2>
-			</div>
-		</header>
-		<ul>
-			<li><span>Método de pago actual: <strong>Tarjeta</strong></span></li>
-			<li><span>Tarjeta: <strong>VISA **** **** **** 4242</strong></span></li>
-			<li class="sinpoint">
-				<a class="btn-org" href="money.html">Cambiar método de pago</a>	
-			</li>
-			<li class="sinpoint">
-				<a class="btn-org btn_cancelar" href="#">Cancelar suscripción</a>
-			</li>
-			<li><span class="miembro">Miembro desde el: </span></li>
-			<li><span class="suscripcion">Modo de prueba hasta el día: </span></li>
-			<li><span><strong>Historial de pagos</strong></span></li>
-			<li class="sinpoint">
-				<table id="historial">
-					<tr>
-						<th>PAGO</th>
-						<th id="ano">FECHA</th>
-					</tr>
-					<!-- <tr class="table_row">
-						<td class="_month">ENERO 3</td>
-						<td class="monto">350.00</td>
-					</tr>
-					<tr>
-						<td>FEBRERO 2</td>
-						<td>350.00</td>
-					</tr>
-					<tr>
-						<td>MARZO 6</td>
-						<td>350.00</td>
-					</tr> -->
-				</table>
-			</li>
-		</ul>
-	</div>
-	<div class="cancel_subscription" style="display:none">
-		<div class="ov-filler2"></div>
-		<div class="dialog">
-			<h5>Subscripción</h5>
-			<p>¿Esás seguro de querer cancelar tu subscripción?</p>
-			<div class="di-options">
-				<a id="accept_cancel" class="accept">Aceptar</a>
-				<a id="cancelar" class="accept">Cancelar</a>
-			</div>
+	
+	<body class="iosm preventEvents">
+		<div id="container" class="rootContainer">
+			
 		</div>
-	</div>
-	<div class="cancel_subscription2" style="display:none">
-		<div class="ov-filler2"></div>
-		<div class="dialog">
-			<h5>Cancelar membresía</h5>
-			<p>Para poder cancelar, por favor ingresa tus comentarios</p>
-			<div class="di-options">
-				<a id="accept_ccomment" class="accept">Aceptar</a>
-				<a id="cancelar2" class="accept">Cancelar</a>
-			</div>
-		</div>
-	</div>
-	<div class="cancel_subscription3" style="display:none">
-		<div class="ov-filler2"></div>
-		<div class="dialog">
-			<h5>Atención</h5>
-			<p>Has cancelado tu plan, tu membresía seguirá vigente hasta el día: <span></span></p>
-			<div class="di-options">
-				<a id="accept_comment3" class="accept">Aceptar</a>
-				<!-- <a id="cancelar3" class="accept">Cancelar</a> -->
-			</div>
-		</div>
-	</div>
-
-	<div class="comment_pop" style="display:none">
-		<div class="ov-filler2"></div>
-		<div class="dialog">
-			<h5>Comentario</h5>
-			<textarea id="comentar" placeholder="Escribe tu comentario aquí..."></textarea>
-			<div class="di-options">
-				<a id="write_ch_coach" class="accept">Aceptar</a>
-				<a class="cancel comment">Cancelar</a>
-			</div>
-		</div>
-	</div>
-
-	<script type="text/javascript">
-		/* Initialize app object and perform initial login check */
-		window.is_feed = true;
-		app.initialize();
-		//app.render_feed(0, 'all');
-		//app.showLoader();
-	</script>
 	</body>
-</html>
 
+    <script type="text/javascript" src="views/compiled/container.js"></script>
+    <script type="text/javascript" src="views/compiled/entermode.js"></script>
+    <script type="text/javascript" src="views/compiled/login.js"></script>
+    <script type="text/javascript" src="views/compiled/login-mail.js"></script>
+	<script type="text/javascript" src="views/compiled/code.js"></script>
+    <script type="text/javascript" src="views/compiled/record.js"></script>
+    <script type="text/javascript" src="views/compiled/my-plan.js"></script>
+    <script type="text/javascript" src="views/compiled/chat-container.js"></script>
+    <script type="text/javascript" src="views/compiled/chat-dialog.js"></script>
+    <script type="text/javascript" src="views/compiled/dialog-messages.js"></script>
+	<script type="text/javascript" src="views/compiled/main-menu.js"></script>
+	<script type="text/javascript" src="views/compiled/transactions.js"></script>
+	<script type="text/javascript" src="views/compiled/change-payment.js"></script>
+	<script type="text/javascript" src="views/compiled/partials/footer_menu.js"></script>
+	<script type="text/javascript" src="views/compiled/partials/footer_activities.js"></script>
+    <script type="text/javascript" src="views/compiled/register.js"></script>
+    <script type="text/javascript" src="views/compiled/register-mail.js"></script>
+    <script type="text/javascript" src="views/compiled/partials/header.js"></script>
+    <script type="text/javascript" src="views/compiled/partials/loader.js"></script>
+    <script type="text/javascript" src="views/compiled/coming-soon.js"></script>
+    <script type="text/javascript" src="views/compiled/about.js"></script>
+    <script type="text/javascript" src="views/compiled/support.js"></script>
+    <script type="text/javascript" src="views/compiled/user-profile.js"></script>
+    <script type="text/javascript" src="views/compiled/edit-profile.js"></script>
+    <script type="text/javascript" src="views/compiled/change-coach.js"></script>
+    <script type="text/javascript" src="views/compiled/record-exercise.js"></script>
+    <script type="text/javascript" src="views/compiled/record-water.js"></script>
+    <script type="text/javascript" src="views/compiled/record-weight.js"></script>
+    <script type="text/javascript" src="views/compiled/record-measures.js"></script>
+    <script type="text/javascript" src="views/compiled/record-mood.js"></script>
+    <script type="text/javascript" src="js/api-sdk-1.0.js"></script>
+	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="js/scripts/chat-core.js"></script>
+	<script type="text/javascript" src="js/oauth.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript">
+		app.render_transactions();
+	</script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/scripts/document_ready.js"></script>
+    <script type="text/javascript" src="js/scripts/initialRecord.js"></script>
+    <script type="text/javascript" src="js/scripts/calendar.js"></script>
+</html>

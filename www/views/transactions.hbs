@@ -1,0 +1,76 @@
+	<header class="hwhite2">
+		<div class="toolbar">
+			<a class="back hook" data-resource="main-menu" href="menu.html">
+				<img src="{{cordova_full_path}}images/back.svg">
+			</a>
+			<h2 class="titulo">{{header_title}}</h2>
+		</div>
+	</header>
+	<ul>
+		<li><span>Método de pago actual: <strong>Tarjeta</strong></span></li>
+		<li><span>Tarjeta: <strong>VISA **** **** **** 4242</strong></span></li>
+		<li><span class="miembro">Miembro desde el: </span></li>
+		<li><span class="suscripcion">Modo de prueba hasta el día: </span></li>
+		<li class="sinpoint">
+			<a class="btn-org" href="money.html">Cambiar método de pago</a>	
+		</li>
+		<li class="sinpoint">
+			<a class="btn-org btn_cancelar" href="#">Cancelar suscripción</a>
+		</li>
+		<li><span><strong>Historial de pagos</strong></span></li>
+		<li class="sinpoint">
+			<table id="historial">
+				<tr>
+					<th>PAGO</th>
+					<th id="ano">FECHA</th>
+				</tr>
+				
+
+			</table>
+		</li>
+	</ul>
+	<div class="cancel_subscription" style="display:none">
+		<div class="ov-filler2"></div>
+		<div class="dialog">
+			<h5>Subscripción</h5>
+			<p>¿Esás seguro de querer cancelar tu subscripción?</p>
+			<div class="di-options">
+				<a id="accept_cancel" class="accept">Aceptar</a>
+				<a id="cancelar" class="accept">Cancelar</a>
+			</div>
+		</div>
+	</div>
+	<div class="cancel_subscription2" style="display:none">
+		<div class="ov-filler2"></div>
+		<div class="dialog">
+			<h5>Cancelar membresía</h5>
+			<p>Para poder cancelar, por favor ingresa tus comentarios</p>
+			<div class="di-options">
+				<a id="accept_ccomment" class="accept">Aceptar</a>
+				<a id="cancelar2" class="accept">Cancelar</a>
+			</div>
+		</div>
+	</div>
+	<div class="cancel_subscription3" style="display:none">
+		<div class="ov-filler2"></div>
+		<div class="dialog">
+			<h5>Atención</h5>
+			<p>Has cancelado tu plan, tu membresía seguirá vigente hasta el día: <span></span></p>
+			<div class="di-options">
+				<a id="accept_comment3" class="accept">Aceptar</a>
+				<!-- <a id="cancelar3" class="accept">Cancelar</a> -->
+			</div>
+		</div>
+	</div>
+
+	<div class="comment_pop" style="display:none">
+		<div class="ov-filler2"></div>
+		<div class="dialog">
+			<h5>Comentario</h5>
+			<textarea id="comentar" placeholder="Escribe tu comentario aquí..."></textarea>
+			<div class="di-options">
+				<a id="write_ch_coach" class="accept">Aceptar</a>
+				<a class="cancel comment">Cancelar</a>
+			</div>
+		</div>
+	</div>
