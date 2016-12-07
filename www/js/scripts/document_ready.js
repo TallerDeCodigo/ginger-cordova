@@ -1771,14 +1771,14 @@ window.initializeEvents = function(){
 			var anchot = document.documentElement.clientWidth;
 
 			var grid_age;
-			var minval_age = 15;
+			var minval_age  = 15;
 			var maxval_age 	= 90;
 			var range_age 	= maxval_age - minval_age;
 
 			var grid_exercise;
 			var minval_eje = 0;
 			var maxval_eje = 7;
-			var range_eje = maxval_eje-minval_eje;
+			var range_eje  = maxval_eje-minval_eje;
 			
 			var nombre_coach	= app.keeper.getItem('nombre_coach');
 			var apellido_coach	= app.keeper.getItem('apellido_coach');
@@ -1870,7 +1870,7 @@ window.initializeEvents = function(){
 			$('#ejercicio-filler').css('width', (grid_exercise*(frecuencia-minval_eje))+20);
 
 			if(restricciones === undefined || restricciones == null || restricciones == ""){
-				console.log('está Indefinido');
+				console.log('No restrictions');
 			}else{
 
 				for (var i = 0; i < _user.perfil.restricciones.length; i++) {
@@ -1878,27 +1878,21 @@ window.initializeEvents = function(){
 					switch(_user.perfil.restricciones[i]){
 						case 0: 
 							$('.tipo_restric .re-option:nth-of-type(1) img').attr("src",cordova_full_path+'images/restric/huevo2.png');
-
 							break;
 						case 1:
 							$('.tipo_restric .re-option:nth-of-type(2) img').attr("src",cordova_full_path+'images/restric/pollo2.png');
-
 							break;
 						case 2:
 							$('.tipo_restric .re-option:nth-of-type(3) img').attr("src",cordova_full_path+'images/restric/pescado2.png');
-
 							break;
 						case 3:
 							$('.tipo_restric .re-option:nth-of-type(4) img').attr("src",cordova_full_path+'images/restric/camaron2.png');
-
 							break;
 						case 4:
 							$('.tipo_restric .re-option:nth-of-type(5) img').attr("src",cordova_full_path+'images/restric/lacteos2.png');
-
 							break;
 						case 5:
 							$('.tipo_restric .re-option:nth-of-type(6) img').attr("src",cordova_full_path+'images/restric/carne2.png');
-
 							break;
 					}
 					_user.perfil.restricciones[i]++;
@@ -1917,7 +1911,7 @@ window.initializeEvents = function(){
 					$('.overscreen7').removeClass('active');
 					setTimeout(function() {$('.overscreen7').hide();}, 800);
 				}
-				$('#blur').toggleClass('blurred');
+				$('#blur').removeClass('blurred');
 			});//end click add updated profile
 
 
@@ -1970,11 +1964,11 @@ window.initializeEvents = function(){
 											"pesoDeseado"		: peso_ideal,
 											"comentario"		: comentario
 										};
-					console.log(user_updated);
-				// var updated_response = apiRH.updatePerfil(user_updated);
-
-				// if(updated_response)
-				// 	return app.render_settings('userdata.html');
+				console.log(user_updated);
+				var updated_response = apiRH.updatePerfil(user_updated);
+				console.log(updated_response);
+				if(updated_response)
+					return app.render_settings('userdata.html');
 
 			});	// END accept_SaveProfile
 
@@ -1982,6 +1976,7 @@ window.initializeEvents = function(){
 			// 	$('.overscreen7').hide();
 			// 	$('#blur').toggleClass('blurred');
 			// });
+
 			initializeRecordEvents();
 			$(window).resize();
 			app.hideLoader();

@@ -198,7 +198,7 @@
 		onSoftInit: function() {
 
 			/*** Initializing chat api if not already did ***/
-			if(!chatCore.isInitialized && loggedIn)
+			if(!chatCore.isInitialized && window.is_home)
 				setTimeout(function(){
 					chatCore.init(_user);
 				}, 800);

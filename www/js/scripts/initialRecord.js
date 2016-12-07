@@ -558,8 +558,7 @@ window.initializeRecordEvents = function(){
 			restricciones = [];
 		}else{
 			restricciones = JSON.parse(restricciones);
-			console.log(restricciones.length);
-			console.log(restricciones);
+			console.log("Restricciones :: "+JSON.stringify(restricciones));
 		}
 
 		$('.re-option').click(function() {
