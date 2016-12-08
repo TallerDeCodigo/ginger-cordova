@@ -41,6 +41,8 @@ window.initializeEvents = function(){
 					return app.render_mainmenu( $(this).attr('href') );
 				if( $(this).data('resource') == "transactions" )
 					return app.render_transactions( $(this).attr('href') );
+				if( $(this).data('resource') == "change-payment" )
+					return app.render_change_payment( $(this).attr('href') );
 				if( $(this).data('resource') == "user-profile" )
 					return app.render_settings( $(this).attr('href') );
 				if( $(this).data('resource') == "edit-profile" )
@@ -1969,12 +1971,7 @@ window.initializeEvents = function(){
 					return app.render_settings('userdata.html');
 
 			});	// END accept_SaveProfile
-
-			// $('#_cancel_chCoach').click(function(){
-			// 	$('.overscreen7').hide();
-			// 	$('#blur').toggleClass('blurred');
-			// });
-
+		
 			initializeRecordEvents();
 			$(window).resize();
 			app.hideLoader();
@@ -2041,15 +2038,9 @@ window.initializeEvents = function(){
 
 							console.log(key + ' :::: ' + value);
 
-							// INSERTAR HTML
-							if(key == 'created_at'){
-								var d = new Date(value * 1000);
-								$('.miembro').append(d.getDate()+'-'+(d.getMonth()+1) +'-' + d.getFullYear());
-							}
-
 							if(key == 'trial_end'){
-								var d = new Date(value * 1000);
-								$('.suscripcion').append(d.getDate()+'-'+(d.getMonth()+1) +'-' + d.getFullYear());
+								var myDate = new Date(value * 1000);
+								$('.suscripcion').append(myDate.getDate()+'-'+("00"+(myDate.getMonth()+1)).slice(-2) +'-' + myDate.getFullYear());
 							}
 					
 							if(key == 'amount'){
@@ -2057,18 +2048,16 @@ window.initializeEvents = function(){
 							}
 
 							if(key == 'paid_at'){
-								var meses_year = ['Enero', 'Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre' ]
-								var r = new Date();
-								console.log( );
-								var d = new Date(value * 1000);
-								// $('._month').html(meses_year[r.getMonth()] + " " +d.getUTCFullYear() );
-
-								myString += '<td> ' + meses_year[r.getMonth()+1] + " " +d.getUTCFullYear() + '</td></tr>';
+								var months = window.catalogues.months;
+								var myDate = new Date(value * 1000);
+								myString += '<td> ' + months[myDate.getMonth()+1] + " " +myDate.getUTCFullYear() + '</td></tr>';
 							}
 						});
 					}
 				});
 			});
+			var myDate = new Date(_user.creado);
+			$('.miembro').append(myDate.getDate()+'-'+("00"+(myDate.getMonth()+1)).slice(-2) +'-' + myDate.getFullYear());
 			$('#historial tbody').append(myString);
 
 			// Cancelar subscripcion

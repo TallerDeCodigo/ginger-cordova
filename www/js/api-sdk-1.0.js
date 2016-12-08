@@ -238,26 +238,15 @@ function requestHandlerAPI(){
 			return false;
 		};
 
+		/**
+		 * Fetch user payments
+		 * @return Object response
+		 */	
 		this.getTransactions = function(){
-			var req = {
-				method : 'GET',
-				url : api_base_url + 'tables/transaction/?cliente=' + apiRH.keeper.getItem('userId'),	//definitr tabla
-				headers: {
-					'X-ZUMO-APPLICATION': 'ideIHnCMutWTPsKMBlWmGVtIPXROdc92',
-					'X-ZUMO-AUTH': apiRH.keeper.getItem('token'),
-					'Content-Type': 'application/json'
-				}
-			}
-			console.log(req);
 
-			var response = this.getRequest('tables/transaction/?cliente=' + apiRH.keeper.getItem('userId'), req);
-
-			console.log("Request Data Cliente Transaction");
-
+			var response = this.getRequest('tables/transaction/?cliente=' + _user._id, null);
 			console.log(response);
-
 			return response;
-
 		};
 
 		/**
@@ -993,8 +982,6 @@ function requestHandlerAPI(){
 				var user = this.getRequest('tables/cliente/' + userId, null);
 
 				apiRH.keeper.setItem('user', JSON.stringify(user));
-				// console.log(JSON.stringify(user));
-				// console.log(user);
 
 				if(user){
 					apiRH.keeper.setItem('coach_type', user.perfil.personalidad);

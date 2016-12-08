@@ -47,7 +47,4 @@ $(window).load(function(){
 		});
 
 
-		
-
-
 	}); //END WINDOW LOAD clicks
