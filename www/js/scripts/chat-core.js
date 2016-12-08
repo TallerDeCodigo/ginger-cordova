@@ -212,18 +212,24 @@
 			chatCore.init(window._coach);
 
 		QB.chat.dialog.list( null, function(err, resDialogs) {
-			var i = 0;
+
 			if (err){
 				app.hideLoader();
 				return app.toast("Error: no fue posible consultar los mensajes.");
 			}
 
 			if(resDialogs){
-
-				console.log(resDialogs);
 				chatCore.coachDialog = resDialogs.items[0];
+				var data = {};
+				data.header_title = _user.coach.nombre+" "+_user.coach.apellido;
+				console.log(data);
+				app.render_template('chat-dialog', '.chat-container', data);
+				$('.view').addClass('dialog-messages');
+				initializeEvents();
+				return;
 			}
-			return;
+			app.toast("Error al consultar los mensajes del chat");
+			return app.render_myPlan('dieta.html');
 		});
 	};
 
@@ -231,7 +237,7 @@
 // ___________________________________________________//
 
 	chatCore.retrieveChatMessages = function(dialog, beforeDateSent){
-
+		console.log("Retrieve");
 		var dialogsMessages = [];
 		var params 	= 	{
 							chat_dialog_id 	: dialog._id,
@@ -251,7 +257,7 @@
 			setTimeout(function(){
 
 				response.items.forEach(function(item, i, arr) {
-
+					console.log(item);
 					var messageId 		= item._id;
 					var messageText 	= item.message;
 					var messageSenderId = item.sender_id;

@@ -986,24 +986,6 @@ window.initializeEvents = function(){
 		} /*** END BODY CLASS DIETA ***/
 
 
-		// if( $('.view').hasClass('chat-dialog') ){
-		
-		// 	var mail 		 = app.keeper.getItem('mail');
-		// 	var chatPassword = app.keeper.getItem('chatPassword');
-		// 	var uChatCoach 	 = _user.coach.jid;
-			
-		// 	uChatCoach = uChatCoach.split('-');
-		// 	app.keeper.setItem('cCoachID', uChatCoach[0]);
-		// 	var user = { login : _user.mail, pass : _user.chatPassword};
-			
-		// 	connectToChat(user);
-			
-		// 	createNewDialog();
-
-
-		// } /*** END BODY CLASS CHAT ***/
-
-
 		if( $('.view').hasClass('chat-container') && !$('.view').hasClass('dialog-messages') ){
 			
 			chatCore.fetchContactList();
