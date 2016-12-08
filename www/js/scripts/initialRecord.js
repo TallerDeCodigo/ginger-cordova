@@ -40,11 +40,10 @@ window.initializeRecordEvents = function(){
 
 			var ancho = document.documentElement.clientWidth;
 			var tamano = $('.slide-coach').length;
-			var csld = (tamano*ancho*0.8125)+(ancho*0.09375);
+			var csld = (tamano*ancho*0.8125)+40;
 			$(".slide-coach").css("width",ancho*0.8125);
 			$(".slide-coach:first-of-type").css("margin-left",ancho*0.09375);
 			$(".cslider").css("width",csld);
-
 		});
 
 		window.init_scripts.push("initial_record");
@@ -379,10 +378,10 @@ window.initializeRecordEvents = function(){
 			$('.bpur').removeClass('active');
 			$('.bgre').addClass('active');
 
-			if($('#hombre').attr('alt') == '1' ){
-				$('#genre_value').attr('value', 1);
+			if( $('#hombre').attr('alt') == '1' ){
+				$('#genre_value').val(1);
 			}else{
-				$('#genre_value').attr('value', 0);
+				$('#genre_value').val(0);
 			}
 
 			if($('input[name="zipcode"]').val() == '' || $('input[name="zipcode"]').val() == undefined){
@@ -680,6 +679,9 @@ window.initializeRecordEvents = function(){
 				console.log("PROFILE UPDATED! ::: "+JSON.stringify(responsedata));
 				
 				if(responsedata){
+
+					apiRH.save_user_data_clientside(responsedata);
+
 					app.toast("¡Estamos encontrando a tu Coach ideal!");
 					/* REQUEST COACH OPTIONS */	
 					var listCoach = apiRH.getCoachList();
@@ -777,13 +779,12 @@ window.initializeRecordEvents = function(){
 							}
 						});
 
-						$(window).resize();
-
 						setTimeout(function() {
 							$(".pagina").hide();
 							$(".pcoach1").show();
 							$(".pcoach1").css("left","40px");
 							$(".pcoach1").animate({opacity:"1",left:"0px"}, 200);
+							$(window).resize();
 							app.hideLoader();
 						}, 250);
 						
@@ -1096,16 +1097,19 @@ window.initializeRecordEvents = function(){
 		} //end swipeStatus
 
 		function previousImage() {
+			
 			currentImg = Math.max(currentImg - 1, 0);
 			scrollImages(IMG_WIDTH * currentImg, speed);
 		}//end previousImage
 
 		function nextImage() {
+
 			currentImg = Math.min(currentImg + 1, maxImages - 1);
 			scrollImages(IMG_WIDTH * currentImg, speed);
 		}//end nextImage
 
 		function scrollImages(distance, duration) {
+
 			imgs.css("transition-duration", (duration / 1000).toFixed(1) + "s");
 			var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
 			imgs.css("transform", "translate(" + value + "px,0)");

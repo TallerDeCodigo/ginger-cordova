@@ -179,17 +179,29 @@ function requestHandlerAPI(){
 		 * @param Object data
 		 * @return Object / Boolean
 		 */
-		this.getCoachList = function(data){
+		this.getCoachList = function(){
 
-			var response 	= apiRH.getRequest('tables/dieta?opciones=1&age='+_user.perfil.edad.enum, data);
 			var coaches 	= [];
 			var flag 		= null;
+			var stored_age  = parseInt(app.keeper.getItem('edad'));
+			var edad_enum 	= null;
+			
+			catalogues.age.forEach(function(element, index){
+				console.log(element);
+				if( element > stored_age )
+					return;
+				console.log(index);
+				edad_enum = index;
+			});
+			console.log('tables/dieta?opciones=1&age='+edad_enum);
+			var response 	= apiRH.getRequest('tables/dieta?opciones=1&age='+edad_enum, null);
+			console.log(response);
 			response.forEach( function( item ) {
 				flag = false;
 				if(!item.coach) 
 					return;
 			    var myCoach = item;
-			    if(!coaches.length) coaches.push(myCoach);
+			    if(!coaches.lenagth) coaches.push(myCoach);
 				coaches.forEach(function( itemCoach ){
 					if( itemCoach.coach._id == item.coach._id ) flag = true;
 				});
@@ -363,9 +375,10 @@ function requestHandlerAPI(){
 				app.keeper.setItem('user_last_name', user.apellido);
 				app.keeper.setItem('genero', user.perfil.sexo);
 
-				if(user.perfil.edad !== undefined)
+				if(user.perfil.edad !== undefined){
 					app.keeper.setItem('edad', user.perfil.edad.real);
-				else
+				} else{
+
 					app.keeper.setItem('edad', 0);
 					app.keeper.setItem('zipcode', user.cp);
 					app.keeper.setItem('estatura', user.perfil.estatura);
@@ -376,14 +389,17 @@ function requestHandlerAPI(){
 					app.keeper.setItem('comentarios', user.comentarios);
 					app.keeper.setItem('customerId', user.customerId);
 					app.keeper.setItem('chatId', user.chatId);
-				if(user.dieta !== undefined)
+				}
+				if(user.dieta !== undefined){
 					app.keeper.setItem('dietaId', user.dieta._id);
-				else
+				} else{
 					app.keeper.setItem('dietaId', 0);
-				if(user.dieta !== undefined)
+				}
+				if(user.dieta !== undefined){
 					app.keeper.setItem('dietaName', user.dieta.nombre);
-				else
+				} else{
 					app.keeper.setItem('dietaName', '');
+				}
 				
 				if(user.coach !== undefined){
 					app.keeper.setItem('nombre_coach', user.coach.nombre);

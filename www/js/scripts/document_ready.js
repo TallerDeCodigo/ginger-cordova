@@ -183,7 +183,7 @@ window.initializeEvents = function(){
 			var csld = (tamano*ancho*0.8125)+(ancho*0.09375);
 			var mediad = 300+(ancho*0.64);
 
-			$('textarea.short-descrip').css('height',alto-mediad);
+			$('textarea.short-descrip').attr('style', "height"+(alto-mediad)+"!important" );
 
 			$('#scroller > ul > li').css("height",alto-245);
 			$('.iosm #scroller > ul > li').css("height",alto-265);
@@ -1899,7 +1899,6 @@ window.initializeEvents = function(){
 					$('.tipo_restric .re-option:nth-of-type('+_user.perfil.restricciones[i]+')').addClass('active');
 				}
 
-
 			}//end if restricciones
 
 			var restricciones_arr = new Array();
@@ -1948,17 +1947,16 @@ window.initializeEvents = function(){
 					}
 					console.log(restricciones);
 					var user_updated = {
-											"sexo" 				: genero,
 											"fechaNacimiento" 	: _yob+"-"+ _mes +"-"+_dia,
 											"perfil"			: {
-																	"fechaNacimiento" : _yob+"-"+ _mes +"-"+_dia,
-																	"sexo" : genero,
-																	"peso" : peso,
-																	"estatura" : estatura,
-																	"ejercicio" : dpw,
-																	"objetivo" : plan,
-																	"restricciones" :(restricciones.length>0||restricciones!="")?JSON.parse(restricciones):null,
-																	"personalidad" : coach_type
+																	"fechaNacimiento" 	: _yob+"-"+ _mes +"-"+_dia,
+																	"sexo" 				: genero,
+																	"peso" 				: peso,
+																	"estatura" 			: estatura,
+																	"ejercicio" 		: dpw,
+																	"objetivo" 			: plan,
+																	"restricciones" 	: ( restricciones.length > 0 || restricciones != "" ) ? JSON.parse(restricciones) : [],
+																	"personalidad" 		: coach_type
 																},
 											"cp"				: zipcode,
 											"pesoDeseado"		: peso_ideal,

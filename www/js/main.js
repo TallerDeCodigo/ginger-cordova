@@ -31,8 +31,8 @@
 			window.catalogues.coach_type 			= [ 'Estricto', 'Innovador', 'Animador', 'Tradicional'];
 			window.catalogues.restricciones 		= [ 'Huevo', 'Pollo', 'Pescado', 'Mariscos', 'Lacteos', 'Carne' ];
 			window.catalogues.objetivo 				= [ 'Adelgazar','Detox','Bienestar','Rendimiento' ];
-			window.catalogues.sex 					= [ 'Hombre', 'Mujer'];
-			window.catalogues.age 					= [ '15-24', '25-34', '35-44', '45-54', '55 o más' ];
+			window.catalogues.sex 					= [ 'Mujer', 'Hombre'];
+			window.catalogues.age 					= [ 15, 25, 35, 45, 55 ];
 			window.catalogues.tipo_de_ingredientes 	= [ 'granosycereales', 'verduras', 'grasas', 'lacteos', 'proteinaanimal', 'leguminosas', 'nuecesysemillas', 'frutas', 'endulzantes', 'aderezosycondimentos', 'superfoods', 'liquidos'];
 
 			/* IMPORTANT to set requests to be syncronous */
@@ -73,6 +73,7 @@
 						 * TODO: Render chunk depending on information already provided
 						 */
 						console.log("Initial record");
+						app.keeper.removeItem('restricciones');
 						return app.render_initial_record();
 					}
 					_user = JSON.parse( app.keeper.getItem('user') );

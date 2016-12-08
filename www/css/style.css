@@ -261,7 +261,7 @@ img.saltar {position:absolute;bottom:2.5%;left:50%;margin-left:-65px;display:blo
 
 .slide-coach .name {font-size:110%;margin-top:5px;}
 .slide-coach .rate-stars {}
-.slide-coach .short-descrip {font-size: 97%; font-weight: 100; width: 90%; margin-top: 10px;}
+.slide-coach .short-descrip {font-size: 97%; font-weight: 100; width: 90%; overflow-x: hidden; margin-top: 10px;}
 .short-descrip {position: relative; top: -5px; resize: none; text-align: justify !important;}
 
 .resena .name {text-align:left;margin:9px 5% 0px;font-size: 2rem;}
